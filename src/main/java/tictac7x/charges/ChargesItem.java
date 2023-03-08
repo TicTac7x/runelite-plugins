@@ -21,4 +21,5 @@ public enum ChargesItem {
     SOUL_BEARER,
     TRIDENT_OF_THE_SEAS,
     XERICS_TALISMAN,
+    SANGUINESTI_STAFF,
 }

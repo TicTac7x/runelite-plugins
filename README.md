@@ -21,6 +21,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - [x] Bryophyta's staff
 - [x] Iban's staff
 - [x] Pharaoh's sceptre
+- [x] Sanguinesti Staff
 - [x] Skull sceptre
 - [x] Trident of the sea
 

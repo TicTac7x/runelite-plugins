@@ -34,6 +34,7 @@ public interface ChargesImprovedConfig extends Config {
     String gricollers_can = "gricollers_can";
     String ibans_staff = "ibans_staff";
     String pharaohs_sceptre = "pharaohs_sceptre";
+    String sanguinesti_staff = "sanguinesti_staff";
     String skull_sceptre = "skull_sceptre";
     String soul_bearer = "soul_bearer";
     String trident_of_the_seas = "trident_of_the_seas";
@@ -223,6 +224,13 @@ public interface ChargesImprovedConfig extends Config {
             description = "Pharaoh's sceptre charges",
             section = debug
         ) default int getPharaohsSceptreCharges() { return -1; }
+
+    @ConfigItem(
+            keyName = sanguinesti_staff,
+            name = "Sanguinesti staff",
+            description = "Sanguinesti staff charges",
+            section = debug
+    ) default int getSanguinestiStaffCharges() { return -1; }
 
         @ConfigItem(
             keyName = skull_sceptre,
