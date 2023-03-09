@@ -34,6 +34,7 @@ public interface ChargesImprovedConfig extends Config {
     String gricollers_can = "gricollers_can";
     String ibans_staff = "ibans_staff";
     String pharaohs_sceptre = "pharaohs_sceptre";
+    String ring_of_suffering = "ring_of_suffering";
     String sanguinesti_staff = "sanguinesti_staff";
     String skull_sceptre = "skull_sceptre";
     String soul_bearer = "soul_bearer";
@@ -110,7 +111,7 @@ public interface ChargesImprovedConfig extends Config {
             description = "Version of the plugin for update message",
             section = debug,
             position = 1
-        ) default String getVersion() { return ""; };
+        ) default String getVersion() { return ""; }
 
         @ConfigItem(
             keyName = date,
@@ -118,7 +119,7 @@ public interface ChargesImprovedConfig extends Config {
             description = "Date to check for charges reset when logging in",
             section = debug,
             position = 2
-        ) default String getResetDate() { return ""; };
+        ) default String getResetDate() { return ""; }
 
         @ConfigItem(
             keyName = arclight,
@@ -224,13 +225,19 @@ public interface ChargesImprovedConfig extends Config {
             description = "Pharaoh's sceptre charges",
             section = debug
         ) default int getPharaohsSceptreCharges() { return -1; }
+        @ConfigItem(
+                keyName = ring_of_suffering,
+                name = "Ring of Suffering",
+                description = "Ring of suffering charges",
+                section = debug
+        ) default int getRingOfSufferingCharges() { return -1; }
 
-    @ConfigItem(
-            keyName = sanguinesti_staff,
-            name = "Sanguinesti staff",
-            description = "Sanguinesti staff charges",
-            section = debug
-    ) default int getSanguinestiStaffCharges() { return -1; }
+        @ConfigItem(
+                keyName = sanguinesti_staff,
+                name = "Sanguinesti staff",
+                description = "Sanguinesti staff charges",
+                section = debug
+        ) default int getSanguinestiStaffCharges() { return -1; }
 
         @ConfigItem(
             keyName = skull_sceptre,

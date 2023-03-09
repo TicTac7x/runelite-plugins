@@ -34,6 +34,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - [x] Bracelet of slaughter
 - [x] Celestial Ring
 - [x] Expeditious bracelet
+- [x] Ring of Suffering
 - [x] Slayer ring
 - [x] Xeric's talisman
 
