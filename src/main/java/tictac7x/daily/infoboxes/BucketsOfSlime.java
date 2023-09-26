@@ -38,10 +38,10 @@ public class BucketsOfSlime extends DailyInfobox {
     private int getBucketsOfSlimeAmount() {
         int buckets_of_slime = 0;
 
-        final boolean easy   = plugin.isCompleted(Varbits.DIARY_VARROCK_EASY);
-        final boolean medium = plugin.isCompleted(Varbits.DIARY_VARROCK_MEDIUM);
-        final boolean hard   = plugin.isCompleted(Varbits.DIARY_VARROCK_HARD);
-        final boolean elite  = plugin.isCompleted(Varbits.DIARY_VARROCK_ELITE);
+        final boolean easy   = plugin.isCompleted(Varbits.DIARY_MORYTANIA_EASY);
+        final boolean medium = plugin.isCompleted(Varbits.DIARY_MORYTANIA_MEDIUM);
+        final boolean hard   = plugin.isCompleted(Varbits.DIARY_MORYTANIA_HARD);
+        final boolean elite  = plugin.isCompleted(Varbits.DIARY_MORYTANIA_ELITE);
 
         if (easy && medium && hard && elite) { buckets_of_slime = 39; } else
         if (easy && medium && hard) { buckets_of_slime = 26; } else
