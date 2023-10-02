@@ -57,6 +57,9 @@ public interface ChargesImprovedConfig extends Config {
     String log_basket = "log_basket";
     String ardougne_cloak = "ardougne_cloak";
     String magic_cape = "magic_cape";
+    String crystal_helm = "crystal_helm";
+    String crystal_body = "crystal_body";
+    String crystal_legs = "crystal_legs";
 
     @ConfigSection(
         name = "Colors",

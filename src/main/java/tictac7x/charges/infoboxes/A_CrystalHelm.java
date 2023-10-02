@@ -31,10 +31,24 @@ public class A_CrystalHelm extends ChargedItemInfoBox {
             final Plugin plugin
     ) {
         super(ChargesItem.CRYSTAL_HELM, ItemID.CRYSTAL_HELM, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, plugin);
-        this.config_key = ChargesImprovedConfig.ring_of_suffering;
+        this.config_key = ChargesImprovedConfig.crystal_helm;
         this.triggers_items = new TriggerItem[]{
                 new TriggerItem(ItemID.CRYSTAL_HELM),
-                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE).fixedCharges(0)
+                new TriggerItem(ItemID.CRYSTAL_HELM_27705),
+                new TriggerItem(ItemID.CRYSTAL_HELM_27717),
+                new TriggerItem(ItemID.CRYSTAL_HELM_27729),
+                new TriggerItem(ItemID.CRYSTAL_HELM_27741),
+                new TriggerItem(ItemID.CRYSTAL_HELM_27753),
+                new TriggerItem(ItemID.CRYSTAL_HELM_27765),
+                new TriggerItem(ItemID.CRYSTAL_HELM_27777),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27707).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27719).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27731).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27743).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27755).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27767).fixedCharges(0),
+                new TriggerItem(ItemID.CRYSTAL_HELM_INACTIVE_27779).fixedCharges(0)
         };
         this.triggers_chat_messages = new TriggerChatMessage[]{
                 new TriggerChatMessage("Your crystal helm has (?<charges>.+) charges? remaining").onItemClick()
