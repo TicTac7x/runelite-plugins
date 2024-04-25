@@ -38,8 +38,11 @@ public class S_TomeOfFire extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[] {
-            // Check.
-            new OnChatMessage("Your tome currently holds (?<charges>.+) charges?.").setDynamically().onItemClick(),
+            // Check searing pages.
+            new OnChatMessage("Your tome has been charged with Searing Pages. It currently holds (?<charges>.+) charges?.").setDynamically().onItemClick(),
+
+            // Check burnt pages.
+            new OnChatMessage("Your tome has been charged with Burnt Pages. It currently holds (?<charges>.+) charges?.").setDynamically().onItemClick(),
 
             // Attack with regular spellbook fire spells.
             new OnGraphicChanged(99, 126, 129, 155, 1464).isEquipped().decreaseCharges(1)
