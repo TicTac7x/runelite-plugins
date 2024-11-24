@@ -47,7 +47,7 @@ public class Motherlode {
 
     public int getNeededPaydirt() {
         return Math.min(
-            sack.getSize() - sack.getPaydirt(),
+            sack.getSize() - sack.getDepositedPaydirt(),
             inventory.getMaximumAvailablePayDirt()
         ) - inventory.getPaydirt();
     }
