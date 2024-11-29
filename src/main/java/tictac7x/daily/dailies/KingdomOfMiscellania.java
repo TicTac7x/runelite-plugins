@@ -22,7 +22,7 @@ public class KingdomOfMiscellania extends DailyInfobox {
     private final ConfigManager configManager;
 
     private final String percentageFormat = "%d%%";
-    private final ZoneId timezone = ZoneId.of("Europe/London");
+    private final ZoneId timezone = ZoneId.of("UTC");
     private final String tooltip = "You need to work harder to increase your kingdom of Miscellania favor: " + percentageFormat;
 
     private final int VARBIT_KINGDOM_APPROVAL = 72;
