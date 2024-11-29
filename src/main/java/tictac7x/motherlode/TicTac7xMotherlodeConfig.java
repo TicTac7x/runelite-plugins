@@ -97,7 +97,7 @@ public interface TicTac7xMotherlodeConfig extends Config {
 		@ConfigItem(
 			keyName = sack_custom,
 			name = "Use custom sack widget",
-			description = "Wether to show custom sack widget or not.",
+			description = "Whether to show custom sack widget or not.",
 			position = 1,
 			section = custom_sack_widget
 		) default boolean showCustomSackWidget() { return true; }
