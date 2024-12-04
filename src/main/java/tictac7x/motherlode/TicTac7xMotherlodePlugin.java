@@ -43,9 +43,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private final String pluginVersion = "v0.4.3";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Ore veins show depletion and respawn timers.<br>" +
-		"<colHIGHLIGHT>* Notification when you should stop mining.<br>" +
-		"<colHIGHLIGHT>* Number of golden nuggets on the widget."
+		"<colHIGHLIGHT>* Needed paydirt improvements."
 	;
 
 	@Inject
