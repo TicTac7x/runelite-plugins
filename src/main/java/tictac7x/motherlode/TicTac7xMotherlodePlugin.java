@@ -40,7 +40,7 @@ import javax.inject.Inject;
 	conflicts = {"Motherlode Mine", "MLM Mining Markers"}
 )
 public class TicTac7xMotherlodePlugin extends Plugin {
-	private final String pluginVersion = "v0.4.2";
+	private final String pluginVersion = "v0.4.3";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Ore veins show depletion and respawn timers.<br>" +
