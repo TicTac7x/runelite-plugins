@@ -27,28 +27,17 @@ import java.util.regex.Pattern;
 
 public class RooftopsCoursesManager {
     private final Client client;
+    private final Course[] courses;
 
     private final Pattern regexLapComplete = Pattern.compile(".*lap count is:.*");
-
-    private final Course[] courses = new Course[]{
-        new RooftopCourseDraynor(),
-        new RooftopCourseAlKharid(),
-        new RooftopCourseVarrock(),
-        new RooftopCourseCanifis(),
-        new RooftopCourseFalador(),
-        new RooftopCourseSeers(),
-        new RooftopCoursePollnivneach(),
-        new RooftopCourseRellekka(),
-        new RooftopCourseArdougne(),
-        new RooftopCourseVarlamore(),
-    };
 
     private final List<Tile> marksOfGraces = new ArrayList<>();
     @Nullable private Course course;
     private int lastMenuOptionClickedId;
 
-    public RooftopsCoursesManager(final Client client) {
+    public RooftopsCoursesManager(final Client client, final Course[] courses) {
         this.client = client;
+        this.courses = courses;
     }
 
     public void onTileObjectSpawned(final TileObject tileObject) {
