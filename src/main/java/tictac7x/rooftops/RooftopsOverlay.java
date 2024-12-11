@@ -31,18 +31,18 @@ public class RooftopsOverlay extends Overlay {
 
     @Override
     public Dimension render(Graphics2D graphics) {
-        if (coursesManager.getCourse() == null) return null;
+        if (!coursesManager.getCourse().isPresent()) return null;
 
         // Obstacles.
-        for (final Obstacle obstacle : coursesManager.getCourse().obstacles) {
+        for (final Obstacle obstacle : coursesManager.getCourse().get().obstacles) {
             if (obstacle.minLevel.isPresent() && getAgilityLevel() < obstacle.minLevel.get()) continue;
             if (obstacle.maxLevel.isPresent() && getAgilityLevel() > obstacle.maxLevel.get()) continue;
 
             final Color color =
                 coursesManager.isStoppingObstacle(obstacle.id)
                     ? config.getObstacleStopColor()
-                    : coursesManager.getCourse().getNextObstacles().isPresent() && coursesManager.getCourse().getNextObstacles().get().stream().anyMatch(o -> o.id == obstacle.id)
-                        ? coursesManager.getCourse().isDoingObstacle()
+                    : coursesManager.getCourse().get().getNextObstacles().isPresent() && coursesManager.getCourse().get().getNextObstacles().get().stream().anyMatch(o -> o.id == obstacle.id)
+                        ? coursesManager.getCourse().get().isDoingObstacle()
                             ? config.getObstacleNextUnavailableColor()
                             : config.getObstacleNextColor()
                         : config.getObstacleUnavailableColor();
