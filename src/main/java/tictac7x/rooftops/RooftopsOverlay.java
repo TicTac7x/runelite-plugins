@@ -1,23 +1,27 @@
 package tictac7x.rooftops;
 
 import net.runelite.api.Client;
+import net.runelite.api.Skill;
 import net.runelite.api.Tile;
-import net.runelite.api.TileObject;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import tictac7x.rooftops.courses.Obstacle;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.util.Arrays;
 
 public class RooftopsOverlay extends Overlay {
+    private final Client client;
     private final RooftopsConfig config;
     private final RooftopsCoursesManager coursesManager;
 
-    public RooftopsOverlay(final RooftopsConfig config, final RooftopsCoursesManager coursesManager) {
+    public RooftopsOverlay(final Client client, final RooftopsConfig config, final RooftopsCoursesManager coursesManager) {
+        this.client = client;
         this.config = config;
         this.coursesManager = coursesManager;
 
@@ -30,17 +34,22 @@ public class RooftopsOverlay extends Overlay {
         if (coursesManager.getCourse() == null) return null;
 
         // Obstacles.
-        for (final TileObject obstacle : coursesManager.getObstaclesTileObjects()) {
-             final Color color =
-                coursesManager.isStoppingObstacle(obstacle.getId())
+        for (final Obstacle obstacle : coursesManager.getCourse().obstacles) {
+            if (obstacle.minLevel.isPresent() && getAgilityLevel() < obstacle.minLevel.get()) continue;
+            if (obstacle.maxLevel.isPresent() && getAgilityLevel() > obstacle.maxLevel.get()) continue;
+
+            final Color color =
+                coursesManager.isStoppingObstacle(obstacle.id)
                     ? config.getObstacleStopColor()
-                    : coursesManager.getCourse().getNextObstacle().hasId(obstacle.getId())
+                    : coursesManager.getCourse().getNextObstacles().isPresent() && coursesManager.getCourse().getNextObstacles().get().stream().anyMatch(o -> o.id == obstacle.id)
                         ? coursesManager.getCourse().isDoingObstacle()
                             ? config.getObstacleNextUnavailableColor()
                             : config.getObstacleNextColor()
                         : config.getObstacleUnavailableColor();
 
-            renderShape(graphics, obstacle.getClickbox(), color);
+            if (obstacle.getTileObject().isPresent()) {
+                renderShape(graphics, obstacle.getTileObject().get().getClickbox(), color);
+            }
         }
 
         // Mark of graces.
@@ -64,5 +73,9 @@ public class RooftopsOverlay extends Overlay {
             graphics.setColor(color);
             graphics.fill(shape);
         } catch (final Exception ignored) {}
+    }
+
+    private int getAgilityLevel() {
+        return client.getBoostedSkillLevel(Skill.AGILITY);
     }
 }

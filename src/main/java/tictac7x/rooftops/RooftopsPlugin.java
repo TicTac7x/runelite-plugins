@@ -3,17 +3,8 @@ package tictac7x.rooftops;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.DecorativeObjectSpawned;
-import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.GroundObjectSpawned;
-import net.runelite.api.events.HitsplatApplied;
-import net.runelite.api.events.ItemDespawned;
-import net.runelite.api.events.ItemSpawned;
-import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.StatChanged;
+import net.runelite.api.Skill;
+import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -50,7 +41,7 @@ public class RooftopsPlugin extends Plugin {
 	@Override
 	protected void startUp() {
 		coursesManager = new RooftopsCoursesManager(client);
-		overlayRooftops = new RooftopsOverlay(config, coursesManager);
+		overlayRooftops = new RooftopsOverlay(client, config, coursesManager);
 		overlays.add(overlayRooftops);
 	}
 
@@ -62,6 +53,11 @@ public class RooftopsPlugin extends Plugin {
 	@Subscribe
 	public void onGameObjectSpawned(final GameObjectSpawned event) {
 		coursesManager.onTileObjectSpawned(event.getGameObject());
+	}
+
+	@Subscribe
+	public void onWallObjectSpawned(final WallObjectSpawned event) {
+		coursesManager.onTileObjectSpawned(event.getWallObject());
 	}
 
 	@Subscribe
@@ -92,6 +88,7 @@ public class RooftopsPlugin extends Plugin {
 	@Subscribe
 	public void onStatChanged(final StatChanged event) {
 		coursesManager.onStatChanged(event);
+		System.out.println(client.getLocalPlayer().getWorldLocation().getX() + " " + client.getLocalPlayer().getWorldLocation().getY());
 	}
 
 	@Subscribe
@@ -102,6 +99,7 @@ public class RooftopsPlugin extends Plugin {
 	@Subscribe
 	public void onGameTick(final GameTick gametick) {
 		coursesManager.onGameTick(gametick);
+		System.out.println(client.getBoostedSkillLevel(Skill.AGILITY));
 	}
 
 	@Subscribe
