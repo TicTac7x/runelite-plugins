@@ -2,23 +2,18 @@ package tictac7x.rooftops;
 
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.DecorativeObjectSpawned;
-import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.GroundObjectSpawned;
-import net.runelite.api.events.HitsplatApplied;
-import net.runelite.api.events.ItemDespawned;
-import net.runelite.api.events.ItemSpawned;
-import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.StatChanged;
+import net.runelite.api.GameState;
+import net.runelite.api.events.*;
+import net.runelite.client.chat.ChatMessageManager;
+import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
+import tictac7x.rooftops.courses.*;
 
 import javax.inject.Inject;
 
@@ -29,11 +24,25 @@ import javax.inject.Inject;
 	tags = { "roof", "rooftop", "agility", "mark", "grace", "graceful" }
 )
 public class RooftopsPlugin extends Plugin {
+	private final String pluginVersion = "v0.6";
+	private final String pluginMessage = "" +
+		"<colHIGHLIGHT>Rooftop Agility Improved " + pluginVersion + ":<br>" +
+		"<colHIGHLIGHT>* Varlamore course added.<br>" +
+		"<colHIGHLIGHT>* Ape Atoll course added.<br>" +
+		"<colHIGHLIGHT>* Multi paths support and skill level checks."
+	;
+
 	@Inject
 	private Client client;
 
 	@Inject
 	private OverlayManager overlays;
+
+	@Inject
+	private ConfigManager configManager;
+
+	@Inject
+	private ChatMessageManager chatMessageManager;
 
 	@Inject
 	private RooftopsConfig config;
@@ -49,8 +58,23 @@ public class RooftopsPlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
-		coursesManager = new RooftopsCoursesManager(client);
-		overlayRooftops = new RooftopsOverlay(config, coursesManager);
+		coursesManager = new RooftopsCoursesManager(client, new Course[]{
+			// Rooftops with marks of grace.
+			new RooftopCourseDraynor(),
+			new RooftopCourseAlKharid(),
+			new RooftopCourseVarrock(),
+			new RooftopCourseCanifis(),
+			new RooftopCourseFalador(),
+			new RooftopCourseSeers(),
+			new RooftopCoursePollnivneach(),
+			new RooftopCourseRellekka(),
+			new RooftopCourseArdougne(),
+
+			// Other.
+			new RooftopCourseVarlamore(),
+			new RooftopCourseApeAtoll()
+		});
+		overlayRooftops = new RooftopsOverlay(client, config, coursesManager);
 		overlays.add(overlayRooftops);
 	}
 
@@ -62,6 +86,11 @@ public class RooftopsPlugin extends Plugin {
 	@Subscribe
 	public void onGameObjectSpawned(final GameObjectSpawned event) {
 		coursesManager.onTileObjectSpawned(event.getGameObject());
+	}
+
+	@Subscribe
+	public void onWallObjectSpawned(final WallObjectSpawned event) {
+		coursesManager.onTileObjectSpawned(event.getWallObject());
 	}
 
 	@Subscribe
@@ -107,6 +136,16 @@ public class RooftopsPlugin extends Plugin {
 	@Subscribe
 	public void onGameStateChanged(final GameStateChanged event) {
 		coursesManager.onGameStateChanged(event);
+
+		// Send message about plugin updates for once.
+		if (event.getGameState() == GameState.LOGGED_IN && !config.getVersion().equals(pluginVersion)) {
+			configManager.setConfiguration(RooftopsConfig.group, RooftopsConfig.version, pluginVersion);
+			chatMessageManager.queue(QueuedMessage.builder()
+				.type(ChatMessageType.CONSOLE)
+				.runeLiteFormattedMessage(pluginMessage)
+				.build()
+			);
+		}
 	}
 
 	@Subscribe

@@ -19,8 +19,12 @@ public class RooftopCourseFalador extends Course {
                 new Obstacle(14911, 3, new int[][]{{3026, 3353}}),
                 new Obstacle(14919, 3, new int[][]{{3018, 3352}, {3017, 3352}, {3016, 3352}}),
                 new Obstacle(14920, 3, new int[][]{{3015, 3345}, {3015, 3346}}),
-                new Obstacle(14921, 3, new int[][]{{3013, 3343}, {3012, 3343}, {3011, 3343}}),
-                new Obstacle(new int[]{14922, 14923}, 3, new int[][]{{3012, 3334}, {3013, 3334}, {3014, 3335}}),
+                new Obstacle(14921, 3, new int[][]{{3013, 3343}, {3012, 3343}, {3011, 3343}})
+                    .nextObstacle(14922, 14923),
+                new Obstacle(14922, 3, new int[][]{{3012, 3334}, {3013, 3334}})
+                    .nextObstacle(14924),
+                new Obstacle(14923, 3, new int[][]{{3014, 3335}})
+                    .nextObstacle(14924),
                 new Obstacle(14924, 3, new int[][]{{3018, 3334}, {3018, 3333}, {3018, 3332}}),
                 new Obstacle(14925, 3, new int[][]{{3025, 3335}, {3025, 3334}, {3025, 3333}, {3025, 3332}}),
             },

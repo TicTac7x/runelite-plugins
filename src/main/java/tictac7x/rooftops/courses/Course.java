@@ -2,13 +2,18 @@ package tictac7x.rooftops.courses;
 
 import tictac7x.rooftops.MarkOfGrace;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 public abstract class Course {
     public final String id;
     public final int[] regions;
     public final Obstacle[] obstacles;
     public final MarkOfGrace[] marksOfGraces;
 
-    private int obstacleIndex = 0;
+    private Optional<Obstacle> currentObstacle = Optional.empty();
     private boolean doingObstacle;
 
     public Course(
@@ -23,18 +28,49 @@ public abstract class Course {
         this.marksOfGraces = marksOfGraces;
     }
 
-    public Obstacle getNextObstacle() {
-        return obstacles[obstacleIndex];
+    public Optional<Obstacle> getCurrentObstacle() {
+        return currentObstacle;
     }
 
-    public void startObstacle() {
-        // Obstacle already started.
+    public Optional<List<Obstacle>> getNextObstacles() {
+        // Course not started.
+        if (!currentObstacle.isPresent()) {
+            return Optional.of(new ArrayList<>(Arrays.asList(obstacles[0])));
+        }
+
+        final Optional<List<Integer>> fixedNextObstacles = currentObstacle.get().nextObstacles;
+        if (fixedNextObstacles.isPresent()) {
+            final List<Obstacle> next = new ArrayList<>();
+            for (final Obstacle obstacle : obstacles) {
+                if (fixedNextObstacles.get().contains(obstacle.id)) {
+                    next.add(obstacle);
+                }
+            }
+            return Optional.of(next);
+        }
+
+        int currentObstacleIndex = 0;
+        for (final Obstacle obstacle : obstacles) {
+            if (obstacle.id == currentObstacle.get().id) {
+                break;
+            }
+
+            currentObstacleIndex++;
+        }
+
+        // Current obstacle is last.
+        if (currentObstacleIndex < obstacles.length - 1) {
+            return Optional.of(new ArrayList<>(Arrays.asList(obstacles[currentObstacleIndex + 1])));
+        }
+
+        return Optional.empty();
+    }
+
+    public void startObstacle(final Obstacle obstacle) {
         if (doingObstacle) return;
 
+        currentObstacle = Optional.of(obstacle);
         doingObstacle = true;
-        obstacleIndex = obstacleIndex + 1 == obstacles.length
-            ? 0
-            : obstacleIndex + 1;
     }
 
     public void completeObstacle() {
@@ -42,8 +78,8 @@ public abstract class Course {
     }
 
     public void completeCourse() {
+        currentObstacle = Optional.empty();
         doingObstacle = false;
-        obstacleIndex = 0;
     }
 
     public boolean isDoingObstacle() {
@@ -58,5 +94,11 @@ public abstract class Course {
         }
 
         return false;
+    }
+
+    public void clearObstaclesTileObjects() {
+        for (final Obstacle obstacle : obstacles) {
+            obstacle.clearTileObject();
+        }
     }
 }

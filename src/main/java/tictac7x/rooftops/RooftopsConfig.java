@@ -8,8 +8,20 @@ import net.runelite.client.config.ConfigSection;
 
 import java.awt.Color;
 
-@ConfigGroup("tictac7x-rooftops")
+import static tictac7x.rooftops.RooftopsConfig.group;
+
+@ConfigGroup(group)
 public interface RooftopsConfig extends Config {
+	String group = "tictac7x-rooftops";
+	String version = "version";
+
+	@ConfigItem(
+		keyName = version,
+		name = version,
+		description = "Version of the plugin for update message",
+		hidden = true
+	) default String getVersion() { return ""; }
+
 	@ConfigSection(
 		name = "Obstacles",
 		description = "Obstacles",
