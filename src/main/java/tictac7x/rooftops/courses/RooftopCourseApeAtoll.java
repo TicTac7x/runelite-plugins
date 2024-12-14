@@ -6,7 +6,7 @@ public class RooftopCourseApeAtoll extends Course {
     public RooftopCourseApeAtoll() {
         super("Ape Atoll",
             // Regions.
-            new int[]{ 11050 },
+            new int[]{ 10794, 11050, 11051 },
 
             // Obstacles.
             new Obstacle[]{
@@ -18,7 +18,13 @@ public class RooftopCourseApeAtoll extends Course {
                 new Obstacle(16062, 0, new int[][]{{2757, 2734}}),
             },
 
-            new MarkOfGrace[]{}
+            new MarkOfGrace[]{
+                //
+                //
+                //
+                //
+                new MarkOfGrace(2745, 2735, 15487),
+            }
         );
     }
 }
