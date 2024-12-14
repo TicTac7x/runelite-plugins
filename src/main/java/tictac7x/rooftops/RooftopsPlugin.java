@@ -24,7 +24,7 @@ import javax.inject.Inject;
 	tags = { "roof", "rooftop", "agility", "mark", "grace", "graceful" }
 )
 public class RooftopsPlugin extends Plugin {
-	private final String pluginVersion = "v0.6";
+	private final String pluginVersion = "v0.6.1";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Rooftop Agility Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Varlamore course added.<br>" +
