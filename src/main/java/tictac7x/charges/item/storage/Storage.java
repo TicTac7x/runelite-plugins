@@ -137,11 +137,13 @@ public class Storage {
         if (maximumTotalQuantity.isPresent()) {
             int newTotalQuantity = 0;
             for (final StorageItem storageItem : storage.values()) {
-                newTotalQuantity += storageItem.itemId == itemId ? quantity : storageItem.getQuantity();
+                if (storageItem.itemId == itemId) continue;
+                newTotalQuantity += storageItem.getQuantity();
             }
+            newTotalQuantity += quantity; //Add outside the loop in case the item is not currently stored
 
             if (newTotalQuantity > maximumTotalQuantity.get()) {
-                quantity = maximumTotalQuantity.get();
+                quantity -= newTotalQuantity - maximumTotalQuantity.get();
             }
         }
 
