@@ -35,10 +35,10 @@ public class U_PlankSack extends ChargedItemWithStorage {
     ) {
         super(ChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
         storage.maximumTotalQuantity(28).storeableItems(
-            new StorageItem(ItemID.PLANK).checkName("Plank"),
-            new StorageItem(ItemID.OAK_PLANK).checkName("Oak plank"),
+            new StorageItem(ItemID.MAHOGANY_PLANK).checkName("Mahogany plank"),
             new StorageItem(ItemID.TEAK_PLANK).checkName("Teak plank"),
-            new StorageItem(ItemID.MAHOGANY_PLANK).checkName("Mahogany plank")
+            new StorageItem(ItemID.OAK_PLANK).checkName("Oak plank"),
+            new StorageItem(ItemID.PLANK).checkName("Plank")
         );
 
         this.items = new TriggerItem[]{
@@ -47,8 +47,12 @@ public class U_PlankSack extends ChargedItemWithStorage {
         };
 
         this.triggers = new TriggerBase[]{
-            // Empty to bank or inventory.
+            // Empty.
+            new OnChatMessage("Your sack is empty.").emptyStorage(),
+
+            // Check.
             new OnChatMessage("Basic planks: (?<basic>.+), Oak planks: (?<oak>.+), Teak planks: (?<teak>.+), Mahogany planks: (?<mahogany>.+)").matcherConsumer(m -> {
+                storage.clear();
                 storage.put(ItemID.PLANK, Integer.parseInt(m.group("basic")));
                 storage.put(ItemID.OAK_PLANK, Integer.parseInt(m.group("oak")));
                 storage.put(ItemID.TEAK_PLANK, Integer.parseInt(m.group("teak")));
