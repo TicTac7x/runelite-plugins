@@ -128,6 +128,7 @@ public class Store {
     }
 
     public void onMenuOptionClicked(final MenuOptionClicked event) {
+        final int menuOptionId = event.getId();
         final String menuTarget = event.getMenuTarget().replaceAll("</?col.*?>", "");
         final String menuOption = event.getMenuOption();
         int impostorId = -1;
@@ -153,7 +154,7 @@ public class Store {
         }
 
         // Save menu option and target for other triggers to use.
-        menuOptionsClicked.add(new AdvancedMenuEntry(menuTarget, menuOption, impostorId));
+        menuOptionsClicked.add(new AdvancedMenuEntry(menuOptionId, menuTarget, menuOption, impostorId));
     }
 
     public void onGameTick(final GameTick ignored) {
@@ -240,6 +241,22 @@ public class Store {
 
     public boolean notInMenuOptions(final String ...options) {
         return !inMenuOptions(options);
+    }
+
+    public boolean inMenuOptionIds(final int ...menuOptionIds) {
+        for (final AdvancedMenuEntry advancedMenuEntry : menuOptionsClicked) {
+            for (final int menuOptionId : menuOptionIds) {
+                if (advancedMenuEntry.eventId == menuOptionId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean notInMenuOptionIds(final int ...menuOptionsIds) {
+        return !inMenuOptionIds(menuOptionsIds);
     }
 
     public boolean inMenuImpostors(final int ...impostorIds) {

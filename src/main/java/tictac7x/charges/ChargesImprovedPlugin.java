@@ -123,7 +123,7 @@ import java.util.Optional;
 )
 
 public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.11";
+	private final String pluginVersion = "v0.5.12";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Tumeken's shadow added.<br>" +
@@ -456,7 +456,8 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 //			impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
 //		} catch (final Exception ignored) {}
 //		System.out.println("MENU OPTION | " +
-//			"option: " + event.getMenuOption() +
+//			"event id: " + event.getId() +
+//			", option: " + event.getMenuOption() +
 //			", target: " + event.getMenuTarget() +
 //			", action name: " + event.getMenuAction().name() +
 //			", action id: " + event.getMenuAction().getId() +
@@ -486,14 +487,20 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 
 	@Subscribe
 	public void onStatChanged(final StatChanged event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onStatChanged(event));
-		store.onStatChanged(event);
-
-//		System.out.println("STAT CHANGED | " +
+//		String statChanged =
 //			event.getSkill().getName() +
 //			", level: " + event.getLevel() +
-//			", xp: " + event.getXp()
+//			", total xp: " + event.getXp();
+//
+//		if (store.getSkillXp(event.getSkill()).isPresent()) {
+//			statChanged += ", xp drop: " + (event.getXp() - store.getSkillXp(event.getSkill()).get());
+//		}
+//		System.out.println("STAT CHANGED | " +
+//			statChanged
 //		);
+
+		Arrays.stream(chargedItems).forEach(infobox -> infobox.onStatChanged(event));
+		store.onStatChanged(event);
 	}
 
 	@Subscribe

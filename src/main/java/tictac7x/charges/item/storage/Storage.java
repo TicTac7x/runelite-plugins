@@ -123,6 +123,12 @@ public class Storage {
         this.remove(itemId, Math.max(quantity - store.getInventoryItemQuantity(itemId), 0));
     }
 
+    public void removeAndPrioritizeInventory(final Optional<Integer> itemId, final int quantity) {
+        if (itemId.isPresent()) {
+            this.removeAndPrioritizeInventory(itemId.get(), quantity);
+        }
+    }
+
     public void put(final int itemId, int quantity) {
         // -1 = item that was previously in the array, but that slot no longer has an item.
         // 6512 = empty item inside huntsmans kit.
