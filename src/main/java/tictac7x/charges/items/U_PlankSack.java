@@ -73,6 +73,14 @@ public class U_PlankSack extends ChargedItemWithStorage {
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
 
+
+            // Hallowed Sepulchre
+            new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
+                storage.removeAndPrioritizeInventory(ItemID.MAHOGANY_PLANK, 2);
+            }).onMenuOptionId(
+                39527
+            ),
+
             // Mahogany homes - 1 plank
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
                 storage.removeAndPrioritizeInventory(getPlankIdBasedOnXpAndPlanks(xp, 1), 1);
