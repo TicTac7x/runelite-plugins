@@ -1800,6 +1800,13 @@ public interface ChargesImprovedConfig extends Config {
         ) default String getLogBasketStorage() { return ""; }
 
         @ConfigItem(
+            keyName = forestry_kit + "_storage",
+            name = forestry_kit + "_storage",
+            description = forestry_kit + "_storage",
+            section = debug
+        ) default String getForestryKitStorage() { return ""; }
+
+        @ConfigItem(
             keyName = ardougne_cloak,
             name = ardougne_cloak,
             description = ardougne_cloak,

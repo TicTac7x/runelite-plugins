@@ -139,7 +139,7 @@ public class Store {
 
         if (
             // Not menu.
-            menuTarget.isEmpty() ||
+            menuTarget.isEmpty() && !menuOption.contains("Buy-") ||
             // Menu option not found.
             menuOption == null || menuOption.isEmpty() ||
             event.getMenuAction().name().equals("RUNELITE")

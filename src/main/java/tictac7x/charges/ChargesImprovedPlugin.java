@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.inject.Provides;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -26,6 +27,7 @@ import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.store.Store;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -128,6 +130,7 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Initial plank sack added with support for Mahogany homes and Hallowed Sepulchre.<br>" +
 		"<colHIGHLIGHT>* Log basket and fish barrel fixes.<br>" +
+		"<colHIGHLIGHT>* Forestry kit shop support.<br>" +
 		"<colHIGHLIGHT>* Master scroll book now has Colossal Wyrm teleport scrolls support."
 	;
 
@@ -647,6 +650,12 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 
 	public static int getNumberFromCommaString(final String charges) {
 		return Integer.parseInt(charges.replaceAll(",", "").replaceAll("\\.", ""));
+	}
+
+	public static Optional<Widget> getWidget(final Client client, final int parent, final int child) {
+		@Nullable
+		final Widget widget = client.getWidget(parent, child);
+		return widget != null ? Optional.of(widget) : Optional.empty();
 	}
 }
 
