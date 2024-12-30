@@ -704,22 +704,23 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 		.build();
 
 	public static int getNumberFromWordRepresentation(final String charges) {
-		String[] words = charges.toLowerCase().split(" ");
-        int result = 0;
-        int current = 0;
+		// Support strings like "twenty two" and "twenty-two"
+		String[] words = charges.toLowerCase().split("[ -]");
+		int result = 0;
+		int current = 0;
 
-        for (String w : words) {
-            if (TEXT_TO_NUMBER_MAP.containsKey(w)) {
-                current += TEXT_TO_NUMBER_MAP.get(w);
-            } else if (w.equals("hundred")) {
-                current *= 100;
-            } else if (w.equals("thousand")) {
-                result += current * 1000;
-                current = 0;
-            }
-        }
+		for (String word : words) {
+			if (TEXT_TO_NUMBER_MAP.containsKey(word)) {
+				current += TEXT_TO_NUMBER_MAP.get(word);
+			} else if (word.equals("hundred")) {
+				current *= 100;
+			} else if (word.equals("thousand")) {
+				result += current * 1000;
+				current = 0;
+			}
+		}
 
-        return result + current;
+		return result + current;
 	}
 }
 

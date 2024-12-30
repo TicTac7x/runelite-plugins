@@ -1918,7 +1918,6 @@ public interface ChargesImprovedConfig extends Config {
             name = colossal_pouch_decay_count,
             description = "Colossal pouch decay count",
             section = debug
-            // hidden = true
         ) default int getColossalPouchDecayCount() { return 0; };
 
         @ConfigItem(
