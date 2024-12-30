@@ -43,7 +43,7 @@ public class J_BindingNecklace extends ChargedItem {
             new OnChatMessage("You have (?<charges>.+) charges left before your Binding necklace disintegrates.").setDynamicallyCharges(),
 
             // Charge used.
-            new OnChatMessage("You are charged to combine runes!").decreaseCharges(1),
+            new OnChatMessage("You (partially succeed to )?bind the temple's power into (mud|lava|steam|dust|smoke|mist) runes\\.").decreaseCharges(1),
 
             // Fully used.
             new OnChatMessage("Your Binding necklace has disintegrated.").setFixedCharges(16),
