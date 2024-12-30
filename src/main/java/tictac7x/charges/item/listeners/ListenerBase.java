@@ -176,7 +176,9 @@ public abstract class ListenerBase {
                 }
             }
 
-            if (!isValid) return false;
+            if (!isValid) {
+                return false;
+            }
         }
 
         // Use charged item on storage item check.

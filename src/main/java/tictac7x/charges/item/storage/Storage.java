@@ -120,7 +120,7 @@ public class Storage {
     }
 
     public void removeAndPrioritizeInventory(final int itemId, final int quantity) {
-        this.remove(itemId, Math.max(quantity - store.getPreviousInventoryItemQuantity(itemId), 0));
+        this.remove(itemId, Math.max(quantity - store.getInventoryItemQuantity(itemId), 0));
     }
 
     public void removeAndPrioritizeInventory(final Optional<Integer> itemId, final int quantity) {

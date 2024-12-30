@@ -5,6 +5,5 @@ public class OnMenuOptionClicked extends TriggerBase {
 
     public OnMenuOptionClicked(final String option) {
         this.option = option;
-        this.onItemClick();
     }
 }

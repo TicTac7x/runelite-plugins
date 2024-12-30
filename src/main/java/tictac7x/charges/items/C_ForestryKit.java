@@ -98,22 +98,22 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onItemClick().onMenuOption("Fill"),
 
             // Buy items from Friendly Forester by 1.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Buy-1").consumer(() -> {
+            new OnMenuOptionClicked("Buy-1").consumer(() -> {
                 purchaseFromFriendlyForesterShop(1);
             }),
 
             // Buy items from Friendly Forester by 5.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Buy-5").consumer(() -> {
+            new OnMenuOptionClicked("Buy-5").consumer(() -> {
                 purchaseFromFriendlyForesterShop(5);
             }),
 
             // Buy items from Friendly Forester by 10.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Buy-10").consumer(() -> {
+            new OnMenuOptionClicked("Buy-10").consumer(() -> {
                 purchaseFromFriendlyForesterShop(10);
             }),
 
             // Buy items from Friendly Forester by 50.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Buy-50").consumer(() -> {
+            new OnMenuOptionClicked("Buy-50").consumer(() -> {
                 purchaseFromFriendlyForesterShop(50);
             }),
 
