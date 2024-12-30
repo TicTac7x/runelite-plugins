@@ -42,10 +42,10 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
         super(ChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
         this.storage = storage
             .storeableItems(
-                new StorageItem(ItemID.RUNE_ESSENCE).checkName("Rune essence"),
-                new StorageItem(ItemID.PURE_ESSENCE).checkName("Pure essence"),
-                new StorageItem(ItemID.DAEYALT_ESSENCE).checkName("Daeyalt essence"),
-                new StorageItem(ItemID.GUARDIAN_ESSENCE).checkName("Guardian essence")
+                new StorageItem(ItemID.RUNE_ESSENCE).checkName("Colossal pouch"),
+                new StorageItem(ItemID.PURE_ESSENCE).checkName("Colossal pouch"),
+                new StorageItem(ItemID.DAEYALT_ESSENCE).checkName("Colossal pouch"),
+                new StorageItem(ItemID.GUARDIAN_ESSENCE).checkName("Colossal pouch")
             )
             .maximumTotalQuantity(40);
 
@@ -99,13 +99,13 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventorySingle().onMenuOption("Fill"),
 
             // Fill from bank.
-            new OnItemContainerChanged(ItemContainerId.BANK).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.BANK).fillStorageFromInventorySingle().onMenuOption("Fill"),
 
             // Use essence on pouch.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventorySingle().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Empty to inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
