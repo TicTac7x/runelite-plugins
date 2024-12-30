@@ -40,6 +40,7 @@ public interface ChargesImprovedConfig extends Config {
     String circlet_of_water = "circlet_of_water";
     String coal_bag = "coal_bag";
     String colossal_pouch = "colossal_pouch";
+    String colossal_pouch_decay_count = "colossal_pouch_decay_count";
     String coffin = "coffin";
     String crystal_body = "crystal_body";
     String crystal_bow = "crystal_bow";
@@ -1906,11 +1907,19 @@ public interface ChargesImprovedConfig extends Config {
         ) default int getCoalBagCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = colossal_pouch,
-            name = colossal_pouch,
-            description = colossal_pouch,
+            keyName = colossal_pouch + "_storage",
+            name = colossal_pouch + "_storage",
+            description = colossal_pouch + "_storage",
             section = debug
-        ) default int getColossalPouchCharges() { return Charges.UNKNOWN; }
+        ) default String getColossalPouchStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = colossal_pouch_decay_count,
+            name = "Colossal pouch decay count",
+            description = "Colossal pouch decay count",
+            section = debug
+            // hidden = true
+        ) default int getColossalPouchDecayCount() { return 0; };
 
         @ConfigItem(
             keyName = herb_sack + "_storage",
