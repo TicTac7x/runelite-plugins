@@ -237,7 +237,7 @@ public class Store {
     public boolean inMenuOptions(final String ...options) {
         for (final AdvancedMenuEntry advancedMenuEntry : menuOptionsClicked) {
             for (final String option : options) {
-                if (advancedMenuEntry.option.contains(option)) {
+                if (advancedMenuEntry.option.equals(option)) {
                     return true;
                 }
             }

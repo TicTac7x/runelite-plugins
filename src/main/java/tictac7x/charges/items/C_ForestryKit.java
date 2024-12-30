@@ -98,7 +98,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onItemClick().onMenuOption("Fill"),
 
             // Buy items from Friendly Forester by 1.
-            new OnItemContainerChanged(INVENTORY).consumer(() -> {
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Buy-1").consumer(() -> {
                 purchaseFromFriendlyForesterShop(1);
             }),
 
@@ -127,7 +127,6 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         if (!forestryShopWidget.isPresent()) return;
 
         int animaBarkPerItem = 0;
-
         final int selectedShopItem = client.getVarpValue(3869);
         switch (selectedShopItem) {
             case 0: // Forestry kit

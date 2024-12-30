@@ -126,15 +126,6 @@ public abstract class ListenerBase {
             return false;
         }
 
-        // Menu option without target or impostor needs to check for self charged item.
-        if (
-            trigger.onMenuOption.isPresent() &&
-            !trigger.onMenuTarget.isPresent() &&
-            !trigger.onMenuImpostor.isPresent() && chargedItem.store.notInMenuTargets(chargedItem.itemId)
-        ) {
-            return false;
-        }
-
         // Menu option check.
         if (trigger.onMenuOption.isPresent() && chargedItem.store.notInMenuOptions(trigger.onMenuOption.get())) {
             return false;
