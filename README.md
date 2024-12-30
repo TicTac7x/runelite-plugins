@@ -90,6 +90,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Bonecrusher
 - Bottomless compost bucket
 - Coal bag
+- Colossal Pouch
 - Crystal saw
 - Fish barrel
 - Fungicide spray

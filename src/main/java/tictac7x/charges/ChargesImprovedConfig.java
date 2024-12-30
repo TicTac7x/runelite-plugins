@@ -39,6 +39,7 @@ public interface ChargesImprovedConfig extends Config {
     String chronicle = "chronicle";
     String circlet_of_water = "circlet_of_water";
     String coal_bag = "coal_bag";
+    String colossal_pouch = "colossal_pouch";
     String coffin = "coffin";
     String crystal_body = "crystal_body";
     String crystal_bow = "crystal_bow";
@@ -662,6 +663,13 @@ public interface ChargesImprovedConfig extends Config {
         ) default boolean coalBagInfobox() { return true; }
 
         @ConfigItem(
+            keyName = colossal_pouch + infobox,
+            name = "Colossal pouch",
+            description = "",
+            section = infoboxes
+        ) default boolean colossalPouchInfobox() { return true; }
+
+        @ConfigItem(
             keyName = crystal_saw + infobox,
             name = "Crystal saw",
             description = "",
@@ -1080,6 +1088,13 @@ public interface ChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean coalBagOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = colossal_pouch + overlay,
+            name = "Colossal pouch",
+            description = "",
+            section = overlays
+        ) default boolean colossalPouchOverlay() { return true; }
 
         @ConfigItem(
             keyName = coffin + overlay,
@@ -1889,6 +1904,13 @@ public interface ChargesImprovedConfig extends Config {
             description = coal_bag,
             section = debug
         ) default int getCoalBagCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = colossal_pouch,
+            name = colossal_pouch,
+            description = colossal_pouch,
+            section = debug
+        ) default int getColossalPouchCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
             keyName = herb_sack + "_storage",
