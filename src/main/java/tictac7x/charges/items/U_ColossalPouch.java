@@ -60,7 +60,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             new OnChatMessage("The rift becomes active!").emptyStorage(),
 
             // Check
-            new OnChatMessage("There (?:is|are) (?<charges>.+?) (?<essence>pure|daeyalt|guardian)? ?essences? in this pouch.").matcherConsumer((m) -> {
+            new OnChatMessage("There (?:is|are) (?<charges>.+?) (?<essence>pure|daeyalt|guardian|normal)? ?essences? in this pouch.").matcherConsumer((m) -> {
                 storage.clear();
 
                 String chargesMatch = m.group("charges");
@@ -77,9 +77,11 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
                     case "guardian":
                         itemID = ItemID.GUARDIAN_ESSENCE;
                         break;
-                    default:
+                    case "normal":
                         itemID = ItemID.RUNE_ESSENCE;
                         break;
+                    default:
+                        return;
                 }
                 
                 storage.put(itemID, charges);
