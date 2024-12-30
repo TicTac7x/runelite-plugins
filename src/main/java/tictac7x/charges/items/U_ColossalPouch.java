@@ -27,9 +27,6 @@ import tictac7x.charges.store.Store;
 import static tictac7x.charges.ChargesImprovedPlugin.getNumberFromWordRepresentation;
 
 public class U_ColossalPouch extends ChargedItemWithStorage {
-    // TODO: save in config storage somehow
-    private int decayCount = 0;
-
     public U_ColossalPouch(
         final Client client,
         final ClientThread client_thread,
@@ -42,7 +39,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.colossal_pouch, ItemID.SMALL_POUCH, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
         this.storage = storage
             .storeableItems(
                 new StorageItem(ItemID.RUNE_ESSENCE).checkName("Rune essence"),
@@ -66,6 +63,9 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             new OnChatMessage("There (?:is|are) (?<charges>.+?) (?<essence>pure|daeyalt|guardian)? ?essences? in this pouch.").matcherConsumer((m) -> {
                 storage.clear();
 
+                String chargesMatch = m.group("charges");
+                int charges = getNumberFromWordRepresentation(chargesMatch);
+
                 int itemID;
                 switch (m.group("essence")) {
                     case "pure":
@@ -82,18 +82,19 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
                         break;
                 }
                 
-                storage.put(itemID, getNumberFromWordRepresentation((m.group("charges"))));
+                storage.put(itemID, charges);
             }).onMenuOption("Check"),
 
             // Decay.
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
-                this.decayCount += 1;
+                int decayCount = config.getColossalPouchDecayCount();
+                configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, decayCount + 1);
                 this.storage.maximumTotalQuantity(getMaxCharges());
             }),
             
             // Repair.
             new OnChatMessage( "Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
-                this.decayCount = 0;
+                configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, 0);
                 this.storage.maximumTotalQuantity(getMaxCharges());
             }),
 
@@ -117,6 +118,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
     }
 
     public int getMaxCharges() {
+        int decayCount = config.getColossalPouchDecayCount();
         int runecraftLevel = this.client.getRealSkillLevel(Skill.RUNECRAFT);
         if (runecraftLevel >= 85) {
             return 40 - (decayCount * 5);

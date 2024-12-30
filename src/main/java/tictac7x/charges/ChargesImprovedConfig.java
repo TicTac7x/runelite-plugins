@@ -1915,7 +1915,7 @@ public interface ChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = colossal_pouch_decay_count,
-            name = "Colossal pouch decay count",
+            name = colossal_pouch_decay_count,
             description = "Colossal pouch decay count",
             section = debug
             // hidden = true
