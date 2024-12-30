@@ -126,7 +126,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             return 40 - (decayCount * 5);
         }
         else if (runecraftLevel >= 75) {
-            return 27 - (decayCount * 3); // TODO: verify this
+            return 27 - (decayCount * 4);
         }
         else if (runecraftLevel >= 50) {
             return 16 - (decayCount * 2);
