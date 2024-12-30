@@ -160,31 +160,38 @@ public class Store {
     public void onGameTick(final GameTick ignored) {
         // Automatically load all skill xps.
         if (!getSkillXp(Skill.MAGIC).isPresent()) {
-            skillsXp.put(Skill.AGILITY,       client.getSkillExperience(Skill.AGILITY));
-            skillsXp.put(Skill.ATTACK,        client.getSkillExperience(Skill.ATTACK));
-            skillsXp.put(Skill.CONSTRUCTION,  client.getSkillExperience(Skill.CONSTRUCTION));
-            skillsXp.put(Skill.COOKING,       client.getSkillExperience(Skill.COOKING));
-            skillsXp.put(Skill.CRAFTING,      client.getSkillExperience(Skill.CRAFTING));
-            skillsXp.put(Skill.DEFENCE,       client.getSkillExperience(Skill.DEFENCE));
-            skillsXp.put(Skill.FARMING,       client.getSkillExperience(Skill.FARMING));
-            skillsXp.put(Skill.FIREMAKING,    client.getSkillExperience(Skill.FIREMAKING));
-            skillsXp.put(Skill.FISHING,       client.getSkillExperience(Skill.FISHING));
-            skillsXp.put(Skill.FLETCHING,     client.getSkillExperience(Skill.FLETCHING));
-            skillsXp.put(Skill.HERBLORE,      client.getSkillExperience(Skill.HERBLORE));
-            skillsXp.put(Skill.HITPOINTS,     client.getSkillExperience(Skill.HITPOINTS));
-            skillsXp.put(Skill.HUNTER,        client.getSkillExperience(Skill.HUNTER));
-            skillsXp.put(Skill.MAGIC,         client.getSkillExperience(Skill.MAGIC));
-            skillsXp.put(Skill.MINING,        client.getSkillExperience(Skill.MINING));
-            skillsXp.put(Skill.PRAYER,        client.getSkillExperience(Skill.PRAYER));
-            skillsXp.put(Skill.RANGED,        client.getSkillExperience(Skill.RANGED));
-            skillsXp.put(Skill.RUNECRAFT,     client.getSkillExperience(Skill.RUNECRAFT));
-            skillsXp.put(Skill.SLAYER,        client.getSkillExperience(Skill.SLAYER));
-            skillsXp.put(Skill.SMITHING,      client.getSkillExperience(Skill.SMITHING));
-            skillsXp.put(Skill.STRENGTH,      client.getSkillExperience(Skill.STRENGTH));
-            skillsXp.put(Skill.THIEVING,      client.getSkillExperience(Skill.THIEVING));
-            skillsXp.put(Skill.WOODCUTTING,   client.getSkillExperience(Skill.WOODCUTTING));
+            skillsXp.put(Skill.AGILITY, client.getSkillExperience(Skill.AGILITY));
+            skillsXp.put(Skill.ATTACK, client.getSkillExperience(Skill.ATTACK));
+            skillsXp.put(Skill.CONSTRUCTION, client.getSkillExperience(Skill.CONSTRUCTION));
+            skillsXp.put(Skill.COOKING, client.getSkillExperience(Skill.COOKING));
+            skillsXp.put(Skill.CRAFTING, client.getSkillExperience(Skill.CRAFTING));
+            skillsXp.put(Skill.DEFENCE, client.getSkillExperience(Skill.DEFENCE));
+            skillsXp.put(Skill.FARMING, client.getSkillExperience(Skill.FARMING));
+            skillsXp.put(Skill.FIREMAKING, client.getSkillExperience(Skill.FIREMAKING));
+            skillsXp.put(Skill.FISHING, client.getSkillExperience(Skill.FISHING));
+            skillsXp.put(Skill.FLETCHING, client.getSkillExperience(Skill.FLETCHING));
+            skillsXp.put(Skill.HERBLORE, client.getSkillExperience(Skill.HERBLORE));
+            skillsXp.put(Skill.HITPOINTS, client.getSkillExperience(Skill.HITPOINTS));
+            skillsXp.put(Skill.HUNTER, client.getSkillExperience(Skill.HUNTER));
+            skillsXp.put(Skill.MAGIC, client.getSkillExperience(Skill.MAGIC));
+            skillsXp.put(Skill.MINING, client.getSkillExperience(Skill.MINING));
+            skillsXp.put(Skill.PRAYER, client.getSkillExperience(Skill.PRAYER));
+            skillsXp.put(Skill.RANGED, client.getSkillExperience(Skill.RANGED));
+            skillsXp.put(Skill.RUNECRAFT, client.getSkillExperience(Skill.RUNECRAFT));
+            skillsXp.put(Skill.SLAYER, client.getSkillExperience(Skill.SLAYER));
+            skillsXp.put(Skill.SMITHING, client.getSkillExperience(Skill.SMITHING));
+            skillsXp.put(Skill.STRENGTH, client.getSkillExperience(Skill.STRENGTH));
+            skillsXp.put(Skill.THIEVING, client.getSkillExperience(Skill.THIEVING));
+            skillsXp.put(Skill.WOODCUTTING, client.getSkillExperience(Skill.WOODCUTTING));
         }
         gametick++;
+
+        // Keep only last menu entry.
+        if (menuOptionsClicked.size() > 1) {
+            final AdvancedMenuEntry lastMenuEntry = menuOptionsClicked.get(menuOptionsClicked.size() - 1);
+            menuOptionsClicked.clear();
+            menuOptionsClicked.add(lastMenuEntry);
+        }
     }
 
     public boolean inMenuTargets(final int ...itemIds) {

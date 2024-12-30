@@ -20,6 +20,7 @@ import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.OnXpDrop;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.Store;
 
 import java.util.Optional;
@@ -105,7 +106,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
                 infernalQuantityTracker++;
             }).requiredItem(ItemID.OPEN_LOG_BASKET, ItemID.OPEN_FORESTRY_BASKET),
 
-                new OnItemPickup(storage.getStoreableItems()).isByOne().requiredItem(ItemID.OPEN_LOG_BASKET).pickUpToStorage(),
+            new OnItemPickup(storage.getStoreableItems()).isByOne().requiredItem(ItemID.OPEN_LOG_BASKET).pickUpToStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),

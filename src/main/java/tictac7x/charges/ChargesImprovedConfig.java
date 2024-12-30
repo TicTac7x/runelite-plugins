@@ -249,6 +249,13 @@ public interface ChargesImprovedConfig extends Config {
     ) String infoboxes = "infoboxes";
 
         @ConfigItem(
+            keyName = binding_necklace + infobox,
+            name = "Binding necklace",
+            description = "",
+            section = infoboxes
+        ) default boolean bindingNecklaceInfobox() { return true; }
+
+        @ConfigItem(
             keyName = pendant_of_ates + infobox,
             name = "Pendant of ates",
             description = "",
@@ -870,6 +877,13 @@ public interface ChargesImprovedConfig extends Config {
         position = 4,
         closedByDefault = true
     ) String overlays = "overlays";
+
+        @ConfigItem(
+            keyName = binding_necklace + overlay,
+            name = "Binding necklace",
+            description = "",
+            section = overlays
+        ) default boolean bindingNecklaceOverlay() { return true; }
 
         @ConfigItem(
             keyName = pendant_of_ates + overlay,

@@ -126,11 +126,9 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 	private final String pluginVersion = "v0.5.12";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Tumeken's shadow added.<br>" +
-		"<colHIGHLIGHT>* Digsite pendant added.<br>" +
-		"<colHIGHLIGHT>* Pendant of ates added.<br>" +
-		"<colHIGHLIGHT>* Binding necklace added.<br>" +
-		"<colHIGHLIGHT>* Fixes to other items."
+		"<colHIGHLIGHT>* Initial plank sack added with support for Mahogany homes and Hallowed Sepulchre.<br>" +
+		"<colHIGHLIGHT>* Log basket and fish barrel fixes.<br>" +
+		"<colHIGHLIGHT>* Master scroll book now has Colossal Wyrm teleport scrolls support."
 	;
 
 	private final int VARBIT_MINUTES = 8354;

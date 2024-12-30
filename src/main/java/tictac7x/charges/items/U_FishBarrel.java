@@ -137,6 +137,9 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             // Empty to bank.
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
+            // Empty to deposit box.
+            new OnChatMessage("You empty the barrel.").onMenuOption("Empty").emptyStorage(),
+
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),
         };
