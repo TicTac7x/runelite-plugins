@@ -657,5 +657,16 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 		final Widget widget = client.getWidget(parent, child);
 		return widget != null ? Optional.of(widget) : Optional.empty();
 	}
+
+	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final int subChild) {
+		@Nullable
+		final Widget widget = client.getWidget(parent, child);
+		if (widget == null) return Optional.empty();
+
+		@Nullable
+		final Widget subWidget = widget.getChild(subChild);
+
+		return subWidget != null ? Optional.of(subWidget) : Optional.empty();
+	}
 }
 
