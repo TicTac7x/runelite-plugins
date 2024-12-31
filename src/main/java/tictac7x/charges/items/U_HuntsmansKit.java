@@ -14,7 +14,6 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ItemContainerId;
@@ -82,7 +81,7 @@ public class U_HuntsmansKit extends ChargedItemWithStorage {
 
         this.triggers = new TriggerBase[]{
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),

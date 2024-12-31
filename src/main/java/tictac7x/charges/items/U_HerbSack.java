@@ -39,7 +39,7 @@ public class U_HerbSack extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.herb_sack, ItemID.HERB_SACK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.maximumIndividualQuantity(30).storeableItems(
+        storage = storage.setMaximumIndividualQuantity(30).storeableItems(
             new StorageItem(ItemID.GRIMY_GUAM_LEAF).checkName("Guam leaf"),
             new StorageItem(ItemID.GRIMY_MARRENTILL).checkName("Marrentill"),
             new StorageItem(ItemID.GRIMY_TARROMIN).checkName("Tarromin"),
@@ -77,7 +77,7 @@ public class U_HerbSack extends ChargedItemWithStorage {
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),

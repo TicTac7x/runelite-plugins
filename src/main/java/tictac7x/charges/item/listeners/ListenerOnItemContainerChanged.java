@@ -47,19 +47,6 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
                 triggerUsed = true;
             }
 
-            // Fill storage from inventory single item.
-            if (trigger.fillStorageFromInventorySingle.isPresent()) {
-                checkLooper: for (final AdvancedMenuEntry entry : chargedItem.store.menuOptionsClicked) {
-                    for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).storage.getStoreableItems()) {
-                        if (entry.target.toLowerCase().contains(storageItem.checkName.isPresent() ? storageItem.checkName.get().toLowerCase() : itemManager.getItemComposition(storageItem.itemId).getName().toLowerCase()) && chargedItem.store.getPreviousInventoryItemQuantity(storageItem.getId()) > 0) {
-                            ((ChargedItemWithStorage) chargedItem).storage.fillFromInventoryIndividually(storageItem.getId());
-                            triggerUsed = true;
-                            break checkLooper;
-                        }
-                    }
-                }
-            }
-
             // Empty storage to bank.
             if (trigger.emptyStorageToBank.isPresent()) {
                 ((ChargedItemWithStorage) chargedItem).storage.emptyToBank();
@@ -69,12 +56,6 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
             // Empty storage to inventory.
             if (trigger.emptyStorageToInventory.isPresent()) {
                 ((ChargedItemWithStorage) chargedItem).storage.emptyToInventory();
-                triggerUsed = true;
-            }
-
-            // Empty storage to inventory.
-            if (trigger.emptyStorageToInventoryReversed.isPresent()) {
-                ((ChargedItemWithStorage) chargedItem).storage.emptyToInventoryReversed();
                 triggerUsed = true;
             }
 

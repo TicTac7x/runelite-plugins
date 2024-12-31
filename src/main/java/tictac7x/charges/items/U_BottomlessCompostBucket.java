@@ -37,7 +37,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.bottomless_compost_bucket, ItemID.BOTTOMLESS_COMPOST_BUCKET_22997, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.maximumTotalQuantity(10000).storeableItems(
+        storage = storage.setMaximumTotalQuantity(10000).storeableItems(
             new StorageItem(ItemID.ULTRACOMPOST).checkName("ultra"),
             new StorageItem(ItemID.SUPERCOMPOST).checkName("super"),
             new StorageItem(ItemID.COMPOST).checkName("regular").displayName("Regular compost")

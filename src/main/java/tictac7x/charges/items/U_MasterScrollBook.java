@@ -34,7 +34,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.master_scroll_book, ItemID.MASTER_SCROLL_BOOK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.maximumIndividualQuantity(1000).storeableItems(
+        storage = storage.setMaximumIndividualQuantity(1000).storeableItems(
             new StorageItem(ItemID.NARDAH_TELEPORT).displayName("Nardah").specificOrder(1),
             new StorageItem(ItemID.DIGSITE_TELEPORT).displayName("Digsite").specificOrder(2),
             new StorageItem(ItemID.FELDIP_HILLS_TELEPORT).displayName("Feldip Hills").specificOrder(3),

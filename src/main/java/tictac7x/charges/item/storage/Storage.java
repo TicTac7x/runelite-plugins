@@ -15,7 +15,6 @@ import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -45,18 +44,18 @@ public class Storage {
         this.gson = gson;
     }
 
-    public Storage maximumTotalQuantity(final int quantity) {
+    public Storage setMaximumTotalQuantity(final int quantity) {
         this.maximumTotalQuantity = Optional.of(quantity);
         return this;
     }
 
-    public Storage maximumTotalQuantityWithEquippedItem(int quantity, final int ...itemIds) {
+    public Storage setMaximumTotalQuantityWithEquippedItem(int quantity, final int ...itemIds) {
         this.maximumTotalQuantityWithItemEquipped = Optional.of(quantity);
         this.maximumTotalQuantityWithItemEquippedItems = Optional.of(itemIds);
         return this;
     }
 
-    public Storage maximumIndividualQuantity(final int quantity) {
+    public Storage setMaximumIndividualQuantity(final int quantity) {
         this.maximumIndividualQuantity = Optional.of(quantity);
         return this;
     }
@@ -99,8 +98,12 @@ public class Storage {
 
     public void clearAndPut(final Optional<StorageItem> item, final int quantity) {
         if (!item.isPresent()) return;
+        clearAndPut(item.get().itemId, quantity);
+    }
+
+    public void clearAndPut(final int itemId, final int quantity) {
         clear();
-        put(item.get().itemId, quantity);
+        put(itemId, quantity);
     }
 
     public void remove(final Optional<StorageItem> item, final int quantity) {
@@ -168,15 +171,6 @@ public class Storage {
     public void fillFromInventory() {
         for (final StorageItem storageItem : storeableItems) {
             add(storageItem.getId(), store.getPreviousInventoryItemQuantity(storageItem.getId()));
-        }
-    }
-
-    public void fillFromInventoryIndividually(final int itemId) {
-        for (final StorageItem storageItem : storeableItems) {
-            if (storageItem.getId() == itemId) {
-                add(storageItem.getId(), store.getPreviousInventoryItemQuantity(storageItem.getId()));
-                return;
-            }
         }
     }
 

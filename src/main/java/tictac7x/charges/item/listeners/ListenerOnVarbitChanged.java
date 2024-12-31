@@ -50,7 +50,7 @@ public class ListenerOnVarbitChanged extends ListenerBase {
         }
 
         // Varbit value check.
-        if (trigger.isVarbitValue.isPresent() && event.getValue() != trigger.isVarbitValue.get()) {
+        if (trigger.varbitValue.isPresent() && event.getValue() != trigger.varbitValue.get()) {
             return false;
         }
 

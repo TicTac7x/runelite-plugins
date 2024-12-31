@@ -70,7 +70,7 @@ public class U_MeatPouch extends ChargedItemWithStorage {
             new OnChatMessage("Your meat pouch is currently holding 0 meat").emptyStorage(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
@@ -79,7 +79,7 @@ public class U_MeatPouch extends ChargedItemWithStorage {
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Use meat on pouch.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventorySingle().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Hide destroy option.
             new OnMenuEntryAdded("Destroy").hide(),

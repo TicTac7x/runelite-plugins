@@ -43,11 +43,14 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
         };
 
         this.triggers = new TriggerBase[]{
-            // Deactivate.
-            new OnVarbitChanged(14838).isVarbitValue(0).deactivate(),
-
-            // Activate.
-            new OnVarbitChanged(14838).isVarbitValue(1).activate(),
+            // Activate / Deactivate.
+            new OnVarbitChanged(14838).varbitValueConsumer(value -> {
+                if (value == 1) {
+                    activate();
+                } else {
+                    deactivate();
+                }
+            }),
 
             // Inactivity period from dialog when changed inactivity period.
             new OnChatMessage("The inactivity period for auto-activation (remains unchanged at|is now) (?<seconds>.+?)s.*").matcherConsumer(matcher -> {

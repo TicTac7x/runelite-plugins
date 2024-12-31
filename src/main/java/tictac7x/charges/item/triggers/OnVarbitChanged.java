@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 public class OnVarbitChanged extends TriggerBase {
     public final int varbitId;
 
-    public Optional<Integer> isVarbitValue = Optional.empty();
+    public Optional<Integer> varbitValue = Optional.empty();
     public Optional<Consumer<Integer>> varbitValueConsumer = Optional.empty();
     public Optional<Boolean> setDynamically = Optional.empty();
 
@@ -14,9 +14,9 @@ public class OnVarbitChanged extends TriggerBase {
         this.varbitId = varbitId;
     }
 
-    public OnVarbitChanged isVarbitValue(final int varbitValue) {
-        this.isVarbitValue = Optional.of(varbitValue);
-        return this;
+    public OnVarbitChanged(final int varbitId, final int varbitValue) {
+        this.varbitId = varbitId;
+        this.varbitValue = Optional.of(varbitValue);
     }
 
     public OnVarbitChanged varbitValueConsumer(final Consumer<Integer> consumer) {

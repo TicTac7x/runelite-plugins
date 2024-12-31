@@ -77,7 +77,7 @@ public class U_FurPouch extends ChargedItemWithStorage {
             new OnChatMessage("Your fur pouch is currently holding 0 fur.").emptyStorage(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
@@ -86,7 +86,7 @@ public class U_FurPouch extends ChargedItemWithStorage {
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Use fur on pouch.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventorySingle().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Hide destroy option.
             new OnMenuEntryAdded("Destroy").hide(),

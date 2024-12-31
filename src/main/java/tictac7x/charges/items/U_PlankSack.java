@@ -14,11 +14,8 @@ import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.Store;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
@@ -42,7 +39,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage.maximumTotalQuantity(28).storeableItems(
+        storage.setMaximumTotalQuantity(28).storeableItems(
             new StorageItem(ItemID.PLANK).checkName("Regular plank"),
             new StorageItem(ItemID.OAK_PLANK).checkName("Oak plank"),
             new StorageItem(ItemID.TEAK_PLANK).checkName("Teak plank"),
@@ -71,7 +68,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
 
             // Hallowed Sepulchre

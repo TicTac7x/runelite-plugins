@@ -20,7 +20,6 @@ import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.OnXpDrop;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.Store;
 
 import java.util.Optional;
@@ -47,7 +46,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.log_basket, ItemID.LOG_BASKET, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage.maximumTotalQuantity(28).storeableItems(
+        storage.setMaximumTotalQuantity(28).storeableItems(
             new StorageItem(ItemID.LOGS).displayName("Regular logs").checkName("Logs"),
             new StorageItem(ItemID.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
             new StorageItem(ItemID.OAK_LOGS).checkName("Oak logs"),
@@ -109,13 +108,13 @@ public class U_LogBasket extends ChargedItemWithStorage {
             new OnItemPickup(storage.getStoreableItems()).isByOne().requiredItem(ItemID.OPEN_LOG_BASKET).pickUpToStorage(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
             new OnChatMessage("You empty as many logs as you can carry.").emptyStorageToInventory(),
 
             // Use log on basket.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventorySingle().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Empty to bank.
             new OnItemContainerChanged(BANK).onMenuOption("Empty").emptyStorage(),

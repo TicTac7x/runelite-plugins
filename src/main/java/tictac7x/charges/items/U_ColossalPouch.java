@@ -1,7 +1,5 @@
 package tictac7x.charges.items;
 
-import static tictac7x.charges.store.ItemContainerId.INVENTORY;
-
 import com.google.gson.Gson;
 
 import net.runelite.api.Client;
@@ -16,11 +14,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.OnStatChanged;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
@@ -40,81 +34,82 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        this.storage = storage
-            .storeableItems(
-                new StorageItem(ItemID.RUNE_ESSENCE).checkName("Colossal pouch"),
-                new StorageItem(ItemID.PURE_ESSENCE).checkName("Colossal pouch"),
-                new StorageItem(ItemID.DAEYALT_ESSENCE).checkName("Colossal pouch"),
-                new StorageItem(ItemID.GUARDIAN_ESSENCE).checkName("Colossal pouch")
-            )
-            .maximumTotalQuantity(40);
+        this.storage = storage.storeableItems(
+            new StorageItem(ItemID.RUNE_ESSENCE),
+            new StorageItem(ItemID.PURE_ESSENCE),
+            new StorageItem(ItemID.DAEYALT_ESSENCE),
+            new StorageItem(ItemID.GUARDIAN_ESSENCE)
+        ).setMaximumTotalQuantity(40);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.COLOSSAL_POUCH),
-            new TriggerItem(ItemID.COLOSSAL_POUCH_26786), // Degrated
+            new TriggerItem(ItemID.COLOSSAL_POUCH_26786), // Degraded
         };
 
         this.triggers = new TriggerBase[]{
-            // Empty
+            // Empty.
             new OnChatMessage("There is no essence in this pouch.").emptyStorage(),
-            new OnChatMessage("The rift becomes active!").emptyStorage(),
 
-            // Check
-            new OnChatMessage("There (?:is|are) (?<charges>.+?) (?<essence>pure|daeyalt|guardian|normal)? ?essences? in this pouch.").matcherConsumer((m) -> {
-                storage.clear();
+            // Guardians of the rift.
+            new OnChatMessage("The rift becomes active!").consumer(() -> {
+                storage.put(ItemID.GUARDIAN_ESSENCE, 0);
+            }),
+            new OnVarbitChanged(13691, 0).consumer(() -> {
+                storage.put(ItemID.GUARDIAN_ESSENCE, 0);
+            }),
 
-                String chargesMatch = m.group("charges");
-                int charges = getNumberFromWordRepresentation(chargesMatch);
+            // Check.
+            new OnChatMessage("There (is|are) (?<quantity>.+?) (?<essence>normal|pure|daeyalt|guardian|normal) essences? in this pouch.").matcherConsumer((m) -> {
+                final int quantity = getNumberFromWordRepresentation(m.group("quantity"));
 
-                int itemID;
+                int essenceId;
                 switch (m.group("essence")) {
+                    case "normal":
+                        essenceId = ItemID.RUNE_ESSENCE;
+                        break;
                     case "pure":
-                        itemID = ItemID.PURE_ESSENCE;
+                        essenceId = ItemID.PURE_ESSENCE;
                         break;
                     case "daeyalt":
-                        itemID = ItemID.DAEYALT_ESSENCE;
+                        essenceId = ItemID.DAEYALT_ESSENCE;
                         break;
                     case "guardian":
-                        itemID = ItemID.GUARDIAN_ESSENCE;
-                        break;
-                    case "normal":
-                        itemID = ItemID.RUNE_ESSENCE;
+                        essenceId = ItemID.GUARDIAN_ESSENCE;
                         break;
                     default:
                         return;
                 }
-                
-                storage.put(itemID, charges);
+
+                storage.clearAndPut(essenceId, quantity);
             }).onMenuOption("Check"),
 
             // Decay.
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
-                int decayCount = config.getColossalPouchDecayCount();
-                configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, decayCount + 1);
-                this.storage.maximumTotalQuantity(getPouchCapacity());
+                configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, config.getColossalPouchDecayCount() + 1);
+                storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
-            
+
             // Repair.
-            new OnChatMessage( "Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
+            new OnChatMessage("Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
                 configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, 0);
-                this.storage.maximumTotalQuantity(getPouchCapacity());
+                storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventorySingle().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Fill from bank.
-            new OnItemContainerChanged(ItemContainerId.BANK).fillStorageFromInventorySingle().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.BANK).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Use essence on pouch.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventorySingle().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Empty to inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
 
             // Set maximum charges on level up
             new OnStatChanged(Skill.RUNECRAFT).consumer(() -> {
-                this.storage.maximumTotalQuantity(getPouchCapacity());
+                this.storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
         };
     }
@@ -125,21 +120,18 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
     private final int[] CAPACITY_25 = {8, 5, 2}; // TODO: verify these
 
     public int getPouchCapacity() {
-        int decayCount = config.getColossalPouchDecayCount();
-        int runecraftLevel = this.client.getRealSkillLevel(Skill.RUNECRAFT);
+        final int decayCount = config.getColossalPouchDecayCount();
+        final int runecraftLevel = this.client.getRealSkillLevel(Skill.RUNECRAFT);
+
         if (runecraftLevel >= 85) {
             return CAPACITY_85[Math.min(CAPACITY_85.length - 1, decayCount)];
-        }
-        else if (runecraftLevel >= 75) {
+        } else if (runecraftLevel >= 75) {
             return CAPACITY_75[Math.min(CAPACITY_75.length - 1, decayCount)];
-        }
-        else if (runecraftLevel >= 50) {
+        } else if (runecraftLevel >= 50) {
             return CAPACITY_50[Math.min(CAPACITY_50.length - 1, decayCount)];
-        }
-        else if (runecraftLevel >= 25) {
+        } else if (runecraftLevel >= 25) {
             return CAPACITY_25[Math.min(CAPACITY_25.length - 1, decayCount)];
-        }
-        else {
+        } else {
             return 0;
         }
     }

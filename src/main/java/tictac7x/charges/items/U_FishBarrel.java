@@ -42,7 +42,7 @@ public class U_FishBarrel extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.fish_barrel, ItemID.FISH_BARREL, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.maximumTotalQuantity(28).storeableItems(
+        storage = storage.setMaximumTotalQuantity(28).storeableItems(
             // Small net
             new StorageItem(ItemID.RAW_SHRIMPS).checkName("Shrimp"),
             new StorageItem(ItemID.RAW_ANCHOVIES).checkName("Anchovies"),
@@ -129,10 +129,10 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             }).onItemClick(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Use fish on barrel.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventorySingle().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Empty to bank.
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),

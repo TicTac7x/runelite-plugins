@@ -40,7 +40,7 @@ public class U_GemBag extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.gem_bag, ItemID.GEM_BAG_12020, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage.maximumIndividualQuantity(60).storeableItems(
+        storage.setMaximumIndividualQuantity(60).storeableItems(
             new StorageItem(ItemID.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
             new StorageItem(ItemID.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),
             new StorageItem(ItemID.UNCUT_RUBY).checkName("Ruby").specificOrder(3),
@@ -82,14 +82,14 @@ public class U_GemBag extends ChargedItemWithStorage {
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to bank.
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Use gem on bag
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onUseChargedItemOnStorageItem(storage.getStoreableItems()),
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Pick up.
             new OnItemPickup(storage.getStoreableItems()).isByOne().requiredItem(ItemID.OPEN_GEM_BAG).pickUpToStorage(),

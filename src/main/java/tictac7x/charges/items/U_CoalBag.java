@@ -32,8 +32,8 @@ public class U_CoalBag extends ChargedItemWithStorage {
         super(ChargesImprovedConfig.coal_bag, ItemID.COAL_BAG_12019, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
         this.storage = storage
             .storeableItems(new StorageItem(ItemID.COAL).checkName("Coal"))
-            .maximumTotalQuantity(27)
-            .maximumTotalQuantityWithEquippedItem(36, ItemID.SMITHING_CAPE, ItemID.HITPOINTS_CAPET);
+            .setMaximumTotalQuantity(27)
+            .setMaximumTotalQuantityWithEquippedItem(36, ItemID.SMITHING_CAPE, ItemID.HITPOINTS_CAPET);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.COAL_BAG_12019),

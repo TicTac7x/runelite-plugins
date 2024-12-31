@@ -15,7 +15,6 @@ import tictac7x.charges.ChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
@@ -95,7 +94,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventoryAll().onItemClick().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onItemClick().onMenuOption("Fill"),
 
             // Buy items from Friendly Forester by 1.
             new OnMenuOptionClicked("Buy-1").consumer(() -> {

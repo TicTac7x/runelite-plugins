@@ -77,7 +77,7 @@ public class C_Coffin extends ChargedItemWithStorage {
             new OnChatMessage("Your coffin is empty.").onItemClick().emptyStorage(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventoryAll().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
         };
     }
 }
