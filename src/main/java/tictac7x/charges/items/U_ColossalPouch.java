@@ -91,13 +91,13 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
                 int decayCount = config.getColossalPouchDecayCount();
                 configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, decayCount + 1);
-                this.storage.maximumTotalQuantity(getMaxCharges());
+                this.storage.maximumTotalQuantity(getPouchCapacity());
             }),
             
             // Repair.
             new OnChatMessage( "Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
                 configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, 0);
-                this.storage.maximumTotalQuantity(getMaxCharges());
+                this.storage.maximumTotalQuantity(getPouchCapacity());
             }),
 
             // Fill from inventory.
@@ -114,25 +114,33 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Set maximum charges on level up
             new OnStatChanged(Skill.RUNECRAFT).consumer(() -> {
-                this.storage.maximumTotalQuantity(getMaxCharges());
+                this.storage.maximumTotalQuantity(getPouchCapacity());
             }),
         };
     }
 
-    public int getMaxCharges() {
+    private final int[] CAPACITY_85 = {40, 35, 30, 25, 20, 15, 10, 5};
+    private final int[] CAPACITY_75 = {27, 23, 20, 16, 13, 10, 6, 3};
+    private final int[] CAPACITY_50 = {16, 14, 12, 10, 8, 6, 4, 2};
+    private final int[] CAPACITY_25 = {8, 5, 2}; // TODO: verify these
+
+    public int getPouchCapacity() {
         int decayCount = config.getColossalPouchDecayCount();
         int runecraftLevel = this.client.getRealSkillLevel(Skill.RUNECRAFT);
         if (runecraftLevel >= 85) {
-            return 40 - (decayCount * 5);
+            return CAPACITY_85[Math.min(CAPACITY_85.length - 1, decayCount)];
         }
         else if (runecraftLevel >= 75) {
-            return 27 - (decayCount * 4);
+            return CAPACITY_75[Math.min(CAPACITY_75.length - 1, decayCount)];
         }
         else if (runecraftLevel >= 50) {
-            return 16 - (decayCount * 2);
+            return CAPACITY_50[Math.min(CAPACITY_50.length - 1, decayCount)];
+        }
+        else if (runecraftLevel >= 25) {
+            return CAPACITY_25[Math.min(CAPACITY_25.length - 1, decayCount)];
         }
         else {
-            return 8 - (decayCount * 1); // TODO: verify this
+            return 0;
         }
     }
 }
