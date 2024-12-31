@@ -1,5 +1,6 @@
 package tictac7x.charges;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.inject.Provides;
 import net.runelite.api.*;
@@ -268,6 +269,7 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			new U_BottomlessCompostBucket(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_CoalBag(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_CrystalSaw(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new U_ColossalPouch(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_FishBarrel(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_FungicideSpray(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_FurPouch(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -667,6 +669,58 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 		final Widget subWidget = widget.getChild(subChild);
 
 		return subWidget != null ? Optional.of(subWidget) : Optional.empty();
+	}
+	
+	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()
+		.put("zero", 0)
+		.put("one", 1)
+		.put("two", 2)
+		.put("three", 3)
+		.put("four", 4)
+		.put("five", 5)
+		.put("six", 6)
+		.put("seven", 7)
+		.put("eight", 8)
+		.put("nine", 9)
+		.put("ten", 10)
+		.put("eleven", 11)
+		.put("twelve", 12)
+		.put("thirteen", 13)
+		.put("fourteen", 14)
+		.put("fifteen", 15)
+		.put("sixteen", 16)
+		.put("seventeen", 17)
+		.put("eighteen", 18)
+		.put("nineteen", 19)
+		.put("twenty", 20)
+		.put("thirty", 30)
+		.put("forty", 40)
+		.put("fifty", 50)
+		.put("sixty", 60)
+		.put("seventy", 70)
+		.put("eighty", 80)
+		.put("ninety", 90)
+		.put("hundred", 100)
+		.build();
+
+	public static int getNumberFromWordRepresentation(final String charges) {
+		// Support strings like "twenty two" and "twenty-two"
+		String[] words = charges.toLowerCase().split("[ -]");
+		int result = 0;
+		int current = 0;
+
+		for (String word : words) {
+			if (TEXT_TO_NUMBER_MAP.containsKey(word)) {
+				current += TEXT_TO_NUMBER_MAP.get(word);
+			} else if (word.equals("hundred")) {
+				current *= 100;
+			} else if (word.equals("thousand")) {
+				result += current * 1000;
+				current = 0;
+			}
+		}
+
+		return result + current;
 	}
 }
 

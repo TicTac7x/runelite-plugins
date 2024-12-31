@@ -45,6 +45,7 @@ public abstract class ChargedItemBase {
     private final ListenerOnItemContainerChanged listenerOnItemContainerChanged;
     private final ListenerOnItemPickup listenerOnItemPickup;
     private final ListenerOnXpDrop listenerOnXpDrop;
+    private final ListenerOnStatChanged listenerOnStatChanged;
     private final ListenerOnMenuEntryAdded listenerOnMenuEntryAdded;
     private final ListenerOnResetDaily listenerOnResetDaily;
     private final ListenerOnGraphicChanged listenerOnGraphicChanged;
@@ -88,6 +89,7 @@ public abstract class ChargedItemBase {
         listenerOnItemContainerChanged = new ListenerOnItemContainerChanged(client, itemManager, this, notifier, config);
         listenerOnItemPickup = new ListenerOnItemPickup(client, itemManager, this, notifier, config);
         listenerOnXpDrop = new ListenerOnXpDrop(client, itemManager, this, notifier, config);
+        listenerOnStatChanged = new ListenerOnStatChanged(client, itemManager, this, notifier, config);
         listenerOnMenuEntryAdded = new ListenerOnMenuEntryAdded(client, itemManager, this, notifier, config);
         listenerOnResetDaily = new ListenerOnResetDaily(client, itemManager, this, notifier, config);
         listenerOnGraphicChanged = new ListenerOnGraphicChanged(client, itemManager, this, notifier, config);
@@ -192,6 +194,7 @@ public abstract class ChargedItemBase {
     }
 
     public void onStatChanged(final StatChanged event) {
+        listenerOnStatChanged.trigger(event);
         if (!inInventoryOrEquipment()) return;
         listenerOnXpDrop.trigger(event);
     }
