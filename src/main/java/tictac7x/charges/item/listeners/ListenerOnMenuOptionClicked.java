@@ -8,13 +8,14 @@ import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnMenuOptionClicked;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.AdvancedMenuEntry;
 
 public class ListenerOnMenuOptionClicked extends ListenerBase {
     public ListenerOnMenuOptionClicked(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final ChargesImprovedConfig config) {
         super(client, itemManager, chargedItem, notifier, config);
     }
 
-    public void trigger(final MenuOptionClicked event) {
+    public void trigger(final AdvancedMenuEntry event) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(triggerBase, event)) continue;
             final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
@@ -28,12 +29,12 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final MenuOptionClicked event) {
+    public boolean isValidTrigger(final TriggerBase triggerBase, final AdvancedMenuEntry event) {
         if (!(triggerBase instanceof OnMenuOptionClicked)) return false;
         final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
 
         // Option check.
-        if (!event.getMenuOption().equals(trigger.option)) {
+        if (!event.option.equals(trigger.option)) {
             return false;
         }
 

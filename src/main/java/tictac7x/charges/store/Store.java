@@ -127,22 +127,14 @@ public class Store {
         updateStorage(event);
     }
 
-    public void onMenuOptionClicked(final MenuOptionClicked event) {
-        final int menuOptionId = event.getId();
-        final String menuTarget = event.getMenuTarget().replaceAll("</?col.*?>", "");
-        final String menuOption = event.getMenuOption();
-        int impostorId = -1;
-
-        try {
-            impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
-        } catch (final Exception ignored) {}
-
+    public void onMenuOptionClicked(final AdvancedMenuEntry advancedMenuEntry) {
         if (
             // Not menu.
-            menuTarget.isEmpty() && !menuOption.contains("Buy-") ||
+            advancedMenuEntry.target.isEmpty() && !advancedMenuEntry.option.contains("Buy-") ||
             // Menu option not found.
-            menuOption == null || menuOption.isEmpty() ||
-            event.getMenuAction().name().equals("RUNELITE")
+            advancedMenuEntry.option.isEmpty() ||
+            // RuneLite specific action.
+            advancedMenuEntry.action.equals("RUNELITE")
         ) {
             return;
         }
@@ -154,7 +146,7 @@ public class Store {
         }
 
         // Save menu option and target for other triggers to use.
-        menuOptionsClicked.add(new AdvancedMenuEntry(menuOptionId, menuTarget, menuOption, impostorId));
+        menuOptionsClicked.add(advancedMenuEntry);
     }
 
     public void onGameTick(final GameTick ignored) {

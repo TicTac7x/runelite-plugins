@@ -26,6 +26,7 @@ import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
 import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
+import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.Store;
 
 import javax.annotation.Nullable;
@@ -447,25 +448,22 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		if (event.getMenuOption().equals("Use") && !event.getMenuTarget().contains("->")) return;
+		final AdvancedMenuEntry advancedMenuEntry = new AdvancedMenuEntry(event, client);
 
-		store.onMenuOptionClicked(event);
+		store.onMenuOptionClicked(advancedMenuEntry);
 
 		for (final ChargedItemBase chargedItem : chargedItems) {
-			chargedItem.onMenuOptionClicked(event);
+			chargedItem.onMenuOptionClicked(advancedMenuEntry);
 		}
 
-//		int impostorId = -1;
-//		try {
-//			impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
-//		} catch (final Exception ignored) {}
 //		System.out.println("MENU OPTION | " +
-//			"event id: " + event.getId() +
-//			", option: " + event.getMenuOption() +
-//			", target: " + event.getMenuTarget() +
-//			", action name: " + event.getMenuAction().name() +
-//			", action id: " + event.getMenuAction().getId() +
-//			", item id: " + event.getItemId() +
-//			", impostor id " + impostorId
+//			"event id: " + advancedMenuEntry.eventId +
+//			", option: " + advancedMenuEntry.option +
+//			", target: " + advancedMenuEntry.target +
+//			", action id: " + advancedMenuEntry.actionId +
+//			", action name: " + advancedMenuEntry.action +
+//			", item id: " + advancedMenuEntry.itemId +
+//			", impostor id: " + advancedMenuEntry.impostorId
 //		);
 	}
 

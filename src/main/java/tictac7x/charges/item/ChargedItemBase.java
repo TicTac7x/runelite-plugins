@@ -17,6 +17,7 @@ import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.listeners.*;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
 
@@ -235,7 +236,7 @@ public abstract class ChargedItemBase {
         listenerOnUserAction.trigger();
     }
 
-    public void onMenuOptionClicked(final MenuOptionClicked event) {
+    public void onMenuOptionClicked(final AdvancedMenuEntry event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnMenuOptionClicked.trigger(event);
     }
