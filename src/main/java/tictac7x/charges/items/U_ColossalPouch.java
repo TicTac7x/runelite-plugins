@@ -18,6 +18,8 @@ import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
+import java.util.Optional;
+
 import static tictac7x.charges.ChargesImprovedPlugin.getNumberFromWordRepresentation;
 
 public class U_ColossalPouch extends ChargedItemWithStorage {
@@ -39,7 +41,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             new StorageItem(ItemID.PURE_ESSENCE),
             new StorageItem(ItemID.DAEYALT_ESSENCE),
             new StorageItem(ItemID.GUARDIAN_ESSENCE)
-        ).setMaximumTotalQuantity(40);
+        ).setMaximumTotalQuantity(40).setHoldsSingleType(true);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.COLOSSAL_POUCH),
@@ -96,20 +98,34 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
-
-            // Fill from bank.
-            new OnItemContainerChanged(ItemContainerId.BANK).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnMenuOptionClicked("Fill").consumer(() -> {
+                if (store.inventoryContainsItem(ItemID.GUARDIAN_ESSENCE)) {
+                    storage.add(ItemID.GUARDIAN_ESSENCE, store.getInventoryItemQuantity(ItemID.GUARDIAN_ESSENCE));
+                } else if (store.inventoryContainsItem(ItemID.DAEYALT_ESSENCE)) {
+                    storage.add(ItemID.DAEYALT_ESSENCE, store.getInventoryItemQuantity(ItemID.DAEYALT_ESSENCE));
+                } else if (store.inventoryContainsItem(ItemID.PURE_ESSENCE)) {
+                    storage.add(ItemID.PURE_ESSENCE, store.getInventoryItemQuantity(ItemID.PURE_ESSENCE));
+                } else if (store.inventoryContainsItem(ItemID.RUNE_ESSENCE)) {
+                    storage.add(ItemID.RUNE_ESSENCE, store.getInventoryItemQuantity(ItemID.RUNE_ESSENCE));
+                }
+            }),
 
             // Use essence on pouch.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnMenuOptionClicked("Use").menuOptionConsumer(advancedMenuEntry -> {
+                final Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target);
+                if (essence.isPresent()) {
+                    storage.add(essence.get().itemId, store.getInventoryItemQuantity(essence.get().itemId));
+                }
+            }).onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Empty to inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
+            new OnMenuOptionClicked("Empty").consumer(() -> {
+                storage.emptyToInventoryWithoutItemContainerChanged();
+            }),
 
             // Set maximum charges on level up
             new OnStatChanged(Skill.RUNECRAFT).consumer(() -> {
-                this.storage.setMaximumTotalQuantity(getPouchCapacity());
+                storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
         };
     }

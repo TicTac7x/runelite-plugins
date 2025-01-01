@@ -21,6 +21,11 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
             final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
             boolean triggerUsed = false;
 
+            if (trigger.menuOptionConsumer.isPresent()) {
+                trigger.menuOptionConsumer.get().accept(event);
+                triggerUsed = true;
+            }
+
             if (super.trigger(trigger)) {
                 triggerUsed = true;
             }

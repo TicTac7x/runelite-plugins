@@ -447,8 +447,11 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		if (event.getMenuOption().equals("Use") && !event.getMenuTarget().contains("->")) return;
 		final AdvancedMenuEntry advancedMenuEntry = new AdvancedMenuEntry(event, client);
+		if (
+			advancedMenuEntry.option.equals("Use") && advancedMenuEntry.action.equals("WIDGET_TARGET") ||
+			advancedMenuEntry.action.equals("CANCEL")
+		) return;
 
 		store.onMenuOptionClicked(advancedMenuEntry);
 
@@ -456,15 +459,15 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			chargedItem.onMenuOptionClicked(advancedMenuEntry);
 		}
 
-//		System.out.println("MENU OPTION | " +
-//			"event id: " + advancedMenuEntry.eventId +
-//			", option: " + advancedMenuEntry.option +
-//			", target: " + advancedMenuEntry.target +
-//			", action id: " + advancedMenuEntry.actionId +
-//			", action name: " + advancedMenuEntry.action +
-//			", item id: " + advancedMenuEntry.itemId +
-//			", impostor id: " + advancedMenuEntry.impostorId
-//		);
+		System.out.println("MENU OPTION | " +
+			"event id: " + advancedMenuEntry.eventId +
+			", option: " + advancedMenuEntry.option +
+			", target: " + advancedMenuEntry.target +
+			", action id: " + advancedMenuEntry.actionId +
+			", action name: " + advancedMenuEntry.action +
+			", item id: " + advancedMenuEntry.itemId +
+			", impostor id: " + advancedMenuEntry.impostorId
+		);
 	}
 
 	@Subscribe
