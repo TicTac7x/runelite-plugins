@@ -102,7 +102,12 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
     @Override
     public Color getTextColor() {
-        // Storage is full.
+        // Full storage is positive.
+        if (storage.emptyIsNegative && storage.isFull()) {
+            return config.getColorActivated();
+        }
+
+        // Full storage is negative.
         if (
             storage.emptyIsNegative && storage.isEmpty() ||
             !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getCharges().equals(String.valueOf(storage.getMaximumTotalQuantity().get()))

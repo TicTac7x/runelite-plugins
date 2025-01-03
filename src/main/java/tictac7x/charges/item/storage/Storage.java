@@ -319,6 +319,20 @@ public class Storage {
         return true;
     }
 
+    public boolean isFull() {
+        if (maximumTotalQuantity.isPresent()) {
+            int quantity = 0;
+
+            for (final StorageItem storageItem : storage.values()) {
+                quantity += storageItem.quantity;
+            }
+
+            return quantity == maximumTotalQuantity.get();
+        }
+
+        return false;
+    }
+
     public Optional<Integer> getMaximumTotalQuantity() {
         // Maximum storage from trigger item.
         for (final TriggerItem item : chargedItem.items) {
