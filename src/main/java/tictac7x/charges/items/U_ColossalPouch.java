@@ -18,6 +18,7 @@ import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
+import java.awt.*;
 import java.util.Optional;
 
 import static tictac7x.charges.ChargesImprovedPlugin.getNumberFromWordRepresentation;
@@ -128,6 +129,19 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
         };
+    }
+
+    @Override
+    public Color getTextColor() {
+        if (storage.isFull()) {
+            if (config.getColossalPouchDecayCount() == 0) {
+                return config.getColorActivated();
+            } else {
+                return config.getColorEmpty();
+            }
+        }
+
+        return super.getTextColor();
     }
 
     private final int[] CAPACITY_85 = {40, 35, 30, 25, 20, 15, 10, 5};
