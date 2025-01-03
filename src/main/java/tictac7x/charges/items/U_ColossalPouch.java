@@ -98,7 +98,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             }),
 
             // Fill from inventory.
-            new OnMenuOptionClicked("Fill").consumer(() -> {
+            new OnMenuOptionClicked("Fill").runConsumerOnNextGameTick().consumer(() -> {
                 if (store.inventoryContainsItem(ItemID.GUARDIAN_ESSENCE)) {
                     storage.add(ItemID.GUARDIAN_ESSENCE, store.getInventoryItemQuantity(ItemID.GUARDIAN_ESSENCE));
                 } else if (store.inventoryContainsItem(ItemID.DAEYALT_ESSENCE)) {
@@ -114,12 +114,12 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             new OnMenuOptionClicked("Use").menuOptionConsumer(advancedMenuEntry -> {
                 final Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target);
                 if (essence.isPresent()) {
-                    storage.add(essence.get().itemId, store.getInventoryItemQuantity(essence.get().itemId));
+                    store.nextTickQueue.add(() -> storage.add(essence.get().itemId, store.getInventoryItemQuantity(essence.get().itemId)));
                 }
             }).onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Empty to inventory.
-            new OnMenuOptionClicked("Empty").consumer(() -> {
+            new OnMenuOptionClicked("Empty").runConsumerOnNextGameTick().consumer(() -> {
                 storage.emptyToInventoryWithoutItemContainerChanged();
             }),
 

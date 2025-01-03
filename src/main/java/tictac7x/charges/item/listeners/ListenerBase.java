@@ -4,6 +4,7 @@ import net.runelite.api.Client;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.ChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStatus;
@@ -76,7 +77,11 @@ public abstract class ListenerBase {
 
         // Consumer.
         if (trigger.consumer.isPresent()) {
-            trigger.consumer.get().run();
+            if (trigger.runConsumerOnNextGameTick.isPresent() && trigger.runConsumerOnNextGameTick.get()) {
+                chargedItem.store.nextTickQueue.add(trigger.consumer.get());
+            } else {
+                trigger.consumer.get().run();
+            }
             triggerUsed = true;
         }
 

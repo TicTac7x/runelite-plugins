@@ -42,6 +42,7 @@ public class Store {
     public List<StorageItem> previousInventoryItems = new ArrayList<>();
     public List<StorageItem> currentBankItems = new ArrayList<>();
     public List<StorageItem> previousBankItems = new ArrayList<>();
+    public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
 
     public final List<AdvancedMenuEntry> menuOptionsClicked = new ArrayList<>();
     private final Map<Skill, Integer> skillsXp = new HashMap<>();
@@ -87,6 +88,8 @@ public class Store {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
+        runNextGameTickQueue();
+
         // Update inventory, save previous items.
         if (event.getContainerId() == InventoryID.INVENTORY.getId()) {
             inventory = Optional.of(event.getItemContainer());
@@ -149,7 +152,16 @@ public class Store {
         menuOptionsClicked.add(advancedMenuEntry);
     }
 
+    private void runNextGameTickQueue() {
+        while (!nextTickQueue.isEmpty()) {
+            final Runnable consumer = nextTickQueue.poll();
+            consumer.run();
+        }
+    }
+
     public void onGameTick(final GameTick ignored) {
+        runNextGameTickQueue();
+
         // Automatically load all skill xps.
         if (!getSkillXp(Skill.MAGIC).isPresent()) {
             skillsXp.put(Skill.AGILITY, client.getSkillExperience(Skill.AGILITY));

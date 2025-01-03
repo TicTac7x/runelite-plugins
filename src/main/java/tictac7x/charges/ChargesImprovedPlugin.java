@@ -37,10 +37,7 @@ import java.awt.event.MouseWheelEvent;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @PluginDescriptor(
 	name = "Item Charges Improved",
@@ -459,15 +456,15 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			chargedItem.onMenuOptionClicked(advancedMenuEntry);
 		}
 
-		System.out.println("MENU OPTION | " +
-			"event id: " + advancedMenuEntry.eventId +
-			", option: " + advancedMenuEntry.option +
-			", target: " + advancedMenuEntry.target +
-			", action id: " + advancedMenuEntry.actionId +
-			", action name: " + advancedMenuEntry.action +
-			", item id: " + advancedMenuEntry.itemId +
-			", impostor id: " + advancedMenuEntry.impostorId
-		);
+//		System.out.println("MENU OPTION | " +
+//			"event id: " + advancedMenuEntry.eventId +
+//			", option: " + advancedMenuEntry.option +
+//			", target: " + advancedMenuEntry.target +
+//			", action id: " + advancedMenuEntry.actionId +
+//			", action name: " + advancedMenuEntry.action +
+//			", item id: " + advancedMenuEntry.itemId +
+//			", impostor id: " + advancedMenuEntry.impostorId
+//		);
 	}
 
 	@Subscribe
