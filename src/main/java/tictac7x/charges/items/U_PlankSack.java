@@ -39,7 +39,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(ChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage.setMaximumTotalQuantity(28).storeableItems(
+        storage.setMaximumTotalQuantity(28).emptyIsNegative().storeableItems(
             new StorageItem(ItemID.PLANK).checkName("Regular plank"),
             new StorageItem(ItemID.OAK_PLANK).checkName("Oak plank"),
             new StorageItem(ItemID.TEAK_PLANK).checkName("Teak plank"),

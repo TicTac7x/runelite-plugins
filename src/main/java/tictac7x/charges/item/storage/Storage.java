@@ -35,6 +35,7 @@ public class Storage {
     public Optional<int[]> maximumTotalQuantityWithItemEquippedItems = Optional.empty();
     public Optional<Boolean> showIndividualCharges = Optional.empty();
     public boolean holdsSingleType = false;
+    public boolean emptyIsNegative = false;
     private Optional<Integer> maximumIndividualQuantity = Optional.empty();
     private StorageItem[] storeableItems = new StorageItem[]{};
 
@@ -50,6 +51,11 @@ public class Storage {
 
     public Storage setMaximumTotalQuantity(final int quantity) {
         this.maximumTotalQuantity = Optional.of(quantity);
+        return this;
+    }
+
+    public Storage emptyIsNegative() {
+        this.emptyIsNegative = true;
         return this;
     }
     
@@ -301,6 +307,16 @@ public class Storage {
         } else {
             return Optional.empty();
         }
+    }
+
+    public boolean isEmpty() {
+        for (final StorageItem storageItem : storage.values()) {
+            if (storageItem.quantity > 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public Optional<Integer> getMaximumTotalQuantity() {
