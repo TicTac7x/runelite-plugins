@@ -127,7 +127,9 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 	private final String pluginVersion = "v0.5.12";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Initial plank sack added with support for Mahogany homes and Hallowed Sepulchre.<br>" +
+		"<colHIGHLIGHT>* Plank sack added.<br>" +
+		"<colHIGHLIGHT>* Colossal pouch added.<br>" +
+		"<colHIGHLIGHT>* Ring of duelling added.<br>" +
 		"<colHIGHLIGHT>* Log basket and fish barrel fixes.<br>" +
 		"<colHIGHLIGHT>* Forestry kit shop support.<br>" +
 		"<colHIGHLIGHT>* Master scroll book now has Colossal Wyrm teleport scrolls support."
@@ -252,6 +254,7 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			new J_NecklaceOfDodgy(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_PendantOfAtes(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfCelestial(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new J_RingOfDueling(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfElements(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfExplorer(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfPursuit(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -465,6 +468,33 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 //			", item id: " + advancedMenuEntry.itemId +
 //			", impostor id: " + advancedMenuEntry.impostorId
 //		);
+	}
+
+	@Subscribe
+	public void onScriptPreFired(final ScriptPreFired event) {
+		switch (event.getScriptId()) {
+			case 4517:
+			case 3174:
+			case 4518:
+			case 1004:
+			case 4716:
+			case 5933:
+			case 5935:
+			case 2512:
+			case 4721:
+			case 5939:
+			case 2100:
+			case 3350:
+			case 4730:
+			case 4029:
+			case 4671:
+				return;
+			default:
+				for (final ChargedItemBase chargedItem : chargedItems) {
+					chargedItem.onScriptPreFired(event);
+				}
+		}
+
 	}
 
 	@Subscribe

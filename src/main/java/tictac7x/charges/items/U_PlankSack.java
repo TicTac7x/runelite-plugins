@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Skill;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -11,20 +12,23 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.ChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_PlankSack extends ChargedItemWithStorage {
-    private final int REGULAR_PLANK_EXPERIENCE = 29;
-    private final int OAK_PLANK_EXPERIENCE = 60;
-    private final int TEAK_PLANK_EXPERIENCE = 90;
-    private final int MAHOGANY_PLANK_EXPERIENCE = 140;
+    private final Pattern homeBuildingPlanksPattern = Pattern.compile("(?<type>Plank|Oak plank|Teak plank|Mahogany plank): (?<amount>[0-9]+)");
+    private final Map<Integer, Integer> homeBuildingWidgetMaterialsUsed = new HashMap<>();
 
     public U_PlankSack(
         final Client client,
@@ -70,12 +74,14 @@ public class U_PlankSack extends ChargedItemWithStorage {
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
+            // Use plank on sack.
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
 
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
                 storage.removeAndPrioritizeInventory(ItemID.MAHOGANY_PLANK, 2);
             }).onMenuOptionId(
-                39527
+                39527, 39528
             ),
 
             // Mahogany homes - 1 plank
@@ -179,8 +185,64 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 storage.removeAndPrioritizeInventory(getPlankIdBasedOnXpAndPlanks(xp, 4), 4);
             }).onMenuOptionId(
                 39981  // Bob large table
-            )
+            ),
+
+            // Building in home with clicks.
+            new OnScriptPreFired(1405).scriptConsumer(script -> {
+                final Optional<Widget> itemWidget = Optional.ofNullable(script.getScriptEvent().getSource());
+                if (!itemWidget.isPresent()) return;
+
+                final Optional<Widget> materialsWidget = Optional.ofNullable(itemWidget.get().getChild(3));
+                if (!materialsWidget.isPresent()) return;
+
+                addPlanksToBeUsedFromHomeMaterialsWidgetText(materialsWidget.get().getText());
+            }),
+            // Building in home with keybinds.
+            new OnScriptPreFired(1632).scriptConsumer(script -> {
+                homeBuildingWidgetMaterialsUsed.clear();
+
+                final int keyChar = script.getScriptEvent().getTypedKeyChar();
+                if (keyChar < 48 || keyChar > 57) return;
+                final int nthItemToBuild = keyChar - 48;
+
+                final Optional<Widget> materialsWidget = ChargesImprovedPlugin.getWidget(client, 458, 3 + nthItemToBuild, 3);
+                if (!materialsWidget.isPresent()) return;
+
+                addPlanksToBeUsedFromHomeMaterialsWidgetText(materialsWidget.get().getText());
+            }),
+            // XP drop after planks to be used from home materials widget text.
+            new OnXpDrop(Skill.CONSTRUCTION).consumer(() -> {
+                if (homeBuildingWidgetMaterialsUsed.isEmpty()) return;
+
+                for (final Map.Entry<Integer, Integer> entry : homeBuildingWidgetMaterialsUsed.entrySet()) {
+                    storage.removeAndPrioritizeInventory(entry.getKey(), entry.getValue());
+                }
+
+                homeBuildingWidgetMaterialsUsed.clear();
+            }),
         };
+    }
+
+    private void addPlanksToBeUsedFromHomeMaterialsWidgetText(final String materials) {
+        final Matcher matcher = homeBuildingPlanksPattern.matcher(materials);
+        while (matcher.find()) {
+            final String type = matcher.group("type");
+            final int amount = Integer.parseInt(matcher.group("amount"));
+            switch (type) {
+                case "Plank":
+                    homeBuildingWidgetMaterialsUsed.put(ItemID.PLANK, amount);
+                    break;
+                case "Oak plank":
+                    homeBuildingWidgetMaterialsUsed.put(ItemID.OAK_PLANK, amount);
+                    break;
+                case "Teak plank":
+                    homeBuildingWidgetMaterialsUsed.put(ItemID.TEAK_PLANK, amount);
+                    break;
+                case "Mahogany plank":
+                    homeBuildingWidgetMaterialsUsed.put(ItemID.MAHOGANY_PLANK, amount);
+                    break;
+            }
+        }
     }
 
     private Optional<Integer> getPlankIdBasedOnXpAndPlanks(final int xp, final int planks) {

@@ -82,6 +82,7 @@ public interface ChargesImprovedConfig extends Config {
     String phoenix_necklace = "phoenix_necklace";
     String plank_sack = "plank_sack";
     String quetzal_whistle = "quetzal_whistle";
+    String ring_of_dueling = "ring_of_dueling";
     String ring_of_pursuit = "ring_of_pursuit";
     String ring_of_recoil = "ring_of_recoil";
     String ring_of_shadows = "ring_of_shadows";
@@ -326,6 +327,13 @@ public interface ChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean moonlightMothMixInfobox() { return false; }
+
+        @ConfigItem(
+            keyName = ring_of_dueling + infobox,
+            name = "Ring of dueling",
+            description = "",
+            section = infoboxes
+        ) default boolean ringOfDuelingInfobox() { return true; }
 
         @ConfigItem(
             keyName = ring_of_pursuit + infobox,
@@ -963,6 +971,13 @@ public interface ChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean moonlightMothMixOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = ring_of_dueling + overlay,
+            name = "Ring of dueling",
+            description = "",
+            section = overlays
+        ) default boolean ringOfDuelingOverlay() { return true; }
 
         @ConfigItem(
             keyName = ring_of_pursuit + overlay,

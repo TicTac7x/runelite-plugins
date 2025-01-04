@@ -56,6 +56,7 @@ public abstract class ChargedItemBase {
     private final ListenerOnVarbitChanged listenerOnVarbitChanged;
     private final ListenerOnUserAction listenerOnUserAction;
     private final ListenerOnMenuOptionClicked listenerOnMenuOptionClicked;
+    private final ListenerOnScriptPreFired listenerOnScriptPreFired;
 
     private boolean inInventory = false;
     private boolean inEquipment = false;
@@ -100,6 +101,7 @@ public abstract class ChargedItemBase {
         listenerOnVarbitChanged = new ListenerOnVarbitChanged(client, itemManager, this, notifier, config);
         listenerOnUserAction = new ListenerOnUserAction(client, itemManager, this, notifier, config);
         listenerOnMenuOptionClicked = new ListenerOnMenuOptionClicked(client, itemManager, this, notifier, config);
+        listenerOnScriptPreFired = new ListenerOnScriptPreFired(client, itemManager, this, notifier, config);
     }
 
     public abstract String getCharges();
@@ -239,6 +241,11 @@ public abstract class ChargedItemBase {
     public void onMenuOptionClicked(final AdvancedMenuEntry event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnMenuOptionClicked.trigger(event);
+    }
+
+    public void onScriptPreFired(final ScriptPreFired event) {
+        if (!inInventoryOrEquipment()) return;
+        listenerOnScriptPreFired.trigger(event);
     }
 
     private void updateItem(final ItemContainerChanged event) {

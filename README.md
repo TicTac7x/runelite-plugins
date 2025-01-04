@@ -75,6 +75,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Necklace of dodgy
 - Pendant of ates
 - Ring of celestial
+- Ring of dueling
 - Ring of elements
 - Ring of explorer
 - Ring of pursuit
