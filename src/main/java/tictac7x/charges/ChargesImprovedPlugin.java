@@ -473,21 +473,9 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 	@Subscribe
 	public void onScriptPreFired(final ScriptPreFired event) {
 		switch (event.getScriptId()) {
-			case 4517:
-			case 3174:
-			case 4518:
-			case 1004:
-			case 4716:
-			case 5933:
-			case 5935:
-			case 2512:
-			case 4721:
-			case 5939:
-			case 2100:
-			case 3350:
-			case 4730:
-			case 4029:
-			case 4671:
+			case 1004: case 2100: case 2512: case 3174: case 3350:
+			case 4029: case 4517: case 4518: case 4671: case 4716:
+			case 4721: case 4730: case 5933: case 5935: case 5939:
 				return;
 			default:
 				for (final ChargedItemBase chargedItem : chargedItems) {
@@ -685,7 +673,7 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child) {
 		@Nullable
 		final Widget widget = client.getWidget(parent, child);
-		return widget != null ? Optional.of(widget) : Optional.empty();
+		return Optional.ofNullable(widget);
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final int subChild) {
@@ -695,49 +683,24 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 
 		@Nullable
 		final Widget subWidget = widget.getChild(subChild);
-
-		return subWidget != null ? Optional.of(subWidget) : Optional.empty();
+		return Optional.ofNullable(subWidget);
 	}
 	
 	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()
-		.put("zero", 0)
-		.put("one", 1)
-		.put("two", 2)
-		.put("three", 3)
-		.put("four", 4)
-		.put("five", 5)
-		.put("six", 6)
-		.put("seven", 7)
-		.put("eight", 8)
-		.put("nine", 9)
-		.put("ten", 10)
-		.put("eleven", 11)
-		.put("twelve", 12)
-		.put("thirteen", 13)
-		.put("fourteen", 14)
-		.put("fifteen", 15)
-		.put("sixteen", 16)
-		.put("seventeen", 17)
-		.put("eighteen", 18)
-		.put("nineteen", 19)
-		.put("twenty", 20)
-		.put("thirty", 30)
-		.put("forty", 40)
-		.put("fifty", 50)
-		.put("sixty", 60)
-		.put("seventy", 70)
-		.put("eighty", 80)
-		.put("ninety", 90)
-		.put("hundred", 100)
-		.build();
+		.put("zero", 0).put("one", 1).put("two", 2).put("three", 3).put("four", 4).put("five", 5)
+		.put("six", 6).put("seven", 7).put("eight", 8).put("nine", 9).put("ten", 10)
+		.put("eleven", 11).put("twelve", 12).put("thirteen", 13).put("fourteen", 14).put("fifteen", 15)
+		.put("sixteen", 16).put("seventeen", 17).put("eighteen", 18).put("nineteen", 19).put("twenty", 20)
+		.put("thirty", 30).put("forty", 40).put("fifty", 50).put("sixty", 60).put("seventy", 70)
+		.put("eighty", 80).put("ninety", 90).put("hundred", 100).build();
 
 	public static int getNumberFromWordRepresentation(final String charges) {
 		// Support strings like "twenty two" and "twenty-two"
-		String[] words = charges.toLowerCase().split("[ -]");
+		final String[] words = charges.toLowerCase().split("[ -]");
 		int result = 0;
 		int current = 0;
 
-		for (String word : words) {
+		for (final String word : words) {
 			if (TEXT_TO_NUMBER_MAP.containsKey(word)) {
 				current += TEXT_TO_NUMBER_MAP.get(word);
 			} else if (word.equals("hundred")) {
