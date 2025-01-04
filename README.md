@@ -105,6 +105,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Master scroll book
 - Meat pouches
 - Ogre bellows
+- Plank sack
 - Seed box
 - Soul bearer
 - Strange old lockpick
