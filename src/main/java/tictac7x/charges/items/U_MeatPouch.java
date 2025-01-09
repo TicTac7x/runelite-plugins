@@ -68,6 +68,7 @@ public class U_MeatPouch extends ChargedItemWithStorage {
         this.triggers = new TriggerBase[]{
             // Empty.
             new OnChatMessage("Your meat pouch is currently holding 0 meat").emptyStorage(),
+            new OnChatMessage("Your meat pouch is empty.").emptyStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
