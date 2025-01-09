@@ -7,8 +7,8 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 import java.awt.Color;
 
-@ConfigGroup(TitheConfig.group)
-public interface TitheConfig extends Config {
+@ConfigGroup(TicTac7xTitheConfig.group)
+public interface TicTac7xTitheConfig extends Config {
 	String group = "tictac7x-tithe";
 	String version = "version";
 
