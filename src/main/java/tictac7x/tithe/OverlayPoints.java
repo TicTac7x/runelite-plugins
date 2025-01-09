@@ -107,7 +107,7 @@ public class OverlayPoints extends OverlayPanel {
         if (!plugin.inTitheFarm() || !config.showCustomPoints()) return null;
 
         final int fruits = inventory.getFruits();
-        final int pointsEarned = (int) (Math.floor((double) fruits / 100) *35 + Math.floor((double) (fruits % 100) / 3));
+        final int pointsEarned = (int) (Math.floor((double) fruits / 100) * 35 + Math.floor((double) (fruits % 100) / 3));
 
         panelComponent.getChildren().clear();
 

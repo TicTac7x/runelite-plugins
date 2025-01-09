@@ -2,13 +2,13 @@
 Improve overall experience for Tithe farm.
 
 ## Plants progress
-* Shows progress of dry plantsManager with game-tick precision
-* Shows progress of watered plantsManager with game-tick precision
-* Shows progress of grown plantsManager with game-tick precision
-* Shows progress of blighted plantsManager with game-tick precision
+* Shows progress of dry plants with game-tick precision
+* Shows progress of watered plants with game-tick precision
+* Shows progress of grown plants with game-tick precision
+* Shows progress of blighted plants with game-tick precision
 * Highlights farm patch on mouse over
 
-![](./img/plantsManager.png)
+![](./img/plants.png)
 
 <br>
 
@@ -31,5 +31,5 @@ Improve overall experience for Tithe farm.
 <br>
 
 ## Ground markers
-Ground markers to do 25 plantsManager per run can be found from [here](./groundmarkers.txt). 
+Ground markers to do 25 plants per run can be found from [here](./groundmarkers.txt). 
 ![](./img/groundmarkers.png)
