@@ -32,10 +32,10 @@ import javax.inject.Inject;
 	conflicts = "Tithe Farm"
 )
 public class TithePlugin extends Plugin {
-	private String plugin_version = "v0.4";
+	private String plugin_version = "v0.4.1";
 	private String plugin_message = "" +
 		"<colHIGHLIGHT>Tithe Farm Improved " + plugin_version + ":<br>" +
-		"<colHIGHLIGHT>* Updated points calculation based on new forumula";
+		"<colHIGHLIGHT>* Points calculation formula is now more precise.";
 
 	private static final int SEED_TABLE = 27430;
 	private boolean in_tithe_farm = false;

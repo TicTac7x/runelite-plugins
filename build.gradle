@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = 'tictac7x-tithe'
-version = '0.3.4'
+version = '0.4.1'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
