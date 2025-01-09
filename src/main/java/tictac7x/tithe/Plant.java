@@ -5,7 +5,7 @@ import net.runelite.api.TileObject;
 
 import java.awt.Color;
 
-public class TithePlant {
+public class Plant {
     // Tithe empty patch.
     protected static final int TITHE_EMPTY_PATCH = 27383;
 
@@ -62,7 +62,7 @@ public class TithePlant {
         BLIGHTED
     }
 
-    private final TitheConfig config;
+    private final TicTac7xTitheConfig config;
     private GameObject game_object;
 
     // First state can't be anything else than dry seedling.
@@ -71,7 +71,7 @@ public class TithePlant {
     // Number of ticks to render the progress pie.
     private int ticks = 0;
 
-    public TithePlant(final TitheConfig config, final GameObject seedling) {
+    public Plant(final TicTac7xTitheConfig config, final GameObject seedling) {
         this.config = config;
         this.game_object = seedling;
     }
