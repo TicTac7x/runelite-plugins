@@ -8,22 +8,22 @@ import net.runelite.api.events.GameStateChanged;
 import java.util.Set;
 
 public class Balloon {
-    private final Set<Integer> balloon_game_object_ids = ImmutableSet.of(19133, 19135, 19137, 19139, 19141, 19143);
+    private final Set<Integer> GAME_OBJECT_IDS = ImmutableSet.of(19133, 19135, 19137, 19139, 19141, 19143);
     private boolean visible = false;
 
     public void onGameObjectSpawned(final GameObjectSpawned event) {
-        if (balloon_game_object_ids.contains(event.getGameObject().getId())) {
-            this.visible = true;
+        if (GAME_OBJECT_IDS.contains(event.getGameObject().getId())) {
+            visible = true;
         }
     }
 
     public void onGameStateChanged(final GameStateChanged event) {
         if (event.getGameState() == GameState.LOADING) {
-            this.visible = false;
+            visible = false;
         }
     }
 
     public boolean isVisible() {
-        return this.visible;
+        return visible;
     }
 }

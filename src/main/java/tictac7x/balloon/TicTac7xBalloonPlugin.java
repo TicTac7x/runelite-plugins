@@ -7,7 +7,6 @@ import net.runelite.api.ItemID;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.WidgetLoaded;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -31,64 +30,59 @@ public class TicTac7xBalloonPlugin extends Plugin {
 	private Client client;
 
 	@Inject
-	private OverlayManager overlays;
+	private OverlayManager overlayManager;
 
 	@Inject
-	private ConfigManager configs;
+	private ConfigManager configManager;
 
 	@Inject
-	private InfoBoxManager infoboxes;
+	private InfoBoxManager infoBoxManager;
 
 	@Inject
-	private ClientThread client_thread;
+	private ClientThread clientThread;
 
 	@Inject
-	private ItemManager items;
+	private ItemManager itemManager;
 
 	@Inject
-	private BalloonConfig config;
+	private TicTac7xBalloonConfig config;
 
 	private Balloon balloon;
-	private BalloonStorage balloon_storage;
-	private BalloonInfoBox[] balloon_infoboxes;
+	private BalloonStorage balloonStorage;
+	private BalloonInfoBox[] balloonInfoBoxes;
 
 	@Provides
-	BalloonConfig provideConfig(ConfigManager configManager) {
-		return configManager.getConfig(BalloonConfig.class);
+	TicTac7xBalloonConfig provideConfig(final ConfigManager configManager) {
+		return configManager.getConfig(TicTac7xBalloonConfig.class);
 	}
 
 	@Override
 	protected void startUp() {
 		balloon = new Balloon();
-		balloon_storage = new BalloonStorage(client, client_thread, configs);
-		balloon_infoboxes = new BalloonInfoBox[]{
-			new BalloonInfoBox(ItemID.LOGS, BalloonConfig.logs_regular, "Regular logs - Entrana / Taverley", configs, config, items, balloon, this),
-			new BalloonInfoBox(ItemID.OAK_LOGS, BalloonConfig.logs_oak, "Oak logs - Crafting Guild", configs, config, items, balloon, this),
-			new BalloonInfoBox(ItemID.WILLOW_LOGS, BalloonConfig.logs_willow, "Willow logs - Varrock", configs, config, items, balloon, this),
-			new BalloonInfoBox(ItemID.YEW_LOGS, BalloonConfig.logs_yew, "Yew logs - Castle Wars", configs, config, items, balloon, this),
-			new BalloonInfoBox(ItemID.MAGIC_LOGS, BalloonConfig.logs_magic, "Magic logs - Grand Tree", configs, config, items, balloon, this),
+		balloonStorage = new BalloonStorage(configManager);
+		balloonInfoBoxes = new BalloonInfoBox[]{
+			new BalloonInfoBox(ItemID.LOGS, TicTac7xBalloonConfig.logs_regular, "Regular logs - Entrana / Taverley", configManager, config, itemManager, balloon, this),
+			new BalloonInfoBox(ItemID.OAK_LOGS, TicTac7xBalloonConfig.logs_oak, "Oak logs - Crafting Guild", configManager, config, itemManager, balloon, this),
+			new BalloonInfoBox(ItemID.WILLOW_LOGS, TicTac7xBalloonConfig.logs_willow, "Willow logs - Varrock", configManager, config, itemManager, balloon, this),
+			new BalloonInfoBox(ItemID.YEW_LOGS, TicTac7xBalloonConfig.logs_yew, "Yew logs - Castle Wars", configManager, config, itemManager, balloon, this),
+			new BalloonInfoBox(ItemID.MAGIC_LOGS, TicTac7xBalloonConfig.logs_magic, "Magic logs - Grand Tree", configManager, config, itemManager, balloon, this),
 		};
 
-		for (final BalloonInfoBox infobox : balloon_infoboxes) {
-			infoboxes.addInfoBox(infobox);
+		for (final BalloonInfoBox infobox : balloonInfoBoxes) {
+			infoBoxManager.addInfoBox(infobox);
 		}
 	}
 
 	@Override
 	protected void shutDown() {
-		for (final BalloonInfoBox infobox : balloon_infoboxes) {
-			infoboxes.removeInfoBox(infobox);
+		for (final BalloonInfoBox infobox : balloonInfoBoxes) {
+			infoBoxManager.removeInfoBox(infobox);
 		}
 	}
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
-		balloon_storage.onChatMessage(event);
-	}
-
-	@Subscribe
-	public void onWidgetLoaded(final WidgetLoaded event) {
-		balloon_storage.onWidgetLoaded(event);
+		balloonStorage.onChatMessage(event);
 	}
 
 	@Subscribe
@@ -103,7 +97,7 @@ public class TicTac7xBalloonPlugin extends Plugin {
 
 	@Subscribe
 	public void onConfigChanged(final ConfigChanged event) {
-		for (final BalloonInfoBox infobox : balloon_infoboxes) {
+		for (final BalloonInfoBox infobox : balloonInfoBoxes) {
 			infobox.onConfigChanged(event);
 		}
 	}
