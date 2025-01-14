@@ -9,8 +9,7 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import tictac7x.gotr.TicTac7xGotrImprovedConfig;
-import tictac7x.gotr.overlays.GreatGuardianOverlay;
-import tictac7x.gotr.store.Guardians;
+import tictac7x.gotr.TicTac7xGotrImprovedPlugin;
 import tictac7x.gotr.store.Inventory;
 import tictac7x.gotr.store.Teleporters;
 import tictac7x.gotr.types.Teleporter;
@@ -45,8 +44,8 @@ public class TeleportersOverlay extends net.runelite.client.ui.overlay.Overlay {
         this.teleporters = teleporters;
         this.inventory = inventory;
 
-        setPosition(OverlayPosition.DYNAMIC);
-        setLayer(OverlayLayer.UNDER_WIDGETS);
+        super.setPosition(OverlayPosition.DYNAMIC);
+        super.setLayer(OverlayLayer.UNDER_WIDGETS);
     }
 
     @Override
@@ -91,7 +90,7 @@ public class TeleportersOverlay extends net.runelite.client.ui.overlay.Overlay {
                     graphics.setFont(FontManager.getRunescapeSmallFont());
                     final Point rune_location = Perspective.getCanvasImageLocation(client, teleporterGameObject.getLocalLocation(), teleporterImage, 500);
                     final Rectangle rectangle = new Rectangle(rune_location.getX() + 16, rune_location.getY() - 18, 0, 24);
-                    drawCenteredString(graphics, time, rectangle,
+                    TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, time, rectangle,
                         inventory.hasGuardianStones() ? Color.red :
                         Color.WHITE,
                     FontManager.getRunescapeSmallFont());
@@ -100,22 +99,5 @@ public class TeleportersOverlay extends net.runelite.client.ui.overlay.Overlay {
         }
 
         return null;
-    }
-
-
-    private void drawCenteredString(final Graphics graphics, final String text, final Rectangle rectangle, final Color color, final Font font) {
-        try {
-            graphics.setFont(font);
-            final FontMetrics metrics = graphics.getFontMetrics();
-
-            final int x = rectangle.x + (rectangle.width - metrics.stringWidth(text)) / 2;
-            final int y = rectangle.y + ((rectangle.height - metrics.getHeight()) / 2) + metrics.getAscent();
-
-            graphics.setColor(Color.BLACK);
-            graphics.drawString(text, x + 1, y + 1);
-
-            graphics.setColor(color);
-            graphics.drawString(text, x, y);
-        } catch (final Exception ignored) {}
     }
 }

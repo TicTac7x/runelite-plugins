@@ -1,101 +1,67 @@
 package tictac7x.gotr.store;
 
-import net.runelite.api.Client;
-import net.runelite.api.GameObject;
-import net.runelite.api.GameState;
-import net.runelite.api.MenuEntry;
-import tictac7x.gotr.Notifications;
-import tictac7x.gotr.TicTac7xGotrImprovedConfig;
+import net.runelite.api.GroundObject;
+import net.runelite.api.NPC;
+import net.runelite.api.events.GroundObjectSpawned;
+import net.runelite.api.events.NpcSpawned;
+import tictac7x.gotr.types.BarrierLevel;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Optional;
 
 public class Barrier {
-    private final int BARRIER_ACTIVE = 43700;
-    private final int BARRIER_INACTIVE = 43849;
-    private final int BARRIER_REENTER_GAMETICKS = 51;
+    private Optional<GroundObject> groundObject = Optional.empty();
+    private Optional<NPC> npc = Optional.empty();
 
-    private final Client client;
-    private final Notifications notifications;
-    private final TicTac7xGotrImprovedConfig config;
-
-    private int gameTickInactiveBarrierDespawned = 0;
-    private Optional<Instant> barrierReenterTimeLeft = Optional.empty();
-    private Optional<GameObject> barrier = Optional.empty();
-
-    private boolean notifiedBeforePassableBarrier = false;
-    private boolean notifiedPassableBarrier = false;
-
-    public Barrier(final Client client, final Notifications notifications, final TicTac7xGotrImprovedConfig config) {
-        this.client = client;
-        this.notifications = notifications;
-        this.config = config;
+    public Barrier() {
     }
 
-    public Optional<Instant> getBarrierReenterTimeLeft() {
-        return barrierReenterTimeLeft;
-    }
-
-    public void onGameObjectSpawned(final GameObject gameObject) {
-        if (gameObject.getId() == BARRIER_ACTIVE && gameTickInactiveBarrierDespawned == 1) {
-            barrierReenterTimeLeft = Optional.of(Instant.now().plusMillis(BARRIER_REENTER_GAMETICKS * 600));
-            notifiedBeforePassableBarrier = false;
-            notifiedPassableBarrier = false;
-        }
-
-        if (gameObject.getId() == BARRIER_ACTIVE) {
-            barrier = Optional.of(gameObject);
-        }
-    }
-
-    public void onGameObjectDespawned(final GameObject gameObject) {
-        if (gameObject.getId() == BARRIER_INACTIVE) {
-            gameTickInactiveBarrierDespawned = 1;
-        }
-
-        if (gameObject.getId() == BARRIER_ACTIVE) {
-            barrier = Optional.empty();
-        }
-    }
-
-    public void onGameStateChanged(final GameState gameState) {
-        if (gameState == GameState.LOADING) {
-            barrier = Optional.empty();
-        }
-    }
-
-    public void onGameTick() {
-        if (gameTickInactiveBarrierDespawned < 10) {
-            gameTickInactiveBarrierDespawned++;
-        }
-
-        if (barrierReenterTimeLeft.isPresent()) {
-            final long seconds = Duration.between(Instant.now(), barrierReenterTimeLeft.get()).getSeconds();
-
-            if (seconds < 5 && !notifiedBeforePassableBarrier) {
-                notifiedBeforePassableBarrier = true;
-                notifications.notifyBeforePassableBarrier();
-            }
-
-            if (seconds < 0 && !notifiedPassableBarrier) {
-                notifiedPassableBarrier = true;
-                notifications.notifyAboutPassableBarrier();
+    public BarrierLevel getLevel() {
+        if (groundObject.isPresent()) {
+            switch (groundObject.get().getId()) {
+                case 43736:
+                    return BarrierLevel.BROKEN;
+                case 43739:
+                    return BarrierLevel.NOT_BUILT;
+                case 43740:
+                    return BarrierLevel.ONE;
+                case 43741:
+                    return BarrierLevel.TWO;
+                case 43742:
+                    return BarrierLevel.THREE;
+                case 43743:
+                    return BarrierLevel.FOUR;
             }
         }
+
+        return BarrierLevel.NOT_BUILT;
     }
 
-    public void onMenuEntryAdded(final MenuEntry menuEntry) {
+    public void updateGroundObject(final GroundObjectSpawned event) {
+        this.groundObject = Optional.of(event.getGroundObject());
+    }
+
+    public void updateNpc(final NpcSpawned event) {
+        this.npc = Optional.of(event.getNpc());
+    }
+
+    public int getHealth() {
+        final BarrierLevel level = getLevel();
+
         if (
-            config.preventQuickLeave() &&
-                (
-                    barrier.isPresent() && client.getLocalPlayer().getLocalLocation().distanceTo(barrier.get().getLocalLocation()) < 128 ||
-                    client.getLocalPlayer().getWorldLocation().getY() >= 9483
-                ) &&
-            menuEntry.getTarget().contains("Barrier") &&
-            menuEntry.getOption().contains("Quick-pass")
+            level == BarrierLevel.BROKEN ||
+            level == BarrierLevel.NOT_BUILT
         ) {
-            menuEntry.setOption("Deprioritized quick-pass");
+            return 0;
         }
+
+        if (npc.isPresent()) {
+            if (npc.get().getHealthRatio() == -1) {
+                return 100;
+            }
+
+            return npc.get().getHealthRatio() * 2;
+        }
+
+        return 0;
     }
 }

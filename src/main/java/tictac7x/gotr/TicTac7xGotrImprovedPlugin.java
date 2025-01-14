@@ -5,15 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.GameObjectDespawned;
-import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.events.MenuEntryAdded;
-import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.NpcSpawned;
+import net.runelite.api.events.*;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -26,23 +18,13 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
-import tictac7x.gotr.overlays.BarrierOverlay;
-import tictac7x.gotr.overlays.GreatGuardianOverlay;
-import tictac7x.gotr.overlays.GuardiansOverlay;
-import tictac7x.gotr.overlays.PortalOverlay;
-import tictac7x.gotr.overlays.TeleportersOverlay;
-import tictac7x.gotr.overlays.UnchargedCellsBenchOverlay;
-import tictac7x.gotr.store.Barrier;
-import tictac7x.gotr.store.Energy;
-import tictac7x.gotr.store.Guardians;
-import tictac7x.gotr.store.Inventory;
-import tictac7x.gotr.store.Portal;
-import tictac7x.gotr.store.Creatures;
-import tictac7x.gotr.store.Teleporters;
+import tictac7x.gotr.overlays.*;
+import tictac7x.gotr.store.*;
 import tictac7x.gotr.widgets.EnergyWidget;
 import tictac7x.gotr.widgets.InactivePortalWidget;
 
 import javax.inject.Inject;
+import java.awt.*;
 
 @Slf4j
 @PluginDescriptor(
@@ -99,15 +81,18 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 	private Portal portal;
 	private Inventory inventory;
 	private Energy energy;
-	private Barrier barrier;
+	private EntranceBarrier entranceBarrier;
 	private Notifications notifications;
 	private Creatures creatures;
+	private Barriers barriers;
 
 	private PortalOverlay portalOverlayOverlay;
 	private GuardiansOverlay guardiansOverlay;
 	private TeleportersOverlay teleportersOverlay;
-	private BarrierOverlay barrierOverlay;
+	private EntranceBarrierOverlay entranceBarrierOverlay;
 	private UnchargedCellsBenchOverlay unchargedCellsBenchOverlay;
+	private BarriersOverlay barriersOverlay;
+	private RewardsGuardianOverlay rewardsGuardianOverlay;
 
 	private InactivePortalWidget inactivePortalWidget;
 	private EnergyWidget energyWidget;
@@ -125,15 +110,18 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		guardians = new Guardians(client);
 		portal = new Portal(client, notifications);
 		energy = new Energy(configManager, config);
-		barrier = new Barrier(client, notifications, config);
+		entranceBarrier = new EntranceBarrier(client, notifications, config);
 		creatures = new Creatures(client, notifications, config);
+		barriers = new Barriers();
 
 		portalOverlayOverlay = new PortalOverlay(client, portal);
 		guardiansOverlay = new GuardiansOverlay(modelOutlineRenderer, config, guardians, inventory);
 		greatGuardianOverlay = new GreatGuardianOverlay(client, itemManager, modelOutlineRenderer, config, inventory);
 		teleportersOverlay = new TeleportersOverlay(client, itemManager, modelOutlineRenderer, config, teleporters, inventory);
-		barrierOverlay = new BarrierOverlay(client, modelOutlineRenderer, barrier, config);
+		entranceBarrierOverlay = new EntranceBarrierOverlay(client, modelOutlineRenderer, entranceBarrier, config);
 		unchargedCellsBenchOverlay = new UnchargedCellsBenchOverlay(client, modelOutlineRenderer, config, inventory);
+		barriersOverlay = new BarriersOverlay(client, config, barriers);
+		rewardsGuardianOverlay = new RewardsGuardianOverlay(client, config);
 
 		inactivePortalWidget = new InactivePortalWidget(client, spriteManager, portal);
 		energyWidget = new EnergyWidget(client, config);
@@ -142,10 +130,12 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		overlayManager.add(guardiansOverlay);
 		overlayManager.add(greatGuardianOverlay);
 		overlayManager.add(teleportersOverlay);
-		overlayManager.add(barrierOverlay);
+		overlayManager.add(entranceBarrierOverlay);
 		overlayManager.add(unchargedCellsBenchOverlay);
 		overlayManager.add(inactivePortalWidget);
 		overlayManager.add(energyWidget);
+		overlayManager.add(barriersOverlay);
+		overlayManager.add(rewardsGuardianOverlay);
 	}
 
 	@Override
@@ -154,10 +144,12 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		overlayManager.remove(guardiansOverlay);
 		overlayManager.remove(greatGuardianOverlay);
 		overlayManager.remove(teleportersOverlay);
-		overlayManager.remove(barrierOverlay);
+		overlayManager.remove(entranceBarrierOverlay);
 		overlayManager.remove(unchargedCellsBenchOverlay);
 		overlayManager.remove(inactivePortalWidget);
 		overlayManager.remove(energyWidget);
+		overlayManager.remove(barriersOverlay);
+		overlayManager.remove(rewardsGuardianOverlay);
 	}
 
 	@Subscribe
@@ -172,10 +164,11 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		teleporters.onGameObjectSpawned(gameObject);
 		portalOverlayOverlay.onGameObjectSpawned(gameObject);
 		guardiansOverlay.onGameObjectSpawned(gameObject);
-		barrier.onGameObjectSpawned(gameObject);
-		barrierOverlay.onGameObjectSpawned(gameObject);
+		entranceBarrier.onGameObjectSpawned(gameObject);
+		entranceBarrierOverlay.onGameObjectSpawned(gameObject);
 		unchargedCellsBenchOverlay.onGameObjectSpawned(gameObject);
 		notifications.onGameObjectSpawned(gameObject);
+		rewardsGuardianOverlay.onGameObjectSpawned(event);
 	}
 
 	@Subscribe
@@ -184,9 +177,10 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 
 		portalOverlayOverlay.onGameObjectDespawned(gameObject);
 		guardiansOverlay.onGameObjectDespawned(gameObject);
-		barrier.onGameObjectDespawned(gameObject);
-		barrierOverlay.onGameObjectDespawned(gameObject);
+		entranceBarrier.onGameObjectDespawned(gameObject);
+		entranceBarrierOverlay.onGameObjectDespawned(gameObject);
 		unchargedCellsBenchOverlay.onGameObjectDespawned(gameObject);
+		rewardsGuardianOverlay.onGameObjectDespawned(gameObject);
 	}
 
 	@Subscribe
@@ -200,9 +194,16 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		creatures.onChatMessage(message);
 	}
 
+
+	@Subscribe
+	public void onGroundObjectSpawned(final GroundObjectSpawned event) {
+		barriers.groundObjectSpawned(event);
+	}
+
 	@Subscribe
 	public void onNpcSpawned(final NpcSpawned event) {
-		greatGuardianOverlay.onNpcSpawned(event.getNpc());
+		greatGuardianOverlay.onNpcSpawned(event);
+		barriers.onNpcSpawned(event);
 	}
 
 	@Subscribe
@@ -215,7 +216,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		teleporters.onGameTick();
 		portal.onGameTick();
 		guardians.onGameTick();
-		barrier.onGameTick();
+		entranceBarrier.onGameTick();
 		creatures.onGameTick();
 	}
 
@@ -223,18 +224,35 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 	public void onGameStateChanged(final GameStateChanged event) {
 		final GameState gameState = event.getGameState();
 
-		barrier.onGameStateChanged(gameState);
+		entranceBarrier.onGameStateChanged(gameState);
 		teleporters.onGameStateChanged(gameState);
 		greatGuardianOverlay.onGameStateChanged(gameState);
 		portalOverlayOverlay.onGameStateChanged(gameState);
 		guardiansOverlay.onGameStateChanged(gameState);
-		barrierOverlay.onGameStateChanged(gameState);
+		entranceBarrierOverlay.onGameStateChanged(gameState);
 		unchargedCellsBenchOverlay.onGameStateChanged(gameState);
+		rewardsGuardianOverlay.onGameStateChanged(event);
 	}
 
 	@Subscribe
 	public void onMenuEntryAdded(final MenuEntryAdded event) {
-		barrier.onMenuEntryAdded(event.getMenuEntry());
+		entranceBarrier.onMenuEntryAdded(event.getMenuEntry());
+	}
+
+	public static void drawCenteredString(final Graphics graphics, final String text, final Rectangle rectangle, final Color color, final Font font) {
+		try {
+			graphics.setFont(font);
+			final FontMetrics metrics = graphics.getFontMetrics();
+
+			final int x = rectangle.x + (rectangle.width - metrics.stringWidth(text)) / 2;
+			final int y = rectangle.y + ((rectangle.height - metrics.getHeight()) / 2) + metrics.getAscent();
+
+			graphics.setColor(Color.BLACK);
+			graphics.drawString(text, x + 1, y + 1);
+
+			graphics.setColor(color);
+			graphics.drawString(text, x, y);
+		} catch (final Exception ignored) {}
 	}
 }
 

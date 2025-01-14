@@ -20,7 +20,8 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Colors",
         description = "Change colors of various items",
-        position = 1
+        position = 1,
+        closedByDefault = true
     ) String colors = "colors";
 
         @Alpha
@@ -68,7 +69,8 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Teleporters",
         description = "Teleporters",
-        position = 2
+        position = 2,
+        closedByDefault = true
     ) String teleporters = "teleporters";
 
         @ConfigItem(
@@ -104,7 +106,8 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Guardians",
         description = "Guardians",
-        position = 3
+        position = 3,
+        closedByDefault = true
     ) String guardians = "guardians";
 
         @ConfigItem(
@@ -130,7 +133,8 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Great Guardian",
         description = "Great Guardian",
-        position = 4
+        position = 4,
+        closedByDefault = true
     ) String greatGuardian = "great_guardian";
 
         @ConfigItem(
@@ -146,7 +150,8 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Uncharged Cells",
         description = "Uncharged Cells",
-        position = 5
+        position = 5,
+        closedByDefault = true
     ) String unchargedCells = "unchargedCells";
 
         @ConfigItem(
@@ -162,7 +167,8 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Barrier",
         description = "Barrier",
-        position = 6
+        position = 6,
+        closedByDefault = true
     ) String barrier = "barrier";
 
         @ConfigItem(
@@ -197,9 +203,44 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     }
 
     @ConfigSection(
+        name = "Barriers",
+        description = "Barriers",
+        position = 7,
+        closedByDefault = true
+    ) String barriers = "barriers";
+
+        @ConfigItem(
+            keyName = "barriersOverlay",
+            name = "Show barriers overlay",
+            description = "Show bars of barriers levels and health",
+            position = 1,
+            section = barriers
+        ) default boolean showBarriersOverlay() {
+        return true;
+    }
+
+    @ConfigSection(
+        name = "Rewards guardian",
+        description = "Rewards guardian",
+        position = 8,
+        closedByDefault = true
+    ) String rewardsGuardian = "rewardsGuardian";
+
+        @ConfigItem(
+            keyName = "rewardsGuardianOverlay",
+            name = "Show remaining searches",
+            description = "Show number of remaining searches above rewards guardian",
+            position = 1,
+            section = rewardsGuardian
+        ) default boolean showRewardsGuardianOverlay() {
+        return true;
+    }
+
+    @ConfigSection(
         name = "Notifications",
         description = "Manage notifications",
-        position = 7
+        position = 9,
+        closedByDefault = true
     ) String notifications = "notifications";
 
         @ConfigItem(

@@ -10,7 +10,7 @@ import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.components.ProgressPieComponent;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import tictac7x.gotr.TicTac7xGotrImprovedConfig;
-import tictac7x.gotr.store.Barrier;
+import tictac7x.gotr.store.EntranceBarrier;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,22 +19,22 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
 
-public class BarrierOverlay extends Overlay {
+public class EntranceBarrierOverlay extends Overlay {
     private final int BARRIER_ACTIVE = 43700;
     private final int BARRIER_REENTER_GAMETICKS = 51;
     private final int GAMETICK_DURATION = 600;
 
     private final Client client;
     private final ModelOutlineRenderer modelOutlineRenderer;
-    private final Barrier barrier;
+    private final EntranceBarrier entranceBarrier;
     private final TicTac7xGotrImprovedConfig config;
 
     private Optional<GameObject> barrierGameObject = Optional.empty();
 
-    public BarrierOverlay(final Client client, final ModelOutlineRenderer modelOutlineRenderer, final Barrier barrier, final TicTac7xGotrImprovedConfig config) {
+    public EntranceBarrierOverlay(final Client client, final ModelOutlineRenderer modelOutlineRenderer, final EntranceBarrier entranceBarrier, final TicTac7xGotrImprovedConfig config) {
         this.client = client;
         this.modelOutlineRenderer = modelOutlineRenderer;
-        this.barrier = barrier;
+        this.entranceBarrier = entranceBarrier;
         this.config = config;
     }
 
@@ -59,23 +59,23 @@ public class BarrierOverlay extends Overlay {
     @Override
     public Dimension render(final Graphics2D graphics) {
         if (!barrierGameObject.isPresent()) return null;
-        if (!barrier.getBarrierReenterTimeLeft().isPresent()) return null;
+        if (!entranceBarrier.getBarrierReenterTimeLeft().isPresent()) return null;
         if (!isBehindBarrier()) return null;
 
-        final long seconds = Duration.between(Instant.now(), barrier.getBarrierReenterTimeLeft().get()).getSeconds();
+        final long seconds = Duration.between(Instant.now(), entranceBarrier.getBarrierReenterTimeLeft().get()).getSeconds();
 
         if (config.showBarrierRemainingTimePie()) {
             final ProgressPieComponent pie = new ProgressPieComponent();
             pie.setPosition(barrierGameObject.get().getCanvasLocation(420));
             pie.setFill(seconds > 0 ? Color.RED : Color.GREEN);
             pie.setBorder(seconds > 0 ? Color.RED : Color.GREEN, 1);
-            pie.setProgress((double) Duration.between(Instant.now(), barrier.getBarrierReenterTimeLeft().get()).getSeconds() / ((double) (BARRIER_REENTER_GAMETICKS * GAMETICK_DURATION) / 1000) - 1);
+            pie.setProgress((double) Duration.between(Instant.now(), entranceBarrier.getBarrierReenterTimeLeft().get()).getSeconds() / ((double) (BARRIER_REENTER_GAMETICKS * GAMETICK_DURATION) / 1000) - 1);
             try { pie.render(graphics); } catch (final Exception ignored) {}
         }
 
         if (config.showBarrierRemainingTime()) {
             if (seconds >= 0) {
-                final long milliseconds = Duration.between(Instant.now(), barrier.getBarrierReenterTimeLeft().get()).getNano() / 1_000_000 % 1000 / 100;
+                final long milliseconds = Duration.between(Instant.now(), entranceBarrier.getBarrierReenterTimeLeft().get()).getNano() / 1_000_000 % 1000 / 100;
                 final String time = seconds + "." + milliseconds;
                 final Point location =  Perspective.getCanvasTextLocation(client, graphics, barrierGameObject.get().getLocalLocation(), time, 410);
 

@@ -5,6 +5,7 @@ import net.runelite.api.GameState;
 import net.runelite.api.ItemID;
 import net.runelite.api.NPC;
 import net.runelite.api.NpcID;
+import net.runelite.api.events.NpcSpawned;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
@@ -21,7 +22,6 @@ import java.util.Optional;
 
 public class GreatGuardianOverlay extends Overlay {
     private final Client client;
-    private final ItemManager itemManager;
     private final ModelOutlineRenderer modelOutlineRenderer;
     private final TicTac7xGotrImprovedConfig config;
     private final Inventory inventory;
@@ -33,7 +33,6 @@ public class GreatGuardianOverlay extends Overlay {
 
     public GreatGuardianOverlay(final Client client, final ItemManager itemManager, final ModelOutlineRenderer modelOutlineRenderer, final TicTac7xGotrImprovedConfig config, final Inventory inventory) {
         this.client = client;
-        this.itemManager = itemManager;
         this.modelOutlineRenderer = modelOutlineRenderer;
         this.config = config;
         this.inventory = inventory;
@@ -45,9 +44,9 @@ public class GreatGuardianOverlay extends Overlay {
         setLayer(OverlayLayer.UNDER_WIDGETS);
     }
 
-    public void onNpcSpawned(final NPC npc) {
-        if (npc.getId() == NpcID.THE_GREAT_GUARDIAN) {
-            greatGuardian = Optional.of(npc);
+    public void onNpcSpawned(final NpcSpawned event) {
+        if (event.getNpc().getId() == NpcID.THE_GREAT_GUARDIAN) {
+            greatGuardian = Optional.of(event.getNpc());
         }
     }
 
