@@ -11,9 +11,7 @@ import java.util.Optional;
 public class Barrier {
     private Optional<GroundObject> groundObject = Optional.empty();
     private Optional<NPC> npc = Optional.empty();
-
-    public Barrier() {
-    }
+    private int health = 0;
 
     public BarrierLevel getLevel() {
         if (groundObject.isPresent()) {
@@ -51,17 +49,11 @@ public class Barrier {
             level == BarrierLevel.BROKEN ||
             level == BarrierLevel.NOT_BUILT
         ) {
-            return 0;
+            health = 0;
+        } else if (npc.isPresent() && npc.get().getHealthRatio() != -1) {
+            health = npc.get().getHealthRatio() * 2;
         }
 
-        if (npc.isPresent()) {
-            if (npc.get().getHealthRatio() == -1) {
-                return 100;
-            }
-
-            return npc.get().getHealthRatio() * 2;
-        }
-
-        return 0;
+        return health;
     }
 }

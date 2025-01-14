@@ -51,7 +51,7 @@ public class RewardsGuardianOverlay extends Overlay {
         if (!config.showRewardsGuardianOverlay()) return null;
 
         if (gameObject.isPresent()) {
-            final String text = "Searches: " + getMaxSearches();
+            final String text = "Rewards: " + getMaxSearches();
 
             final FontMetrics metrics = graphics.getFontMetrics();
             final int textWidth = metrics.stringWidth(text);
@@ -59,7 +59,6 @@ public class RewardsGuardianOverlay extends Overlay {
             final Rectangle rectangle = new Rectangle(textLocation.getX(), textLocation.getY(), textWidth, 0);
             TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, text, rectangle, new Color(220, 220, 220), FontManager.getRunescapeFont());
         }
-
 
         return null;
     }

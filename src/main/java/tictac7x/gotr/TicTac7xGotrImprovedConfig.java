@@ -152,10 +152,10 @@ public interface TicTac7xGotrImprovedConfig extends Config {
         description = "Uncharged Cells",
         position = 5,
         closedByDefault = true
-    ) String unchargedCells = "unchargedCells";
+    ) String unchargedCells = "uncharged_cells";
 
         @ConfigItem(
-            keyName = "highlightUnchargedCellsBench",
+            keyName = "highlight_uncharged_cells_bench",
             name = "Highlight Uncharged Cells Bench",
             description = "Highlight uncharged cells bench if player has no uncharged cells in their inventory",
             position = 1,
@@ -169,36 +169,15 @@ public interface TicTac7xGotrImprovedConfig extends Config {
         description = "Barrier",
         position = 6,
         closedByDefault = true
-    ) String barrier = "barrier";
+    ) String barrier = "entrance_barrier";
 
         @ConfigItem(
-            keyName = "barrierLeavePreventer",
+            keyName = "entrance_barrier_preventer",
             name = "Prevent leave",
             description = "Rename quick-pass option to make sure you can't left click it after passing",
             position = 1,
             section = barrier
-        ) default boolean preventQuickLeave() {
-        return true;
-    }
-
-
-        @ConfigItem(
-            keyName = "barrierTimeRemaining",
-            name = "Remaining Time",
-            description = "Show remaining time until the barrier is passable",
-            position = 2,
-            section = barrier
-        ) default boolean showBarrierRemainingTime() {
-        return true;
-    }
-
-        @ConfigItem(
-            keyName = "barrierPie",
-            name = "Remaining Time Pie",
-            description = "Show remaining time as pie",
-            position = 3,
-            section = barrier
-        ) default boolean showBarrierRemainingTimePie() {
+        ) default boolean preventEntranceBarrierQuickLeave() {
         return true;
     }
 
@@ -210,7 +189,7 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     ) String barriers = "barriers";
 
         @ConfigItem(
-            keyName = "barriersOverlay",
+            keyName = "barriers_overlay",
             name = "Show barriers overlay",
             description = "Show bars of barriers levels and health",
             position = 1,
@@ -224,10 +203,10 @@ public interface TicTac7xGotrImprovedConfig extends Config {
         description = "Rewards guardian",
         position = 8,
         closedByDefault = true
-    ) String rewardsGuardian = "rewardsGuardian";
+    ) String rewardsGuardian = "rewards_guardian";
 
         @ConfigItem(
-            keyName = "rewardsGuardianOverlay",
+            keyName = "rewards_guardian_overlay",
             name = "Show remaining searches",
             description = "Show number of remaining searches above rewards guardian",
             position = 1,
@@ -285,30 +264,10 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     }
 
         @ConfigItem(
-            keyName = "notification_barrier_passable",
-            name = "Passable barrier",
-            description = "Notify about barrier being passable",
-            position = 5,
-            section = notifications
-        ) default boolean notifyBarrierPassable() {
-        return true;
-    }
-
-        @ConfigItem(
-            keyName = "notification_before_barrier_passable",
-            name = "Before passable barrier",
-            description = "Notify about barrier being passable",
-            position = 6,
-            section = notifications
-        ) default boolean notifyBeforePassableBarrier() {
-        return true;
-    }
-
-        @ConfigItem(
             keyName = "notification_eye_robes",
             name = "Unused eye robes",
             description = "Notify about unused eye robes when you are near altar with essence in inventory",
-            position = 7,
+            position = 5,
             section = notifications
         ) default boolean notifyUnusedEyeRobes() {
         return true;

@@ -1,5 +1,9 @@
 package tictac7x.gotr.store;
 
+import net.runelite.api.Client;
+import net.runelite.api.GameObject;
+import net.runelite.api.NPC;
+import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GroundObjectSpawned;
 import net.runelite.api.events.NpcSpawned;
 import tictac7x.gotr.types.BarrierPosition;
@@ -7,6 +11,7 @@ import tictac7x.gotr.types.BarrierPosition;
 import java.util.*;
 
 public class Barriers {
+    private Optional<GameObject> airAltar = Optional.empty();
     public Map<BarrierPosition, Barrier> barriers = new LinkedHashMap<>();
 
     public Barriers() {
@@ -19,47 +24,53 @@ public class Barriers {
         barriers.put(BarrierPosition.SEVEN, new Barrier());
     }
 
-    public void onNpcSpawned(final NpcSpawned event) {
-        if (isBarrierNpc(event)) {
-            final int x = event.getNpc().getLocalLocation().getX();
-            final int y = event.getNpc().getLocalLocation().getY();
+    public void onGameObjectSpawned(final GameObjectSpawned event) {
+        if (event.getGameObject().getId() == 43701) {
+            airAltar = Optional.of(event.getGameObject());
+        }
+    }
 
-            if (x == 5952 && y == 10176) {
+    public void onNpcSpawned(final NpcSpawned event) {
+        if (isBarrierNpc(event) && airAltar.isPresent()) {
+            final int x = airAltar.get().getWorldLocation().getX() - event.getNpc().getWorldLocation().getX();
+            final int y = airAltar.get().getWorldLocation().getY() - event.getNpc().getWorldLocation().getY();
+
+            if (x == 12 && y == -8) {
                 barriers.get(BarrierPosition.ONE).updateNpc(event);
-            } else if (x == 6144 && y == 10752) {
+            } else if (x == 10 && y == -13) {
                 barriers.get(BarrierPosition.TWO).updateNpc(event);
-            } else if (x == 6528 && y == 11136) {
+            } else if (x == 7 && y == -16) {
                 barriers.get(BarrierPosition.THREE).updateNpc(event);
-            } else if (x == 7104 && y == 11328) {
+            } else if (x == 3 && y == -17) {
                 barriers.get(BarrierPosition.FOUR).updateNpc(event);
-            } else if (x == 7680 && y == 11136) {
+            } else if (x == -2 && y == -16) {
                 barriers.get(BarrierPosition.FIVE).updateNpc(event);
-            } else if (x == 8064 && y == 10752) {
+            } else if (x == -5 && y == -13) {
                 barriers.get(BarrierPosition.SIX).updateNpc(event);
-            } else if (x == 8256 && y == 10176) {
+            } else if (x == -6 && y == -8) {
                 barriers.get(BarrierPosition.SEVEN).updateNpc(event);
             }
         }
     }
 
     public void groundObjectSpawned(final GroundObjectSpawned event) {
-        if (isBarrierGroundObject(event)) {
-            final int x = event.getGroundObject().getLocalLocation().getX();
-            final int y = event.getGroundObject().getLocalLocation().getY();
+        if (isBarrierGroundObject(event) && airAltar.isPresent()) {
+            final int x = airAltar.get().getWorldLocation().getX() - event.getGroundObject().getWorldLocation().getX();
+            final int y = airAltar.get().getWorldLocation().getY() - event.getGroundObject().getWorldLocation().getY();
 
-            if (x == 6208 && y == 10176) {
+            if (x == 9 && y == -9) {
                 barriers.get(BarrierPosition.ONE).updateGroundObject(event);
-            } else if (x == 6336 && y == 10688) {
+            } else if (x == 8 && y == -13) {
                 barriers.get(BarrierPosition.TWO).updateGroundObject(event);
-            } else if (x == 6592 && y == 10944) {
+            } else if (x == 6 && y == -15) {
                 barriers.get(BarrierPosition.THREE).updateGroundObject(event);
-            } else if (x == 7104 && y == 11072) {
+            } else if (x == 2 && y == -16) {
                 barriers.get(BarrierPosition.FOUR).updateGroundObject(event);
-            } else if (x == 7616 && y == 10944) {
+            } else if (x == -2 && y == -15) {
                 barriers.get(BarrierPosition.FIVE).updateGroundObject(event);
-            } else if (x == 7872 && y == 10688) {
+            } else if (x == -4 && y == -13) {
                 barriers.get(BarrierPosition.SIX).updateGroundObject(event);
-            } else if (x == 8000 && y == 10176) {
+            } else if (x == -5 && y == -9) {
                 barriers.get(BarrierPosition.SEVEN).updateGroundObject(event);
             }
         }

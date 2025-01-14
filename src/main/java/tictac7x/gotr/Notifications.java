@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Notifications {
-    private final Client client;
     private final Notifier notifier;
     private final Inventory inventory;
     private TicTac7xGotrImprovedConfig config;
@@ -23,8 +22,7 @@ public class Notifications {
     private final String regexGameStarted = "The rift becomes active!";
     private final Pattern regexPortalOpened = Pattern.compile("(?<location>.*) - .*");
 
-    public Notifications(final Client client, final Notifier notifier, final Inventory inventory, final TicTac7xGotrImprovedConfig config) {
-        this.client = client;
+    public Notifications(final Notifier notifier, final Inventory inventory, final TicTac7xGotrImprovedConfig config) {
         this.notifier = notifier;
         this.inventory = inventory;
         this.config = config;
@@ -81,22 +79,6 @@ public class Notifications {
             location.equals("W") ? "west" :
             "") + "!"
         );
-    }
-
-    public void notifyAboutPassableBarrier() {
-        if (config.notifyBarrierPassable() && shouldNotifyAboutBarrier()) {
-            notifier.notify("Barrier is now passable!");
-        }
-    }
-
-    public void notifyBeforePassableBarrier() {
-        if (config.notifyBeforePassableBarrier() && shouldNotifyAboutBarrier()) {
-            notifier.notify("Barrier will be passable in 5 seconds!");
-        }
-    }
-
-    private boolean shouldNotifyAboutBarrier() {
-        return client.getLocalPlayer().getWorldLocation().getY() <= 9482;
     }
 
     public void notifyBeforeFirstRift(final int seconds) {
