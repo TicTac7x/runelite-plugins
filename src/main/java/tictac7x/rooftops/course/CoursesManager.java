@@ -1,4 +1,4 @@
-package tictac7x.rooftops;
+package tictac7x.rooftops.course;
 
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -17,15 +17,13 @@ import net.runelite.api.events.ItemDespawned;
 import net.runelite.api.events.ItemSpawned;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.StatChanged;
-import tictac7x.rooftops.courses.*;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-public class RooftopsCoursesManager {
+public class CoursesManager {
     private final Client client;
     private final Course[] courses;
 
@@ -35,7 +33,7 @@ public class RooftopsCoursesManager {
     private final List<Integer> menuOptionsClicked = new ArrayList<>();
     private Optional<Course> course = Optional.empty();
 
-    public RooftopsCoursesManager(final Client client, final Course[] courses) {
+    public CoursesManager(final Client client, final Course[] courses) {
         this.client = client;
         this.courses = courses;
     }

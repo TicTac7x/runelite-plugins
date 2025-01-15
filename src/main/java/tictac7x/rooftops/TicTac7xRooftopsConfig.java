@@ -8,10 +8,10 @@ import net.runelite.client.config.ConfigSection;
 
 import java.awt.Color;
 
-import static tictac7x.rooftops.RooftopsConfig.group;
+import static tictac7x.rooftops.TicTac7xRooftopsConfig.group;
 
 @ConfigGroup(group)
-public interface RooftopsConfig extends Config {
+public interface TicTac7xRooftopsConfig extends Config {
 	String group = "tictac7x-rooftops";
 	String version = "version";
 

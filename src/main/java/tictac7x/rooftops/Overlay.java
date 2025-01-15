@@ -3,24 +3,23 @@ package tictac7x.rooftops;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.api.Tile;
-import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
-import tictac7x.rooftops.courses.Obstacle;
+import tictac7x.rooftops.course.CoursesManager;
+import tictac7x.rooftops.course.Obstacle;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Shape;
-import java.util.Arrays;
 
-public class RooftopsOverlay extends Overlay {
+public class Overlay extends net.runelite.client.ui.overlay.Overlay {
     private final Client client;
-    private final RooftopsConfig config;
-    private final RooftopsCoursesManager coursesManager;
+    private final TicTac7xRooftopsConfig config;
+    private final CoursesManager coursesManager;
 
-    public RooftopsOverlay(final Client client, final RooftopsConfig config, final RooftopsCoursesManager coursesManager) {
+    public Overlay(final Client client, final TicTac7xRooftopsConfig config, final CoursesManager coursesManager) {
         this.client = client;
         this.config = config;
         this.coursesManager = coursesManager;

@@ -1,4 +1,4 @@
-package tictac7x.rooftops.courses;
+package tictac7x.rooftops.course;
 
 import net.runelite.api.TileObject;
 import net.runelite.api.coords.WorldPoint;

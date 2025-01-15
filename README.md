@@ -1,4 +1,4 @@
-# Rooftop Agility Improved - v0.6.1
+# Rooftop Agility Improved - v0.6.2
 Improved clickboxes for rooftop agility courses.
 
 ![](img/seers.png)
@@ -14,7 +14,7 @@ Improved clickboxes for rooftop agility courses.
 
 <br>
 
-## Implemented rooftops
+## Implemented courses
 - [x] Draynor
 - [x] Al Kharid
 - [x] Varrock
@@ -24,6 +24,8 @@ Improved clickboxes for rooftop agility courses.
 - [x] Pollnivneach
 - [x] Rellekka
 - [x] Ardougne
+- [x] Ape Atoll
+- [x] Varlamore
 
 <br>
 

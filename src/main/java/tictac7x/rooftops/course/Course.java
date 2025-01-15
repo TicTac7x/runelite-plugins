@@ -1,6 +1,4 @@
-package tictac7x.rooftops.courses;
-
-import tictac7x.rooftops.MarkOfGrace;
+package tictac7x.rooftops.course;
 
 import java.util.ArrayList;
 import java.util.Arrays;

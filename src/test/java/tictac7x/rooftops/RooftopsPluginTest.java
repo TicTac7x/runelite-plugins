@@ -5,7 +5,7 @@ import net.runelite.client.externalplugins.ExternalPluginManager;
 
 public class RooftopsPluginTest {
 	public static void main(String[] args) throws Exception {
-		ExternalPluginManager.loadBuiltin(RooftopsPlugin.class);
+		ExternalPluginManager.loadBuiltin(TicTac7xRooftopsPlugin.class);
 		RuneLite.main(args);
 	}
 }
