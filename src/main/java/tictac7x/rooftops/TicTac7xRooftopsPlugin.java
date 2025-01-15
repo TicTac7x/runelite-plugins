@@ -60,7 +60,7 @@ public class TicTac7xRooftopsPlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
-		coursesManager = new CoursesManager(client, new Course[]{
+		coursesManager = new CoursesManager(client, config, new Course[]{
 			// Rooftops with marks of grace.
 			new Draynor(),
 			new AlKharid(),
@@ -136,6 +136,11 @@ public class TicTac7xRooftopsPlugin extends Plugin {
 	}
 
 	@Subscribe
+	public void onMenuOptionClicked(final MenuOptionClicked event) {
+		coursesManager.onMenuOptionClicked(event);
+	}
+
+	@Subscribe
 	public void onGameStateChanged(final GameStateChanged event) {
 		coursesManager.onGameStateChanged(event);
 
@@ -148,10 +153,5 @@ public class TicTac7xRooftopsPlugin extends Plugin {
 				.build()
 			);
 		}
-	}
-
-	@Subscribe
-	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		coursesManager.onMenuOptionClicked(event);
 	}
 }

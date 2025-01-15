@@ -17,6 +17,7 @@ import net.runelite.api.events.ItemDespawned;
 import net.runelite.api.events.ItemSpawned;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.StatChanged;
+import tictac7x.rooftops.TicTac7xRooftopsConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.regex.Pattern;
 
 public class CoursesManager {
     private final Client client;
+    private final TicTac7xRooftopsConfig config;
     private final Course[] courses;
 
     private final Pattern regexLapComplete = Pattern.compile(".*lap count is:.*");
@@ -33,8 +35,9 @@ public class CoursesManager {
     private final List<Integer> menuOptionsClicked = new ArrayList<>();
     private Optional<Course> course = Optional.empty();
 
-    public CoursesManager(final Client client, final Course[] courses) {
+    public CoursesManager(final Client client, final TicTac7xRooftopsConfig config, final Course[] courses) {
         this.client = client;
+        this.config = config;
         this.courses = courses;
     }
 
@@ -103,7 +106,7 @@ public class CoursesManager {
     }
 
     public boolean isStoppingObstacle(final int obstacleId) {
-        if (!course.isPresent()) return false;
+        if (!course.isPresent() || !config.showMarkOfGraceStop()) return false;
 
         for (final Tile tile : marksOfGraces) {
             for (final MarkOfGrace mark : course.get().marksOfGraces) {

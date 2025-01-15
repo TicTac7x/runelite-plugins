@@ -78,4 +78,12 @@ public interface TicTac7xRooftopsConfig extends Config {
 			position = 1,
 			section = marks_of_graces
 		) default Color getMarkOfGraceColor() { return new Color(0, 255, 0, 80); }
+
+		@ConfigItem(
+			keyName = "mark_of_grace_stop",
+			name = "Show stop obstacles",
+			description = "Show next obstacle after Mark of grace as stop.",
+			position = 2,
+			section = marks_of_graces
+		) default boolean showMarkOfGraceStop() { return true; }
 }
