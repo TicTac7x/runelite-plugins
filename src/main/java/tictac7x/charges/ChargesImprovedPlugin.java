@@ -124,15 +124,12 @@ import java.util.*;
 )
 
 public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.12";
+	private final String pluginVersion = "v0.5.13";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Plank sack added.<br>" +
-		"<colHIGHLIGHT>* Colossal pouch added.<br>" +
-		"<colHIGHLIGHT>* Ring of duelling added.<br>" +
-		"<colHIGHLIGHT>* Log basket and fish barrel fixes.<br>" +
-		"<colHIGHLIGHT>* Forestry kit shop support.<br>" +
-		"<colHIGHLIGHT>* Master scroll book now has Colossal Wyrm teleport scrolls support."
+		"<colHIGHLIGHT>* Fur/Meat pouches and binding necklace fixes.<br>" +
+		"<colHIGHLIGHT>* Tumeken's shadow enabled.<br>" +
+		"<colHIGHLIGHT>* Ring of endurance added."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -213,6 +210,7 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			new W_SkullSceptre(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new W_SlayerStaffE(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new W_TridentOfTheSeas(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new W_TumekensShadow(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new W_VenatorBow(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new W_WarpedSceptre(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new W_WesternBanner(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -256,6 +254,7 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			new J_RingOfCelestial(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfDueling(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfElements(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new J_RingOfEndurance(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfExplorer(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfPursuit(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfRecoil(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),

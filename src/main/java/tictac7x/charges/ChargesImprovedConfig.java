@@ -89,6 +89,7 @@ public interface ChargesImprovedConfig extends Config {
     String ring_of_suffering = "ring_of_suffering";
     String ring_of_suffering_status = "ring_of_suffering_status";
     String ring_of_the_elements = "ring_of_the_elements";
+    String ring_of_endurance = "ring_of_endurance";
     String sanguinesti_staff = "sanguinesti_staff";
     String seed_box = "seed_box";
     String skull_sceptre = "skull_sceptre";
@@ -544,6 +545,13 @@ public interface ChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean ringOfTheElementsInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = ring_of_endurance + infobox,
+            name = "Ring of endurance",
+            description = "",
+            section = infoboxes
+        ) default boolean ringOfEnduranceInfobox() { return true; }
 
         @ConfigItem(
             keyName = explorers_ring + infobox,
@@ -1358,6 +1366,13 @@ public interface ChargesImprovedConfig extends Config {
         ) default boolean ringOfTheElementsOverlay() { return true; }
 
         @ConfigItem(
+            keyName = ring_of_endurance + overlay,
+            name = "Ring of endurance",
+            description = "",
+            section = overlays
+        ) default boolean ringOfEnduranceOverlay() { return true; }
+
+        @ConfigItem(
             keyName = seed_box + overlay,
             name = "Seed box",
             description = "",
@@ -2032,6 +2047,13 @@ public interface ChargesImprovedConfig extends Config {
             description = ring_of_the_elements,
             section = debug
         ) default int getRingOfElementsCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = ring_of_endurance,
+            name = ring_of_endurance,
+            description = ring_of_endurance,
+            section = debug
+        ) default int getRingOfEnduranceCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
             keyName = plank_sack,

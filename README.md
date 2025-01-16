@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.5.12
+# Item Charges Improved - v0.5.13
 
 Show charges of various items that are in inventory or equipped
 
@@ -77,6 +77,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Ring of celestial
 - Ring of dueling
 - Ring of elements
+- Ring of endurance
 - Ring of explorer
 - Ring of pursuit
 - Ring of recoil

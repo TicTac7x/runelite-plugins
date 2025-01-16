@@ -50,13 +50,13 @@ public class J_BindingNecklace extends ChargedItem {
             // Charge used.
             new OnChatMessage("You (partially succeed to )?bind the temple's power into (mud|lava|steam|dust|smoke|mist) runes\\.").decreaseCharges(1),
 
-            // Fully used.
-            new OnChatMessage("Your Binding necklace has disintegrated.").setFixedCharges(16),
+            // Fully used (set charges to 17, because binding message appears right after disintegrate).
+            new OnChatMessage("Your Binding necklace has disintegrated.").setFixedCharges(17),
 
             // Destroy.
             new OnMenuOptionClicked("Yes").consumer(() -> {
-                final Optional<Widget> bindingNecklaceDestroyWidget = ChargesImprovedPlugin.getWidget(client, 584, 0, 2);
-                if (bindingNecklaceDestroyWidget.isPresent() && bindingNecklaceDestroyWidget.get().getText().equals("Destroy necklace of binding?")) {
+                final Optional<Widget> destroyWidget = ChargesImprovedPlugin.getWidget(client, 584, 0, 2);
+                if (destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?")) {
                     setCharges(16);
                 }
             }),

@@ -146,8 +146,9 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase runConsumerOnNextGameTick() {
+    public TriggerBase runConsumerOnNextGameTick(final Runnable consumer) {
         this.runConsumerOnNextGameTick = Optional.of(true);
+        this.consumer = Optional.of(consumer);
         return this;
     }
 
