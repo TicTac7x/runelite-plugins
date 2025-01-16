@@ -75,6 +75,7 @@ public class U_FurPouch extends ChargedItemWithStorage {
         this.triggers = new TriggerBase[]{
             // Empty.
             new OnChatMessage("Your fur pouch is currently holding 0 fur.").emptyStorage(),
+            new OnChatMessage("Your fur pouch is empty.").emptyStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
