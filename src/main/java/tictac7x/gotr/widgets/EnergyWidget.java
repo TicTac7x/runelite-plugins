@@ -60,7 +60,7 @@ public class EnergyWidget extends Overlay {
         int y = widgetGotr.get().getCanvasLocation().getY();
 
         final String elementalEnergyString = config.getPointsWidgetStyle() == PointsWidgetStyle.SEPARATE ? config.getElementalEnergy() + " + " + elementalEnergy / 100 : String.valueOf(config.getElementalEnergy() + elementalEnergy / 100);
-        final String catalyticEnergyString = config.getPointsWidgetStyle() == PointsWidgetStyle.SEPARATE ? config.getCatalyticEnergy() + " + " + catalyticEnergy / 100 : String.valueOf(config.getElementalEnergy() + catalyticEnergy / 100);
+        final String catalyticEnergyString = config.getPointsWidgetStyle() == PointsWidgetStyle.SEPARATE ? config.getCatalyticEnergy() + " + " + catalyticEnergy / 100 : String.valueOf(config.getCatalyticEnergy() + catalyticEnergy / 100);
 
         TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, "Elemental:", new Rectangle(x + 46, y + 79, 0, 0), config.getElementalColor(), FontManager.getRunescapeFont());
         TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, elementalEnergyString, new Rectangle(x + 46, y + 95, 0, 0), config.getElementalColor(), FontManager.getRunescapeFont());
