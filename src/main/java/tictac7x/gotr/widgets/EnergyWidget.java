@@ -7,6 +7,7 @@ import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import tictac7x.gotr.TicTac7xGotrImprovedConfig;
 import tictac7x.gotr.TicTac7xGotrImprovedPlugin;
+import tictac7x.gotr.types.PointsWidgetStyle;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -58,11 +59,14 @@ public class EnergyWidget extends Overlay {
         int x = widgetGotr.get().getCanvasLocation().getX();
         int y = widgetGotr.get().getCanvasLocation().getY();
 
+        final String elementalEnergyString = config.getPointsWidgetStyle() == PointsWidgetStyle.SEPARATE ? config.getElementalEnergy() + " + " + elementalEnergy / 100 : String.valueOf(config.getElementalEnergy() + elementalEnergy / 100);
+        final String catalyticEnergyString = config.getPointsWidgetStyle() == PointsWidgetStyle.SEPARATE ? config.getCatalyticEnergy() + " + " + catalyticEnergy / 100 : String.valueOf(config.getElementalEnergy() + catalyticEnergy / 100);
+
         TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, "Elemental:", new Rectangle(x + 46, y + 79, 0, 0), config.getElementalColor(), FontManager.getRunescapeFont());
-        TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, config.getElementalEnergy() + " + " + elementalEnergy / 100, new Rectangle(x + 46, y + 95, 0, 0), config.getElementalColor(), FontManager.getRunescapeFont());
+        TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, elementalEnergyString, new Rectangle(x + 46, y + 95, 0, 0), config.getElementalColor(), FontManager.getRunescapeFont());
 
         TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, "Catalytic:", new Rectangle(x + 124, y + 79, 0, 0), config.getCatalyticColor(), FontManager.getRunescapeFont());
-        TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, config.getCatalyticEnergy() + " + " + catalyticEnergy / 100, new Rectangle(x + 124, y + 95, 0, 0), config.getCatalyticColor(), FontManager.getRunescapeFont());
+        TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, catalyticEnergyString, new Rectangle(x + 124, y + 95, 0, 0), config.getCatalyticColor(), FontManager.getRunescapeFont());
 
         return null;
     }

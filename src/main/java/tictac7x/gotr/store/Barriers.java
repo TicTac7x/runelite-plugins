@@ -1,8 +1,6 @@
 package tictac7x.gotr.store;
 
-import net.runelite.api.Client;
 import net.runelite.api.GameObject;
-import net.runelite.api.NPC;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GroundObjectSpawned;
 import net.runelite.api.events.NpcSpawned;
@@ -11,8 +9,10 @@ import tictac7x.gotr.types.BarrierPosition;
 import java.util.*;
 
 public class Barriers {
-    private Optional<GameObject> airAltar = Optional.empty();
     public Map<BarrierPosition, Barrier> barriers = new LinkedHashMap<>();
+
+    private Optional<GameObject> airAltar = Optional.empty();
+    public final Set<BarrierPosition> barriersBuiltDuringGame = new HashSet<>();
 
     public Barriers() {
         barriers.put(BarrierPosition.ONE, new Barrier());
@@ -37,18 +37,25 @@ public class Barriers {
 
             if (x == 12 && y == -8) {
                 barriers.get(BarrierPosition.ONE).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.ONE);
             } else if (x == 10 && y == -13) {
                 barriers.get(BarrierPosition.TWO).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.TWO);
             } else if (x == 7 && y == -16) {
                 barriers.get(BarrierPosition.THREE).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.THREE);
             } else if (x == 3 && y == -17) {
                 barriers.get(BarrierPosition.FOUR).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.FOUR);
             } else if (x == -2 && y == -16) {
                 barriers.get(BarrierPosition.FIVE).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.FIVE);
             } else if (x == -5 && y == -13) {
                 barriers.get(BarrierPosition.SIX).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.SIX);
             } else if (x == -6 && y == -8) {
                 barriers.get(BarrierPosition.SEVEN).updateNpc(event);
+                barriersBuiltDuringGame.add(BarrierPosition.SEVEN);
             }
         }
     }
@@ -77,13 +84,23 @@ public class Barriers {
     }
 
     private boolean isBarrierGroundObject(final GroundObjectSpawned event) {
+        final int groundObjectId = event.getGroundObject().getId();
+
         return (
-            event.getGroundObject().getId() == 43736 ||
-            event.getGroundObject().getId() >= 43739 && event.getGroundObject().getId() <= 43743
+            groundObjectId == 43736 || // broken
+            groundObjectId == 43739 || // not built
+            groundObjectId == 43740 || // level 1
+            groundObjectId == 43741 || // levle 2
+            groundObjectId == 43742 || // level 3
+            groundObjectId == 43743    // level 4
         );
     }
 
     private boolean isBarrierNpc(final NpcSpawned event) {
         return event.getNpc().getId() >= 11418 && event.getNpc().getId() <= 11425;
+    }
+
+    public void onGameEnd() {
+        barriersBuiltDuringGame.clear();
     }
 }

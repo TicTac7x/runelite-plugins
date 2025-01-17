@@ -13,7 +13,7 @@ public class EntranceBarrier {
     }
 
     public void onMenuEntryAdded(final MenuEntry menuEntry) {
-        if (config.preventEntranceBarrierQuickLeave() && player.inGotr() &&
+        if (config.preventEntranceQuickLeave() && player.inGotr() &&
             menuEntry.getTarget().contains("Barrier") &&
             menuEntry.getOption().contains("Quick-pass")
         ) {

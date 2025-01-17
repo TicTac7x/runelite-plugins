@@ -2,6 +2,7 @@ package tictac7x.gotr;
 
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
@@ -20,6 +21,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import tictac7x.gotr.overlays.*;
 import tictac7x.gotr.store.*;
+import tictac7x.gotr.widgets.BarriersWidget;
 import tictac7x.gotr.widgets.EnergyWidget;
 import tictac7x.gotr.widgets.InactivePortalWidget;
 
@@ -91,7 +93,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 	private GuardiansOverlay guardiansOverlay;
 	private TeleportersOverlay teleportersOverlay;
 	private UnchargedCellsBenchOverlay unchargedCellsBenchOverlay;
-	private BarriersOverlay barriersOverlay;
+	private BarriersWidget barriersWidget;
 	private RewardsGuardianOverlay rewardsGuardianOverlay;
 
 	private InactivePortalWidget inactivePortalWidget;
@@ -120,7 +122,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		greatGuardianOverlay = new GreatGuardianOverlay(client, itemManager, modelOutlineRenderer, config, inventory);
 		teleportersOverlay = new TeleportersOverlay(client, itemManager, modelOutlineRenderer, config, teleporters, inventory);
 		unchargedCellsBenchOverlay = new UnchargedCellsBenchOverlay(client, modelOutlineRenderer, config, inventory);
-		barriersOverlay = new BarriersOverlay(client, config, barriers);
+		barriersWidget = new BarriersWidget(client, config, barriers);
 		rewardsGuardianOverlay = new RewardsGuardianOverlay(client, config);
 
 		inactivePortalWidget = new InactivePortalWidget(client, spriteManager, portal);
@@ -133,7 +135,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		overlayManager.add(unchargedCellsBenchOverlay);
 		overlayManager.add(inactivePortalWidget);
 		overlayManager.add(energyWidget);
-		overlayManager.add(barriersOverlay);
+		overlayManager.add(barriersWidget);
 		overlayManager.add(rewardsGuardianOverlay);
 	}
 
@@ -146,7 +148,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		overlayManager.remove(unchargedCellsBenchOverlay);
 		overlayManager.remove(inactivePortalWidget);
 		overlayManager.remove(energyWidget);
-		overlayManager.remove(barriersOverlay);
+		overlayManager.remove(barriersWidget);
 		overlayManager.remove(rewardsGuardianOverlay);
 	}
 
@@ -187,6 +189,10 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		notifications.onChatMessage(message);
 		portal.onChatMessage(message);
 		creatures.onChatMessage(message);
+
+		if (message.getType() == ChatMessageType.GAMEMESSAGE && message.getMessage().equals("The Portal Guardians will keep their rifts open for another 30 seconds.")) {
+			onGameEnd();
+		}
 	}
 
 
@@ -255,6 +261,10 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 			graphics.setColor(color);
 			graphics.drawString(text, x, y);
 		} catch (final Exception ignored) {}
+	}
+
+	private void onGameEnd() {
+		barriers.onGameEnd();
 	}
 }
 

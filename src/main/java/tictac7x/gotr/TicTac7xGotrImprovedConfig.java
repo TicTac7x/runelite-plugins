@@ -1,7 +1,9 @@
 package tictac7x.gotr;
 
 import net.runelite.client.config.*;
+import tictac7x.gotr.types.BarriersWidgetStyle;
 import tictac7x.gotr.types.BeforeGameStarts;
+import tictac7x.gotr.types.PointsWidgetStyle;
 
 import java.awt.Color;
 
@@ -165,43 +167,60 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     }
 
     @ConfigSection(
-        name = "Barrier",
-        description = "Barrier",
+        name = "Entrance",
+        description = "Entrance",
         position = 6,
         closedByDefault = true
-    ) String barrier = "entrance_barrier";
+    ) String entrance = "entrance";
 
         @ConfigItem(
-            keyName = "entrance_barrier_preventer",
-            name = "Prevent leave",
-            description = "Rename quick-pass option to make sure you can't left click it after passing",
+            keyName = "entrance_prevent_quickpass",
+            name = "Prevent quick leave",
+            description = "Prevent quick-pass of the entrance during game",
             position = 1,
-            section = barrier
-        ) default boolean preventEntranceBarrierQuickLeave() {
+            section = entrance
+        ) default boolean preventEntranceQuickLeave() {
         return true;
     }
 
     @ConfigSection(
-        name = "Barriers",
-        description = "Barriers",
+        name = "Points Widget",
+        description = "Points Widget",
         position = 7,
         closedByDefault = true
-    ) String barriers = "barriers";
+    ) String points_widget = "points_widget";
 
         @ConfigItem(
-            keyName = "barriers_overlay",
-            name = "Show barriers overlay",
+            keyName = "points_widget_style",
+            name = "Points widget style",
+            description = "Style of points",
+            position = 1,
+            section = points_widget
+        ) default PointsWidgetStyle getPointsWidgetStyle() {
+        return PointsWidgetStyle.SEPARATE;
+    }
+
+    @ConfigSection(
+        name = "Barriers Widget",
+        description = "Barriers Widget",
+        position = 8,
+        closedByDefault = true
+    ) String barriers_widget = "barriers_widget";
+
+        @ConfigItem(
+            keyName = "barriers_widget_style",
+            name = "Widget style",
             description = "Show bars of barriers levels and health",
             position = 1,
-            section = barriers
-        ) default boolean showBarriersOverlay() {
-        return true;
+            section = barriers_widget
+        ) default BarriersWidgetStyle getBarriersWidgetStyle() {
+        return BarriersWidgetStyle.ALL;
     }
 
     @ConfigSection(
         name = "Rewards guardian",
         description = "Rewards guardian",
-        position = 8,
+        position = 9,
         closedByDefault = true
     ) String rewardsGuardian = "rewards_guardian";
 
@@ -218,14 +237,14 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     @ConfigSection(
         name = "Notifications",
         description = "Manage notifications",
-        position = 9,
+        position = 10,
         closedByDefault = true
     ) String notifications = "notifications";
 
         @ConfigItem(
             keyName = "notification_before_game_starts",
             name = "Before game starts",
-            description = "Notify before the game starts ",
+            description = "Notify seconds before the game starts ",
             position = 1,
             section = notifications
         ) default BeforeGameStarts notifyBeforeGameStarts() {
