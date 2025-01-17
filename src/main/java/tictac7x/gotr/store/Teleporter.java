@@ -1,7 +1,8 @@
-package tictac7x.gotr.types;
+package tictac7x.gotr.store;
 
 import net.runelite.api.ItemID;
 import net.runelite.api.ObjectID;
+import tictac7x.gotr.types.Essence;
 
 public class Teleporter {
     final public int teleporterGameObjectid;

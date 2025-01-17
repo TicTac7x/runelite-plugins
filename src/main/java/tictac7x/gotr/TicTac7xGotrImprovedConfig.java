@@ -48,26 +48,6 @@ public interface TicTac7xGotrImprovedConfig extends Config {
             return new Color(215, 240, 60);
         }
 
-        @ConfigItem(
-            keyName = "color_widget_energies",
-            name = "Colorful energy points",
-            description = "If enabled shows energy points in respective colors",
-            position = 3,
-            section = colors
-        ) default boolean showWidgetEnergyPointColors() {
-            return true;
-        }
-
-        @ConfigItem(
-            keyName = "color_widget_portal",
-            name = "Colorful portal countdown",
-            description = "If enabled shows portal countdown in different colors based on time left",
-            position = 4,
-            section = colors
-        ) default boolean showWidgetPortalCountdownColors() {
-            return true;
-        }
-
     @ConfigSection(
         name = "Teleporters",
         description = "Teleporters",
@@ -86,20 +66,10 @@ public interface TicTac7xGotrImprovedConfig extends Config {
         }
 
         @ConfigItem(
-            keyName = "teleporters_level_requirements",
-            name = "Check level requirements",
-            description = "Check teleporter level requirement for highlighting",
-            position = 2,
-            section = teleporters
-        ) default boolean checkTeleporterLevelRequirements() {
-        return true;
-    }
-
-        @ConfigItem(
             keyName = "unusable_teleporters",
             name = "Indicate unusable teleporters",
             description = "Indicate that teleporters are unusable, because player has guardian stones in their inventory",
-            position = 3,
+            position = 2,
             section = teleporters
         ) default boolean indicateUnusableTeleporters() {
             return true;

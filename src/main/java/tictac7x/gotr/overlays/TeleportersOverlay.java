@@ -12,7 +12,7 @@ import tictac7x.gotr.TicTac7xGotrImprovedConfig;
 import tictac7x.gotr.TicTac7xGotrImprovedPlugin;
 import tictac7x.gotr.store.Inventory;
 import tictac7x.gotr.store.Teleporters;
-import tictac7x.gotr.types.Teleporter;
+import tictac7x.gotr.store.Teleporter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

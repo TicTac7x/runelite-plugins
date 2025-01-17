@@ -65,7 +65,7 @@ public class BarriersWidget extends Overlay {
         final int barThickness = 1;
         final int barHeight = 50;
         final int barWidth = 10;
-        final int barOffsetX = 40;
+        final int barOffsetX = 39;
         final int barOffsetY = 0;
         final int barGap = 15;
         final int barRoundness = 2;

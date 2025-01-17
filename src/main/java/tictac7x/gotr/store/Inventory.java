@@ -3,7 +3,6 @@ package tictac7x.gotr.store;
 import net.runelite.api.InventoryID;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.ItemID;
-import tictac7x.gotr.types.Teleporter;
 
 import java.util.Optional;
 

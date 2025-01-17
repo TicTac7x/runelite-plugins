@@ -4,7 +4,6 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
 import net.runelite.api.events.ChatMessage;
-import tictac7x.gotr.types.Teleporter;
 
 import java.time.Instant;
 import java.util.*;

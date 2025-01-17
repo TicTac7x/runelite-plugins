@@ -1,12 +1,11 @@
 package tictac7x.gotr;
 
-import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.client.Notifier;
 import tictac7x.gotr.store.Inventory;
 import tictac7x.gotr.types.BeforeGameStarts;
-import tictac7x.gotr.types.Teleporter;
+import tictac7x.gotr.store.Teleporter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
