@@ -16,8 +16,6 @@ public interface TicTac7xGotrImprovedConfig extends Config {
     String version = "version";
     String energy_catalytic = "energy_catalytic";
     String energy_elemental = "energy_elemental";
-    String guardians_current = "guardians_current";
-    String guardians_total = "guardians_total";
 
     @ConfigSection(
         name = "Colors",
@@ -47,6 +45,17 @@ public interface TicTac7xGotrImprovedConfig extends Config {
         ) default Color getCatalyticColor() {
             return new Color(215, 240, 60);
         }
+
+        @Alpha
+        @ConfigItem(
+            keyName = "color_polyelemental",
+            name = "Polyelemental color",
+            description = "Color to highlight polyelemental objects",
+            position = 3,
+            section = colors
+        ) default Color getPolyelementalColor() {
+        return new Color(125, 25, 15);
+    }
 
     @ConfigSection(
         name = "Teleporters",

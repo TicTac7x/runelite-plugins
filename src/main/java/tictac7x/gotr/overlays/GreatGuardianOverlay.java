@@ -15,8 +15,7 @@ import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import tictac7x.gotr.store.Inventory;
 import tictac7x.gotr.TicTac7xGotrImprovedConfig;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 
@@ -28,6 +27,7 @@ public class GreatGuardianOverlay extends Overlay {
 
     private final BufferedImage imageElementalGuardianStones;
     private final BufferedImage imageCatalyticGuardianStones;
+    private final BufferedImage imagePolyelementalGuardianStones;
 
     private Optional<NPC> greatGuardian = Optional.empty();
 
@@ -37,8 +37,9 @@ public class GreatGuardianOverlay extends Overlay {
         this.config = config;
         this.inventory = inventory;
 
-        this.imageCatalyticGuardianStones = itemManager.getImage(ItemID.CATALYTIC_GUARDIAN_STONE);
         this.imageElementalGuardianStones = itemManager.getImage(ItemID.ELEMENTAL_GUARDIAN_STONE);
+        this.imageCatalyticGuardianStones = itemManager.getImage(ItemID.CATALYTIC_GUARDIAN_STONE);
+        this.imagePolyelementalGuardianStones = itemManager.getImage(ItemID.POLYELEMENTAL_GUARDIAN_STONE);
 
         setPosition(OverlayPosition.DYNAMIC);
         setLayer(OverlayLayer.UNDER_WIDGETS);
@@ -75,12 +76,20 @@ public class GreatGuardianOverlay extends Overlay {
 
         // Outline.
         try {
-            modelOutlineRenderer.drawOutline(greatGuardian.get(), 2, inventory.hasElementalGuardianStones() ? config.getElementalColor() : config.getCatalyticColor(), 2);
+            final Color outlineColor =
+                inventory.hasElementalGuardianStones() ? config.getElementalColor() :
+                inventory.hasCatalyticGuardianStones() ? config.getCatalyticColor() :
+                config.getPolyelementalColor();
+            modelOutlineRenderer.drawOutline(greatGuardian.get(), 2, outlineColor, 2);
         } catch (final Exception ignored) {}
 
         // Image.
         try {
-            OverlayUtil.renderImageLocation(client, graphics, greatGuardian.get().getLocalLocation(), inventory.hasElementalGuardianStones() ? imageElementalGuardianStones : imageCatalyticGuardianStones, 550);
+            final BufferedImage stoneImage =
+                inventory.hasElementalGuardianStones() ? imageElementalGuardianStones :
+                inventory.hasCatalyticGuardianStones() ? imageCatalyticGuardianStones :
+                imagePolyelementalGuardianStones;
+            OverlayUtil.renderImageLocation(client, graphics, greatGuardian.get().getLocalLocation(), stoneImage, 550);
         } catch (final Exception ignored) {}
 
         return null;

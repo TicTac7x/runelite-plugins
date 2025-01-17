@@ -20,11 +20,7 @@ public class Inventory {
     }
 
     public boolean hasGuardianStones() {
-        return inventory.isPresent() && (
-            inventory.get().contains(ItemID.ELEMENTAL_GUARDIAN_STONE) ||
-            inventory.get().contains(ItemID.CATALYTIC_GUARDIAN_STONE) ||
-            inventory.get().contains(ItemID.POLYELEMENTAL_GUARDIAN_STONE)
-        );
+        return hasElementalGuardianStones() || hasCatalyticGuardianStones() || hasPolyelementalGuardianStones();
     }
 
     public boolean hasGuardianEssence() {
@@ -33,6 +29,14 @@ public class Inventory {
 
     public boolean hasElementalGuardianStones() {
         return inventory.isPresent() && inventory.get().contains(ItemID.ELEMENTAL_GUARDIAN_STONE);
+    }
+
+    public boolean hasPolyelementalGuardianStones() {
+        return inventory.isPresent() && inventory.get().contains(ItemID.POLYELEMENTAL_GUARDIAN_STONE);
+    }
+
+    public boolean hasCatalyticGuardianStones() {
+        return inventory.isPresent() && inventory.get().contains(ItemID.CATALYTIC_GUARDIAN_STONE);
     }
 
     public boolean hasCell() {
