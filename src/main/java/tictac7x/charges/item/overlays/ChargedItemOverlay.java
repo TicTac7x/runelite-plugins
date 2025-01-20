@@ -117,7 +117,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
             config.itemOverlayLocation() == ItemOverlayLocation.TOP_LEFT
         )
             ? bounds.getMinX()
-            : bounds.getMaxX() - textDimension.getWidth()
+            : bounds.getMaxX() - textDimension.getWidth() - 5
         );
 
         final int itemOverlayY = (int) ((
