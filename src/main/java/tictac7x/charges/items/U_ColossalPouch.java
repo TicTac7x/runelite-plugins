@@ -13,9 +13,9 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
 import java.awt.*;
@@ -26,22 +26,22 @@ import static tictac7x.charges.ChargesImprovedPlugin.getNumberFromWordRepresenta
 public class U_ColossalPouch extends ChargedItemWithStorage {
     public U_ColossalPouch(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        this.storage = storage.storeableItems(
-            new StorageItem(ItemID.RUNE_ESSENCE),
-            new StorageItem(ItemID.PURE_ESSENCE),
-            new StorageItem(ItemID.DAEYALT_ESSENCE),
-            new StorageItem(ItemID.GUARDIAN_ESSENCE)
+        super(ChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        this.storage = storage.storableItems(
+            new StorableItem(ItemID.RUNE_ESSENCE),
+            new StorableItem(ItemID.PURE_ESSENCE),
+            new StorableItem(ItemID.DAEYALT_ESSENCE),
+            new StorableItem(ItemID.GUARDIAN_ESSENCE)
         ).setMaximumTotalQuantity(40).setHoldsSingleType(true);
 
         this.items = new TriggerItem[]{
@@ -88,13 +88,13 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Decay.
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
-                configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, config.getColossalPouchDecayCount() + 1);
+                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, config.getColossalPouchDecayCount() + 1);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
             // Repair.
             new OnChatMessage("Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
-                configs.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, 0);
+                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, 0);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
@@ -117,7 +117,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
                 if (essence.isPresent()) {
                     store.nextTickQueue.add(() -> storage.add(essence.get().itemId, store.getInventoryItemQuantity(essence.get().itemId)));
                 }
-            }).onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            }).onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Empty to inventory.
             new OnMenuOptionClicked("Empty").runConsumerOnNextGameTick(() -> {

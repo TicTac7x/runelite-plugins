@@ -96,16 +96,13 @@ public class Store {
 
             previousInventoryItems = new ArrayList<>();
             for (final StorageItem storageItem : currentInventoryItems) {
-                previousInventoryItems.add(new StorageItem(storageItem.itemId, storageItem.getQuantity()));
+                previousInventoryItems.add(new StorageItem(storageItem.itemId, storageItem.quantity));
             }
 
             currentInventoryItems = new ArrayList<>();
             for (final Item item : event.getItemContainer().getItems()) {
                 if (isInvalidItem(item)) continue;
-                currentInventoryItems.add(new StorageItem(item.getId())
-                    .displayName(itemManager.getItemComposition(item.getId()).getName())
-                    .quantity(item.getQuantity())
-                );
+                currentInventoryItems.add(new StorageItem(item.getId(), item.getQuantity()));
             }
         } else if (event.getContainerId() == InventoryID.EQUIPMENT.getId()) {
             equipment = Optional.of(event.getItemContainer());
@@ -114,16 +111,13 @@ public class Store {
 
             previousBankItems = new ArrayList<>();
             for (final StorageItem storageItem : currentBankItems) {
-                previousBankItems.add(new StorageItem(storageItem.itemId, storageItem.getQuantity()));
+                previousBankItems.add(new StorageItem(storageItem.itemId, storageItem.quantity));
             }
 
             currentBankItems = new ArrayList<>();
             for (final Item item : event.getItemContainer().getItems()) {
                 if (isInvalidItem(item)) continue;
-                currentBankItems.add(new StorageItem(item.getId())
-                    .displayName(itemManager.getItemComposition(item.getId()).getName())
-                    .quantity(item.getQuantity())
-                );
+                currentBankItems.add(new StorageItem(item.getId(), item.getQuantity()));
             }
         }
 
@@ -291,7 +285,7 @@ public class Store {
 
         for (final StorageItem storageItem : currentInventoryItems) {
             if (storageItem.itemId == itemId) {
-                quantity += storageItem.getQuantity();
+                quantity += storageItem.quantity;
             }
         }
 
@@ -317,7 +311,7 @@ public class Store {
 
         for (final StorageItem storageItem : previousInventoryItems) {
             if (storageItem.itemId == itemId) {
-                quantity += storageItem.getQuantity();
+                quantity += storageItem.quantity;
             }
         }
 
@@ -326,7 +320,7 @@ public class Store {
 
     public boolean inventoryContainsItem(final int itemId) {
         for (final StorageItem storageItem : currentInventoryItems) {
-            if (storageItem.getId() == itemId) {
+            if (storageItem.itemId == itemId) {
                 return true;
             }
         }
@@ -436,9 +430,9 @@ public class Store {
 
             for (final StorageItem itemOld : previousInventoryItems) {
                 if (quantitiesBefore.containsKey(itemOld.itemId)) {
-                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
+                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.quantity);
                 } else {
-                    quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
+                    quantitiesBefore.put(itemOld.itemId, itemOld.quantity);
                 }
             }
         }
@@ -470,9 +464,9 @@ public class Store {
 
             for (final StorageItem itemOld : previousBankItems) {
                 if (quantitiesBefore.containsKey(itemOld.itemId)) {
-                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
+                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.quantity);
                 } else {
-                    quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
+                    quantitiesBefore.put(itemOld.itemId, itemOld.quantity);
                 }
             }
         }

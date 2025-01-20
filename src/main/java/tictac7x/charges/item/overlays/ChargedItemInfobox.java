@@ -13,8 +13,8 @@ import java.util.Optional;
 
 public class ChargedItemInfobox extends InfoBox {
     private final ChargedItemBase chargedItem;
-    private final ItemManager items;
-    private final InfoBoxManager infoboxes;
+    private final ItemManager itemManager;
+    private final InfoBoxManager infoBoxManager;
     private final ChargesImprovedConfig config;
     private final ConfigManager configManager;
 
@@ -22,16 +22,16 @@ public class ChargedItemInfobox extends InfoBox {
 
     public ChargedItemInfobox(
         final ChargedItemBase chargedItem,
-        final ItemManager items,
+        final ItemManager itemManager,
         final InfoBoxManager infoBoxManager,
         final ConfigManager configManager,
         final ChargesImprovedConfig config,
         final ChargesImprovedPlugin plugin
     ) {
-        super(items.getImage(chargedItem.itemId), plugin);
+        super(itemManager.getImage(chargedItem.itemId), plugin);
         this.chargedItem = chargedItem;
-        this.items = items;
-        this.infoboxes = infoBoxManager;
+        this.itemManager = itemManager;
+        this.infoBoxManager = infoBoxManager;
         this.configManager = configManager;
         this.config = config;
         this.itemId = chargedItem.itemId;
@@ -79,8 +79,8 @@ public class ChargedItemInfobox extends InfoBox {
             itemId = chargedItem.itemId;
 
             // Update infobox image.
-            setImage(items.getImage(itemId));
-            infoboxes.updateInfoBoxImage(this);
+            setImage(itemManager.getImage(itemId));
+            infoBoxManager.updateInfoBoxImage(this);
         }
     }
 

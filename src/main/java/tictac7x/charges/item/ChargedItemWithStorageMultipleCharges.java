@@ -23,8 +23,8 @@ public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorag
 
         int validItems = 0;
         for (final StorageItem storageItem : getStorage().values()) {
-            if (storageItem.getQuantity() >= 0) {
-                individualCharges += storageItem.getQuantity() + "/";
+            if (storageItem.quantity >= 0) {
+                individualCharges += storageItem.quantity + "/";
                 validItems++;
             }
         }

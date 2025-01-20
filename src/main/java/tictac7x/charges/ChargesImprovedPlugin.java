@@ -124,12 +124,10 @@ import java.util.*;
 )
 
 public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.13";
+	private final String pluginVersion = "v0.5.14";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Fur/Meat pouches and binding necklace fixes.<br>" +
-		"<colHIGHLIGHT>* Tumeken's shadow enabled.<br>" +
-		"<colHIGHLIGHT>* Ring of endurance added."
+		"<colHIGHLIGHT>* Log basket fixes."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -458,15 +456,15 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 			chargedItem.onMenuOptionClicked(advancedMenuEntry);
 		}
 
-//		System.out.println("MENU OPTION | " +
-//			"event id: " + advancedMenuEntry.eventId +
-//			", option: " + advancedMenuEntry.option +
-//			", target: " + advancedMenuEntry.target +
-//			", action id: " + advancedMenuEntry.actionId +
-//			", action name: " + advancedMenuEntry.action +
-//			", item id: " + advancedMenuEntry.itemId +
-//			", impostor id: " + advancedMenuEntry.impostorId
-//		);
+		System.out.println("MENU OPTION | " +
+			"event id: " + advancedMenuEntry.eventId +
+			", option: " + advancedMenuEntry.option +
+			", target: " + advancedMenuEntry.target +
+			", action id: " + advancedMenuEntry.actionId +
+			", action name: " + advancedMenuEntry.action +
+			", item id: " + advancedMenuEntry.itemId +
+			", impostor id: " + advancedMenuEntry.impostorId
+		);
 	}
 
 	@Subscribe

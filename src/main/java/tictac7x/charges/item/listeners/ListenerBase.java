@@ -4,7 +4,6 @@ import net.runelite.api.Client;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.ChargesImprovedConfig;
-import tictac7x.charges.ChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStatus;
@@ -170,7 +169,7 @@ public abstract class ListenerBase {
                 if (!itemOne.equals(chargedItem.getItemName()) && !itemTwo.equals(chargedItem.getItemName())) {
                     continue;
                 }
-                for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStoreableItems()) {
+                for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
                         itemOne.equals(itemManager.getItemComposition(storeableItem.itemId).getName()) ||
                         itemTwo.equals(itemManager.getItemComposition(storeableItem.itemId).getName())

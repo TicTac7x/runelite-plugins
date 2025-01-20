@@ -19,17 +19,17 @@ import tictac7x.charges.store.Store;
 public class U_StrangeOldLockpick extends ChargedItem {
     public U_StrangeOldLockpick(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.strange_old_lockpick, ItemID.STRANGE_OLD_LOCKPICK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.strange_old_lockpick, ItemID.STRANGE_OLD_LOCKPICK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.STRANGE_OLD_LOCKPICK),

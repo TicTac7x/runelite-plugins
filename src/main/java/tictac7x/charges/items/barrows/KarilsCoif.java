@@ -17,17 +17,17 @@ import tictac7x.charges.store.Store;
 public class KarilsCoif extends ChargedItem {
     public KarilsCoif(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.barrows_gear, ItemID.KARILS_COIF, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.barrows_gear, ItemID.KARILS_COIF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KARILS_COIF).fixedCharges(100),
             new TriggerItem(ItemID.KARILS_COIF_100).fixedCharges(100),

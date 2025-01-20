@@ -12,7 +12,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.OnItemPickup;
@@ -29,23 +29,23 @@ import static tictac7x.charges.store.ItemContainerId.BANK;
 public class U_GemBag extends ChargedItemWithStorage {
     public U_GemBag(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.gem_bag, ItemID.GEM_BAG_12020, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage.setMaximumIndividualQuantity(60).storeableItems(
-            new StorageItem(ItemID.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
-            new StorageItem(ItemID.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),
-            new StorageItem(ItemID.UNCUT_RUBY).checkName("Ruby").specificOrder(3),
-            new StorageItem(ItemID.UNCUT_DIAMOND).checkName("Diamond").specificOrder(4),
-            new StorageItem(ItemID.UNCUT_DRAGONSTONE).checkName("Dragonstone").specificOrder(5)
+        super(ChargesImprovedConfig.gem_bag, ItemID.GEM_BAG_12020, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        storage.setMaximumIndividualQuantity(60).storableItems(
+            new StorableItem(ItemID.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
+            new StorableItem(ItemID.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),
+            new StorableItem(ItemID.UNCUT_RUBY).checkName("Ruby").specificOrder(3),
+            new StorableItem(ItemID.UNCUT_DIAMOND).checkName("Diamond").specificOrder(4),
+            new StorableItem(ItemID.UNCUT_DRAGONSTONE).checkName("Dragonstone").specificOrder(5)
         );
 
         this.items = new TriggerItem[]{
@@ -88,11 +88,11 @@ public class U_GemBag extends ChargedItemWithStorage {
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Use gem on bag
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStoreableItems()),
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Pick up.
-            new OnItemPickup(storage.getStoreableItems()).isByOne().requiredItem(ItemID.OPEN_GEM_BAG).pickUpToStorage(),
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemID.OPEN_GEM_BAG).pickUpToStorage(),
 
             // Telegrab.
             new OnXpDrop(Skill.MAGIC).requiredItem(ItemID.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(

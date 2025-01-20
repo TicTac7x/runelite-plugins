@@ -13,7 +13,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.ChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
@@ -25,39 +25,39 @@ import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 public class C_ForestryKit extends ChargedItemWithStorage {
     public C_ForestryKit(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
-        this.storage = storage.storeableItems(
-            new StorageItem(ItemID.ANIMAINFUSED_BARK).specificOrder(1),
-            new StorageItem(ItemID.FORESTERS_RATION).specificOrder(2),
-            new StorageItem(ItemID.NATURE_OFFERINGS).specificOrder(3),
-            new StorageItem(ItemID.SECATEURS_ATTACHMENT).specificOrder(4),
-            new StorageItem(ItemID.LEAVES).displayName("Regular leaves").checkName("regular").specificOrder(5),
-            new StorageItem(ItemID.OAK_LEAVES).checkName("oak").specificOrder(6),
-            new StorageItem(ItemID.WILLOW_LEAVES).checkName("willow").specificOrder(7),
-            new StorageItem(ItemID.MAPLE_LEAVES).checkName("maple").specificOrder(8),
-            new StorageItem(ItemID.YEW_LEAVES).checkName("yew").specificOrder(9),
-            new StorageItem(ItemID.MAGIC_LEAVES).checkName("magic").specificOrder(10),
-            new StorageItem(ItemID.FORESTRY_HAT).specificOrder(11),
-            new StorageItem(ItemID.FORESTRY_TOP).specificOrder(12),
-            new StorageItem(ItemID.FORESTRY_LEGS).specificOrder(13),
-            new StorageItem(ItemID.FORESTRY_BOOTS).specificOrder(14),
-            new StorageItem(ItemID.LUMBERJACK_HAT).specificOrder(15),
-            new StorageItem(ItemID.LUMBERJACK_TOP).specificOrder(16),
-            new StorageItem(ItemID.LUMBERJACK_LEGS).specificOrder(17),
-            new StorageItem(ItemID.LUMBERJACK_BOOTS).specificOrder(18),
-            new StorageItem(ItemID.WOODCUTTING_CAPE).specificOrder(19),
-            new StorageItem(ItemID.WOODCUT_CAPET).specificOrder(20)
+        this.storage = storage.storableItems(
+            new StorableItem(ItemID.ANIMAINFUSED_BARK).specificOrder(1),
+            new StorableItem(ItemID.FORESTERS_RATION).specificOrder(2),
+            new StorableItem(ItemID.NATURE_OFFERINGS).specificOrder(3),
+            new StorableItem(ItemID.SECATEURS_ATTACHMENT).specificOrder(4),
+            new StorableItem(ItemID.LEAVES).displayName("Regular leaves").checkName("regular").specificOrder(5),
+            new StorableItem(ItemID.OAK_LEAVES).checkName("oak").specificOrder(6),
+            new StorableItem(ItemID.WILLOW_LEAVES).checkName("willow").specificOrder(7),
+            new StorableItem(ItemID.MAPLE_LEAVES).checkName("maple").specificOrder(8),
+            new StorableItem(ItemID.YEW_LEAVES).checkName("yew").specificOrder(9),
+            new StorableItem(ItemID.MAGIC_LEAVES).checkName("magic").specificOrder(10),
+            new StorableItem(ItemID.FORESTRY_HAT).specificOrder(11),
+            new StorableItem(ItemID.FORESTRY_TOP).specificOrder(12),
+            new StorableItem(ItemID.FORESTRY_LEGS).specificOrder(13),
+            new StorableItem(ItemID.FORESTRY_BOOTS).specificOrder(14),
+            new StorableItem(ItemID.LUMBERJACK_HAT).specificOrder(15),
+            new StorableItem(ItemID.LUMBERJACK_TOP).specificOrder(16),
+            new StorableItem(ItemID.LUMBERJACK_LEGS).specificOrder(17),
+            new StorableItem(ItemID.LUMBERJACK_BOOTS).specificOrder(18),
+            new StorableItem(ItemID.WOODCUTTING_CAPE).specificOrder(19),
+            new StorableItem(ItemID.WOODCUT_CAPET).specificOrder(20)
         );
 
         this.items = new TriggerItem[]{

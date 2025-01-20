@@ -37,7 +37,7 @@ public class Storage {
     public boolean holdsSingleType = false;
     public boolean emptyIsNegative = false;
     private Optional<Integer> maximumIndividualQuantity = Optional.empty();
-    private StorageItem[] storeableItems = new StorageItem[]{};
+    private StorableItem[] storableItems = new StorableItem[]{};
 
 
     public Storage(final ChargedItemWithStorage chargedItem, final String configKey, final ItemManager itemManager, final ConfigManager configManager, final Store store, final Gson gson) {
@@ -80,8 +80,8 @@ public class Storage {
         return this;
     }
 
-    public Storage storeableItems(final StorageItem... storageItems) {
-        this.storeableItems = storageItems;
+    public Storage storableItems(final StorableItem... storableItems) {
+        this.storableItems = storableItems;
         return this;
     }
 
@@ -98,7 +98,7 @@ public class Storage {
         }
 
         final Optional<StorageItem> item = getItem(itemId);
-        put(itemId, (item.isPresent() ? item.get().getQuantity() : 0) + quantity);
+        put(itemId, (item.isPresent() ? item.get().quantity : 0) + quantity);
     }
 
     public void add(final Optional<StorageItem> item, final int quantity) {
@@ -130,11 +130,11 @@ public class Storage {
         final Optional<StorageItem> item = getItem(itemId);
 
         // Don't decrease quantity of unlimited storage item.
-        if (item.isPresent() && item.get().getQuantity() == Charges.UNLIMITED) {
+        if (item.isPresent() && item.get().quantity == Charges.UNLIMITED) {
             return;
         }
 
-        put(itemId, (item.isPresent() ? Math.max(0, item.get().getQuantity() - quantity) : 0));
+        put(itemId, (item.isPresent() ? Math.max(0, item.get().quantity - quantity) : 0));
     }
 
     public void removeAndPrioritizeInventory(final int itemId, final int quantity) {
@@ -171,7 +171,7 @@ public class Storage {
             int newTotalQuantity = 0;
             for (final StorageItem storageItem : storage.values()) {
                 if (storageItem.itemId == itemId) continue;
-                newTotalQuantity += storageItem.getQuantity();
+                newTotalQuantity += storageItem.quantity;
             }
             newTotalQuantity += quantity; //Add outside the loop in case the item is not currently stored
 
@@ -184,7 +184,7 @@ public class Storage {
         if (quantity == 0) {
             storage.remove(itemId);
         } else if (item.isPresent()) {
-            item.get().setQuantity(quantity);
+            item.get().quantity = quantity;
         } else {
             storage.put(itemId, new StorageItem(itemId, quantity));
         }
@@ -201,7 +201,7 @@ public class Storage {
     }
 
     private boolean isStorageItem(final ItemWithQuantity item) {
-        for (final StorageItem storageItem : storeableItems) {
+        for (final StorageItem storageItem : storableItems) {
             if (storageItem.itemId == item.itemId) {
                 return true;
             }
@@ -254,7 +254,7 @@ public class Storage {
         int charges = 0;
 
         for (final StorageItem item : storage.values()) {
-            charges += item.getQuantity();
+            charges += item.quantity;
         }
 
         return charges;
@@ -280,9 +280,9 @@ public class Storage {
 
                 // Update previous item quantity or put new into the storage.
                 if (storage.containsKey(loadedItem.itemId)) {
-                    storage.get(loadedItem.itemId).setQuantity(loadedItem.quantity);
+                    storage.get(loadedItem.itemId).quantity = loadedItem.quantity;
                 } else {
-                    put(loadedItem.itemId, loadedItem.getQuantity());
+                    put(loadedItem.itemId, loadedItem.quantity);
                 }
             }
         } catch (final Exception ignored) {}
@@ -294,7 +294,7 @@ public class Storage {
         for (final StorageItem storageItem : storage.values()) {
             final JsonObject jsonItem = new JsonObject();
             jsonItem.addProperty("itemId", storageItem.itemId);
-            jsonItem.addProperty("quantity", storageItem.getQuantity());
+            jsonItem.addProperty("quantity", storageItem.quantity);
             jsonStorage.add(jsonItem);
         }
 
@@ -356,20 +356,48 @@ public class Storage {
 
     public final Optional<StorageItem> getStorageItemFromName(final String name) {
         // Based on checkName.
-        for (final StorageItem storageItem : storeableItems) {
-            if (
-                storageItem.checkName.isPresent() && name.equalsIgnoreCase(storageItem.checkName.get()) ||
-                storageItem.checkName.isPresent() && name.toLowerCase().contains(storageItem.checkName.get().toLowerCase()) ||
-                name.contains(itemManager.getItemComposition(storageItem.itemId).getName())
-            ) {
-                return Optional.of(storageItem);
+        for (final StorableItem storableItem : storableItems) {
+            if (storableItem.checkName.isPresent()) {
+                for (final String checkName :storableItem.checkName.get()) {
+                    if (
+                        name.equalsIgnoreCase(checkName) ||
+                        name.toLowerCase().contains(checkName.toLowerCase()) ||
+                        name.contains(itemManager.getItemComposition(storableItem.itemId).getName())
+                    ) {
+                        return Optional.of(storableItem);
+                    }
+                }
             }
         }
 
         return Optional.empty();
     }
 
-    public StorageItem[] getStoreableItems() {
-        return storeableItems;
+    public StorableItem[] getStorableItems() {
+        return storableItems;
+    }
+
+    public int getStorageItemOrder(final StorageItem storageItem) {
+        for (final StorableItem storableItem : storableItems) {
+            if (storableItem.itemId == storageItem.itemId) {
+                if (storableItem.order.isPresent()) {
+                    return storableItem.order.get();
+                }
+            }
+        }
+
+        return Integer.MAX_VALUE;
+    }
+
+    public String getStorageItemName(final StorageItem storageItem) {
+        for (final StorableItem storableItem : storableItems) {
+            if (storableItem.itemId == storageItem.itemId) {
+                if (storableItem.displayName.isPresent()) {
+                    return storableItem.displayName.get();
+                }
+            }
+        }
+
+        return itemManager.getItemComposition(storageItem.itemId).getName();
     }
 }

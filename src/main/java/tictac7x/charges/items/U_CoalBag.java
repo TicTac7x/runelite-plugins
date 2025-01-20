@@ -12,26 +12,26 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
 public class U_CoalBag extends ChargedItemWithStorage {
     public U_CoalBag(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.coal_bag, ItemID.COAL_BAG_12019, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.coal_bag, ItemID.COAL_BAG_12019, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage
-            .storeableItems(new StorageItem(ItemID.COAL).checkName("Coal"))
+            .storableItems(new StorableItem(ItemID.COAL).checkName("Coal"))
             .setMaximumTotalQuantity(27)
             .setMaximumTotalQuantityWithEquippedItem(36, ItemID.SMITHING_CAPE, ItemID.HITPOINTS_CAPET);
 

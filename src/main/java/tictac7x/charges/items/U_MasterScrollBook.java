@@ -13,6 +13,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.OnVarbitChanged;
@@ -23,36 +24,36 @@ import tictac7x.charges.store.Store;
 public class U_MasterScrollBook extends ChargedItemWithStorage {
     public U_MasterScrollBook(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.master_scroll_book, ItemID.MASTER_SCROLL_BOOK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.setMaximumIndividualQuantity(1000).storeableItems(
-            new StorageItem(ItemID.NARDAH_TELEPORT).displayName("Nardah").specificOrder(1),
-            new StorageItem(ItemID.DIGSITE_TELEPORT).displayName("Digsite").specificOrder(2),
-            new StorageItem(ItemID.FELDIP_HILLS_TELEPORT).displayName("Feldip Hills").specificOrder(3),
-            new StorageItem(ItemID.LUNAR_ISLE_TELEPORT).displayName("Lunar Isle").specificOrder(4),
-            new StorageItem(ItemID.MORTTON_TELEPORT).displayName("Mort'ton").specificOrder(5),
-            new StorageItem(ItemID.PEST_CONTROL_TELEPORT).displayName("Pest Control").specificOrder(6),
-            new StorageItem(ItemID.PISCATORIS_TELEPORT).displayName("Piscatoris").specificOrder(7),
-            new StorageItem(ItemID.TAI_BWO_WANNAI_TELEPORT).displayName("Tai Bwo Wannai").specificOrder(8),
-            new StorageItem(ItemID.IORWERTH_CAMP_TELEPORT).displayName("Iorwerth Camp").specificOrder(9),
-            new StorageItem(ItemID.MOS_LEHARMLESS_TELEPORT).displayName("Mos Le' Harmless").specificOrder(10),
-            new StorageItem(ItemID.LUMBERYARD_TELEPORT).displayName("Lumberyard").specificOrder(11),
-            new StorageItem(ItemID.ZULANDRA_TELEPORT).displayName("Zul-Andra").specificOrder(12),
-            new StorageItem(ItemID.KEY_MASTER_TELEPORT).displayName("Key Master").specificOrder(13),
-            new StorageItem(ItemID.REVENANT_CAVE_TELEPORT).displayName("Revenant Caves").specificOrder(14),
-            new StorageItem(ItemID.WATSON_TELEPORT).displayName("Watson").specificOrder(15),
-            new StorageItem(ItemID.GUTHIXIAN_TEMPLE_TELEPORT).displayName("Guthixian Temple").specificOrder(16),
-            new StorageItem(ItemID.SPIDER_CAVE_TELEPORT).displayName("Spider Cave").specificOrder(17),
-            new StorageItem(ItemID.COLOSSAL_WYRM_TELEPORT_SCROLL).displayName("Colossal Wyrm").specificOrder(18)
+        super(ChargesImprovedConfig.master_scroll_book, ItemID.MASTER_SCROLL_BOOK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        storage = storage.setMaximumIndividualQuantity(1000).storableItems(
+            new StorableItem(ItemID.NARDAH_TELEPORT).displayName("Nardah").specificOrder(1),
+            new StorableItem(ItemID.DIGSITE_TELEPORT).displayName("Digsite").specificOrder(2),
+            new StorableItem(ItemID.FELDIP_HILLS_TELEPORT).displayName("Feldip Hills").specificOrder(3),
+            new StorableItem(ItemID.LUNAR_ISLE_TELEPORT).displayName("Lunar Isle").specificOrder(4),
+            new StorableItem(ItemID.MORTTON_TELEPORT).displayName("Mort'ton").specificOrder(5),
+            new StorableItem(ItemID.PEST_CONTROL_TELEPORT).displayName("Pest Control").specificOrder(6),
+            new StorableItem(ItemID.PISCATORIS_TELEPORT).displayName("Piscatoris").specificOrder(7),
+            new StorableItem(ItemID.TAI_BWO_WANNAI_TELEPORT).displayName("Tai Bwo Wannai").specificOrder(8),
+            new StorableItem(ItemID.IORWERTH_CAMP_TELEPORT).displayName("Iorwerth Camp").specificOrder(9),
+            new StorableItem(ItemID.MOS_LEHARMLESS_TELEPORT).displayName("Mos Le' Harmless").specificOrder(10),
+            new StorableItem(ItemID.LUMBERYARD_TELEPORT).displayName("Lumberyard").specificOrder(11),
+            new StorableItem(ItemID.ZULANDRA_TELEPORT).displayName("Zul-Andra").specificOrder(12),
+            new StorableItem(ItemID.KEY_MASTER_TELEPORT).displayName("Key Master").specificOrder(13),
+            new StorableItem(ItemID.REVENANT_CAVE_TELEPORT).displayName("Revenant Caves").specificOrder(14),
+            new StorableItem(ItemID.WATSON_TELEPORT).displayName("Watson").specificOrder(15),
+            new StorableItem(ItemID.GUTHIXIAN_TEMPLE_TELEPORT).displayName("Guthixian Temple").specificOrder(16),
+            new StorableItem(ItemID.SPIDER_CAVE_TELEPORT).displayName("Spider Cave").specificOrder(17),
+            new StorableItem(ItemID.COLOSSAL_WYRM_TELEPORT_SCROLL).displayName("Colossal Wyrm").specificOrder(18)
         );
 
         this.items = new TriggerItem[]{
@@ -96,11 +97,11 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         }
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().containsKey(storage.getStoreableItems()[varbit10968 * 15 + varbit10966 - 1].itemId)) {
+        if (!storage.getStorage().containsKey(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId)) {
             return "0";
         }
 
-        return String.valueOf(storage.getStorage().get(storage.getStoreableItems()[varbit10968 * 15 + varbit10966 - 1].itemId).quantity);
+        return String.valueOf(storage.getStorage().get(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId).quantity);
     }
 
     @Override
@@ -116,14 +117,14 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         final int teleportScrollIndex = varbit10968 * 15 + varbit10966 - 1;
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().containsKey(storage.getStoreableItems()[teleportScrollIndex].itemId)) {
+        if (!storage.getStorage().containsKey(storage.getStorableItems()[teleportScrollIndex].itemId)) {
             return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", config.getColorEmpty()));
         }
 
-        final StorageItem defaultTeleportScrollStoreableItem = storage.getStoreableItems()[teleportScrollIndex];
+        final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[teleportScrollIndex];
         final StorageItem defaultTeleportScrollStorageItem = storage.getStorage().get(defaultTeleportScrollStoreableItem.itemId);
 
-        return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=ff9040>.+?</col>", getDefaultTeleportLocation() + ": <col=00ff00>" + defaultTeleportScrollStorageItem.getQuantity() + "</col>");
+        return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=ff9040>.+?</col>", getDefaultTeleportLocation() + ": <col=00ff00>" + defaultTeleportScrollStorageItem.quantity + "</col>");
     }
 
     private String getDefaultTeleportLocation() {
@@ -136,7 +137,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
         // Default teleport set, show correct location display name.
         } else {
-            return storage.getStoreableItems()[varbit10968 * 15 + varbit10966 - 1].displayName.get();
+            return storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].displayName.get();
         }
     }
 }

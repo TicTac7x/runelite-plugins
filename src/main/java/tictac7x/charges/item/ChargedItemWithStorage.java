@@ -38,22 +38,12 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     public String getTooltip() {
         String tooltip = "";
         for (final StorageItem storageItem : storage.getStorage().values().stream()
-            .sorted(Comparator.comparing(storageItem -> {
-                for (final StorageItem storeableItem : storage.getStoreableItems()) {
-                    if (storeableItem.itemId == storageItem.itemId) {
-                        if (storeableItem.displayName.isPresent()) {
-                            storageItem.setDisplayName(storeableItem.displayName.get());
-                        }
-                        return storeableItem.order.orElse(Integer.MAX_VALUE);
-                    }
-                }
-                return Integer.MAX_VALUE;
-            }))
+            .sorted(Comparator.comparing(storageItem -> storage.getStorageItemOrder(storageItem)))
             .collect(Collectors.toList())
         ) {
-            if (storageItem.getQuantity() > 0) {
-                tooltip += storageItem.getName(itemManager) + ": ";
-                tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.getQuantity()), JagexColors.MENU_TARGET) + "</br>";
+            if (storageItem.quantity > 0) {
+                tooltip += storage.getStorageItemName(storageItem) + ": ";
+                tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.quantity), JagexColors.MENU_TARGET) + "</br>";
             }
         }
 
@@ -72,8 +62,8 @@ public class ChargedItemWithStorage extends ChargedItemBase {
         int quantity = 0;
 
         for (final StorageItem storageItem : getStorage().values()) {
-            if (storageItem.getQuantity() >= 0) {
-                quantity += storageItem.getQuantity();
+            if (storageItem.quantity >= 0) {
+                quantity += storageItem.quantity;
             }
         }
 

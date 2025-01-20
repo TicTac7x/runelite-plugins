@@ -12,7 +12,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
@@ -28,39 +28,39 @@ import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 public class U_FurPouch extends ChargedItemWithStorage {
     public U_FurPouch(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.fur_pouch, ItemID.SMALL_FUR_POUCH, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.fur_pouch, ItemID.SMALL_FUR_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage
-            .storeableItems(
+            .storableItems(
                 // Tracking.
-                new StorageItem(ItemID.POLAR_KEBBIT_FUR),
-                new StorageItem(ItemID.COMMON_KEBBIT_FUR),
-                new StorageItem(ItemID.FELDIP_WEASEL_FUR),
-                new StorageItem(ItemID.DESERT_DEVIL_FUR),
+                new StorableItem(ItemID.POLAR_KEBBIT_FUR),
+                new StorableItem(ItemID.COMMON_KEBBIT_FUR),
+                new StorableItem(ItemID.FELDIP_WEASEL_FUR),
+                new StorableItem(ItemID.DESERT_DEVIL_FUR),
 
                 // Deadfall.
-                new StorageItem(ItemID.FOX_FUR),
+                new StorableItem(ItemID.FOX_FUR),
 
                 // Pitfalls.
-                new StorageItem(ItemID.LARUPIA_FUR),
-                new StorageItem(ItemID.GRAAHK_FUR),
-                new StorageItem(ItemID.KYATT_FUR),
-                new StorageItem(ItemID.SUNLIGHT_ANTELOPE_FUR),
-                new StorageItem(ItemID.MOONLIGHT_ANTELOPE_FUR),
+                new StorableItem(ItemID.LARUPIA_FUR),
+                new StorableItem(ItemID.GRAAHK_FUR),
+                new StorableItem(ItemID.KYATT_FUR),
+                new StorableItem(ItemID.SUNLIGHT_ANTELOPE_FUR),
+                new StorableItem(ItemID.MOONLIGHT_ANTELOPE_FUR),
 
                 // Aerial.
-                new StorageItem(ItemID.SPOTTED_KEBBIT_FUR),
-                new StorageItem(ItemID.DARK_KEBBIT_FUR),
-                new StorageItem(ItemID.DASHING_KEBBIT_FUR)
+                new StorableItem(ItemID.SPOTTED_KEBBIT_FUR),
+                new StorableItem(ItemID.DARK_KEBBIT_FUR),
+                new StorableItem(ItemID.DASHING_KEBBIT_FUR)
             );
 
         this.items = new TriggerItem[]{
@@ -87,7 +87,7 @@ public class U_FurPouch extends ChargedItemWithStorage {
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Use fur on pouch.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Hide destroy option.
             new OnMenuEntryAdded("Destroy").hide(),

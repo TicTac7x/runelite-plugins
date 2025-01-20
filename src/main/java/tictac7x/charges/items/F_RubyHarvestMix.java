@@ -17,17 +17,17 @@ import tictac7x.charges.store.Store;
 public class F_RubyHarvestMix extends ChargedItem {
     public F_RubyHarvestMix(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.ruby_harvest_mix, ItemID.RUBY_HARVEST_MIX_1, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.ruby_harvest_mix, ItemID.RUBY_HARVEST_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.RUBY_HARVEST_MIX_1).fixedCharges(1),

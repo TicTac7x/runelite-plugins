@@ -21,17 +21,17 @@ import tictac7x.charges.store.Store;
 public class C_ArdougneCloak extends ChargedItem {
     public C_ArdougneCloak(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.ardougne_cloak, ItemID.ARDOUGNE_CLOAK_1, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
+        super(ChargesImprovedConfig.ardougne_cloak, ItemID.ARDOUGNE_CLOAK_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ARDOUGNE_CLOAK_1).fixedCharges(Charges.UNLIMITED),

@@ -12,7 +12,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorageMultipleCharges;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
@@ -26,21 +26,21 @@ class ExplorersRingStorageItemId {
 public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
     public J_RingOfExplorer(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.explorers_ring, ItemID.EXPLORERS_RING_1, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.storeableItems(
-            new StorageItem(ExplorersRingStorageItemId.ALCHEMY).displayName("Alchemy charges"),
-            new StorageItem(ExplorersRingStorageItemId.TELEPORTS).displayName("Teleports"),
-            new StorageItem(ExplorersRingStorageItemId.ENERGY_RESTORES).displayName("Energy restores")
+        super(ChargesImprovedConfig.explorers_ring, ItemID.EXPLORERS_RING_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        storage = storage.storableItems(
+            new StorableItem(ExplorersRingStorageItemId.ALCHEMY).displayName("Alchemy charges"),
+            new StorableItem(ExplorersRingStorageItemId.TELEPORTS).displayName("Teleports"),
+            new StorableItem(ExplorersRingStorageItemId.ENERGY_RESTORES).displayName("Energy restores")
         ).showIndividualCharges();
 
         this.items = new TriggerItem[]{

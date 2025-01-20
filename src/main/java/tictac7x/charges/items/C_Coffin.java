@@ -11,7 +11,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -22,24 +22,24 @@ import tictac7x.charges.store.Store;
 public class C_Coffin extends ChargedItemWithStorage {
     public C_Coffin(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.coffin, ItemID.GOLD_COFFIN, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        this.storage = storage.storeableItems(
-            new StorageItem(ItemID.LOAR_REMAINS).checkName("Loar"),
-            new StorageItem(ItemID.PHRIN_REMAINS).checkName("Phrin"),
-            new StorageItem(ItemID.RIYL_REMAINS).checkName("Riyl"),
-            new StorageItem(ItemID.ASYN_REMAINS).checkName("Asyn"),
-            new StorageItem(ItemID.FIYR_REMAINS).checkName("Fiyr"),
-            new StorageItem(ItemID.URIUM_REMAINS).checkName("Urium")
+        super(ChargesImprovedConfig.coffin, ItemID.GOLD_COFFIN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        this.storage = storage.storableItems(
+            new StorableItem(ItemID.LOAR_REMAINS).checkName("Loar"),
+            new StorableItem(ItemID.PHRIN_REMAINS).checkName("Phrin"),
+            new StorableItem(ItemID.RIYL_REMAINS).checkName("Riyl"),
+            new StorableItem(ItemID.ASYN_REMAINS).checkName("Asyn"),
+            new StorableItem(ItemID.FIYR_REMAINS).checkName("Fiyr"),
+            new StorableItem(ItemID.URIUM_REMAINS).checkName("Urium")
         );
 
         this.items = new TriggerItem[]{

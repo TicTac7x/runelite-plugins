@@ -14,7 +14,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.ChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
@@ -32,22 +32,22 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
     public U_PlankSack(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage.setMaximumTotalQuantity(28).emptyIsNegative().storeableItems(
-            new StorageItem(ItemID.PLANK).checkName("Regular plank"),
-            new StorageItem(ItemID.OAK_PLANK).checkName("Oak plank"),
-            new StorageItem(ItemID.TEAK_PLANK).checkName("Teak plank"),
-            new StorageItem(ItemID.MAHOGANY_PLANK).checkName("Mahogany plank")
+        super(ChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        storage.setMaximumTotalQuantity(28).emptyIsNegative().storableItems(
+            new StorableItem(ItemID.PLANK).checkName("Regular plank"),
+            new StorableItem(ItemID.OAK_PLANK).checkName("Oak plank"),
+            new StorableItem(ItemID.TEAK_PLANK).checkName("Teak plank"),
+            new StorableItem(ItemID.MAHOGANY_PLANK).checkName("Mahogany plank")
         );
 
         this.items = new TriggerItem[]{
@@ -75,7 +75,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Use plank on sack.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStoreableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {

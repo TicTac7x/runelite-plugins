@@ -12,7 +12,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
@@ -28,33 +28,33 @@ import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 public class U_HerbSack extends ChargedItemWithStorage {
     public U_HerbSack(
         final Client client,
-        final ClientThread client_thread,
-        final ConfigManager configs,
-        final ItemManager items,
-        final InfoBoxManager infoboxes,
-        final ChatMessageManager chat_messages,
+        final ClientThread clientThread,
+        final ConfigManager configManager,
+        final ItemManager itemManager,
+        final InfoBoxManager infoBoxManager,
+        final ChatMessageManager chatMessageManager,
         final Notifier notifier,
         final ChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.herb_sack, ItemID.HERB_SACK, client, client_thread, configs, items, infoboxes, chat_messages, notifier, config, store, gson);
-        storage = storage.setMaximumIndividualQuantity(30).storeableItems(
-            new StorageItem(ItemID.GRIMY_GUAM_LEAF).checkName("Guam leaf"),
-            new StorageItem(ItemID.GRIMY_MARRENTILL).checkName("Marrentill"),
-            new StorageItem(ItemID.GRIMY_TARROMIN).checkName("Tarromin"),
-            new StorageItem(ItemID.GRIMY_HARRALANDER).checkName("Harralander"),
-            new StorageItem(ItemID.GRIMY_RANARR_WEED).checkName("Ranarr weed"),
-            new StorageItem(ItemID.GRIMY_TOADFLAX).checkName("Toadflax"),
-            new StorageItem(ItemID.GRIMY_IRIT_LEAF).checkName("Irit leaf"),
-            new StorageItem(ItemID.GRIMY_AVANTOE).checkName("Avantoe"),
-            new StorageItem(ItemID.GRIMY_KWUARM).checkName("Kwuarm"),
-            new StorageItem(ItemID.GRIMY_HUASCA).checkName("Huasca"),
-            new StorageItem(ItemID.GRIMY_SNAPDRAGON).checkName("Snapdragon"),
-            new StorageItem(ItemID.GRIMY_CADANTINE).checkName("Cadantine"),
-            new StorageItem(ItemID.GRIMY_LANTADYME).checkName("Lantadyme"),
-            new StorageItem(ItemID.GRIMY_DWARF_WEED).checkName("Dwarf weed"),
-            new StorageItem(ItemID.GRIMY_TORSTOL).checkName("Torstol")
+        super(ChargesImprovedConfig.herb_sack, ItemID.HERB_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        storage = storage.setMaximumIndividualQuantity(30).storableItems(
+            new StorableItem(ItemID.GRIMY_GUAM_LEAF).checkName("Guam leaf"),
+            new StorableItem(ItemID.GRIMY_MARRENTILL).checkName("Marrentill"),
+            new StorableItem(ItemID.GRIMY_TARROMIN).checkName("Tarromin"),
+            new StorableItem(ItemID.GRIMY_HARRALANDER).checkName("Harralander"),
+            new StorableItem(ItemID.GRIMY_RANARR_WEED).checkName("Ranarr weed"),
+            new StorableItem(ItemID.GRIMY_TOADFLAX).checkName("Toadflax"),
+            new StorableItem(ItemID.GRIMY_IRIT_LEAF).checkName("Irit leaf"),
+            new StorableItem(ItemID.GRIMY_AVANTOE).checkName("Avantoe"),
+            new StorableItem(ItemID.GRIMY_KWUARM).checkName("Kwuarm"),
+            new StorableItem(ItemID.GRIMY_HUASCA).checkName("Huasca"),
+            new StorableItem(ItemID.GRIMY_SNAPDRAGON).checkName("Snapdragon"),
+            new StorableItem(ItemID.GRIMY_CADANTINE).checkName("Cadantine"),
+            new StorableItem(ItemID.GRIMY_LANTADYME).checkName("Lantadyme"),
+            new StorableItem(ItemID.GRIMY_DWARF_WEED).checkName("Dwarf weed"),
+            new StorableItem(ItemID.GRIMY_TORSTOL).checkName("Torstol")
         );
 
         this.items = new TriggerItem[]{

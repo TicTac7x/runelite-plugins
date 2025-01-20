@@ -27,7 +27,6 @@ public interface ChargesImprovedConfig extends Config {
     String bonecrusher = "bonecrusher";
     String bonecrusher_status = "bonecrusher_status";
     String bottomless_compost_bucket = "bottomless_compost_bucket";
-    String bottomless_compost_bucket_type = "bottomless_compost_bucket_type";
     String bow_of_faerdhinen = "bow_of_faerdhinen";
     String bracelet_of_clay = "bracelet_of_clay";
     String bracelet_of_expeditious = "bracelet_of_expeditious";
@@ -1636,18 +1635,11 @@ public interface ChargesImprovedConfig extends Config {
         ) default int getKharedstsMemoirsCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = bottomless_compost_bucket,
-            name = bottomless_compost_bucket,
-            description = bottomless_compost_bucket,
+            keyName = bottomless_compost_bucket + "_storage",
+            name = bottomless_compost_bucket + "_storage",
+            description = bottomless_compost_bucket + "_storage",
             section = debug
-        ) default int getBottomlessCompostBucketCharges() { return Charges.UNKNOWN; }
-
-        @ConfigItem(
-            keyName = bottomless_compost_bucket_type,
-            name = bottomless_compost_bucket_type,
-            description = bottomless_compost_bucket_type,
-            section = debug
-        ) default String getBottomlessCompostBucketType() { return ""; }
+        ) default String getBottomlessCompostBucketStorage() { return ""; }
 
         @ConfigItem(
             keyName = bracelet_of_slaughter,
@@ -1823,13 +1815,6 @@ public interface ChargesImprovedConfig extends Config {
             description = coffin,
             section = debug
         ) default int getCoffinCharges() { return Charges.UNKNOWN; }
-
-        @ConfigItem(
-            keyName = log_basket,
-            name = log_basket,
-            description = log_basket,
-            section = debug
-        ) default int getLogBasketCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
             keyName = huntsmans_kit + "_storage",
