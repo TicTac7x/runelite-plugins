@@ -9,7 +9,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Charges;
@@ -24,11 +24,11 @@ public class W_BowOfFaerdhinen extends ChargedItem {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.bow_of_faerdhinen, ItemID.BOW_OF_FAERDHINEN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bow_of_faerdhinen, ItemID.BOW_OF_FAERDHINEN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BOW_OF_FAERDHINEN_INACTIVE).fixedCharges(0),

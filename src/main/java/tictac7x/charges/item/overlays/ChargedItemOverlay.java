@@ -9,7 +9,7 @@ import net.runelite.client.ui.overlay.WidgetItemOverlay;
 import net.runelite.client.ui.overlay.components.TextComponent;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.TriggerItem;
@@ -23,7 +23,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
     private final Client client;
     private final TooltipManager tooltipManager;
     private final ConfigManager configManager;
-    private final ChargesImprovedConfig config;
+    private final TicTac7xChargesImprovedConfig config;
     private final ChargedItemBase[] chargedItems;
 
     public ChargedItemOverlay(
@@ -31,7 +31,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         final TooltipManager tooltipManager,
         final ItemManager itemManager,
         final ConfigManager configManager,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final ChargedItemBase[] chargedItems
     ) {
         this.client = client;
@@ -163,7 +163,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
     }
 
     private boolean isChargedItemOverlayEnabled(final ChargedItemBase chargedItem) {
-        final Optional<String> visible = Optional.ofNullable(configManager.getConfiguration(ChargesImprovedConfig.group, chargedItem.configKey + "_overlay"));
+        final Optional<String> visible = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, chargedItem.configKey + "_overlay"));
 
         if (visible.isPresent() && visible.get().equals("false")) {
             return false;

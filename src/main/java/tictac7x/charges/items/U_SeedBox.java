@@ -9,7 +9,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
@@ -27,11 +27,11 @@ public class U_SeedBox extends ChargedItemWithStorage {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.seed_box, ItemID.SEED_BOX, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.seed_box, ItemID.SEED_BOX, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.SEED_BOX),
             new TriggerItem(ItemID.OPEN_SEED_BOX),

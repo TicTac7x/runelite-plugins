@@ -10,8 +10,8 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedPlugin;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
@@ -31,11 +31,11 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.storage = storage.storableItems(
             new StorableItem(ItemID.ANIMAINFUSED_BARK).specificOrder(1),
@@ -122,7 +122,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
     }
 
     private void purchaseFromFriendlyForesterShop(final int amountToBuy) {
-        final Optional<Widget> forestryShopWidget = ChargesImprovedPlugin.getWidget(client, 819, 3);
+        final Optional<Widget> forestryShopWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 819, 3);
         if (!forestryShopWidget.isPresent()) return;
 
         int animaBarkPerItem = 0;

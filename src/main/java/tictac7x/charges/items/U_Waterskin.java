@@ -9,7 +9,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
@@ -23,11 +23,11 @@ public class U_Waterskin extends ChargedItem {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.waterskin, ItemID.WATERSKIN0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.waterskin, ItemID.WATERSKIN0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.WATERSKIN0).fixedCharges(0),
             new TriggerItem(ItemID.WATERSKIN1).fixedCharges(1),

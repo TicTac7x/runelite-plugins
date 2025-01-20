@@ -11,8 +11,8 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
-import tictac7x.charges.ChargesImprovedPlugin;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
@@ -38,11 +38,11 @@ public class U_LogBasket extends ChargedItemWithStorage {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.log_basket, ItemID.LOG_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.log_basket, ItemID.LOG_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemID.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
             new StorableItem(ItemID.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
@@ -118,7 +118,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
 
             // Leprechaun.
             new OnMenuOptionClicked("Continue").consumer(() -> {
-                final Optional<Widget> bankWoodcuttingResourcesWidget = ChargesImprovedPlugin.getWidget(client, 219, 1, 2);
+                final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 219, 1, 2);
                 if (bankWoodcuttingResourcesWidget.isPresent() && bankWoodcuttingResourcesWidget.get().getText().equals("Only bank woodcutting resources")) {
                     storage.clear();
                 }

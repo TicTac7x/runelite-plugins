@@ -10,7 +10,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
@@ -28,11 +28,11 @@ public class U_AshSanctifier extends ChargedItemWithStatus {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.ash_sanctifier, ItemID.ASH_SANCTIFIER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ash_sanctifier, ItemID.ASH_SANCTIFIER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ASH_SANCTIFIER),
         };

@@ -12,8 +12,8 @@ import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.StatChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.ChargesImprovedPlugin;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnResetDaily;
@@ -58,7 +58,7 @@ public class Store {
 
     public void setLastChatMessage(final ChatMessage event) {
         if (event.getType() == ChatMessageType.GAMEMESSAGE || event.getType() == ChatMessageType.DIALOG || event.getType() == ChatMessageType.SPAM) {
-            lastChatMessage = Optional.of(ChargesImprovedPlugin.getCleanChatMessage(event));
+            lastChatMessage = Optional.of(TicTac7xChargesImprovedPlugin.getCleanChatMessage(event));
         }
     }
 
@@ -376,11 +376,11 @@ public class Store {
         }
 
         // Update config all items.
-        configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.storage, storage.toString().replaceAll(",$", ""));
+        configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage, storage.toString().replaceAll(",$", ""));
     }
 
     private Set<Integer> getAllItems() {
-        final Optional<String> storageString = Optional.ofNullable(configManager.getConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.storage));
+        final Optional<String> storageString = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage));
         final Set<Integer> allItems = new HashSet<>();
 
         if (storageString.isPresent()) {

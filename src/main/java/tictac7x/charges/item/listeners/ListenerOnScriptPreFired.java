@@ -4,13 +4,13 @@ import net.runelite.api.Client;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnScriptPreFired;
 import tictac7x.charges.item.triggers.TriggerBase;
 
 public class ListenerOnScriptPreFired extends ListenerBase {
-    public ListenerOnScriptPreFired(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final ChargesImprovedConfig config) {
+    public ListenerOnScriptPreFired(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
         super(client, itemManager, chargedItem, notifier, config);
     }
 

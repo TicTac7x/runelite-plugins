@@ -10,7 +10,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorageMultipleCharges;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
@@ -32,11 +32,11 @@ public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.explorers_ring, ItemID.EXPLORERS_RING_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.explorers_ring, ItemID.EXPLORERS_RING_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.storableItems(
             new StorableItem(ExplorersRingStorageItemId.ALCHEMY).displayName("Alchemy charges"),
             new StorableItem(ExplorersRingStorageItemId.TELEPORTS).displayName("Teleports"),

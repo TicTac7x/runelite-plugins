@@ -9,7 +9,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnHitsplatApplied;
@@ -27,11 +27,11 @@ public class J_RingOfSuffering extends ChargedItemWithStatus {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.ring_of_suffering, ItemID.RING_OF_SUFFERING, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_suffering, ItemID.RING_OF_SUFFERING, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.RING_OF_SUFFERING).fixedCharges(0),

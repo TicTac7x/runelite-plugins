@@ -11,7 +11,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
@@ -21,7 +21,7 @@ import tictac7x.charges.store.Store;
 import java.awt.*;
 import java.util.Optional;
 
-import static tictac7x.charges.ChargesImprovedPlugin.getNumberFromWordRepresentation;
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRepresentation;
 
 public class U_ColossalPouch extends ChargedItemWithStorage {
     public U_ColossalPouch(
@@ -32,11 +32,11 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             new StorableItem(ItemID.RUNE_ESSENCE),
             new StorableItem(ItemID.PURE_ESSENCE),
@@ -88,13 +88,13 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Decay.
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
-                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, config.getColossalPouchDecayCount() + 1);
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, config.getColossalPouchDecayCount() + 1);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
             // Repair.
             new OnChatMessage("Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
-                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.colossal_pouch_decay_count, 0);
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, 0);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 

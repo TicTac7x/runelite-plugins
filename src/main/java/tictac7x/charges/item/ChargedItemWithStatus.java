@@ -8,7 +8,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.store.ItemActivity;
 import tictac7x.charges.store.Store;
 
@@ -17,12 +17,12 @@ import java.util.Optional;
 
 public class ChargedItemWithStatus extends ChargedItem {
 
-    public ChargedItemWithStatus(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, ChargesImprovedConfig config, Store store, final Gson gson) {
+    public ChargedItemWithStatus(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
         super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
     }
 
     public boolean isDeactivated() {
-        final Optional<String> status = Optional.ofNullable(configManager.getConfiguration(ChargesImprovedConfig.group, getConfigStatusKey()));
+        final Optional<String> status = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
 
         if (!status.isPresent()) {
             return false;
@@ -32,7 +32,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     public boolean isActivated() {
-        final Optional<String> status = Optional.ofNullable(configManager.getConfiguration(ChargesImprovedConfig.group, getConfigStatusKey()));
+        final Optional<String> status = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
 
         if (!status.isPresent()) {
             return false;
@@ -54,7 +54,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     private void setActivity(final ItemActivity status) {
-        configManager.setConfiguration(ChargesImprovedConfig.group, getConfigStatusKey(), status);
+        configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey(), status);
     }
 
     @Override

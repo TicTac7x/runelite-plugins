@@ -9,7 +9,7 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Charges;
@@ -269,7 +269,7 @@ public class Storage {
 
         // Load storage from config.
         try {
-            final String jsonString = configManager.getConfiguration(ChargesImprovedConfig.group, storageConfigKey);
+            final String jsonString = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey);
             final JsonArray jsonStorage = (JsonArray) (new JsonParser()).parse(jsonString);
 
             for (final JsonElement jsonStorageItem : jsonStorage) {
@@ -298,7 +298,7 @@ public class Storage {
             jsonStorage.add(jsonItem);
         }
 
-        configManager.setConfiguration(ChargesImprovedConfig.group, storageConfigKey, gson.toJson(jsonStorage));
+        configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey, gson.toJson(jsonStorage));
     }
 
     private Optional<StorageItem> getItem(final int itemId) {

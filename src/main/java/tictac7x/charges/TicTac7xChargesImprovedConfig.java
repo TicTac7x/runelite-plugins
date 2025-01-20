@@ -7,10 +7,10 @@ import tictac7x.charges.store.ItemOverlayLocation;
 
 import java.awt.Color;
 
-import static tictac7x.charges.ChargesImprovedConfig.group;
+import static tictac7x.charges.TicTac7xChargesImprovedConfig.group;
 
 @ConfigGroup(group)
-public interface ChargesImprovedConfig extends Config {
+public interface TicTac7xChargesImprovedConfig extends Config {
     String group = "tictac7x-charges";
     String version = "version";
     String storage = "storage";

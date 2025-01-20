@@ -9,7 +9,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnAnimationChanged;
 import tictac7x.charges.item.triggers.OnChatMessage;
@@ -30,11 +30,11 @@ public class U_QuetzalWhistle extends ChargedItem {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.quetzal_whistle, ItemID.BASIC_QUETZAL_WHISTLE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.quetzal_whistle, ItemID.BASIC_QUETZAL_WHISTLE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BASIC_QUETZAL_WHISTLE).maxCharges(5),

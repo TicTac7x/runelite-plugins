@@ -10,8 +10,8 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
-import tictac7x.charges.ChargesImprovedPlugin;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
@@ -27,11 +27,11 @@ public class J_RingOfEndurance extends ChargedItem {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.ring_of_endurance, ItemID.RING_OF_ENDURANCE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_endurance, ItemID.RING_OF_ENDURANCE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.RING_OF_ENDURANCE),
@@ -51,7 +51,7 @@ public class J_RingOfEndurance extends ChargedItem {
 
             // Uncharge.
             new OnMenuOptionClicked("Yes").runConsumerOnNextGameTick(() -> {
-                final Optional<Widget> unchargeWidget = ChargesImprovedPlugin.getWidget(client, 584, 0, 2);
+                final Optional<Widget> unchargeWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 584, 0, 2);
                 if (unchargeWidget.isPresent() && unchargeWidget.get().getText().equals("Are you sure you want to uncharge your Ring of endurance?")) {
                     setCharges(0);
                 }

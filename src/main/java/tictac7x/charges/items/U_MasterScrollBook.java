@@ -11,7 +11,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
@@ -30,11 +30,11 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.master_scroll_book, ItemID.MASTER_SCROLL_BOOK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.master_scroll_book, ItemID.MASTER_SCROLL_BOOK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.setMaximumIndividualQuantity(1000).storableItems(
             new StorableItem(ItemID.NARDAH_TELEPORT).displayName("Nardah").specificOrder(1),
             new StorableItem(ItemID.DIGSITE_TELEPORT).displayName("Digsite").specificOrder(2),

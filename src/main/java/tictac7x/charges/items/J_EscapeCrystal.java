@@ -9,7 +9,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Charges;
@@ -32,11 +32,11 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.escape_crystal, ItemID.ESCAPE_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemID.ESCAPE_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ESCAPE_CRYSTAL).quantityCharges().hideOverlay(),
@@ -54,17 +54,17 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
 
             // Inactivity period from dialog when changed inactivity period.
             new OnChatMessage("The inactivity period for auto-activation (remains unchanged at|is now) (?<seconds>.+?)s.*").matcherConsumer(matcher -> {
-                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.escape_crystal_inactivity_period, matcher.group("seconds"));
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.escape_crystal_inactivity_period, matcher.group("seconds"));
             }),
 
             // Inactivity period from game message when activating.
             new OnChatMessage("Your escape crystals will now auto-activate if you take damage after a (?<seconds>.+?) seconds.*").matcherConsumer(matcher -> {
-                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.escape_crystal_inactivity_period, matcher.group("seconds"));
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.escape_crystal_inactivity_period, matcher.group("seconds"));
             }),
 
             // Inactivity period from widget.
             new OnWidgetLoaded(219, 1, 3).text("Set auto-activation inactivity period \\(in seconds\\)\\(current: (?<seconds>.+?)s\\)").matcherConsumer(matcher -> {
-                configManager.setConfiguration(ChargesImprovedConfig.group, ChargesImprovedConfig.escape_crystal_inactivity_period, matcher.group("seconds"));
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.escape_crystal_inactivity_period, matcher.group("seconds"));
             }),
 
             // Keyboard or mouse action resets idle timer.

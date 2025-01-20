@@ -5,7 +5,7 @@ import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnWidgetLoaded;
@@ -14,10 +14,10 @@ import tictac7x.charges.store.ItemWithQuantity;
 
 import java.util.regex.Matcher;
 
-import static tictac7x.charges.ChargesImprovedPlugin.getNumberFromCommaString;
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
 
 public class ListenerOnWidgetLoaded extends ListenerBase {
-    public ListenerOnWidgetLoaded(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final ChargesImprovedConfig config) {
+    public ListenerOnWidgetLoaded(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
         super(client, itemManager, chargedItem, notifier, config);
     }
 

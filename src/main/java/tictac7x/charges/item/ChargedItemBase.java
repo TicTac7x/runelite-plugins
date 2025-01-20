@@ -12,7 +12,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.listeners.*;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
@@ -32,7 +32,7 @@ public abstract class ChargedItemBase {
     protected final ConfigManager configManager;
     protected final ChatMessageManager chatMessageManager;
     protected final Notifier notifier;
-    protected final ChargesImprovedConfig config;
+    protected final TicTac7xChargesImprovedConfig config;
 
     public final Store store;
 
@@ -70,7 +70,7 @@ public abstract class ChargedItemBase {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store
     ) {
         this.itemId = itemId;

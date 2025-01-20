@@ -3,14 +3,14 @@ package tictac7x.charges.item.listeners;
 import net.runelite.api.Client;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnMenuOptionClicked;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.AdvancedMenuEntry;
 
 public class ListenerOnMenuOptionClicked extends ListenerBase {
-    public ListenerOnMenuOptionClicked(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final ChargesImprovedConfig config) {
+    public ListenerOnMenuOptionClicked(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
         super(client, itemManager, chargedItem, notifier, config);
     }
 

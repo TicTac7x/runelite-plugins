@@ -10,8 +10,8 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
-import tictac7x.charges.ChargesImprovedPlugin;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnMenuOptionClicked;
@@ -30,11 +30,11 @@ public class J_BindingNecklace extends ChargedItem {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.binding_necklace, ItemID.BINDING_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.binding_necklace, ItemID.BINDING_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BINDING_NECKLACE).needsToBeEquipped(),
@@ -55,7 +55,7 @@ public class J_BindingNecklace extends ChargedItem {
 
             // Destroy.
             new OnMenuOptionClicked("Yes").consumer(() -> {
-                final Optional<Widget> destroyWidget = ChargesImprovedPlugin.getWidget(client, 584, 0, 2);
+                final Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 584, 0, 2);
                 if (destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?")) {
                     setCharges(16);
                 }

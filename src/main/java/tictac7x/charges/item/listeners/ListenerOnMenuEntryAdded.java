@@ -5,7 +5,7 @@ import net.runelite.api.MenuEntry;
 import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListenerOnMenuEntryAdded extends ListenerBase {
-    public ListenerOnMenuEntryAdded(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final ChargesImprovedConfig config) {
+    public ListenerOnMenuEntryAdded(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
         super(client, itemManager, chargedItem, notifier, config);
     }
 

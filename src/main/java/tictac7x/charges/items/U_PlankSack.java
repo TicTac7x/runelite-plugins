@@ -11,8 +11,8 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedPlugin;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
@@ -38,11 +38,11 @@ public class U_PlankSack extends ChargedItemWithStorage {
         final InfoBoxManager infoBoxManager,
         final ChatMessageManager chatMessageManager,
         final Notifier notifier,
-        final ChargesImprovedConfig config,
+        final TicTac7xChargesImprovedConfig config,
         final Store store,
         final Gson gson
     ) {
-        super(ChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumTotalQuantity(28).emptyIsNegative().storableItems(
             new StorableItem(ItemID.PLANK).checkName("Regular plank"),
             new StorableItem(ItemID.OAK_PLANK).checkName("Oak plank"),
@@ -205,7 +205,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 if (keyChar < 48 || keyChar > 57) return;
                 final int nthItemToBuild = keyChar - 48;
 
-                final Optional<Widget> materialsWidget = ChargesImprovedPlugin.getWidget(client, 458, 3 + nthItemToBuild, 3);
+                final Optional<Widget> materialsWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 458, 3 + nthItemToBuild, 3);
                 if (!materialsWidget.isPresent()) return;
 
                 addPlanksToBeUsedFromHomeMaterialsWidgetText(materialsWidget.get().getText());

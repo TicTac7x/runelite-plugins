@@ -8,7 +8,7 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.ChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
@@ -16,7 +16,7 @@ import tictac7x.charges.store.Store;
 import java.util.Optional;
 
 public class ChargedItem extends ChargedItemBase {
-    public ChargedItem(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, ChargesImprovedConfig config, Store store, final Gson gson) {
+    public ChargedItem(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
         super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
     }
 
@@ -73,7 +73,7 @@ public class ChargedItem extends ChargedItemBase {
             Math.max(0, charges);
 
         if (this.getChargesFromConfig() != charges) {
-            configManager.setConfiguration(ChargesImprovedConfig.group, configKey, charges);
+            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey, charges);
         }
     }
 
@@ -86,7 +86,7 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     private int getChargesFromConfig() {
-        final Optional<String> charges = Optional.ofNullable(configManager.getConfiguration(ChargesImprovedConfig.group, configKey));
+        final Optional<String> charges = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
 
         if (!charges.isPresent()) {
             return Charges.UNKNOWN;
