@@ -98,6 +98,7 @@ public interface ChargesImprovedConfig extends Config {
     String strange_old_lockpick = "strange_old_lockpick";
     String tackle_box = "tackle_box";
     String teleport_crystal = "teleport_crystal";
+    String eternal_teleport_crystal = "teleport_crystal";
     String tome_of_fire = "tome_of_fire";
     String tome_of_water = "tome_of_water";
     String toxic_staff_of_the_dead = "toxic_staff_of_the_dead";
@@ -798,6 +799,13 @@ public interface ChargesImprovedConfig extends Config {
         ) default boolean teleportCrystalInfobox() { return true; }
 
         @ConfigItem(
+            keyName = eternal_teleport_crystal + infobox,
+            name = "Eternal teleport crystal",
+            description = "",
+            section = infoboxes
+        ) default boolean eternalTeleportCrystalInfobox() { return true; }
+
+        @ConfigItem(
             keyName = waterskin + infobox,
             name = "Waterskin",
             description = "",
@@ -1412,6 +1420,13 @@ public interface ChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean teleportCrystalOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = eternal_teleport_crystal + overlay,
+            name = "Eternal teleport crystal",
+            description = "",
+            section = overlays
+        ) default boolean eternalTeleportCrystalOverlay() { return true; }
 
         @ConfigItem(
             keyName = tome_of_fire + overlay,
