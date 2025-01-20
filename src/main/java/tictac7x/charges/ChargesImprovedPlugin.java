@@ -446,8 +446,16 @@ public class ChargesImprovedPlugin extends Plugin implements KeyListener, MouseL
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		final AdvancedMenuEntry advancedMenuEntry = new AdvancedMenuEntry(event, client);
 		if (
+			// Menu option not found.
+			advancedMenuEntry.option.isEmpty() ||
+			// Not menu.
+			advancedMenuEntry.target.isEmpty() && !advancedMenuEntry.option.contains("Buy-") ||
+			// Start use by clicking on item.
 			advancedMenuEntry.option.equals("Use") && advancedMenuEntry.action.equals("WIDGET_TARGET") ||
-			advancedMenuEntry.action.equals("CANCEL")
+			// Cancel option.
+			advancedMenuEntry.action.equals("CANCEL") ||
+			// RuneLite specific action.
+			advancedMenuEntry.action.equals("RUNELITE")
 		) return;
 
 		store.onMenuOptionClicked(advancedMenuEntry);

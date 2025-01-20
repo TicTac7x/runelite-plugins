@@ -125,17 +125,6 @@ public class Store {
     }
 
     public void onMenuOptionClicked(final AdvancedMenuEntry advancedMenuEntry) {
-        if (
-            // Not menu.
-            advancedMenuEntry.target.isEmpty() && !advancedMenuEntry.option.contains("Buy-") ||
-            // Menu option not found.
-            advancedMenuEntry.option.isEmpty() ||
-            // RuneLite specific action.
-            advancedMenuEntry.action.equals("RUNELITE")
-        ) {
-            return;
-        }
-
         // Gametick changed, clear previous menu entries since they are no longer valid.
         if (gametick >= gametick_before + 2) {
             gametick = 0; gametick_before = 0;
