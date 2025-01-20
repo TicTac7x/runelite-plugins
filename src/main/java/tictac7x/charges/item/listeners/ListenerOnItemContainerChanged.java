@@ -10,13 +10,9 @@ import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.AdvancedMenuEntry;
-
-import java.util.regex.Matcher;
 
 public class ListenerOnItemContainerChanged extends ListenerBase {
     public ListenerOnItemContainerChanged(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final ChargesImprovedConfig config) {

@@ -3,7 +3,6 @@ package tictac7x.charges.item;
 import net.runelite.api.Client;
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
-import net.runelite.api.ItemID;
 import net.runelite.api.events.*;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;

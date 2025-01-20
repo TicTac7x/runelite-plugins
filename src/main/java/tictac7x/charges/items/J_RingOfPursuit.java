@@ -12,11 +12,8 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnHitsplatApplied;
-import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.HitsplatTarget;
 import tictac7x.charges.store.Store;
 
 public class J_RingOfPursuit extends ChargedItem {

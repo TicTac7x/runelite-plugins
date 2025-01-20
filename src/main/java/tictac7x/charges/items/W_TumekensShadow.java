@@ -2,7 +2,6 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.GraphicID;
 import net.runelite.api.ItemID;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;

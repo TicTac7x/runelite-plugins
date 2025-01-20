@@ -3,6 +3,7 @@ package tictac7x.charges;
 import net.runelite.client.config.*;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.ItemActivity;
+import tictac7x.charges.store.ItemOverlayLocation;
 
 import java.awt.Color;
 
@@ -157,11 +158,19 @@ public interface ChargesImprovedConfig extends Config {
         ) default boolean showOverlaysOnlyInBank() { return false; }
 
         @ConfigItem(
+            keyName = "item_overlay_location",
+            name = "Item overlay location",
+            description = "Location of the charges for item overlays",
+            section = general,
+            position = 5
+        ) default ItemOverlayLocation itemOverlayLocation() { return ItemOverlayLocation.BOTTOM_LEFT; }
+
+        @ConfigItem(
             keyName = "storage_tooltips",
             name = "Show storage tooltips",
             description = "Show tooltips for items with storage",
             section = general,
-            position = 5
+            position = 6
         ) default boolean showStorageTooltips() { return true; }
 
         @ConfigItem(
@@ -169,7 +178,7 @@ public interface ChargesImprovedConfig extends Config {
             name = "Unify menu entries",
             description = "Replace obscure menu entries like \"Reminisce\" and \"Divine\" with \"Teleport\" and \"Check\" and show detailed herb patches names.",
             section = general,
-            position = 6
+            position = 7
         ) default boolean useCommonMenuEntries() { return true; }
 
         @ConfigItem(
@@ -177,7 +186,7 @@ public interface ChargesImprovedConfig extends Config {
             name = "Hide destroy menu entries",
             description = "Hide destroy menu entry from items that make no sense to destroy",
             section = general,
-            position = 7
+            position = 8
         ) default boolean hideDestroy() { return true; }
 
         @ConfigItem(
@@ -185,7 +194,7 @@ public interface ChargesImprovedConfig extends Config {
             name = "Show unlimited charges",
             description = "Show infinity symbol for items with unlimited charges",
             section = general,
-            position = 8
+            position = 9
         ) default boolean showUnlimited() { return true; }
 
     @ConfigSection(

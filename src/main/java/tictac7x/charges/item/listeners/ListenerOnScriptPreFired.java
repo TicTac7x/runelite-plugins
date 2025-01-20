@@ -1,15 +1,12 @@
 package tictac7x.charges.item.listeners;
 
 import net.runelite.api.Client;
-import net.runelite.api.Skill;
 import net.runelite.api.events.ScriptPreFired;
-import net.runelite.api.events.StatChanged;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.ChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnScriptPreFired;
-import tictac7x.charges.item.triggers.OnStatChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 
 public class ListenerOnScriptPreFired extends ListenerBase {

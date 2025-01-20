@@ -1,7 +1,6 @@
 package tictac7x.charges.item.listeners;
 
 import net.runelite.api.Client;
-import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.ChargesImprovedConfig;
