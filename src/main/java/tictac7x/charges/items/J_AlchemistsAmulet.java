@@ -23,11 +23,6 @@ import tictac7x.charges.store.Store;
 import java.util.Optional;
 
 public class J_AlchemistsAmulet extends ChargedItem {
-    int lastXpDropTick = 0;
-
-    final int[] fourDosePotions = {ItemID.PRAYER_POTION4};
-
-
     public J_AlchemistsAmulet(
             final Client client,
             final ClientThread clientThread,
