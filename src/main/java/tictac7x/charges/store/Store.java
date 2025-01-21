@@ -32,6 +32,7 @@ public class Store {
     private int gametick_before = 0;
 
     private Optional<ChargedItemBase[]> chargedItems = Optional.empty();
+    private List<Integer> dailyResetItemIds = new ArrayList<>();
     private Optional<String> lastChatMessage = Optional.empty();
     public Optional<ItemContainer> inventory = Optional.empty();
     public Optional<ItemContainer> equipment = Optional.empty();
@@ -64,6 +65,21 @@ public class Store {
 
     public void setChargedItems(final ChargedItemBase[] chargedItems) {
         this.chargedItems = Optional.of(chargedItems);
+
+        List<Integer> dailyResetItemIds = new ArrayList<>();
+        Arrays.stream(chargedItems).filter(chargedItem -> {
+            for (final TriggerBase trigger : chargedItem.triggers) {
+                if (trigger instanceof OnResetDaily) {
+                    return true;
+                }
+            }
+            return false;
+        }).forEach(chargedItem -> {
+            for (final TriggerItem triggerItem : chargedItem.items) {
+                dailyResetItemIds.add(triggerItem.itemId);
+            }
+        });
+        this.dailyResetItemIds = dailyResetItemIds;
     }
 
     public Optional<Integer> getSkillXp(final Skill skill) {
@@ -331,64 +347,55 @@ public class Store {
     }
 
     private void updateStorage(final ItemContainerChanged event) {
-        if (event.getContainerId() != InventoryID.BANK.getId()) return;
+        if (
+            event.getContainerId() != InventoryID.BANK.getId() &&
+            event.getContainerId() != InventoryID.INVENTORY.getId() &&
+            event.getContainerId() != InventoryID.EQUIPMENT.getId()
+        ) {
+            return;
+        }
 
-        // Get all previous items.
-        Set<Integer> items = getAllItems();
+        final List<Integer> itemIds = new ArrayList<>();
 
         // Update items.
         for (final Item item : event.getItemContainer().getItems()) {
-            if (item.getId() != -1) {
-                items.add(item.getId());
+            if (item.getId() != -1 && item.getQuantity() > 0 && dailyResetItemIds.contains(item.getId())) {
+                itemIds.add(item.getId());
             }
         }
 
-        // We need to know only about items that have daily resets defined.
-        if (chargedItems.isPresent()) {
-            items = items.stream().filter(
-                item -> {
-                    for (final ChargedItemBase chargedItem : chargedItems.get()) {
-                        boolean validItem = false;
-                        for (final TriggerItem triggerItem : chargedItem.items) {
-                            if (triggerItem.itemId == item) {
-                                validItem = true;
-                                break;
-                            }
-                        }
-
-                        if (validItem) {
-                            for (final TriggerBase trigger : chargedItem.triggers) {
-                                if (trigger instanceof OnResetDaily) {
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-
-                    return false;
-                }
-            ).collect(Collectors.toSet());
+        final StringBuilder storageStringBuilder = new StringBuilder();
+        for (final Integer itemId : itemIds) {
+            storageStringBuilder.append(itemId).append(",");
         }
+        final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
 
-        final StringBuilder storage = new StringBuilder();
-        for (final Integer item : items) {
-            storage.append(item).append(",");
+        // Save storage string to config.
+        if (event.getContainerId() == InventoryID.BANK.getId()) {
+            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
+        } else if (event.getContainerId() == InventoryID.INVENTORY.getId()) {
+            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_inventory, storageString);
+        } else if (event.getContainerId() == InventoryID.EQUIPMENT.getId()) {
+            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_equipment, storageString);
         }
-
-        // Update config all items.
-        configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage, storage.toString().replaceAll(",$", ""));
     }
 
     private Set<Integer> getAllItems() {
-        final Optional<String> storageString = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage));
         final Set<Integer> allItems = new HashSet<>();
 
-        if (storageString.isPresent()) {
-            for (final String itemString : storageString.get().split(",")) {
-                try {
-                    allItems.add(Integer.parseInt(itemString));
-                } catch (final Exception ignored) {}
-            }
+        final String storageBank = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank);
+        final String storageInventory = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_inventory);
+        final String storageEquipment = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_equipment);
+
+        final List<String> storages = new ArrayList<>();
+        storages.addAll(Arrays.asList(storageBank.split(",")));
+        storages.addAll(Arrays.asList(storageInventory.split(",")));
+        storages.addAll(Arrays.asList(storageEquipment.split(",")));
+
+        for (final String itemId : storages) {
+            try {
+                allItems.add(Integer.parseInt(itemId));
+            } catch (final Exception ignored) {}
         }
 
         return allItems;
