@@ -21,6 +21,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String infobox = "_infobox";
     String overlay = "_overlay";
 
+    String alchemists_amulet = "alchemists_amulet";
     String arclight = "arclight";
     String ardougne_cloak = "ardougne_cloak";
     String ash_sanctifier = "ash_sanctifier";
@@ -914,6 +915,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = infoboxes
         ) default boolean warpedSceptreInfobox() { return true; }
 
+        @ConfigItem(
+                keyName = alchemists_amulet + infobox,
+                name = "Alchemist's Amulet",
+                description = "",
+                section = infoboxes
+        ) default boolean alchemistsAmuletInfobox() { return true; }
+
     @ConfigSection(
         name = "Overlays",
         description = "Choose for which charged items number is shown next to it",
@@ -1571,6 +1579,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean xericsTalismanOverlay() { return true; }
+
+        @ConfigItem(
+                keyName = alchemists_amulet + overlay,
+                name = "Alchemist's Amulet",
+                description = "",
+                section = overlays
+        ) default boolean alchemistsAmuletOverlay() { return true; }
 
     @ConfigSection(
         name = "Debug",
