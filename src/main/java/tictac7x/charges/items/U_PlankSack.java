@@ -228,22 +228,21 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 final Optional<Widget> itemWidget = Optional.ofNullable(script.getScriptEvent().getSource());
                 if (!itemWidget.isPresent()) return;
 
-                //Use the IDs because the itemIDs turn into an Hourglass
-                //Alternatively use the getName "<col=ff9040>Teak - 500gp</col>"
-                switch (itemWidget.get().getId()) {
-                    case 17694734:
+                int itemID = (int)script.getScriptEvent().getArguments()[2];
+                switch (itemID) {
+                    case ItemID.LOGS:
                         this.sawmillLogId = ItemID.LOGS;
                         this.sawmillPlankId = ItemID.PLANK;
                         break;
-                    case 17694735:
+                    case ItemID.OAK_LOGS:
                         this.sawmillLogId = ItemID.OAK_LOGS;
                         this.sawmillPlankId = ItemID.OAK_PLANK;
                         break;
-                    case 17694736:
+                    case ItemID.TEAK_LOGS:
                         this.sawmillLogId = ItemID.TEAK_LOGS;
                         this.sawmillPlankId = ItemID.TEAK_PLANK;
                         break;
-                    case 17694737:
+                    case ItemID.MAHOGANY_LOGS:
                         this.sawmillLogId = ItemID.MAHOGANY_LOGS;
                         this.sawmillPlankId = ItemID.MAHOGANY_PLANK;
                         break;
@@ -252,9 +251,9 @@ public class U_PlankSack extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).consumer(() -> {
                 if (this.sawmillLogId == 0 || this.sawmillPlankId == 0) return;
 
-                final int logsBefore = store.getPreviousInventoryItemQuantity(this.sawmillLogId);
-                final int planksAfter = store.getInventoryItemQuantity(this.sawmillPlankId);
-                storage.add(this.sawmillPlankId, logsBefore - planksAfter);
+                final int logsDifference = store.getPreviousInventoryItemQuantity(this.sawmillLogId) - store.getInventoryItemQuantity(this.sawmillLogId);
+                final int planksDifference = store.getPreviousInventoryItemQuantity(this.sawmillPlankId) - store.getInventoryItemQuantity(this.sawmillPlankId);
+                storage.add(this.sawmillPlankId, logsDifference + planksDifference);
 
                 this.sawmillLogId = 0;
                 this.sawmillPlankId = 0;
