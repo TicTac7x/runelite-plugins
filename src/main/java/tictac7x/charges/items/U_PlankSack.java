@@ -248,12 +248,22 @@ public class U_PlankSack extends ChargedItemWithStorage {
                         break;
                 }
             }),
-            new OnItemContainerChanged(INVENTORY).consumer(() -> {
+            new OnItemContainerChanged(INVENTORY).onItemContainerDifference(itemsDifference -> {
                 if (this.sawmillLogId == 0 || this.sawmillPlankId == 0) return;
 
-                final int logsDifference = store.getPreviousInventoryItemQuantity(this.sawmillLogId) - store.getInventoryItemQuantity(this.sawmillLogId);
-                final int planksDifference = store.getPreviousInventoryItemQuantity(this.sawmillPlankId) - store.getInventoryItemQuantity(this.sawmillPlankId);
-                storage.add(this.sawmillPlankId, logsDifference + planksDifference);
+                int logsDifference = 0;
+                int planksDifference = 0;
+                int vouchersDifference = 0;
+                for (final ItemWithQuantity item : itemsDifference.items) {
+                    if (itemId == this.sawmillLogId) {
+                        logsDifference = item.quantity;
+                    } else if (itemId == this.sawmillPlankId) {
+                        planksDifference = item.quantity;
+                    } else if (itemId == ItemID.SAWMILL_VOUCHER) {
+                        vouchersDifference = item.quantity;
+                    }
+                }
+                storage.add(this.sawmillPlankId, Math.abs(logsDifference + vouchersDifference + planksDifference));
 
                 this.sawmillLogId = 0;
                 this.sawmillPlankId = 0;
