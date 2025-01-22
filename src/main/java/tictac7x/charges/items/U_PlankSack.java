@@ -220,6 +220,43 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
                 homeBuildingWidgetMaterialsUsed.clear();
             }),
+
+            // Sawmill, this script fires multiple times and regardless of the number of crafts
+            new OnScriptPreFired(2053).scriptConsumer(script -> {
+                final Optional<Widget> itemWidget = Optional.ofNullable(script.getScriptEvent().getSource());
+                if (!itemWidget.isPresent()) return;
+
+                //Use the IDs because the itemIDs turn into an Hourglass
+                //Alternatively use the getName "<col=ff9040>Teak - 500gp</col>"
+                switch (itemWidget.get().getId()) {
+                    case 17694734:
+                        this.sawmillLogId = ItemID.LOGS;
+                        this.sawmillPlankId = ItemID.PLANK;
+                        break;
+                    case 17694735:
+                        this.sawmillLogId = ItemID.OAK_LOGS;
+                        this.sawmillPlankId = ItemID.OAK_PLANK;
+                        break;
+                    case 17694736:
+                        this.sawmillLogId = ItemID.TEAK_LOGS;
+                        this.sawmillPlankId = ItemID.TEAK_PLANK;
+                        break;
+                    case 17694737:
+                        this.sawmillLogId = ItemID.MAHOGANY_LOGS;
+                        this.sawmillPlankId = ItemID.MAHOGANY_PLANK;
+                        break;
+                }
+            }),
+            new OnItemContainerChanged(INVENTORY).consumer(() -> {
+                if (this.sawmillLogId == 0 || this.sawmillPlankId == 0) return;
+
+                final int logsBefore = store.getPreviousInventoryItemQuantity(this.sawmillLogId);
+                final int planksAfter = store.getInventoryItemQuantity(this.sawmillPlankId);
+                storage.add(this.sawmillPlankId, logsBefore - planksAfter);
+
+                this.sawmillLogId = 0;
+                this.sawmillPlankId = 0;
+            }),
         };
     }
 
