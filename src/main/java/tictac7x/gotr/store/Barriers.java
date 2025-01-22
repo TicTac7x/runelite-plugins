@@ -1,6 +1,8 @@
 package tictac7x.gotr.store;
 
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.GameObject;
+import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GroundObjectSpawned;
 import net.runelite.api.events.NpcSpawned;
@@ -22,6 +24,12 @@ public class Barriers {
         barriers.put(BarrierPosition.FIVE, new Barrier());
         barriers.put(BarrierPosition.SIX, new Barrier());
         barriers.put(BarrierPosition.SEVEN, new Barrier());
+    }
+
+    public void onChatMessage(final ChatMessage message) {
+        if (message.getType() == ChatMessageType.GAMEMESSAGE && message.getMessage().equals("The Portal Guardians will keep their rifts open for another 30 seconds.")) {
+            barriersBuiltDuringGame.clear();
+        }
     }
 
     public void onGameObjectSpawned(final GameObjectSpawned event) {
@@ -98,9 +106,5 @@ public class Barriers {
 
     private boolean isBarrierNpc(final NpcSpawned event) {
         return event.getNpc().getId() >= 11418 && event.getNpc().getId() <= 11425;
-    }
-
-    public void onGameEnd() {
-        barriersBuiltDuringGame.clear();
     }
 }

@@ -10,6 +10,7 @@ import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import tictac7x.gotr.TicTac7xGotrImprovedConfig;
 import tictac7x.gotr.TicTac7xGotrImprovedPlugin;
+import tictac7x.gotr.store.Points;
 
 import java.awt.*;
 import java.util.Optional;
@@ -17,12 +18,14 @@ import java.util.Optional;
 public class RewardsGuardianOverlay extends Overlay {
     private final Client client;
     private final TicTac7xGotrImprovedConfig config;
+    private final Points points;
 
     private Optional<GameObject> gameObject = Optional.empty();
 
-    public RewardsGuardianOverlay(final Client client, final TicTac7xGotrImprovedConfig config) {
+    public RewardsGuardianOverlay(final Client client, final TicTac7xGotrImprovedConfig config, final Points points) {
         this.client = client;
         this.config = config;
+        this.points = points;
 
         super.setPosition(OverlayPosition.DYNAMIC);
         super.setLayer(OverlayLayer.UNDER_WIDGETS);
@@ -48,23 +51,21 @@ public class RewardsGuardianOverlay extends Overlay {
 
     @Override
     public Dimension render(final Graphics2D graphics) {
-        if (!config.showRewardsGuardianOverlay()) return null;
+        if (!config.showRewardsGuardianOverlay() || !gameObject.isPresent()) return null;
 
-        if (gameObject.isPresent()) {
-            try {
-                final String text = "Rewards: " + getMaxSearches();
-                final FontMetrics metrics = graphics.getFontMetrics();
-                final int textWidth = metrics.stringWidth(text);
-                final Point textLocation = Perspective.getCanvasTextLocation(client, graphics, gameObject.get().getLocalLocation(), text, 270);
-                final Rectangle rectangle = new Rectangle(textLocation.getX(), textLocation.getY(), textWidth, 0);
-                TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, text, rectangle, new Color(220, 220, 220), FontManager.getRunescapeFont());
-            } catch (Exception ignored) {}
-        }
+        try {
+            final String text = "Rewards: " + getMaxSearches();
+            final FontMetrics metrics = graphics.getFontMetrics();
+            final int textWidth = metrics.stringWidth(text);
+            final Point textLocation = Perspective.getCanvasTextLocation(client, graphics, gameObject.get().getLocalLocation(), text, 270);
+            final Rectangle rectangle = new Rectangle(textLocation.getX(), textLocation.getY(), textWidth, 0);
+            TicTac7xGotrImprovedPlugin.drawCenteredString(graphics, text, rectangle, new Color(220, 220, 220), FontManager.getRunescapeFont());
+        } catch (Exception ignored) {}
 
         return null;
     }
 
     private int getMaxSearches() {
-        return Math.min(config.getCatalyticEnergy(), config.getElementalEnergy());
+        return Math.min(points.getTotalElementalPoints(), points.getTotalCatalyticPoints());
     }
 }

@@ -22,7 +22,7 @@ import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import tictac7x.gotr.overlays.*;
 import tictac7x.gotr.store.*;
 import tictac7x.gotr.widgets.BarriersWidget;
-import tictac7x.gotr.widgets.EnergyWidget;
+import tictac7x.gotr.widgets.PointsWidget;
 import tictac7x.gotr.widgets.InactivePortalWidget;
 
 import javax.inject.Inject;
@@ -83,7 +83,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 	private Guardians guardians;
 	private Portal portal;
 	private Inventory inventory;
-	private Energy energy;
+	private Points points;
 	private EntranceBarrier entranceBarrier;
 	private Notifications notifications;
 	private Creatures creatures;
@@ -97,7 +97,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 	private RewardsGuardianOverlay rewardsGuardianOverlay;
 
 	private InactivePortalWidget inactivePortalWidget;
-	private EnergyWidget energyWidget;
+	private PointsWidget pointsWidget;
 
 	@Provides
 	TicTac7xGotrImprovedConfig provideConfig(ConfigManager configManager) {
@@ -112,7 +112,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		teleporters = new Teleporters();
 		guardians = new Guardians(client);
 		portal = new Portal(client, notifications);
-		energy = new Energy(configManager, config);
+		points = new Points(client, configManager, config);
 		entranceBarrier = new EntranceBarrier(config, player);
 		creatures = new Creatures(client, notifications, config);
 		barriers = new Barriers();
@@ -123,10 +123,10 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		teleportersOverlay = new TeleportersOverlay(client, itemManager, modelOutlineRenderer, config, teleporters, inventory);
 		unchargedCellsBenchOverlay = new UnchargedCellsBenchOverlay(client, modelOutlineRenderer, config, inventory);
 		barriersWidget = new BarriersWidget(client, config, barriers);
-		rewardsGuardianOverlay = new RewardsGuardianOverlay(client, config);
+		rewardsGuardianOverlay = new RewardsGuardianOverlay(client, config, points);
 
 		inactivePortalWidget = new InactivePortalWidget(client, spriteManager, portal);
-		energyWidget = new EnergyWidget(client, config);
+		pointsWidget = new PointsWidget(client, config, points);
 
 		overlayManager.add(portalOverlayOverlay);
 		overlayManager.add(guardiansOverlay);
@@ -134,7 +134,7 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		overlayManager.add(teleportersOverlay);
 		overlayManager.add(unchargedCellsBenchOverlay);
 		overlayManager.add(inactivePortalWidget);
-		overlayManager.add(energyWidget);
+		overlayManager.add(pointsWidget);
 		overlayManager.add(barriersWidget);
 		overlayManager.add(rewardsGuardianOverlay);
 	}
@@ -147,9 +147,11 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		overlayManager.remove(teleportersOverlay);
 		overlayManager.remove(unchargedCellsBenchOverlay);
 		overlayManager.remove(inactivePortalWidget);
-		overlayManager.remove(energyWidget);
+		overlayManager.remove(pointsWidget);
 		overlayManager.remove(barriersWidget);
 		overlayManager.remove(rewardsGuardianOverlay);
+
+		pointsWidget.shutDown();
 	}
 
 	@Subscribe
@@ -184,17 +186,13 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 	public void onChatMessage(final ChatMessage message) {
 		message.setMessage(message.getMessage().replaceAll("</?col.*?>", ""));
 
+		barriers.onChatMessage(message);
 		teleporters.onChatMessage(message);
-		energy.onChatMessage(message);
+		points.onChatMessage(message);
 		notifications.onChatMessage(message);
 		portal.onChatMessage(message);
 		creatures.onChatMessage(message);
-
-		if (message.getType() == ChatMessageType.GAMEMESSAGE && message.getMessage().equals("The Portal Guardians will keep their rifts open for another 30 seconds.")) {
-			onGameEnd();
-		}
 	}
-
 
 	@Subscribe
 	public void onGroundObjectSpawned(final GroundObjectSpawned event) {
@@ -223,6 +221,8 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 		portal.onGameTick();
 		guardians.onGameTick();
 		creatures.onGameTick();
+
+		points.onGameTick();
 	}
 
 	@Subscribe
@@ -244,7 +244,10 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 
 	@Subscribe
 	public void onWidgetLoaded(final WidgetLoaded event) {
+		points.onWidgetLoaded(event);
 		player.onWidgetLoaded(event);
+
+		pointsWidget.onWidgetLoaded(event);
 	}
 
 	public static void drawCenteredString(final Graphics graphics, final String text, final Rectangle rectangle, final Color color, final Font font) {
@@ -261,10 +264,6 @@ public class TicTac7xGotrImprovedPlugin extends Plugin {
 			graphics.setColor(color);
 			graphics.drawString(text, x, y);
 		} catch (final Exception ignored) {}
-	}
-
-	private void onGameEnd() {
-		barriers.onGameEnd();
 	}
 }
 
