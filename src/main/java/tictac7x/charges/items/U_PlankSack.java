@@ -255,11 +255,11 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 int planksDifference = 0;
                 int vouchersDifference = 0;
                 for (final ItemWithQuantity item : itemsDifference.items) {
-                    if (itemId == this.sawmillLogId) {
+                    if (item.itemId == this.sawmillLogId) {
                         logsDifference = item.quantity;
-                    } else if (itemId == this.sawmillPlankId) {
+                    } else if (item.itemId == this.sawmillPlankId) {
                         planksDifference = item.quantity;
-                    } else if (itemId == ItemID.SAWMILL_VOUCHER) {
+                    } else if (item.itemId == ItemID.SAWMILL_VOUCHER) {
                         vouchersDifference = item.quantity;
                     }
                 }
