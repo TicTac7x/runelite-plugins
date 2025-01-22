@@ -29,6 +29,8 @@ import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 public class U_PlankSack extends ChargedItemWithStorage {
     private final Pattern homeBuildingPlanksPattern = Pattern.compile("(?<type>Plank|Oak plank|Teak plank|Mahogany plank): (?<amount>[0-9]+)");
     private final Map<Integer, Integer> homeBuildingWidgetMaterialsUsed = new HashMap<>();
+    private int sawmillLogId = 0;
+    private int sawmillPlankId = 0;
 
     public U_PlankSack(
         final Client client,
