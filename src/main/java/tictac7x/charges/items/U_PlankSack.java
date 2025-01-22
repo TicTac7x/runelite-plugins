@@ -228,22 +228,18 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 final Optional<Widget> itemWidget = Optional.ofNullable(script.getScriptEvent().getSource());
                 if (!itemWidget.isPresent()) return;
 
-                int itemID = (int)script.getScriptEvent().getArguments()[2];
-                switch (itemID) {
+                this.sawmillLogId = (int)script.getScriptEvent().getArguments()[2];
+                switch (this.sawmillLogId) {
                     case ItemID.LOGS:
-                        this.sawmillLogId = ItemID.LOGS;
                         this.sawmillPlankId = ItemID.PLANK;
                         break;
                     case ItemID.OAK_LOGS:
-                        this.sawmillLogId = ItemID.OAK_LOGS;
                         this.sawmillPlankId = ItemID.OAK_PLANK;
                         break;
                     case ItemID.TEAK_LOGS:
-                        this.sawmillLogId = ItemID.TEAK_LOGS;
                         this.sawmillPlankId = ItemID.TEAK_PLANK;
                         break;
                     case ItemID.MAHOGANY_LOGS:
-                        this.sawmillLogId = ItemID.MAHOGANY_LOGS;
                         this.sawmillPlankId = ItemID.MAHOGANY_PLANK;
                         break;
                 }
@@ -263,7 +259,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
                         vouchersDifference = item.quantity;
                     }
                 }
-                storage.add(this.sawmillPlankId, Math.abs(logsDifference + vouchersDifference + planksDifference));
+                storage.add(this.sawmillPlankId, Math.abs(logsDifference + planksDifference + vouchersDifference));
 
                 this.sawmillLogId = 0;
                 this.sawmillPlankId = 0;
