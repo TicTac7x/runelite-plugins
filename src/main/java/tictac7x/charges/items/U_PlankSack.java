@@ -29,6 +29,8 @@ import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 public class U_PlankSack extends ChargedItemWithStorage {
     private final Pattern homeBuildingPlanksPattern = Pattern.compile("(?<type>Plank|Oak plank|Teak plank|Mahogany plank): (?<amount>[0-9]+)");
     private final Map<Integer, Integer> homeBuildingWidgetMaterialsUsed = new HashMap<>();
+    private int sawmillLogId = 0;
+    private int sawmillPlankId = 0;
 
     public U_PlankSack(
         final Client client,
@@ -219,6 +221,48 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 }
 
                 homeBuildingWidgetMaterialsUsed.clear();
+            }),
+
+            // Sawmill, this script fires multiple times and regardless of the number of crafts
+            new OnScriptPreFired(2053).scriptConsumer(script -> {
+                final Optional<Widget> itemWidget = Optional.ofNullable(script.getScriptEvent().getSource());
+                if (!itemWidget.isPresent()) return;
+
+                this.sawmillLogId = (int)script.getScriptEvent().getArguments()[2];
+                switch (this.sawmillLogId) {
+                    case ItemID.LOGS:
+                        this.sawmillPlankId = ItemID.PLANK;
+                        break;
+                    case ItemID.OAK_LOGS:
+                        this.sawmillPlankId = ItemID.OAK_PLANK;
+                        break;
+                    case ItemID.TEAK_LOGS:
+                        this.sawmillPlankId = ItemID.TEAK_PLANK;
+                        break;
+                    case ItemID.MAHOGANY_LOGS:
+                        this.sawmillPlankId = ItemID.MAHOGANY_PLANK;
+                        break;
+                }
+            }),
+            new OnItemContainerChanged(INVENTORY).onItemContainerDifference(itemsDifference -> {
+                if (this.sawmillLogId == 0 || this.sawmillPlankId == 0) return;
+
+                int logsDifference = 0;
+                int planksDifference = 0;
+                int vouchersDifference = 0;
+                for (final ItemWithQuantity item : itemsDifference.items) {
+                    if (item.itemId == this.sawmillLogId) {
+                        logsDifference = item.quantity;
+                    } else if (item.itemId == this.sawmillPlankId) {
+                        planksDifference = item.quantity;
+                    } else if (item.itemId == ItemID.SAWMILL_VOUCHER) {
+                        vouchersDifference = item.quantity;
+                    }
+                }
+                storage.add(this.sawmillPlankId, Math.abs(logsDifference + planksDifference + vouchersDifference));
+
+                this.sawmillLogId = 0;
+                this.sawmillPlankId = 0;
             }),
         };
     }
