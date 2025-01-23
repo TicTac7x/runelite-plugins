@@ -451,7 +451,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			// Menu option not found.
 			advancedMenuEntry.option.isEmpty() ||
 			// Not menu.
-			advancedMenuEntry.target.isEmpty() && !advancedMenuEntry.option.contains("Buy-") ||
+			advancedMenuEntry.target.isEmpty() && (
+				!advancedMenuEntry.option.contains("Buy-") &&
+				!advancedMenuEntry.option.equals("Continue")
+			) ||
 			// Start use by clicking on item.
 			advancedMenuEntry.option.equals("Use") && advancedMenuEntry.action.equals("WIDGET_TARGET") ||
 			// Cancel option.

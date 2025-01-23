@@ -108,7 +108,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
-            new OnItemContainerChanged(INVENTORY).hasChatMessage("You empty as many logs as you can carry.").emptyStorageToInventory(),
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Continue").hasChatMessage("You empty as many logs as you can carry.").emptyStorageToInventory(),
 
             // Use log on basket.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
