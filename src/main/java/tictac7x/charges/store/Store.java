@@ -21,7 +21,6 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Store {
     private final Client client;
@@ -419,7 +418,7 @@ public class Store {
 
         if (inventory.isPresent()) {
             for (final Item itemNew : inventory.get().getItems()) {
-                if (isInvalidItem(itemNew)) continue;
+                if (isInvalidItem(itemNew) || quantitiesNew.containsKey(itemNew.getId())) continue;
                 quantitiesNew.put(itemNew.getId(), inventory.get().count(itemNew.getId()));
             }
 
@@ -433,7 +432,10 @@ public class Store {
         }
 
         for (final int itemId : quantitiesNew.keySet()) {
-            itemsDifference.add(new ItemWithQuantity(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
+            final int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
+            if (quantity != 0) {
+                itemsDifference.add(new ItemWithQuantity(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
+            }
         }
 
         for (final int itemId : quantitiesBefore.keySet()) {

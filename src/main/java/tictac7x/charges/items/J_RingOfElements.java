@@ -35,7 +35,11 @@ public class J_RingOfElements extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[] {
+            // Teleport.
             new OnVarbitChanged(13707).setDynamically(),
+
+            // Menu entry.
+            new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
         };
     }
 }

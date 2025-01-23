@@ -3,24 +3,16 @@ package tictac7x.charges.items;
 import com.google.gson.Gson;
 import net.runelite.api.Client;
 import net.runelite.api.ItemID;
-import net.runelite.api.Skill;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import org.apache.commons.lang3.ArrayUtils;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
-
-import java.util.Optional;
 
 public class J_AlchemistsAmulet extends ChargedItem {
     public J_AlchemistsAmulet(

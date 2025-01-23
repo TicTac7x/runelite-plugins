@@ -16,6 +16,7 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 
 import java.util.HashMap;
@@ -245,24 +246,16 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 }
             }),
             new OnItemContainerChanged(INVENTORY).onItemContainerDifference(itemsDifference -> {
-                if (this.sawmillLogId == 0 || this.sawmillPlankId == 0) return;
+                if (this.sawmillLogId == -1 || this.sawmillPlankId == -1) return;
 
-                int logsDifference = 0;
-                int planksDifference = 0;
-                int vouchersDifference = 0;
-                for (final ItemWithQuantity item : itemsDifference.items) {
-                    if (item.itemId == this.sawmillLogId) {
-                        logsDifference = item.quantity;
-                    } else if (item.itemId == this.sawmillPlankId) {
-                        planksDifference = item.quantity;
-                    } else if (item.itemId == ItemID.SAWMILL_VOUCHER) {
-                        vouchersDifference = item.quantity;
-                    }
-                }
-                storage.add(this.sawmillPlankId, Math.abs(logsDifference + planksDifference + vouchersDifference));
+                final int logsDifference = itemsDifference.getItemQuantity(sawmillLogId);
+                final int planksDifference = itemsDifference.getItemQuantity(sawmillPlankId);
+                final int vouchersDifference = itemsDifference.getItemQuantity(ItemID.SAWMILL_VOUCHER);
 
-                this.sawmillLogId = 0;
-                this.sawmillPlankId = 0;
+                storage.add(this.sawmillPlankId, Math.abs(logsDifference) + Math.abs(vouchersDifference) - Math.abs(planksDifference));
+
+                this.sawmillLogId = -1;
+                this.sawmillPlankId = -1;
             }),
         };
     }

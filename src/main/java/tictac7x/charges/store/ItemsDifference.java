@@ -18,4 +18,14 @@ public class ItemsDifference {
 
         return false;
     }
+
+    public int getItemQuantity(final int itemId) {
+        for (final ItemWithQuantity item : items) {
+            if (item.itemId == itemId) {
+                return item.quantity;
+            }
+        }
+
+        return 0;
+    }
 }
