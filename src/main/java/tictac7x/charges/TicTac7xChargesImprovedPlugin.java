@@ -127,8 +127,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.5.14";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
+		"<colHIGHLIGHT>* Option to choose item overlay location.<br>" +
+		"<colHIGHLIGHT>* Alchemist's amulet added.<br>" +
 		"<colHIGHLIGHT>* Log basket fixes.<br>" +
-		"<colHIGHLIGHT>* Alchemist's amulet added." +
+		"<colHIGHLIGHT>* Daily reset items fixes."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
