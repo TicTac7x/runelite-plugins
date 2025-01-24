@@ -1671,6 +1671,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default ItemActivity getAshSanctifierStatus() { return ItemActivity.ACTIVATED; }
 
         @ConfigItem(
+            keyName = binding_necklace,
+            name = binding_necklace,
+            description = binding_necklace,
+            section = debug
+        ) default int getBindingNecklaceCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
             keyName = bonecrusher,
             name = bonecrusher,
             description = bonecrusher,

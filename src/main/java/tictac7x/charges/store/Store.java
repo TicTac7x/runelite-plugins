@@ -21,6 +21,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Store {
     private final Client client;
@@ -483,5 +484,9 @@ public class Store {
 
     private boolean isInvalidItem(final Item item) {
         return item == null | item.getId() == -1 || item.getId() == 6512;
+    }
+
+    public void addConsumerToNextTickQueue(final Runnable consumer) {
+        nextTickQueue.add(consumer);
     }
 }

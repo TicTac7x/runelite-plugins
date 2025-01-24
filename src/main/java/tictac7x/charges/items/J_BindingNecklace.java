@@ -13,10 +13,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnMenuOptionClicked;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
 import java.util.Optional;
@@ -50,14 +47,18 @@ public class J_BindingNecklace extends ChargedItem {
             // Charge used.
             new OnChatMessage("You (partially succeed to )?bind the temple's power into (mud|lava|steam|dust|smoke|mist) runes\\.").decreaseCharges(1),
 
-            // Fully used (set charges to 17, because binding message appears right after disintegrate).
-            new OnChatMessage("Your Binding necklace has disintegrated.").setFixedCharges(17),
+            // Fully used.
+            new OnChatMessage("Your Binding necklace has disintegrated.").runConsumerOnNextGameTick(() -> setCharges(16)),
 
             // Destroy.
-            new OnMenuOptionClicked("Yes").consumer(() -> {
+            new OnScriptPreFired(1651).scriptConsumer((script) -> {
                 final Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 584, 0, 2);
-                if (destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?")) {
-                    setCharges(16);
+                if (
+                    destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?") &&
+                    script.getScriptEvent().getArguments().length >= 5 &&
+                    script.getScriptEvent().getArguments()[4].toString().equals("Yes")
+                ) {
+                    store.addConsumerToNextTickQueue(() -> setCharges(16));
                 }
             }),
         };
