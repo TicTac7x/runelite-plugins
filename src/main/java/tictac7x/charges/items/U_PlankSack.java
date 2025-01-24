@@ -30,8 +30,8 @@ import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 public class U_PlankSack extends ChargedItemWithStorage {
     private final Pattern homeBuildingPlanksPattern = Pattern.compile("(?<type>Plank|Oak plank|Teak plank|Mahogany plank): (?<amount>[0-9]+)");
     private final Map<Integer, Integer> homeBuildingWidgetMaterialsUsed = new HashMap<>();
-    private int sawmillLogId = 0;
-    private int sawmillPlankId = 0;
+    private Optional<Integer> sawmillLogId = Optional.empty();
+    private Optional<Integer> sawmillPlankId = Optional.empty();
 
     public U_PlankSack(
         final Client client,
@@ -229,33 +229,37 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 final Optional<Widget> itemWidget = Optional.ofNullable(script.getScriptEvent().getSource());
                 if (!itemWidget.isPresent()) return;
 
-                this.sawmillLogId = (int)script.getScriptEvent().getArguments()[2];
-                switch (this.sawmillLogId) {
+                final int sawmillLogId = (int) script.getScriptEvent().getArguments()[2];
+                switch (sawmillLogId) {
                     case ItemID.LOGS:
-                        this.sawmillPlankId = ItemID.PLANK;
+                        this.sawmillLogId = Optional.of(ItemID.LOGS);
+                        this.sawmillPlankId = Optional.of(ItemID.PLANK);
                         break;
                     case ItemID.OAK_LOGS:
-                        this.sawmillPlankId = ItemID.OAK_PLANK;
+                        this.sawmillLogId = Optional.of(ItemID.OAK_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemID.OAK_PLANK);
                         break;
                     case ItemID.TEAK_LOGS:
-                        this.sawmillPlankId = ItemID.TEAK_PLANK;
+                        this.sawmillLogId = Optional.of(ItemID.TEAK_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemID.TEAK_PLANK);
                         break;
                     case ItemID.MAHOGANY_LOGS:
-                        this.sawmillPlankId = ItemID.MAHOGANY_PLANK;
+                        this.sawmillLogId = Optional.of(ItemID.MAHOGANY_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemID.MAHOGANY_PLANK);
                         break;
                 }
             }),
             new OnItemContainerChanged(INVENTORY).onItemContainerDifference(itemsDifference -> {
-                if (this.sawmillLogId == -1 || this.sawmillPlankId == -1) return;
+                if (!sawmillLogId.isPresent() || !sawmillPlankId.isPresent()) return;
 
-                final int logsDifference = itemsDifference.getItemQuantity(sawmillLogId);
-                final int planksDifference = itemsDifference.getItemQuantity(sawmillPlankId);
+                final int logsDifference = itemsDifference.getItemQuantity(sawmillLogId.get());
+                final int planksDifference = itemsDifference.getItemQuantity(sawmillPlankId.get());
                 final int vouchersDifference = itemsDifference.getItemQuantity(ItemID.SAWMILL_VOUCHER);
 
-                storage.add(this.sawmillPlankId, Math.abs(logsDifference) + Math.abs(vouchersDifference) - Math.abs(planksDifference));
+                storage.add(this.sawmillPlankId.get(), Math.abs(logsDifference) + Math.abs(vouchersDifference) - Math.abs(planksDifference));
 
-                this.sawmillLogId = -1;
-                this.sawmillPlankId = -1;
+                this.sawmillLogId = Optional.empty();
+                this.sawmillPlankId = Optional.empty();
             }),
         };
     }
