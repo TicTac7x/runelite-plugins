@@ -59,14 +59,14 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
                 storage.clearAndPut(getStorageItemFromName(m.group("type")), quantity);
             }),
 
-            // Use compost on a patch, invoke at tick end, because the "You treat" message appears on same tick after this one.
+            // Use compost on a patch, run on next gametick, because the "You treat" message appears on same tick after this one.
             new OnChatMessage("Your bottomless compost bucket has a single use of (?<type>.+) ?compost remaining.").matcherConsumer(m -> {
-                clientThread.invokeAtTickEnd(() -> {
+                store.addConsumerToNextTickQueue(() -> {
                     storage.clearAndPut(getStorageItemFromName(m.group("type")), 1);
                 });
             }),
             new OnChatMessage("Your bottomless compost bucket has (?<quantity>.+) uses of (?<type>.+) ?compost remaining.").matcherConsumer(m -> {
-                clientThread.invokeAtTickEnd(() -> {
+                store.addConsumerToNextTickQueue(() -> {
                     final int quantity = getNumberFromCommaString(m.group("quantity"));
                     storage.clearAndPut(getStorageItemFromName(m.group("type")), quantity);
                 });
