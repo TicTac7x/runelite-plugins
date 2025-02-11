@@ -23,6 +23,7 @@ public abstract class TriggerBase {
     public Optional<Pattern> hasChatMessage = Optional.empty();
     public Optional<Boolean> runConsumerOnNextGameTick = Optional.empty();
     public Optional<int[]> varbitCheck = Optional.empty();
+    public Optional<int[]> isWidgetVisible = Optional.empty();
     public boolean multiTrigger = false;
 
     // Actions.
@@ -190,6 +191,11 @@ public abstract class TriggerBase {
 
     public TriggerBase varbitCheck(final int varbitId, final int varbitValue) {
         this.varbitCheck = Optional.of(new int[]{varbitId, varbitValue});
+        return this;
+    }
+
+    public TriggerBase isWidgetVisible(final int parentId, final int childId) {
+        this.isWidgetVisible = Optional.of(new int[]{parentId, childId});
         return this;
     }
 }

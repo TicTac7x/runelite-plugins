@@ -10,6 +10,7 @@ public class OnHitsplatApplied extends TriggerBase {
     public HitsplatGroup hitsplatGroup = HitsplatGroup.REGULAR;
 
     public Optional<Boolean> moreThanZeroDamage = Optional.empty();
+    public Optional<String> hasTargetName = Optional.empty();
 
     public OnHitsplatApplied(final HitsplatTarget hitsplatTarget) {
         this.hitsplatTarget = hitsplatTarget;
@@ -17,6 +18,11 @@ public class OnHitsplatApplied extends TriggerBase {
 
     public OnHitsplatApplied moreThanZeroDamage() {
         this.moreThanZeroDamage = Optional.of(true);
+        return this;
+    }
+
+    public OnHitsplatApplied hasTargetName(final String name) {
+        this.hasTargetName = Optional.of(name);
         return this;
     }
 }

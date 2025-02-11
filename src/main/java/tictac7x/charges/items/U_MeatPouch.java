@@ -13,12 +13,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.OnXpDrop;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
 import static tictac7x.charges.store.ItemContainerId.BANK;
@@ -78,6 +73,9 @@ public class U_MeatPouch extends ChargedItemWithStorage {
 
             // Empty to bank.
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
+
+            // Empty from deposit box.
+            new OnMenuOptionClicked("Empty").isWidgetVisible(192, 1).emptyStorage(),
 
             // Use meat on pouch.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),

@@ -129,8 +129,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Tome of earth added.<br>" +
 		"<colHIGHLIGHT>* Skills necklace added.<br>" +
+		"<colHIGHLIGHT>* Efaritay's aid added.<br>" +
 		"<colHIGHLIGHT>* Item overlays in bank no longer show 0 charges, when they actually have them.<br>" +
-		"<colHIGHLIGHT>* Ring of the elements last destination option shows actual altar name.<br>"
+		"<colHIGHLIGHT>* Ring of the elements last destination option shows actual altar name."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -249,6 +250,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_Camulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_DesertAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_DigsitePendant(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new J_EfaritaysAid(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_EscapeCrystal(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_GiantsoulAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_NecklaceOfPassage(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -418,11 +420,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(event));
 
 //		System.out.println("HITSPLAT | " +
-//			"actor: " + (event.getActor() == client.getLocalPlayer() ? "self" : "enemy") +
+//			"actor: " + (event.getActor() == client.getLocalPlayer() ? "self" : "enemy -> " + event.getActor().getName()) +
 //			", type: " + event.getHitsplat().getHitsplatType() +
 //			", amount:" + event.getHitsplat().getAmount() +
-//			", others = " + event.getHitsplat().isOthers() +
-//			", mine = " + event.getHitsplat().isMine()
+//			", others: " + event.getHitsplat().isOthers() +
+//			", mine: " + event.getHitsplat().isMine()
 //		);
 	}
 

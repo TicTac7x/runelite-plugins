@@ -1,9 +1,11 @@
 package tictac7x.charges.item.listeners;
 
 import net.runelite.api.Client;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStatus;
@@ -12,6 +14,7 @@ import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.AdvancedMenuEntry;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 
 public abstract class ListenerBase {
@@ -225,6 +228,13 @@ public abstract class ListenerBase {
             if (client.getVarbitValue(trigger.varbitCheck.get()[0]) != trigger.varbitCheck.get()[1]) {
                 return false;
             }
+        }
+
+        // Visible widget check.
+        if (trigger.isWidgetVisible.isPresent()) {
+            final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, trigger.isWidgetVisible.get()[0], trigger.isWidgetVisible.get()[1]);
+            if (!widget.isPresent()) return false;
+            if (widget.get().isHidden()) return false;
         }
 
         if (trigger.emptyStorageToInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {

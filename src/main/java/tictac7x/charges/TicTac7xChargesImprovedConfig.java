@@ -55,6 +55,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String desert_amulet = "desert_amulet";
     String dodgy_necklace = "dodgy_necklace";
     String dragonfire_shield = "dragonfire_shield";
+    String efaritays_aid = "efaritays_aid";
     String enchanted_lyre = "enchanted_lyre";
     String escape_crystal = "escape_crystal";
     String escape_crystal_status = "escape_crystal_status";
@@ -877,6 +878,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean crystalHalberdInfobox() { return true; }
 
         @ConfigItem(
+            keyName = efaritays_aid + infobox,
+            name = "Efaritay's aid",
+            description = "",
+            section = infoboxes
+        ) default boolean efaritaysAidInfobox() { return true; }
+
+        @ConfigItem(
             keyName = enchanted_lyre + infobox,
             name = "Enchanted Lyre",
             description = "",
@@ -1549,6 +1557,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean crystalHalberdOverlay() { return true; }
 
         @ConfigItem(
+            keyName = efaritays_aid + overlay,
+            name = "Efaritay's aid",
+            description = "",
+            section = overlays
+        ) default boolean efaritaysAidOverlay() { return true; }
+
+        @ConfigItem(
             keyName = enchanted_lyre + overlay,
             name = "Enchanted Lyre",
             description = "",
@@ -1728,6 +1743,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = bonecrusher,
             section = debug
         ) default int getBoneCrusherCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = efaritays_aid,
+            name = efaritays_aid,
+            description = efaritays_aid,
+            section = debug
+        ) default int getEfaritaysAidCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
             keyName = bonecrusher_status,

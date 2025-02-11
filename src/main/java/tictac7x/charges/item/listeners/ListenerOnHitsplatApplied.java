@@ -65,6 +65,11 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             return false;
         }
 
+        // Name check.
+        if (trigger.hasTargetName.isPresent() && (event.getActor().getName() == null || !event.getActor().getName().equals(trigger.hasTargetName.get()))) {
+            return false;
+        }
+
         return super.isValidTrigger(trigger);
     }
 }

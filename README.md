@@ -70,6 +70,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Camulet
 - Desert amulet
 - Digsite pendant
+- Efaritay's aid
 - Escape crystal
 - Giantsoul amulet
 - Necklace of passage

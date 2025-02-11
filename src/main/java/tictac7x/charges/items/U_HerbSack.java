@@ -13,12 +13,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.OnXpDrop;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ReplaceTarget;
 import tictac7x.charges.store.Store;
 
@@ -84,6 +79,9 @@ public class U_HerbSack extends ChargedItemWithStorage {
 
             // Empty to bank.
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
+
+            // Empty from deposit box.
+            new OnMenuOptionClicked("Empty").isWidgetVisible(192, 1).emptyStorage(),
 
             // Pick guam leaf.
             new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Guam herbs").onMenuImpostor(26828, 39816).addToStorage(ItemID.GRIMY_GUAM_LEAF),
