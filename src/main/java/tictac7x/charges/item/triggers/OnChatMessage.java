@@ -40,7 +40,7 @@ public class OnChatMessage extends TriggerBase {
         return this;
     }
 
-    public OnChatMessage useDifference() {
+    public OnChatMessage setDifferenceCharges() {
         this.useDifference = Optional.of(true);
         return this;
     }

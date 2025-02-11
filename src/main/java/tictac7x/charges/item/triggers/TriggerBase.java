@@ -22,6 +22,7 @@ public abstract class TriggerBase {
     public Optional<Boolean> isEquipped = Optional.empty();
     public Optional<Pattern> hasChatMessage = Optional.empty();
     public Optional<Boolean> runConsumerOnNextGameTick = Optional.empty();
+    public Optional<int[]> varbitCheck = Optional.empty();
     public boolean multiTrigger = false;
 
     // Actions.
@@ -184,6 +185,11 @@ public abstract class TriggerBase {
 
     public TriggerBase hasChatMessage(final String message) {
         this.hasChatMessage = Optional.of(Pattern.compile(message));
+        return this;
+    }
+
+    public TriggerBase varbitCheck(final int varbitId, final int varbitValue) {
+        this.varbitCheck = Optional.of(new int[]{varbitId, varbitValue});
         return this;
     }
 }

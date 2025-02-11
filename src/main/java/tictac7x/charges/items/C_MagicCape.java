@@ -40,7 +40,7 @@ public class C_MagicCape extends ChargedItem {
 
         this.triggers = new TriggerBase[] {
             // After spellbook swap.
-            new OnChatMessage("You have changed your spellbook (?<used>.+)/(?<total>.+) times today.").useDifference(),
+            new OnChatMessage("You have changed your spellbook (?<used>.+)/(?<total>.+) times today.").setDifferenceCharges(),
 
             // Spellbook swap widget.
             new OnWidgetLoaded(219, 1, 0).text("Choose spellbook: \\((?<charges>.+)/5 left\\)").setDynamically(),

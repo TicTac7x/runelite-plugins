@@ -220,6 +220,13 @@ public abstract class ListenerBase {
             }
         }
 
+        // Varbit check.
+        if (trigger.varbitCheck.isPresent()) {
+            if (client.getVarbitValue(trigger.varbitCheck.get()[0]) != trigger.varbitCheck.get()[1]) {
+                return false;
+            }
+        }
+
         if (trigger.emptyStorageToInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
             return false;
         }

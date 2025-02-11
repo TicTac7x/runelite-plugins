@@ -129,7 +129,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Tome of earth added.<br>" +
 		"<colHIGHLIGHT>* Skills necklace added.<br>" +
-		"<colHIGHLIGHT>* Item overlays in bank no longer show 0 charges, when they actually have them."
+		"<colHIGHLIGHT>* Item overlays in bank no longer show 0 charges, when they actually have them.<br>" +
+		"<colHIGHLIGHT>* Ring of the elements last destination option shows actual altar name.<br>"
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -256,7 +257,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_PendantOfAtes(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfCelestial(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfDueling(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new J_RingOfElements(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new J_RingOfTheElements(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfEndurance(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfExplorer(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfPursuit(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -452,6 +453,17 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		final AdvancedMenuEntry advancedMenuEntry = new AdvancedMenuEntry(event, client);
+
+//		System.out.println("MENU OPTION | " +
+//			"event id: " + advancedMenuEntry.eventId +
+//			", option: " + advancedMenuEntry.option +
+//			", target: " + advancedMenuEntry.target +
+//			", action id: " + advancedMenuEntry.actionId +
+//			", action name: " + advancedMenuEntry.action +
+//			", item id: " + advancedMenuEntry.itemId +
+//			", impostor id: " + advancedMenuEntry.impostorId
+//		);
+
 		if (
 			// Menu option not found.
 			advancedMenuEntry.option.isEmpty() ||
@@ -473,16 +485,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		for (final ChargedItemBase chargedItem : chargedItems) {
 			chargedItem.onMenuOptionClicked(advancedMenuEntry);
 		}
-
-//		System.out.println("MENU OPTION | " +
-//			"event id: " + advancedMenuEntry.eventId +
-//			", option: " + advancedMenuEntry.option +
-//			", target: " + advancedMenuEntry.target +
-//			", action id: " + advancedMenuEntry.actionId +
-//			", action name: " + advancedMenuEntry.action +
-//			", item id: " + advancedMenuEntry.itemId +
-//			", impostor id: " + advancedMenuEntry.impostorId
-//		);
 	}
 
 	final List<Integer> scriptIdsToIgnore = Arrays.asList(

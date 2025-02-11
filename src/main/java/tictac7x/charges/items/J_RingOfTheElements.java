@@ -14,8 +14,8 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
-public class J_RingOfElements extends ChargedItem {
-    public J_RingOfElements(
+public class J_RingOfTheElements extends ChargedItem {
+    public J_RingOfTheElements(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,
@@ -38,8 +38,14 @@ public class J_RingOfElements extends ChargedItem {
             // Teleport.
             new OnVarbitChanged(13707).setDynamically(),
 
-            // Menu entry.
+            // Unified menu entry.
             new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
+
+            // Last destination replaced with actual altar.
+            new OnMenuEntryAdded("Last Destination").replaceOption("Air Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 1),
+            new OnMenuEntryAdded("Last Destination").replaceOption("Water Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 2),
+            new OnMenuEntryAdded("Last Destination").replaceOption("Earth Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 3),
+            new OnMenuEntryAdded("Last Destination").replaceOption("Fire Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 4),
         };
     }
 }
