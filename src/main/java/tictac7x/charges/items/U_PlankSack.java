@@ -80,6 +80,10 @@ public class U_PlankSack extends ChargedItemWithStorage {
             // Use plank on sack.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
+            // Replace "Use" with proper Fill/Empty option.
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(12, 1),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(192, 1),
+
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
                 storage.removeAndPrioritizeInventory(ItemID.MAHOGANY_PLANK, 2);
@@ -329,5 +333,18 @@ public class U_PlankSack extends ChargedItemWithStorage {
         }
 
         return Optional.empty();
+    }
+
+    private String getMenuOptionForUse() {
+        if (
+            store.inventoryContainsItem(ItemID.PLANK) ||
+            store.inventoryContainsItem(ItemID.OAK_PLANK) ||
+            store.inventoryContainsItem(ItemID.TEAK_PLANK) ||
+            store.inventoryContainsItem(ItemID.MAHOGANY_PLANK)
+        ) {
+            return "Fill";
+        }
+
+        return "Empty";
     }
 }

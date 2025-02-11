@@ -33,6 +33,13 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
                 triggerUsed = true;
             }
 
+            if (trigger.replaceOptionConsumer.isPresent()) {
+                try {
+                    event.getMenuEntry().setOption(trigger.replaceOptionConsumer.get().call());
+                    triggerUsed = true;
+                } catch (final Exception ignored) {}
+            }
+
             if (trigger.replaceTargets.isPresent()) {
                 for (final ReplaceTarget replaceTarget : trigger.replaceTargets.get()) {
                     if (event.getTarget().contains(replaceTarget.target)) {
@@ -111,15 +118,6 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
 
         // Menu entry option check.
         if (trigger.menuEntryOption.isPresent() && !event.getOption().equals(trigger.menuEntryOption.get())) {
-            return false;
-        }
-
-        // Menu option replace check.
-        if (trigger.replaceOption.isPresent() && (
-            !trigger.menuEntryOption.isPresent() ||
-            !config.useCommonMenuEntries() ||
-            !event.getOption().equals(trigger.menuEntryOption.get())
-        )) {
             return false;
         }
 

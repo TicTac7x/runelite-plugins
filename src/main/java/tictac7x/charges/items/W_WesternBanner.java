@@ -11,9 +11,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnResetDaily;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
 
@@ -38,6 +36,13 @@ public class W_WesternBanner extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[]{
+            // Teleport.
+            new OnMenuOptionClicked("Teleport").hasItemId(ItemID.WESTERN_BANNER_3).setFixedCharges(0),
+
+            // Teleport already used.
+            new OnChatMessage("You have already used your available teleports for today. Try again tomorrow after the standard has recharged.").onItemClick().setFixedCharges(0),
+
+            // Daily reset.
             new OnResetDaily().requiredItem(ItemID.WESTERN_BANNER_3).setFixedCharges(1),
         };
     }

@@ -287,7 +287,7 @@ public abstract class ChargedItemBase {
                 for (final TriggerItem triggerItem : items) {
                     if (triggerItem.itemId == item.getId()) {
                         // Update item id only for items without fixed charges, to make sure that dynamic items have higher priority.
-                        if (!triggerItem.fixedCharges.isPresent()) {
+                        if (!triggerItem.fixedCharges.isPresent() || triggerItem.fixedCharges.get() != 0) {
                             itemId = Optional.of(triggerItem.itemId);
                         }
                         inInventory = true;

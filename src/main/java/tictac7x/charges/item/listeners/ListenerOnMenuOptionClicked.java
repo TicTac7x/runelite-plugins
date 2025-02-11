@@ -42,6 +42,11 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
             return false;
         }
 
+        // Item id check.
+        if (trigger.hasItemId.isPresent() && event.itemId != trigger.hasItemId.get()) {
+            return false;
+        }
+
         return super.isValidTrigger(trigger);
     }
 }

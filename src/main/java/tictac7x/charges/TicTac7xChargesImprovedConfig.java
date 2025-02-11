@@ -181,19 +181,11 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean showStorageTooltips() { return true; }
 
         @ConfigItem(
-            keyName = "menu_replacements",
-            name = "Unify menu entries",
-            description = "Replace obscure menu entries like \"Reminisce\" and \"Divine\" with \"Teleport\" and \"Check\" and show detailed herb patches names.",
-            section = general,
-            position = 7
-        ) default boolean useCommonMenuEntries() { return true; }
-
-        @ConfigItem(
             keyName = "hide_destroy",
             name = "Hide destroy menu entries",
             description = "Hide destroy menu entry from items that make no sense to destroy",
             section = general,
-            position = 8
+            position = 7
         ) default boolean hideDestroy() { return true; }
 
         @ConfigItem(
@@ -201,7 +193,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             name = "Show unlimited charges",
             description = "Show infinity symbol for items with unlimited charges",
             section = general,
-            position = 9
+            position = 8
         ) default boolean showUnlimited() { return true; }
 
     @ConfigSection(

@@ -13,6 +13,7 @@ public class OnMenuEntryAdded extends TriggerBase {
     public Optional<ReplaceTarget[]> replaceTargets = Optional.empty();
     public Optional<int[]> replaceImpostorIds = Optional.empty();
     public Optional<DynamicReplaceTarget> replaceTargetDynamically = Optional.empty();
+    public Optional<Callable<String>> replaceOptionConsumer = Optional.empty();
 
     public OnMenuEntryAdded() {
         this.menuEntryOption = Optional.empty();
@@ -48,6 +49,11 @@ public class OnMenuEntryAdded extends TriggerBase {
 
     public OnMenuEntryAdded isReplaceImpostorId(final int ...impostorIds) {
         this.replaceImpostorIds = Optional.of(impostorIds);
+        return this;
+    }
+
+    public OnMenuEntryAdded replaceOptionConsumer(Callable<String> consumer) {
+        this.replaceOptionConsumer = Optional.of(consumer);
         return this;
     }
 }
