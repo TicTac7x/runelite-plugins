@@ -9,6 +9,7 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ReplaceTarget;
 
 import java.util.ArrayList;
@@ -21,7 +22,9 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
 
     public void trigger(final MenuEntryAdded event) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(triggerBase, event)) {
+                continue;
+            };
             final OnMenuEntryAdded trigger = (OnMenuEntryAdded) triggerBase;
             boolean triggerUsed = false;
 
@@ -86,8 +89,19 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
         }
 
         // Item id check.
-        if (!trigger.replaceImpostorIds.isPresent() && event.getMenuEntry().getItemId() != chargedItem.itemId) {
-            return false;
+        if (!trigger.replaceImpostorIds.isPresent()) {
+            boolean idCheck = false;
+
+            for (final TriggerItem item : chargedItem.items) {
+                if (item.itemId == chargedItem.itemId) {
+                    idCheck = true;
+                    break;
+                }
+            }
+
+            if (!idCheck) {
+                return false;
+            }
         }
 
         // Hide config check.
@@ -133,6 +147,6 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
             return false;
         }
 
-        return true;
+        return super.isValidTrigger(trigger);
     }
 }

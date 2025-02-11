@@ -22,6 +22,7 @@ import tictac7x.charges.store.Store;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
+import java.util.Optional;
 
 public abstract class ChargedItemBase {
     public final String configKey;
@@ -250,18 +251,30 @@ public abstract class ChargedItemBase {
     private void updateItem(final ItemContainerChanged event) {
         if (
             event.getContainerId() != InventoryID.INVENTORY.getId() &&
-            event.getContainerId() != InventoryID.EQUIPMENT.getId()
+            event.getContainerId() != InventoryID.EQUIPMENT.getId() &&
+            event.getContainerId() != InventoryID.BANK.getId()
         ) return;
 
-        Integer itemId = null;
+        Optional<Integer> itemId = Optional.empty();
         boolean inEquipment = false;
         boolean inInventory = false;
+
+        if (store.bank.isPresent()) {
+            bankLooper: for (final Item item : store.bank.get().getItems()) {
+                for (final TriggerItem triggerItem : items) {
+                    if (triggerItem.itemId == item.getId()) {
+                        itemId = Optional.of(triggerItem.itemId);
+                        break bankLooper;
+                    }
+                }
+            }
+        }
 
         if (store.equipment.isPresent()) {
             equipmentLooper: for (final Item item : store.equipment.get().getItems()) {
                 for (final TriggerItem triggerItem : items) {
                     if (triggerItem.itemId == item.getId()) {
-                        itemId = triggerItem.itemId;
+                        itemId = Optional.of(triggerItem.itemId);
                         inEquipment = true;
                         break equipmentLooper;
                     }
@@ -273,8 +286,9 @@ public abstract class ChargedItemBase {
             inventoryLooper: for (final Item item : store.inventory.get().getItems()) {
                 for (final TriggerItem triggerItem : items) {
                     if (triggerItem.itemId == item.getId()) {
-                        if (itemId == null) {
-                            itemId = triggerItem.itemId;
+                        // Update item id only for items without fixed charges, to make sure that dynamic items have higher priority.
+                        if (!triggerItem.fixedCharges.isPresent()) {
+                            itemId = Optional.of(triggerItem.itemId);
                         }
                         inInventory = true;
                         break inventoryLooper;
@@ -283,7 +297,7 @@ public abstract class ChargedItemBase {
             }
         }
 
-        if (itemId !=null )this.itemId = itemId;
+        if (itemId.isPresent()) this.itemId = itemId.get();
         this.inEquipment = inEquipment;
         this.inInventory = inInventory;
     }

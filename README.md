@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.5.15.1
+# Item Charges Improved - v0.5.16
 
 Show charges of various items that are in inventory or equipped
 
@@ -41,6 +41,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Dragonfire shield / ward
 - Falador shield
 - Kharedst's memoirs / Book of the dead
+- Tome of earth
 - Tome of fire
 - Tome of water
 
@@ -85,6 +86,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Ring of shadows
 - Ring of slayer
 - Ring of suffering
+- Skills necklace
 - Xeric's talisman
 
 ### Utilities
