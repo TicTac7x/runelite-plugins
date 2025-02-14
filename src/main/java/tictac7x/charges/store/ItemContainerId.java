@@ -7,4 +7,5 @@ public final class ItemContainerId {
     public static final int BANK = InventoryID.BANK.getId();
     public static final int FORESTRY_KIT = 814;
     public static final int HUNTSMANS_KIT = 855;
+    public static final int TACKLE_BOX = 651;
 }

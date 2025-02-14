@@ -124,15 +124,12 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.16.1";
+	private final String pluginVersion = "v0.5.17";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Plank sack now has proper fill / empty options at bank instead of generic use.<br>" +
-		"<colHIGHLIGHT>* Tome of earth added.<br>" +
-		"<colHIGHLIGHT>* Skills necklace added.<br>" +
-		"<colHIGHLIGHT>* Efaritay's aid added.<br>" +
-		"<colHIGHLIGHT>* Item overlays in bank no longer show 0 charges, when they actually have them.<br>" +
-		"<colHIGHLIGHT>* Ring of the elements last destination option shows actual altar name."
+		"<colHIGHLIGHT>* Tackle box tracks items now.<br>" +
+		"<colHIGHLIGHT>* Huntsman's kit tracks items when using them on it.<br>" +
+		"<colHIGHLIGHT>* Burning amulet added."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -251,6 +248,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_BraceletOfExpeditious(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_BraceletOfFlamtaer(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_BraceletOfSlaughter(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new J_BurningAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_Camulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_DesertAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_DigsitePendant(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),

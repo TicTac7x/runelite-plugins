@@ -283,7 +283,7 @@ public abstract class ChargedItemBase {
         }
 
         if (store.inventory.isPresent()) {
-            inventoryLooper: for (final Item item : store.inventory.get().getItems()) {
+            for (final Item item : store.inventory.get().getItems()) {
                 for (final TriggerItem triggerItem : items) {
                     if (triggerItem.itemId == item.getId()) {
                         // Update item id only for items without fixed charges, to make sure that dynamic items have higher priority.
@@ -291,7 +291,6 @@ public abstract class ChargedItemBase {
                             itemId = Optional.of(triggerItem.itemId);
                         }
                         inInventory = true;
-                        break inventoryLooper;
                     }
                 }
             }

@@ -19,6 +19,8 @@ import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
+import static tictac7x.charges.store.ItemContainerId.INVENTORY;
+
 public class U_HuntsmansKit extends ChargedItemWithStorage {
     public U_HuntsmansKit(
         final Client client,
@@ -86,11 +88,15 @@ public class U_HuntsmansKit extends ChargedItemWithStorage {
             // Empty to inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
 
-            // Hide destroy option.
-            new OnMenuEntryAdded("Destroy").hide(),
-
             // Update from item container when viewing huntsmans kit contents.
             new OnItemContainerChanged(ItemContainerId.HUNTSMANS_KIT).updateStorage(),
+
+            // Use storable item on kit.
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
+
+            // Hide destroy option.
+            new OnMenuEntryAdded("Destroy").hide(),
         };
     }
 }
