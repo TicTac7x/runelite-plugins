@@ -30,7 +30,7 @@ public class W_TumekensShadow extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.tumekens_shadow, ItemID.TUMEKENS_SHADOW, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.tumekens_shadow, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TUMEKENS_SHADOW_UNCHARGED).fixedCharges(0),

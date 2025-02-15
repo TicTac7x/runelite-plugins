@@ -27,7 +27,7 @@ public class J_RingOfSlayer extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.slayer_ring, ItemID.SLAYER_RING_8, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.slayer_ring, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.SLAYER_RING_1).fixedCharges(1),
             new TriggerItem(ItemID.SLAYER_RING_2).fixedCharges(2),

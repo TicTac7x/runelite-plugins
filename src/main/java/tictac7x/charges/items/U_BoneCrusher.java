@@ -32,7 +32,7 @@ public class U_BoneCrusher extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bonecrusher, ItemID.BONECRUSHER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bonecrusher, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BONECRUSHER),

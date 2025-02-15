@@ -27,7 +27,7 @@ public class J_NecklaceOfPhoenix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.phoenix_necklace, ItemID.PHOENIX_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.phoenix_necklace, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.PHOENIX_NECKLACE).fixedCharges(1).needsToBeEquipped(),
         };

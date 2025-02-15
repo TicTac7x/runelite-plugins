@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public class ChargedItemWithStatus extends ChargedItem {
 
-    public ChargedItemWithStatus(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
-        super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public ChargedItemWithStatus(String configKey, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
+        super(configKey, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
     }
 
     public boolean isDeactivated() {
@@ -58,7 +58,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     @Override
-    public Color getTextColor() {
+    public Color getTextColor(final int itemId) {
         if (isActivated()) {
             return config.getColorActivated();
         }
@@ -67,6 +67,6 @@ public class ChargedItemWithStatus extends ChargedItem {
             return config.getColorEmpty();
         }
 
-        return super.getTextColor();
+        return super.getTextColor(itemId);
     }
 }

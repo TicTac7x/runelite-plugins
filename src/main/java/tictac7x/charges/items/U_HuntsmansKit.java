@@ -34,7 +34,7 @@ public class U_HuntsmansKit extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.huntsmans_kit, ItemID.HUNTSMANS_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.huntsmans_kit, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             new StorableItem(ItemID.BIRD_SNARE),
             new StorableItem(ItemID.BUTTERFLY_NET),

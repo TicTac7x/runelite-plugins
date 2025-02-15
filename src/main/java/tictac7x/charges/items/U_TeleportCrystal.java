@@ -28,7 +28,7 @@ public class U_TeleportCrystal extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.teleport_crystal, ItemID.TELEPORT_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.teleport_crystal, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TELEPORT_CRYSTAL).fixedCharges(0),

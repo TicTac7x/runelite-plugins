@@ -27,7 +27,7 @@ public class DharoksGreataxe extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.DHAROKS_GREATAXE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.barrows_gear, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DHAROKS_GREATAXE).fixedCharges(100),
             new TriggerItem(ItemID.DHAROKS_GREATAXE_100).fixedCharges(100),

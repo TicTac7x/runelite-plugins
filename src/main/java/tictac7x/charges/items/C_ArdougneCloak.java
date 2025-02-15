@@ -31,7 +31,7 @@ public class C_ArdougneCloak extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ardougne_cloak, ItemID.ARDOUGNE_CLOAK_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ardougne_cloak, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ARDOUGNE_CLOAK_1).fixedCharges(Charges.UNLIMITED),
@@ -42,8 +42,8 @@ public class C_ArdougneCloak extends ChargedItem {
 
         this.triggers = new TriggerBase[] {
             new OnChatMessage("You have used (?<used>.+) of your (?<total>.+) Ardougne Farm teleports for today.").setDifferenceCharges(),
-            new OnResetDaily().specificItem(ItemID.ARDOUGNE_CLOAK_2).setFixedCharges(3),
-            new OnResetDaily().specificItem(ItemID.ARDOUGNE_CLOAK_3).setFixedCharges(5),
+            new OnResetDaily(ItemID.ARDOUGNE_CLOAK_2).setFixedCharges(3),
+            new OnResetDaily(ItemID.ARDOUGNE_CLOAK_3).setFixedCharges(5),
         };
     }
 }

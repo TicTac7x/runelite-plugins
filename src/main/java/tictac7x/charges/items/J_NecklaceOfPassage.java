@@ -27,7 +27,7 @@ public class J_NecklaceOfPassage extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.necklace_of_passage, ItemID.NECKLACE_OF_PASSAGE1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.necklace_of_passage, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.NECKLACE_OF_PASSAGE1).fixedCharges(1),
             new TriggerItem(ItemID.NECKLACE_OF_PASSAGE2).fixedCharges(2),

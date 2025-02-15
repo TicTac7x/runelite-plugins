@@ -30,7 +30,7 @@ public class S_TomeOfEarth extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.tome_of_earth, ItemID.TOME_OF_EARTH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.tome_of_earth, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TOME_OF_EARTH_EMPTY).fixedCharges(0),

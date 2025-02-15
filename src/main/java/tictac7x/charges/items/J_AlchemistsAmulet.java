@@ -27,7 +27,7 @@ public class J_AlchemistsAmulet extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemID.ALCHEMISTS_AMULET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.alchemists_amulet, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ALCHEMISTS_AMULET).needsToBeEquipped(), //Uncharged 29988

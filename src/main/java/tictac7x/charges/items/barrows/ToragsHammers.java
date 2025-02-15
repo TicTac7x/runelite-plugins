@@ -27,7 +27,7 @@ public class ToragsHammers extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.TORAGS_HAMMERS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.barrows_gear, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TORAGS_HAMMERS).fixedCharges(100),
             new TriggerItem(ItemID.TORAGS_HAMMERS_100).fixedCharges(100),

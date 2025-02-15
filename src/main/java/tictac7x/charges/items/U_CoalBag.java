@@ -29,7 +29,7 @@ public class U_CoalBag extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.coal_bag, ItemID.COAL_BAG_12019, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.coal_bag, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage
             .storableItems(new StorableItem(ItemID.COAL).checkName("Coal"))
             .setMaximumTotalQuantity(27)

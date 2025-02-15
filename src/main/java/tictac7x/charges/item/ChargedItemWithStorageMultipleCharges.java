@@ -13,12 +13,12 @@ import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.store.Store;
 
 public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorage {
-    public ChargedItemWithStorageMultipleCharges(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
-        super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public ChargedItemWithStorageMultipleCharges(String configKey, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
+        super(configKey, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         String individualCharges = "";
 
         int validItems = 0;

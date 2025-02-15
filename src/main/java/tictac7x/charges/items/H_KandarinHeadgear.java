@@ -32,7 +32,7 @@ public class H_KandarinHeadgear extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.kandarin_headgear, ItemID.KANDARIN_HEADGEAR_3, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.kandarin_headgear, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KANDARIN_HEADGEAR_3),
@@ -47,7 +47,7 @@ public class H_KandarinHeadgear extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem(ItemID.KANDARIN_HEADGEAR_3).setFixedCharges(1),
+            new OnResetDaily(ItemID.KANDARIN_HEADGEAR_3).setFixedCharges(1),
         };
     }
 }

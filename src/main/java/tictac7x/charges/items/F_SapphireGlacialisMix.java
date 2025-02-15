@@ -27,7 +27,7 @@ public class F_SapphireGlacialisMix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.sapphire_glacialis_mix, ItemID.SAPPHIRE_GLACIALIS_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.sapphire_glacialis_mix, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.SAPPHIRE_GLACIALIS_MIX_1).fixedCharges(1),
@@ -36,7 +36,7 @@ public class F_SapphireGlacialisMix extends ChargedItem {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip(final int itemId) {
         return "Sapphrie glacialis mix: " + getTotalCharges();
     }
 }

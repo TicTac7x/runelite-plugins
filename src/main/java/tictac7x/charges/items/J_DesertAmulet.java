@@ -31,7 +31,7 @@ public class J_DesertAmulet extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.desert_amulet, ItemID.DESERT_AMULET_2, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.desert_amulet, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DESERT_AMULET_2),
@@ -41,8 +41,8 @@ public class J_DesertAmulet extends ChargedItem {
 
         this.triggers = new TriggerBase[]{
             new OnChatMessage("You have already used your available teleports for today.").setFixedCharges(0),
-            new OnResetDaily().specificItem(ItemID.DESERT_AMULET_2).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.DESERT_AMULET_3).setFixedCharges(1),
+            new OnResetDaily(ItemID.DESERT_AMULET_2).setFixedCharges(1),
+            new OnResetDaily(ItemID.DESERT_AMULET_3).setFixedCharges(1),
         };
     }
 }

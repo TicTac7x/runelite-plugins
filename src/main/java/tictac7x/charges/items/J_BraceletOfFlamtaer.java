@@ -29,7 +29,7 @@ public class J_BraceletOfFlamtaer extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_flamtaer, ItemID.FLAMTAER_BRACELET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bracelet_of_flamtaer, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.FLAMTAER_BRACELET).needsToBeEquipped(),

@@ -36,7 +36,7 @@ public class U_TackleBox extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.tackle_box, ItemID.TACKLE_BOX, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.tackle_box, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             new StorableItem(ItemID.ANGLER_HAT),
             new StorableItem(ItemID.ANGLER_TOP),

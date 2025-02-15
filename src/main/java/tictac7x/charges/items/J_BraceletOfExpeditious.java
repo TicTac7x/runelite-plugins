@@ -29,7 +29,7 @@ public class J_BraceletOfExpeditious extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_expeditious, ItemID.EXPEDITIOUS_BRACELET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bracelet_of_expeditious, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.EXPEDITIOUS_BRACELET).needsToBeEquipped(),

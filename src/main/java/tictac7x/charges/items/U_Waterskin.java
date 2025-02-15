@@ -27,7 +27,7 @@ public class U_Waterskin extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.waterskin, ItemID.WATERSKIN0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.waterskin, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.WATERSKIN0).fixedCharges(0),
             new TriggerItem(ItemID.WATERSKIN1).fixedCharges(1),

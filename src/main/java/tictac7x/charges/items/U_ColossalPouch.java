@@ -36,7 +36,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.colossal_pouch, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             new StorableItem(ItemID.RUNE_ESSENCE),
             new StorableItem(ItemID.PURE_ESSENCE),
@@ -132,7 +132,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
     }
 
     @Override
-    public Color getTextColor() {
+    public Color getTextColor(final int itemId) {
         if (storage.isFull()) {
             if (config.getColossalPouchDecayCount() == 0) {
                 return config.getColorActivated();
@@ -141,7 +141,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             }
         }
 
-        return super.getTextColor();
+        return super.getTextColor(itemId);
     }
 
     private final int[] CAPACITY_85 = {40, 35, 30, 25, 20, 15, 10, 5};

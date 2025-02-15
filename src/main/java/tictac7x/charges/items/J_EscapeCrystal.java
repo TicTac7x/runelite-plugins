@@ -36,7 +36,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemID.ESCAPE_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.escape_crystal, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ESCAPE_CRYSTAL).quantityCharges().hideOverlay(),
@@ -92,12 +92,12 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     @Override
-    public Color getTextColor() {
-        return isAboutToActivate() ? Color.YELLOW : super.getTextColor();
+    public Color getTextColor(final int itemId) {
+        return isAboutToActivate() ? Color.YELLOW : super.getTextColor(itemId);
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         if (config.getEscapeCrystalStatus() == ItemActivity.DEACTIVATED || (!inInventory() && !inEquipment())) { return "∞"; }
         if (config.getEscapeCrystalInactivityPeriod() == Charges.UNKNOWN) { return "?"; }
 

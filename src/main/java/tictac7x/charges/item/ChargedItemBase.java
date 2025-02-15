@@ -34,10 +34,7 @@ public abstract class ChargedItemBase {
     protected final ChatMessageManager chatMessageManager;
     protected final Notifier notifier;
     protected final TicTac7xChargesImprovedConfig config;
-
     public final Store store;
-
-    public int itemId;
 
     public TriggerItem[] items = new TriggerItem[]{};
     public TriggerBase[] triggers = new TriggerBase[]{};
@@ -58,12 +55,8 @@ public abstract class ChargedItemBase {
     private final ListenerOnMenuOptionClicked listenerOnMenuOptionClicked;
     private final ListenerOnScriptPreFired listenerOnScriptPreFired;
 
-    private boolean inInventory = false;
-    private boolean inEquipment = false;
-
     public ChargedItemBase(
         final String configKey,
-        final int itemId,
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,
@@ -74,7 +67,6 @@ public abstract class ChargedItemBase {
         final TicTac7xChargesImprovedConfig config,
         final Store store
     ) {
-        this.itemId = itemId;
         this.configKey = configKey;
 
         this.client = client;
@@ -104,52 +96,105 @@ public abstract class ChargedItemBase {
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(client, itemManager, this, notifier, config);
     }
 
-    public abstract String getCharges();
+    public abstract String getCharges(final int itemId);
 
     public abstract String getTotalCharges();
 
+    public boolean inInventory(final int itemId) {
+        return store.inventoryContainsItem(itemId);
+    }
+
+    public boolean inEquipment(final int itemId) {
+        return store.equipmentContainsItem(itemId);
+    }
+
     public boolean inInventory() {
-        return inInventory;
-    }
-
-    public boolean inEquipment() {
-        return inEquipment;
-    }
-
-    private boolean inInventoryOrEquipment() {
-        return inInventory || inEquipment;
-    }
-
-    public String getTooltip() {
-        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(String.valueOf(getCharges()), JagexColors.MENU_TARGET);
-    }
-
-    @Nonnull
-    private TriggerItem getCurrentItem() {
-        for (final TriggerItem triggerItem : items) {
-            if (triggerItem.itemId == itemId) {
-                return triggerItem;
+        for (final TriggerItem item : items) {
+            if (store.inventoryContainsItem(item.itemId)) {
+                return true;
             }
         }
 
-        return null;
+        return false;
     }
 
-    public String getItemName() {
+    public boolean inEquipment() {
+        for (final TriggerItem item : items) {
+            if (store.equipmentContainsItem(item.itemId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean inInventoryOrEquipment(final int itemId) {
+        return inInventory(itemId) || inEquipment(itemId);
+    }
+
+    private boolean inInventoryOrEquipment() {
+        boolean inInventory = false;
+        boolean inEquipment = false;
+
+        for (final TriggerItem item : items) {
+            if (store.inventoryContainsItem(item.itemId)) {
+                inInventory = true;
+            }
+            if (store.equipmentContainsItem(item.itemId)) {
+                inEquipment = true;
+            }
+        }
+
+        return inInventory || inEquipment;
+    }
+
+    public String getTooltip(final int itemId) {
+        return
+            getItemName(itemId) +
+            (needsToBeEquipped(itemId) && !inEquipment()
+                ? " (needs to be equipped)"
+                : ""
+            ) + ": " +
+            ColorUtil.wrapWithColorTag(String.valueOf(getCharges(itemId)), JagexColors.MENU_TARGET);
+    }
+
+    public String getItemName(final int itemId) {
         return itemManager.getItemComposition(itemId).getName();
     }
 
-    public boolean needsToBeEquipped() {
-        return getCurrentItem().needsToBeEquipped.isPresent();
+    public boolean isCorrectItem(final String itemName) {
+        for (final TriggerItem item : items) {
+            if (itemManager.getItemComposition(item.itemId).getName().equals(itemName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public Color getTextColor() {
-        if (getCharges().equals("?")) {
+    public boolean needsToBeEquipped(final int itemId) {
+        for (final TriggerItem triggerItem : items) {
+            if (triggerItem.itemId == itemId) {
+                return triggerItem.needsToBeEquipped.isPresent() && triggerItem.needsToBeEquipped.get();
+            }
+        }
+
+        return false;
+    }
+
+    public Color getTextColor(final int itemId) {
+        if (getCharges(itemId).equals("?")) {
             return config.getColorUnknown();
         }
 
-        if (getCharges().equals("0") || needsToBeEquipped() && !inEquipment()) {
+        if (getCharges(itemId).equals("0")) {
             return config.getColorEmpty();
+        }
+
+        for (final TriggerItem item : items) {
+            if (item.itemId == itemId && item.needsToBeEquipped.isPresent() && item.needsToBeEquipped.get() && !inEquipment(itemId)) {
+                return config.getColorEmpty();
+            }
         }
 
         return config.getColorDefault();
@@ -213,8 +258,6 @@ public abstract class ChargedItemBase {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        updateItem(event);
-
         if (!inInventoryOrEquipment()) return;
         listenerOnItemContainerChanged.trigger(event);
     }
@@ -246,58 +289,5 @@ public abstract class ChargedItemBase {
     public void onScriptPreFired(final ScriptPreFired event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnScriptPreFired.trigger(event);
-    }
-
-    private void updateItem(final ItemContainerChanged event) {
-        if (
-            event.getContainerId() != InventoryID.INVENTORY.getId() &&
-            event.getContainerId() != InventoryID.EQUIPMENT.getId() &&
-            event.getContainerId() != InventoryID.BANK.getId()
-        ) return;
-
-        Optional<Integer> itemId = Optional.empty();
-        boolean inEquipment = false;
-        boolean inInventory = false;
-
-        if (store.bank.isPresent()) {
-            bankLooper: for (final Item item : store.bank.get().getItems()) {
-                for (final TriggerItem triggerItem : items) {
-                    if (triggerItem.itemId == item.getId()) {
-                        itemId = Optional.of(triggerItem.itemId);
-                        break bankLooper;
-                    }
-                }
-            }
-        }
-
-        if (store.equipment.isPresent()) {
-            equipmentLooper: for (final Item item : store.equipment.get().getItems()) {
-                for (final TriggerItem triggerItem : items) {
-                    if (triggerItem.itemId == item.getId()) {
-                        itemId = Optional.of(triggerItem.itemId);
-                        inEquipment = true;
-                        break equipmentLooper;
-                    }
-                }
-            }
-        }
-
-        if (store.inventory.isPresent()) {
-            for (final Item item : store.inventory.get().getItems()) {
-                for (final TriggerItem triggerItem : items) {
-                    if (triggerItem.itemId == item.getId()) {
-                        // Update item id only for items without fixed charges, to make sure that dynamic items have higher priority.
-                        if (!triggerItem.fixedCharges.isPresent() || triggerItem.fixedCharges.get() != 0) {
-                            itemId = Optional.of(triggerItem.itemId);
-                        }
-                        inInventory = true;
-                    }
-                }
-            }
-        }
-
-        if (itemId.isPresent()) this.itemId = itemId.get();
-        this.inEquipment = inEquipment;
-        this.inInventory = inInventory;
     }
 }

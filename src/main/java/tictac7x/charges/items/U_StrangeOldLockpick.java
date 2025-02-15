@@ -29,7 +29,7 @@ public class U_StrangeOldLockpick extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.strange_old_lockpick, ItemID.STRANGE_OLD_LOCKPICK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.strange_old_lockpick, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.STRANGE_OLD_LOCKPICK),

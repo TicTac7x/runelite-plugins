@@ -28,7 +28,7 @@ public class W_WesternBanner extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.western_banner, ItemID.WESTERN_BANNER_3, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.western_banner, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.WESTERN_BANNER_3),
@@ -43,7 +43,7 @@ public class W_WesternBanner extends ChargedItem {
             new OnChatMessage("You have already used your available teleports for today. Try again tomorrow after the standard has recharged.").onItemClick().setFixedCharges(0),
 
             // Daily reset.
-            new OnResetDaily().requiredItem(ItemID.WESTERN_BANNER_3).setFixedCharges(1),
+            new OnResetDaily(ItemID.WESTERN_BANNER_3).setFixedCharges(1),
         };
     }
 }

@@ -35,7 +35,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.forestry_kit, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.storage = storage.storableItems(
             new StorableItem(ItemID.ANIMAINFUSED_BARK).specificOrder(1),

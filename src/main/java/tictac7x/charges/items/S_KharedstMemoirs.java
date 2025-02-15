@@ -30,7 +30,7 @@ public class S_KharedstMemoirs extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.kharedsts_memoirs, ItemID.KHAREDSTS_MEMOIRS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.kharedsts_memoirs, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KHAREDSTS_MEMOIRS),

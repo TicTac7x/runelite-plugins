@@ -32,7 +32,7 @@ public class U_MeatPouch extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.meat_pouch, ItemID.SMALL_MEAT_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.meat_pouch, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             // Tracking.
             new StorableItem(ItemID.RAW_BEAST_MEAT),

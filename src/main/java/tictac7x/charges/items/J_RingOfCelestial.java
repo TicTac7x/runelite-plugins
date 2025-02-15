@@ -29,7 +29,7 @@ public class J_RingOfCelestial extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.celestial_ring, ItemID.CELESTIAL_RING, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.celestial_ring, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.CELESTIAL_RING_UNCHARGED).fixedCharges(0),

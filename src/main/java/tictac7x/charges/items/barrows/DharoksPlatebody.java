@@ -27,7 +27,7 @@ public class DharoksPlatebody extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.DHAROKS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.barrows_gear, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DHAROKS_PLATEBODY).fixedCharges(100),
             new TriggerItem(ItemID.DHAROKS_PLATEBODY_100).fixedCharges(100),

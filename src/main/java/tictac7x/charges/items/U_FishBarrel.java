@@ -42,7 +42,7 @@ public class U_FishBarrel extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.fish_barrel, ItemID.FISH_BARREL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.fish_barrel, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.setMaximumTotalQuantity(28).storableItems(
             // Small net
             new StorableItem(ItemID.RAW_SHRIMPS).checkName("Shrimp"),

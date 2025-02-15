@@ -74,14 +74,14 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         }
 
         // Invalid item.
-        if (!chargedItem.isPresent() || !triggerItem.isPresent()) return;
+        if (!chargedItem.isPresent()) return;
 
         if (
             // Item overlay disabled.
             !isChargedItemOverlayEnabled(chargedItem.get()) ||
 
             // Infinity charges hidden.
-            !config.showUnlimited() && chargedItem.get().getCharges().equals("∞") ||
+            !config.showUnlimited() && chargedItem.get().getCharges(itemId).equals("∞") ||
             !config.showUnlimited() && triggerItem.get().fixedCharges.isPresent() && triggerItem.get().fixedCharges.get().equals(Charges.UNLIMITED) ||
 
             // Hide overlays in bank.
@@ -92,8 +92,8 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         ) return;
 
         // Get default charges from charged item.
-        String charges = chargedItem.get().getCharges();
-        Color color = chargedItem.get().getTextColor();
+        String charges = chargedItem.get().getCharges(itemId);
+        Color color = chargedItem.get().getTextColor(itemId);
 
         // Override charges and color for fixed items.
         for (final TriggerItem item : chargedItem.get().items) {
@@ -134,17 +134,17 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         charges_component.setColor(color);
 
         // Override for bank items.
-        if (isBankWidget(widgetItem) && !chargedItem.get().getCharges().equals("?")) {
+        if (isBankWidget(widgetItem) && !chargedItem.get().getCharges(itemId).equals("?")) {
             charges_component.setColor(config.getColorDefault());
         }
 
         charges_component.render(graphics);
 
         // Charged item with storage
-        renderTooltip(chargedItem.get(), widgetItem);
+        renderTooltip(chargedItem.get(), itemId, widgetItem);
     }
 
-    private void renderTooltip(final ChargedItemBase chargedItem, final WidgetItem widgetItem) {
+    private void renderTooltip(final ChargedItemBase chargedItem, final int itemId, final WidgetItem widgetItem) {
         // Config, not storage item, empty storage checks.
         if (
             !config.showStorageTooltips() ||
@@ -156,7 +156,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         if (!widgetItem.getCanvasBounds().contains(mousePosition.getX(), mousePosition.getY())) return;
 
 
-        final String tooltip = chargedItem.getTooltip();
+        final String tooltip = chargedItem.getTooltip(itemId);
         if (!tooltip.isEmpty()) {
             tooltipManager.addFront(new Tooltip(tooltip));
         }

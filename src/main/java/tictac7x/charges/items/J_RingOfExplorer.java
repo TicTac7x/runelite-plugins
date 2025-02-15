@@ -36,7 +36,7 @@ public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.explorers_ring, ItemID.EXPLORERS_RING_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.explorers_ring, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.storableItems(
             new StorableItem(ExplorersRingStorageItemId.ALCHEMY).displayName("Alchemy charges"),
             new StorableItem(ExplorersRingStorageItemId.TELEPORTS).displayName("Teleports"),
@@ -59,28 +59,28 @@ public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
             // Check.
             new OnMenuOptionClicked("Check").onItemClick().consumer(() -> updateStorage()),
 
-            new OnResetDaily().specificItem(ItemID.EXPLORERS_RING_1).consumer(() -> {
+            new OnResetDaily(ItemID.EXPLORERS_RING_1).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 2);
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, 0);
             }),
 
-            new OnResetDaily().specificItem(ItemID.EXPLORERS_RING_2).consumer(() -> {
+            new OnResetDaily(ItemID.EXPLORERS_RING_2).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 3);
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, 3);
             }),
 
-            new OnResetDaily().specificItem(ItemID.EXPLORERS_RING_3).consumer(() -> {
+            new OnResetDaily(ItemID.EXPLORERS_RING_3).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 4);
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, Charges.UNLIMITED);
             }),
 
-            new OnResetDaily().specificItem(ItemID.EXPLORERS_RING_4).consumer(() -> {
+            new OnResetDaily(ItemID.EXPLORERS_RING_4).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 3);
@@ -97,7 +97,7 @@ public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
 
         // Energy restores.
         final int energyRestoresUsed = client.getVarbitValue(Varbits.EXPLORER_RING_RUNENERGY);
-        switch (itemId) {
+        switch (getItemId()) {
             case ItemID.EXPLORERS_RING_1:
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 2 - energyRestoresUsed);
                 break;
@@ -114,7 +114,7 @@ public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
 
         // Teleports.
         final int teleportsUsed = client.getVarbitValue(Varbits.EXPLORER_RING_TELEPORTS);
-        switch (itemId) {
+        switch (getItemId()) {
             case ItemID.EXPLORERS_RING_1:
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, 0);
                 break;
@@ -126,5 +126,19 @@ public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, Charges.UNLIMITED);
                 break;
         }
+    }
+
+    private int getItemId() {
+        if (store.inventoryOrEquipmentContainsItem(ItemID.EXPLORERS_RING_1)) {
+            return ItemID.EXPLORERS_RING_1;
+        } else if (store.inventoryOrEquipmentContainsItem(ItemID.EXPLORERS_RING_2)) {
+            return ItemID.EXPLORERS_RING_2;
+        } else if (store.inventoryOrEquipmentContainsItem(ItemID.EXPLORERS_RING_3)) {
+            return ItemID.EXPLORERS_RING_3;
+        } else if (store.inventoryOrEquipmentContainsItem(ItemID.EXPLORERS_RING_4)) {
+            return ItemID.EXPLORERS_RING_4;
+        }
+
+        return -1;
     }
 }

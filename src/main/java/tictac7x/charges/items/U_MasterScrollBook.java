@@ -34,7 +34,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.master_scroll_book, ItemID.MASTER_SCROLL_BOOK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.master_scroll_book, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.setMaximumIndividualQuantity(1000).storableItems(
             new StorableItem(ItemID.NARDAH_TELEPORT).displayName("Nardah").specificOrder(1),
             new StorableItem(ItemID.DIGSITE_TELEPORT).displayName("Digsite").specificOrder(2),
@@ -87,13 +87,13 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         final int varbit10966 = client.getVarbitValue(10966);
         final int varbit10968 = client.getVarbitValue(10968);
 
         // Default teleport not set, show all scrolls.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return super.getCharges();
+            return super.getCharges(itemId);
         }
 
         // Default teleport set, but no teleports.
@@ -105,26 +105,26 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip(final int itemId) {
         final int varbit10966 = client.getVarbitValue(10966);
         final int varbit10968 = client.getVarbitValue(10968);
 
         // Default teleport not set, show all scrolls.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return super.getTooltip();
+            return super.getTooltip(itemId);
         }
 
         final int teleportScrollIndex = varbit10968 * 15 + varbit10966 - 1;
 
         // Default teleport set, but no teleports.
         if (!storage.getStorage().containsKey(storage.getStorableItems()[teleportScrollIndex].itemId)) {
-            return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", config.getColorEmpty()));
+            return super.getTooltip(itemId).replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", config.getColorEmpty()));
         }
 
         final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[teleportScrollIndex];
         final StorageItem defaultTeleportScrollStorageItem = storage.getStorage().get(defaultTeleportScrollStoreableItem.itemId);
 
-        return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=ff9040>.+?</col>", getDefaultTeleportLocation() + ": <col=00ff00>" + defaultTeleportScrollStorageItem.quantity + "</col>");
+        return super.getTooltip(itemId).replaceAll(getDefaultTeleportLocation() + ": <col=ff9040>.+?</col>", getDefaultTeleportLocation() + ": <col=00ff00>" + defaultTeleportScrollStorageItem.quantity + "</col>");
     }
 
     private String getDefaultTeleportLocation() {
@@ -133,7 +133,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
         // Default teleport not set, show default.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return itemManager.getItemComposition(itemId).getName();
+            return itemManager.getItemComposition(ItemID.MASTER_SCROLL_BOOK).getName();
 
         // Default teleport set, show correct location display name.
         } else {

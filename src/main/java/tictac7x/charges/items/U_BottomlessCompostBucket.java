@@ -37,7 +37,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemID.BOTTOMLESS_COMPOST_BUCKET_22997, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.setMaximumTotalQuantity(10_000).storableItems(
             new StorableItem(ItemID.ULTRACOMPOST).checkName("ultra"),
             new StorableItem(ItemID.SUPERCOMPOST).checkName("super"),

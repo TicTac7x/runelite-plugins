@@ -31,7 +31,7 @@ public class C_MagicCape extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.magic_cape, ItemID.MAGIC_CAPE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.magic_cape, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.MAGIC_CAPE),
@@ -46,7 +46,8 @@ public class C_MagicCape extends ChargedItem {
             new OnWidgetLoaded(219, 1, 0).text("Choose spellbook: \\((?<charges>.+)/5 left\\)").setDynamically(),
 
             // Daily reset.
-            new OnResetDaily().setFixedCharges(5),
+            new OnResetDaily(ItemID.MAGIC_CAPE).setFixedCharges(5),
+            new OnResetDaily(ItemID.MAGIC_CAPET).setFixedCharges(5),
         };
     }
 }

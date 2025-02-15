@@ -42,7 +42,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.log_basket, ItemID.LOG_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.log_basket, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemID.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
             new StorableItem(ItemID.ACHEY_TREE_LOGS).checkName("Achey tree logs"),

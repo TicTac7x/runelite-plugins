@@ -32,7 +32,7 @@ public class B_FremennikSeaBoots extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, ItemID.FREMENNIK_SEA_BOOTS_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.FREMENNIK_SEA_BOOTS_1),
@@ -49,9 +49,9 @@ public class B_FremennikSeaBoots extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem(ItemID.FREMENNIK_SEA_BOOTS_1).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FREMENNIK_SEA_BOOTS_2).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FREMENNIK_SEA_BOOTS_3).setFixedCharges(1),
+            new OnResetDaily(ItemID.FREMENNIK_SEA_BOOTS_1).setFixedCharges(1),
+            new OnResetDaily(ItemID.FREMENNIK_SEA_BOOTS_2).setFixedCharges(1),
+            new OnResetDaily(ItemID.FREMENNIK_SEA_BOOTS_3).setFixedCharges(1),
         };
     }
 }

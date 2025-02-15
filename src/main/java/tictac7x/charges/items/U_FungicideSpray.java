@@ -27,7 +27,7 @@ public class U_FungicideSpray extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.fungicide_spray, ItemID.FUNGICIDE_SPRAY_0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.fungicide_spray, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.FUNGICIDE_SPRAY_0).fixedCharges(0),
             new TriggerItem(ItemID.FUNGICIDE_SPRAY_1).fixedCharges(1),

@@ -30,7 +30,7 @@ public class W_TridentOfTheSeas extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.trident_of_the_seas, ItemID.TRIDENT_OF_THE_SEAS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.trident_of_the_seas, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.UNCHARGED_TRIDENT).fixedCharges(0),

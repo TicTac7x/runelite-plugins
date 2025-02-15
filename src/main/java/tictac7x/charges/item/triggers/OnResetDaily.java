@@ -3,10 +3,9 @@ package tictac7x.charges.item.triggers;
 import java.util.Optional;
 
 public class OnResetDaily extends TriggerBase {
-    public Optional<Integer> resetSpecificItem = Optional.empty();
+    public final int resetSpecificItem;
 
-    public OnResetDaily specificItem(final int itemId) {
-        this.resetSpecificItem = Optional.of(itemId);
-        return this;
+    public OnResetDaily(final int resetSpecificItem) {
+        this.resetSpecificItem = resetSpecificItem;
     }
 }

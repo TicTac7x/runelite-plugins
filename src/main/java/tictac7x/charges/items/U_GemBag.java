@@ -33,7 +33,7 @@ public class U_GemBag extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.gem_bag, ItemID.GEM_BAG_12020, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.gem_bag, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumIndividualQuantity(60).storableItems(
             new StorableItem(ItemID.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
             new StorableItem(ItemID.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),

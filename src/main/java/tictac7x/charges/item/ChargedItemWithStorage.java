@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
 public class ChargedItemWithStorage extends ChargedItemBase {
     public Storage storage;
 
-    public ChargedItemWithStorage(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
-        super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
+    public ChargedItemWithStorage(String configKey, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
+        super(configKey,client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
         this.storage = new Storage(this, configKey, itemManager, configManager, store, gson);
 
         clientThread.invokeLater(() -> {
@@ -35,7 +35,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip(final int itemId) {
         String tooltip = "";
         for (final StorageItem storageItem : storage.getStorage().values().stream()
             .sorted(Comparator.comparing(storageItem -> storage.getStorageItemOrder(storageItem)))
@@ -71,7 +71,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         int quantity = getQuantity();
 
         if (quantity == Charges.UNKNOWN) {
@@ -83,7 +83,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
     @Override
     public String getTotalCharges() {
-        return getCharges();
+        return "0";
     }
 
     private void loadCharges() {
@@ -91,7 +91,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public Color getTextColor() {
+    public Color getTextColor(final int itemId) {
         // Full storage is positive.
         if (storage.emptyIsNegative && storage.isFull()) {
             return config.getColorActivated();
@@ -100,7 +100,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
         // Full storage is negative.
         if (
             storage.emptyIsNegative && storage.isEmpty() ||
-            !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getCharges().equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
+            !storage.emptyIsNegative && storage.getMaximumTotalQuantity(itemId).isPresent() && getCharges(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity(itemId).get()))
         ) {
             return config.getColorEmpty();
         }
@@ -110,6 +110,6 @@ public class ChargedItemWithStorage extends ChargedItemBase {
             return config.getColorDefault();
         }
 
-        return super.getTextColor();
+        return super.getTextColor(itemId);
     }
 }

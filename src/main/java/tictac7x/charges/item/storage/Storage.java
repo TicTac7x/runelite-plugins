@@ -91,8 +91,8 @@ public class Storage {
     }
 
     public void add(final int itemId, final int quantity) {
-        if (getMaximumTotalQuantity().isPresent()) {
-            if (getCharges() == getMaximumTotalQuantity().get()) {
+        if (getMaximumTotalQuantity(itemId).isPresent()) {
+            if (getCharges() == getMaximumTotalQuantity(itemId).get()) {
                 return;
             }
         }
@@ -166,7 +166,7 @@ public class Storage {
             quantity = maximumIndividualQuantity.get();
         }
 
-        final Optional<Integer> maximumTotalQuantity = getMaximumTotalQuantity();
+        final Optional<Integer> maximumTotalQuantity = getMaximumTotalQuantity(itemId);
         if (maximumTotalQuantity.isPresent()) {
             int newTotalQuantity = 0;
             for (final StorageItem storageItem : storage.values()) {
@@ -333,10 +333,10 @@ public class Storage {
         return false;
     }
 
-    public Optional<Integer> getMaximumTotalQuantity() {
+    public Optional<Integer> getMaximumTotalQuantity(final int itemId) {
         // Maximum storage from trigger item.
         for (final TriggerItem item : chargedItem.items) {
-            if (chargedItem.itemId == item.itemId && item.maxCharges.isPresent()) {
+            if (itemId == item.itemId && item.maxCharges.isPresent()) {
                 return item.maxCharges;
             }
         }

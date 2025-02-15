@@ -27,7 +27,7 @@ public class F_SunlightMothMix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.sunlight_moth_mix, ItemID.SUNLIGHT_MOTH_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.sunlight_moth_mix, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.SUNLIGHT_MOTH_MIX_1).fixedCharges(1),
@@ -36,7 +36,7 @@ public class F_SunlightMothMix extends ChargedItem {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip(final int itemId) {
         return "Sunlight moth mix: " + getTotalCharges();
     }
 }

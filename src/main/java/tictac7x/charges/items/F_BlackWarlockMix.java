@@ -27,7 +27,7 @@ public class F_BlackWarlockMix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.black_warlock_mix, ItemID.BLACK_WARLOCK_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.black_warlock_mix, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BLACK_WARLOCK_MIX_1).fixedCharges(1),
@@ -36,7 +36,7 @@ public class F_BlackWarlockMix extends ChargedItem {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip(final int itemId) {
         return "Black warlock mix: " + getTotalCharges();
     }
 }

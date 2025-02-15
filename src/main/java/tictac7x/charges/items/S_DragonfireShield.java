@@ -30,7 +30,7 @@ public class S_DragonfireShield extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.dragonfire_shield, ItemID.DRAGONFIRE_SHIELD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.dragonfire_shield, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DRAGONFIRE_SHIELD_11284).fixedCharges(0),

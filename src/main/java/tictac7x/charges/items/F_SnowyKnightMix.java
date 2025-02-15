@@ -27,7 +27,7 @@ public class F_SnowyKnightMix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.snowy_knight_mix, ItemID.SNOWY_KNIGHT_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.snowy_knight_mix, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.SNOWY_KNIGHT_MIX_1).fixedCharges(1),
@@ -36,7 +36,7 @@ public class F_SnowyKnightMix extends ChargedItem {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip(final int itemId) {
         return "Snowy knight mix: " + getTotalCharges();
     }
 }

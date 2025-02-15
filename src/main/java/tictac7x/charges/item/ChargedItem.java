@@ -16,12 +16,12 @@ import tictac7x.charges.store.Store;
 import java.util.Optional;
 
 public class ChargedItem extends ChargedItemBase {
-    public ChargedItem(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
-        super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
+    public ChargedItem(String configKey, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
+        super(configKey, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
                 return getChargesMinified(triggerItem.fixedCharges.get());
@@ -43,25 +43,40 @@ public class ChargedItem extends ChargedItemBase {
     public String getTotalCharges() {
         int totalFixedCharges = 0;
         int equipmentFixedCharges = 0;
-        boolean fixedItemsFound = false;
 
         for (final TriggerItem triggerItem : items) {
-            if (triggerItem.fixedCharges.isPresent()) {
-                totalFixedCharges += store.getInventoryItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
-                equipmentFixedCharges += store.getEquipmentItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
-                fixedItemsFound = true;
+            totalFixedCharges += getChargesInventory(triggerItem.itemId);
+            equipmentFixedCharges += getEquipmentFixedCharges(triggerItem.itemId);
+        }
+
+        return equipmentFixedCharges > 0
+            ? getChargesMinified(equipmentFixedCharges)
+            : getChargesMinified(totalFixedCharges)
+        ;
+    }
+
+    private int getEquipmentFixedCharges(final int itemId) {
+        int charges = 0;
+
+        for (final TriggerItem item : items) {
+            if (item.itemId == itemId && item.fixedCharges.isPresent() && item.fixedCharges.get() > 0) {
+                charges += item.fixedCharges.get() * store.getEquipmentItemQuantity(item.itemId);
             }
         }
 
-        try {
-            if (getChargesFromConfig() == Charges.UNKNOWN && fixedItemsFound) {
-                return equipmentFixedCharges > 0 ?
-                    getChargesMinified(equipmentFixedCharges) :
-                    getChargesMinified(totalFixedCharges);
-            }
-        } catch (final Exception ignored) {}
+        return charges;
+    }
 
-        return getCharges();
+    private int getChargesInventory(final int itemId) {
+        int charges = 0;
+
+        for (final TriggerItem item : items) {
+            if (item.itemId == itemId && item.fixedCharges.isPresent() && item.fixedCharges.get() > 0) {
+                charges += item.fixedCharges.get() * store.getInventoryItemQuantity(item.itemId);
+            }
+        }
+
+        return charges;
     }
 
     public void setCharges(int charges) {

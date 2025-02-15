@@ -18,7 +18,6 @@ import net.runelite.client.input.*;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
-import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import tictac7x.charges.item.ChargedItemBase;
@@ -183,7 +182,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private ChargedItemOverlay overlayChargedItems;
 
 	private ChargedItemBase[] chargedItems;
-	private List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
+	private List<ChargedItemInfobox> chargedItemsInfoboxes = new ArrayList<>();
 
 	private final ZoneId timezone = ZoneId.of("Europe/London");
 
@@ -354,7 +353,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		overlayManager.add(overlayChargedItems);
 
 		// Items infoboxes.
-		chargedItemsInfoboxes.clear();
 		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItemsInfoboxes.add(new ChargedItemInfobox(chargedItem, itemManager, infoBoxManager, configManager, config, this)));
 		chargedItemsInfoboxes.forEach(chargedItemInfobox -> infoBoxManager.addInfoBox(chargedItemInfobox));
 	}
@@ -371,8 +369,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
-		store.setLastChatMessage(event);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onChatMessage(event));
+		store.onChatMessage(event);
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onChatMessage(event));
 
 //		System.out.println("MESSAGE | " +
 //			"type: " + event.getType().name() +
@@ -385,9 +383,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onItemContainerChanged(final ItemContainerChanged event) {
 		store.onItemContainerChanged(event);
 
-		for (final ChargedItemBase infobox : chargedItems) {
-			infobox.onItemContainerChanged(event);
-		}
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onItemContainerChanged(event));
+		chargedItemsInfoboxes.forEach(infoBox -> infoBox.onItemContainerChanged(event));
 
 //		String itemContainer = String.valueOf(event.getContainerId());
 //		for (final Item item : event.getItemContainer().getItems()) {
@@ -404,7 +401,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onGraphicChanged(final GraphicChanged event) {
 		if (event.getActor() != client.getLocalPlayer()) return;
 
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onGraphicChanged(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onGraphicChanged(event));
 
 		if (config.showDebugIds()) {
 			for (final ActorSpotAnim graphic : event.getActor().getSpotAnims()) {
@@ -419,7 +416,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onHitsplatApplied(final HitsplatApplied event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onHitsplatApplied(event));
 
 //		System.out.println("HITSPLAT | " +
 //			"actor: " + (event.getActor() == client.getLocalPlayer() ? "self" : "enemy -> " + event.getActor().getName()) +
@@ -434,7 +431,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onAnimationChanged(final AnimationChanged event) {
 		if (event.getActor() != client.getLocalPlayer() || event.getActor().getAnimation() == -1) return;
 
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onAnimationChanged(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onAnimationChanged(event));
 
 		if (config.showDebugIds()) {
 			chatMessageManager.queue(QueuedMessage.builder()
@@ -447,7 +444,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onWidgetLoaded(final WidgetLoaded event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onWidgetLoaded(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onWidgetLoaded(event));
 
 //		System.out.println("WIDGET | " +
 //			"group: " + event.getGroupId()
@@ -491,17 +488,19 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		}
 	}
 
-	final List<Integer> scriptIdsToIgnore = Arrays.asList(
-		44, 85, 100, 839, 900, 1004, 1005, 1045, 1445, 1972, 2100, 2101,
-		2165, 2250, 2372, 2476, 2512, 2513, 3174, 3277, 3350, 3351, 4024,
-		4029, 4482, 4517, 4518, 4666, 4667, 4668, 4669, 4671, 4672, 4716,
-		4721, 4729, 4730, 4731, 4734, 5343, 5923, 5933, 5935, 5936, 5939,
-		5943, 5944, 6015, 6016, 6063, 6152
-	);
-
 	@Subscribe
 	public void onScriptPreFired(final ScriptPreFired event) {
-		if (scriptIdsToIgnore.contains(event.getScriptId())) return;
+		if (event == null) return;
+
+		switch (event.getScriptId()) {
+			case 1405:
+			case 1632:
+			case 1651:
+			case 2053:
+				for (final ChargedItemBase chargedItem : chargedItems) {
+					chargedItem.onScriptPreFired(event);
+				}
+        }
 
 //		String scriptDebug = "script id: " + event.getScriptId();
 //		try {
@@ -519,10 +518,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 //			scriptDebug += arguments.replaceAll(", ]", "]");
 //		} catch (final Exception ignored) {}
 //		System.out.println("SCRIPT FIRED | " + scriptDebug);
-
-		for (final ChargedItemBase chargedItem : chargedItems) {
-			chargedItem.onScriptPreFired(event);
-		}
 	}
 
 	@Subscribe
@@ -558,18 +553,18 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 //			statChanged
 //		);
 
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onStatChanged(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onStatChanged(event));
 		store.onStatChanged(event);
 	}
 
 	@Subscribe
 	public void onItemDespawned(final ItemDespawned event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onItemDespawned(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onItemDespawned(event));
 	}
 
 	@Subscribe
 	public void onVarbitChanged(final VarbitChanged event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onVarbitChanged(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onVarbitChanged(event));
 
 		// If server minutes are 0, it's a new day!
 		if (event.getVarbitId() == VARBIT_MINUTES && client.getGameState() == GameState.LOGGED_IN && event.getValue() == 0) {
@@ -584,7 +579,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onMenuEntryAdded(final MenuEntryAdded event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onMenuEntryAdded(event));
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onMenuEntryAdded(event));
 
 //		if (event.getMenuEntry().getItemId() != -1) {
 //			System.out.println("MENU ENTRY ADDED | " +
@@ -614,7 +609,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	private void onUserAction() {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onUserAction());
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onUserAction());
 	}
 
 	private void checkForChargesReset() {
@@ -622,7 +617,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		if (date.equals(config.getResetDate())) return;
 
 		configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.date, date);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onResetDaily());
+		Arrays.stream(chargedItems).forEach(chargedItem -> chargedItem.onResetDaily());
 
 		chatMessageManager.queue(QueuedMessage.builder()
 			.type(ChatMessageType.CONSOLE)
@@ -711,19 +706,14 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child) {
-		@Nullable
-		final Widget widget = client.getWidget(parent, child);
-		return Optional.ofNullable(widget);
+		return Optional.ofNullable(client.getWidget(parent, child));
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final int subChild) {
-		@Nullable
-		final Widget widget = client.getWidget(parent, child);
-		if (widget == null) return Optional.empty();
+		final Optional<Widget> widget = getWidget(client, parent, child);
+		if (!widget.isPresent()) return Optional.empty();
 
-		@Nullable
-		final Widget subWidget = widget.getChild(subChild);
-		return Optional.ofNullable(subWidget);
+		return Optional.ofNullable(widget.get().getChild(subChild));
 	}
 	
 	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()

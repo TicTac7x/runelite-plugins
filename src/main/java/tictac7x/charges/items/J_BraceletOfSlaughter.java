@@ -29,7 +29,7 @@ public class J_BraceletOfSlaughter extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_slaughter, ItemID.BRACELET_OF_SLAUGHTER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bracelet_of_slaughter, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),

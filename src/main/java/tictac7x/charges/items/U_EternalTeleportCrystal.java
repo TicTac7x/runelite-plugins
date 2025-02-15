@@ -28,7 +28,7 @@ public class U_EternalTeleportCrystal extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.eternal_teleport_crystal, ItemID.ETERNAL_TELEPORT_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.eternal_teleport_crystal, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ETERNAL_TELEPORT_CRYSTAL).fixedCharges(Charges.UNLIMITED),

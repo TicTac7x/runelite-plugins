@@ -18,10 +18,8 @@ import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class Store {
     private final Client client;
@@ -57,7 +55,7 @@ public class Store {
         return this.lastChatMessage;
     }
 
-    public void setLastChatMessage(final ChatMessage event) {
+    public void onChatMessage(final ChatMessage event) {
         if (event.getType() == ChatMessageType.GAMEMESSAGE || event.getType() == ChatMessageType.DIALOG || event.getType() == ChatMessageType.SPAM) {
             lastChatMessage = Optional.of(TicTac7xChargesImprovedPlugin.getCleanChatMessage(event));
         }
@@ -67,18 +65,13 @@ public class Store {
         this.chargedItems = Optional.of(chargedItems);
 
         List<Integer> dailyResetItemIds = new ArrayList<>();
-        Arrays.stream(chargedItems).filter(chargedItem -> {
+        for (final ChargedItemBase chargedItem : chargedItems) {
             for (final TriggerBase trigger : chargedItem.triggers) {
                 if (trigger instanceof OnResetDaily) {
-                    return true;
+                    dailyResetItemIds.add(((OnResetDaily) trigger).resetSpecificItem);
                 }
             }
-            return false;
-        }).forEach(chargedItem -> {
-            for (final TriggerItem triggerItem : chargedItem.items) {
-                dailyResetItemIds.add(triggerItem.itemId);
-            }
-        });
+        }
         this.dailyResetItemIds = dailyResetItemIds;
     }
 
@@ -320,6 +313,10 @@ public class Store {
         }
 
         return quantity;
+    }
+
+    public boolean inventoryOrEquipmentContainsItem(final int itemId) {
+        return inventoryContainsItem(itemId) || equipmentContainsItem(itemId);
     }
 
     public boolean inventoryContainsItem(final int itemId) {

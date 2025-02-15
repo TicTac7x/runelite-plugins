@@ -45,7 +45,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.plank_sack, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumTotalQuantity(28).emptyIsNegative().storableItems(
             new StorableItem(ItemID.PLANK).checkName("Regular plank"),
             new StorableItem(ItemID.OAK_PLANK).checkName("Oak plank"),

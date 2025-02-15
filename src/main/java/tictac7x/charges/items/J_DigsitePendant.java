@@ -27,7 +27,7 @@ public class J_DigsitePendant extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.digsite_pendant, ItemID.DIGSITE_PENDANT_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.digsite_pendant, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DIGSITE_PENDANT_1).fixedCharges(1),

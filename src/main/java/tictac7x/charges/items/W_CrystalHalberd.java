@@ -32,7 +32,7 @@ public class W_CrystalHalberd extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.crystal_halberd, ItemID.CRYSTAL_HALBERD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.crystal_halberd, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.CRYSTAL_HALBERD),
             new TriggerItem(ItemID.CRYSTAL_HALBERD_24125),

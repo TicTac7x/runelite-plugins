@@ -29,7 +29,7 @@ public class W_ToxicStaffOfTheDead extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.toxic_staff_of_the_dead, ItemID.TOXIC_STAFF_OF_THE_DEAD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.toxic_staff_of_the_dead, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TOXIC_STAFF_UNCHARGED).fixedCharges(0),

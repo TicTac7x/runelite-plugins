@@ -32,7 +32,7 @@ public class C_Coffin extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.coffin, ItemID.GOLD_COFFIN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.coffin, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             new StorableItem(ItemID.LOAR_REMAINS).checkName("Loar"),
             new StorableItem(ItemID.PHRIN_REMAINS).checkName("Phrin"),

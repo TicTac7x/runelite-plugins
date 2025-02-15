@@ -31,7 +31,7 @@ public class S_FaladorShield extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.falador_shield, ItemID.FALADOR_SHIELD_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.falador_shield, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.FALADOR_SHIELD_1),
@@ -53,10 +53,10 @@ public class S_FaladorShield extends ChargedItem {
             new OnGraphicChanged(321).onItemClick().decreaseCharges(1),
 
             // Daily resets.
-            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_1).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_2).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_3).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_4).setFixedCharges(2),
+            new OnResetDaily(ItemID.FALADOR_SHIELD_1).setFixedCharges(1),
+            new OnResetDaily(ItemID.FALADOR_SHIELD_2).setFixedCharges(1),
+            new OnResetDaily(ItemID.FALADOR_SHIELD_3).setFixedCharges(1),
+            new OnResetDaily(ItemID.FALADOR_SHIELD_4).setFixedCharges(2),
         };
     }
 }
