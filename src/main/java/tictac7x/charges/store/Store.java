@@ -157,7 +157,7 @@ public class Store {
             for (final Item itemContainerItem : event.getItemContainer().getItems()) {
                 for (final TriggerItem triggerItem : chargedItem.items) {
                     if (triggerItem.itemId == itemContainerItem.getId()) {
-                        if (!newItemId.isPresent() || !triggerItem.fixedCharges.isPresent()) {
+                        if (!triggerItem.fixedCharges.isPresent() || triggerItem.fixedCharges.get() == Charges.UNLIMITED) {
                             newItemId = Optional.of(triggerItem.itemId);
                         }
 
