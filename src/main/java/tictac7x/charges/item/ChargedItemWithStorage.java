@@ -82,6 +82,11 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
+    public String getCharges(final int itemId) {
+        return getCharges();
+    }
+
+    @Override
     public String getTotalCharges() {
         return getCharges();
     }

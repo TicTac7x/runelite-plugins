@@ -73,6 +73,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
             }
         }
 
+
         // Invalid item.
         if (!chargedItem.isPresent() || !triggerItem.isPresent()) return;
 
@@ -92,18 +93,8 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         ) return;
 
         // Get default charges from charged item.
-        String charges = chargedItem.get().getCharges();
-        Color color = chargedItem.get().getTextColor();
-
-        // Override charges and color for fixed items.
-        for (final TriggerItem item : chargedItem.get().items) {
-            if (item.itemId == itemId && item.fixedCharges.isPresent()) {
-                charges = item.fixedCharges.get() == Charges.UNLIMITED
-                    ? "∞"
-                    : String.valueOf(item.fixedCharges.get());
-                color = item.fixedCharges.get() == 0 ? config.getColorEmpty() : config.getColorDefault();
-            }
-        }
+        String charges = chargedItem.get().getCharges(itemId);
+        Color color = chargedItem.get().getTextColor(itemId);
 
         graphics.setFont(FontManager.getRunescapeSmallFont());
 

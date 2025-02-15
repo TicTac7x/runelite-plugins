@@ -40,6 +40,17 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     @Override
+    public String getCharges(final int itemId) {
+        for (final TriggerItem triggerItem : items) {
+            if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
+                return getChargesMinified(triggerItem.fixedCharges.get());
+            }
+        }
+
+        return getCharges();
+    }
+
+    @Override
     public String getTotalCharges() {
         int totalFixedCharges = 0;
         int equipmentFixedCharges = 0;

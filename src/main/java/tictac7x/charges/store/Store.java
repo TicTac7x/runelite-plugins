@@ -137,6 +137,49 @@ public class Store {
         }
 
         updateStorage(event);
+        updateChargedItemsPrimaryId(event);
+    }
+
+    private void updateChargedItemsPrimaryId(final ItemContainerChanged event) {
+        final int itemContainerId = event.getContainerId();
+        if (
+            !chargedItems.isPresent() || (
+            itemContainerId != InventoryID.INVENTORY.getId() &&
+            itemContainerId != InventoryID.EQUIPMENT.getId() &&
+            itemContainerId != InventoryID.BANK.getId()
+        )) return;
+
+        for (final ChargedItemBase chargedItem : chargedItems.get()) {
+            Optional<Integer> newItemId = Optional.empty();
+            boolean inInventory = false;
+            boolean inEquipment = false;
+
+            for (final Item itemContainerItem : event.getItemContainer().getItems()) {
+                for (final TriggerItem triggerItem : chargedItem.items) {
+                    if (triggerItem.itemId == itemContainerItem.getId()) {
+                        if (!newItemId.isPresent() || !triggerItem.fixedCharges.isPresent()) {
+                            newItemId = Optional.of(triggerItem.itemId);
+                        }
+
+                        if (itemContainerId == InventoryID.INVENTORY.getId()) {
+                            inInventory = true;
+                        } else if (itemContainerId == InventoryID.EQUIPMENT.getId()) {
+                            inEquipment = true;
+                        }
+                    }
+                }
+            }
+
+            if (newItemId.isPresent()) {
+                chargedItem.itemId = newItemId.get();
+            }
+
+            if (itemContainerId == InventoryID.INVENTORY.getId()) {
+                chargedItem.inInventory = inInventory;
+            } else if (itemContainerId == InventoryID.EQUIPMENT.getId()) {
+                chargedItem.inEquipment = inEquipment;
+            }
+        }
     }
 
     public void onMenuOptionClicked(final AdvancedMenuEntry advancedMenuEntry) {

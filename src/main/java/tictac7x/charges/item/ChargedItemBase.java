@@ -58,8 +58,8 @@ public abstract class ChargedItemBase {
     private final ListenerOnMenuOptionClicked listenerOnMenuOptionClicked;
     private final ListenerOnScriptPreFired listenerOnScriptPreFired;
 
-    private boolean inInventory = false;
-    private boolean inEquipment = false;
+    public boolean inInventory = false;
+    public boolean inEquipment = false;
 
     public ChargedItemBase(
         final String configKey,
@@ -105,6 +105,8 @@ public abstract class ChargedItemBase {
     }
 
     public abstract String getCharges();
+
+    public abstract String getCharges(final int itemId);
 
     public abstract String getTotalCharges();
 
@@ -153,6 +155,16 @@ public abstract class ChargedItemBase {
         }
 
         return config.getColorDefault();
+    }
+
+    public Color getTextColor(final int itemId) {
+        for (final TriggerItem triggerItem : items) {
+            if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent() && triggerItem.fixedCharges.get() == 0) {
+                return config.getColorEmpty();
+            }
+        }
+
+        return getTextColor();
     }
 
     protected String getChargesMinified(final int charges) {
@@ -213,8 +225,6 @@ public abstract class ChargedItemBase {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        updateItem(event);
-
         if (!inInventoryOrEquipment()) return;
         listenerOnItemContainerChanged.trigger(event);
     }
@@ -246,59 +256,5 @@ public abstract class ChargedItemBase {
     public void onScriptPreFired(final ScriptPreFired event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnScriptPreFired.trigger(event);
-    }
-
-    private void updateItem(final ItemContainerChanged event) {
-        if (
-            event.getContainerId() != InventoryID.INVENTORY.getId() &&
-            event.getContainerId() != InventoryID.EQUIPMENT.getId() &&
-            event.getContainerId() != InventoryID.BANK.getId()
-        ) return;
-
-        Optional<Integer> itemId = Optional.empty();
-        boolean inEquipment = false;
-        boolean inInventory = false;
-
-        if (store.bank.isPresent()) {
-            bankLooper: for (final Item item : store.bank.get().getItems()) {
-                for (final TriggerItem triggerItem : items) {
-                    if (triggerItem.itemId == item.getId()) {
-                        itemId = Optional.of(triggerItem.itemId);
-                        break bankLooper;
-                    }
-                }
-            }
-        }
-
-        if (store.equipment.isPresent()) {
-            equipmentLooper: for (final Item item : store.equipment.get().getItems()) {
-                for (final TriggerItem triggerItem : items) {
-                    if (triggerItem.itemId == item.getId()) {
-                        itemId = Optional.of(triggerItem.itemId);
-                        inEquipment = true;
-                        break equipmentLooper;
-                    }
-                }
-            }
-        }
-
-        if (store.inventory.isPresent()) {
-            inventoryLooper: for (final Item item : store.inventory.get().getItems()) {
-                for (final TriggerItem triggerItem : items) {
-                    if (triggerItem.itemId == item.getId()) {
-                        // Update item id only for items without fixed charges, to make sure that dynamic items have higher priority.
-                        if (!triggerItem.fixedCharges.isPresent() || triggerItem.fixedCharges.get() != 0) {
-                            itemId = Optional.of(triggerItem.itemId);
-                        }
-                        inInventory = true;
-                        break inventoryLooper;
-                    }
-                }
-            }
-        }
-
-        if (itemId.isPresent()) this.itemId = itemId.get();
-        this.inEquipment = inEquipment;
-        this.inInventory = inInventory;
     }
 }
