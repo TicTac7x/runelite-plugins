@@ -37,6 +37,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String bracelet_of_flamtaer = "bracelet_of_flamtaer";
     String bracelet_of_slaughter = "bracelet_of_slaughter";
     String bryophytas_staff = "bryophytas_staff";
+    String burning_amulet = "burning_amulet";
     String camulet = "camulet";
     String celestial_ring = "celestial_ring";
     String chronicle = "chronicle";
@@ -859,6 +860,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bryophytasStaffInfobox() { return true; }
 
         @ConfigItem(
+            keyName = burning_amulet + infobox,
+            name = "Burning amulet",
+            description = "",
+            section = infoboxes
+        ) default boolean burninAmuletInfobox() { return true; }
+
+        @ConfigItem(
             keyName = crystal_bow + infobox,
             name = "Crystal bow",
             description = "",
@@ -1557,6 +1565,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean bryophytasStaffOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = burning_amulet + overlay,
+            name = "Burning amulet",
+            description = "",
+            section = overlays
+        ) default boolean burningAmuletOverlay() { return true; }
 
         @ConfigItem(
             keyName = crystal_bow + overlay,

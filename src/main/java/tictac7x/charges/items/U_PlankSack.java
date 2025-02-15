@@ -82,7 +82,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
             // Replace "Use" with proper Fill/Empty option.
             new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(12, 1),
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(192, 1),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(12, 1),
 
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {

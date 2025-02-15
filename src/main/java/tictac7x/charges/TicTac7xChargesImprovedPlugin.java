@@ -124,15 +124,10 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.16.1";
+	private final String pluginVersion = "v0.5.18";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Plank sack now has proper fill / empty options at bank instead of generic use.<br>" +
-		"<colHIGHLIGHT>* Tome of earth added.<br>" +
-		"<colHIGHLIGHT>* Skills necklace added.<br>" +
-		"<colHIGHLIGHT>* Efaritay's aid added.<br>" +
-		"<colHIGHLIGHT>* Item overlays in bank no longer show 0 charges, when they actually have them.<br>" +
-		"<colHIGHLIGHT>* Ring of the elements last destination option shows actual altar name."
+		"<colHIGHLIGHT>* Burning amulet added."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -251,6 +246,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_BraceletOfExpeditious(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_BraceletOfFlamtaer(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_BraceletOfSlaughter(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new J_BurningAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_Camulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_DesertAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_DigsitePendant(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -713,19 +709,14 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child) {
-		@Nullable
-		final Widget widget = client.getWidget(parent, child);
-		return Optional.ofNullable(widget);
+		return Optional.ofNullable(client.getWidget(parent, child));
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final int subChild) {
-		@Nullable
-		final Widget widget = client.getWidget(parent, child);
-		if (widget == null) return Optional.empty();
+		final Optional<Widget> widget = getWidget(client, parent, child);
+		if (!widget.isPresent()) return Optional.empty();
 
-		@Nullable
-		final Widget subWidget = widget.getChild(subChild);
-		return Optional.ofNullable(subWidget);
+		return Optional.ofNullable(widget.get().getChild(subChild));
 	}
 	
 	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()

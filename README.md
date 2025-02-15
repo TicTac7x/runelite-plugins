@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.5.16.1
+# Item Charges Improved - v0.5.18
 
 Show charges of various items that are in inventory or equipped
 
@@ -67,6 +67,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Bracelet of expeditious
 - Bracelet of flamtaer
 - Bracelet of slaughter
+- Burning amulet
 - Camulet
 - Desert amulet
 - Digsite pendant
