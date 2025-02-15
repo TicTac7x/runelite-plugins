@@ -143,6 +143,6 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
             return false;
         }
 
-        return true;
+        return super.isValidTrigger(trigger);
     }
 }

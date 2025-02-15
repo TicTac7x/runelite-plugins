@@ -365,6 +365,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 		overlayManager.remove(overlayChargedItems);
 		chargedItemsInfoboxes.forEach(chargedItemInfobox -> infoBoxManager.removeInfoBox(chargedItemInfobox));
+		chargedItemsInfoboxes.clear();
 	}
 
 	@Subscribe
