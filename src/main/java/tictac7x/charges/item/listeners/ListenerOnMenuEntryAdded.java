@@ -106,7 +106,9 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
                 }
             }
 
-            if (!idCheck) return false;
+            if (!idCheck) {
+                return false;
+            }
         }
 
         // Hide config check.

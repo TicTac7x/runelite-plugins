@@ -29,7 +29,6 @@ import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.store.AdvancedMenuEntry;
 import tictac7x.charges.store.Store;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -124,7 +123,7 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.18";
+	private final String pluginVersion = "v0.5.19";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Burning amulet added."
@@ -582,6 +581,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onMenuEntryAdded(final MenuEntryAdded event) {
+		if (event.getOption().equals("Cancel")) return;
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onMenuEntryAdded(event));
 
 //		if (event.getMenuEntry().getItemId() != -1) {

@@ -105,6 +105,12 @@ public class Store {
     public void onItemContainerChanged(final ItemContainerChanged event) {
         runNextGameTickQueue();
 
+        if (
+            event.getContainerId() != InventoryID.BANK.getId() &&
+            event.getContainerId() != InventoryID.INVENTORY.getId() &&
+            event.getContainerId() != InventoryID.EQUIPMENT.getId()
+        ) return;
+
         // Update inventory, save previous items.
         if (event.getContainerId() == InventoryID.INVENTORY.getId()) {
             inventory = Optional.of(event.getItemContainer());
@@ -137,48 +143,80 @@ public class Store {
         }
 
         updateStorage(event);
-        updateChargedItemsPrimaryId(event);
+        updateChargedItemsPrimaryId(event.getContainerId() == InventoryID.BANK.getId());
     }
 
-    private void updateChargedItemsPrimaryId(final ItemContainerChanged event) {
-        final int itemContainerId = event.getContainerId();
-        if (
-            !chargedItems.isPresent() || (
-            itemContainerId != InventoryID.INVENTORY.getId() &&
-            itemContainerId != InventoryID.EQUIPMENT.getId() &&
-            itemContainerId != InventoryID.BANK.getId()
-        )) return;
+    private void updateChargedItemsPrimaryId(final boolean checkBank) {
+        if (!chargedItems.isPresent()) return;
 
         for (final ChargedItemBase chargedItem : chargedItems.get()) {
-            Optional<Integer> newItemId = Optional.empty();
-            boolean inInventory = false;
-            boolean inEquipment = false;
+            Optional<Integer> bankItemId = Optional.empty();
+            boolean bankItemDynamic = false;
 
-            for (final Item itemContainerItem : event.getItemContainer().getItems()) {
-                for (final TriggerItem triggerItem : chargedItem.items) {
-                    if (triggerItem.itemId == itemContainerItem.getId()) {
-                        if (!triggerItem.fixedCharges.isPresent() || triggerItem.fixedCharges.get() == Charges.UNLIMITED) {
-                            newItemId = Optional.of(triggerItem.itemId);
-                        }
+            Optional<Integer> inventoryItemId = Optional.empty();
+            boolean inventoryItemDynamic = false;
 
-                        if (itemContainerId == InventoryID.INVENTORY.getId()) {
-                            inInventory = true;
-                        } else if (itemContainerId == InventoryID.EQUIPMENT.getId()) {
-                            inEquipment = true;
+            Optional<Integer> equipmentItemId = Optional.empty();
+            boolean equipmentItemDynamic = false;
+
+            // Bank has least priority.
+            if (checkBank && bank.isPresent()) {
+                for (final Item item : bank.get().getItems()) {
+                    for (final TriggerItem triggerItem : chargedItem.items) {
+                        if (item.getId() == triggerItem.itemId) {
+                            if (!bankItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !bankItemDynamic || !triggerItem.fixedCharges.isPresent()) {
+                                bankItemId = Optional.of(item.getId());
+
+                                if (!triggerItem.fixedCharges.isPresent()) {
+                                    bankItemDynamic = true;
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            if (newItemId.isPresent()) {
-                chargedItem.itemId = newItemId.get();
+            // Inventory is more important than bank.
+            if (inventory.isPresent()) {
+                for (final Item item : inventory.get().getItems()) {
+                    for (final TriggerItem triggerItem : chargedItem.items) {
+                        if (item.getId() == triggerItem.itemId) {
+                            if (!inventoryItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !inventoryItemDynamic || !triggerItem.fixedCharges.isPresent()) {
+                                inventoryItemId = Optional.of(item.getId());
+
+                                if (!triggerItem.fixedCharges.isPresent()) {
+                                    inventoryItemDynamic = true;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            if (itemContainerId == InventoryID.INVENTORY.getId()) {
-                chargedItem.inInventory = inInventory;
-            } else if (itemContainerId == InventoryID.EQUIPMENT.getId()) {
-                chargedItem.inEquipment = inEquipment;
+            // Equipment has most priority.
+            if (equipment.isPresent()) {
+                for (final Item item : equipment.get().getItems()) {
+                    for (final TriggerItem triggerItem : chargedItem.items) {
+                        if (item.getId() == triggerItem.itemId) {
+                            if (!equipmentItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !equipmentItemDynamic || !triggerItem.fixedCharges.isPresent()) {
+                                equipmentItemId = Optional.of(item.getId());
+
+                                if (!triggerItem.fixedCharges.isPresent()) {
+                                    equipmentItemDynamic = true;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+
+            chargedItem.inEquipment = equipmentItemId.isPresent();
+            chargedItem.inInventory = inventoryItemId.isPresent();
+            chargedItem.itemId =
+                equipmentItemId.isPresent() ? equipmentItemId.get() :
+                inventoryItemId.isPresent() ? inventoryItemId.get() :
+                bankItemId.isPresent() ? bankItemId.get() :
+                chargedItem.itemId;
         }
     }
 
@@ -390,14 +428,6 @@ public class Store {
     }
 
     private void updateStorage(final ItemContainerChanged event) {
-        if (
-            event.getContainerId() != InventoryID.BANK.getId() &&
-            event.getContainerId() != InventoryID.INVENTORY.getId() &&
-            event.getContainerId() != InventoryID.EQUIPMENT.getId()
-        ) {
-            return;
-        }
-
         final List<Integer> itemIds = new ArrayList<>();
 
         // Update items.
