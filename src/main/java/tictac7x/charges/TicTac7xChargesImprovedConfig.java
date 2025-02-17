@@ -20,6 +20,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String debug_ids = "debug_ids";
     String infobox = "_infobox";
     String overlay = "_overlay";
+    String storage = "_storage";
 
     String alchemists_amulet = "alchemists_amulet";
     String arclight = "arclight";
@@ -65,6 +66,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String explorers_ring = "explorers_ring";
     String falador_shield = "falador_shield";
     String fish_barrel = "fish_barrel";
+    String flamtaer_bag = "flamtaer_bag";
     String forestry_kit = "forestry_kit";
     String fremennik_sea_boots = "fremennik_sea_boots";
     String fungicide_spray = "fungicide_spray";
@@ -720,6 +722,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean fishBarrelInfobox() { return true; }
 
         @ConfigItem(
+            keyName = flamtaer_bag + infobox,
+            name = "Flamtaer bag",
+            description = "",
+            section = infoboxes
+        ) default boolean flamtaerBagInfobox() { return true; }
+
+        @ConfigItem(
             keyName = fungicide_spray + infobox,
             name = "Fungicide spray",
             description = "",
@@ -1301,6 +1310,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean fishBarrelOverlay() { return true; }
 
         @ConfigItem(
+            keyName = flamtaer_bag + overlay,
+            name = "Flamtaer bag",
+            description = "",
+            section = overlays
+        ) default boolean flamtaerBagOverlay() { return true; }
+
+        @ConfigItem(
             keyName = forestry_kit + overlay,
             name = "Forestry kit",
             description = "",
@@ -1818,9 +1834,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getKharedstsMemoirsCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = bottomless_compost_bucket + "_storage",
-            name = bottomless_compost_bucket + "_storage",
-            description = bottomless_compost_bucket + "_storage",
+            keyName = bottomless_compost_bucket + storage,
+            name = bottomless_compost_bucket + storage,
+            description = bottomless_compost_bucket + storage,
             section = debug
         ) default String getBottomlessCompostBucketStorage() { return ""; }
 
@@ -1881,11 +1897,18 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getFaladorShieldCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = fish_barrel,
-            name = fish_barrel,
-            description = fish_barrel,
+            keyName = fish_barrel + storage,
+            name = fish_barrel + storage,
+            description = fish_barrel + storage,
             section = debug
-        ) default int getFishBarrelCharges() { return Charges.UNKNOWN; }
+        ) default String getFishBarrelStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = flamtaer_bag + storage,
+            name = flamtaer_bag + storage,
+            description = flamtaer_bag + storage,
+            section = debug
+        ) default String getFlamtaerBagStorage() { return ""; }
 
         @ConfigItem(
             keyName = gricollers_can,
@@ -2000,23 +2023,23 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getCoffinCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = huntsmans_kit + "_storage",
-            name = huntsmans_kit + "_storage",
-            description = huntsmans_kit + "_storage",
+            keyName = huntsmans_kit + storage,
+            name = huntsmans_kit + storage,
+            description = huntsmans_kit + storage,
             section = debug
         ) default String getHuntsmansKitStorage() { return ""; }
 
         @ConfigItem(
-            keyName = log_basket + "_storage",
-            name = log_basket + "_storage",
-            description = log_basket + "_storage",
+            keyName = log_basket + storage,
+            name = log_basket + storage,
+            description = log_basket + storage,
             section = debug
         ) default String getLogBasketStorage() { return ""; }
 
         @ConfigItem(
-            keyName = forestry_kit + "_storage",
-            name = forestry_kit + "_storage",
-            description = forestry_kit + "_storage",
+            keyName = forestry_kit + storage,
+            name = forestry_kit + storage,
+            description = forestry_kit + storage,
             section = debug
         ) default String getForestryKitStorage() { return ""; }
 
@@ -2035,16 +2058,16 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getMagicCapeCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = meat_pouch + "_storage",
-            name = meat_pouch + "_storage",
-            description = meat_pouch + "_storage",
+            keyName = meat_pouch + storage,
+            name = meat_pouch + storage,
+            description = meat_pouch + storage,
             section = debug
         ) default String getMeatPouchStorageCharges() { return ""; }
 
         @ConfigItem(
-            keyName = gem_bag + "_storage",
-            name = gem_bag + "_storage",
-            description = gem_bag + "_storage",
+            keyName = gem_bag + storage,
+            name = gem_bag + storage,
+            description = gem_bag + storage,
             section = debug
         ) default String getGemBagStorageCharges() { return ""; }
 
@@ -2056,9 +2079,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getSeedBoxCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = seed_box + "_storage",
-            name = seed_box + "_storage",
-            description = seed_box + "_storage",
+            keyName = seed_box + storage,
+            name = seed_box + storage,
+            description = seed_box + storage,
             section = debug
         ) default String getSeedBoxStorage() { return ""; }
 
@@ -2105,9 +2128,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getCoalBagCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = colossal_pouch + "_storage",
-            name = colossal_pouch + "_storage",
-            description = colossal_pouch + "_storage",
+            keyName = colossal_pouch + storage,
+            name = colossal_pouch + storage,
+            description = colossal_pouch + storage,
             section = debug
         ) default String getColossalPouchStorage() { return ""; }
 
@@ -2119,9 +2142,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getColossalPouchDecayCount() { return 0; };
 
         @ConfigItem(
-            keyName = herb_sack + "_storage",
-            name = herb_sack + "_storage",
-            description = herb_sack + "_storage",
+            keyName = herb_sack + storage,
+            name = herb_sack + storage,
+            description = herb_sack + storage,
             section = debug
         ) default String getHerbSackStorage() { return ""; }
 
@@ -2182,9 +2205,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getFremennikSeaBootsCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = fur_pouch + "_storage",
-            name = fur_pouch + "_storage",
-            description = fur_pouch + "_storage",
+            keyName = fur_pouch + storage,
+            name = fur_pouch + storage,
+            description = fur_pouch + storage,
             section = debug
         ) default String getFurPouchStorageCharges() { return ""; }
 
@@ -2196,9 +2219,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getJarGeneratorCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = explorers_ring + "_storage",
-            name = explorers_ring + "_storage",
-            description = explorers_ring + "_storage",
+            keyName = explorers_ring + storage,
+            name = explorers_ring + storage,
+            description = explorers_ring + storage,
             section = debug
         ) default String getExplorersRingCharges() { return ""; }
 

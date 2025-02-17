@@ -1,5 +1,6 @@
 package tictac7x.charges.item.triggers;
 
+import net.runelite.api.widgets.Widget;
 import tictac7x.charges.store.ItemWithQuantity;
 
 import java.util.Optional;
@@ -14,9 +15,7 @@ public class OnWidgetLoaded extends TriggerBase {
 
     public Optional<Pattern> text = Optional.empty();
     public Optional<Consumer<Matcher>> matcherConsumer = Optional.empty();
-    public Optional<Consumer<Integer>> itemQuantityConsumer = Optional.empty();
-    public Optional<Consumer<ItemWithQuantity>> itemWithQuantityConsumer = Optional.empty();
-    public Optional<Consumer<Integer>> textAsChargesConsumer = Optional.empty();
+    public Optional<Consumer<Widget>> widgetConsumer = Optional.empty();
     public Optional<Boolean> setDynamically = Optional.empty();
 
     public OnWidgetLoaded(final int groupId, final int childId) {
@@ -45,18 +44,8 @@ public class OnWidgetLoaded extends TriggerBase {
         return this;
     }
 
-    public OnWidgetLoaded textAsChargesConsumer(final Consumer<Integer> consumer) {
-        this.textAsChargesConsumer = Optional.of(consumer);
-        return this;
-    }
-
-    public OnWidgetLoaded itemQuantityConsumer(final Consumer<Integer> consumer) {
-        this.itemQuantityConsumer = Optional.of(consumer);
-        return this;
-    }
-
-    public OnWidgetLoaded itemWithQuantityConsumer(final Consumer<ItemWithQuantity> consumer) {
-        this.itemWithQuantityConsumer = Optional.of(consumer);
+    public OnWidgetLoaded widgetConsumer(final Consumer<Widget> consumer) {
+        this.widgetConsumer = Optional.of(consumer);
         return this;
     }
 }

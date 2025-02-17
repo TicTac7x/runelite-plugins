@@ -126,7 +126,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.5.19";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Burning amulet added."
+		"<colHIGHLIGHT>* Partial support for flamtaer bag.<br>" +
+		"<colHIGHLIGHT>* Item prioritization fixes."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -277,6 +278,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_CrystalSaw(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_ColossalPouch(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_FishBarrel(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new U_FlamtaerBag(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_FungicideSpray(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_FurPouch(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_GemBag(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -305,7 +307,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new F_SapphireGlacialisMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new F_SnowyKnightMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new F_SunlightMothMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-
 
 			// Crystal armor set
 			new A_CrystalBody(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -700,8 +701,12 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		return mouseEvent;
 	}
 
+	public static String getCleanText(final String text) {
+		return text.replaceAll("</?col.*?>", "").replaceAll("<br>", " ").replaceAll("\u00A0"," ");
+	}
+
 	public static String getCleanChatMessage(final ChatMessage event) {
-		return event.getMessage().replaceAll("</?col.*?>", "").replaceAll("<br>", " ").replaceAll("\u00A0"," ");
+		return getCleanText(event.getMessage());
 	}
 
 	public static int getNumberFromCommaString(final String charges) {
@@ -717,6 +722,17 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		if (!widget.isPresent()) return Optional.empty();
 
 		return Optional.ofNullable(widget.get().getChild(subChild));
+	}
+
+	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final Optional<Integer> subChild) {
+		final Optional<Widget> widget = getWidget(client, parent, child);
+		if (!widget.isPresent()) return Optional.empty();
+
+		if (subChild.isPresent()) {
+			return Optional.ofNullable(widget.get().getChild(subChild.get()));
+		} else {
+			return widget;
+		}
 	}
 	
 	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()

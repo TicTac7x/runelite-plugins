@@ -22,6 +22,11 @@ public class ChargedItem extends ChargedItemBase {
 
     @Override
     public String getCharges() {
+        return getCharges(itemId);
+    }
+
+    @Override
+    public String getCharges(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
                 return getChargesMinified(triggerItem.fixedCharges.get());
@@ -37,17 +42,6 @@ public class ChargedItem extends ChargedItemBase {
         }
 
         return "?";
-    }
-
-    @Override
-    public String getCharges(final int itemId) {
-        for (final TriggerItem triggerItem : items) {
-            if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
-                return getChargesMinified(triggerItem.fixedCharges.get());
-            }
-        }
-
-        return getCharges();
     }
 
     @Override

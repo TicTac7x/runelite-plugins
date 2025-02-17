@@ -6,12 +6,14 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.ItemWithQuantity;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
@@ -27,10 +29,11 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
 
             boolean triggerUsed = false;
             final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
-            final Widget widget = getWidget(trigger);
+            final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, trigger.groupId, trigger.childId, trigger.subChildId);
+            if (!widget.isPresent()) continue;
 
             if (trigger.text.isPresent()) {
-                final String text = getCleanText(widget.getText());
+                final String text = TicTac7xChargesImprovedPlugin.getCleanText(widget.get().getText());
                 final Matcher matcher = trigger.text.get().matcher(text);
                 matcher.find();
 
@@ -45,18 +48,8 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
                 }
             }
 
-            if (trigger.textAsChargesConsumer.isPresent()) {
-                trigger.textAsChargesConsumer.get().accept(Integer.parseInt(widget.getText()));
-                triggerUsed = true;
-            }
-
-            if (trigger.itemQuantityConsumer.isPresent()) {
-                trigger.itemQuantityConsumer.get().accept(widget.getItemQuantity());
-                triggerUsed = true;
-            }
-
-            if (trigger.itemWithQuantityConsumer.isPresent()) {
-                trigger.itemWithQuantityConsumer.get().accept(new ItemWithQuantity(widget.getItemId(), widget.getItemQuantity()));
+            if (trigger.widgetConsumer.isPresent()) {
+                trigger.widgetConsumer.get().accept(widget.get());
                 triggerUsed = true;
             }
 
@@ -71,7 +64,6 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
     public boolean isValidTrigger(final TriggerBase triggerBase, final WidgetLoaded event) {
         if (!(triggerBase instanceof OnWidgetLoaded)) return false;
         final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
-        final Widget widget = getWidget(trigger);
 
         // Widget group check.
         if (event.getGroupId() != trigger.groupId) {
@@ -79,32 +71,19 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
         }
 
         // Widget existance check.
-        if (widget == null) {
+        final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, trigger.groupId, trigger.childId, trigger.subChildId);
+        if (!widget.isPresent()) {
             return false;
         }
 
         // Text check.
         if (trigger.text.isPresent()) {
-            final Matcher matcher = trigger.text.get().matcher(getCleanText(widget.getText()));
+            final Matcher matcher = trigger.text.get().matcher(TicTac7xChargesImprovedPlugin.getCleanText(widget.get().getText()));
             if (!matcher.find()) {
                 return false;
             }
         }
 
         return super.isValidTrigger(trigger);
-    }
-
-    private String getCleanText(final String text) {
-        return text.replaceAll("</?col.*?>", "").replaceAll("<br>", " ");
-    }
-
-    private Widget getWidget(final OnWidgetLoaded trigger) {
-        Widget widget = client.getWidget(trigger.groupId, trigger.childId);
-
-        if (widget != null && trigger.subChildId.isPresent()) {
-            widget = widget.getChild(trigger.subChildId.get());
-        }
-
-        return widget;
     }
 }
