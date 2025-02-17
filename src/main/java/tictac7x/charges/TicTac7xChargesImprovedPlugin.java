@@ -718,10 +718,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final int subChild) {
-		final Optional<Widget> widget = getWidget(client, parent, child);
-		if (!widget.isPresent()) return Optional.empty();
-
-		return Optional.ofNullable(widget.get().getChild(subChild));
+		return getWidget(client, parent, child, Optional.of(subChild));
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final Optional<Integer> subChild) {
