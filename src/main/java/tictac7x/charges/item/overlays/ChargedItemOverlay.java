@@ -82,7 +82,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
             !isChargedItemOverlayEnabled(chargedItem.get()) ||
 
             // Infinity charges hidden.
-            !config.showUnlimited() && chargedItem.get().getCharges().equals("∞") ||
+            !config.showUnlimited() && chargedItem.get().getCharges(itemId).equals("∞") ||
             !config.showUnlimited() && triggerItem.get().fixedCharges.isPresent() && triggerItem.get().fixedCharges.get().equals(Charges.UNLIMITED) ||
 
             // Hide overlays in bank.
@@ -125,7 +125,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         charges_component.setColor(color);
 
         // Override for bank items.
-        if (isBankWidget(widgetItem) && !chargedItem.get().getCharges().equals("?")) {
+        if (isBankWidget(widgetItem) && !chargedItem.get().getCharges(itemId).equals("?")) {
             charges_component.setColor(config.getColorDefault());
         }
 

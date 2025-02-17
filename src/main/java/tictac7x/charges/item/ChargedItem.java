@@ -21,11 +21,6 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     @Override
-    public String getCharges() {
-        return getCharges(itemId);
-    }
-
-    @Override
     public String getCharges(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
@@ -66,7 +61,7 @@ public class ChargedItem extends ChargedItemBase {
             }
         } catch (final Exception ignored) {}
 
-        return getCharges();
+        return getCharges(itemId);
     }
 
     public void setCharges(int charges) {

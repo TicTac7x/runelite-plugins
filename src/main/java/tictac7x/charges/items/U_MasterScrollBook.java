@@ -87,13 +87,13 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         final int varbit10966 = client.getVarbitValue(10966);
         final int varbit10968 = client.getVarbitValue(10968);
 
         // Default teleport not set, show all scrolls.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return super.getCharges();
+            return super.getCharges(itemId);
         }
 
         // Default teleport set, but no teleports.

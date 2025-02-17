@@ -71,7 +71,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public String getCharges() {
+    public String getCharges(final int itemId) {
         int quantity = getQuantity();
 
         if (quantity == Charges.UNKNOWN) {
@@ -82,13 +82,8 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public String getCharges(final int itemId) {
-        return getCharges();
-    }
-
-    @Override
     public String getTotalCharges() {
-        return getCharges();
+        return getCharges(itemId);
     }
 
     private void loadCharges() {
@@ -105,7 +100,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
         // Full storage is negative.
         if (
             storage.emptyIsNegative && storage.isEmpty() ||
-            !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getCharges().equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
+            !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getCharges(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
         ) {
             return config.getColorEmpty();
         }

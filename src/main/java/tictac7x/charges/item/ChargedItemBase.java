@@ -104,8 +104,6 @@ public abstract class ChargedItemBase {
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(client, itemManager, this, notifier, config);
     }
 
-    public abstract String getCharges();
-
     public abstract String getCharges(final int itemId);
 
     public abstract String getTotalCharges();
@@ -123,7 +121,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getTooltip() {
-        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(String.valueOf(getCharges()), JagexColors.MENU_TARGET);
+        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(String.valueOf(getCharges(itemId)), JagexColors.MENU_TARGET);
     }
 
     @Nonnull
@@ -146,11 +144,11 @@ public abstract class ChargedItemBase {
     }
 
     public Color getTextColor() {
-        if (getCharges().equals("?")) {
+        if (getCharges(itemId).equals("?")) {
             return config.getColorUnknown();
         }
 
-        if (getCharges().equals("0") || needsToBeEquipped() && !inEquipment()) {
+        if (getCharges(itemId).equals("0") || needsToBeEquipped() && !inEquipment()) {
             return config.getColorEmpty();
         }
 
