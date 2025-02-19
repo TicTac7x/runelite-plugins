@@ -46,7 +46,7 @@ public class W_ScytheOfVitur extends ChargedItem {
 
         this.triggers = new TriggerBase[]{
             // Check.
-            new OnChatMessage("Your (Holy s|Sanguine s|S)cythe of vitur has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
+            new OnChatMessage("Your (Holy s|Sanguine s|[Ss])cythe (of vitur )?has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
 
             // Charge partially full.
             new OnChatMessage("You apply an additional .+ charges to your (Holy s|Sanguine s|S)cythe of vitur. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
@@ -55,13 +55,7 @@ public class W_ScytheOfVitur extends ChargedItem {
             new OnChatMessage("You apply (?<charges>.+) charges to your (Holy s|Sanguine s|S)cythe of vitur.").setDynamicallyCharges(),
 
             // Attack.
-            // `OnHitsplatApplied` is triggered multiple times per attack, so we ensure that the charge is only decreased once per attack.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY).moreThanZeroDamage().isEquipped().consumer(() -> {
-                final int tickCount = client.getTickCount();
-                if (tickCount == this.hitsplatTick) return;
-                decreaseCharges(1);
-                this.hitsplatTick = tickCount;
-            }),
+            new OnHitsplatApplied(HitsplatTarget.ENEMY).moreThanZeroDamage().oncePerGameTick().isEquipped().decreaseCharges(1),
         };
     }
 }
