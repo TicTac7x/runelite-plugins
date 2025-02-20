@@ -19,8 +19,6 @@ import tictac7x.charges.store.HitsplatTarget;
 import tictac7x.charges.store.Store;
 
 public class W_ScytheOfVitur extends ChargedItem {
-    private int hitsplatTick;
-
     public W_ScytheOfVitur(
         final Client client,
         final ClientThread clientThread,

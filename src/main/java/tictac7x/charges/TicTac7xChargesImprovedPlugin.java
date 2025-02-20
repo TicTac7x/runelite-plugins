@@ -126,8 +126,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.5.20";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Partial support for flamtaer bag.<br>" +
-		"<colHIGHLIGHT>* Item prioritization fixes."
+		"<colHIGHLIGHT>* Scythe of vitur added.<br>" +
+		"<colHIGHLIGHT>* Tackle box now tracks stored items.<br>" +
+		"<colHIGHLIGHT>* Crystal halberd decreases 1 charge per multi-hit."
 	;
 
 	private final int VARBIT_MINUTES = 8354;

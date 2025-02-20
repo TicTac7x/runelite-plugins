@@ -26,6 +26,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Iban's staff
 - Pharaoh's sceptre
 - Sanguinesti staff
+- Scythe of vitur
 - Skull sceptre
 - Slayer staff (e)
 - Trident of the seas / swamp

@@ -2302,4 +2302,11 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = quetzal_whistle,
             section = debug
         ) default int getQuetzalWhistleCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = tackle_box + storage,
+            name = tackle_box + storage,
+            description = tackle_box + storage,
+            section = debug
+        ) default String getTackleBoxStorage() { return ""; }
 }
