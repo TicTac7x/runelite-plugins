@@ -28,7 +28,14 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (triggerUsed) return;
+            if (triggerUsed) {
+                // Once per game tick check.
+                if (trigger.oncePerGameTick.isPresent()) {
+                    trigger.triggerTick = client.getTickCount();
+                }
+
+                return;
+            }
         }
     }
 
@@ -67,6 +74,11 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
 
         // Name check.
         if (trigger.hasTargetName.isPresent() && (event.getActor().getName() == null || !event.getActor().getName().equals(trigger.hasTargetName.get()))) {
+            return false;
+        }
+
+        // Once per game tick check.
+        if (trigger.oncePerGameTick.isPresent() && client.getTickCount() == trigger.triggerTick) {
             return false;
         }
 
