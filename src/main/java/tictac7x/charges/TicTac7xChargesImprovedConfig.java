@@ -40,6 +40,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String bryophytas_staff = "bryophytas_staff";
     String burning_amulet = "burning_amulet";
     String camulet = "camulet";
+    String castle_wars_braelet = "castle_wars_bracelet";
     String celestial_ring = "celestial_ring";
     String chronicle = "chronicle";
     String circlet_of_water = "circlet_of_water";
@@ -91,6 +92,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String plank_sack = "plank_sack";
     String quetzal_whistle = "quetzal_whistle";
     String ring_of_dueling = "ring_of_dueling";
+    String ring_of_forging = "ring_of_forging";
     String ring_of_pursuit = "ring_of_pursuit";
     String ring_of_recoil = "ring_of_recoil";
     String ring_of_shadows = "ring_of_shadows";
@@ -351,6 +353,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean ringOfDuelingInfobox() { return true; }
 
         @ConfigItem(
+            keyName = ring_of_forging + infobox,
+            name = "Ring of forging",
+            description = "",
+            section = infoboxes
+        ) default boolean ringOfForgingInfobox() { return true; }
+
+        @ConfigItem(
             keyName = ring_of_pursuit + infobox,
             name = "Ring of pursuit",
             description = "",
@@ -510,6 +519,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean camuletInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = castle_wars_braelet + infobox,
+            name = "Castle wars bracelet",
+            description = "",
+            section = infoboxes
+        ) default boolean castleWarsBraceletInfobox() { return true; }
 
         @ConfigItem(
             keyName = desert_amulet + infobox,
@@ -1079,6 +1095,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean ringOfDuelingOverlay() { return true; }
 
         @ConfigItem(
+            keyName = ring_of_forging + overlay,
+            name = "Ring of forging",
+            description = "",
+            section = overlays
+        ) default boolean ringOfForgingOverlay() { return true; }
+
+        @ConfigItem(
             keyName = ring_of_pursuit + overlay,
             name = "Ring of pursuit",
             description = "",
@@ -1175,6 +1198,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean camuletOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = castle_wars_braelet + overlay,
+            name = "Castle wars bracelet",
+            description = "",
+            section = overlays
+        ) default boolean castleWarsBraceletOverlay() { return true; }
 
         @ConfigItem(
             keyName = celestial_ring + overlay,
@@ -1930,6 +1960,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = pharaohs_sceptre,
             section = debug
         ) default int getPharaohsSceptreCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = ring_of_forging,
+            name = ring_of_forging,
+            description = ring_of_forging,
+            section = debug
+        ) default int getRingOfForgingCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
             keyName = ring_of_suffering,
