@@ -11,13 +11,11 @@ import net.runelite.api.Varbits;
 
 /**
  * Get a generalised weapon style (melee/magic/ranged) from the current attack style.
- *
  * @see net.runelite.client.plugins.attackstyles.AttackStylesPlugin
  */
 @Slf4j
 public class WeaponAttackStyle {
     private final Client client;
-    private int[] weaponStyleStructs;
 
     public WeaponAttackStyle(Client client) {
         this.client = client;
@@ -26,19 +24,14 @@ public class WeaponAttackStyle {
     public CombatStyle getCombatStyle() {
         final int currentAttackStyleVarbit = client.getVarpValue(VarPlayer.ATTACK_STYLE);
         final int currentEquippedWeaponTypeVarbit = client.getVarbitValue(Varbits.EQUIPPED_WEAPON_TYPE);
-        int weaponStyleEnum = client.getEnum(EnumID.WEAPON_STYLES).getIntValue(currentEquippedWeaponTypeVarbit);
+        final int weaponStyleEnum = client.getEnum(EnumID.WEAPON_STYLES).getIntValue(currentEquippedWeaponTypeVarbit);
+        final int[] weaponStyleStructs = client.getEnum(weaponStyleEnum).getIntVals();
 
-        weaponStyleStructs = client.getEnum(weaponStyleEnum).getIntVals();
-
-        AttackStyle attackStyle = getAttackStyle(currentAttackStyleVarbit);
-        CombatStyle selectedWeaponStyle = getWeaponFromAttackStyle(attackStyle);
-
-        log.debug("Weapon style: {}", selectedWeaponStyle);
-
-        return selectedWeaponStyle;
+        final AttackStyle attackStyle = getAttackStyle(currentAttackStyleVarbit, weaponStyleStructs);
+        return getWeaponFromAttackStyle(attackStyle, weaponStyleStructs);
     }
 
-    private AttackStyle getAttackStyle(int attackStyleVarbit) {
+    private AttackStyle getAttackStyle(int attackStyleVarbit, final int [] weaponStyleStructs) {
         // Get selected weapon attack style
         StructComposition attackStyleStruct = client.getStructComposition(weaponStyleStructs[attackStyleVarbit]);
         String attackStyleName = attackStyleStruct.getStringValue(ParamID.ATTACK_STYLE_NAME);
@@ -47,7 +40,7 @@ public class WeaponAttackStyle {
         return AttackStyle.valueOf(attackStyleName.toUpperCase());
     }
 
-    private CombatStyle getWeaponFromAttackStyle(AttackStyle attackStyle) {
+    private CombatStyle getWeaponFromAttackStyle(final AttackStyle attackStyle, final int[] weaponStyleStructs) {
         switch (attackStyle) {
             case ACCURATE:
             case AGGRESSIVE:
@@ -62,11 +55,10 @@ public class WeaponAttackStyle {
             // "Defensive" is shared between melee and magic
             // We can look at the first attack style to determine which one is in use
             case DEFENSIVE:
-                AttackStyle firstAttackStyle = getAttackStyle(0);
-                log.debug("Defensive, maybe melee or magic: {}", firstAttackStyle);
+                final AttackStyle firstAttackStyle = getAttackStyle(0, weaponStyleStructs);
 
                 return firstAttackStyle != AttackStyle.DEFENSIVE
-                    ? getWeaponFromAttackStyle(firstAttackStyle)
+                    ? getWeaponFromAttackStyle(firstAttackStyle, weaponStyleStructs)
                     : CombatStyle.UNKNOWN;
             default:
                 return CombatStyle.UNKNOWN;

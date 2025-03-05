@@ -32,9 +32,9 @@ public class J_CastleWarsBracelet extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.castle_wars_braelet, ItemID.CASTLE_WARS_BRACELET1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.CASTLE_WARS_BRACELET1).needsToBeEquipped(),
-            new TriggerItem(ItemID.CASTLE_WARS_BRACELET2).needsToBeEquipped(),
-            new TriggerItem(ItemID.CASTLE_WARS_BRACELET3).needsToBeEquipped(),
+            new TriggerItem(ItemID.CASTLE_WARS_BRACELET1).fixedCharges(1).needsToBeEquipped(),
+            new TriggerItem(ItemID.CASTLE_WARS_BRACELET2).fixedCharges(2).needsToBeEquipped(),
+            new TriggerItem(ItemID.CASTLE_WARS_BRACELET3).fixedCharges(3).needsToBeEquipped(),
         };
     }
 }

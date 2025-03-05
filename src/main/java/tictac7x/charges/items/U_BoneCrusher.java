@@ -63,8 +63,8 @@ public class U_BoneCrusher extends ChargedItemWithStatus {
             new OnXpDrop(Skill.PRAYER).isActivated().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Bonecrusher( necklace)? using (?<ectotokens>.+)x Ecto-token.").matcherConsumer(m -> {
-                final int ectoTokens = Integer.parseInt(m.group("ectotokens"));
+            new OnChatMessage("The banker charges your Bonecrusher( necklace)? using (?<ectotoken>.+)x Ecto-token.").matcherConsumer(m -> {
+                final int ectoTokens = Integer.parseInt(m.group("ectotoken"));
                 increaseCharges(ectoTokens * 25);
             }),
 

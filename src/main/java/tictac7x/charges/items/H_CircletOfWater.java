@@ -53,8 +53,8 @@ public class H_CircletOfWater extends ChargedItem {
             new OnChatMessage("You add .+ charges? to your circlet. It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Circlet of water using (?<waterrunes>.+)x Water rune.").matcherConsumer(m -> {
-                final int waterRunes = Integer.parseInt(m.group("waterrunes"));
+            new OnChatMessage("The banker charges your Circlet of water using (?<waterrune>.+)x Water rune.").matcherConsumer(m -> {
+                final int waterRunes = Integer.parseInt(m.group("waterrune"));
                 increaseCharges(waterRunes / 5);
             }),
         };
