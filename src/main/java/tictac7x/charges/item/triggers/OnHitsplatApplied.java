@@ -1,5 +1,6 @@
 package tictac7x.charges.item.triggers;
 
+import tictac7x.charges.store.CombatStyle;
 import tictac7x.charges.store.HitsplatGroup;
 import tictac7x.charges.store.HitsplatTarget;
 
@@ -12,6 +13,7 @@ public class OnHitsplatApplied extends TriggerBase {
     public Optional<Boolean> moreThanZeroDamage = Optional.empty();
     public Optional<String> hasTargetName = Optional.empty();
     public Optional<Boolean> oncePerGameTick = Optional.empty();
+    public Optional<CombatStyle> combatStyle = Optional.empty();
     public int triggerTick = 0;
 
     public OnHitsplatApplied(final HitsplatTarget hitsplatTarget) {
@@ -30,6 +32,11 @@ public class OnHitsplatApplied extends TriggerBase {
 
     public TriggerBase oncePerGameTick() {
         this.oncePerGameTick = Optional.of(true);
+        return this;
+    }
+
+    public TriggerBase combatStyle(final CombatStyle combatStyle) {
+        this.combatStyle = Optional.of(combatStyle);
         return this;
     }
 }

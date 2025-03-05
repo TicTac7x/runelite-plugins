@@ -23,6 +23,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String storage = "_storage";
 
     String alchemists_amulet = "alchemists_amulet";
+    String amulet_of_blood_fury = "amulet_of_blood_fury";
     String arclight = "arclight";
     String ardougne_cloak = "ardougne_cloak";
     String ash_sanctifier = "ash_sanctifier";
@@ -1011,6 +1012,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
                 section = infoboxes
         ) default boolean alchemistsAmuletInfobox() { return true; }
 
+        @ConfigItem(
+                keyName = amulet_of_blood_fury + infobox,
+                name = "Amulet of Blood Fury",
+                description = "",
+                section = infoboxes
+        ) default boolean amuletOfBloodFuryInfobox() { return true; }
+
     @ConfigSection(
         name = "Overlays",
         description = "Choose for which charged items number is shown next to it",
@@ -1759,6 +1767,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
                 description = "",
                 section = overlays
         ) default boolean alchemistsAmuletOverlay() { return true; }
+
+        @ConfigItem(
+                keyName = amulet_of_blood_fury + overlay,
+                name = "Amulet of Blood Fury",
+                description = "",
+                section = overlays
+        ) default boolean amuletOfBloodFuryOverlay() { return true; }
 
     @ConfigSection(
         name = "Debug",

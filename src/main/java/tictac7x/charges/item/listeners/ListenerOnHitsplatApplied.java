@@ -10,12 +10,17 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnHitsplatApplied;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.WeaponAttackStyle;
 import tictac7x.charges.store.HitsplatGroup;
 import tictac7x.charges.store.HitsplatTarget;
 
 public class ListenerOnHitsplatApplied extends ListenerBase {
+    private final WeaponAttackStyle weaponAttackStyle;
+
     public ListenerOnHitsplatApplied(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
         super(client, itemManager, chargedItem, notifier, config);
+
+        this.weaponAttackStyle = new WeaponAttackStyle(client);
     }
 
     public void trigger(final HitsplatApplied event) {
@@ -79,6 +84,11 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
 
         // Once per game tick check.
         if (trigger.oncePerGameTick.isPresent() && client.getTickCount() == trigger.triggerTick) {
+            return false;
+        }
+
+        // Attack style check.
+        if (trigger.combatStyle.isPresent() && weaponAttackStyle.getCombatStyle() != trigger.combatStyle.get()) {
             return false;
         }
 

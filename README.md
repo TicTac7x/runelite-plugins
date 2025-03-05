@@ -63,6 +63,8 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 
 ### Jewellery
 
+- Alchemists Amulet
+- Amulet of Blood Fury
 - Binding necklace
 - Bracelet of clay
 - Bracelet of expeditious
