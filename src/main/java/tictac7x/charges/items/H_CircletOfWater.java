@@ -12,11 +12,8 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 
 public class H_CircletOfWater extends ChargedItem {
