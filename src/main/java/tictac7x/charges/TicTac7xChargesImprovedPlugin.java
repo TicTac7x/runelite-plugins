@@ -127,7 +127,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Ring of forging added.<br>" +
-		"<colHIGHLIGHT>* Castle wars bracelet added."
+		"<colHIGHLIGHT>* Castle wars bracelet added.<br>" +
+		"<colHIGHLIGHT>* Auto-charging tracking for most of the items."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
