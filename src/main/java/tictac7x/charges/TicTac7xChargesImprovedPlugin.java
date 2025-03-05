@@ -126,6 +126,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.5.21";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
+		"<colHIGHLIGHT>* Amulet of blood fury added.<br>" +
 		"<colHIGHLIGHT>* Ring of forging added.<br>" +
 		"<colHIGHLIGHT>* Castle wars bracelet added.<br>" +
 		"<colHIGHLIGHT>* Auto-charging tracking for most of the items."
