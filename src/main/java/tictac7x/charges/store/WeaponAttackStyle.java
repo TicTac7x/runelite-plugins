@@ -17,7 +17,7 @@ import net.runelite.api.Varbits;
 public class WeaponAttackStyle {
     private final Client client;
 
-    public WeaponAttackStyle(Client client) {
+    public WeaponAttackStyle(final Client client) {
         this.client = client;
     }
 
@@ -79,8 +79,7 @@ public class WeaponAttackStyle {
 
         private final String name;
 
-        AttackStyle(String name)
-        {
+        AttackStyle(String name) {
             this.name = name;
         }
     }
