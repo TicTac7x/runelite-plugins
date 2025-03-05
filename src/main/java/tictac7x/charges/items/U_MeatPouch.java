@@ -15,6 +15,7 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 import static tictac7x.charges.store.ItemContainerId.BANK;
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
@@ -75,7 +76,7 @@ public class U_MeatPouch extends ChargedItemWithStorage {
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Empty from deposit box.
-            new OnMenuOptionClicked("Empty").isWidgetVisible(192, 1).emptyStorage(),
+            new OnMenuOptionClicked("Empty").onItemClick().isWidgetVisible(WidgetId.DEPOSIT_BOX).emptyStorage(),
 
             // Use meat on pouch.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),

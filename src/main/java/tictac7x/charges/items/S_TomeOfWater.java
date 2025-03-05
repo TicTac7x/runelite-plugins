@@ -42,7 +42,13 @@ public class S_TomeOfWater extends ChargedItem {
             new OnChatMessage("Your tome currently holds (?<charges>.+) charges?.").setDynamicallyCharges().onItemClick(),
 
             // Attack with regular spellbook water spells.
-            new OnGraphicChanged(93, 120, 135, 161, 1458).isEquipped().decreaseCharges(1)
+            new OnGraphicChanged(93, 120, 135, 161, 1458).isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Tome of fire using (?<soakedpage>.+)x Soaked page.").matcherConsumer(m -> {
+                final int soakedPages = Integer.parseInt(m.group("soakedpage"));
+                increaseCharges(soakedPages * 20);
+            }),
         };
     }
 }

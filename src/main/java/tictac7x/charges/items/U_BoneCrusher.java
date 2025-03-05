@@ -46,16 +46,28 @@ public class U_BoneCrusher extends ChargedItemWithStatus {
             new OnChatMessage("(The|Your) bonecrusher( necklace)? has (?<charges>.+) charges?( left)?. It is active").setDynamicallyCharges().activate(),
             new OnChatMessage("(The|Your) bonecrusher( necklace)? has (?<charges>.+) charges?( left)?. It has been deactivated").setDynamicallyCharges().deactivate(),
             new OnChatMessage("(The|Your) bonecrusher( necklace)? has (?<charges>.+) charges?( left)?.").setDynamicallyCharges(),
+
             // Uncharge.
             new OnChatMessage("You remove all the charges from the bonecrusher( necklace)?.").setFixedCharges(0),
+
             // Ran out.
             new OnChatMessage("Your bonecrusher( necklace)? has run out of charges.").notification().setFixedCharges(0),
+
             // Activate.
             new OnChatMessage("The bonecrusher( necklace)? has been deactivated").deactivate(),
+
             // Deactivate.
             new OnChatMessage("The bonecrusher( necklace)? is active").activate(),
+
             // Automatic bury.
             new OnXpDrop(Skill.PRAYER).isActivated().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Bonecrusher( necklace)? using (?<ectotokens>.+)x Ecto-token.").matcherConsumer(m -> {
+                final int ectoTokens = Integer.parseInt(m.group("ectotokens"));
+                increaseCharges(ectoTokens * 25);
+            }),
+
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),
         };

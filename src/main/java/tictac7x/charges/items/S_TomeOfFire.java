@@ -42,7 +42,13 @@ public class S_TomeOfFire extends ChargedItem {
             new OnChatMessage("Your tome has been charged with (Burnt|Searing) Pages. It currently holds (?<charges>.+) charges?.").setDynamicallyCharges().onItemClick(),
 
             // Attack with regular spellbook fire spells.
-            new OnGraphicChanged(99, 126, 129, 155, 1464).isEquipped().decreaseCharges(1)
+            new OnGraphicChanged(99, 126, 129, 155, 1464).isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Tome of fire using (?<burntpage>.+)x Burnt page.").matcherConsumer(m -> {
+                final int burntPages = Integer.parseInt(m.group("burntpage"));
+                increaseCharges(burntPages * 20);
+            }),
         };
     }
 }

@@ -12,8 +12,11 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
+import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.ItemContainerId;
+import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 
 public class H_CircletOfWater extends ChargedItem {
@@ -48,6 +51,12 @@ public class H_CircletOfWater extends ChargedItem {
 
             // Charge while not empty.
             new OnChatMessage("You add .+ charges? to your circlet. It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Circlet of water using (?<waterrunes>.+)x Water rune.").matcherConsumer(m -> {
+                final int waterRunes = Integer.parseInt(m.group("waterrunes"));
+                increaseCharges(waterRunes / 5);
+            }),
         };
     }
 }

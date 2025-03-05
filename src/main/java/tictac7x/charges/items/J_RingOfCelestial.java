@@ -51,6 +51,12 @@ public class J_RingOfCelestial extends ChargedItem {
 
             // Mine.
             new OnChatMessage("You manage to (mine|quarry) some (clay|copper|tin|guardian fragments|guardian essence|tephra|blurite|limestone|iron|silver|coal|sandstone|gold|granite|mithril|lovakite|adamantite|soft clay)( ore)?.").isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Celestial (ring|signet) using (?<stardust>.+)x Stardust.").matcherConsumer(m -> {
+                final int stardust = Integer.parseInt(m.group("stardust"));
+                increaseCharges(stardust);
+            })
         };
     }
 }

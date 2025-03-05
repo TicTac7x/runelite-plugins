@@ -185,8 +185,9 @@ public abstract class ChargedItemBase {
     }
 
     public void onChatMessage(final ChatMessage event) {
-        if (!inInventoryOrEquipment()) return;
-        listenerOnChatMessage.trigger(event);
+        if (event.getMessage().contains("The banker charges") || inInventoryOrEquipment()) {
+            listenerOnChatMessage.trigger(event);
+        }
     }
 
     public void onHitsplatApplied(final HitsplatApplied event) {

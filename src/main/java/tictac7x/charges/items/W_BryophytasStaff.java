@@ -48,6 +48,12 @@ public class W_BryophytasStaff extends ChargedItem {
             // Charge.
             new OnChatMessage("Your Bryophyta's staff now has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Bryophyta's staff using (?<naturerune>.+)x Nature rune.").matcherConsumer(m -> {
+                final int natureRunes = Integer.parseInt(m.group("naturerune"));
+                increaseCharges(natureRunes);
+            }),
+
             // Regular spellbook.
             new OnXpDrop(Skill.MAGIC).isEquipped().onMenuOption("Cast").onMenuTarget(
                 "Bones to Bananas",

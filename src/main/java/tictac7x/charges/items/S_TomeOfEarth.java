@@ -42,7 +42,13 @@ public class S_TomeOfEarth extends ChargedItem {
             new OnChatMessage("Your tome currently holds (?<charges>.+) charges?.").setDynamicallyCharges().onItemClick(),
 
             // Attack with regular spellbook earth spells.
-            new OnGraphicChanged(96, 123, 138, 164, 1461).isEquipped().decreaseCharges(1)
+            new OnGraphicChanged(96, 123, 138, 164, 1461).isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Tome of earth using (?<soiledpage>.+)x Soiled page.").matcherConsumer(m -> {
+                final int soiledPages = Integer.parseInt(m.group("soiledpage"));
+                increaseCharges(soiledPages * 20);
+            }),
         };
     }
 }

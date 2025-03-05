@@ -15,6 +15,7 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 import static tictac7x.charges.store.ItemContainerId.BANK;
@@ -82,7 +83,7 @@ public class U_GemBag extends ChargedItemWithStorage {
             new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
 
             // Empty from deposit box.
-            new OnMenuOptionClicked("Empty").emptyStorage().isWidgetVisible(192, 1),
+            new OnMenuOptionClicked("Empty").onItemClick().isWidgetVisible(WidgetId.DEPOSIT_BOX).emptyStorage(),
 
             // Use gem on bag
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),

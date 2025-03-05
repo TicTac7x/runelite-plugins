@@ -52,6 +52,12 @@ public class W_WarpedSceptre extends ChargedItem {
 
             // Ran out of charges.
             new OnChatMessage("Your warped sceptre has run out of charges!").setFixedCharges(0),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Warped sceptre using (?<chaosrune>.+)x Chaos rune, and .+x Earth rune.*").matcherConsumer(m -> {
+                final int chaosRunes = Integer.parseInt(m.group("chaosrune"));
+                increaseCharges(chaosRunes / 2);
+            }),
         };
     }
 }

@@ -51,7 +51,13 @@ public class W_TridentOfTheSeasE extends ChargedItem {
             new OnChatMessage("You add .* charges? to the Trident of the seas \\(e\\). New total: (?<charges>.+)").setDynamicallyCharges(),
 
             // Attack.
-            new OnGraphicChanged(1251).isEquipped().decreaseCharges(1)
+            new OnGraphicChanged(1251).isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Trident of the seas (e) using (?<deathrune>.+)x Death rune.*").matcherConsumer(m -> {
+                final int deathRunes = Integer.parseInt(m.group("deathrune"));
+                increaseCharges(deathRunes);
+            }),
         };
     }
 }

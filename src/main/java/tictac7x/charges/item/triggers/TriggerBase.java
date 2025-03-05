@@ -200,8 +200,8 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase isWidgetVisible(final int parentId, final int childId) {
-        this.isWidgetVisible = Optional.of(new int[]{parentId, childId});
+    public TriggerBase isWidgetVisible(final int[] widgetIds) {
+        this.isWidgetVisible = Optional.of(widgetIds);
         return this;
     }
 }

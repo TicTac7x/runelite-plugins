@@ -53,6 +53,12 @@ public class U_AshSanctifier extends ChargedItemWithStatus {
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Ash sanctifier using (?<deathrune>.+)x Death rune.").matcherConsumer(m -> {
+                final int deathRunes = Integer.parseInt(m.group("deathrune"));
+                increaseCharges(deathRunes * 10);
+            }),
         };
     }
 }

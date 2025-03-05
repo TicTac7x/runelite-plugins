@@ -11,11 +11,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.OnWidgetLoaded;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
 public class J_XericsTalisman extends ChargedItem {
@@ -48,6 +44,15 @@ public class J_XericsTalisman extends ChargedItem {
 
             // Teleport widget.
             new OnWidgetLoaded(187, 0, 1).text("The talisman has (?<charges>.+) charges.").setDynamically(),
+
+            // Unified menu entry.
+            new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Xeric's talisman using (?<lizardmanfang>.+)x Lizardman fang.").matcherConsumer(m -> {
+                final int lizardmanFangs = Integer.parseInt(m.group("lizardmanfang"));
+                increaseCharges(lizardmanFangs);
+            }),
         };
     }
 }
