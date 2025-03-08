@@ -14,6 +14,9 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.PluginDescriptor;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Slf4j
 @PluginDescriptor(
 	name = "CAPS LOCK",
@@ -38,7 +41,7 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 	@Subscribe
 	public void onOverheadTextChanged(final OverheadTextChanged event) {
 		final String message = event.getOverheadText().trim();
-		if (isMessageValidForUppercase(message)) {
+		if (isMessageValidForCapsLock(message)) {
 			event.getActor().setOverheadText(message.toUpperCase());
 		}
 	}
@@ -63,19 +66,26 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 		final MessageNode messageNode = chatMessage.getMessageNode();
 		final String message = messageNode.getValue();
 
-		if (isMessageValidForUppercase(message)) {
+		if (isMessageValidForCapsLock(message)) {
 			messageNode.setValue(message.trim().toUpperCase());
 		}
 	}
 
-	private boolean isMessageValidForUppercase(final String message) {
+	private boolean isMessageValidForCapsLock(final String message) {
 		final String[] words = message.trim().split("\\s+");
 		if (words.length == 1) return false;
 
+		final List<String> cleanedWords = new LinkedList<>();
 		for (final String rawWord : words) {
 			final String cleanedWord = rawWord.replaceAll("[^a-zA-Z]", "");
-			if (cleanedWord.isEmpty()) continue;
+			if (!cleanedWord.isEmpty()) {
+				cleanedWords.add(cleanedWord);
+			}
+		}
 
+		if (cleanedWords.size() == 1) return false;
+
+		for (final String cleanedWord : cleanedWords) {
 			if (!Character.isUpperCase(cleanedWord.charAt(0))) {
 				return false;
 			}
