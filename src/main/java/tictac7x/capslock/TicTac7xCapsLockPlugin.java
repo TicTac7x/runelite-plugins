@@ -8,7 +8,6 @@ import com.google.inject.Provides;
 import net.runelite.api.MessageNode;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.OverheadTextChanged;
-import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.config.ConfigManager;
@@ -30,9 +29,6 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 	@Inject
 	private TicTac7xCapsLockConfig config;
 
-	@Inject
-	private ChatMessageManager chatMessageManager;
-
 	@Provides
 	TicTac7xCapsLockConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(TicTac7xCapsLockConfig.class);
@@ -42,7 +38,7 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 	public void onOverheadTextChanged(final OverheadTextChanged event) {
 		final String message = event.getOverheadText().trim();
 		if (isMessageValidForCapsLock(message)) {
-			event.getActor().setOverheadText(message.toUpperCase());
+			event.getActor().setOverheadText(capsLockMessage(message));
 		}
 	}
 
@@ -67,11 +63,11 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 		final String message = messageNode.getValue();
 
 		if (isMessageValidForCapsLock(message)) {
-			messageNode.setValue(message.trim().toUpperCase());
+			messageNode.setValue(capsLockMessage(message));
 		}
 	}
 
-	private boolean isMessageValidForCapsLock(final String message) {
+	boolean isMessageValidForCapsLock(final String message) {
 		final String[] words = message.trim().split("\\s+");
 		if (words.length == 1) return false;
 
@@ -92,5 +88,9 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 		}
 
 		return true;
+	}
+
+	String capsLockMessage(final String message) {
+		return message.toUpperCase();
 	}
 }
