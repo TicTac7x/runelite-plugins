@@ -1,16 +1,11 @@
 package tictac7x.capslock;
 
-import javax.inject.Inject;
-
-import net.runelite.api.Client;
 import lombok.extern.slf4j.Slf4j;
-import com.google.inject.Provides;
 import net.runelite.api.MessageNode;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.OverheadTextChanged;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
-import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.PluginDescriptor;
 
 import java.util.LinkedList;
@@ -23,17 +18,6 @@ import java.util.List;
 	tags = { "caps", "lock"	}
 )
 public class TicTac7xCapsLockPlugin extends Plugin {
-	@Inject
-	private Client client;
-
-	@Inject
-	private TicTac7xCapsLockConfig config;
-
-	@Provides
-	TicTac7xCapsLockConfig provideConfig(ConfigManager configManager) {
-		return configManager.getConfig(TicTac7xCapsLockConfig.class);
-	}
-
 	@Subscribe
 	public void onOverheadTextChanged(final OverheadTextChanged event) {
 		final String message = event.getOverheadText().trim();
