@@ -1,11 +1,11 @@
-package tictac7x.TODO_PLUGIN_NAME;
+package tictac7x.capslock;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class TicTac7xTODO_PLUGIN_NAMEPluginTest {
+public class TicTac7xCapsLockPluginTest {
 	public static void main(String[] args) throws Exception {
-		ExternalPluginManager.loadBuiltin(TicTac7xTODO_PLUGIN_NAMEPlugin.class);
+		ExternalPluginManager.loadBuiltin(TicTac7xCapsLockPlugin.class);
 		RuneLite.main(args);
 	}
 }

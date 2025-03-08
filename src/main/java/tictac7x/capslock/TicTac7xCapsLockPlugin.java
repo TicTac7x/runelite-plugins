@@ -1,4 +1,4 @@
-package tictac7x.TODO_PLUGIN_NAME;
+package tictac7x.capslock;
 
 import javax.inject.Inject;
 import net.runelite.api.Client;
@@ -10,20 +10,20 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 @Slf4j
 @PluginDescriptor(
-	name = "TODO_PLUGIN_DISPLAY_NAME",
-	description = "TODO_PLUGIN_DESCRIPTION",
-	tags = { "TODO_PLUGIN_TAGS"	}
+	name = "CAPS LOCK",
+	description = "ALLOW WRITING MESSAGES IN CAPS LOCK",
+	tags = { "caps", "lock"	}
 )
-public class TicTac7xTODO_PLUGIN_NAMEPlugin extends Plugin {
+public class TicTac7xCapsLockPlugin extends Plugin {
 	@Inject
 	private Client client;
 
 	@Inject
-	private TicTac7xTODO_PLUGIN_NAMEConfig config;
+	private TicTac7xCapsLockConfig config;
 
 	@Provides
-	TicTac7xTODO_PLUGIN_NAMEConfig provideConfig(ConfigManager configManager) {
-		return configManager.getConfig(TicTac7xTODO_PLUGIN_NAMEConfig.class);
+	TicTac7xCapsLockConfig provideConfig(ConfigManager configManager) {
+		return configManager.getConfig(TicTac7xCapsLockConfig.class);
 	}
 
 	@Override
