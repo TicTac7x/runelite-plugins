@@ -50,7 +50,7 @@ public class W_SkullSceptre extends ChargedItem {
             // Charge.
             new OnChatMessage("You charge the Skull Sceptre with .*. It now contains (?<charges>.+) charges?.").setDynamicallyCharges(),
 
-            // Unified menu entries.
+            // Unified menu entry.
             new OnMenuEntryAdded("Divine").replaceOption("Check"),
             new OnMenuEntryAdded("Invoke").replaceOption("Teleport"),
         };

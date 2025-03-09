@@ -85,7 +85,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             new OnMenuOptionClicked("Empty").onItemClick().isWidgetVisible(WidgetId.DEPOSIT_BOX).emptyStorage(),
 
             // Pick guam leaf.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Guam herbs").onMenuImpostor(26828, 39816).addToStorage(ItemID.GRIMY_GUAM_LEAF),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Guam herbs"
+            ).onMenuImpostor(
+                26828,
+                39816
+            ).addToStorage(ItemID.GRIMY_GUAM_LEAF),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 26824, 26825, 26826, 26827, 26828,
                 39812, 39813, 39814, 39815, 39816
@@ -95,7 +100,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick marrentill.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Marrentill herbs").onMenuImpostor(39751, 39821).addToStorage(ItemID.GRIMY_MARRENTILL),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Marrentill herbs"
+            ).onMenuImpostor(
+                39751,
+                39821
+            ).addToStorage(ItemID.GRIMY_MARRENTILL),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39747, 39748, 39749, 39750, 39751,
                 39816, 39817, 39818, 39819, 39821
@@ -105,7 +115,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick tarromin.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Tarromin herbs").onMenuImpostor(39756, 39826).addToStorage(ItemID.GRIMY_TARROMIN),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Tarromin herbs"
+            ).onMenuImpostor(
+                39756,
+                39826
+            ).addToStorage(ItemID.GRIMY_TARROMIN),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39752, 39753, 39754, 39755, 39756,
                 39822, 39823, 39824, 39825, 39826
@@ -115,7 +130,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick harralander.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Harralander herbs").onMenuImpostor(39761, 39831).addToStorage(ItemID.GRIMY_HARRALANDER),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Harralander herbs"
+            ).onMenuImpostor(
+                39761,
+                39831
+            ).addToStorage(ItemID.GRIMY_HARRALANDER),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39757, 39758, 39759, 39760, 39761,
                 39827, 39828, 39829, 39830, 39831
@@ -125,7 +145,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick ranarr.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Ranarr weed herbs").onMenuImpostor(39766, 39836).addToStorage(ItemID.GRIMY_RANARR_WEED),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Ranarr weed herbs"
+            ).onMenuImpostor(
+                39766,
+                39836
+            ).addToStorage(ItemID.GRIMY_RANARR_WEED),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39762, 39763, 39764, 39765, 39766,
                 39832, 39833, 39834, 39835, 39836
@@ -135,7 +160,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick irit leaf.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Irit leaf herbs").onMenuImpostor(39771, 39841).addToStorage(ItemID.GRIMY_IRIT_LEAF),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Irit leaf herbs"
+            ).onMenuImpostor(
+                39771,
+                39841
+            ).addToStorage(ItemID.GRIMY_IRIT_LEAF),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39767, 39768, 39769, 39770, 39771,
                 39837, 39838, 39839, 39840, 39841
@@ -145,7 +175,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick avantoe.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Avantoe herbs").onMenuImpostor(39776, 39846).addToStorage(ItemID.GRIMY_AVANTOE),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Avantoe herbs"
+            ).onMenuImpostor(
+                39776,
+                39846
+            ).addToStorage(ItemID.GRIMY_AVANTOE),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39772, 39773, 39774, 39775, 39776,
                 39842, 39843, 39844, 39845, 39846
@@ -155,7 +190,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick toadflax.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Toadflax herbs").onMenuImpostor(39781, 39851).addToStorage(ItemID.GRIMY_TOADFLAX),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Toadflax herbs"
+            ).onMenuImpostor(
+                39781,
+                39851
+            ).addToStorage(ItemID.GRIMY_TOADFLAX),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39777, 39778, 39779, 39780, 39781,
                 39847, 39848, 39849, 39850, 39851
@@ -165,7 +205,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick kwuarm.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Kwuarm herbs").onMenuImpostor(39786, 39856).addToStorage(ItemID.GRIMY_KWUARM),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Kwuarm herbs"
+            ).onMenuImpostor(
+                39786,
+                39856
+            ).addToStorage(ItemID.GRIMY_KWUARM),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39782, 39783, 39784, 39785, 39786,
                 39852, 39853, 39854, 39855, 39856
@@ -175,7 +220,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick huasca.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Huasca herbs").onMenuImpostor(39786, 39856).addToStorage(ItemID.GRIMY_HUASCA),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Huasca herbs"
+            ).onMenuImpostor(
+                55351,
+                55346
+            ).addToStorage(ItemID.GRIMY_HUASCA),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 55342, 55343, 55344, 55345, 55346,
                 55347, 55348, 55349, 55350, 55351
@@ -185,7 +235,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick cadantine.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Cadantine herbs").onMenuImpostor(39791, 39861).addToStorage(ItemID.GRIMY_CADANTINE),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Cadantine herbs"
+            ).onMenuImpostor(
+                39791,
+                39861
+            ).addToStorage(ItemID.GRIMY_CADANTINE),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39787, 39788, 39789, 39790, 39791,
                 39857, 39858, 39859, 39860, 39861
@@ -205,7 +260,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick dwarf weed.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Dwarf weed herbs").onMenuImpostor(39801, 39871).addToStorage(ItemID.GRIMY_DWARF_WEED),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Dwarf weed herbs"
+            ).onMenuImpostor(
+                39801,
+                39871
+            ).addToStorage(ItemID.GRIMY_DWARF_WEED),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39797, 39798, 39799, 39800, 39801,
                 39867, 39868, 39869, 39870, 39871
@@ -215,7 +275,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick torstol.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Torstol herbs").onMenuImpostor(39806, 39876).addToStorage(ItemID.GRIMY_TORSTOL),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Torstol herbs"
+            ).onMenuImpostor(
+                39806,
+                39876
+            ).addToStorage(ItemID.GRIMY_TORSTOL),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39802, 39803, 39804, 39805, 39806,
                 39872, 39873, 39874, 39875, 39876
@@ -225,7 +290,12 @@ public class U_HerbSack extends ChargedItemWithStorage {
             ).onMenuTarget("Herbs").onHover(),
 
             // Pick snapdragon
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs", "Snapdragon herbs").onMenuImpostor(39811, 39881).addToStorage(ItemID.GRIMY_SNAPDRAGON),
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
+                "Snapdragon herbs"
+            ).onMenuImpostor(
+                39811,
+                39881
+            ).addToStorage(ItemID.GRIMY_SNAPDRAGON),
             new OnMenuEntryAdded().isReplaceImpostorId(
                 39807, 39808, 39809, 39810, 39811,
                 39877, 39878, 39879, 39880, 39881

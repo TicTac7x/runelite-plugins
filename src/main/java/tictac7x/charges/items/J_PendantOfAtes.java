@@ -11,10 +11,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 
 public class J_PendantOfAtes extends ChargedItem {
@@ -52,6 +49,9 @@ public class J_PendantOfAtes extends ChargedItem {
 
             // Teleport.
             new OnGraphicChanged(2754).decreaseCharges(1),
+
+            // Unified menu entry.
+            new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
         };
     }
 }
