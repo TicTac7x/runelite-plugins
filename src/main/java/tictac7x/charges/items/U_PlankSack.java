@@ -73,17 +73,17 @@ public class U_PlankSack extends ChargedItemWithStorage {
             }),
 
             // Empty to inventory.
-            new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
+            new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty", TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             // Use plank on sack.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Replace "Use" with proper Fill/Empty option.
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK),
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
@@ -337,15 +337,8 @@ public class U_PlankSack extends ChargedItemWithStorage {
     }
 
     private String getMenuOptionForUse() {
-        if (
-            store.inventoryContainsItem(ItemID.PLANK) ||
-            store.inventoryContainsItem(ItemID.OAK_PLANK) ||
-            store.inventoryContainsItem(ItemID.TEAK_PLANK) ||
-            store.inventoryContainsItem(ItemID.MAHOGANY_PLANK)
-        ) {
-            return "Fill";
-        }
-
-        return "Empty";
+        return storage.isStorableItemInInventory()
+            ? TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory
+            : TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory;
     }
 }

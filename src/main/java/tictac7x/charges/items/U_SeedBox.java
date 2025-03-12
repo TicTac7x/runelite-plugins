@@ -10,6 +10,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
@@ -17,6 +18,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 public class U_SeedBox extends ChargedItemWithStorage {
     public U_SeedBox(
@@ -70,6 +72,9 @@ public class U_SeedBox extends ChargedItemWithStorage {
                 final int quantity = Integer.parseInt(m.group("quantity"));
                 storage.put(seed, quantity);
             }),
+
+            // Replace "Empty" with proper "Empty to bank".
+            new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide()

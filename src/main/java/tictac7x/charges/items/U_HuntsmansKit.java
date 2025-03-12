@@ -10,6 +10,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
@@ -18,6 +19,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 public class U_HuntsmansKit extends ChargedItemWithStorage {
     public U_HuntsmansKit(
@@ -81,16 +83,26 @@ public class U_HuntsmansKit extends ChargedItemWithStorage {
 
         this.triggers = new TriggerBase[]{
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             // Empty to inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
-
-            // Hide destroy option.
-            new OnMenuEntryAdded("Destroy").hide(),
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty", TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory),
 
             // Update from item container when viewing huntsmans kit contents.
             new OnItemContainerChanged(ItemContainerId.HUNTSMANS_KIT).updateStorage(),
+
+            // Replace "Use" with proper Fill/Empty option.
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+
+            // Hide destroy option.
+            new OnMenuEntryAdded("Destroy").hide(),
         };
+    }
+
+    private String getMenuOptionForUse() {
+        return storage.isStorableItemInInventory()
+                ? TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory
+                : TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory;
     }
 }

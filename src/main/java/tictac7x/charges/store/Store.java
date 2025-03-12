@@ -21,7 +21,6 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class Store {
     private final Client client;
@@ -33,7 +32,8 @@ public class Store {
 
     private Optional<ChargedItemBase[]> chargedItems = Optional.empty();
     private List<Integer> dailyResetItemIds = new ArrayList<>();
-    private Optional<String> lastChatMessage = Optional.empty();
+    private int lastChatMessagesTick = 0;
+    private List<String> lastChatMessages = new ArrayList<>();
     public Optional<ItemContainer> inventory = Optional.empty();
     public Optional<ItemContainer> equipment = Optional.empty();
     public Optional<ItemContainer> bank = Optional.empty();
@@ -53,14 +53,27 @@ public class Store {
         this.configManager = configManager;
     }
 
-    public Optional<String> getLastChatMessage() {
-        return this.lastChatMessage;
+    public List<String> getLastChatMessages() {
+        return lastChatMessages;
     }
 
-    public void setLastChatMessage(final ChatMessage event) {
-        if (event.getType() == ChatMessageType.GAMEMESSAGE || event.getType() == ChatMessageType.DIALOG || event.getType() == ChatMessageType.SPAM) {
-            lastChatMessage = Optional.of(TicTac7xChargesImprovedPlugin.getCleanChatMessage(event));
+    public void setLastChatMessages(final ChatMessage event) {
+        switch (event.getType()) {
+            case GAMEMESSAGE:
+            case DIALOG:
+            case SPAM:
+                break;
+            default:
+                return;
         }
+
+        final int tick = client.getTickCount();
+        if (tick != lastChatMessagesTick) {
+            lastChatMessages = new ArrayList<>();
+            lastChatMessagesTick = tick;
+        }
+
+        lastChatMessages.add(TicTac7xChargesImprovedPlugin.getCleanChatMessage(event));
     }
 
     public void setChargedItems(final ChargedItemBase[] chargedItems) {

@@ -12,16 +12,20 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 import java.awt.*;
 import java.util.Optional;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRepresentation;
+import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_ColossalPouch extends ChargedItemWithStorage {
     public U_ColossalPouch(
@@ -124,11 +128,27 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
                 storage.emptyToInventoryWithoutItemContainerChanged();
             }),
 
+            // Empty to inventory at bank.
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).emptyStorageToInventory(),
+
+            // Fill from inventory at bank.
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
+
+            // Replace "Fill" with proper Fill/Empty option.
+            new OnMenuEntryAdded("Fill").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+            new OnMenuEntryAdded("Fill").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+
             // Set maximum charges on level up
             new OnStatChanged(Skill.RUNECRAFT).consumer(() -> {
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
         };
+    }
+
+    private String getMenuOptionForUse() {
+        return (storage.isStorableItemInInventory() || storage.isEmpty())
+            ? TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory
+            : TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory;
     }
 
     @Override

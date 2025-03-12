@@ -18,6 +18,7 @@ import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -114,7 +115,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Empty to bank.
-            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
+            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty", TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank),
 
             // Leprechaun.
             new OnMenuOptionClicked("Continue").consumer(() -> {
@@ -123,6 +124,9 @@ public class U_LogBasket extends ChargedItemWithStorage {
                     storage.clear();
                 }
             }),
+
+            // Replace "Empty" with proper Empty to bank option.
+            new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),
@@ -136,5 +140,4 @@ public class U_LogBasket extends ChargedItemWithStorage {
             }).requiredItem(ItemID.OPEN_LOG_BASKET, ItemID.OPEN_FORESTRY_BASKET),
         };
     }
-
 }

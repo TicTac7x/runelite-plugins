@@ -17,6 +17,7 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -68,11 +69,14 @@ public class U_FlamtaerBag extends ChargedItemWithStorage {
                 storage.removeAndPrioritizeInventory(ItemID.SWAMP_PASTE, 5);
             }),
 
+            // Replace "Empty" with proper "Empty to inventory" at bank.
+            new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory at bank.
-            new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
+            new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory),
 
             // Use storable items on flamtaer bag.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
@@ -97,7 +101,7 @@ public class U_FlamtaerBag extends ChargedItemWithStorage {
 //            // TODO - figure out how to detect which option was chosen from empty dialog
 
             // Trying to empty already empty bag.
-            new OnChatMessage("The bag is empty").onMenuOption("Empty").onMenuTarget("Flamtaer bag").emptyStorage(),
+            new OnChatMessage("The bag is empty").onMenuOption("Empty", TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).onItemClick().emptyStorage(),
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),

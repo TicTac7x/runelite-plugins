@@ -92,6 +92,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String phoenix_necklace = "phoenix_necklace";
     String plank_sack = "plank_sack";
     String quetzal_whistle = "quetzal_whistle";
+    String reagent_pouch = "reagent_pouch";
     String ring_of_dueling = "ring_of_dueling";
     String ring_of_forging = "ring_of_forging";
     String ring_of_pursuit = "ring_of_pursuit";
@@ -354,6 +355,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean moonlightMothMixInfobox() { return false; }
+
+        @ConfigItem(
+            keyName = reagent_pouch + infobox,
+            name = "Reagent pouch",
+            description = "",
+            section = infoboxes
+        ) default boolean reagentPouchInfobox() { return true; }
 
         @ConfigItem(
             keyName = ring_of_dueling + infobox,
@@ -1110,6 +1118,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean moonlightMothMixOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = reagent_pouch + overlay,
+            name = "Reagent pouch",
+            description = "",
+            section = overlays
+        ) default boolean reagentPouchOverlay() { return true; }
 
         @ConfigItem(
             keyName = ring_of_dueling + overlay,
@@ -1998,6 +2013,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = pharaohs_sceptre,
             section = debug
         ) default int getPharaohsSceptreCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = reagent_pouch + storage,
+            name = reagent_pouch + storage,
+            description = reagent_pouch + storage,
+            section = debug
+        ) default String getReagentPouchStorage() { return ""; }
 
         @ConfigItem(
             keyName = ring_of_forging,

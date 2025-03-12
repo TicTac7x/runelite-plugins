@@ -123,7 +123,7 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v5.22";
+	private final String pluginVersion = "v0.5.22";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Huasca herbs support for herb sack.<br>" +
@@ -296,6 +296,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_OgreBellows(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_QuetzalWhistle(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_PlankSack(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new U_ReagentPouch(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_SeedBox(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_SoulBearer(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_StrangeOldLockpick(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -373,7 +374,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
-		store.setLastChatMessage(event);
+		store.setLastChatMessages(event);
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onChatMessage(event));
 
 //		System.out.println("MESSAGE | " +
@@ -714,6 +715,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String getCleanChatMessage(final ChatMessage event) {
 		return getCleanText(event.getMessage());
 	}
+
+	public static String menuOptionEmptyToBank = "Empty to bank";
+	public static String menuOptionFillFromBank = "Fill from bank";
+	public static String menuOptionEmptyToInventory = "Empty to inventory";
+	public static String menuOptionFillFromInventory = "Fill from inventory";
 
 	public static int getNumberFromCommaString(final String charges) {
 		return Integer.parseInt(charges.replaceAll(",", "").replaceAll("\\.", ""));

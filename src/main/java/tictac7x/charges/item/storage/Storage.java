@@ -355,8 +355,8 @@ public class Storage {
     }
 
     public final Optional<StorageItem> getStorageItemFromName(final String name) {
-        // Based on checkName.
         for (final StorableItem storableItem : storableItems) {
+            // Based on checkName.
             if (storableItem.checkName.isPresent()) {
                 for (final String checkName :storableItem.checkName.get()) {
                     if (
@@ -368,6 +368,7 @@ public class Storage {
                     }
                 }
             }
+
         }
 
         return Optional.empty();
@@ -399,5 +400,17 @@ public class Storage {
         }
 
         return itemManager.getItemComposition(storageItem.itemId).getName();
+    }
+
+    public boolean isStorableItemInInventory() {
+        for (final StorageItem inventoryItem : store.currentInventoryItems) {
+            for (final StorableItem storableItem : storableItems) {
+                if (inventoryItem.itemId == storableItem.itemId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

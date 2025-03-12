@@ -59,7 +59,7 @@ public class U_SoulBearer extends ChargedItem {
             new OnChatMessage("The banker charges your Soul bearer using (?<bloodrune>.+)x Blood rune.*").matcherConsumer(m -> {
                 final int bloodRunes = Integer.parseInt(m.group("bloodrune"));
                 increaseCharges(bloodRunes);
-            })
+            }),
         };
     }
 }

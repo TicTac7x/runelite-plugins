@@ -213,12 +213,16 @@ public abstract class ListenerBase {
 
         // Chat message check.
         if (trigger.hasChatMessage.isPresent()) {
-            if (!chargedItem.store.getLastChatMessage().isPresent()) {
-                return false;
+            boolean matches = false;
+
+            for (final String message : chargedItem.store.getLastChatMessages()) {
+                if (trigger.hasChatMessage.get().matcher(message).find()) {
+                    matches = true;
+                    break;
+                }
             }
 
-            final Matcher matcher = trigger.hasChatMessage.get().matcher(chargedItem.store.getLastChatMessage().get());
-            if (!matcher.find()) {
+            if (!matches) {
                 return false;
             }
         }
@@ -232,9 +236,18 @@ public abstract class ListenerBase {
 
         // Visible widget check.
         if (trigger.isWidgetVisible.isPresent()) {
-            final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, trigger.isWidgetVisible.get()[0], trigger.isWidgetVisible.get()[1]);
-            if (!widget.isPresent()) return false;
-            if (widget.get().isHidden()) return false;
+            boolean widgetVisible = false;
+            for (final int[] widgetIds : trigger.isWidgetVisible.get()) {
+                final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, widgetIds[0], widgetIds[1]);
+                if (widget.isPresent() && !widget.get().isHidden()) {
+                    widgetVisible = true;
+                    break;
+                }
+            }
+
+            if (!widgetVisible) {
+                return false;
+            }
         }
 
         if (trigger.emptyStorageToInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {

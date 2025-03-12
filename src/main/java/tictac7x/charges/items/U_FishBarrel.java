@@ -10,6 +10,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
@@ -19,6 +20,7 @@ import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.WidgetId;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -117,6 +119,9 @@ public class U_FishBarrel extends ChargedItemWithStorage {
                 storage.add(lastCaughtFish, 1);
             }),
 
+            // Replace "Empty" with proper "Empty to bank".
+            new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+
             // Check.
             new OnChatMessage("The barrel contains:").stringConsumer(s -> {
                 storage.clear();
@@ -135,11 +140,8 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             // Use fish on barrel.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
-            // Empty to bank.
-            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
-
             // Empty to deposit box.
-            new OnChatMessage("You empty the barrel.").onMenuOption("Empty").emptyStorage(),
+            new OnChatMessage("You empty the barrel.").onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).emptyStorage(),
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),

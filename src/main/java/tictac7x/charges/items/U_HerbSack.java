@@ -11,6 +11,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
@@ -79,10 +80,16 @@ public class U_HerbSack extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
 
             // Empty to bank.
-            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption("Empty"),
+            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank),
 
             // Empty from deposit box.
-            new OnMenuOptionClicked("Empty").onItemClick().isWidgetVisible(WidgetId.DEPOSIT_BOX).emptyStorage(),
+            new OnMenuOptionClicked(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).onItemClick().isWidgetVisible(WidgetId.DEPOSIT_BOX).emptyStorage(),
+
+            // Replace "Empty" with proper "Empty to bank".
+            new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+
+            // Hide destroy option.
+            new OnMenuEntryAdded("Destroy").hide(),
 
             // Pick guam leaf.
             new OnXpDrop(Skill.FARMING).requiredItem(ItemID.OPEN_HERB_SACK).onMenuOption("Pick").onMenuTarget("Herbs",
@@ -303,9 +310,6 @@ public class U_HerbSack extends ChargedItemWithStorage {
                 new ReplaceTarget("Herbs", "Snapdragon herbs"),
                 new ReplaceTarget("Herb patch", "Snapdragon herbs")
             ).onMenuTarget("Herbs").onHover(),
-
-            // Hide destroy option.
-            new OnMenuEntryAdded("Destroy").hide()
         };
     }
 }
