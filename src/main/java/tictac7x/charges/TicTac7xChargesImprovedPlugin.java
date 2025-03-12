@@ -127,7 +127,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Huasca herbs support for herb sack.<br>" +
-		"<colHIGHLIGHT>* Pendant of ates unified menu entry."
+		"<colHIGHLIGHT>* All storage items at bank have proper empty/fill menu options.<br>" +
+		"<colHIGHLIGHT>* Auto-charges support for some missing items.<br>" +
+		"<colHIGHLIGHT>* Log basket and forestry kit nature offerings support."
 	;
 
 	private final int VARBIT_MINUTES = 8354;

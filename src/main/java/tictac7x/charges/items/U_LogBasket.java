@@ -103,6 +103,13 @@ public class U_LogBasket extends ChargedItemWithStorage {
                 infernalQuantityTracker++;
             }).requiredItem(ItemID.OPEN_LOG_BASKET, ItemID.OPEN_FORESTRY_BASKET),
 
+            // Extra logs from nature offerings.
+            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemID.OPEN_LOG_BASKET).runConsumerOnNextGameTick(() -> {
+                if (lastLogs.isPresent()) {
+                    storage.add(lastLogs.get().itemId, 1);
+                }
+            }),
+
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemID.OPEN_LOG_BASKET).pickUpToStorage(),
 
             // Fill from inventory.
