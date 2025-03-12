@@ -13,6 +13,7 @@ import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
 
@@ -37,20 +38,20 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     @Override
     public String getTooltip() {
         String tooltip = "";
-        for (final StorageItem storageItem : storage.getStorage().values().stream()
+        for (final StorageItem storageItem : storage.getStorage().getItems().stream()
             .sorted(Comparator.comparing(storageItem -> storage.getStorageItemOrder(storageItem)))
             .collect(Collectors.toList())
         ) {
-            if (storageItem.quantity > 0) {
+            if (storageItem.getQuantity() > 0) {
                 tooltip += storage.getStorageItemName(storageItem) + ": ";
-                tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.quantity), JagexColors.MENU_TARGET) + "</br>";
+                tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.getQuantity()), JagexColors.MENU_TARGET) + "</br>";
             }
         }
 
         return tooltip.replaceAll("</br>$", "");
     }
 
-    public Map<Integer, StorageItem> getStorage() {
+    public StorageItems getStorage() {
         return this.storage.getStorage();
     }
 
@@ -61,9 +62,9 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     public int getQuantity() {
         int quantity = 0;
 
-        for (final StorageItem storageItem : getStorage().values()) {
-            if (storageItem.quantity >= 0) {
-                quantity += storageItem.quantity;
+        for (final StorageItem storageItem : getStorage().getItems()) {
+            if (storageItem.getQuantity() > 0) {
+                quantity += storageItem.getQuantity();
             }
         }
 

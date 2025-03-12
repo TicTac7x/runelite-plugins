@@ -29,9 +29,4 @@ public class StorableItem extends StorageItem {
         this.displayName = Optional.of(displayName);
         return this;
     }
-
-    public StorableItem quantity(final int quantity) {
-        this.quantity = quantity;
-        return this;
-    }
 }

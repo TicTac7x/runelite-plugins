@@ -71,12 +71,6 @@ public abstract class ListenerBase {
             triggerUsed = true;
         }
 
-        // Add to storage.
-        if (trigger.removeFromStorage.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
-            ((ChargedItemWithStorage) chargedItem).storage.remove(trigger.removeFromStorage.get().itemId, trigger.removeFromStorage.get().quantity);
-            triggerUsed = true;
-        }
-
         // Consumer.
         if (trigger.consumer.isPresent()) {
             if (trigger.runConsumerOnNextGameTick.isPresent() && trigger.runConsumerOnNextGameTick.get()) {
@@ -194,7 +188,7 @@ public abstract class ListenerBase {
             useCheckLooper: for (final AdvancedMenuEntry menuEntry : chargedItem.store.menuOptionsClicked) {
                 if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
-                for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().values()) {
+                for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
                     if (menuEntry.target.split(" -> ")[1].equals(itemManager.getItemComposition(storageItem.itemId).getName())) {
                         useCheck = true;
                         break useCheckLooper;

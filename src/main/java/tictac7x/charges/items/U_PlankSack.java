@@ -256,9 +256,9 @@ public class U_PlankSack extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).onInventoryDifference(itemsDifference -> {
                 if (!sawmillLogId.isPresent() || !sawmillPlankId.isPresent()) return;
 
-                final int logsDifference = itemsDifference.getItemQuantity(sawmillLogId.get());
-                final int planksDifference = itemsDifference.getItemQuantity(sawmillPlankId.get());
-                final int vouchersDifference = itemsDifference.getItemQuantity(ItemID.SAWMILL_VOUCHER);
+                final int logsDifference = itemsDifference.count(sawmillLogId.get());
+                final int planksDifference = itemsDifference.count(sawmillPlankId.get());
+                final int vouchersDifference = itemsDifference.count(ItemID.SAWMILL_VOUCHER);
 
                 storage.add(this.sawmillPlankId.get(), Math.abs(logsDifference) + Math.abs(vouchersDifference) - Math.abs(planksDifference));
 

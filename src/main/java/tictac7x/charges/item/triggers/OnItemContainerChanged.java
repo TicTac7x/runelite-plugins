@@ -1,6 +1,6 @@
 package tictac7x.charges.item.triggers;
 
-import net.runelite.api.events.ItemContainerChanged;
+import tictac7x.charges.item.storage.StorageItems;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -12,7 +12,7 @@ public class OnItemContainerChanged extends TriggerBase {
     public Optional<Boolean> fillStorageFromInventory = Optional.empty();
     public Optional<Boolean> emptyStorageToInventory = Optional.empty();
     public Optional<Boolean> emptyStorageToBank = Optional.empty();
-    public Optional<Consumer<ItemContainerChanged>> itemContainerConsumer = Optional.empty();
+    public Optional<Consumer<StorageItems>> itemsConsumer = Optional.empty();
 
     public OnItemContainerChanged(final int itemContainerId) {
         this.itemContainerId = itemContainerId;
@@ -38,8 +38,8 @@ public class OnItemContainerChanged extends TriggerBase {
         return this;
     }
 
-    public TriggerBase itemContainerConsumer(final Consumer<ItemContainerChanged> event) {
-        this.itemContainerConsumer = Optional.of(event);
+    public TriggerBase itemsConsumer(final Consumer<StorageItems> event) {
+        this.itemsConsumer = Optional.of(event);
         return this;
     }
 }

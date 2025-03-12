@@ -11,6 +11,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnAnimationChanged;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
@@ -18,7 +19,6 @@ import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 
 public class U_QuetzalWhistle extends ChargedItem {
@@ -62,23 +62,23 @@ public class U_QuetzalWhistle extends ChargedItem {
 
             // Partially charged.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {
-                for (final ItemWithQuantity item : itemsDifference.items) {
+                for (final StorageItem item : itemsDifference.getItems()) {
                     switch (item.itemId) {
                         case ItemID.QUETZAL_FEED:
                         case ItemID.RAW_WILD_KEBBIT:
                         case ItemID.RAW_BARBTAILED_KEBBIT:
                         case ItemID.RAW_LARUPIA:
-                            increaseCharges(Math.abs(item.quantity));
+                            increaseCharges(Math.abs(item.getQuantity()));
                             break;
                         case ItemID.RAW_GRAAHK:
                         case ItemID.RAW_KYATT:
                         case ItemID.RAW_PYRE_FOX:
-                            increaseCharges(Math.abs(item.quantity) * 2);
+                            increaseCharges(Math.abs(item.getQuantity()) * 2);
                             break;
                         case ItemID.RAW_DASHING_KEBBIT:
                         case ItemID.RAW_SUNLIGHT_ANTELOPE:
                         case ItemID.RAW_MOONLIGHT_ANTELOPE:
-                            increaseCharges(Math.abs(item.quantity) * 3);
+                            increaseCharges(Math.abs(item.getQuantity()) * 3);
                             break;
                     }
                 }

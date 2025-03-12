@@ -16,6 +16,7 @@ import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
@@ -130,7 +131,7 @@ public class Store {
 
             previousInventoryItems = new ArrayList<>();
             for (final StorageItem storageItem : currentInventoryItems) {
-                previousInventoryItems.add(new StorageItem(storageItem.itemId, storageItem.quantity));
+                previousInventoryItems.add(new StorageItem(storageItem.itemId, storageItem.getQuantity()));
             }
 
             currentInventoryItems = new ArrayList<>();
@@ -145,7 +146,7 @@ public class Store {
 
             previousBankItems = new ArrayList<>();
             for (final StorageItem storageItem : currentBankItems) {
-                previousBankItems.add(new StorageItem(storageItem.itemId, storageItem.quantity));
+                previousBankItems.add(new StorageItem(storageItem.itemId, storageItem.getQuantity()));
             }
 
             currentBankItems = new ArrayList<>();
@@ -383,7 +384,7 @@ public class Store {
 
         for (final StorageItem storageItem : currentInventoryItems) {
             if (storageItem.itemId == itemId) {
-                quantity += storageItem.quantity;
+                quantity += storageItem.getQuantity();
             }
         }
 
@@ -409,7 +410,7 @@ public class Store {
 
         for (final StorageItem storageItem : previousInventoryItems) {
             if (storageItem.itemId == itemId) {
-                quantity += storageItem.quantity;
+                quantity += storageItem.getQuantity();
             }
         }
 
@@ -497,8 +498,8 @@ public class Store {
         return false;
     }
 
-    public ItemsDifference getInventoryItemsDifference() {
-        final List<ItemWithQuantity> itemsDifference = new ArrayList<>();
+    public StorageItems getInventoryItemsDifference() {
+        final StorageItems itemsDifference = new StorageItems();
 
         final Map<Integer, Integer> quantitiesNew = new HashMap<>();
         final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
@@ -511,9 +512,9 @@ public class Store {
 
             for (final StorageItem itemOld : previousInventoryItems) {
                 if (quantitiesBefore.containsKey(itemOld.itemId)) {
-                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.quantity);
+                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
                 } else {
-                    quantitiesBefore.put(itemOld.itemId, itemOld.quantity);
+                    quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
                 }
             }
         }
@@ -521,21 +522,21 @@ public class Store {
         for (final int itemId : quantitiesNew.keySet()) {
             final int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
             if (quantity != 0) {
-                itemsDifference.add(new ItemWithQuantity(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
+                itemsDifference.put(new StorageItem(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
             }
         }
 
         for (final int itemId : quantitiesBefore.keySet()) {
             if (!quantitiesNew.containsKey(itemId)) {
-                itemsDifference.add(new ItemWithQuantity(itemId, -quantitiesBefore.get(itemId)));
+                itemsDifference.put(new StorageItem(itemId, -quantitiesBefore.get(itemId)));
             }
         }
 
-        return new ItemsDifference(itemsDifference);
+        return itemsDifference;
     }
 
-    public ItemsDifference getBankItemsDifference() {
-        final List<ItemWithQuantity> itemsDifference = new ArrayList<>();
+    public StorageItems getBankItemsDifference() {
+        final StorageItems itemsDifference = new StorageItems();
 
         final Map<Integer, Integer> quantitiesNew = new HashMap<>();
         final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
@@ -548,9 +549,9 @@ public class Store {
 
             for (final StorageItem itemOld : previousBankItems) {
                 if (quantitiesBefore.containsKey(itemOld.itemId)) {
-                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.quantity);
+                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
                 } else {
-                    quantitiesBefore.put(itemOld.itemId, itemOld.quantity);
+                    quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
                 }
             }
         }
@@ -558,21 +559,21 @@ public class Store {
         for (final int itemId : quantitiesNew.keySet()) {
             final int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
             if (quantity != 0) {
-                itemsDifference.add(new ItemWithQuantity(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
+                itemsDifference.put(new StorageItem(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
             }
         }
 
         for (final int itemId : quantitiesBefore.keySet()) {
             if (!quantitiesNew.containsKey(itemId)) {
-                itemsDifference.add(new ItemWithQuantity(itemId, -quantitiesBefore.get(itemId)));
+                itemsDifference.put(new StorageItem(itemId, -quantitiesBefore.get(itemId)));
             }
         }
 
-        return new ItemsDifference(itemsDifference);
+        return itemsDifference;
     }
 
     private boolean isInvalidItem(final Item item) {
-        return item == null | item.getId() == -1 || item.getId() == 6512;
+        return item == null || item.getId() == -1 || item.getId() == 6512;
     }
 
     public void addConsumerToNextTickQueue(final Runnable consumer) {

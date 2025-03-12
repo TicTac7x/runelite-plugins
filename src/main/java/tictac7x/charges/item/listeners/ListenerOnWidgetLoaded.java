@@ -11,7 +11,6 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.ItemWithQuantity;
 
 import java.util.Optional;
 import java.util.regex.Matcher;

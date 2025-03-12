@@ -21,6 +21,8 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
+import java.util.Optional;
+
 public class U_MasterScrollBook extends ChargedItemWithStorage {
     public U_MasterScrollBook(
         final Client client,
@@ -97,11 +99,17 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         }
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().containsKey(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId)) {
+        if (!storage.getStorage().hasItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId)) {
             return "0";
         }
 
-        return String.valueOf(storage.getStorage().get(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId).quantity);
+        final Optional<StorageItem> storageItem = storage.getStorage().getItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId);
+
+        if (!storageItem.isPresent()) {
+            return "0";
+        }
+
+        return String.valueOf(storageItem.get().getQuantity());
     }
 
     @Override
@@ -117,14 +125,18 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         final int teleportScrollIndex = varbit10968 * 15 + varbit10966 - 1;
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().containsKey(storage.getStorableItems()[teleportScrollIndex].itemId)) {
+        if (!storage.getStorage().hasItem(storage.getStorableItems()[teleportScrollIndex].itemId)) {
             return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", config.getColorEmpty()));
         }
 
         final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[teleportScrollIndex];
-        final StorageItem defaultTeleportScrollStorageItem = storage.getStorage().get(defaultTeleportScrollStoreableItem.itemId);
+        final Optional<StorageItem> defaultTeleportScrollStorageItem = storage.getStorage().getItem(defaultTeleportScrollStoreableItem.itemId);
 
-        return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=ff9040>.+?</col>", getDefaultTeleportLocation() + ": <col=00ff00>" + defaultTeleportScrollStorageItem.quantity + "</col>");
+        if (!defaultTeleportScrollStorageItem.isPresent()) {
+            return "?";
+        }
+
+        return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=ff9040>.+?</col>", getDefaultTeleportLocation() + ": <col=00ff00>" + defaultTeleportScrollStorageItem.get().getQuantity() + "</col>");
     }
 
     private String getDefaultTeleportLocation() {

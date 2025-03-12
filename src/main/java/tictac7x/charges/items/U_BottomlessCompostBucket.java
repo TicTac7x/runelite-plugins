@@ -115,8 +115,8 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
     }
 
     private Optional<StorageItem> getCompostType() {
-        for (final StorageItem storageItem : getStorage().values()) {
-            if (storageItem.quantity > 0) {
+        for (final StorageItem storageItem : getStorage().getItems()) {
+            if (storageItem.getQuantity() > 0) {
                 return Optional.of(storageItem);
             }
         }

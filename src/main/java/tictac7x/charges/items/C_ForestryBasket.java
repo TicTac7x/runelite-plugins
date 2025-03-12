@@ -2,7 +2,6 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemContainer;
 import net.runelite.api.ItemID;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
@@ -19,7 +18,6 @@ import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 import tictac7x.charges.store.WidgetId;
 
@@ -97,29 +95,27 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
         this.triggers = new TriggerBase[]{
             // View contents.
-            new OnItemContainerChanged(ItemContainerId.FORESTRY_KIT).itemContainerConsumer(event -> {
-                final ItemContainer itemContainer = event.getItemContainer();
-
-                storage.put(ItemID.ANIMAINFUSED_BARK, itemContainer.count(ItemID.ANIMAINFUSED_BARK));
-                storage.put(ItemID.FORESTERS_RATION, itemContainer.count(ItemID.FORESTERS_RATION));
-                storage.put(ItemID.NATURE_OFFERINGS, itemContainer.count(ItemID.NATURE_OFFERINGS));
-                storage.put(ItemID.SECATEURS_ATTACHMENT, itemContainer.count(ItemID.SECATEURS_ATTACHMENT));
-                storage.put(ItemID.LEAVES, itemContainer.count(ItemID.LEAVES));
-                storage.put(ItemID.OAK_LEAVES, itemContainer.count(ItemID.OAK_LEAVES));
-                storage.put(ItemID.WILLOW_LEAVES, itemContainer.count(ItemID.WILLOW_LEAVES));
-                storage.put(ItemID.MAPLE_LEAVES, itemContainer.count(ItemID.MAPLE_LEAVES));
-                storage.put(ItemID.YEW_LEAVES, itemContainer.count(ItemID.YEW_LEAVES));
-                storage.put(ItemID.MAGIC_LEAVES, itemContainer.count(ItemID.MAGIC_LEAVES));
-                storage.put(ItemID.FORESTRY_HAT, itemContainer.count(ItemID.FORESTRY_HAT));
-                storage.put(ItemID.FORESTRY_TOP, itemContainer.count(ItemID.FORESTRY_TOP));
-                storage.put(ItemID.FORESTRY_LEGS, itemContainer.count(ItemID.FORESTRY_LEGS));
-                storage.put(ItemID.FORESTRY_BOOTS, itemContainer.count(ItemID.FORESTRY_BOOTS));
-                storage.put(ItemID.LUMBERJACK_HAT, itemContainer.count(ItemID.LUMBERJACK_HAT));
-                storage.put(ItemID.LUMBERJACK_TOP, itemContainer.count(ItemID.LUMBERJACK_TOP));
-                storage.put(ItemID.LUMBERJACK_LEGS, itemContainer.count(ItemID.LUMBERJACK_LEGS));
-                storage.put(ItemID.LUMBERJACK_BOOTS, itemContainer.count(ItemID.LUMBERJACK_BOOTS));
-                storage.put(ItemID.WOODCUTTING_CAPE, itemContainer.count(ItemID.WOODCUTTING_CAPE));
-                storage.put(ItemID.WOODCUT_CAPET, itemContainer.count(ItemID.WOODCUT_CAPET));
+            new OnItemContainerChanged(ItemContainerId.FORESTRY_KIT).itemsConsumer(storageItems -> {
+                storage.put(ItemID.ANIMAINFUSED_BARK, storageItems.count(ItemID.ANIMAINFUSED_BARK));
+                storage.put(ItemID.FORESTERS_RATION, storageItems.count(ItemID.FORESTERS_RATION));
+                storage.put(ItemID.NATURE_OFFERINGS, storageItems.count(ItemID.NATURE_OFFERINGS));
+                storage.put(ItemID.SECATEURS_ATTACHMENT, storageItems.count(ItemID.SECATEURS_ATTACHMENT));
+                storage.put(ItemID.LEAVES, storageItems.count(ItemID.LEAVES));
+                storage.put(ItemID.OAK_LEAVES, storageItems.count(ItemID.OAK_LEAVES));
+                storage.put(ItemID.WILLOW_LEAVES, storageItems.count(ItemID.WILLOW_LEAVES));
+                storage.put(ItemID.MAPLE_LEAVES, storageItems.count(ItemID.MAPLE_LEAVES));
+                storage.put(ItemID.YEW_LEAVES, storageItems.count(ItemID.YEW_LEAVES));
+                storage.put(ItemID.MAGIC_LEAVES, storageItems.count(ItemID.MAGIC_LEAVES));
+                storage.put(ItemID.FORESTRY_HAT, storageItems.count(ItemID.FORESTRY_HAT));
+                storage.put(ItemID.FORESTRY_TOP, storageItems.count(ItemID.FORESTRY_TOP));
+                storage.put(ItemID.FORESTRY_LEGS, storageItems.count(ItemID.FORESTRY_LEGS));
+                storage.put(ItemID.FORESTRY_BOOTS, storageItems.count(ItemID.FORESTRY_BOOTS));
+                storage.put(ItemID.LUMBERJACK_HAT, storageItems.count(ItemID.LUMBERJACK_HAT));
+                storage.put(ItemID.LUMBERJACK_TOP, storageItems.count(ItemID.LUMBERJACK_TOP));
+                storage.put(ItemID.LUMBERJACK_LEGS, storageItems.count(ItemID.LUMBERJACK_LEGS));
+                storage.put(ItemID.LUMBERJACK_BOOTS, storageItems.count(ItemID.LUMBERJACK_BOOTS));
+                storage.put(ItemID.WOODCUTTING_CAPE, storageItems.count(ItemID.WOODCUTTING_CAPE));
+                storage.put(ItemID.WOODCUT_CAPET, storageItems.count(ItemID.WOODCUT_CAPET));
             }),
 
             // Get leaves while chopping wood.
@@ -233,7 +229,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             // Fill from bank.
             new OnItemContainerChanged(BANK).onMenuOption(menuOptionFillLeavesFromBank).onBankDifference(itemsDifference -> {
-                for (final ItemWithQuantity item : itemsDifference.items) {
+                for (final StorageItem item : itemsDifference.getItems()) {
                     switch (item.itemId) {
                         case ItemID.LEAVES:
                         case ItemID.OAK_LEAVES:
@@ -245,7 +241,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                         default:
                             continue;
                     }
-                    storage.add(item.itemId, Math.abs(item.quantity));
+                    storage.add(item.itemId, Math.abs(item.getQuantity()));
                 }
             }),
 
@@ -360,8 +356,8 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
     }
 
     private boolean isLogsInBasket() {
-        for (final StorageItem storageItem : storage.getStorage().values()) {
-            if (storageItem.quantity == 0) continue;
+        for (final StorageItem storageItem : storage.getStorage().getItems()) {
+            if (storageItem.getQuantity() == 0) continue;
 
             switch (storageItem.itemId) {
                 case ItemID.LOGS:
@@ -384,8 +380,8 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
     }
 
     private boolean isLeavesInBasket() {
-        for (final StorageItem storageItem : storage.getStorage().values()) {
-            if (storageItem.quantity == 0) continue;
+        for (final StorageItem storageItem : storage.getStorage().getItems()) {
+            if (storageItem.getQuantity() == 0) continue;
 
             switch (storageItem.itemId) {
                 case ItemID.LEAVES:

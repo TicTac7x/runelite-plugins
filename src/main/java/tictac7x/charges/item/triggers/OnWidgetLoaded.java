@@ -1,7 +1,6 @@
 package tictac7x.charges.item.triggers;
 
 import net.runelite.api.widgets.Widget;
-import tictac7x.charges.store.ItemWithQuantity;
 
 import java.util.Optional;
 import java.util.function.Consumer;

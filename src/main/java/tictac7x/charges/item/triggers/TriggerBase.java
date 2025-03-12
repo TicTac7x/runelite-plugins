@@ -1,8 +1,7 @@
 package tictac7x.charges.item.triggers;
 
 import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.store.ItemWithQuantity;
-import tictac7x.charges.store.ItemsDifference;
+import tictac7x.charges.item.storage.StorageItems;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -40,15 +39,14 @@ public abstract class TriggerBase {
     public Optional<Boolean> emptyStorageToInventory = Optional.empty();
     public Optional<Boolean> pickUpToStorage = Optional.empty();
     public Optional<int[]> addToStorage = Optional.empty();
-    public Optional<ItemWithQuantity> removeFromStorage = Optional.empty();
 
     // Activity.
     public Optional<Boolean> isActivated = Optional.empty();
     public Optional<Boolean> activate = Optional.empty();
     public Optional<Boolean> deactivate = Optional.empty();
 
-    public Optional<Consumer<ItemsDifference>> onInventoryDifference = Optional.empty();
-    public Optional<Consumer<ItemsDifference>> onBankDifference = Optional.empty();
+    public Optional<Consumer<StorageItems>> onInventoryDifference = Optional.empty();
+    public Optional<Consumer<StorageItems>> onBankDifference = Optional.empty();
 
     public TriggerBase setFixedCharges(final int charges) {
         this.fixedCharges = Optional.of(charges);
@@ -181,18 +179,13 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase onInventoryDifference(Consumer<ItemsDifference> consumer) {
+    public TriggerBase onInventoryDifference(Consumer<StorageItems> consumer) {
         this.onInventoryDifference = Optional.of(consumer);
         return this;
     }
 
-    public TriggerBase onBankDifference(Consumer<ItemsDifference> consumer) {
+    public TriggerBase onBankDifference(Consumer<StorageItems> consumer) {
         this.onBankDifference = Optional.of(consumer);
-        return this;
-    }
-
-    public TriggerBase removeFromStorage(final int itemId, final int quantity) {
-        this.removeFromStorage = Optional.of(new ItemWithQuantity(itemId, quantity));
         return this;
     }
 

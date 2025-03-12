@@ -10,6 +10,7 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
+import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
@@ -71,8 +72,8 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (trigger.itemContainerConsumer.isPresent()) {
-                trigger.itemContainerConsumer.get().accept(event);
+            if (trigger.itemsConsumer.isPresent()) {
+                trigger.itemsConsumer.get().accept(new StorageItems(event));
                 triggerUsed = true;
             }
 
