@@ -47,7 +47,8 @@ public abstract class TriggerBase {
     public Optional<Boolean> activate = Optional.empty();
     public Optional<Boolean> deactivate = Optional.empty();
 
-    public Optional<Consumer<ItemsDifference>> onItemContainerDifference = Optional.empty();
+    public Optional<Consumer<ItemsDifference>> onInventoryDifference = Optional.empty();
+    public Optional<Consumer<ItemsDifference>> onBankDifference = Optional.empty();
 
     public TriggerBase setFixedCharges(final int charges) {
         this.fixedCharges = Optional.of(charges);
@@ -180,8 +181,13 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase onItemContainerDifference(Consumer<ItemsDifference> consumer) {
-        this.onItemContainerDifference = Optional.of(consumer);
+    public TriggerBase onInventoryDifference(Consumer<ItemsDifference> consumer) {
+        this.onInventoryDifference = Optional.of(consumer);
+        return this;
+    }
+
+    public TriggerBase onBankDifference(Consumer<ItemsDifference> consumer) {
+        this.onBankDifference = Optional.of(consumer);
         return this;
     }
 

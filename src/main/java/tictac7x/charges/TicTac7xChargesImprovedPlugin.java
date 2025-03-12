@@ -27,6 +27,7 @@ import tictac7x.charges.item.overlays.ChargedItemOverlay;
 import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.store.AdvancedMenuEntry;
+import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 
 import javax.inject.Inject;
@@ -239,6 +240,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			// Capes
 			new C_ArdougneCloak(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new C_Coffin(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new C_ForestryBasket(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new C_ForestryKit(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new C_MagicCape(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 

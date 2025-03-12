@@ -61,8 +61,18 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (trigger.onItemContainerDifference.isPresent()) {
-                trigger.onItemContainerDifference.get().accept(chargedItem.store.getInventoryItemsDifference());
+            if (trigger.onInventoryDifference.isPresent()) {
+                trigger.onInventoryDifference.get().accept(chargedItem.store.getInventoryItemsDifference());
+                triggerUsed = true;
+            }
+
+            if (trigger.onBankDifference.isPresent()) {
+                trigger.onBankDifference.get().accept(chargedItem.store.getBankItemsDifference());
+                triggerUsed = true;
+            }
+
+            if (trigger.itemContainerConsumer.isPresent()) {
+                trigger.itemContainerConsumer.get().accept(event);
                 triggerUsed = true;
             }
 

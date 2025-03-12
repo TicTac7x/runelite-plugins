@@ -542,7 +542,7 @@ public class Store {
 
         if (bank.isPresent()) {
             for (final Item itemNew : bank.get().getItems()) {
-                if (isInvalidItem(itemNew)) continue;
+                if (isInvalidItem(itemNew) || quantitiesNew.containsKey(itemNew.getId())) continue;
                 quantitiesNew.put(itemNew.getId(), bank.get().count(itemNew.getId()));
             }
 
@@ -556,7 +556,10 @@ public class Store {
         }
 
         for (final int itemId : quantitiesNew.keySet()) {
-            itemsDifference.add(new ItemWithQuantity(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
+            final int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
+            if (quantity != 0) {
+                itemsDifference.add(new ItemWithQuantity(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
+            }
         }
 
         for (final int itemId : quantitiesBefore.keySet()) {

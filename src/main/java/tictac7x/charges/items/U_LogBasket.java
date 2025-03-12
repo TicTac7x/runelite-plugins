@@ -63,8 +63,6 @@ public class U_LogBasket extends ChargedItemWithStorage {
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.LOG_BASKET),
             new TriggerItem(ItemID.OPEN_LOG_BASKET),
-            new TriggerItem(ItemID.FORESTRY_BASKET),
-            new TriggerItem(ItemID.OPEN_FORESTRY_BASKET),
         };
         this.triggers = new TriggerBase[] {
             // Check while empty.
@@ -94,14 +92,14 @@ public class U_LogBasket extends ChargedItemWithStorage {
             }).onItemClick(),
 
             // Miscellania support.
-            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemID.OPEN_LOG_BASKET, ItemID.OPEN_FORESTRY_BASKET).addToStorage(ItemID.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemID.OPEN_LOG_BASKET).addToStorage(ItemID.MAPLE_LOGS, 0),
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
                 lastLogs = getStorageItemFromName(m.group("logs"));
                 storage.add(lastLogs, 1);
                 infernalQuantityTracker++;
-            }).requiredItem(ItemID.OPEN_LOG_BASKET, ItemID.OPEN_FORESTRY_BASKET),
+            }).requiredItem(ItemID.OPEN_LOG_BASKET),
 
             // Extra logs from nature offerings.
             new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemID.OPEN_LOG_BASKET).runConsumerOnNextGameTick(() -> {
@@ -144,7 +142,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
                     storage.remove(lastLogs, 1);
                     infernalQuantityTracker--;
                 }
-            }).requiredItem(ItemID.OPEN_LOG_BASKET, ItemID.OPEN_FORESTRY_BASKET),
+            }).requiredItem(ItemID.OPEN_LOG_BASKET),
         };
     }
 }

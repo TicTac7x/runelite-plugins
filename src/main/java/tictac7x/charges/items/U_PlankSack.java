@@ -16,7 +16,6 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemWithQuantity;
 import tictac7x.charges.store.Store;
 import tictac7x.charges.store.WidgetId;
 
@@ -254,7 +253,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
                         break;
                 }
             }),
-            new OnItemContainerChanged(INVENTORY).onItemContainerDifference(itemsDifference -> {
+            new OnItemContainerChanged(INVENTORY).onInventoryDifference(itemsDifference -> {
                 if (!sawmillLogId.isPresent() || !sawmillPlankId.isPresent()) return;
 
                 final int logsDifference = itemsDifference.getItemQuantity(sawmillLogId.get());
