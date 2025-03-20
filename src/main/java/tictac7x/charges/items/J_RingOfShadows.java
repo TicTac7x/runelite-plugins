@@ -46,6 +46,12 @@ public class J_RingOfShadows extends ChargedItem {
             new OnChatMessage("You add .+ charges? to the ring of shadows. It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
             // TODO - teleport
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Ring of shadows using (?<bloodrune>.+)x Blood rune.*").matcherConsumer(m -> {
+                final int bloodRunes = Integer.parseInt(m.group("ringofrecoil"));
+                increaseCharges(bloodRunes);
+            }),
         };
     }
 }
