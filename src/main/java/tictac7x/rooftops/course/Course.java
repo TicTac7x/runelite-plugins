@@ -12,7 +12,7 @@ public abstract class Course {
     public final MarkOfGrace[] marksOfGraces;
 
     private Optional<Obstacle> currentObstacle = Optional.empty();
-    private boolean doingObstacle;
+    private boolean isDoingObstacle = false;
 
     public Course(
         final String id,
@@ -31,57 +31,83 @@ public abstract class Course {
     }
 
     public Optional<List<Obstacle>> getNextObstacles() {
+        final List<Obstacle> nextObstacles = new ArrayList<>();
+
         // Course not started.
         if (!currentObstacle.isPresent()) {
-            return Optional.of(new ArrayList<>(Arrays.asList(obstacles[0])));
-        }
+            nextObstacles.add(obstacles[0]);
 
-        final Optional<List<Integer>> fixedNextObstacles = currentObstacle.get().nextObstacles;
-        if (fixedNextObstacles.isPresent()) {
-            final List<Obstacle> next = new ArrayList<>();
+        // Get next obstacles based on ids and not order.
+        } else if (currentObstacle.get().nextObstacles.isPresent()) {
             for (final Obstacle obstacle : obstacles) {
-                if (fixedNextObstacles.get().contains(obstacle.id)) {
-                    next.add(obstacle);
+                if (currentObstacle.get().nextObstacles.get().contains(obstacle.id)) {
+                    nextObstacles.add(obstacle);
                 }
             }
-            return Optional.of(next);
-        }
 
-        int currentObstacleIndex = 0;
-        for (final Obstacle obstacle : obstacles) {
-            if (obstacle.id == currentObstacle.get().id) {
-                break;
+        // Find next obstacle index based on order.
+        } else {
+            int currentObstacleIndex = 0;
+            for (final Obstacle obstacle : obstacles) {
+                if (obstacle.id == currentObstacle.get().id) {
+                    break;
+                }
+
+                currentObstacleIndex++;
             }
 
-            currentObstacleIndex++;
+            // Current obstacle is last.
+            if (currentObstacleIndex ==  obstacles.length - 1) {
+                return Optional.empty();
+            }
+
+            // Next obstacle based on order.
+            nextObstacles.add(obstacles[currentObstacleIndex + 1]);
         }
 
-        // Current obstacle is last.
-        if (currentObstacleIndex < obstacles.length - 1) {
-            return Optional.of(new ArrayList<>(Arrays.asList(obstacles[currentObstacleIndex + 1])));
-        }
-
-        return Optional.empty();
+        return Optional.of(nextObstacles);
     }
 
     public void startObstacle(final Obstacle obstacle) {
-        if (doingObstacle) return;
+        if (isDoingObstacle) return;
 
         currentObstacle = Optional.of(obstacle);
-        doingObstacle = true;
+        isDoingObstacle = true;
     }
 
-    public void completeObstacle() {
-        doingObstacle = false;
+    public void completeObstacle(final List<Integer> menuOptionsClicked) {
+        isDoingObstacle = false;
+
+        // If possible, complete current obstacle.
+        if (currentObstacle.isPresent()) {
+            for (int i = 0; i < obstacles.length; i++) {
+                if (i != obstacles.length - 1) continue;
+
+                final Obstacle obstacle = obstacles[i];
+                if (obstacle.id == currentObstacle.get().id) {
+                    completeCourse();
+                }
+            }
+
+        // If for some reason we failed to mark obstacle as current, try to find one based on id and complete that instead.
+        } else {
+            for (final Obstacle obstacle : obstacles) {
+                if (menuOptionsClicked.contains(obstacle.id)) {
+                    currentObstacle = Optional.of(obstacle);
+                    completeObstacle(menuOptionsClicked);
+                    return;
+                }
+            }
+        }
     }
 
     public void completeCourse() {
         currentObstacle = Optional.empty();
-        doingObstacle = false;
+        isDoingObstacle = false;
     }
 
     public boolean isDoingObstacle() {
-        return doingObstacle;
+        return isDoingObstacle;
     }
 
     public boolean isNearRegion(final int region) {

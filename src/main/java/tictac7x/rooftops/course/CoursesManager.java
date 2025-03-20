@@ -60,7 +60,7 @@ public class CoursesManager {
 
     public void onStatChanged(final StatChanged event) {
         if (course.isPresent() && event.getSkill() == Skill.AGILITY) {
-            completeObstacle();
+            completeObstacle(menuOptionsClicked);
             menuOptionsClicked.clear();
         }
     }
@@ -147,19 +147,21 @@ public class CoursesManager {
         }
     }
 
-    private void completeObstacle() {
+    private void completeObstacle(final List<Integer> menuOptionsClicked) {
         if (!course.isPresent()) return;
 
         final Optional<Obstacle> currentObstacle = course.get().getCurrentObstacle();
+
         if (
             currentObstacle.isPresent() &&
-            currentObstacle.get().completeAt.isPresent() &&
-            (client.getLocalPlayer().getWorldLocation().getX() != currentObstacle.get().completeAt.get()[0] || client.getLocalPlayer().getWorldLocation().getY() != currentObstacle.get().completeAt.get()[1])
-        ) {
+            currentObstacle.get().completeAt.isPresent() && (
+                client.getLocalPlayer().getWorldLocation().getX() != currentObstacle.get().completeAt.get()[0] ||
+                client.getLocalPlayer().getWorldLocation().getY() != currentObstacle.get().completeAt.get()[1]
+        )) {
             return;
         }
 
-        course.get().completeObstacle();
+        course.get().completeObstacle(menuOptionsClicked);
     }
 
     private boolean detectCourse() {

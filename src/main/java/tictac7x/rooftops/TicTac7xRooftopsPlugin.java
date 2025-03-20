@@ -29,9 +29,8 @@ public class TicTac7xRooftopsPlugin extends Plugin {
 	private final String pluginVersion = "v0.6.2";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Rooftop Agility Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Varlamore course added.<br>" +
-		"<colHIGHLIGHT>* Ape Atoll course added.<br>" +
-		"<colHIGHLIGHT>* Multi paths support and skill level checks."
+		"<colHIGHLIGHT>* Option to not show stopper for Mark of grace.<br>" +
+		"<colHIGHLIGHT>* Better current obstacle detection."
 	;
 
 	@Inject
