@@ -61,7 +61,6 @@ public class CoursesManager {
     public void onStatChanged(final StatChanged event) {
         if (course.isPresent() && event.getSkill() == Skill.AGILITY) {
             completeObstacle(menuOptionsClicked);
-            menuOptionsClicked.clear();
         }
     }
 
@@ -198,11 +197,17 @@ public class CoursesManager {
 
     private void completeCourse() {
         if (course.isPresent()) {
-            course.get().completeCourse();
+            course.get().completeCourse(menuOptionsClicked);
         }
     }
 
     public void onMenuOptionClicked(final MenuOptionClicked event) {
-        menuOptionsClicked.add(event.getId());
+        if (course.isPresent()) {
+            for (final Obstacle obstacle : course.get().obstacles) {
+                if (event.getId() == obstacle.id) {
+                    menuOptionsClicked.add(event.getId());
+                }
+            }
+        }
     }
 }

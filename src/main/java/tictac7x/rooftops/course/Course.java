@@ -85,23 +85,26 @@ public abstract class Course {
 
                 final Obstacle obstacle = obstacles[i];
                 if (obstacle.id == currentObstacle.get().id) {
-                    completeCourse();
+                    completeCourse(menuOptionsClicked);
                 }
             }
 
         // If for some reason we failed to mark obstacle as current, try to find one based on id and complete that instead.
         } else {
-            for (final Obstacle obstacle : obstacles) {
-                if (menuOptionsClicked.contains(obstacle.id)) {
-                    currentObstacle = Optional.of(obstacle);
-                    completeObstacle(menuOptionsClicked);
-                    return;
+            for (int i = menuOptionsClicked.size() - 1; i >= 0; i--) {
+                for (final Obstacle obstacle : obstacles) {
+                    if (obstacle.id == menuOptionsClicked.get(i)) {
+                        currentObstacle = Optional.of(obstacle);
+                        completeObstacle(menuOptionsClicked);
+                        return;
+                    }
                 }
             }
         }
     }
 
-    public void completeCourse() {
+    public void completeCourse(final List<Integer> menuOptionsClicked) {
+        menuOptionsClicked.clear();
         currentObstacle = Optional.empty();
         isDoingObstacle = false;
     }
