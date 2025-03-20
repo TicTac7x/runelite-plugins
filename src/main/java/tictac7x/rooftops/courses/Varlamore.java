@@ -1,9 +1,11 @@
 package tictac7x.rooftops.courses;
 
-import tictac7x.rooftops.MarkOfGrace;
+import tictac7x.rooftops.course.Course;
+import tictac7x.rooftops.course.MarkOfGrace;
+import tictac7x.rooftops.course.Obstacle;
 
-public class RooftopCourseVarlamore extends Course {
-    public RooftopCourseVarlamore() {
+public class Varlamore extends Course {
+    public Varlamore() {
         super("Varlamore",
             // Regions.
             new int[]{6701,6445,},

@@ -1,4 +1,4 @@
-package tictac7x.rooftops;
+package tictac7x.rooftops.course;
 
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -17,16 +17,16 @@ import net.runelite.api.events.ItemDespawned;
 import net.runelite.api.events.ItemSpawned;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.StatChanged;
-import tictac7x.rooftops.courses.*;
+import tictac7x.rooftops.TicTac7xRooftopsConfig;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-public class RooftopsCoursesManager {
+public class CoursesManager {
     private final Client client;
+    private final TicTac7xRooftopsConfig config;
     private final Course[] courses;
 
     private final Pattern regexLapComplete = Pattern.compile(".*lap count is:.*");
@@ -35,8 +35,9 @@ public class RooftopsCoursesManager {
     private final List<Integer> menuOptionsClicked = new ArrayList<>();
     private Optional<Course> course = Optional.empty();
 
-    public RooftopsCoursesManager(final Client client, final Course[] courses) {
+    public CoursesManager(final Client client, final TicTac7xRooftopsConfig config, final Course[] courses) {
         this.client = client;
+        this.config = config;
         this.courses = courses;
     }
 
@@ -59,7 +60,7 @@ public class RooftopsCoursesManager {
 
     public void onStatChanged(final StatChanged event) {
         if (course.isPresent() && event.getSkill() == Skill.AGILITY) {
-            completeObstacle();
+            completeObstacle(menuOptionsClicked);
             menuOptionsClicked.clear();
         }
     }
@@ -105,7 +106,7 @@ public class RooftopsCoursesManager {
     }
 
     public boolean isStoppingObstacle(final int obstacleId) {
-        if (!course.isPresent()) return false;
+        if (!course.isPresent() || !config.showMarkOfGraceStop()) return false;
 
         for (final Tile tile : marksOfGraces) {
             for (final MarkOfGrace mark : course.get().marksOfGraces) {
@@ -146,19 +147,21 @@ public class RooftopsCoursesManager {
         }
     }
 
-    private void completeObstacle() {
+    private void completeObstacle(final List<Integer> menuOptionsClicked) {
         if (!course.isPresent()) return;
 
         final Optional<Obstacle> currentObstacle = course.get().getCurrentObstacle();
+
         if (
             currentObstacle.isPresent() &&
-            currentObstacle.get().completeAt.isPresent() &&
-            (client.getLocalPlayer().getWorldLocation().getX() != currentObstacle.get().completeAt.get()[0] || client.getLocalPlayer().getWorldLocation().getY() != currentObstacle.get().completeAt.get()[1])
-        ) {
+            currentObstacle.get().completeAt.isPresent() && (
+                client.getLocalPlayer().getWorldLocation().getX() != currentObstacle.get().completeAt.get()[0] ||
+                client.getLocalPlayer().getWorldLocation().getY() != currentObstacle.get().completeAt.get()[1]
+        )) {
             return;
         }
 
-        course.get().completeObstacle();
+        course.get().completeObstacle(menuOptionsClicked);
     }
 
     private boolean detectCourse() {

@@ -1,9 +1,11 @@
 package tictac7x.rooftops.courses;
 
-import tictac7x.rooftops.MarkOfGrace;
+import tictac7x.rooftops.course.Course;
+import tictac7x.rooftops.course.MarkOfGrace;
+import tictac7x.rooftops.course.Obstacle;
 
-public class RooftopCourseDraynor extends Course {
-    public RooftopCourseDraynor() {
+public class Draynor extends Course {
+    public Draynor() {
         super("Draynor Village",
             // Regions.
             new int[]{12082,12338,12339,12594,12595},

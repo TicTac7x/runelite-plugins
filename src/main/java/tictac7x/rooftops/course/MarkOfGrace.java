@@ -1,4 +1,4 @@
-package tictac7x.rooftops;
+package tictac7x.rooftops.course;
 
 public class MarkOfGrace {
     public final int x;

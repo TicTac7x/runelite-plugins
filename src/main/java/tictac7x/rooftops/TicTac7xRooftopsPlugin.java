@@ -13,6 +13,8 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
+import tictac7x.rooftops.course.Course;
+import tictac7x.rooftops.course.CoursesManager;
 import tictac7x.rooftops.courses.*;
 
 import javax.inject.Inject;
@@ -23,13 +25,12 @@ import javax.inject.Inject;
 	description = "Improved clickboxes for rooftop agility courses",
 	tags = { "roof", "rooftop", "agility", "mark", "grace", "graceful" }
 )
-public class RooftopsPlugin extends Plugin {
-	private final String pluginVersion = "v0.6.1";
+public class TicTac7xRooftopsPlugin extends Plugin {
+	private final String pluginVersion = "v0.6.2";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Rooftop Agility Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Varlamore course added.<br>" +
-		"<colHIGHLIGHT>* Ape Atoll course added.<br>" +
-		"<colHIGHLIGHT>* Multi paths support and skill level checks."
+		"<colHIGHLIGHT>* Option to not show stopper for Mark of grace.<br>" +
+		"<colHIGHLIGHT>* Better current obstacle detection."
 	;
 
 	@Inject
@@ -45,36 +46,36 @@ public class RooftopsPlugin extends Plugin {
 	private ChatMessageManager chatMessageManager;
 
 	@Inject
-	private RooftopsConfig config;
+	private TicTac7xRooftopsConfig config;
 
-	private RooftopsCoursesManager coursesManager;
+	private CoursesManager coursesManager;
 
-	private RooftopsOverlay overlayRooftops;
+	private Overlay overlayRooftops;
 
 	@Provides
-	RooftopsConfig provideConfig(final ConfigManager configManager) {
-		return configManager.getConfig(RooftopsConfig.class);
+	TicTac7xRooftopsConfig provideConfig(final ConfigManager configManager) {
+		return configManager.getConfig(TicTac7xRooftopsConfig.class);
 	}
 
 	@Override
 	protected void startUp() {
-		coursesManager = new RooftopsCoursesManager(client, new Course[]{
+		coursesManager = new CoursesManager(client, config, new Course[]{
 			// Rooftops with marks of grace.
-			new RooftopCourseDraynor(),
-			new RooftopCourseAlKharid(),
-			new RooftopCourseVarrock(),
-			new RooftopCourseCanifis(),
-			new RooftopCourseFalador(),
-			new RooftopCourseSeers(),
-			new RooftopCoursePollnivneach(),
-			new RooftopCourseRellekka(),
-			new RooftopCourseArdougne(),
+			new Draynor(),
+			new AlKharid(),
+			new Varrock(),
+			new Canifis(),
+			new Falador(),
+			new Seers(),
+			new Pollnivneach(),
+			new Rellekka(),
+			new Ardougne(),
 
 			// Other.
-			new RooftopCourseVarlamore(),
-			new RooftopCourseApeAtoll()
+			new Varlamore(),
+			new ApeAtoll()
 		});
-		overlayRooftops = new RooftopsOverlay(client, config, coursesManager);
+		overlayRooftops = new Overlay(client, config, coursesManager);
 		overlays.add(overlayRooftops);
 	}
 
@@ -134,22 +135,22 @@ public class RooftopsPlugin extends Plugin {
 	}
 
 	@Subscribe
+	public void onMenuOptionClicked(final MenuOptionClicked event) {
+		coursesManager.onMenuOptionClicked(event);
+	}
+
+	@Subscribe
 	public void onGameStateChanged(final GameStateChanged event) {
 		coursesManager.onGameStateChanged(event);
 
 		// Send message about plugin updates for once.
 		if (event.getGameState() == GameState.LOGGED_IN && !config.getVersion().equals(pluginVersion)) {
-			configManager.setConfiguration(RooftopsConfig.group, RooftopsConfig.version, pluginVersion);
+			configManager.setConfiguration(TicTac7xRooftopsConfig.group, TicTac7xRooftopsConfig.version, pluginVersion);
 			chatMessageManager.queue(QueuedMessage.builder()
 				.type(ChatMessageType.CONSOLE)
 				.runeLiteFormattedMessage(pluginMessage)
 				.build()
 			);
 		}
-	}
-
-	@Subscribe
-	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		coursesManager.onMenuOptionClicked(event);
 	}
 }

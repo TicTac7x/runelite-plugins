@@ -1,9 +1,11 @@
 package tictac7x.rooftops.courses;
 
-import tictac7x.rooftops.MarkOfGrace;
+import tictac7x.rooftops.course.Course;
+import tictac7x.rooftops.course.MarkOfGrace;
+import tictac7x.rooftops.course.Obstacle;
 
-public class RooftopCoursePollnivneach extends Course {
-    public RooftopCoursePollnivneach() {
+public class Pollnivneach extends Course {
+    public Pollnivneach() {
         super("Pollnivneach",
             // Regions.
             new int[]{13101,13102,13103,13357,13358,13359,13613,13614,13615},
