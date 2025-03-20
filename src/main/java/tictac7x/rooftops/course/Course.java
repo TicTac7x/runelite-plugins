@@ -79,7 +79,7 @@ public abstract class Course {
         isDoingObstacle = false;
 
         // If possible, complete current obstacle.
-        if (currentObstacle.isPresent()) {
+        if (currentObstacle.isPresent() && menuOptionsClicked.contains(currentObstacle.get().id)) {
             for (int i = 0; i < obstacles.length; i++) {
                 if (i != obstacles.length - 1) continue;
 
