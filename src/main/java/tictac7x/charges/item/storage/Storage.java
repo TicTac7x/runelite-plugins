@@ -211,10 +211,7 @@ public class Storage {
 
     public void emptyToInventory() {
         for (final StorageItem itemDifference : store.getInventoryItemsDifference().getItems()) {
-            storage.getItem(itemDifference.itemId).ifPresent(item -> item.setQuantity(item.getQuantity() - itemDifference.getQuantity()));
             storage.getItem(itemDifference.itemId).ifPresent(item -> item.decreaseQuantity(itemDifference.getQuantity()));
-            if (storage.hasItem(itemDifference.itemId)) {
-            }
         }
     }
 

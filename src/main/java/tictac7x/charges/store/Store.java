@@ -173,7 +173,7 @@ public class Store {
             Optional<Integer> equipmentItemId = Optional.empty();
             boolean equipmentItemDynamic = false;
 
-            // Bank has least priority.
+            // Bank has the least priority.
             if (checkBank && bank.isPresent()) {
                 for (final Item item : bank.get().getItems()) {
                     for (final TriggerItem triggerItem : chargedItem.items) {
