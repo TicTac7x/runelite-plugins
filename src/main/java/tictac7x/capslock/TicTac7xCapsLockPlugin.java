@@ -52,7 +52,17 @@ public class TicTac7xCapsLockPlugin extends Plugin {
 	}
 
 	boolean isMessageValidForCapsLock(final String message) {
-		final String[] words = message.trim().split("\\s+");
+		for (final String sentence : message.trim().split("[.?!]+")) {
+			if (isSentenceValidForCapsLock(sentence) == false) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	boolean isSentenceValidForCapsLock(final String sentence) {
+		final String[] words = sentence.trim().replaceAll("\\s*[^\\p{L}\\p{N}\\s]+\\w*", "").split("\\s+");
 		if (words.length == 1) return false;
 
 		final List<String> cleanedWords = new LinkedList<>();
