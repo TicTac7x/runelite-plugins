@@ -30,9 +30,9 @@ public class StorageInventory extends Storage {
     @Nullable
     private ImageComponent inventory_free;
 
-    public StorageInventory(final String storage_id, final InventoryID item_container_id, final WidgetInfo widget_info, final Client client, final ClientThread client_thread, final ConfigManager configs, final StorageConfig config, final ItemManager items) {
+    public StorageInventory(final String storage_id, final InventoryID item_container_id, final WidgetInfo widget_info, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
         super(storage_id, item_container_id, widget_info, client, client_thread, configs, config, items);
-        this.inventory_png = ImageUtil.loadImageResource(getClass(), "inventory.png");
+        this.inventory_png = ImageUtil.loadImageResource(getClass(), "/inventory.png");
         client_thread.invokeLater(() -> updateInventoryItem(INVENTORY_SIZE));
         client_thread.invokeLater(() -> updateInventoryFree(INVENTORY_SIZE));
     }

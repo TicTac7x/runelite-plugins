@@ -37,7 +37,7 @@ public class Storage extends OverlayPanel {
     private final Client client;
     private final ClientThread client_thread;
     private final ConfigManager configs;
-    protected final StorageConfig config;
+    protected final TicTac7xStorageConfig config;
     private final ItemManager items;
 
     private final int PLACEHOLDER_TEMPLATE_ID = 14401;
@@ -45,7 +45,7 @@ public class Storage extends OverlayPanel {
     private final List<ImageComponent> images = new ArrayList<>();
     private final JsonParser parser = new JsonParser();
 
-    public Storage(final String storage_id, final InventoryID item_container_id, final WidgetInfo widget_info, final Client client, final ClientThread client_thread, final ConfigManager configs, final StorageConfig config, final ItemManager items) {
+    public Storage(final String storage_id, final InventoryID item_container_id, final WidgetInfo widget_info, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
         this.storage_id = storage_id;
         this.item_container_id = item_container_id.getId();
         this.widget_info = widget_info;
@@ -68,7 +68,7 @@ public class Storage extends OverlayPanel {
         itemsPanelComponent.setBorder(new Rectangle(0,0,0,0));
 
         // Generate images based on config.
-        this.client_thread.invokeLater(() -> this.updateImages(configs.getConfiguration(StorageConfig.group, storage_id)));
+        this.client_thread.invokeLater(() -> this.updateImages(configs.getConfiguration(TicTac7xStorageConfig.group, storage_id)));
 
     }
 
@@ -92,18 +92,18 @@ public class Storage extends OverlayPanel {
             }
         }
 
-        configs.setConfiguration(StorageConfig.group, this.storage_id, json.toString());
+        configs.setConfiguration(TicTac7xStorageConfig.group, this.storage_id, json.toString());
     }
 
     public void onConfigChanged(final ConfigChanged event) {
         if (
-            !event.getGroup().equals(StorageConfig.group) |
+            !event.getGroup().equals(TicTac7xStorageConfig.group) |
                 !event.getKey().equals(this.storage_id) &&
-                !event.getKey().equals(this.storage_id + "_" + StorageConfig.visible) &&
-                !event.getKey().equals(this.storage_id + "_" + StorageConfig.hidden)
+                !event.getKey().equals(this.storage_id + "_" + TicTac7xStorageConfig.visible) &&
+                !event.getKey().equals(this.storage_id + "_" + TicTac7xStorageConfig.hidden)
         ) return;
 
-        this.client_thread.invokeLater(() -> this.updateImages(configs.getConfiguration(StorageConfig.group, this.storage_id)));
+        this.client_thread.invokeLater(() -> this.updateImages(configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id)));
     }
 
     private void updateImages(final String items) {
@@ -128,7 +128,7 @@ public class Storage extends OverlayPanel {
 
     private String[] getVisibleItems() {
         String[] visible = new String[]{};
-        try { visible = configs.getConfiguration(StorageConfig.group, this.storage_id + "_" + StorageConfig.visible).split(",");
+        try { visible = configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.visible).split(",");
         } catch (final Exception ignored) {}
 
         return visible;
@@ -136,7 +136,7 @@ public class Storage extends OverlayPanel {
 
     private String[] getHiddenItems() {
         String[] hidden = new String[]{};
-        try { hidden = configs.getConfiguration(StorageConfig.group, this.storage_id + "_" + StorageConfig.hidden).split(",");
+        try { hidden = configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.hidden).split(",");
         } catch (final Exception ignored) {}
 
         return hidden;
@@ -179,11 +179,11 @@ public class Storage extends OverlayPanel {
     }
 
     private boolean show() {
-        return Boolean.parseBoolean(configs.getConfiguration(StorageConfig.group, this.storage_id + "_" + StorageConfig.show));
+        return Boolean.parseBoolean(configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.show));
     }
 
     private boolean autoHide() {
-        return Boolean.parseBoolean(configs.getConfiguration(StorageConfig.group, this.storage_id + "_" + StorageConfig.auto_hide));
+        return Boolean.parseBoolean(configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.auto_hide));
     }
 
     private boolean isWidgetVisible() {

@@ -8,7 +8,7 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
-import tictac7x.storage.StorageConfig;
+import tictac7x.storage.TicTac7xStorageConfig;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class StoragePanel extends PluginPanel {
     private final ClientThread client_thread;
     private final ItemManager items;
-    private final StorageConfig config;
+    private final TicTac7xStorageConfig config;
     private final JsonParser parser = new JsonParser();
 
     private List<DataItem> list_items;
@@ -30,7 +30,7 @@ public class StoragePanel extends PluginPanel {
     private JScrollPane panel_scoller;
     private PanelItems panel_items;
 
-    public StoragePanel(final ClientThread client_thread, final ItemManager items, final StorageConfig config) {
+    public StoragePanel(final ClientThread client_thread, final ItemManager items, final TicTac7xStorageConfig config) {
         super(false);
         this.client_thread = client_thread;
         this.items = items;
@@ -100,7 +100,7 @@ public class StoragePanel extends PluginPanel {
     }
 
     public void onConfigChanged(final ConfigChanged event) {
-        if (!event.getGroup().equals(StorageConfig.group) || !event.getKey().equals(StorageConfig.bank)) return;
+        if (!event.getGroup().equals(TicTac7xStorageConfig.group) || !event.getKey().equals(TicTac7xStorageConfig.bank)) return;
 
         loadItemsFromConfig();
         searchItems(search);

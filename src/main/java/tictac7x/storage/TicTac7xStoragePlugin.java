@@ -6,7 +6,6 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.InventoryID;
-import net.runelite.api.ItemID;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.widgets.WidgetInfo;
@@ -22,6 +21,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.overlay.OverlayManager;
+import tictac7x.storage.panel.PanelNavigationButton;
 import tictac7x.storage.panel.StoragePanel;
 
 import javax.annotation.Nullable;
@@ -34,7 +34,7 @@ import javax.inject.Inject;
 	tags = { "storage", "bank", "inventory", "item" }
 )
 public class TicTac7xStoragePlugin extends Plugin {
-	private String plugin_version = "v0.5.1";
+	private String plugin_version = "v0.6";
 	private String plugin_message = "" +
 		"<colHIGHLIGHT>Storage " + plugin_version + ":<br>" +
 		"<colHIGHLIGHT>* Overlays without any items no longer rendering";
@@ -46,7 +46,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 	private ClientToolbar client_toolbar;
 
 	@Inject
-	private StorageConfig config;
+	private TicTac7xStorageConfig config;
 
 	@Inject
 	private ClientThread client_thread;
@@ -64,8 +64,8 @@ public class TicTac7xStoragePlugin extends Plugin {
 	private ChatMessageManager chat_messages;
 
 	@Provides
-	StorageConfig provideConfig(ConfigManager configManager) {
-		return configManager.getConfig(StorageConfig.class);
+	TicTac7xStorageConfig provideConfig(ConfigManager configManager) {
+		return configManager.getConfig(TicTac7xStorageConfig.class);
 	}
 
 	private Storage[] storages;
@@ -75,11 +75,13 @@ public class TicTac7xStoragePlugin extends Plugin {
 	@Nullable
 	private NavigationButton navigation_button;
 
+	private PanelNavigationButton panelNavigationButton;
+
 	@Override
 	protected void startUp() {
 		storages = new Storage[]{
-			new StorageInventory(StorageConfig.inventory, InventoryID.INVENTORY, WidgetInfo.INVENTORY, client, client_thread, configs, config, items),
-			new Storage(StorageConfig.bank, InventoryID.BANK, WidgetInfo.BANK_CONTAINER, client, client_thread, configs, config, items)
+			new StorageInventory(TicTac7xStorageConfig.inventory, InventoryID.INVENTORY, WidgetInfo.INVENTORY, client, client_thread, configs, config, items),
+			new Storage(TicTac7xStorageConfig.bank, InventoryID.BANK, WidgetInfo.BANK_CONTAINER, client, client_thread, configs, config, items)
 		};
 
 		for (final Storage storage : storages) {
@@ -88,17 +90,15 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 		// Panel
 		storage_panel = new StoragePanel(client_thread, items, config);
-		updateNavigationButton();
+		panelNavigationButton = new PanelNavigationButton(client_toolbar, config, storage_panel);
 	}
 
 	@Override
 	protected void shutDown() {
+		panelNavigationButton.shutDown();
+
 		for (final Storage storage : storages) {
 			overlays.remove(storage);
-		}
-
-		if (config.showPanel()) {
-			client_toolbar.removeNavigation(navigation_button);
 		}
 	}
 
@@ -111,13 +111,9 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 	@Subscribe
 	public void onConfigChanged(final ConfigChanged event) {
-		if (!event.getGroup().equals(StorageConfig.group)) return;
+		if (!event.getGroup().equals(TicTac7xStorageConfig.group)) return;
 
-		// Toggle panel.
-		if (event.getKey().equals(StorageConfig.panel) || event.getKey().equals(StorageConfig.panel_priority)) {
-			updateNavigationButton();
-			return;
-		}
+		panelNavigationButton.onConfigChanged(event);
 
 		// Update list of items in the panel.
 		storage_panel.onConfigChanged(event);
@@ -131,31 +127,12 @@ public class TicTac7xStoragePlugin extends Plugin {
 	public void onGameStateChanged(final GameStateChanged event) {
 		// Plugin update message.
 		if (event.getGameState() == GameState.LOGGED_IN && !config.getVersion().equals(plugin_version)) {
-			configs.setConfiguration(StorageConfig.group, StorageConfig.version, plugin_version);
+			configs.setConfiguration(TicTac7xStorageConfig.group, TicTac7xStorageConfig.version, plugin_version);
 			chat_messages.queue(QueuedMessage.builder()
 				.type(ChatMessageType.CONSOLE)
 				.runeLiteFormattedMessage(plugin_message)
 				.build()
 			);
-		}
-	}
-
-	private void updateNavigationButton() {
-		if (navigation_button != null) {
-			client_toolbar.removeNavigation(navigation_button);
-		}
-
-		if (config.showPanel()) {
-			// Invoke on client thread otherwise icon is not showing on the sidebar.
-			client_thread.invokeLater(() -> {
-				navigation_button = NavigationButton.builder()
-						.tooltip("Storage")
-						.icon(items.getImage(ItemID.CHEST))
-						.priority(config.getPanelPriority())
-						.panel(storage_panel)
-						.build();
-				client_toolbar.addNavigation(navigation_button);
-			});
 		}
 	}
 }

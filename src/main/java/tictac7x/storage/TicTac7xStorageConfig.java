@@ -5,8 +5,8 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup(StorageConfig.group)
-public interface StorageConfig extends Config {
+@ConfigGroup(TicTac7xStorageConfig.group)
+public interface TicTac7xStorageConfig extends Config {
 	String group = "tictac7x-storage";
 	String visible = "visible";
 	String hidden = "hidden";
