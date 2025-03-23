@@ -9,45 +9,38 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import java.awt.Component;
 import java.util.List;
 
-public class PanelItems {
-    private final ClientThread client_thread;
-    private final ItemManager items;
-    private JPanel panel;
+public class PanelItems extends JPanel {
+    private final ClientThread clientThread;
+    private final ItemManager itemManager;
 
-    public PanelItems(final ClientThread client_thread, final ItemManager items, final List<StorageItem> list_items) {
-        this.client_thread = client_thread;
-        this.items = items;
+    public PanelItems(final ClientThread clientThread, final ItemManager itemManager, final List<StorageItem> items) {
+        this.clientThread = clientThread;
+        this.itemManager = itemManager;
 
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-        panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(ColorScheme.DARKER_GRAY_COLOR);
+        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        addItemsToPanel(list_items);
-    }
-
-    public Component get() {
-        return panel;
+        addItemsToPanel(items);
     }
 
     public void update(final List<StorageItem> list_items) {
-        panel.removeAll();
+        removeAll();
 
         SwingUtilities.invokeLater(() -> {
             addItemsToPanel(list_items);
         });
 
-        panel.revalidate();
-        panel.repaint();
+        revalidate();
+        repaint();
     }
 
     private void addItemsToPanel(final List<StorageItem> list_items) {
         for (final StorageItem item : list_items) {
-            final PanelItem panel_item = new PanelItem(item.id, item.quantity, client_thread, items);
-            panel.add(panel_item.get());
+            final PanelItem panelItem = new PanelItem(item.id, item.quantity, clientThread, itemManager);
+            add(panelItem);
         }
     }
 }

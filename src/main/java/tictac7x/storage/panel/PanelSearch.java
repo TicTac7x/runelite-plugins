@@ -10,10 +10,9 @@ import java.awt.Dimension;
 import java.util.function.Consumer;
 
 public class PanelSearch {
-    private final IconTextField search;
+    private final IconTextField search = new IconTextField();
 
     public PanelSearch(final Consumer<String> onSearch) {
-        search = new IconTextField();
         search.setIcon(IconTextField.Icon.SEARCH);
         search.setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH, 30));
         search.setBackground(ColorScheme.DARKER_GRAY_COLOR);

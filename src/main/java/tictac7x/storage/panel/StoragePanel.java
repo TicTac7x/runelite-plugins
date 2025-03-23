@@ -19,22 +19,19 @@ import java.util.List;
 import java.util.Map;
 
 public class StoragePanel extends PluginPanel {
-    private final ClientThread client_thread;
-    private final ItemManager items;
+    private final ClientThread clientThread;
+    private final ItemManager itemManager;
     private final TicTac7xStorageConfig config;
-    private final JsonParser parser = new JsonParser();
 
     private List<StorageItem> list_items;
     private String search = "";
 
-    private PanelSearch input_Panel_search;
-    private JScrollPane panel_scoller;
-    private PanelItems panel_items;
+    private PanelItems panelItems;
 
-    public StoragePanel(final ClientThread client_thread, final ItemManager items, final TicTac7xStorageConfig config) {
+    public StoragePanel(final ClientThread clientThread, final ItemManager itemManager, final TicTac7xStorageConfig config) {
         super(false);
-        this.client_thread = client_thread;
-        this.items = items;
+        this.clientThread = clientThread;
+        this.itemManager = itemManager;
         this.config = config;
         loadItemsFromConfig();
 
@@ -44,21 +41,21 @@ public class StoragePanel extends PluginPanel {
         setBackground(ColorScheme.DARK_GRAY_COLOR);
 
         // Panel components.
-        input_Panel_search = new PanelSearch((this::searchItems));
-        add(input_Panel_search.get(), BorderLayout.NORTH);
+        final PanelSearch panelSearch = new PanelSearch((this::searchItems));
+        add(panelSearch.get(), BorderLayout.NORTH);
 
         // Panel items.
-        panel_items = new PanelItems(client_thread, items, list_items);
+        panelItems = new PanelItems(clientThread, itemManager, list_items);
 
         // Panel scroller.
-        panel_scoller = new JScrollPane(panel_items.get());
-        add(panel_scoller, BorderLayout.CENTER);
+        final JScrollPane scroller = new JScrollPane(panelItems);
+        add(scroller, BorderLayout.CENTER);
     }
 
     private void loadItemsFromConfig() {
         list_items = new ArrayList<>();
 
-        final JsonObject bank = (JsonObject) parser.parse(config.getBank());
+        final JsonObject bank = (JsonObject) new JsonParser().parse(config.getBank());
 
         for (final Map.Entry<String, JsonElement> item : bank.entrySet()) {
             list_items.add(new StorageItem(Integer.parseInt(item.getKey()), item.getValue().getAsInt()));
@@ -70,20 +67,20 @@ public class StoragePanel extends PluginPanel {
 
         // Show all items.
         if (search.length() == 0) {
-            panel_items.update(list_items);
+            panelItems.update(list_items);
             return;
         }
 
         final String searchLowercase = search.toLowerCase();
 
         // Client thread is required to get item names from compositions.
-        client_thread.invoke(() -> {
+        clientThread.invoke(() -> {
             final List<StorageItem> list_items_starts_with = new ArrayList<>();
             final List<StorageItem> list_items_contains = new ArrayList<>();
 
             // Filter items.
             for (final StorageItem item : list_items) {
-                final String name = items.getItemComposition(item.id).getName().toLowerCase();
+                final String name = itemManager.getItemComposition(item.id).getName().toLowerCase();
 
                 // Find items that start with the search first.
                 if (name.startsWith(searchLowercase)) {
@@ -96,7 +93,7 @@ public class StoragePanel extends PluginPanel {
             }
 
             list_items_starts_with.addAll(list_items_contains);
-            panel_items.update(list_items_starts_with);
+            panelItems.update(list_items_starts_with);
         });
     }
 

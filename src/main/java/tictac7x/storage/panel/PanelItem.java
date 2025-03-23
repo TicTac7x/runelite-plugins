@@ -6,29 +6,18 @@ import net.runelite.client.ui.PluginPanel;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-import java.awt.Component;
 import java.awt.Dimension;
 
-public class PanelItem {
-    private final JLabel item;
+public class PanelItem extends JLabel {
+    public PanelItem(final int itemId, final int itemQuantity, final ClientThread clientThread, final ItemManager itemManager) {
+        setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH - 20, 32));
 
-    public PanelItem(final int item_id, final int quantity, final ClientThread client_thread, final ItemManager items) {
-        item = new JLabel();
-        item.setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH - 20, 32));
+        clientThread.invoke(() -> {
+            setIcon(new ImageIcon(itemManager.getImage(itemId, itemQuantity, true)));
+            setText(itemManager.getItemComposition(itemId).getName());
 
-        client_thread.invoke(() -> {
-            item.setIcon(new ImageIcon(items.getImage(item_id, quantity, true)));
-            item.setText(items.getItemComposition(item_id).getName());
-
-            SwingUtilities.invokeLater(() -> {
-                item.revalidate();
-                item.repaint();
-            });
+            revalidate();
+            repaint();
         });
-    }
-
-    public Component get() {
-        return item;
     }
 }
