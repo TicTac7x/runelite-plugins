@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.ItemContainer;
@@ -15,6 +14,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.OverlayLayer;
+import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.ComponentOrientation;
@@ -30,30 +30,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class Storage extends OverlayPanel {
+public class StorageOverlay extends OverlayPanel {
     private final String storage_id;
-    protected final int item_container_id;
+    protected final int itemContainerId;
     private final int[] widgetIds;
     private final Client client;
-    private final ClientThread client_thread;
-    private final ConfigManager configs;
+    private final ClientThread clientThread;
+    private final OverlayManager overlayManager;
+    private final ConfigManager configManager;
     protected final TicTac7xStorageConfig config;
-    private final ItemManager items;
+    private final ItemManager itemManager;
 
     private final int PLACEHOLDER_TEMPLATE_ID = 14401;
     protected final PanelComponent itemsPanelComponent = new PanelComponent();
     private final List<ImageComponent> images = new ArrayList<>();
     private final JsonParser parser = new JsonParser();
 
-    public Storage(final String storage_id, final InventoryID item_container_id, final int[] widgetIds, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
-        this.storage_id = storage_id;
-        this.item_container_id = item_container_id.getId();
+    public StorageOverlay(final String configKey, final int itemContainerId, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
+        this.storage_id = configKey;
+        this.itemContainerId = itemContainerId;
         this.widgetIds = widgetIds;
         this.client = client;
-        this.client_thread = client_thread;
-        this.configs = configs;
+        this.clientThread = clientThread;
+        this.overlayManager = overlayManager;
+        this.configManager = configManager;
+        this.itemManager = itemManager;
         this.config = config;
-        this.items = items;
 
         // Overlay configuration.
         setPreferredPosition(OverlayPosition.BOTTOM_RIGHT);
@@ -68,12 +70,12 @@ public class Storage extends OverlayPanel {
         itemsPanelComponent.setBorder(new Rectangle(0,0,0,0));
 
         // Generate images based on config.
-        this.client_thread.invokeLater(() -> this.updateImages(configs.getConfiguration(TicTac7xStorageConfig.group, storage_id)));
+        this.clientThread.invokeLater(() -> this.updateImages(configManager.getConfiguration(TicTac7xStorageConfig.group, configKey)));
 
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (event.getContainerId() != this.item_container_id) return;
+        if (event.getContainerId() != this.itemContainerId) return;
 
         final ItemContainer item_container = event.getItemContainer();
         final JsonObject json = new JsonObject();
@@ -83,7 +85,7 @@ public class Storage extends OverlayPanel {
             if (item.getId() == -1 || item.getQuantity() == 0) continue;
 
             // Placeholder.
-            if (items.getItemComposition(item.getId()).getPlaceholderTemplateId() == PLACEHOLDER_TEMPLATE_ID) continue;
+            if (itemManager.getItemComposition(item.getId()).getPlaceholderTemplateId() == PLACEHOLDER_TEMPLATE_ID) continue;
 
             // Save item.
             final String id = String.valueOf(item.getId());
@@ -92,7 +94,7 @@ public class Storage extends OverlayPanel {
             }
         }
 
-        configs.setConfiguration(TicTac7xStorageConfig.group, this.storage_id, json.toString());
+        configManager.setConfiguration(TicTac7xStorageConfig.group, this.storage_id, json.toString());
     }
 
     public void onConfigChanged(final ConfigChanged event) {
@@ -103,7 +105,7 @@ public class Storage extends OverlayPanel {
                 !event.getKey().equals(this.storage_id + "_" + TicTac7xStorageConfig.hidden)
         ) return;
 
-        this.client_thread.invokeLater(() -> this.updateImages(configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id)));
+        this.clientThread.invokeLater(() -> this.updateImages(configManager.getConfiguration(TicTac7xStorageConfig.group, this.storage_id)));
     }
 
     private void updateImages(final String items) {
@@ -118,7 +120,7 @@ public class Storage extends OverlayPanel {
             // Item not shown.
             if (!isVisible(item_id) || isHidden(item_id)) continue;
 
-            images.add(new ImageComponent(this.items.getImage(item_id, item_quantity, true)));
+            images.add(new ImageComponent(this.itemManager.getImage(item_id, item_quantity, true)));
         }
 
         // Replace old images with new ones.
@@ -128,7 +130,7 @@ public class Storage extends OverlayPanel {
 
     private String[] getVisibleItems() {
         String[] visible = new String[]{};
-        try { visible = configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.visible).split(",");
+        try { visible = configManager.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.visible).split(",");
         } catch (final Exception ignored) {}
 
         return visible;
@@ -136,7 +138,7 @@ public class Storage extends OverlayPanel {
 
     private String[] getHiddenItems() {
         String[] hidden = new String[]{};
-        try { hidden = configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.hidden).split(",");
+        try { hidden = configManager.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.hidden).split(",");
         } catch (final Exception ignored) {}
 
         return hidden;
@@ -144,7 +146,7 @@ public class Storage extends OverlayPanel {
 
     private boolean isVisible(final int item_id) {
         final String[] visible = this.getVisibleItems();
-        final ItemComposition item = this.items.getItemComposition(item_id);
+        final ItemComposition item = this.itemManager.getItemComposition(item_id);
 
         // Visible list not used.
         if (visible.length == 0 || visible.length == 1 && visible[0].equals("")) return true;
@@ -162,7 +164,7 @@ public class Storage extends OverlayPanel {
 
     private boolean isHidden(final int item_id) {
         final String[] hidden = this.getHiddenItems();
-        final ItemComposition item = this.items.getItemComposition(item_id);
+        final ItemComposition item = this.itemManager.getItemComposition(item_id);
 
         // Hidden list not used.
         if (hidden.length == 0 || hidden.length == 1 && hidden[0].equals("")) return false;
@@ -179,11 +181,11 @@ public class Storage extends OverlayPanel {
     }
 
     private boolean show() {
-        return Boolean.parseBoolean(configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.show));
+        return Boolean.parseBoolean(configManager.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.show));
     }
 
     private boolean autoHide() {
-        return Boolean.parseBoolean(configs.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.auto_hide));
+        return Boolean.parseBoolean(configManager.getConfiguration(TicTac7xStorageConfig.group, this.storage_id + "_" + TicTac7xStorageConfig.auto_hide));
     }
 
     private boolean isWidgetVisible() {
@@ -212,4 +214,7 @@ public class Storage extends OverlayPanel {
 
     protected void renderBefore() {}
     protected void renderAfter() {}
+
+    public void shutDown() {
+    }
 }

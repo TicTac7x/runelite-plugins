@@ -39,7 +39,7 @@ public class PanelItems extends JPanel {
 
     private void addItemsToPanel(final List<StorageItem> list_items) {
         for (final StorageItem item : list_items) {
-            final PanelItem panelItem = new PanelItem(item.id, item.quantity, clientThread, itemManager);
+            final PanelItem panelItem = new PanelItem(item.id, item.getQuantity(), clientThread, itemManager);
             add(panelItem);
         }
     }

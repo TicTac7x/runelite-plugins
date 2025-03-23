@@ -8,6 +8,7 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
+import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.util.ImageUtil;
 
@@ -17,7 +18,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class StorageInventory extends Storage {
+public class StorageInventory extends StorageOverlay {
     private int INVENTORY_SIZE = 28;
     private int NULL_ITEM = -1;
 
@@ -29,11 +30,11 @@ public class StorageInventory extends Storage {
     @Nullable
     private ImageComponent inventory_free;
 
-    public StorageInventory(final String storage_id, final InventoryID item_container_id, final int[] widgetIds, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
-        super(storage_id, item_container_id, widgetIds, client, client_thread, configs, config, items);
+    public StorageInventory(final String configKey, final int itemContainerId, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
+        super(configKey, itemContainerId, widgetIds, client, clientThread, overlayManager, configManager, itemManager, config);
         this.inventory_png = ImageUtil.loadImageResource(getClass(), "/inventory.png");
-        client_thread.invokeLater(() -> updateInventoryItem(INVENTORY_SIZE));
-        client_thread.invokeLater(() -> updateInventoryFree(INVENTORY_SIZE));
+        clientThread.invokeLater(() -> updateInventoryItem(INVENTORY_SIZE));
+        clientThread.invokeLater(() -> updateInventoryFree(INVENTORY_SIZE));
     }
 
     @Override
@@ -81,7 +82,7 @@ public class StorageInventory extends Storage {
     }
 
     private void updateEmpty(final ItemContainerChanged event) {
-        if (event.getContainerId() != this.item_container_id) return;
+        if (event.getContainerId() != this.itemContainerId) return;
 
         int empty = INVENTORY_SIZE;
         for (final Item item : event.getItemContainer().getItems()) {

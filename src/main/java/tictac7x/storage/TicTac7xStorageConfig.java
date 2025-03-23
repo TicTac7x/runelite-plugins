@@ -14,6 +14,7 @@ public interface TicTac7xStorageConfig extends Config {
 	String auto_hide = "auto_hide";
 	String version = "version";
 	String panel_priority = "panel_priority";
+	String storage = "_storage";
 
 	enum InventoryEmpty { TOP, FIRST, LAST, BOTTOM, HIDDEN }
 
@@ -147,4 +148,27 @@ public interface TicTac7xStorageConfig extends Config {
 			section = panel,
 			position = 2
 		) default int getPanelPriority() { return 5; }
+
+	@ConfigSection(
+		name = "Debug",
+		description = "Debug",
+		position = 4,
+		closedByDefault = true
+	) String debug = "debug";
+
+		@ConfigItem(
+			keyName = inventory + storage,
+			name = inventory + storage,
+			description = inventory + storage,
+			section = debug,
+			position = 1
+		) default String getInventoryStorage() { return ""; }
+
+		@ConfigItem(
+			keyName = bank + storage,
+			name = bank + storage,
+			description = bank + storage,
+			section = debug,
+			position = 2
+		) default String getBankStorage() { return ""; }
 }
