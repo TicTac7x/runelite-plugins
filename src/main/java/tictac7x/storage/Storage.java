@@ -10,7 +10,6 @@ import net.runelite.api.ItemComposition;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.events.ConfigChanged;
@@ -29,11 +28,12 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Storage extends OverlayPanel {
     private final String storage_id;
     protected final int item_container_id;
-    private final WidgetInfo widget_info;
+    private final int[] widgetIds;
     private final Client client;
     private final ClientThread client_thread;
     private final ConfigManager configs;
@@ -45,10 +45,10 @@ public class Storage extends OverlayPanel {
     private final List<ImageComponent> images = new ArrayList<>();
     private final JsonParser parser = new JsonParser();
 
-    public Storage(final String storage_id, final InventoryID item_container_id, final WidgetInfo widget_info, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
+    public Storage(final String storage_id, final InventoryID item_container_id, final int[] widgetIds, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
         this.storage_id = storage_id;
         this.item_container_id = item_container_id.getId();
-        this.widget_info = widget_info;
+        this.widgetIds = widgetIds;
         this.client = client;
         this.client_thread = client_thread;
         this.configs = configs;
@@ -187,8 +187,8 @@ public class Storage extends OverlayPanel {
     }
 
     private boolean isWidgetVisible() {
-        final Widget widget = client.getWidget(this.widget_info);
-        return (widget != null && !widget.isHidden());
+        final Optional<Widget> widget = Optional.ofNullable(client.getWidget(widgetIds[0], widgetIds[1]));
+        return (widget.isPresent() && !widget.get().isHidden());
     }
 
     @Override

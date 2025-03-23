@@ -4,7 +4,6 @@ import net.runelite.api.Client;
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
@@ -30,8 +29,8 @@ public class StorageInventory extends Storage {
     @Nullable
     private ImageComponent inventory_free;
 
-    public StorageInventory(final String storage_id, final InventoryID item_container_id, final WidgetInfo widget_info, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
-        super(storage_id, item_container_id, widget_info, client, client_thread, configs, config, items);
+    public StorageInventory(final String storage_id, final InventoryID item_container_id, final int[] widgetIds, final Client client, final ClientThread client_thread, final ConfigManager configs, final TicTac7xStorageConfig config, final ItemManager items) {
+        super(storage_id, item_container_id, widgetIds, client, client_thread, configs, config, items);
         this.inventory_png = ImageUtil.loadImageResource(getClass(), "/inventory.png");
         client_thread.invokeLater(() -> updateInventoryItem(INVENTORY_SIZE));
         client_thread.invokeLater(() -> updateInventoryFree(INVENTORY_SIZE));

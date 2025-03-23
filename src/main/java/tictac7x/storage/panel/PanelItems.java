@@ -3,6 +3,7 @@ package tictac7x.storage.panel;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
+import tictac7x.storage.storage.StorageItem;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,7 +17,7 @@ public class PanelItems {
     private final ItemManager items;
     private JPanel panel;
 
-    public PanelItems(final ClientThread client_thread, final ItemManager items, final List<DataItem> list_items) {
+    public PanelItems(final ClientThread client_thread, final ItemManager items, final List<StorageItem> list_items) {
         this.client_thread = client_thread;
         this.items = items;
 
@@ -32,7 +33,7 @@ public class PanelItems {
         return panel;
     }
 
-    public void update(final List<DataItem> list_items) {
+    public void update(final List<StorageItem> list_items) {
         panel.removeAll();
 
         SwingUtilities.invokeLater(() -> {
@@ -43,8 +44,8 @@ public class PanelItems {
         panel.repaint();
     }
 
-    private void addItemsToPanel(final List<DataItem> list_items) {
-        for (final DataItem item : list_items) {
+    private void addItemsToPanel(final List<StorageItem> list_items) {
+        for (final StorageItem item : list_items) {
             final PanelItem panel_item = new PanelItem(item.id, item.quantity, client_thread, items);
             panel.add(panel_item.get());
         }

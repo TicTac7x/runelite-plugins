@@ -9,6 +9,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import tictac7x.storage.TicTac7xStorageConfig;
+import tictac7x.storage.storage.StorageItem;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
@@ -23,10 +24,10 @@ public class StoragePanel extends PluginPanel {
     private final TicTac7xStorageConfig config;
     private final JsonParser parser = new JsonParser();
 
-    private List<DataItem> list_items;
+    private List<StorageItem> list_items;
     private String search = "";
 
-    private Search input_search;
+    private PanelSearch input_Panel_search;
     private JScrollPane panel_scoller;
     private PanelItems panel_items;
 
@@ -43,8 +44,8 @@ public class StoragePanel extends PluginPanel {
         setBackground(ColorScheme.DARK_GRAY_COLOR);
 
         // Panel components.
-        input_search = new Search((this::searchItems));
-        add(input_search.get(), BorderLayout.NORTH);
+        input_Panel_search = new PanelSearch((this::searchItems));
+        add(input_Panel_search.get(), BorderLayout.NORTH);
 
         // Panel items.
         panel_items = new PanelItems(client_thread, items, list_items);
@@ -60,7 +61,7 @@ public class StoragePanel extends PluginPanel {
         final JsonObject bank = (JsonObject) parser.parse(config.getBank());
 
         for (final Map.Entry<String, JsonElement> item : bank.entrySet()) {
-            list_items.add(new DataItem(Integer.parseInt(item.getKey()), item.getValue().getAsInt()));
+            list_items.add(new StorageItem(Integer.parseInt(item.getKey()), item.getValue().getAsInt()));
         }
     }
 
@@ -77,11 +78,11 @@ public class StoragePanel extends PluginPanel {
 
         // Client thread is required to get item names from compositions.
         client_thread.invoke(() -> {
-            final List<DataItem> list_items_starts_with = new ArrayList<>();
-            final List<DataItem> list_items_contains = new ArrayList<>();
+            final List<StorageItem> list_items_starts_with = new ArrayList<>();
+            final List<StorageItem> list_items_contains = new ArrayList<>();
 
             // Filter items.
-            for (final DataItem item : list_items) {
+            for (final StorageItem item : list_items) {
                 final String name = items.getItemComposition(item.id).getName().toLowerCase();
 
                 // Find items that start with the search first.
