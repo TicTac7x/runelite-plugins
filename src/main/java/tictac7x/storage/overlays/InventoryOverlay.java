@@ -9,35 +9,42 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.util.ImageUtil;
 import tictac7x.storage.TicTac7xStorageConfig;
+import tictac7x.storage.storage.Storage;
 
-import javax.annotation.Nullable;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 public class InventoryOverlay extends StorageOverlay {
-    private int panel_width = 0;
-    private final BufferedImage inventory_png;
-    private ImageComponent inventory_image;
+    private int panelWidth = 0;
+    private final BufferedImage inventoryIcon;
 
-    @Nullable
-    private ImageComponent inventory_free;
+    private Optional<ImageComponent> freeWithInventoryImage = Optional.empty();
+    private Optional<ImageComponent> freeWithLabel = Optional.empty();
 
-    public InventoryOverlay(final String configKey, final int itemContainerId, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
-        super(configKey, itemContainerId, widgetIds, client, clientThread, overlayManager, configManager, itemManager, config);
-        this.inventory_png = ImageUtil.loadImageResource(getClass(), "/inventory.png");
+    public InventoryOverlay(final String configKey, final Storage storage, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
+        super(configKey, storage, widgetIds, client, clientThread, overlayManager, configManager, itemManager, config);
+        this.inventoryIcon = ImageUtil.loadImageResource(getClass(), "/inventory.png");
+        storage.onChange(this::updateFreeImages);
+    }
+
+    private void updateFreeImages() {
+        updateFreeInventoryItem(28 - storage.getSlotsUsed());
+        updateFreeWithLabel(28 - storage.getSlotsUsed());
     }
 
     @Override
     protected void renderBefore() {
         switch (config.getInventoryEmpty()) {
             case TOP:
-                this.renderFree();
+                this.renderFreeWithLabel();
                 return;
             case FIRST:
-                itemsPanelComponent.getChildren().add(this.inventory_image);
-                return;
+                if (freeWithInventoryImage.isPresent()) {
+                    itemsPanelComponent.getChildren().add(freeWithInventoryImage.get());
+                }
         }
     }
 
@@ -45,42 +52,38 @@ public class InventoryOverlay extends StorageOverlay {
     protected void renderAfter() {
         switch (config.getInventoryEmpty()) {
             case LAST:
-                itemsPanelComponent.getChildren().add(this.inventory_image);
+                if (freeWithInventoryImage.isPresent()) {
+                    itemsPanelComponent.getChildren().add(freeWithInventoryImage.get());
+                }
                 return;
             case BOTTOM:
-                this.renderFree();
-                return;
+                this.renderFreeWithLabel();
         }
     }
 
-    @Override
-    protected void loadStorageFromConfig() {
-        super.loadStorageFromConfig();
-        updateInventoryFree(28 - storage.getSlotsUsed());
-        updateInventoryItem(28 - storage.getSlotsUsed());
-    }
-
-    private void renderFree() {
+    private void renderFreeWithLabel() {
         // Extra checks to re-render the free text.
         if (
-            this.inventory_free == null ||
-            this.inventory_free.getBounds().width == 0 ||
-            itemsPanelComponent.getBounds().width != panel_width
+            !freeWithLabel.isPresent() ||
+            freeWithLabel.get().getBounds().width == 0 ||
+            itemsPanelComponent.getBounds().width != panelWidth
         ) {
-            this.updateInventoryFree(28 - storage.getSlotsUsed());
-            this.panel_width = itemsPanelComponent.getBounds().width;
+            updateFreeWithLabel(28 - storage.getSlotsUsed());
+            panelWidth = itemsPanelComponent.getBounds().width;
         }
 
-        if (this.inventory_free != null) panelComponent.getChildren().add(this.inventory_free);
+        if (freeWithLabel.isPresent()) {
+            panelComponent.getChildren().add(freeWithLabel.get());
+        }
     }
 
-    private void updateInventoryItem(final int empty) {
+    private void updateFreeInventoryItem(final int empty) {
         final String free = String.valueOf(empty);
 
         // Make copy of inventory icon.
-        final BufferedImage inventory_image = new BufferedImage(this.inventory_png.getWidth(), this.inventory_png.getHeight(), this.inventory_png.getType());
-        final Graphics graphics = inventory_image.getGraphics();
-        graphics.drawImage(this.inventory_png, 0, 0, null);
+        final BufferedImage inventoryImage = new BufferedImage(this.inventoryIcon.getWidth(), this.inventoryIcon.getHeight(), this.inventoryIcon.getType());
+        final Graphics graphics = inventoryImage.getGraphics();
+        graphics.drawImage(this.inventoryIcon, 0, 0, null);
 
         // Free slots count.
         final FontMetrics fm = graphics.getFontMetrics();
@@ -95,28 +98,28 @@ public class InventoryOverlay extends StorageOverlay {
         graphics.drawString(free, 0, fm.getAscent() - 1);
 
         graphics.dispose();
-        this.inventory_image = new ImageComponent(inventory_image);
+        freeWithInventoryImage = Optional.of(new ImageComponent(inventoryImage));
     }
 
-    private void updateInventoryFree(final int empty) {
+    private void updateFreeWithLabel(final int empty) {
         try {
-            final String free = empty + " free";
+            final String freeText = empty + " free";
 
-            final BufferedImage free_image = new BufferedImage(itemsPanelComponent.getBounds().width - 8, 16, BufferedImage.TYPE_4BYTE_ABGR);
-            final Graphics graphics = free_image.getGraphics();
-            final FontMetrics font_metrics = graphics.getFontMetrics();
+            final BufferedImage freeImage = new BufferedImage(itemsPanelComponent.getBounds().width - 8, 16, BufferedImage.TYPE_4BYTE_ABGR);
+            final Graphics graphics = freeImage.getGraphics();
+            final FontMetrics fontMetrics = graphics.getFontMetrics();
             graphics.setFont(FontManager.getRunescapeFont());
 
             // Shadow.
             graphics.setColor(Color.BLACK);
-            graphics.drawString(free, ((free_image.getWidth() - font_metrics.stringWidth(free)) / 2) + 1, font_metrics.getAscent() + 2);
+            graphics.drawString(freeText, ((freeImage.getWidth() - fontMetrics.stringWidth(freeText)) / 2) + 1, fontMetrics.getAscent() + 2);
 
             // Label.
             graphics.setColor(Color.LIGHT_GRAY);
-            graphics.drawString(free, (free_image.getWidth() - font_metrics.stringWidth(free)) / 2, font_metrics.getAscent() + 1);
+            graphics.drawString(freeText, (freeImage.getWidth() - fontMetrics.stringWidth(freeText)) / 2, fontMetrics.getAscent() + 1);
 
             graphics.dispose();
-            this.inventory_free = new ImageComponent(free_image);
+            freeWithLabel = Optional.of(new ImageComponent(freeImage));
         } catch (final Exception ignored) {}
     }
 }

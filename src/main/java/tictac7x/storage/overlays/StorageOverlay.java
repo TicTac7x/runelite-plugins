@@ -27,7 +27,7 @@ import java.util.Optional;
 
 public class StorageOverlay extends OverlayPanel {
     private final String configKey;
-    protected final int itemContainerId;
+    protected final Storage storage;
     private final int[] widgetIds;
     private final Client client;
     private final ClientThread clientThread;
@@ -39,11 +39,9 @@ public class StorageOverlay extends OverlayPanel {
     protected final PanelComponent itemsPanelComponent = new PanelComponent();
     private List<ImageComponent> images = new ArrayList<>();
 
-    protected Storage storage;
-
-    public StorageOverlay(final String configKey, final int itemContainerId, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
+    public StorageOverlay(final String configKey, final Storage storage, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
         this.configKey = configKey;
-        this.itemContainerId = itemContainerId;
+        this.storage = storage;
         this.widgetIds = widgetIds;
         this.client = client;
         this.clientThread = clientThread;
@@ -64,24 +62,16 @@ public class StorageOverlay extends OverlayPanel {
         itemsPanelComponent.setOrientation(ComponentOrientation.HORIZONTAL);
         itemsPanelComponent.setBorder(new Rectangle(0,0,0,0));
 
-        clientThread.invoke(() -> {
-            loadStorageFromConfig();
-            updateImages();
-        });
-
         overlayManager.add(this);
+        storage.onChange(this::updateImages);
     }
 
     public void onConfigChanged(final ConfigChanged event) {
         if (
-            event.getKey().equals(configKey + TicTac7xStorageConfig.storage) ||
             event.getKey().equals(configKey + "_" + TicTac7xStorageConfig.visible) ||
             event.getKey().equals(configKey + "_" + TicTac7xStorageConfig.hidden)
         ) {
-            clientThread.invoke(() -> {
-                loadStorageFromConfig();
-                updateImages();
-            });
+            updateImages();
         }
     }
 
@@ -89,13 +79,15 @@ public class StorageOverlay extends OverlayPanel {
         final String visibleString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.visible);
         final String hiddenString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.hidden);
 
-        final List<ImageComponent> images = new ArrayList<>();
+        clientThread.invoke(() -> {
+            final List<ImageComponent> images = new ArrayList<>();
 
-        for (final StorageItem item : storage.getItems(visibleString, hiddenString, true, false)) {
-            images.add(new ImageComponent(this.itemManager.getImage(item.id, item.getQuantity(), true)));
-        }
+            for (final StorageItem item : storage.getItems(visibleString, hiddenString, true, false)) {
+                images.add(new ImageComponent(this.itemManager.getImage(item.id, item.getQuantity(), true)));
+            }
 
-        this.images = images;
+            this.images = images;
+        });
     }
 
     private boolean show() {
@@ -111,10 +103,6 @@ public class StorageOverlay extends OverlayPanel {
         return (widget.isPresent() && !widget.get().isHidden());
     }
 
-    protected void loadStorageFromConfig() {
-        storage = new Storage(configKey, itemContainerId, clientThread, itemManager, configManager);
-    }
-
     @Override
     public Dimension render(final Graphics2D graphics) {
         if (!show()) return null;
@@ -125,7 +113,7 @@ public class StorageOverlay extends OverlayPanel {
 
         renderBefore();
 
-        this.images.forEach(image -> itemsPanelComponent.getChildren().add(image));
+        images.forEach(image -> itemsPanelComponent.getChildren().add(image));
         panelComponent.getChildren().add(itemsPanelComponent);
 
         renderAfter();

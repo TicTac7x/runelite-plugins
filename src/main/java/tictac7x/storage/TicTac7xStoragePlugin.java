@@ -91,13 +91,9 @@ public class TicTac7xStoragePlugin extends Plugin {
 		storages = new Storage[] { bankStorage, inventoryStorage };
 
 		storageOverlays = new StorageOverlay[]{
-			new InventoryOverlay(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
-			new StorageOverlay(TicTac7xStorageConfig.bank, ItemContainerId.BANK, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
+			new InventoryOverlay(TicTac7xStorageConfig.inventory, inventoryStorage, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
+			new StorageOverlay(TicTac7xStorageConfig.bank, bankStorage, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
 		};
-
-		for (final StorageOverlay storageOverlay : storageOverlays) {
-			overlayManager.add(storageOverlay);
-		}
 
 		// Panel
 		storagePanel = new StoragePanel(clientThread, itemManager, configManager, config);
