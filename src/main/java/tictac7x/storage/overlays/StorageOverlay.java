@@ -1,7 +1,6 @@
 package tictac7x.storage.overlays;
 
 import net.runelite.api.Client;
-import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -16,7 +15,6 @@ import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.ui.overlay.components.PanelComponent;
 import tictac7x.storage.TicTac7xStorageConfig;
 import tictac7x.storage.storage.Storage;
-import tictac7x.storage.storage.StorageFromConfig;
 import tictac7x.storage.storage.StorageItem;
 
 import java.awt.Dimension;
@@ -114,7 +112,7 @@ public class StorageOverlay extends OverlayPanel {
     }
 
     protected void loadStorageFromConfig() {
-        storage = new StorageFromConfig(configKey, itemContainerId, itemManager, configManager);
+        storage = new Storage(configKey, itemContainerId, clientThread, itemManager, configManager);
     }
 
     @Override

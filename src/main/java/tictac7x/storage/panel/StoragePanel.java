@@ -8,15 +8,12 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import tictac7x.storage.TicTac7xStorageConfig;
 import tictac7x.storage.storage.Storage;
-import tictac7x.storage.storage.StorageFromConfig;
-import tictac7x.storage.storage.StorageItem;
 import tictac7x.storage.utils.ItemContainerId;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StoragePanel extends PluginPanel {
     private final ClientThread clientThread;
@@ -59,7 +56,7 @@ public class StoragePanel extends PluginPanel {
     }
 
     private void loadStorageFromConfig() {
-        storage = new StorageFromConfig(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager);
+        storage = new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, clientThread, itemManager, configManager);
     }
 
     public void searchItems(final String search) {

@@ -1,9 +1,11 @@
 package tictac7x.storage.storage;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.runelite.api.Item;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.storage.TicTac7xStorageConfig;
@@ -11,20 +13,44 @@ import tictac7x.storage.TicTac7xStorageConfig;
 import java.util.*;
 
 public class Storage {
-    protected final ItemManager itemManager;
-    protected final ConfigManager configManager;
+    private final ClientThread clientThread;
+    private final ItemManager itemManager;
+    private final ConfigManager configManager;
 
     public final String configKey;
     public final int itemContainerId;
     private final Map<Integer, StorageItem> storage = new LinkedHashMap<>();
     private int slotsUsed = 0;
-    private List<Runnable> listeners = new ArrayList<>();
+    private final List<Runnable> listeners = new ArrayList<>();
 
-    public Storage(final String configKey, final int itemContainerId, final ItemManager itemManager, final ConfigManager configManager) {
+    public Storage(final String configKey, final int itemContainerId, final ClientThread clientThread, final ItemManager itemManager, final ConfigManager configManager) {
         this.configKey = configKey;
         this.itemContainerId = itemContainerId;
+        this.clientThread = clientThread;
         this.itemManager = itemManager;
         this.configManager = configManager;
+
+        loadFromConfig();
+    }
+
+    private void loadFromConfig() {
+        final String storageJsonString = configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
+
+        try {
+            final JsonObject jsonObject = (JsonObject) new JsonParser().parse(storageJsonString);
+
+            clientThread.invoke(() -> {
+                for (final String itemKey : jsonObject.keySet()) {
+                    final int itemId = Integer.parseInt(itemKey);
+                    final int itemQuantity = jsonObject.get(itemKey).getAsInt();
+                    final String itemName = itemManager.getItemComposition(itemId).getName();
+
+                    addItem(new StorageItem(itemId, itemQuantity, itemName), false);
+                }
+
+                notifyListeners();
+            });
+        } catch (final Exception ignored) {}
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
