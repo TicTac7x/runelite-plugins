@@ -181,7 +181,7 @@ public class Storage {
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
     }
 
-    public void onChange(final Runnable listener) {
+    public void addOnChangeListener(final Runnable listener) {
         listeners.add(listener);
     }
 

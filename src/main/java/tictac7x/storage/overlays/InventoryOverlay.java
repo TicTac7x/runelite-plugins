@@ -27,7 +27,7 @@ public class InventoryOverlay extends StorageOverlay {
     public InventoryOverlay(final String configKey, final Storage storage, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
         super(configKey, storage, widgetIds, client, clientThread, overlayManager, configManager, itemManager, config);
         this.inventoryIcon = ImageUtil.loadImageResource(getClass(), "/inventory.png");
-        storage.onChange(this::updateFreeImages);
+        storage.addOnChangeListener(this::updateFreeImages);
     }
 
     private void updateFreeImages() {

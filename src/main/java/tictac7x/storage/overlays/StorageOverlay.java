@@ -63,21 +63,21 @@ public class StorageOverlay extends OverlayPanel {
         itemsPanelComponent.setBorder(new Rectangle(0,0,0,0));
 
         overlayManager.add(this);
-        storage.onChange(this::updateImages);
+        storage.addOnChangeListener(this::updateImages);
     }
 
     public void onConfigChanged(final ConfigChanged event) {
         if (
-            event.getKey().equals(configKey + "_" + TicTac7xStorageConfig.visible) ||
-            event.getKey().equals(configKey + "_" + TicTac7xStorageConfig.hidden)
+            event.getKey().equals(configKey + TicTac7xStorageConfig.visible) ||
+            event.getKey().equals(configKey + TicTac7xStorageConfig.hidden)
         ) {
             updateImages();
         }
     }
 
     private void updateImages() {
-        final String visibleString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.visible);
-        final String hiddenString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.hidden);
+        final String visibleString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.visible);
+        final String hiddenString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.hidden);
 
         clientThread.invoke(() -> {
             final List<ImageComponent> images = new ArrayList<>();
@@ -91,11 +91,11 @@ public class StorageOverlay extends OverlayPanel {
     }
 
     private boolean show() {
-        return Boolean.parseBoolean(configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.show));
+        return Boolean.parseBoolean(configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.show));
     }
 
     private boolean autoHide() {
-        return Boolean.parseBoolean(configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.auto_hide));
+        return Boolean.parseBoolean(configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.auto_hide));
     }
 
     private boolean isWidgetVisible() {
@@ -105,8 +105,7 @@ public class StorageOverlay extends OverlayPanel {
 
     @Override
     public Dimension render(final Graphics2D graphics) {
-        if (!show()) return null;
-        if (autoHide() && isWidgetVisible()) return null;
+        if (!show() || autoHide() && isWidgetVisible()) return null;
 
         panelComponent.getChildren().clear();
         itemsPanelComponent.getChildren().clear();

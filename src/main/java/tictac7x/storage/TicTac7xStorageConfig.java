@@ -8,13 +8,13 @@ import net.runelite.client.config.ConfigSection;
 @ConfigGroup(TicTac7xStorageConfig.group)
 public interface TicTac7xStorageConfig extends Config {
 	String group = "tictac7x-storage";
-	String visible = "visible";
-	String hidden = "hidden";
-	String show = "show";
-	String auto_hide = "auto_hide";
-	String version = "version";
-	String panel_priority = "panel_priority";
+	String visible = "_visible";
+	String hidden = "_hidden";
+	String show = "_show";
+	String auto_hide = "_auto_hide";
 	String storage = "_storage";
+	String panel_priority = "panel_priority";
+	String version = "version";
 
 	enum InventoryEmpty { TOP, FIRST, LAST, BOTTOM, HIDDEN }
 
@@ -34,7 +34,7 @@ public interface TicTac7xStorageConfig extends Config {
 	) String inventory = "inventory";
 
 		@ConfigItem(
-			keyName = inventory + "_" + show,
+			keyName = inventory + show,
 			name = "Show inventory overlay",
 			description = "Show inventory overlay",
 			section = inventory,
@@ -42,7 +42,7 @@ public interface TicTac7xStorageConfig extends Config {
 		) default boolean showInventory() { return true; }
 
 		@ConfigItem(
-			keyName = inventory + "_" + auto_hide,
+			keyName = inventory + auto_hide,
 			name = "Auto-hide when inventory is open",
 			description = "Hide inventory overlay if inventory tab is open",
 			section = inventory,
@@ -50,7 +50,7 @@ public interface TicTac7xStorageConfig extends Config {
 		) default boolean hideInventory() { return true; }
 
 		@ConfigItem(
-			keyName = inventory + "_" + visible,
+			keyName = inventory + visible,
 			name = "Visible items",
 			description = "Names of the items to show in the inventory overlay (all if empty)",
 			section = inventory,
@@ -58,7 +58,7 @@ public interface TicTac7xStorageConfig extends Config {
 		) default String getInventoryVisible() { return ""; }
 
 		@ConfigItem(
-			keyName = inventory + "_" + hidden,
+			keyName = inventory + hidden,
 			name = "Hidden items",
 			description = "Names of the items to hide in the inventory overlay",
 			section = inventory,
@@ -80,7 +80,7 @@ public interface TicTac7xStorageConfig extends Config {
 	) String bank = "bank";
 
 		@ConfigItem(
-			keyName = bank + "_" + show,
+			keyName = bank + show,
 			name = "Show bank overlay",
 			description = "Show bank overlay",
 			section = bank,
@@ -88,7 +88,7 @@ public interface TicTac7xStorageConfig extends Config {
 		) default boolean showBank() { return true; }
 
 		@ConfigItem(
-			keyName = bank + "_" + auto_hide,
+			keyName = bank + auto_hide,
 			name = "Auto-hide when bank is open",
 			description = "Hide bank overlay if bank is open",
 			section = bank,
@@ -96,7 +96,7 @@ public interface TicTac7xStorageConfig extends Config {
 		) default boolean hideBank() { return true; }
 
 		@ConfigItem(
-			keyName = bank + "_" + visible,
+			keyName = bank + visible,
 			name = "Visible items",
 			description = "Names of the items to show in the bank overlay (all if empty)",
 			section = bank,
@@ -104,7 +104,7 @@ public interface TicTac7xStorageConfig extends Config {
 		) default String getBankVisible() { return "Coins"; }
 
 		@ConfigItem(
-			keyName = bank + "_" + hidden,
+			keyName = bank + hidden,
 			name = "Hidden items",
 			description = "Names of the items to hide in the bank overlay",
 			section = bank,

@@ -8,7 +8,6 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import tictac7x.storage.TicTac7xStorageConfig;
 import tictac7x.storage.storage.Storage;
-import tictac7x.storage.utils.ItemContainerId;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
@@ -17,21 +16,16 @@ import java.util.ArrayList;
 
 public class StoragePanel extends PluginPanel {
     private final ClientThread clientThread;
-    private final ItemManager itemManager;
-    private final ConfigManager configManager;
-    private final TicTac7xStorageConfig config;
 
-    private Storage storage;
+    private final Storage storage;
     private String search = "";
 
     private PanelItems panelItems;
 
-    public StoragePanel(final ClientThread clientThread, final ItemManager itemManager, final ConfigManager configManager, final TicTac7xStorageConfig config) {
+    public StoragePanel(final Storage storage, final ClientThread clientThread, final ItemManager itemManager) {
         super(false);
         this.clientThread = clientThread;
-        this.itemManager = itemManager;
-        this.configManager = configManager;
-        this.config = config;
+        this.storage = storage;
 
         // Panel theme.
         setLayout(new BorderLayout(10, 10));
@@ -43,20 +37,17 @@ public class StoragePanel extends PluginPanel {
         add(panelSearch.get(), BorderLayout.NORTH);
 
         // Panel items.
-        panelItems = new PanelItems(clientThread, itemManager, new ArrayList<>());
+        panelItems = new PanelItems(itemManager);
 
         // Panel scroller.
         final JScrollPane scroller = new JScrollPane(panelItems);
         add(scroller, BorderLayout.CENTER);
 
-        clientThread.invoke(() -> {
-            loadStorageFromConfig();
-            searchItems("");
-        });
+        storage.addOnChangeListener(this::bankStorageChanged);
     }
 
-    private void loadStorageFromConfig() {
-        storage = new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, clientThread, itemManager, configManager);
+    private void bankStorageChanged() {
+        searchItems(search);
     }
 
     public void searchItems(final String search) {
@@ -65,14 +56,5 @@ public class StoragePanel extends PluginPanel {
         clientThread.invoke(() -> {
             panelItems.update(storage.getItems(search.toLowerCase(), "", false, true));
         });
-    }
-
-    public void onConfigChanged(final ConfigChanged event) {
-        if (event.getKey().equals(TicTac7xStorageConfig.bank + TicTac7xStorageConfig.storage)) {
-            clientThread.invoke(() -> {
-                loadStorageFromConfig();
-                searchItems(search);
-            });
-        }
     }
 }

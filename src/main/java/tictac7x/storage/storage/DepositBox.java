@@ -18,7 +18,7 @@ public class DepositBox {
         this.inventory = inventory;
         this.bank = bank;
 
-        inventory.onChange(this::onInventoryChanged);
+        inventory.addOnChangeListener(this::onInventoryChanged);
     }
 
     private void onInventoryChanged() {

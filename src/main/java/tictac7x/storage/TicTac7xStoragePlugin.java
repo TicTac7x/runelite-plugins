@@ -96,7 +96,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		};
 
 		// Panel
-		storagePanel = new StoragePanel(clientThread, itemManager, configManager, config);
+		storagePanel = new StoragePanel(bankStorage, clientThread, itemManager);
 		panelNavigationButton = new PanelNavigationButton(clientToolbar, config, storagePanel);
 	}
 
@@ -121,9 +121,6 @@ public class TicTac7xStoragePlugin extends Plugin {
 		if (!event.getGroup().equals(TicTac7xStorageConfig.group)) return;
 
 		panelNavigationButton.onConfigChanged(event);
-
-		// Update list of items in the panel.
-		storagePanel.onConfigChanged(event);
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
 			storageOverlay.onConfigChanged(event);
