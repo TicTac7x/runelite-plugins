@@ -18,7 +18,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.overlay.OverlayManager;
-import tictac7x.storage.overlays.StorageInventory;
+import tictac7x.storage.overlays.InventoryOverlay;
 import tictac7x.storage.overlays.StorageOverlay;
 import tictac7x.storage.panel.PanelNavigationButton;
 import tictac7x.storage.panel.StoragePanel;
@@ -88,7 +88,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		};
 
 		storageOverlays = new StorageOverlay[]{
-			new StorageInventory(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
+			new InventoryOverlay(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
 			new StorageOverlay(TicTac7xStorageConfig.bank, ItemContainerId.BANK, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
 		};
 

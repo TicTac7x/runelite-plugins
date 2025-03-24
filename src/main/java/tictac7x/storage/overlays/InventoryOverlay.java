@@ -16,9 +16,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class StorageInventory extends StorageOverlay {
-    private int INVENTORY_SIZE = 28;
-
+public class InventoryOverlay extends StorageOverlay {
     private int panel_width = 0;
     private final BufferedImage inventory_png;
     private ImageComponent inventory_image;
@@ -26,11 +24,9 @@ public class StorageInventory extends StorageOverlay {
     @Nullable
     private ImageComponent inventory_free;
 
-    public StorageInventory(final String configKey, final int itemContainerId, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
+    public InventoryOverlay(final String configKey, final int itemContainerId, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
         super(configKey, itemContainerId, widgetIds, client, clientThread, overlayManager, configManager, itemManager, config);
         this.inventory_png = ImageUtil.loadImageResource(getClass(), "/inventory.png");
-        clientThread.invokeLater(() -> updateInventoryItem(INVENTORY_SIZE));
-        clientThread.invokeLater(() -> updateInventoryFree(INVENTORY_SIZE));
     }
 
     @Override
@@ -55,6 +51,13 @@ public class StorageInventory extends StorageOverlay {
                 this.renderFree();
                 return;
         }
+    }
+
+    @Override
+    protected void loadStorageFromConfig() {
+        super.loadStorageFromConfig();
+        updateInventoryFree(28 - storage.getSlotsUsed());
+        updateInventoryItem(28 - storage.getSlotsUsed());
     }
 
     private void renderFree() {

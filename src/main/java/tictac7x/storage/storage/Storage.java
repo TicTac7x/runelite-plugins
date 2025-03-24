@@ -2,6 +2,7 @@ package tictac7x.storage.storage;
 
 import com.google.gson.JsonObject;
 import net.runelite.api.Item;
+import net.runelite.api.ItemComposition;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Storage {
-    private final ItemManager itemManager;
+    protected final ItemManager itemManager;
     protected final ConfigManager configManager;
 
     public final String configKey;
@@ -38,11 +39,13 @@ public class Storage {
             // Missing item.
             if (item.getId() == -1) continue;
 
+            final ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
+
             // Placeholder item.
-            if (itemManager.getItemComposition(item.getId()).getPlaceholderTemplateId() != -1) continue;
+            if (itemComposition.getPlaceholderTemplateId() != -1) continue;
 
             // Valid item.
-            addItem(new StorageItem(item.getId(), item.getQuantity()));
+            addItem(new StorageItem(item.getId(), item.getQuantity(), itemComposition.getName()));
         }
 
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
@@ -63,8 +66,78 @@ public class Storage {
     }
 
     public List<StorageItem> getItems() {
-        return new ArrayList<>(storage.values());
+        return getItems("", "", false, false);
     }
+
+    public List<StorageItem> getItems(final String visibleString, final String hiddenString, final boolean caseSensitive, final boolean prioritizeStartsWith) {
+        final String[] visibleList = visibleString.split(",");
+        final String[] hiddenList = hiddenString.split(",");
+
+        final List<StorageItem> prioritizedItems = new ArrayList<>();
+        final List<StorageItem> regularItems = new ArrayList<>();
+
+        for (final StorageItem item : storage.values()) {
+            if (!isItemHidden(item, hiddenList, caseSensitive) && isItemVisible(item, visibleList, caseSensitive)) {
+                if (prioritizeStartsWith && itemStartsWith(item, visibleList, caseSensitive)) {
+                    prioritizedItems.add(item);
+                } else {
+                    regularItems.add(item);
+                }
+            }
+        }
+
+        if (prioritizeStartsWith) {
+            prioritizedItems.addAll(regularItems);
+            return prioritizedItems;
+        } else {
+            regularItems.addAll(prioritizedItems);
+            return regularItems;
+        }
+    }
+
+    private boolean isItemVisible(final StorageItem item, final String[] visibleList, final boolean caseSensitive) {
+        if (visibleList.length == 0 || visibleList.length == 1 && visibleList[0].isEmpty()) return true;
+
+        for (final String visibleString : visibleList) {
+            if (caseSensitive ?
+                item.name.contains(visibleString) :
+                item.name.toLowerCase().contains(visibleString.toLowerCase())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean itemStartsWith(final StorageItem item, final String[] visibleList, final boolean caseSensitive) {
+        for (final String visibleString : visibleList) {
+            if (caseSensitive ?
+                item.name.startsWith(visibleString) :
+                item.name.toLowerCase().startsWith(visibleString.toLowerCase())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isItemHidden(final StorageItem item, final String[] hiddenList, final boolean caseSensitive) {
+        if (hiddenList.length == 0 || hiddenList.length == 1 && hiddenList[0].isEmpty()) return false;
+
+        for (final String hiddenString : hiddenList) {
+            if (caseSensitive ?
+                item.name.contains(hiddenString) :
+                item.name.toLowerCase().contains(hiddenString.toLowerCase())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     private String getJsonString() {
         final JsonObject jsonObject = new JsonObject();

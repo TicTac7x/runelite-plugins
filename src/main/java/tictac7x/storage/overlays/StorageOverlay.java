@@ -39,7 +39,7 @@ public class StorageOverlay extends OverlayPanel {
     private final ItemManager itemManager;
 
     protected final PanelComponent itemsPanelComponent = new PanelComponent();
-    private final List<ImageComponent> images = new ArrayList<>();
+    private List<ImageComponent> images = new ArrayList<>();
 
     protected Storage storage;
 
@@ -88,76 +88,16 @@ public class StorageOverlay extends OverlayPanel {
     }
 
     private void updateImages() {
-        try {
-            // List of images to render.
-            List<ImageComponent> images = new ArrayList<>();
+        final String visibleString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.visible);
+        final String hiddenString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.hidden);
 
-            for (final StorageItem item : storage.getItems()) {
-                final int itemId = item.id;
-                final int itemQuantity = item.getQuantity();
+        final List<ImageComponent> images = new ArrayList<>();
 
-                // Item not shown.
-                if (!isVisible(itemId) || isHidden(itemId)) continue;
-
-                images.add(new ImageComponent(this.itemManager.getImage(itemId, itemQuantity, true)));
-            }
-
-            // Replace old images with new ones.
-            this.images.clear();
-            this.images.addAll(images);
-        } catch (final Exception ignored) {}
-    }
-
-    private String[] getVisibleItems() {
-        String[] visible = new String[]{};
-        try { visible = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.visible).split(",");
-        } catch (final Exception ignored) {}
-
-        return visible;
-    }
-
-    private String[] getHiddenItems() {
-        String[] hidden = new String[]{};
-        try { hidden = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + "_" + TicTac7xStorageConfig.hidden).split(",");
-        } catch (final Exception ignored) {}
-
-        return hidden;
-    }
-
-    private boolean isVisible(final int item_id) {
-        final String[] visible = this.getVisibleItems();
-        final ItemComposition item = this.itemManager.getItemComposition(item_id);
-
-        // Visible list not used.
-        if (visible.length == 0 || visible.length == 1 && visible[0].equals("")) return true;
-
-        // Check if visible.
-        for (final String name : visible) {
-            if (item.getName().contains(name)) {
-                return true;
-            }
+        for (final StorageItem item : storage.getItems(visibleString, hiddenString, true, false)) {
+            images.add(new ImageComponent(this.itemManager.getImage(item.id, item.getQuantity(), true)));
         }
 
-        // Not visible.
-        return false;
-    }
-
-    private boolean isHidden(final int item_id) {
-        final String[] hidden = this.getHiddenItems();
-        final ItemComposition item = this.itemManager.getItemComposition(item_id);
-
-        // Hidden list not used.
-        if (hidden.length == 0 || hidden.length == 1 && hidden[0].equals("")) return false;
-
-        // Check if hidden.
-        for (final String name : hidden) {
-            if (item.getName().contains(name)) {
-                return true;
-            }
-        }
-
-        // Not Hidden.
-        return false;
+        this.images = images;
     }
 
     private boolean show() {
@@ -173,7 +113,7 @@ public class StorageOverlay extends OverlayPanel {
         return (widget.isPresent() && !widget.get().isHidden());
     }
 
-    private void loadStorageFromConfig() {
+    protected void loadStorageFromConfig() {
         storage = new StorageFromConfig(configKey, itemContainerId, itemManager, configManager);
     }
 

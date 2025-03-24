@@ -17,11 +17,14 @@ public class StorageFromConfig extends Storage {
 
         try {
             final JsonObject jsonObject = (JsonObject) new JsonParser().parse(storageJsonString);
-            for (final String itemId : jsonObject.keySet()) {
-                final int itemQuantity = jsonObject.get(itemId).getAsInt();
-                addItem(new StorageItem(Integer.parseInt(itemId), itemQuantity));
-            }
 
+            for (final String itemKey : jsonObject.keySet()) {
+                final int itemId = Integer.parseInt(itemKey);
+                final int itemQuantity = jsonObject.get(itemKey).getAsInt();
+                final String itemName = itemManager.getItemComposition(itemId).getName();
+
+                addItem(new StorageItem(itemId, itemQuantity, itemName));
+            }
         } catch (final Exception ignored) {}
     }
 }
