@@ -22,24 +22,6 @@ public class InventoryStorage extends Storage {
         this.bankStorage = bankStorage;
     }
 
-    @Override
-    public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (event.getContainerId() != itemContainerId) return;
-        super.onItemContainerChanged(event);
-
-        final Optional<Widget> bankDepositWidget = Optional.ofNullable(client.getWidget(WidgetId.DEPOSIT_BOX[0], WidgetId.DEPOSIT_BOX[1]));
-        if (bankDepositWidget.isPresent() && !bankDepositWidget.get().isHidden()) {
-            final List<Item> itemsDifference = getItemsDifference(event);
-
-            for (final Item item : itemsDifference) {
-                bankStorage.addItem(new StorageItem(item.getId(), Math.abs(item.getQuantity()), itemManager.getItemComposition(item.getId()).getName()));
-            }
-            bankStorage.updateConfig();
-        }
-
-        inventoryItemsBefore = getInventoryQuantityMap(event);
-    }
-
     private List<Item> getItemsDifference(final ItemContainerChanged event) {
         final List<Item> itemsDifference = new ArrayList<>();
 

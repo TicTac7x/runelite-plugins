@@ -8,10 +8,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.storage.TicTac7xStorageConfig;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Storage {
     protected final ItemManager itemManager;
@@ -21,6 +18,7 @@ public class Storage {
     public final int itemContainerId;
     private final Map<Integer, StorageItem> storage = new LinkedHashMap<>();
     private int slotsUsed = 0;
+    private List<Runnable> listeners = new ArrayList<>();
 
     public Storage(final String configKey, final int itemContainerId, final ItemManager itemManager, final ConfigManager configManager) {
         this.configKey = configKey;
@@ -41,17 +39,19 @@ public class Storage {
 
             final ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
 
-            // Placeholder item.
-            if (itemComposition.getPlaceholderTemplateId() != -1) continue;
-
             // Valid item.
-            addItem(new StorageItem(item.getId(), item.getQuantity(), itemComposition.getName()));
+            addItem(new StorageItem(
+                item.getId(),
+                itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity(),
+                itemComposition.getName()
+            ), false);
         }
 
         updateConfig();
+        notifyListeners();
     }
 
-    protected void addItem(final StorageItem item) {
+    protected void addItem(final StorageItem item, final boolean updateConfig) {
         if (storage.containsKey(item.id)) {
             storage.get(item.id).increaseQuantity(item.getQuantity());
         } else {
@@ -59,10 +59,16 @@ public class Storage {
         }
 
         slotsUsed++;
+
+        if (updateConfig) updateConfig();
     }
 
     public int getSlotsUsed() {
         return slotsUsed;
+    }
+
+    public List<StorageItem> getItems() {
+        return new ArrayList<>(storage.values());
     }
 
     public List<StorageItem> getItems(final String visibleString, final String hiddenString, final boolean caseSensitive, final boolean prioritizeStartsWith) {
@@ -147,5 +153,19 @@ public class Storage {
 
     protected void updateConfig() {
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
+    }
+
+    public void onChange(final Runnable listener) {
+        listeners.add(listener);
+    }
+
+    private void notifyListeners() {
+        for (final Runnable listener : listeners) {
+            listener.run();
+        }
+    }
+
+    public Optional<StorageItem> getItem(final int itemId) {
+        return Optional.ofNullable(storage.get(itemId));
     }
 }

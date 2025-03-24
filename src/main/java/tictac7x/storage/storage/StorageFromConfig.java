@@ -23,7 +23,7 @@ public class StorageFromConfig extends Storage {
                 final int itemQuantity = jsonObject.get(itemKey).getAsInt();
                 final String itemName = itemManager.getItemComposition(itemId).getName();
 
-                addItem(new StorageItem(itemId, itemQuantity, itemName));
+                addItem(new StorageItem(itemId, itemQuantity, itemName), false);
             }
         } catch (final Exception ignored) {}
     }
