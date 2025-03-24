@@ -22,6 +22,7 @@ import tictac7x.storage.overlays.InventoryOverlay;
 import tictac7x.storage.overlays.StorageOverlay;
 import tictac7x.storage.panel.PanelNavigationButton;
 import tictac7x.storage.panel.StoragePanel;
+import tictac7x.storage.storage.InventoryStorage;
 import tictac7x.storage.storage.Storage;
 import tictac7x.storage.utils.ItemContainerId;
 import tictac7x.storage.utils.WidgetId;
@@ -82,10 +83,10 @@ public class TicTac7xStoragePlugin extends Plugin {
 	protected void startUp() {
 		configMigration();
 
-		storages = new Storage[] {
-			new Storage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, itemManager, configManager),
-			new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager),
-		};
+		final Storage bankStorage = new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager);
+		final Storage inventoryStorage = new InventoryStorage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, client, itemManager, configManager, bankStorage);
+
+		storages = new Storage[] { bankStorage, inventoryStorage };
 
 		storageOverlays = new StorageOverlay[]{
 			new InventoryOverlay(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),

@@ -48,7 +48,7 @@ public class Storage {
             addItem(new StorageItem(item.getId(), item.getQuantity(), itemComposition.getName()));
         }
 
-        configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
+        updateConfig();
     }
 
     protected void addItem(final StorageItem item) {
@@ -63,10 +63,6 @@ public class Storage {
 
     public int getSlotsUsed() {
         return slotsUsed;
-    }
-
-    public List<StorageItem> getItems() {
-        return getItems("", "", false, false);
     }
 
     public List<StorageItem> getItems(final String visibleString, final String hiddenString, final boolean caseSensitive, final boolean prioritizeStartsWith) {
@@ -147,5 +143,9 @@ public class Storage {
         }
 
         return jsonObject.toString();
+    }
+
+    protected void updateConfig() {
+        configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
     }
 }
