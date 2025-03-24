@@ -41,7 +41,7 @@ public class Storage {
 
             // Valid item.
             addItem(new StorageItem(
-                item.getId(),
+                    itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : item.getId(),
                 itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity(),
                 itemComposition.getName()
             ), false);
