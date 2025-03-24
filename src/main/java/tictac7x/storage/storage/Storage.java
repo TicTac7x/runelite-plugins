@@ -29,11 +29,9 @@ public class Storage {
         this.clientThread = clientThread;
         this.itemManager = itemManager;
         this.configManager = configManager;
-
-        loadFromConfig();
     }
 
-    private void loadFromConfig() {
+    public void loadFromConfig() {
         final String storageJsonString = configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
 
         try {
@@ -74,7 +72,6 @@ public class Storage {
         }
 
         updateConfig();
-        notifyListeners();
     }
 
     protected void addItem(final StorageItem item, final boolean updateConfig) {
@@ -179,6 +176,7 @@ public class Storage {
 
     protected void updateConfig() {
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
+        notifyListeners();
     }
 
     public void addOnChangeListener(final Runnable listener) {

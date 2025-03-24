@@ -4,9 +4,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import tictac7x.storage.storage.StorageItem;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.util.List;
 
 public class PanelItems extends JPanel {

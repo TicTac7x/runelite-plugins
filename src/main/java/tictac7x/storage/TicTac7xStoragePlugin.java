@@ -86,7 +86,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		final Storage bankStorage = new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, clientThread, itemManager, configManager);
 		final Storage inventoryStorage = new Storage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, clientThread, itemManager, configManager);
 
-		final DepositBox depositBox = new DepositBox(client, inventoryStorage, bankStorage);
+		new DepositBox(client, inventoryStorage, bankStorage);
 
 		storages = new Storage[] { bankStorage, inventoryStorage };
 
@@ -98,6 +98,9 @@ public class TicTac7xStoragePlugin extends Plugin {
 		// Panel
 		storagePanel = new StoragePanel(bankStorage, clientThread, itemManager);
 		panelNavigationButton = new PanelNavigationButton(clientToolbar, config, storagePanel);
+
+		bankStorage.loadFromConfig();
+		inventoryStorage.loadFromConfig();
 	}
 
 	@Override
