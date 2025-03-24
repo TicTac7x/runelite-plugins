@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
-import net.runelite.api.InventoryID;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.callback.ClientThread;
@@ -26,6 +25,7 @@ import tictac7x.storage.utils.ItemContainerId;
 import tictac7x.storage.utils.WidgetId;
 
 import javax.inject.Inject;
+import java.util.Optional;
 
 @Slf4j
 @PluginDescriptor(
@@ -78,14 +78,16 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
+		configMigration();
+
 		storages = new Storage[] {
 			new Storage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, itemManager, configManager),
-			new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager),
+//			new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager),
 		};
 
 		storageOverlays = new StorageOverlay[]{
 			new StorageInventory(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
-			new StorageOverlay(TicTac7xStorageConfig.bank, ItemContainerId.BANK, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
+//			new StorageOverlay(TicTac7xStorageConfig.bank, ItemContainerId.BANK, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
 		};
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
@@ -103,7 +105,6 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
 			storageOverlay.shutDown();
-			overlayManager.remove(storageOverlay);
 		}
 	}
 
@@ -111,10 +112,6 @@ public class TicTac7xStoragePlugin extends Plugin {
 	public void onItemContainerChanged(final ItemContainerChanged event) {
 		for (final Storage storage : storages) {
 			storage.onItemContainerChanged(event);
-		}
-
-		for (final StorageOverlay storageOverlay : storageOverlays) {
-			storageOverlay.onItemContainerChanged(event);
 		}
 	}
 
@@ -142,6 +139,21 @@ public class TicTac7xStoragePlugin extends Plugin {
 				.runeLiteFormattedMessage(pluginMessage)
 				.build()
 			);
+		}
+	}
+
+	private void configMigration() {
+		// v0.5.1 -> v0.6
+		final Optional<String> inventory = Optional.ofNullable(configManager.getConfiguration(TicTac7xStorageConfig.group, "inventory"));
+		if (inventory.isPresent()) {
+			configManager.setConfiguration(TicTac7xStorageConfig.group, TicTac7xStorageConfig.inventory + TicTac7xStorageConfig.storage, inventory.get());
+			configManager.unsetConfiguration(TicTac7xStorageConfig.group, "inventory");
+		}
+
+		final Optional<String> bank = Optional.ofNullable(configManager.getConfiguration(TicTac7xStorageConfig.group, "bank"));
+		if (bank.isPresent()) {
+			configManager.setConfiguration(TicTac7xStorageConfig.group, TicTac7xStorageConfig.bank + TicTac7xStorageConfig.storage, bank.get());
+			configManager.unsetConfiguration(TicTac7xStorageConfig.group, "bank");
 		}
 	}
 }

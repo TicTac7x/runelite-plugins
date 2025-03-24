@@ -20,10 +20,8 @@ import java.awt.image.BufferedImage;
 
 public class StorageInventory extends StorageOverlay {
     private int INVENTORY_SIZE = 28;
-    private int NULL_ITEM = -1;
 
     private int panel_width = 0;
-    private int empty = 0;
     private final BufferedImage inventory_png;
     private ImageComponent inventory_image;
 
@@ -35,12 +33,6 @@ public class StorageInventory extends StorageOverlay {
         this.inventory_png = ImageUtil.loadImageResource(getClass(), "/inventory.png");
         clientThread.invokeLater(() -> updateInventoryItem(INVENTORY_SIZE));
         clientThread.invokeLater(() -> updateInventoryFree(INVENTORY_SIZE));
-    }
-
-    @Override
-    public void onItemContainerChanged(final ItemContainerChanged event) {
-        super.onItemContainerChanged(event);
-        this.updateEmpty(event);
     }
 
     @Override
@@ -74,24 +66,11 @@ public class StorageInventory extends StorageOverlay {
             this.inventory_free.getBounds().width == 0 ||
             itemsPanelComponent.getBounds().width != panel_width
         ) {
-            this.updateInventoryFree(this.empty);
+            this.updateInventoryFree(28 - storage.getSlotsUsed());
             this.panel_width = itemsPanelComponent.getBounds().width;
         }
 
         if (this.inventory_free != null) panelComponent.getChildren().add(this.inventory_free);
-    }
-
-    private void updateEmpty(final ItemContainerChanged event) {
-        if (event.getContainerId() != this.itemContainerId) return;
-
-        int empty = INVENTORY_SIZE;
-        for (final Item item : event.getItemContainer().getItems()) {
-            if (item.getId() != NULL_ITEM) empty--;
-        }
-
-        this.empty = empty;
-        this.updateInventoryItem(empty);
-        this.updateInventoryFree(empty);
     }
 
     private void updateInventoryItem(final int empty) {

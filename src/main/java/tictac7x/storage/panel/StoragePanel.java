@@ -53,13 +53,15 @@ public class StoragePanel extends PluginPanel {
     }
 
     private void loadItemsFromConfig() {
-        list_items = new ArrayList<>();
+        try {
+            list_items = new ArrayList<>();
 
-        final JsonObject bank = (JsonObject) new JsonParser().parse(config.getBank());
+            final JsonObject bank = (JsonObject) new JsonParser().parse(config.getBankStorage());
 
-        for (final Map.Entry<String, JsonElement> item : bank.entrySet()) {
-            list_items.add(new StorageItem(Integer.parseInt(item.getKey()), item.getValue().getAsInt()));
-        }
+            for (final Map.Entry<String, JsonElement> item : bank.entrySet()) {
+                list_items.add(new StorageItem(Integer.parseInt(item.getKey()), item.getValue().getAsInt()));
+            }
+        } catch (final Exception ignored) {}
     }
 
     public void searchItems(final String search) {

@@ -34,14 +34,6 @@ public interface TicTac7xStorageConfig extends Config {
 	) String inventory = "inventory";
 
 		@ConfigItem(
-			keyName = inventory,
-			name = inventory,
-			description = inventory,
-			section = inventory,
-			hidden = true
-		) default String getInventory() { return "{}"; }
-
-		@ConfigItem(
 			keyName = inventory + "_" + show,
 			name = "Show inventory overlay",
 			description = "Show inventory overlay",
@@ -86,14 +78,6 @@ public interface TicTac7xStorageConfig extends Config {
 		description = "Bank overlay settings",
 		position = 2
 	) String bank = "bank";
-
-		@ConfigItem(
-			keyName = bank,
-			name = bank,
-			description = bank,
-			section = bank,
-			hidden = true
-		) default String getBank() { return "{}"; }
 
 		@ConfigItem(
 			keyName = bank + "_" + show,

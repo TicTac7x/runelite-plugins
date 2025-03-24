@@ -1,13 +1,16 @@
 package tictac7x.storage.storage;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.runelite.api.Item;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.storage.TicTac7xStorageConfig;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Storage {
@@ -26,6 +29,21 @@ public class Storage {
         this.configManager = configManager;
     }
 
+    public Storage loadStorageFromConfig() {
+        final String storageJsonString = configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
+
+        try {
+            final JsonObject jsonObject = (JsonObject) new JsonParser().parse(storageJsonString);
+            for (final String itemId : jsonObject.keySet()) {
+                final int itemQuantity = jsonObject.get(itemId).getAsInt();
+                addItem(new StorageItem(Integer.parseInt(itemId), itemQuantity));
+            }
+
+        } catch (final Exception ignored) {}
+
+        return this;
+    }
+
     public void onItemContainerChanged(final ItemContainerChanged event) {
         if (event.getContainerId() != itemContainerId) return;
 
@@ -40,15 +58,28 @@ public class Storage {
             if (itemManager.getItemComposition(item.getId()).getPlaceholderTemplateId() != -1) continue;
 
             // Valid item.
-            slotsUsed++;
-            if (storage.containsKey(item.getId())) {
-                storage.get(item.getId()).increaseQuantity(item.getQuantity());
-            } else {
-                storage.put(item.getId(), new StorageItem(item.getId(), item.getQuantity()));
-            }
+            addItem(new StorageItem(item.getId(), item.getQuantity()));
         }
 
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
+    }
+
+    private void addItem(final StorageItem item) {
+        if (storage.containsKey(item.id)) {
+            storage.get(item.id).increaseQuantity(item.getQuantity());
+        } else {
+            storage.put(item.id, item);
+        }
+
+        slotsUsed++;
+    }
+
+    public int getSlotsUsed() {
+        return slotsUsed;
+    }
+
+    public List<StorageItem> getItems() {
+        return new ArrayList<>(storage.values());
     }
 
     private String getJsonString() {
