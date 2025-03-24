@@ -83,19 +83,19 @@ public class InventoryOverlay extends StorageOverlay {
         // Make copy of inventory icon.
         final BufferedImage inventoryImage = new BufferedImage(this.inventoryIcon.getWidth(), this.inventoryIcon.getHeight(), this.inventoryIcon.getType());
         final Graphics graphics = inventoryImage.getGraphics();
-        graphics.drawImage(this.inventoryIcon, 0, 0, null);
+        graphics.drawImage(this.inventoryIcon, 0, 1, null);
 
         // Free slots count.
-        final FontMetrics fm = graphics.getFontMetrics();
+        final FontMetrics fontMetrics = graphics.getFontMetrics();
         graphics.setFont(FontManager.getRunescapeSmallFont());
 
         // Shadow.
         graphics.setColor(Color.BLACK);
-        graphics.drawString(free, 1, fm.getAscent());
+        graphics.drawString(free, 1, 11);
 
         // Yellow label.
         graphics.setColor(Color.YELLOW);
-        graphics.drawString(free, 0, fm.getAscent() - 1);
+        graphics.drawString(free, 0, 10);
 
         graphics.dispose();
         freeWithInventoryImage = Optional.of(new ImageComponent(inventoryImage));
