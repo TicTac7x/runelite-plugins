@@ -9,18 +9,19 @@ import tictac7x.storage.storage.Storage;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
+import java.util.List;
 
 public class StoragePanel extends PluginPanel {
     private final ClientThread clientThread;
 
     private final PanelItems panelItems;
-    private final Storage storage;
+    private final List<Storage> storages;
     private String search = "";
 
-    public StoragePanel(final Storage storage, final ClientThread clientThread, final ItemManager itemManager) {
+    public StoragePanel(final List<Storage> storages, final ClientThread clientThread, final ItemManager itemManager) {
         super(false);
         this.clientThread = clientThread;
-        this.storage = storage;
+        this.storages = storages;
 
         // Panel theme.
         setLayout(new BorderLayout(10, 10));
@@ -38,10 +39,12 @@ public class StoragePanel extends PluginPanel {
         final JScrollPane scroller = new JScrollPane(panelItems);
         add(scroller, BorderLayout.CENTER);
 
-        storage.addOnChangeListener(this::bankStorageChanged);
+        for (final Storage storage : storages) {
+            storage.addOnChangeListener(this::storagesChanged);
+        }
     }
 
-    private void bankStorageChanged() {
+    private void storagesChanged() {
         searchItems(search);
     }
 
@@ -49,7 +52,7 @@ public class StoragePanel extends PluginPanel {
         this.search = search;
 
         clientThread.invoke(() -> {
-            panelItems.update(storage.getItems(search, "", false, true));
+            panelItems.update(storages, search);
         });
     }
 }

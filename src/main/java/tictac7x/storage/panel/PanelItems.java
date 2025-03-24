@@ -2,6 +2,7 @@ package tictac7x.storage.panel;
 
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
+import tictac7x.storage.storage.Storage;
 import tictac7x.storage.storage.StorageItem;
 
 import javax.swing.*;
@@ -18,9 +19,15 @@ public class PanelItems extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
-    public void update(final List<StorageItem> items) {
+    public void update(final List<Storage> storages, final String search) {
         removeAll();
-        items.forEach(item -> add(new PanelItem(item, itemManager)));
+
+        for (final Storage storage : storages) {
+            for (final StorageItem item : storage.getItems(search, "", false, true)) {
+                add(new PanelItem(item, storage.itemContainerId, itemManager));
+            }
+        }
+
         revalidate();
         repaint();
     }

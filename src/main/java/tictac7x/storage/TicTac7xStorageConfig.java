@@ -15,6 +15,7 @@ public interface TicTac7xStorageConfig extends Config {
 	String storage = "_storage";
 	String panel_priority = "panel_priority";
 	String version = "version";
+	String home = "home";
 
 	enum InventoryEmpty { TOP, FIRST, LAST, BOTTOM, HIDDEN }
 
@@ -155,4 +156,12 @@ public interface TicTac7xStorageConfig extends Config {
 			section = debug,
 			position = 2
 		) default String getBankStorage() { return ""; }
+
+		@ConfigItem(
+			keyName = home + storage,
+			name = home + storage,
+			description = home + storage,
+			section = debug,
+			position = 3
+		) default String getHomeStorage() { return ""; }
 }

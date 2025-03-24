@@ -28,6 +28,7 @@ import tictac7x.storage.utils.ItemContainerId;
 import tictac7x.storage.utils.WidgetId;
 
 import javax.inject.Inject;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Slf4j
@@ -40,7 +41,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 	private String pluginVersion = "v0.6";
 	private String pluginMessage = "" +
 		"<colHIGHLIGHT>Storage " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Overlays without any items no longer rendering";
+		"<colHIGHLIGHT>* Player house items now searchable from the panel.";
 
 	@Inject
 	private Client client;
@@ -85,10 +86,10 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 		final Storage bankStorage = new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, clientThread, itemManager, configManager);
 		final Storage inventoryStorage = new Storage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, clientThread, itemManager, configManager);
+		final Storage homeStorage = new Storage(TicTac7xStorageConfig.home, ItemContainerId.HOME, clientThread, itemManager, configManager);
+		storages = new Storage[] { bankStorage, inventoryStorage, homeStorage };
 
 		new DepositBox(client, inventoryStorage, bankStorage);
-
-		storages = new Storage[] { bankStorage, inventoryStorage };
 
 		storageOverlays = new StorageOverlay[]{
 			new InventoryOverlay(TicTac7xStorageConfig.inventory, inventoryStorage, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
@@ -96,11 +97,13 @@ public class TicTac7xStoragePlugin extends Plugin {
 		};
 
 		// Panel
-		storagePanel = new StoragePanel(bankStorage, clientThread, itemManager);
+		storagePanel = new StoragePanel(Arrays.asList(bankStorage, homeStorage), clientThread, itemManager);
 		panelNavigationButton = new PanelNavigationButton(clientToolbar, config, storagePanel);
 
-		bankStorage.loadFromConfig();
-		inventoryStorage.loadFromConfig();
+		// Load storage items from config.
+		for (final Storage storage : storages) {
+			storage.loadFromConfig();
+		}
 	}
 
 	@Override
