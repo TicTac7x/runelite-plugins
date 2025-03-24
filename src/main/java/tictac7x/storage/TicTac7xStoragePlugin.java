@@ -84,12 +84,12 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 		storages = new Storage[] {
 			new Storage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, itemManager, configManager),
-//			new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager),
+			new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, itemManager, configManager),
 		};
 
 		storageOverlays = new StorageOverlay[]{
 			new StorageInventory(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
-//			new StorageOverlay(TicTac7xStorageConfig.bank, ItemContainerId.BANK, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
+			new StorageOverlay(TicTac7xStorageConfig.bank, ItemContainerId.BANK, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
 		};
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
@@ -97,7 +97,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		}
 
 		// Panel
-		storagePanel = new StoragePanel(clientThread, itemManager, config);
+		storagePanel = new StoragePanel(clientThread, itemManager, configManager, config);
 		panelNavigationButton = new PanelNavigationButton(clientToolbar, config, storagePanel);
 	}
 
