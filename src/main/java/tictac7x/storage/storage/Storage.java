@@ -1,7 +1,6 @@
 package tictac7x.storage.storage;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import net.runelite.api.Item;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.config.ConfigManager;
@@ -15,7 +14,7 @@ import java.util.Map;
 
 public class Storage {
     private final ItemManager itemManager;
-    private final ConfigManager configManager;
+    protected final ConfigManager configManager;
 
     public final String configKey;
     public final int itemContainerId;
@@ -27,21 +26,6 @@ public class Storage {
         this.itemContainerId = itemContainerId;
         this.itemManager = itemManager;
         this.configManager = configManager;
-    }
-
-    public Storage loadStorageFromConfig() {
-        final String storageJsonString = configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
-
-        try {
-            final JsonObject jsonObject = (JsonObject) new JsonParser().parse(storageJsonString);
-            for (final String itemId : jsonObject.keySet()) {
-                final int itemQuantity = jsonObject.get(itemId).getAsInt();
-                addItem(new StorageItem(Integer.parseInt(itemId), itemQuantity));
-            }
-
-        } catch (final Exception ignored) {}
-
-        return this;
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
@@ -64,7 +48,7 @@ public class Storage {
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
     }
 
-    private void addItem(final StorageItem item) {
+    protected void addItem(final StorageItem item) {
         if (storage.containsKey(item.id)) {
             storage.get(item.id).increaseQuantity(item.getQuantity());
         } else {

@@ -1,8 +1,5 @@
-package tictac7x.storage;
+package tictac7x.storage.overlays;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import net.runelite.api.Client;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.Widget;
@@ -17,7 +14,9 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.ComponentOrientation;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.ui.overlay.components.PanelComponent;
+import tictac7x.storage.TicTac7xStorageConfig;
 import tictac7x.storage.storage.Storage;
+import tictac7x.storage.storage.StorageFromConfig;
 import tictac7x.storage.storage.StorageItem;
 
 import java.awt.Dimension;
@@ -26,7 +25,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class StorageOverlay extends OverlayPanel {
@@ -176,7 +174,7 @@ public class StorageOverlay extends OverlayPanel {
     }
 
     private void loadStorageFromConfig() {
-        storage = new Storage(configKey, itemContainerId, itemManager, configManager).loadStorageFromConfig();
+        storage = new StorageFromConfig(configKey, itemContainerId, itemManager, configManager);
     }
 
     @Override

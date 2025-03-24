@@ -1,9 +1,6 @@
-package tictac7x.storage;
+package tictac7x.storage.overlays;
 
 import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
-import net.runelite.api.Item;
-import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
@@ -11,6 +8,7 @@ import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.util.ImageUtil;
+import tictac7x.storage.TicTac7xStorageConfig;
 
 import javax.annotation.Nullable;
 import java.awt.Color;
