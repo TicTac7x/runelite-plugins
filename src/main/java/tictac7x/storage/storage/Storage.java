@@ -11,6 +11,7 @@ import net.runelite.client.game.ItemManager;
 import tictac7x.storage.TicTac7xStorageConfig;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Storage {
     private final ClientThread clientThread;
@@ -95,8 +96,8 @@ public class Storage {
     }
 
     public List<StorageItem> getItems(final String visibleString, final String hiddenString, final boolean caseSensitive, final boolean prioritizeStartsWith) {
-        final String[] visibleList = visibleString.split(",");
-        final String[] hiddenList = hiddenString.split(",");
+        final String[] visibleList = visibleString.replaceAll("\\*", ".*").split(",");
+        final String[] hiddenList = hiddenString.replaceAll("\\*", ".*").split(",");
 
         final List<StorageItem> prioritizedItems = new ArrayList<>();
         final List<StorageItem> regularItems = new ArrayList<>();
@@ -121,13 +122,11 @@ public class Storage {
     }
 
     private boolean isItemVisible(final StorageItem item, final String[] visibleList, final boolean caseSensitive) {
-        if (visibleList.length == 0 || visibleList.length == 1 && visibleList[0].isEmpty()) return true;
+        if (visibleList.length == 0 || (visibleList.length == 1 && visibleList[0].isEmpty())) return true;
 
         for (final String visibleString : visibleList) {
-            if (caseSensitive ?
-                item.name.contains(visibleString) :
-                item.name.toLowerCase().contains(visibleString.toLowerCase())
-            ) {
+            final Pattern pattern = Pattern.compile(visibleString, caseSensitive ? 0 : Pattern.CASE_INSENSITIVE);
+            if (pattern.matcher(item.name).find()) {
                 return true;
             }
         }
@@ -137,10 +136,8 @@ public class Storage {
 
     private boolean itemStartsWith(final StorageItem item, final String[] visibleList, final boolean caseSensitive) {
         for (final String visibleString : visibleList) {
-            if (caseSensitive ?
-                item.name.startsWith(visibleString) :
-                item.name.toLowerCase().startsWith(visibleString.toLowerCase())
-            ) {
+            final Pattern pattern = Pattern.compile("^" + Pattern.quote(visibleString), caseSensitive ? 0 : Pattern.CASE_INSENSITIVE);
+            if (pattern.matcher(item.name).find()) {
                 return true;
             }
         }
@@ -149,20 +146,17 @@ public class Storage {
     }
 
     private boolean isItemHidden(final StorageItem item, final String[] hiddenList, final boolean caseSensitive) {
-        if (hiddenList.length == 0 || hiddenList.length == 1 && hiddenList[0].isEmpty()) return false;
+        if (hiddenList.length == 0 || (hiddenList.length == 1 && hiddenList[0].isEmpty())) return false;
 
         for (final String hiddenString : hiddenList) {
-            if (caseSensitive ?
-                item.name.contains(hiddenString) :
-                item.name.toLowerCase().contains(hiddenString.toLowerCase())
-            ) {
+            final Pattern pattern = Pattern.compile(hiddenString, caseSensitive ? 0 : Pattern.CASE_INSENSITIVE);
+            if (pattern.matcher(item.name).find()) {
                 return true;
             }
         }
 
         return false;
     }
-
 
     private String getJsonString() {
         final JsonObject jsonObject = new JsonObject();
