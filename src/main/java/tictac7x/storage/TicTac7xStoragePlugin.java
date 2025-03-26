@@ -20,7 +20,7 @@ import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.overlay.OverlayManager;
 import tictac7x.storage.overlays.InventoryOverlay;
 import tictac7x.storage.overlays.StorageOverlay;
-import tictac7x.storage.panel.PanelNavigationButton;
+import tictac7x.storage.panel.PanelNavigator;
 import tictac7x.storage.panel.StoragePanel;
 import tictac7x.storage.storage.BankStorage;
 import tictac7x.storage.storage.StorageItem;
@@ -45,7 +45,9 @@ public class TicTac7xStoragePlugin extends Plugin {
 	private String pluginVersion = "v0.6";
 	private String pluginMessage = "" +
 		"<colHIGHLIGHT>Storage " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Player house items now searchable from the panel.";
+		"<colHIGHLIGHT>* Player house items now searchable from the panel.<br>" +
+		"<colHIGHLIGHT>* Panel performance improvements."
+	;
 
 	@Inject
 	private Client client;
@@ -82,7 +84,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 	private StoragePanel storagePanel;
 
-	private PanelNavigationButton panelNavigationButton;
+	private PanelNavigator panelNavigator;
 
 	private LunarLootChest lunarLootChest;
 
@@ -105,7 +107,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 		// Panel
 		storagePanel = new StoragePanel(Arrays.asList(bankStorage, homeStorage), clientThread, itemManager);
-		panelNavigationButton = new PanelNavigationButton(clientToolbar, config, storagePanel);
+		panelNavigator = new PanelNavigator(clientToolbar, config, storagePanel);
 
 		// Load storage items from config.
 		for (final Storage storage : storages) {
@@ -117,7 +119,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 	@Override
 	protected void shutDown() {
-		panelNavigationButton.shutDown();
+		panelNavigator.shutDown();
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
 			storageOverlay.shutDown();
@@ -155,7 +157,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 	public void onConfigChanged(final ConfigChanged event) {
 		if (!event.getGroup().equals(TicTac7xStorageConfig.group)) return;
 
-		panelNavigationButton.onConfigChanged(event);
+		panelNavigator.onConfigChanged(event);
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
 			storageOverlay.onConfigChanged(event);
@@ -199,11 +201,9 @@ public class TicTac7xStoragePlugin extends Plugin {
 	public static ImageIcon getCachedIcon(final int itemId, final int itemQuantity, final ItemManager itemManager) {
 		final String multiKey = itemId + "_" + itemQuantity;
 
-		iconCache.put(multiKey, new ImageIcon(itemManager.getImage(itemId, itemQuantity, true)));
-//		if (!iconCache.containsKey(multiKey)) {
-//		} else {
-//			System.out.println("FOUND " + multiKey);
-//		}
+		if (!iconCache.containsKey(multiKey)) {
+			iconCache.put(multiKey, new ImageIcon(itemManager.getImage(itemId, itemQuantity, true)));
+		}
 
 		return iconCache.get(multiKey);
 	}

@@ -11,6 +11,12 @@ public class StorageItem {
         this.name = name;
     }
 
+    public StorageItem(final StorageItem item) {
+        this.id = item.id;
+        this.quantity = item.getQuantity();
+        this.name = item.name;
+    }
+
     public void increaseQuantity(final int quantity) {
         this.quantity += quantity;
     }

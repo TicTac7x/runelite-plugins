@@ -51,7 +51,6 @@ public class ConfigStorage extends Storage {
 
     protected void updateConfig() {
         configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
-        notifyListeners();
     }
 
     private String getJsonString() {

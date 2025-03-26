@@ -6,14 +6,14 @@ import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.util.ImageUtil;
 import tictac7x.storage.TicTac7xStorageConfig;
 
-public class PanelNavigationButton {
+public class PanelNavigator {
     private final ClientToolbar clientToolbar;
     private final TicTac7xStorageConfig config;
     private final StoragePanel storagePanel;
 
     private NavigationButton navigationButton;
 
-    public PanelNavigationButton(final ClientToolbar clientToolbar, final TicTac7xStorageConfig config, final StoragePanel storagePanel) {
+    public PanelNavigator(final ClientToolbar clientToolbar, final TicTac7xStorageConfig config, final StoragePanel storagePanel) {
         this.clientToolbar = clientToolbar;
         this.config = config;
         this.storagePanel = storagePanel;
