@@ -4,20 +4,42 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.ui.components.IconTextField;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.function.Consumer;
 
-public class PanelSearch {
-    private final IconTextField search = new IconTextField();
+public class PanelSearch extends JPanel {
+    private final Consumer<String> onSearch;
+    private final IconTextField search;
 
     public PanelSearch(final Consumer<String> onSearch) {
+        this.onSearch = onSearch;
+        this.search = new IconTextField();
+
+        setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH + 17, 40));
+        setMinimumSize(new Dimension(PluginPanel.PANEL_WIDTH + 17, 40));
+        setMaximumSize(new Dimension(PluginPanel.PANEL_WIDTH + 17, 40));
+
+        setBackground(Color.blue);
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
         search.setIcon(IconTextField.Icon.SEARCH);
-        search.setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH, 30));
+        search.setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH + 3, 30));
         search.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+        search.setBorder(BorderFactory.createLineBorder(ColorScheme.BORDER_COLOR, 1));
+
+        // Swap the order in which the borders are applied
+        search.setBorder(BorderFactory.createLineBorder(ColorScheme.BORDER_COLOR, 1));
         search.setHoverBackgroundColor(ColorScheme.DARK_GRAY_HOVER_COLOR);
-        search.getDocument().addDocumentListener(new DocumentListener() {
+
+        search.getDocument().addDocumentListener(searchListener());
+        add(search);
+    }
+
+    private DocumentListener searchListener() {
+        return new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent documentEvent) {
                 onSearch.accept(search.getText());
@@ -32,10 +54,6 @@ public class PanelSearch {
             public void changedUpdate(DocumentEvent documentEvent) {
                 onSearch.accept(search.getText());
             }
-        });
-    }
-
-    public IconTextField get() {
-        return search;
+        };
     }
 }

@@ -1,81 +1,30 @@
 package tictac7x.storage.storage;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import net.runelite.api.Item;
-import net.runelite.api.ItemComposition;
-import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import tictac7x.storage.TicTac7xStorageConfig;
-
 import java.util.*;
 import java.util.regex.Pattern;
 
 public class Storage {
-    private final ClientThread clientThread;
-    private final ItemManager itemManager;
-    private final ConfigManager configManager;
-
-    public final String configKey;
     public final int itemContainerId;
-    private final Map<Integer, StorageItem> storage = new LinkedHashMap<>();
+    protected final Map<Integer, StorageItem> storage = new LinkedHashMap<>();
     private int slotsUsed = 0;
     private final List<Runnable> listeners = new ArrayList<>();
 
-    public Storage(final String configKey, final int itemContainerId, final ClientThread clientThread, final ItemManager itemManager, final ConfigManager configManager) {
-        this.configKey = configKey;
+    public Storage(final int itemContainerId) {
         this.itemContainerId = itemContainerId;
-        this.clientThread = clientThread;
-        this.itemManager = itemManager;
-        this.configManager = configManager;
     }
 
-    public void loadFromConfig() {
-        final String storageJsonString = configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
-
-        try {
-            final JsonObject jsonObject = (JsonObject) new JsonParser().parse(storageJsonString);
-
-            clientThread.invoke(() -> {
-                for (final String itemKey : jsonObject.keySet()) {
-                    final int itemId = Integer.parseInt(itemKey);
-                    final int itemQuantity = jsonObject.get(itemKey).getAsInt();
-                    final String itemName = itemManager.getItemComposition(itemId).getName();
-
-                    addItem(new StorageItem(itemId, itemQuantity, itemName), false);
-                }
-
-                notifyListeners();
-            });
-        } catch (final Exception ignored) {}
-    }
-
-    public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (event.getContainerId() != itemContainerId) return;
-
+    public void addItems(final List<StorageItem> items) {
         storage.clear();
         slotsUsed = 0;
 
-        for (final Item item : event.getItemContainer().getItems()) {
-            // Missing item.
-            if (item.getId() == -1) continue;
-
-            final ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
-
-            // Valid item.
-            addItem(new StorageItem(
-                    itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : item.getId(),
-                itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity(),
-                itemComposition.getName()
-            ), false);
+        for (final StorageItem item : items) {
+            addItem(item);
         }
 
-        updateConfig();
+        notifyListeners();
     }
 
-    protected void addItem(final StorageItem item, final boolean updateConfig) {
+    protected void addItem(final StorageItem item) {
         if (storage.containsKey(item.id)) {
             storage.get(item.id).increaseQuantity(item.getQuantity());
         } else {
@@ -83,8 +32,6 @@ public class Storage {
         }
 
         slotsUsed++;
-
-        if (updateConfig) updateConfig();
     }
 
     public int getSlotsUsed() {
@@ -158,26 +105,11 @@ public class Storage {
         return false;
     }
 
-    private String getJsonString() {
-        final JsonObject jsonObject = new JsonObject();
-
-        for (final StorageItem item : storage.values()) {
-            jsonObject.addProperty(String.valueOf(item.id), item.getQuantity());
-        }
-
-        return jsonObject.toString();
-    }
-
-    protected void updateConfig() {
-        configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
-        notifyListeners();
-    }
-
     public void addOnChangeListener(final Runnable listener) {
         listeners.add(listener);
     }
 
-    private void notifyListeners() {
+    protected void notifyListeners() {
         for (final Runnable listener : listeners) {
             listener.run();
         }

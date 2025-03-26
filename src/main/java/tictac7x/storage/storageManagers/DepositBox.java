@@ -1,19 +1,24 @@
-package tictac7x.storage.storage;
+package tictac7x.storage.storageManagers;
 
 import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
+import tictac7x.storage.storage.BankStorage;
+import tictac7x.storage.storage.Storage;
+import tictac7x.storage.storage.StorageItem;
 import tictac7x.storage.utils.WidgetId;
 
 import java.util.*;
 
+import static tictac7x.storage.TicTac7xStoragePlugin.getWidget;
+
 public class DepositBox {
     private final Client client;
     private final Storage inventory;
-    private final Storage bank;
+    private final BankStorage bank;
 
     private final List<StorageItem> inventoryItemsBefore = new ArrayList<>();
 
-    public DepositBox(final Client client, final Storage inventory, final Storage bank) {
+    public DepositBox(final Client client, final Storage inventory, final BankStorage bank) {
         this.client = client;
         this.inventory = inventory;
         this.bank = bank;
@@ -22,7 +27,7 @@ public class DepositBox {
     }
 
     private void onInventoryChanged() {
-        final Optional<Widget> depositBoxWidget = Optional.ofNullable(client.getWidget(WidgetId.DEPOSIT_BOX[0], WidgetId.DEPOSIT_BOX[1]));
+        final Optional<Widget> depositBoxWidget = getWidget(WidgetId.DEPOSIT_BOX, client);
         if (depositBoxWidget.isPresent() && !depositBoxWidget.get().isHidden()) {
             depositItemsToBank();
         }
@@ -31,17 +36,19 @@ public class DepositBox {
     }
 
     private void depositItemsToBank() {
+        final List<StorageItem> items = new ArrayList<>();
+
         for (final StorageItem itemBefore : inventoryItemsBefore) {
             final Optional<StorageItem> itemAfter = inventory.getItem(itemBefore.id);
 
             if (itemAfter.isPresent() && itemBefore.getQuantity() - itemAfter.get().getQuantity() != 0) {
-                bank.addItem(new StorageItem(itemBefore.id, itemBefore.getQuantity() - itemAfter.get().getQuantity(), itemBefore.name), false);
+                items.add(new StorageItem(itemBefore.id, itemBefore.getQuantity() - itemAfter.get().getQuantity(), itemBefore.name));
             } else {
-                bank.addItem(new StorageItem(itemBefore.id, itemBefore.getQuantity(), itemBefore.name), false);
+                items.add(new StorageItem(itemBefore.id, itemBefore.getQuantity(), itemBefore.name));
             }
         }
 
-        bank.updateConfig();
+        bank.depositItems(items);
     }
 
     private void updateInventoryItemsBefore() {

@@ -16,6 +16,7 @@ public interface TicTac7xStorageConfig extends Config {
 	String panel_priority = "panel_priority";
 	String version = "version";
 	String home = "home";
+	String loot_chest = "loot_chest";
 
 	enum InventoryEmpty { TOP, FIRST, LAST, BOTTOM, HIDDEN }
 

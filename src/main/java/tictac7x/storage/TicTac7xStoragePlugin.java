@@ -2,11 +2,11 @@ package tictac7x.storage;
 
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
-import net.runelite.api.Client;
-import net.runelite.api.GameState;
+import net.runelite.api.*;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
@@ -22,14 +22,18 @@ import tictac7x.storage.overlays.InventoryOverlay;
 import tictac7x.storage.overlays.StorageOverlay;
 import tictac7x.storage.panel.PanelNavigationButton;
 import tictac7x.storage.panel.StoragePanel;
-import tictac7x.storage.storage.DepositBox;
+import tictac7x.storage.storage.BankStorage;
+import tictac7x.storage.storage.StorageItem;
+import tictac7x.storage.storageManagers.DepositBox;
 import tictac7x.storage.storage.Storage;
+import tictac7x.storage.storage.ConfigStorage;
+import tictac7x.storage.storageManagers.LunarLootChest;
 import tictac7x.storage.utils.ItemContainerId;
 import tictac7x.storage.utils.WidgetId;
 
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.Optional;
+import javax.swing.*;
+import java.util.*;
 
 @Slf4j
 @PluginDescriptor(
@@ -80,13 +84,16 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 	private PanelNavigationButton panelNavigationButton;
 
+	private LunarLootChest lunarLootChest;
+
 	@Override
 	protected void startUp() {
 		configMigration();
 
-		final Storage bankStorage = new Storage(TicTac7xStorageConfig.bank, ItemContainerId.BANK, clientThread, itemManager, configManager);
-		final Storage inventoryStorage = new Storage(TicTac7xStorageConfig.inventory, ItemContainerId.INVENTORY, clientThread, itemManager, configManager);
-		final Storage homeStorage = new Storage(TicTac7xStorageConfig.home, ItemContainerId.HOME, clientThread, itemManager, configManager);
+		final BankStorage bankStorage = new BankStorage(clientThread, configManager);
+		final Storage inventoryStorage = new Storage(ItemContainerId.INVENTORY);
+		final ConfigStorage homeStorage = new ConfigStorage(TicTac7xStorageConfig.home, ItemContainerId.HOME, clientThread, configManager);
+		lunarLootChest = new LunarLootChest(ItemContainerId.LUNAR_LOOT_CHEST, bankStorage, client);
 		storages = new Storage[] { bankStorage, inventoryStorage, homeStorage };
 
 		new DepositBox(client, inventoryStorage, bankStorage);
@@ -102,7 +109,9 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 		// Load storage items from config.
 		for (final Storage storage : storages) {
-			storage.loadFromConfig();
+			if (storage instanceof ConfigStorage) {
+				((ConfigStorage) storage).loadFromConfig(itemManager);
+			}
 		}
 	}
 
@@ -118,8 +127,28 @@ public class TicTac7xStoragePlugin extends Plugin {
 	@Subscribe
 	public void onItemContainerChanged(final ItemContainerChanged event) {
 		for (final Storage storage : storages) {
-			storage.onItemContainerChanged(event);
+			if (event.getContainerId() != storage.itemContainerId) continue;
+			final List<StorageItem> items = new ArrayList<>();
+
+			for (final Item item : event.getItemContainer().getItems()) {
+				if (item.getId() == -1) continue;
+				final ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
+
+				// Valid item.
+				items.add(new StorageItem(
+					itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : item.getId(),
+					itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity(),
+					itemComposition.getName()
+				));
+			}
+
+			storage.addItems(items);
 		}
+	}
+
+	@Subscribe
+	public void onMenuOptionClicked(final MenuOptionClicked event) {
+		lunarLootChest.onMenuOptionClicked(event);
 	}
 
 	@Subscribe
@@ -159,5 +188,23 @@ public class TicTac7xStoragePlugin extends Plugin {
 			configManager.setConfiguration(TicTac7xStorageConfig.group, TicTac7xStorageConfig.bank + TicTac7xStorageConfig.storage, bank.get());
 			configManager.unsetConfiguration(TicTac7xStorageConfig.group, "bank");
 		}
+	}
+
+	public static Optional<Widget> getWidget(final int[] ids, final Client client) {
+		return Optional.ofNullable(client.getWidget(ids[0], ids[1]));
+	}
+
+	private static final Map<String, ImageIcon> iconCache = new HashMap<>();
+
+	public static ImageIcon getCachedIcon(final int itemId, final int itemQuantity, final ItemManager itemManager) {
+		final String multiKey = itemId + "_" + itemQuantity;
+
+		iconCache.put(multiKey, new ImageIcon(itemManager.getImage(itemId, itemQuantity, true)));
+//		if (!iconCache.containsKey(multiKey)) {
+//		} else {
+//			System.out.println("FOUND " + multiKey);
+//		}
+
+		return iconCache.get(multiKey);
 	}
 }
