@@ -19,7 +19,7 @@ import java.awt.event.MouseEvent;
 
 public class PanelItem extends JLayeredPane {
     private final ItemManager itemManager;
-    private StorageItem item;
+    private final StorageItem item;
     public final int itemContainerId;
 
     private static Optional<BufferedImage> pohIcon = Optional.empty();
@@ -94,10 +94,6 @@ public class PanelItem extends JLayeredPane {
         }
 
         return pohIcon.get();
-    }
-
-    public StorageItem getItem() {
-        return item;
     }
 }
 
