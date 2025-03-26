@@ -33,9 +33,6 @@ public class PanelItem extends JLayeredPane {
         this.item = item;
         this.itemContainerId = itemContainerId;
 
-        setOpaque(true);
-        setBackground(ColorScheme.DARKER_GRAY_COLOR);
-
         renderItem();
         addHoverEffect();
     }
@@ -45,6 +42,8 @@ public class PanelItem extends JLayeredPane {
         setPreferredSize(new Dimension(ITEM_WIDTH, ITEM_HEIGHT));
         setMinimumSize(new Dimension(ITEM_WIDTH, ITEM_HEIGHT));
         setMaximumSize(new Dimension(ITEM_WIDTH, ITEM_HEIGHT));
+        setOpaque(true);
+        setBackground(ColorScheme.DARKER_GRAY_COLOR);
 
         final boolean hasIcon = itemContainerId != ItemContainerId.BANK;
         final int itemLabelWidth = ITEM_WIDTH + (hasIcon ? - ICON_SIZE - 7 : -0);
@@ -61,10 +60,10 @@ public class PanelItem extends JLayeredPane {
             final JLabel iconOverlay = new JLabel(new ImageIcon(smallIcon));
 
             iconOverlay.setBounds(
-                    itemLabelWidth,
-                    (ITEM_HEIGHT - ICON_SIZE) / 2,  // Vertically center the icon
-                    ICON_SIZE,
-                    ICON_SIZE
+                itemLabelWidth,
+                (ITEM_HEIGHT - ICON_SIZE) / 2,  // Vertically center the icon
+                ICON_SIZE,
+                ICON_SIZE
             );
 
             add(iconOverlay, JLayeredPane.PALETTE_LAYER);
