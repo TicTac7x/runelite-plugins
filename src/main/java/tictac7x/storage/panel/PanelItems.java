@@ -23,7 +23,7 @@ public class PanelItems extends JPanel {
         final Set<String> visibleMultiKeys = new LinkedHashSet<>();
 
         for (final Storage storage : storages) {
-            for (final StorageItem item : storage.getItems(search, "", false, true)) {
+            for (final StorageItem item : storage.getItems(search, "", true)) {
                 final String multiKey = storage.itemContainerId + "_" + item.id + "_" + item.getQuantity();
                 visibleMultiKeys.add(multiKey);
 

@@ -42,30 +42,42 @@ public class Storage {
         return new ArrayList<>(storage.values());
     }
 
-    public List<StorageItem> getItems(final String visibleString, final String hiddenString, final boolean caseSensitive, final boolean prioritizeStartsWith) {
+    public List<StorageItem> getItems(final String visibleString, final String hiddenString, final boolean usePrioritize) {
         final String[] visibleList = visibleString.replaceAll("\\*", ".*").split(",");
         final String[] hiddenList = hiddenString.replaceAll("\\*", ".*").split(",");
 
-        final List<StorageItem> prioritizedItems = new ArrayList<>();
-        final List<StorageItem> regularItems = new ArrayList<>();
+        final List<StorageItem> startsWithItems = new ArrayList<>();
+        final List<StorageItem> containsWordItems = new ArrayList<>();
+        final List<StorageItem> otherItems = new ArrayList<>();
 
         for (final StorageItem item : storage.values()) {
-            if (!isItemHidden(item, hiddenList, caseSensitive) && isItemVisible(item, visibleList, caseSensitive)) {
-                if (prioritizeStartsWith && itemStartsWith(item, visibleList, caseSensitive)) {
-                    prioritizedItems.add(item);
+            if (!isItemHidden(item, hiddenList, !usePrioritize) && isItemVisible(item, visibleList, !usePrioritize)) {
+                if (usePrioritize && itemStartsWith(item, visibleList, !usePrioritize)) {
+                    startsWithItems.add(item);
+                } else if (usePrioritize && itemContains(item, visibleList, !usePrioritize)) {
+                    containsWordItems.add(item);
                 } else {
-                    regularItems.add(item);
+                    otherItems.add(item);
                 }
             }
         }
 
-        if (prioritizeStartsWith) {
-            prioritizedItems.addAll(regularItems);
-            return prioritizedItems;
-        } else {
-            regularItems.addAll(prioritizedItems);
-            return regularItems;
+        final List<StorageItem> allItems = new ArrayList<>();
+        allItems.addAll(startsWithItems);
+        allItems.addAll(containsWordItems);
+        allItems.addAll(otherItems);
+        return allItems;
+    }
+
+    private boolean itemContains(final StorageItem item, final String[] visibleList, final boolean caseSensitive) {
+        for (final String visibleString : visibleList) {
+            final Pattern pattern = Pattern.compile("\\b" + Pattern.quote(visibleString) + "\\b", caseSensitive ? 0 : Pattern.CASE_INSENSITIVE);
+            if (pattern.matcher(item.name).find()) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     private boolean isItemVisible(final StorageItem item, final String[] visibleList, final boolean caseSensitive) {

@@ -82,7 +82,7 @@ public class StorageOverlay extends OverlayPanel {
         clientThread.invoke(() -> {
             final List<ImageComponent> images = new ArrayList<>();
 
-            for (final StorageItem item : storage.getItems(visibleString, hiddenString, true, false)) {
+            for (final StorageItem item : storage.getItems(visibleString, hiddenString, false)) {
                 images.add(new ImageComponent(this.itemManager.getImage(item.id, item.getQuantity(), true)));
             }
 
