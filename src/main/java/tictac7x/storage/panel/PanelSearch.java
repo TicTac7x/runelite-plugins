@@ -18,15 +18,13 @@ public class PanelSearch extends JPanel {
         this.onSearch = onSearch;
         this.search = new IconTextField();
 
-        setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH + 17, 40));
-        setMinimumSize(new Dimension(PluginPanel.PANEL_WIDTH + 17, 40));
-        setMaximumSize(new Dimension(PluginPanel.PANEL_WIDTH + 17, 40));
-
-        setBackground(Color.blue);
-        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
 
         search.setIcon(IconTextField.Icon.SEARCH);
         search.setPreferredSize(new Dimension(PluginPanel.PANEL_WIDTH + 3, 30));
+        search.setMinimumSize(new Dimension(PluginPanel.PANEL_WIDTH + 3, 30));
+        search.setMaximumSize(new Dimension(PluginPanel.PANEL_WIDTH + 3, 30));
         search.setBackground(ColorScheme.DARKER_GRAY_COLOR);
         search.setBorder(BorderFactory.createLineBorder(ColorScheme.BORDER_COLOR, 1));
 

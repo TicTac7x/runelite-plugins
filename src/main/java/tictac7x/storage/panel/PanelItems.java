@@ -7,8 +7,6 @@ import tictac7x.storage.storage.Storage;
 import tictac7x.storage.storage.StorageItem;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -19,8 +17,8 @@ public class PanelItems extends JPanel {
     public PanelItems(final ItemManager itemManager) {
         this.itemManager = itemManager;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//        setBackground(ColorScheme.DARKER_GRAY_COLOR);
-        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        setBorder(BorderFactory.createEmptyBorder(7, 7, 0, -7));
+        setBackground(ColorScheme.DARKER_GRAY_COLOR);
     }
 
     public void update(final List<Storage> storages, final String search) {

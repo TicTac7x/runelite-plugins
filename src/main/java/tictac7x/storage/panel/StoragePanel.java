@@ -7,7 +7,7 @@ import net.runelite.client.ui.PluginPanel;
 import tictac7x.storage.storage.Storage;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.List;
 
 public class StoragePanel extends PluginPanel {
@@ -23,8 +23,6 @@ public class StoragePanel extends PluginPanel {
         this.storages = storages;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        setBackground(ColorScheme.DARK_GRAY_COLOR);
 
         // Panel search.
         final PanelSearch panelSearch = new PanelSearch((this::searchItems));
@@ -35,6 +33,7 @@ public class StoragePanel extends PluginPanel {
 
         // Panel scroller.
         final JScrollPane scroller = new JScrollPane(panelItems);
+        scroller.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, ColorScheme.BORDER_COLOR));
         add(scroller, BorderLayout.SOUTH);
 
         for (final Storage storage : storages) {
