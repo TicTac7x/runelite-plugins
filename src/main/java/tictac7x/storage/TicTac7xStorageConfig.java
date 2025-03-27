@@ -5,15 +5,18 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup(StorageConfig.group)
-public interface StorageConfig extends Config {
+@ConfigGroup(TicTac7xStorageConfig.group)
+public interface TicTac7xStorageConfig extends Config {
 	String group = "tictac7x-storage";
-	String visible = "visible";
-	String hidden = "hidden";
-	String show = "show";
-	String auto_hide = "auto_hide";
-	String version = "version";
+	String visible = "_visible";
+	String hidden = "_hidden";
+	String show = "_show";
+	String auto_hide = "_auto_hide";
+	String storage = "_storage";
 	String panel_priority = "panel_priority";
+	String version = "version";
+	String home = "home";
+	String lunar_chest_hide_close = "lunar_chest_hide_close";
 
 	enum InventoryEmpty { TOP, FIRST, LAST, BOTTOM, HIDDEN }
 
@@ -33,15 +36,7 @@ public interface StorageConfig extends Config {
 	) String inventory = "inventory";
 
 		@ConfigItem(
-			keyName = inventory,
-			name = inventory,
-			description = inventory,
-			section = inventory,
-			hidden = true
-		) default String getInventory() { return "{}"; }
-
-		@ConfigItem(
-			keyName = inventory + "_" + show,
+			keyName = inventory + show,
 			name = "Show inventory overlay",
 			description = "Show inventory overlay",
 			section = inventory,
@@ -49,7 +44,7 @@ public interface StorageConfig extends Config {
 		) default boolean showInventory() { return true; }
 
 		@ConfigItem(
-			keyName = inventory + "_" + auto_hide,
+			keyName = inventory + auto_hide,
 			name = "Auto-hide when inventory is open",
 			description = "Hide inventory overlay if inventory tab is open",
 			section = inventory,
@@ -57,7 +52,7 @@ public interface StorageConfig extends Config {
 		) default boolean hideInventory() { return true; }
 
 		@ConfigItem(
-			keyName = inventory + "_" + visible,
+			keyName = inventory + visible,
 			name = "Visible items",
 			description = "Names of the items to show in the inventory overlay (all if empty)",
 			section = inventory,
@@ -65,7 +60,7 @@ public interface StorageConfig extends Config {
 		) default String getInventoryVisible() { return ""; }
 
 		@ConfigItem(
-			keyName = inventory + "_" + hidden,
+			keyName = inventory + hidden,
 			name = "Hidden items",
 			description = "Names of the items to hide in the inventory overlay",
 			section = inventory,
@@ -87,15 +82,7 @@ public interface StorageConfig extends Config {
 	) String bank = "bank";
 
 		@ConfigItem(
-			keyName = bank,
-			name = bank,
-			description = bank,
-			section = bank,
-			hidden = true
-		) default String getBank() { return "{}"; }
-
-		@ConfigItem(
-			keyName = bank + "_" + show,
+			keyName = bank + show,
 			name = "Show bank overlay",
 			description = "Show bank overlay",
 			section = bank,
@@ -103,7 +90,7 @@ public interface StorageConfig extends Config {
 		) default boolean showBank() { return true; }
 
 		@ConfigItem(
-			keyName = bank + "_" + auto_hide,
+			keyName = bank + auto_hide,
 			name = "Auto-hide when bank is open",
 			description = "Hide bank overlay if bank is open",
 			section = bank,
@@ -111,7 +98,7 @@ public interface StorageConfig extends Config {
 		) default boolean hideBank() { return true; }
 
 		@ConfigItem(
-			keyName = bank + "_" + visible,
+			keyName = bank + visible,
 			name = "Visible items",
 			description = "Names of the items to show in the bank overlay (all if empty)",
 			section = bank,
@@ -119,7 +106,7 @@ public interface StorageConfig extends Config {
 		) default String getBankVisible() { return "Coins"; }
 
 		@ConfigItem(
-			keyName = bank + "_" + hidden,
+			keyName = bank + hidden,
 			name = "Hidden items",
 			description = "Names of the items to hide in the bank overlay",
 			section = bank,
@@ -147,4 +134,42 @@ public interface StorageConfig extends Config {
 			section = panel,
 			position = 2
 		) default int getPanelPriority() { return 5; }
+
+	@ConfigSection(
+		name = "Loot chests",
+		description = "Additional loot chests settings",
+		position = 4,
+		closedByDefault = false
+	) String loot_chests = "loot_chests";
+
+		@ConfigItem(
+			keyName = lunar_chest_hide_close,
+			name = "Hide Lunar chest close",
+			description = "Hide Lunar chest close so you don't ",
+			section = loot_chests,
+			position = 1
+		) default boolean hideLunarChestClose() { return true; }
+
+	@ConfigSection(
+		name = "Debug",
+		description = "Debug",
+		position = 5,
+		closedByDefault = true
+	) String debug = "debug";
+
+		@ConfigItem(
+			keyName = bank + storage,
+			name = bank + storage,
+			description = bank + storage,
+			section = debug,
+			position = 1
+		) default String getBankStorage() { return ""; }
+
+		@ConfigItem(
+			keyName = home + storage,
+			name = home + storage,
+			description = home + storage,
+			section = debug,
+			position = 2
+		) default String getHomeStorage() { return ""; }
 }
