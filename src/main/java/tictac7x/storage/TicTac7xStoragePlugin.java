@@ -3,9 +3,7 @@ package tictac7x.storage;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.events.*;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -39,14 +37,15 @@ import java.util.*;
 @PluginDescriptor(
 	name = "Storage",
 	description = "Show overlays of inventory and bank",
-	tags = { "storage", "bank", "inventory", "item" }
+	tags = { "storage", "bank", "inventory", "item", "poh" }
 )
 public class TicTac7xStoragePlugin extends Plugin {
 	private String pluginVersion = "v0.6";
 	private String pluginMessage = "" +
 		"<colHIGHLIGHT>Storage " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Player house items now searchable from the panel.<br>" +
-		"<colHIGHLIGHT>* Panel performance improvements."
+		"<colHIGHLIGHT>* Panel performance improvements.<br>" +
+		"<colHIGHLIGHT>* Lunar chest support."
 	;
 
 	@Inject
@@ -102,7 +101,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		final ConfigStorage homeStorage = new ConfigStorage(TicTac7xStorageConfig.home, ItemContainerId.HOME, clientThread, configManager);
 		storages.add(homeStorage);
 
-		lunarLootChest = new LunarLootChest(ItemContainerId.LUNAR_LOOT_CHEST, bankStorage, client);
+		lunarLootChest = new LunarLootChest(ItemContainerId.LUNAR_LOOT_CHEST, bankStorage, client, config);
 		storages.add(lunarLootChest);
 
 		new DepositBox(client, inventoryStorage, bankStorage);
@@ -156,6 +155,16 @@ public class TicTac7xStoragePlugin extends Plugin {
 	}
 
 	@Subscribe
+	public void onWidgetLoaded(final WidgetLoaded event) {
+		lunarLootChest.onWidgetLoaded(event);
+	}
+
+	@Subscribe
+	public void onWidgetClosed(final WidgetClosed event) {
+		lunarLootChest.onWidgetClosed(event);
+	}
+
+	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		lunarLootChest.onMenuOptionClicked(event);
 	}
@@ -165,6 +174,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		if (!event.getGroup().equals(TicTac7xStorageConfig.group)) return;
 
 		panelNavigator.onConfigChanged(event);
+		lunarLootChest.onConfigChanged(event);
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
 			storageOverlay.onConfigChanged(event);
@@ -201,6 +211,16 @@ public class TicTac7xStoragePlugin extends Plugin {
 
 	public static Optional<Widget> getWidget(final int[] ids, final Client client) {
 		return Optional.ofNullable(client.getWidget(ids[0], ids[1]));
+	}
+
+	public static Optional<Widget> getWidget(final int id1, final int id2, final int id3, final Client client) {
+		final Optional<Widget> widget = Optional.ofNullable(client.getWidget(id1, id2));
+
+		if (widget.isPresent()) {
+			return Optional.ofNullable(widget.get().getChild(id3));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	private static final Map<String, ImageIcon> iconCache = new HashMap<>();

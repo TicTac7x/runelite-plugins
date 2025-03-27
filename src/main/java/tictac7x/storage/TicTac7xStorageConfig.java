@@ -16,7 +16,7 @@ public interface TicTac7xStorageConfig extends Config {
 	String panel_priority = "panel_priority";
 	String version = "version";
 	String home = "home";
-	String loot_chest = "loot_chest";
+	String lunar_chest_hide_close = "lunar_chest_hide_close";
 
 	enum InventoryEmpty { TOP, FIRST, LAST, BOTTOM, HIDDEN }
 
@@ -136,9 +136,24 @@ public interface TicTac7xStorageConfig extends Config {
 		) default int getPanelPriority() { return 5; }
 
 	@ConfigSection(
+		name = "Loot chests",
+		description = "Additional loot chests settings",
+		position = 4,
+		closedByDefault = false
+	) String loot_chests = "loot_chests";
+
+		@ConfigItem(
+			keyName = lunar_chest_hide_close,
+			name = "Hide Lunar chest close",
+			description = "Hide Lunar chest close so you don't ",
+			section = loot_chests,
+			position = 1
+		) default boolean hideLunarChestClose() { return true; }
+
+	@ConfigSection(
 		name = "Debug",
 		description = "Debug",
-		position = 4,
+		position = 5,
 		closedByDefault = true
 	) String debug = "debug";
 
