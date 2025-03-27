@@ -16,11 +16,8 @@ public class BankStorage extends ConfigStorage {
         for (final StorageItem item : items) {
             addItem(item);
         }
-        updateConfig();
-    }
 
-    @Override
-    protected void notifyListeners() {
-        super.notifyListeners();
+        notifyListeners();
+        updateConfig();
     }
 }

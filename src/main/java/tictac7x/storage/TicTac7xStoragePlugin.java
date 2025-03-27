@@ -78,7 +78,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		return configManager.getConfig(TicTac7xStorageConfig.class);
 	}
 
-	private Storage[] storages;
+	private List<Storage> storages;
 
 	private StorageOverlay[] storageOverlays;
 
@@ -91,12 +91,19 @@ public class TicTac7xStoragePlugin extends Plugin {
 	@Override
 	protected void startUp() {
 		configMigration();
+		storages = new ArrayList<>();
 
 		final BankStorage bankStorage = new BankStorage(clientThread, configManager);
+		storages.add(bankStorage);
+
 		final Storage inventoryStorage = new Storage(ItemContainerId.INVENTORY);
+		storages.add(inventoryStorage);
+
 		final ConfigStorage homeStorage = new ConfigStorage(TicTac7xStorageConfig.home, ItemContainerId.HOME, clientThread, configManager);
+		storages.add(homeStorage);
+
 		lunarLootChest = new LunarLootChest(ItemContainerId.LUNAR_LOOT_CHEST, bankStorage, client);
-		storages = new Storage[] { bankStorage, inventoryStorage, homeStorage };
+		storages.add(lunarLootChest);
 
 		new DepositBox(client, inventoryStorage, bankStorage);
 
