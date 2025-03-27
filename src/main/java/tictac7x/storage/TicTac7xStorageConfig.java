@@ -158,19 +158,11 @@ public interface TicTac7xStorageConfig extends Config {
 	) String debug = "debug";
 
 		@ConfigItem(
-			keyName = inventory + storage,
-			name = inventory + storage,
-			description = inventory + storage,
-			section = debug,
-			position = 1
-		) default String getInventoryStorage() { return ""; }
-
-		@ConfigItem(
 			keyName = bank + storage,
 			name = bank + storage,
 			description = bank + storage,
 			section = debug,
-			position = 2
+			position = 1
 		) default String getBankStorage() { return ""; }
 
 		@ConfigItem(
@@ -178,6 +170,6 @@ public interface TicTac7xStorageConfig extends Config {
 			name = home + storage,
 			description = home + storage,
 			section = debug,
-			position = 3
+			position = 2
 		) default String getHomeStorage() { return ""; }
 }
