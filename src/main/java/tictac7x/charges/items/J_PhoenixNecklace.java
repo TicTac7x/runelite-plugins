@@ -14,8 +14,8 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class J_NecklaceOfPhoenix extends ChargedItem {
-    public J_NecklaceOfPhoenix(
+public class J_PhoenixNecklace extends ChargedItem {
+    public J_PhoenixNecklace(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,

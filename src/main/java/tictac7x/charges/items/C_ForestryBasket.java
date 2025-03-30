@@ -47,7 +47,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.forestry_basket, ItemID.FORESTRY_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.storage = storage.storableItems(
             // Log basket.

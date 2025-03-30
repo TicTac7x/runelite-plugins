@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.5.22
+# Item Charges Improved - v0.5.23
 
 Show charges of various items that are in inventory or equipped
 
@@ -11,12 +11,71 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 ## Implemented items
 
 ### Armor sets
-
 - Barrows gear
 - Crystal armor
 
-### Weapons
+### Helms
+- Circlet of water
+- Kandarin headgear
 
+### Boots
+- Fremennik sea boots
+
+### Capes
+- Ardougle cloak
+- Coffin
+- Forestry kit / Forestry basket
+- Magic cape
+
+### Foods
+- Hunter mixes
+
+### Jewellery
+- Alchemists amulet
+- Amulet of blood fury
+- Amulet of chemistry
+- Binding necklace
+- Bracelet of clay
+- Bracelet of expeditious
+- Bracelet of flamtaer
+- Burning amulet
+- Camulet
+- Castle wars bracelet
+- Celestial ring
+- Desert amulet
+- Digsite pendant
+- Dodgy necklace
+- Efaritay's aid
+- Escape crystal
+- Explorer's ring
+- Giantsoul amulet
+- Necklace of passage
+- Pendant of ates
+- Phoenix necklace
+- Ring of dueling
+- Ring of endurance
+- Ring of forging
+- Ring of pursuit
+- Ring of recoil
+- Ring of shadows
+- Ring of suffering
+- Ring of the elements
+- Skills necklace
+- Slaughter bracelet
+- Slayer ring
+- Xeric's talisman
+
+### Shields
+- Chronicle
+- Crystal shield
+- Dragonfire shield / ward
+- Falador shield
+- Kharedst's memoirs / Book of the dead
+- Tome of earth
+- Tome of fire
+- Tome of water
+
+### Weapons
 - Arclight
 - Bow of faerdhinen
 - Bryophyta's staff
@@ -35,66 +94,15 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Warped sceptre
 - Western banner
 
-### Shields
 
-- Chronicle
-- Crystal shield
-- Dragonfire shield / ward
-- Falador shield
-- Kharedst's memoirs / Book of the dead
-- Tome of earth
-- Tome of fire
-- Tome of water
 
-### Boots
-- Fremennik sea boots
 
-### Helms
 
-- Circlet of water
-- Kandarin headgear
 
-### Capes
 
-- Ardougle cloak
-- Coffin
-- Forestry kit
-- Magic cape
 
-### Jewellery
 
-- Alchemists amulet
-- Amulet of blood fury
-- Binding necklace
-- Bracelet of clay
-- Bracelet of expeditious
-- Bracelet of flamtaer
-- Bracelet of slaughter
-- Burning amulet
-- Camulet
-- Castle wars bracelet
-- Desert amulet
-- Digsite pendant
-- Efaritay's aid
-- Escape crystal
-- Giantsoul amulet
-- Necklace of passage
-- Necklace of phoenix
-- Necklace of dodgy
-- Pendant of ates
-- Ring of celestial
-- Ring of dueling
-- Ring of forging
-- Ring of elements
-- Ring of endurance
-- Ring of explorer
-- Ring of pursuit
-- Ring of recoil
-- Ring of shadows
-- Ring of slayer
-- Ring of suffering
-- Skills necklace
-- Xeric's talisman
+
 
 ### Utilities
 
@@ -126,5 +134,3 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Teleport crystal
 - Waterskins
 
-### Consumables
-- Hunter mixes

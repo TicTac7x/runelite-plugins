@@ -12,12 +12,13 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
+import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class J_BraceletOfSlaughter extends ChargedItem {
-    public J_BraceletOfSlaughter(
+public class J_DodgyNecklace extends ChargedItem {
+    public J_DodgyNecklace(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,
@@ -29,24 +30,26 @@ public class J_BraceletOfSlaughter extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_slaughter, ItemID.BRACELET_OF_SLAUGHTER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.dodgy_necklace, ItemID.DODGY_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),
+            new TriggerItem(ItemID.DODGY_NECKLACE).needsToBeEquipped(),
         };
-
+        
         this.triggers = new TriggerBase[] {
             // Check.
-            new OnChatMessage("Your bracelet of slaughter has (?<charges>.+) charges? left.").setDynamicallyCharges(),
+            new OnChatMessage("Your dodgy necklace has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
-            // Charge used.
-            new OnChatMessage("Your bracelet of slaughter prevents your slayer count from decreasing. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
+            // Protects.
+            new OnChatMessage("Your dodgy necklace protects you. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
-            // Bracelet fully used.
-            new OnChatMessage("Your bracelet of slaughter prevents your slayer count from decreasing. It then crumbles to dust.").setFixedCharges(30).notification("Your slaughter bracelet crumbles to dust."),
+            // Breaks.
+            new OnChatMessage("Your dodgy necklace protects you. It then crumbles to dust.").setFixedCharges(10).notification("Your dodgy necklace crumbles to dust."),
 
             // Break.
-            new OnChatMessage("The bracelet shatters. Your next bracelet of slaughter will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),
+            new OnChatMessage("The necklace shatters. Your next dodgy necklace will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),
+
+            new OnWidgetLoaded(219, 1, 0).text("Status: (?<charges>.+) charges? left.").setDynamically().onItemClick(),
         };
     }
 }

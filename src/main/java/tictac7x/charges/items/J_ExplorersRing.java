@@ -23,8 +23,8 @@ class ExplorersRingStorageItemId {
     public static final int ENERGY_RESTORES = -1002;
 }
 
-public class J_RingOfExplorer extends ChargedItemWithStorageMultipleCharges {
-    public J_RingOfExplorer(
+public class J_ExplorersRing extends ChargedItemWithStorageMultipleCharges {
+    public J_ExplorersRing(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,

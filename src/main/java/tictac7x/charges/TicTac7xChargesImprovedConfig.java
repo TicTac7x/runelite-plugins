@@ -22,79 +22,61 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String overlay = "_overlay";
     String storage = "_storage";
 
+    // Armor sets
+    String crystal_body = "crystal_body";
+    String crystal_helm = "crystal_helm";
+    String crystal_legs = "crystal_legs";
+    String barrows_gear = "barrows_gear";
+
+    // Helms
+    String circlet_of_water = "circlet_of_water";
+    String kandarin_headgear = "kandarin_headgear";
+
+    // Boots
+    String fremennik_sea_boots = "fremennik_sea_boots";
+
+    // Capes
+    String ardougne_cloak = "ardougne_cloak";
+    String coffin = "coffin";
+    String forestry_basket = "forestry_basket";
+    String forestry_kit = "forestry_kit";
+    String magic_cape = "magic_cape";
+
+    // Foods
+    String ruby_harvest_mix = "ruby_harvest_mix";
+    String sapphire_glacialis_mix = "sapphire_glacialis_mix";
+    String snowy_knight_mix = "snowy_knight_mix";
+    String black_warlock_mix = "black_warlock_mix";
+    String sunlight_moth_mix = "sunlight_moth_mix";
+    String moonlight_moth_mix = "moonlight_moth_mix";
+
+    // Jewellery
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
-    String arclight = "arclight";
-    String ardougne_cloak = "ardougne_cloak";
-    String ash_sanctifier = "ash_sanctifier";
-    String ash_sanctifier_status = "ash_sanctifier_status";
-    String barrows_gear = "barrows_gear";
+    String amulet_of_chemistry = "amulet_of_chemistry";
     String binding_necklace = "binding_necklace";
-    String bonecrusher = "bonecrusher";
-    String bonecrusher_status = "bonecrusher_status";
-    String bottomless_compost_bucket = "bottomless_compost_bucket";
-    String bow_of_faerdhinen = "bow_of_faerdhinen";
     String bracelet_of_clay = "bracelet_of_clay";
     String bracelet_of_expeditious = "bracelet_of_expeditious";
     String bracelet_of_flamtaer = "bracelet_of_flamtaer";
-    String bracelet_of_slaughter = "bracelet_of_slaughter";
-    String bryophytas_staff = "bryophytas_staff";
     String burning_amulet = "burning_amulet";
     String camulet = "camulet";
     String castle_wars_bracelet = "castle_wars_bracelet";
     String celestial_ring = "celestial_ring";
-    String chronicle = "chronicle";
-    String chugging_barrel = "chugging_barrel";
-    String circlet_of_water = "circlet_of_water";
-    String coal_bag = "coal_bag";
-    String colossal_pouch = "colossal_pouch";
-    String colossal_pouch_decay_count = "colossal_pouch_decay_count";
-    String coffin = "coffin";
-    String crystal_body = "crystal_body";
-    String crystal_bow = "crystal_bow";
-    String crystal_halberd = "crystal_halberd";
-    String crystal_helm = "crystal_helm";
-    String crystal_legs = "crystal_legs";
-    String crystal_saw = "crystal_saw";
-    String crystal_shield = "crystal_shield";
     String desert_amulet = "desert_amulet";
+    String digsite_pendant = "digsite_pendant";
     String dodgy_necklace = "dodgy_necklace";
-    String dragonfire_shield = "dragonfire_shield";
     String efaritays_aid = "efaritays_aid";
-    String enchanted_lyre = "enchanted_lyre";
     String escape_crystal = "escape_crystal";
     String escape_crystal_status = "escape_crystal_status";
     String escape_crystal_inactivity_period = "escape_crystal_inactivity_period";
     String escape_crystal_time_remaining_warning = "escape_crystal_time_remaining_warning";
     String explorers_ring = "explorers_ring";
-    String falador_shield = "falador_shield";
-    String fish_barrel = "fish_barrel";
-    String flamtaer_bag = "flamtaer_bag";
-    String forestry_kit = "forestry_kit";
-    String fremennik_sea_boots = "fremennik_sea_boots";
-    String fungicide_spray = "fungicide_spray";
-    String fur_pouch = "fur_pouch";
-    String gem_bag = "gem_bag";
     String giantsoul_amulet = "giantsoul_amulet";
-    String gricollers_can = "gricollers_can";
-    String herb_sack = "herb_sack";
-    String ibans_staff = "ibans_staff";
-    String jar_generator = "jar_generator";
-    String kandarin_headgear = "kandarin_headgear";
-    String kharedsts_memoirs = "kharedsts_memoirs";
-    String log_basket = "log_basket";
-    String magic_cape = "magic_cape";
-    String master_scroll_book = "master_scroll_book";
-    String meat_pouch = "meat_pouch";
-    String huntsmans_kit = "huntsmans_kit";
     String necklace_of_passage = "necklace_of_passage";
-    String ogre_bellows = "ogre_bellows";
-    String pharaohs_sceptre = "pharaohs_sceptre";
+    String pendant_of_ates = "pendant_of_ates";
     String phoenix_necklace = "phoenix_necklace";
-    String plank_sack = "plank_sack";
-    String quetzal_whistle = "quetzal_whistle";
-    String reagent_pouch = "reagent_pouch";
     String ring_of_dueling = "ring_of_dueling";
+    String ring_of_endurance = "ring_of_endurance";
     String ring_of_forging = "ring_of_forging";
     String ring_of_pursuit = "ring_of_pursuit";
     String ring_of_recoil = "ring_of_recoil";
@@ -102,41 +84,78 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String ring_of_suffering = "ring_of_suffering";
     String ring_of_suffering_status = "ring_of_suffering_status";
     String ring_of_the_elements = "ring_of_the_elements";
-    String ring_of_endurance = "ring_of_endurance";
-    String sanguinesti_staff = "sanguinesti_staff";
-    String scythe_of_vitur = "scythe_of_vitur";
-    String seed_box = "seed_box";
     String skills_necklace = "skills_necklace";
-    String skull_sceptre = "skull_sceptre";
+    String slaughter_bracelet = "slaughter_bracelet";
     String slayer_ring = "slayer_ring";
-    String slayer_staff_e = "slayer_staff_e";
+    String xerics_talisman = "xerics_talisman";
+
+    // Shields
+    String chronicle = "chronicle";
+    String crystal_shield = "crystal_shield";
+    String dragonfire_shield = "dragonfire_shield";
+    String falador_shield = "falador_shield";
+    String kharedsts_memoirs = "kharedsts_memoirs";
+    String tome_of_earth = "tome_of_earth";
+    String tome_of_fire = "tome_of_fire";
+    String tome_of_water = "tome_of_water";
+
+    // Utilities
+    String ash_sanctifier = "ash_sanctifier";
+    String ash_sanctifier_status = "ash_sanctifier_status";
+    String bonecrusher = "bonecrusher";
+    String bonecrusher_status = "bonecrusher_status";
+    String bottomless_compost_bucket = "bottomless_compost_bucket";
+    String chugging_barrel = "chugging_barrel";
+    String coal_bag = "coal_bag";
+    String colossal_pouch = "colossal_pouch";
+    String colossal_pouch_decay_count = "colossal_pouch_decay_count";
+    String crystal_saw = "crystal_saw";
+    String enchanted_lyre = "enchanted_lyre";
+    String fish_barrel = "fish_barrel";
+    String flamtaer_bag = "flamtaer_bag";
+    String fungicide_spray = "fungicide_spray";
+    String fur_pouch = "fur_pouch";
+    String gem_bag = "gem_bag";
+    String gricollers_can = "gricollers_can";
+    String herb_sack = "herb_sack";
+    String jar_generator = "jar_generator";
+    String log_basket = "log_basket";
+    String master_scroll_book = "master_scroll_book";
+    String meat_pouch = "meat_pouch";
+    String huntsmans_kit = "huntsmans_kit";
+    String ogre_bellows = "ogre_bellows";
+    String plank_sack = "plank_sack";
+    String quetzal_whistle = "quetzal_whistle";
+    String reagent_pouch = "reagent_pouch";
+    String seed_box = "seed_box";
     String soul_bearer = "soul_bearer";
     String strange_old_lockpick = "strange_old_lockpick";
     String tackle_box = "tackle_box";
     String teleport_crystal = "teleport_crystal";
     String eternal_teleport_crystal = "teleport_crystal";
-    String tome_of_earth = "tome_of_earth";
-    String tome_of_fire = "tome_of_fire";
-    String tome_of_water = "tome_of_water";
+    String waterskin = "waterskin";
+
+    // Weapons
+    String arclight = "arclight";
+    String bow_of_faerdhinen = "bow_of_faerdhinen";
+    String bryophytas_staff = "bryophytas_staff";
+    String crystal_bow = "crystal_bow";
+    String crystal_halberd = "crystal_halberd";
+    String ibans_staff = "ibans_staff";
+    String pharaohs_sceptre = "pharaohs_sceptre";
+    String sanguinesti_staff = "sanguinesti_staff";
+    String scythe_of_vitur = "scythe_of_vitur";
+    String skull_sceptre = "skull_sceptre";
+    String slayer_staff_e = "slayer_staff_e";
     String toxic_staff_of_the_dead = "toxic_staff_of_the_dead";
     String trident_of_the_seas = "trident_of_the_seas";
     String trident_of_the_seas_e = "trident_of_the_seas_e";
     String trident_of_the_swamp = "trident_of_the_swamp";
     String trident_of_the_swamp_e = "trident_of_the_swamp_e";
+    String tumekens_shadow = "tumekens_shadow";
     String venator_bow = "venator_bow";
     String warped_sceptre = "warped_sceptre";
-    String waterskin = "waterskin";
     String western_banner = "western_banner";
-    String xerics_talisman = "xerics_talisman";
-    String ruby_harvest_mix = "ruby_harvest_mix";
-    String sapphire_glacialis_mix = "sapphire_glacialis_mix";
-    String snowy_knight_mix = "snowy_knight_mix";
-    String black_warlock_mix = "black_warlock_mix";
-    String sunlight_moth_mix = "sunlight_moth_mix";
-    String moonlight_moth_mix = "moonlight_moth_mix";
-    String tumekens_shadow = "tumekens_shadow";
-    String digsite_pendant = "digsite_pendant";
-    String pendant_of_ates = "pendant_of_ates";
 
     @ConfigSection(
         name = "General",
@@ -470,6 +489,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean coffinInfobox() { return true; }
 
         @ConfigItem(
+            keyName = forestry_basket + infobox,
+            name = "Forestry basket",
+            description = "",
+            section = infoboxes
+        ) default boolean forestryBasketInfobox() { return true; }
+
+        @ConfigItem(
             keyName = forestry_kit + infobox,
             name = "Forestry kit",
             description = "",
@@ -533,7 +559,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean flamtaerBraceletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_slaughter + infobox,
+            keyName = slaughter_bracelet + infobox,
             name = "Bracelet of slaughter",
             description = "",
             section = infoboxes
@@ -1030,18 +1056,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean warpedSceptreInfobox() { return true; }
 
         @ConfigItem(
-                keyName = alchemists_amulet + infobox,
-                name = "Alchemist's Amulet",
-                description = "",
-                section = infoboxes
+            keyName = alchemists_amulet + infobox,
+            name = "Alchemist's amulet",
+            description = "",
+            section = infoboxes
         ) default boolean alchemistsAmuletInfobox() { return true; }
 
         @ConfigItem(
-                keyName = amulet_of_blood_fury + infobox,
-                name = "Amulet of Blood Fury",
-                description = "",
-                section = infoboxes
+            keyName = amulet_of_blood_fury + infobox,
+            name = "Amulet of blood fury",
+            description = "",
+            section = infoboxes
         ) default boolean amuletOfBloodFuryInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = amulet_of_chemistry + infobox,
+            name = "Amulet of chemistry",
+            description = "",
+            section = infoboxes
+        ) default boolean amuletOfChemistryInfobox() { return true; }
 
     @ConfigSection(
         name = "Overlays",
@@ -1233,7 +1266,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean flamtaerBraceletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_slaughter + overlay,
+            keyName = slaughter_bracelet + overlay,
             name = "Bracelet of slaughter",
             description = "",
             section = overlays
@@ -1399,6 +1432,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean flamtaerBagOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = forestry_basket + overlay,
+            name = "Forestry basket",
+            description = "",
+            section = overlays
+        ) default boolean forestryBasketOverlay() { return true; }
 
         @ConfigItem(
             keyName = forestry_kit + overlay,
@@ -1800,18 +1840,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean xericsTalismanOverlay() { return true; }
 
         @ConfigItem(
-                keyName = alchemists_amulet + overlay,
-                name = "Alchemist's Amulet",
-                description = "",
-                section = overlays
+            keyName = alchemists_amulet + overlay,
+            name = "Alchemist's amulet",
+            description = "",
+            section = overlays
         ) default boolean alchemistsAmuletOverlay() { return true; }
 
         @ConfigItem(
-                keyName = amulet_of_blood_fury + overlay,
-                name = "Amulet of Blood Fury",
-                description = "",
-                section = overlays
+            keyName = amulet_of_blood_fury + overlay,
+            name = "Amulet of blood fury",
+            description = "",
+            section = overlays
         ) default boolean amuletOfBloodFuryOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = amulet_of_chemistry + overlay,
+            name = "Amulet of chemistry",
+            description = "",
+            section = overlays
+        ) default boolean amuletOfChemistryOverlay() { return true; }
 
     @ConfigSection(
         name = "Debug",
@@ -1939,9 +1986,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getBottomlessCompostBucketStorage() { return ""; }
 
         @ConfigItem(
-            keyName = bracelet_of_slaughter,
-            name = bracelet_of_slaughter,
-            description = bracelet_of_slaughter,
+            keyName = slaughter_bracelet,
+            name = slaughter_bracelet,
+            description = slaughter_bracelet,
             section = debug
         ) default int getBraceletOfSlaughterCharges() { return Charges.UNKNOWN; }
 
@@ -2161,6 +2208,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = log_basket + storage,
             section = debug
         ) default String getLogBasketStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = forestry_basket + storage,
+            name = forestry_basket + storage,
+            description = forestry_basket + storage,
+            section = debug
+        ) default String getForestryBasketStorage() { return ""; }
 
         @ConfigItem(
             keyName = forestry_kit + storage,
@@ -2413,4 +2467,11 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = tackle_box + storage,
             section = debug
         ) default String getTackleBoxStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = amulet_of_chemistry,
+            name = amulet_of_chemistry,
+            description = amulet_of_chemistry,
+            section = debug
+        ) default int getAmuletOfChemistryCharges() { return Charges.UNKNOWN; }
 }

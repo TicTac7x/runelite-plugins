@@ -16,8 +16,8 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class J_RingOfCelestial extends ChargedItem {
-    public J_RingOfCelestial(
+public class J_CelestialRing extends ChargedItem {
+    public J_CelestialRing(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,
