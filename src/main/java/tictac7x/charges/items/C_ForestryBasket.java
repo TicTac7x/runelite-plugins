@@ -120,12 +120,12 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             // Get leaves while chopping wood.
             new OnChatMessage("Some (?<leaves>.+) leaves fall to the ground and you place them into your Forestry kit.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("leaves")), 1);
+                storage.add(getStorageItemFromName(m.group("leaves"), 1));
             }),
 
             // Get leaves from event.
             new OnChatMessage("You've been awarded (?<amount>.+) piles of (?<leaves>.+) leaves which you put into your Forestry kit.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("leaves")), Integer.parseInt(m.group("amount")));
+                storage.add(getStorageItemFromName(m.group("leaves"), Integer.parseInt(m.group("amount"))));
             }),
 
             // Get bark from an event.
@@ -190,7 +190,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                 final Matcher matcher = pattern.matcher(s);
 
                 while (matcher.find()) {
-                    storage.put(getStorageItemFromName(matcher.group("logs")), Integer.parseInt(matcher.group("quantity")));
+                    storage.put(getStorageItemFromName(matcher.group("logs"), Integer.parseInt(matcher.group("quantity"))));
                 }
 
                 infernalQuantityTracker = getQuantity();
@@ -201,8 +201,8 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
-                lastLogs = getStorageItemFromName(m.group("logs"));
-                storage.add(lastLogs, 1);
+                lastLogs = getStorageItemFromName(m.group("logs"), 1);
+                storage.add(lastLogs);
                 infernalQuantityTracker++;
             }).requiredItem(ItemID.OPEN_FORESTRY_BASKET),
 
@@ -262,7 +262,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             // Infernal axe support.
             new OnXpDrop(Skill.FIREMAKING).onMenuOption("Chop down", "Cut").consumer(() -> {
                 if (infernalQuantityTracker < 29 && lastLogs.isPresent()) {
-                    storage.remove(lastLogs, 1);
+                    storage.remove(lastLogs.get().itemId, 1);
                     infernalQuantityTracker--;
                 }
             }).requiredItem(ItemID.OPEN_FORESTRY_BASKET),

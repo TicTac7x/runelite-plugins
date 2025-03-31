@@ -52,28 +52,28 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
         this.triggers = new TriggerBase[] {
             // Check.
             new OnChatMessage("Your bottomless compost bucket is currently holding one use of (?<type>.+) ?compost.").matcherConsumer(m -> {
-                storage.clearAndPut(getStorageItemFromName(m.group("type")), 1);
+                storage.clearAndPut(getStorageItemFromName(m.group("type"), 1));
             }),
             new OnChatMessage("Your bottomless compost bucket is currently holding (?<quantity>.+) uses of (?<type>.+) ?compost.").matcherConsumer(m -> {
                 final int quantity = getNumberFromCommaString(m.group("quantity"));
-                storage.clearAndPut(getStorageItemFromName(m.group("type")), quantity);
+                storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
             }),
 
             // Use compost on a patch, run on next gametick, because the "You treat" message appears on same tick after this one.
             new OnChatMessage("Your bottomless compost bucket has a single use of (?<type>.+) ?compost remaining.").matcherConsumer(m -> {
                 store.addConsumerToNextTickQueue(() -> {
-                    storage.clearAndPut(getStorageItemFromName(m.group("type")), 1);
+                    storage.clearAndPut(getStorageItemFromName(m.group("type"), 1));
                 });
             }),
             new OnChatMessage("Your bottomless compost bucket has (?<quantity>.+) uses of (?<type>.+) ?compost remaining.").matcherConsumer(m -> {
                 store.addConsumerToNextTickQueue(() -> {
                     final int quantity = getNumberFromCommaString(m.group("quantity"));
-                    storage.clearAndPut(getStorageItemFromName(m.group("type")), quantity);
+                    storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
                 });
             }),
             new OnChatMessage("You treat the .* with (?<type>.*) ?compost.").matcherConsumer(m -> {
                 final String type = m.group("type");
-                storage.remove(getStorageItemFromName(type.isEmpty() ? "regular" : type), 1);
+                storage.remove(getStorageItemFromName(type.isEmpty() ? "regular" : type, 1));
             }).onItemClick(),
 
             // Discard.
@@ -85,31 +85,39 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
             // Fill.
             new OnChatMessage("You fill your bottomless compost bucket with a single bucket of (?<type>.+) ?compost. Your bottomless compost bucket now contains a total of (?<quantity>.+) uses.").matcherConsumer(m -> {
                 final int quantity = getNumberFromCommaString(m.group("quantity"));
-                storage.clearAndPut(getStorageItemFromName(m.group("type")), quantity);
+                storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
             }),
             new OnChatMessage("You fill your bottomless compost bucket with .* buckets of (?<type>.+) ?compost. Your bottomless compost bucket now contains a total of (?<quantity>.+) uses.").matcherConsumer(m -> {
                 final int quantity = getNumberFromCommaString(m.group("quantity"));
-                storage.clearAndPut(getStorageItemFromName(m.group("type")), quantity);
+                storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
             }),
 
             // Almost full.
             new OnChatMessage("Your bottomless compost bucket is just about full. You won't be able to squeeze any more compost in there.").consumer(() -> {
-                storage.clearAndPut(getCompostType(), 9999);
+                if (getCompostType().isPresent()) {
+                    storage.clearAndPut(getCompostType().get().itemId, 9999);
+                }
             }),
 
             // Full.
             new OnChatMessage("Your bottomless compost bucket is now full!").consumer(() -> {
-                storage.clearAndPut(getCompostType(), 10_000);
+                if (getCompostType().isPresent()) {
+                    storage.clearAndPut(getCompostType().get().itemId, 10_000);
+                }
             }),
 
             // Fill compost from bin.
             new OnXpDrop(Skill.FARMING).unallowedItem(ItemID.BUCKET).onMenuOption("Take").onMenuTarget("Compost Bin", "Big Compost Bin").consumer(() -> {
-                storage.add(getCompostType(), 2);
+                if (getCompostType().isPresent()) {
+                    storage.add(getCompostType().get().itemId, 2);
+                }
             }),
 
             // Use on compost bin.
             new OnXpDrop(Skill.FARMING).onMenuOption("Use").onMenuTarget("Bottomless compost bucket -> Compost Bin", "Bottomless compost bucket -> Big Compost Bin").consumer(() -> {
-                storage.add(getCompostType(), 2);
+                if (getCompostType().isPresent()) {
+                    storage.add(getCompostType().get().itemId, 2);
+                }
             }),
         };
     }

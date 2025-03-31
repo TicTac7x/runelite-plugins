@@ -64,13 +64,13 @@ public class U_HerbSack extends ChargedItemWithStorage {
 
             // Pickup.
             new OnChatMessage("You put the Grimy (?<herb>.+) herb into your herb sack.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("herb")), 1);
+                storage.add(getStorageItemFromName(m.group("herb"), 1));
             }),
 
             // Check.
             new OnChatMessage("You look in your herb sack and see:").emptyStorage(),
             new OnChatMessage("(?<quantity>.+) x Grimy (?<herb>.+)").matcherConsumer(m -> {
-                storage.put(getStorageItemFromName(m.group("herb")), Integer.parseInt(m.group("quantity")));
+                storage.put(getStorageItemFromName(m.group("herb"), Integer.parseInt(m.group("quantity"))));
             }),
 
             // Fill from inventory.

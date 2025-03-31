@@ -4,10 +4,7 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.events.ItemContainerChanged;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class StorageItems {
     final Map<Integer, StorageItem> items = new LinkedHashMap<>();
@@ -37,8 +34,14 @@ public class StorageItems {
         items.put(storageItem.itemId, storageItem);
     }
 
-    public Collection<StorageItem> getItems() {
-        return items.values();
+    public List<StorageItem> getItems() {
+        final List<StorageItem> items = new ArrayList<>();
+
+        for (final StorageItem item : this.items.values()) {
+            items.add(new StorageItem(item.itemId, item.getQuantity()));
+        }
+
+        return items;
     }
 
     public boolean hasItem(final int itemId) {

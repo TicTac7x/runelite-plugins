@@ -110,13 +110,13 @@ public class U_FishBarrel extends ChargedItemWithStorage {
 
             // Catch fish.
             new OnChatMessage("You catch (a|an|some) (?<fish>.+).").matcherConsumer(m -> {
-                lastCaughtFish = getStorageItemFromName(m.group("fish"));
-                storage.add(lastCaughtFish, 1);
+                lastCaughtFish = getStorageItemFromName(m.group("fish"), 1);
+                storage.add(lastCaughtFish);
             }).requiredItem(ItemID.OPEN_FISH_BARREL, ItemID.OPEN_FISH_SACK_BARREL),
 
             // Extra fish.
             new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemID.OPEN_FISH_BARREL, ItemID.OPEN_FISH_SACK_BARREL).consumer(() -> {
-                storage.add(lastCaughtFish, 1);
+                storage.add(lastCaughtFish.get().itemId, 1);
             }),
 
             // Replace "Empty" with proper "Empty to bank".
@@ -130,7 +130,7 @@ public class U_FishBarrel extends ChargedItemWithStorage {
                 final Matcher matcher = pattern.matcher(s);
 
                 while (matcher.find()) {
-                    storage.put(getStorageItemFromName(matcher.group("fish")), Integer.parseInt(matcher.group("quantity")));
+                    storage.put(getStorageItemFromName(matcher.group("fish"), Integer.parseInt(matcher.group("quantity"))));
                 }
             }).onItemClick(),
 

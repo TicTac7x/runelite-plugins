@@ -117,9 +117,10 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Use essence on pouch.
             new OnMenuOptionClicked("Use").menuOptionConsumer(advancedMenuEntry -> {
-                final Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target);
+                final Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target, 0);
                 if (essence.isPresent()) {
-                    store.nextTickQueue.add(() -> storage.add(essence.get().itemId, store.getInventoryItemQuantity(essence.get().itemId)));
+                    essence.get().setQuantity(store.getInventoryItemQuantity(essence.get().itemId));
+                    store.nextTickQueue.add(() -> storage.add(essence));
                 }
             }).onUseStorageItemOnChargedItem(storage.getStorableItems()),
 

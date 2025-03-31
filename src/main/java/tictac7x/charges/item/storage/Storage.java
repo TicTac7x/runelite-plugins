@@ -100,19 +100,19 @@ public class Storage {
         put(itemId, (item.isPresent() ? item.get().getQuantity() : 0) + quantity);
     }
 
-    public void add(final Optional<StorageItem> item, final int quantity) {
+    public void add(final Optional<StorageItem> item) {
         if (!item.isPresent()) return;
-        add(item.get().itemId, quantity);
+        add(item.get().itemId, item.get().getQuantity());
     }
 
-    public void put(final Optional<StorageItem> item, final int quantity) {
+    public void put(final Optional<StorageItem> item) {
         if (!item.isPresent()) return;
-        put(item.get().itemId, quantity);
+        put(item.get().itemId, item.get().getQuantity());
     }
 
-    public void clearAndPut(final Optional<StorageItem> item, final int quantity) {
+    public void clearAndPut(final Optional<StorageItem> item) {
         if (!item.isPresent()) return;
-        clearAndPut(item.get().itemId, quantity);
+        clearAndPut(item.get().itemId, item.get().getQuantity());
     }
 
     public void clearAndPut(final int itemId, final int quantity) {
@@ -120,9 +120,9 @@ public class Storage {
         put(itemId, quantity);
     }
 
-    public void remove(final Optional<StorageItem> item, final int quantity) {
+    public void remove(final Optional<StorageItem> item) {
         if (!item.isPresent()) return;
-        remove(item.get().itemId, quantity);
+        remove(item.get().itemId, item.get().getQuantity());
     }
 
     public void remove(final int itemId, final int quantity) {
@@ -341,7 +341,7 @@ public class Storage {
         return Optional.empty();
     }
 
-    public final Optional<StorageItem> getStorageItemFromName(final String name) {
+    public final Optional<StorageItem> getStorageItemFromName(final String name, final int quantity) {
         for (final StorableItem storableItem : storableItems) {
             // Based on checkName.
             if (storableItem.checkName.isPresent()) {
@@ -351,7 +351,7 @@ public class Storage {
                         name.toLowerCase().contains(checkName.toLowerCase()) ||
                         name.contains(itemManager.getItemComposition(storableItem.itemId).getName())
                     ) {
-                        return Optional.of(storableItem);
+                        return Optional.of(new StorageItem(storableItem.itemId, quantity));
                     }
                 }
             }

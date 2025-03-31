@@ -85,7 +85,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
                 final Matcher matcher = pattern.matcher(s);
 
                 while (matcher.find()) {
-                    storage.put(getStorageItemFromName(matcher.group("logs")), Integer.parseInt(matcher.group("quantity")));
+                    storage.put(getStorageItemFromName(matcher.group("logs"), Integer.parseInt(matcher.group("quantity"))));
                 }
 
                 infernalQuantityTracker = getQuantity();
@@ -96,8 +96,8 @@ public class U_LogBasket extends ChargedItemWithStorage {
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
-                lastLogs = getStorageItemFromName(m.group("logs"));
-                storage.add(lastLogs, 1);
+                lastLogs = getStorageItemFromName(m.group("logs"), 1);
+                storage.add(lastLogs);
                 infernalQuantityTracker++;
             }).requiredItem(ItemID.OPEN_LOG_BASKET),
 
@@ -142,7 +142,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
             // Infernal axe support.
             new OnXpDrop(Skill.FIREMAKING).onMenuOption("Chop down", "Cut").consumer(() -> {
                 if (infernalQuantityTracker < 29 && lastLogs.isPresent()) {
-                    storage.remove(lastLogs, 1);
+                    storage.remove(lastLogs.get().itemId, 1);
                     infernalQuantityTracker--;
                 }
             }).requiredItem(ItemID.OPEN_LOG_BASKET),

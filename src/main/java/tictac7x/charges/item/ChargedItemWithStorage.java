@@ -55,8 +55,8 @@ public class ChargedItemWithStorage extends ChargedItemBase {
         return this.storage.getStorage();
     }
 
-    public Optional<StorageItem> getStorageItemFromName(final String name) {
-        return storage.getStorageItemFromName(name);
+    public Optional<StorageItem> getStorageItemFromName(final String name, final int quantity) {
+        return storage.getStorageItemFromName(name, quantity);
     }
 
     public int getQuantity() {

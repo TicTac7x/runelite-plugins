@@ -64,17 +64,17 @@ public class U_GemBag extends ChargedItemWithStorage {
 
             // Mining regular or gem rocks.
             new OnChatMessage("You just (found|mined) (a|an) (?<gem>.+)!").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("gem")), 1);
+                storage.add(getStorageItemFromName(m.group("gem"), 1));
             }).requiredItem(ItemID.OPEN_GEM_BAG),
 
             // Pickpocketing.
             new OnChatMessage("The following stolen loot gets added to your gem bag: Uncut (?<gem>.+) x (?<quantity>.+).").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("gem")), Integer.parseInt(m.group("quantity")));
+                storage.add(getStorageItemFromName(m.group("gem"), Integer.parseInt(m.group("quantity"))));
             }),
 
             // Stealing from stalls.
             new OnChatMessage("You steal an uncut (?<gem>.+) and add it to your gem bag.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("gem")), 1);
+                storage.add(getStorageItemFromName(m.group("gem"), 1));
             }),
 
             // Fill from inventory.

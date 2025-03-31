@@ -59,7 +59,7 @@ public class C_Coffin extends ChargedItemWithStorage {
         this.triggers = new TriggerBase[] {
             // Add remains to coffin.
             new OnChatMessage("You put the (?<remains>.+) remains into your open coffin.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("remains")), 1);
+                storage.add(getStorageItemFromName(m.group("remains"), 1));
             }),
 
             // Check.
