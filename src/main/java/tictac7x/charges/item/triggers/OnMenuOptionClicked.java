@@ -6,12 +6,12 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class OnMenuOptionClicked extends TriggerBase {
-    public final String option;
+    public final String[] options;
     public Optional<Consumer<AdvancedMenuEntry>> menuOptionConsumer = Optional.empty();
     public Optional<Integer> hasItemId = Optional.empty();
 
-    public OnMenuOptionClicked(final String option) {
-        this.option = option;
+    public OnMenuOptionClicked(final String ...options) {
+        this.options = options;
     }
 
     public OnMenuOptionClicked menuOptionConsumer(final Consumer<AdvancedMenuEntry> consumer) {

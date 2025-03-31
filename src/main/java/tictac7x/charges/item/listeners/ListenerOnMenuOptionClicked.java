@@ -38,9 +38,13 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
         final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
 
         // Option check.
-        if (!event.option.equals(trigger.option)) {
-            return false;
+        boolean optionCheck = false;
+        for (final String option : trigger.options) {
+            if (event.option.equals(option)) {
+                optionCheck = true;
+            }
         }
+        if (!optionCheck) return false;
 
         // Item id check.
         if (trigger.hasItemId.isPresent() && event.itemId != trigger.hasItemId.get()) {

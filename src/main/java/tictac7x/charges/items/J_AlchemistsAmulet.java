@@ -30,7 +30,7 @@ public class J_AlchemistsAmulet extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemID.ALCHEMISTS_AMULET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.ALCHEMISTS_AMULET).needsToBeEquipped(),
+            new TriggerItem(ItemID.ALCHEMISTS_AMULET).fixedCharges(0),
             new TriggerItem(ItemID.ALCHEMISTS_AMULET_29990).needsToBeEquipped(), //Charged
             new TriggerItem(ItemID.ALCHEMISTS_AMULET_29992).needsToBeEquipped(), //???
         };
@@ -50,6 +50,12 @@ public class J_AlchemistsAmulet extends ChargedItem {
             new OnChatMessage("Your Alchemist's amulet helps you create a 4-dose potion. It no longer has any charges.").setFixedCharges(0),
             new OnChatMessage("Your Alchemist's amulet helps you create a 4-dose potion. It has one charge left.").setFixedCharges(1),
             new OnChatMessage("Your Alchemist's amulet helps you create a 4-dose potion. It has (?<charges>.+) charges left.").setDynamicallyCharges(),
+
+            // Auto-charge
+            new OnChatMessage("The banker charges your Alchemist's amulet using (?<amulets>.+)x Amulet of chemistry.*").matcherConsumer(m -> {
+                final int amuletsOfChemistry = Integer.parseInt(m.group("amulets"));
+                increaseCharges(amuletsOfChemistry * 10);
+            }),
         };
     }
 }

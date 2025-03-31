@@ -151,6 +151,15 @@ public class Storage {
         // 6512 = empty item inside huntsmans kit.
         if (itemId == -1 || itemId == 6512) return;
 
+        boolean storableCheck = false;
+        for (final StorableItem item : storableItems) {
+            if (item.itemId == itemId) {
+                storableCheck = true;
+                break;
+            }
+        }
+        if (!storableCheck) return;
+
         // Storage holds only one unique item at once check.
         if (holdsSingleType) {
             for (final StorageItem storageItem : storage.getItems()) {

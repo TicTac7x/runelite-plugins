@@ -83,13 +83,13 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             new OnChatMessage("(?<amount>.+) x (?<item>.+)").matcherConsumer(m -> {
                 final Optional<StorageItem> item = getStorageItemFromName(m.group("item"));
                 final int amount = Integer.parseInt(m.group("amount"));
-                if (item.isPresent()) storage.put(item.get().itemId, amount);
+                storage.put(item, amount);
             }).hasChatMessage("You look in your Reagent pouch and see:"),
 
             // Pick up.
             new OnChatMessage("You put the (?<item>.+) into your Reagent pouch.").matcherConsumer(m -> {
                 final Optional<StorageItem> item = getStorageItemFromName(m.group("item"));
-                if (item.isPresent()) storage.add(item.get().itemId, 1);
+                storage.add(item, 1);
             }),
 
             // Empty to bank.
@@ -99,25 +99,25 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onInventoryDifference(inventoryDifference -> {
-                if (!store.inventoryStorage.isPresent()) return;
-                for (final StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
-                    // Item was put into the reagent pouch, but there is more in inventory, meaning that item is filled to maximum.
-                    if (store.inventoryStorage.get().hasItem(inventoryDifferenceItem.itemId)) {
-                        storage.put(inventoryDifferenceItem.itemId, 26);
-                    }
+            new OnMenuOptionClicked("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory).onMenuTarget("Reagent pouch", "Open reagent pouch").runConsumerOnNextGameTick(() -> {
+                for (final StorageItem item : store.inventoryStorage.getItems()) {
+                    storage.add(item.itemId, item.getQuantity());
                 }
-            }).onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
+            }),
 
             // Replace "Use" with proper Fill/Empty option.
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(this::getMenuOptionForUse).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Mix potions.
             new OnChatMessage("You mix the (?<item>.+) into (your|the unfinished)( antifire)? (potion|antidote\\+\\+).*").matcherConsumer((m) -> {
                 final Optional<StorageItem> item = getStorageItemFromName(m.group("item"));
                 if (item.isPresent()) storage.remove(item.get().itemId, 1);
             }).requiredItem(ItemID.OPEN_REAGENT_POUCH),
+
+            // Pick
+            new OnChatMessage("You pick some whiteberries").requiredItem(ItemID.OPEN_REAGENT_POUCH).consumer(() -> {
+                storage.add(ItemID.WHITE_BERRIES, 1);
+            }),
         };
     }
 
