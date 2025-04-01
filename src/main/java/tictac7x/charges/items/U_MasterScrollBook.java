@@ -99,11 +99,11 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         }
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().hasItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId)) {
+        if (!storage.getStorage().hasItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].getId())) {
             return "0";
         }
 
-        final Optional<StorageItem> storageItem = storage.getStorage().getItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].itemId);
+        final Optional<StorageItem> storageItem = storage.getStorage().getItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].getId());
 
         if (!storageItem.isPresent()) {
             return "0";
@@ -125,12 +125,12 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         final int teleportScrollIndex = varbit10968 * 15 + varbit10966 - 1;
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().hasItem(storage.getStorableItems()[teleportScrollIndex].itemId)) {
+        if (!storage.getStorage().hasItem(storage.getStorableItems()[teleportScrollIndex].getId())) {
             return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", config.getColorEmpty()));
         }
 
         final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[teleportScrollIndex];
-        final Optional<StorageItem> defaultTeleportScrollStorageItem = storage.getStorage().getItem(defaultTeleportScrollStoreableItem.itemId);
+        final Optional<StorageItem> defaultTeleportScrollStorageItem = storage.getStorage().getItem(defaultTeleportScrollStoreableItem.getId());
 
         if (!defaultTeleportScrollStorageItem.isPresent()) {
             return "?";

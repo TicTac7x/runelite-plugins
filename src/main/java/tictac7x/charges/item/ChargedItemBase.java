@@ -14,6 +14,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.listeners.*;
+import tictac7x.charges.item.storage.StorageItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.AdvancedMenuEntry;
@@ -223,7 +224,7 @@ public abstract class ChargedItemBase {
         listenerOnAnimationChanged.trigger(event);
     }
 
-    public void onItemContainerChanged(final ItemContainerChanged event) {
+    public void onItemContainerChanged(final StorageItemContainerChanged event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnItemContainerChanged.trigger(event);
     }

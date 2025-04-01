@@ -11,17 +11,11 @@ public class StorageItems {
 
     public StorageItems() {}
 
-    public StorageItems(final ItemContainer itemContainer) {
-        if (itemContainer == null) return;
-
-        for (final Item item : itemContainer.getItems()) {
-            if (item == null || item.getId() <= 0 || items.containsKey(item.getId())) continue;
-            items.put(item.getId(), new StorageItem(item.getId(), itemContainer.count(item.getId())));
+    public StorageItems(final StorageItemContainerChanged itemContainerChanged) {
+        for (final StorageItem item : itemContainerChanged.getItems()) {
+            if (items.containsKey(item.getId())) continue;
+            items.put(item.getId(), new StorageItem(item.getId(), itemContainerChanged.count(item.getId())));
         }
-    }
-
-    public StorageItems(final ItemContainerChanged event) {
-        this(event.getItemContainer());
     }
 
     public int count(final int itemId) {
@@ -31,14 +25,14 @@ public class StorageItems {
     }
 
     public void put(final StorageItem storageItem) {
-        items.put(storageItem.itemId, storageItem);
+        items.put(storageItem.getId(), storageItem);
     }
 
     public List<StorageItem> getItems() {
         final List<StorageItem> items = new ArrayList<>();
 
         for (final StorageItem item : this.items.values()) {
-            items.add(new StorageItem(item.itemId, item.getQuantity()));
+            items.add(new StorageItem(item.getId(), item.getQuantity()));
         }
 
         return items;

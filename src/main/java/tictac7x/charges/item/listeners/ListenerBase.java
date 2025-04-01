@@ -168,8 +168,8 @@ public abstract class ListenerBase {
                 }
                 for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
-                        itemOne.equals(itemManager.getItemComposition(storeableItem.itemId).getName()) ||
-                        itemTwo.equals(itemManager.getItemComposition(storeableItem.itemId).getName())
+                        itemOne.equals(itemManager.getItemComposition(storeableItem.getId()).getName()) ||
+                        itemTwo.equals(itemManager.getItemComposition(storeableItem.getId()).getName())
                     ) {
                         isValid = true;
                         break loopChecker;
@@ -189,7 +189,7 @@ public abstract class ListenerBase {
                 if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
                 for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
-                    if (menuEntry.target.split(" -> ")[1].equals(itemManager.getItemComposition(storageItem.itemId).getName())) {
+                    if (menuEntry.target.split(" -> ")[1].equals(itemManager.getItemComposition(storageItem.getId()).getName())) {
                         useCheck = true;
                         break useCheckLooper;
                     }

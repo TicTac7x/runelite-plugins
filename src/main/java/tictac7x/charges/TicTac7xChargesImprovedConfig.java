@@ -14,8 +14,6 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String group = "tictac7x-charges";
     String version = "version";
     String storage_bank = "storage_bank";
-    String storage_inventory = "storage_inventory";
-    String storage_equipment = "storage_equipment";
     String date = "date";
     String debug_ids = "debug_ids";
     String infobox = "_infobox";
@@ -1892,27 +1890,11 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getStorageBank() { return ""; }
 
         @ConfigItem(
-            keyName = storage_inventory,
-            name = storage_inventory,
-            description = "All player inventory items to check for daily resets",
-            section = debug,
-            position = 4
-        ) default String getStorageInventory() { return ""; }
-
-        @ConfigItem(
-            keyName = storage_equipment,
-            name = storage_equipment,
-            description = "All player equipment items to check for daily resets",
-            section = debug,
-            position = 5
-        ) default String getStorageEquipment() { return ""; }
-
-        @ConfigItem(
             keyName = debug_ids,
             name = "Debug IDs",
             description = "Shows animation and graphics ids within ingame messages to add support for new items",
             section = debug,
-            position = 6
+            position = 4
         ) default boolean showDebugIds() { return false; }
 
         @ConfigItem(

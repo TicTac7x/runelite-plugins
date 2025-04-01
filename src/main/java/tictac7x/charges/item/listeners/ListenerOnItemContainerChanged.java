@@ -10,6 +10,8 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
+import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorageItemContainerChanged;
 import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -20,11 +22,11 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         super(client, itemManager, chargedItem, notifier, config);
     }
 
-    public void trigger(final ItemContainerChanged event) {
+    public void trigger(final StorageItemContainerChanged itemContainerChanged) {
         // Get quantity from amount in item container.
         for (final TriggerItem triggerItem : chargedItem.items) {
             if (triggerItem.quantityCharges.isPresent()) {
-               for (final Item item : event.getItemContainer().getItems()) {
+               for (final StorageItem item : itemContainerChanged.getItems()) {
                     if (item.getId() == triggerItem.itemId) {
                         ((ChargedItem) chargedItem).setCharges(item.getQuantity());
                         break;
@@ -34,7 +36,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         }
 
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(triggerBase, itemContainerChanged)) continue;
             boolean triggerUsed = false;
             final OnItemContainerChanged trigger = (OnItemContainerChanged) triggerBase;
 
@@ -58,7 +60,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
 
             // Update storage directly from item container.
             if (trigger.updateStorage.isPresent()) {
-                ((ChargedItemWithStorage) chargedItem).storage.updateFromItemContainer(event.getItemContainer());
+                ((ChargedItemWithStorage) chargedItem).storage.updateFromItemContainer(itemContainerChanged);
                 triggerUsed = true;
             }
 
@@ -73,7 +75,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
             }
 
             if (trigger.itemsConsumer.isPresent()) {
-                trigger.itemsConsumer.get().accept(new StorageItems(event));
+                trigger.itemsConsumer.get().accept(new StorageItems(itemContainerChanged));
                 triggerUsed = true;
             }
 
@@ -85,14 +87,13 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final ItemContainerChanged event) {
+    public boolean isValidTrigger(final TriggerBase triggerBase, final StorageItemContainerChanged itemContainerChanged) {
         if (!(triggerBase instanceof OnItemContainerChanged)) return false;
         final OnItemContainerChanged trigger = (OnItemContainerChanged) triggerBase;
 
         // Item container type check.
-        final ItemContainer itemContainer = event.getItemContainer();
         if (
-            itemContainer == null || itemContainer.getId() != trigger.itemContainerId) {
+            itemContainerChanged.getContainerId() != trigger.itemContainerId) {
             return false;
         }
 

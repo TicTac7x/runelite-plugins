@@ -116,7 +116,7 @@ public class U_FishBarrel extends ChargedItemWithStorage {
 
             // Extra fish.
             new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemID.OPEN_FISH_BARREL, ItemID.OPEN_FISH_SACK_BARREL).consumer(() -> {
-                storage.add(lastCaughtFish.get().itemId, 1);
+                storage.add(lastCaughtFish.get().getId(), 1);
             }),
 
             // Replace "Empty" with proper "Empty to bank".

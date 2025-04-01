@@ -45,7 +45,7 @@ public class ListenerOnItemPickup extends ListenerBase {
         // Correct item check.
         boolean correctItem = false;
         for (final StorageItem storageItem : chargedItem.storage.getStorableItems()) {
-            if (event.getItem().getId() == storageItem.itemId) {
+            if (event.getItem().getId() == storageItem.getId()) {
                 correctItem = true;
                 break;
             }

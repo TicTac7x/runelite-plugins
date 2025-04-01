@@ -24,6 +24,7 @@ import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
+import tictac7x.charges.item.storage.StorageItemContainerChanged;
 import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.store.AdvancedMenuEntry;
@@ -391,10 +392,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onItemContainerChanged(final ItemContainerChanged event) {
-		store.onItemContainerChanged(event);
+		final StorageItemContainerChanged itemContainerChanged = new StorageItemContainerChanged(event, itemManager);
+		store.onItemContainerChanged(itemContainerChanged);
 
 		for (final ChargedItemBase infobox : chargedItems) {
-			infobox.onItemContainerChanged(event);
+			infobox.onItemContainerChanged(itemContainerChanged);
 		}
 
 //		String itemContainer = String.valueOf(event.getContainerId());
@@ -466,15 +468,15 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		final AdvancedMenuEntry advancedMenuEntry = new AdvancedMenuEntry(event, client);
 
-//		System.out.println("MENU OPTION | " +
-//			"event id: " + advancedMenuEntry.eventId +
-//			", option: " + advancedMenuEntry.option +
-//			", target: " + advancedMenuEntry.target +
-//			", action id: " + advancedMenuEntry.actionId +
-//			", action name: " + advancedMenuEntry.action +
-//			", item id: " + advancedMenuEntry.itemId +
-//			", impostor id: " + advancedMenuEntry.impostorId
-//		);
+		System.out.println("MENU OPTION | " +
+			"event id: " + advancedMenuEntry.eventId +
+			", option: " + advancedMenuEntry.option +
+			", target: " + advancedMenuEntry.target +
+			", action id: " + advancedMenuEntry.actionId +
+			", action name: " + advancedMenuEntry.action +
+			", item id: " + advancedMenuEntry.itemId +
+			", impostor id: " + advancedMenuEntry.impostorId
+		);
 
 		if (
 			// Menu option not found.

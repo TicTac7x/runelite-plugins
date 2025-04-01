@@ -99,14 +99,14 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             // Empty to inventory.
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
 
-                new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onInventoryDifference(inventoryDifference -> {
-                    for (final StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
-                        // Item was put into the reagent pouch, but there is more in inventory, meaning that item is filled to maximum.
-                        if (store.inventoryStorage.hasItem(inventoryDifferenceItem.itemId)) {
-                            storage.put(inventoryDifferenceItem.itemId, 26);
-                        }
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onInventoryDifference(inventoryDifference -> {
+                for (final StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
+                    // Item was put into the reagent pouch, but there is more in inventory, meaning that item is filled to maximum.
+                    if (store.inventory.hasItem(inventoryDifferenceItem.getId())) {
+                        storage.put(inventoryDifferenceItem.getId(), 26);
                     }
-                }).onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
+                }
+            }).onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             // Replace "Use" with proper Fill/Empty option.
             new OnMenuEntryAdded("Use").replaceOptionConsumer(this::getMenuOptionForUse).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),

@@ -104,7 +104,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
             // Extra logs from nature offerings.
             new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemID.OPEN_LOG_BASKET).runConsumerOnNextGameTick(() -> {
                 if (lastLogs.isPresent()) {
-                    storage.add(lastLogs.get().itemId, 1);
+                    storage.add(lastLogs.get().getId(), 1);
                 }
             }),
 
@@ -142,7 +142,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
             // Infernal axe support.
             new OnXpDrop(Skill.FIREMAKING).onMenuOption("Chop down", "Cut").consumer(() -> {
                 if (infernalQuantityTracker < 29 && lastLogs.isPresent()) {
-                    storage.remove(lastLogs.get().itemId, 1);
+                    storage.remove(lastLogs.get().getId(), 1);
                     infernalQuantityTracker--;
                 }
             }).requiredItem(ItemID.OPEN_LOG_BASKET),

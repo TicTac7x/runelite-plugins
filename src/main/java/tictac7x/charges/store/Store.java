@@ -1,6 +1,5 @@
 package tictac7x.charges.store;
 
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
@@ -16,6 +15,7 @@ import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.StorageItemContainerChanged;
 import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -31,19 +31,18 @@ public class Store {
     private int gametick = 0;
     private int gametick_before = 0;
 
-    private Optional<ChargedItemBase[]> chargedItems = Optional.empty();
+    private ChargedItemBase[] chargedItems = new ChargedItemBase[]{};
     private List<Integer> dailyResetItemIds = new ArrayList<>();
     private int lastChatMessagesTick = 0;
     private List<String> lastChatMessages = new ArrayList<>();
-    public Optional<ItemContainer> inventory = Optional.empty();
-    public StorageItems inventoryStorage = new StorageItems();
-    public Optional<ItemContainer> equipment = Optional.empty();
-    public Optional<ItemContainer> bank = Optional.empty();
 
-    public List<StorageItem> currentInventoryItems = new ArrayList<>();
-    public List<StorageItem> previousInventoryItems = new ArrayList<>();
-    public List<StorageItem> currentBankItems = new ArrayList<>();
-    public List<StorageItem> previousBankItems = new ArrayList<>();
+    public StorageItemContainerChanged inventory = new StorageItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
+    public StorageItemContainerChanged previousInventory = new StorageItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
+    public StorageItemContainerChanged equipment = new StorageItemContainerChanged(InventoryID.EQUIPMENT.getId(), new ArrayList<>());
+    public StorageItemContainerChanged bank = new StorageItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
+    public StorageItemContainerChanged previousBank = new StorageItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
+
+
     public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
 
     public final List<AdvancedMenuEntry> menuOptionsClicked = new ArrayList<>();
@@ -79,7 +78,7 @@ public class Store {
     }
 
     public void setChargedItems(final ChargedItemBase[] chargedItems) {
-        this.chargedItems = Optional.of(chargedItems);
+        this.chargedItems = chargedItems;
 
         List<Integer> dailyResetItemIds = new ArrayList<>();
         Arrays.stream(chargedItems).filter(chargedItem -> {
@@ -105,67 +104,46 @@ public class Store {
         return Optional.empty();
     }
 
-    public int getInventoryPreviouslyEmptySlots() {
-        return 28 - previousInventoryItems.size();
-    }
-
     public int getInventoryEmptySlots() {
-        return 28 - currentInventoryItems.size();
+        return 28 - inventory.size();
     }
 
     public void onStatChanged(final StatChanged event) {
         skillsXp.put(event.getSkill(), event.getXp());
     }
 
-    public void onItemContainerChanged(final ItemContainerChanged event) {
+    public void onItemContainerChanged(final StorageItemContainerChanged itemContainerChanged) {
         runNextGameTickQueue();
 
         if (
-            event.getContainerId() != InventoryID.BANK.getId() &&
-            event.getContainerId() != InventoryID.INVENTORY.getId() &&
-            event.getContainerId() != InventoryID.EQUIPMENT.getId()
+            itemContainerChanged.getContainerId() != InventoryID.BANK.getId() &&
+            itemContainerChanged.getContainerId() != InventoryID.INVENTORY.getId() &&
+            itemContainerChanged.getContainerId() != InventoryID.EQUIPMENT.getId()
         ) return;
 
         // Update inventory, save previous items.
-        if (event.getContainerId() == InventoryID.INVENTORY.getId()) {
-            inventory = Optional.of(event.getItemContainer());
-            inventoryStorage = new StorageItems(event);
+        if (itemContainerChanged.getContainerId() == InventoryID.INVENTORY.getId()) {
+            previousInventory = inventory;
+            inventory = itemContainerChanged;
+        } else if (itemContainerChanged.getContainerId() == InventoryID.EQUIPMENT.getId()) {
+            equipment = itemContainerChanged;
+        } else if (itemContainerChanged.getContainerId() == InventoryID.BANK.getId()) {
+            previousBank = bank;
+            bank = itemContainerChanged;
 
-            previousInventoryItems = new ArrayList<>();
-            for (final StorageItem storageItem : currentInventoryItems) {
-                previousInventoryItems.add(new StorageItem(storageItem.itemId, storageItem.getQuantity()));
+            final StringBuilder storageStringBuilder = new StringBuilder();
+            for (final StorageItem item : itemContainerChanged.getItems()) {
+                storageStringBuilder.append(item.getId()).append(",");
             }
-
-            currentInventoryItems = new ArrayList<>();
-            for (final Item item : event.getItemContainer().getItems()) {
-                if (isInvalidItem(item)) continue;
-                currentInventoryItems.add(new StorageItem(item.getId(), item.getQuantity()));
-            }
-        } else if (event.getContainerId() == InventoryID.EQUIPMENT.getId()) {
-            equipment = Optional.of(event.getItemContainer());
-        } else if (event.getContainerId() == InventoryID.BANK.getId()) {
-            bank = Optional.of(event.getItemContainer());
-
-            previousBankItems = new ArrayList<>();
-            for (final StorageItem storageItem : currentBankItems) {
-                previousBankItems.add(new StorageItem(storageItem.itemId, storageItem.getQuantity()));
-            }
-
-            currentBankItems = new ArrayList<>();
-            for (final Item item : event.getItemContainer().getItems()) {
-                if (isInvalidItem(item)) continue;
-                currentBankItems.add(new StorageItem(item.getId(), item.getQuantity()));
-            }
+            final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
+            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
         }
 
-        updateStorage(event);
-        updateChargedItemsPrimaryId(event.getContainerId() == InventoryID.BANK.getId());
+        updateChargedItemsPrimaryId(itemContainerChanged.getContainerId() == InventoryID.BANK.getId());
     }
 
     private void updateChargedItemsPrimaryId(final boolean checkBank) {
-        if (!chargedItems.isPresent()) return;
-
-        for (final ChargedItemBase chargedItem : chargedItems.get()) {
+        for (final ChargedItemBase chargedItem : chargedItems) {
             Optional<Integer> bankItemId = Optional.empty();
             boolean bankItemDynamic = false;
 
@@ -176,8 +154,8 @@ public class Store {
             boolean equipmentItemDynamic = false;
 
             // Bank has the least priority.
-            if (checkBank && bank.isPresent()) {
-                for (final Item item : bank.get().getItems()) {
+            if (checkBank) {
+                for (final StorageItem item : bank.getItems()) {
                     for (final TriggerItem triggerItem : chargedItem.items) {
                         if (item.getId() == triggerItem.itemId) {
                             if (!bankItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !bankItemDynamic || !triggerItem.fixedCharges.isPresent()) {
@@ -193,16 +171,14 @@ public class Store {
             }
 
             // Inventory is more important than bank.
-            if (inventory.isPresent()) {
-                for (final Item item : inventory.get().getItems()) {
-                    for (final TriggerItem triggerItem : chargedItem.items) {
-                        if (item.getId() == triggerItem.itemId) {
-                            if (!inventoryItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !inventoryItemDynamic || !triggerItem.fixedCharges.isPresent()) {
-                                inventoryItemId = Optional.of(item.getId());
+            for (final StorageItem item : inventory.getItems()) {
+                for (final TriggerItem triggerItem : chargedItem.items) {
+                    if (item.getId() == triggerItem.itemId) {
+                        if (!inventoryItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !inventoryItemDynamic || !triggerItem.fixedCharges.isPresent()) {
+                            inventoryItemId = Optional.of(item.getId());
 
-                                if (!triggerItem.fixedCharges.isPresent()) {
-                                    inventoryItemDynamic = true;
-                                }
+                            if (!triggerItem.fixedCharges.isPresent()) {
+                                inventoryItemDynamic = true;
                             }
                         }
                     }
@@ -210,16 +186,14 @@ public class Store {
             }
 
             // Equipment has most priority.
-            if (equipment.isPresent()) {
-                for (final Item item : equipment.get().getItems()) {
-                    for (final TriggerItem triggerItem : chargedItem.items) {
-                        if (item.getId() == triggerItem.itemId) {
-                            if (!equipmentItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !equipmentItemDynamic || !triggerItem.fixedCharges.isPresent()) {
-                                equipmentItemId = Optional.of(item.getId());
+            for (final StorageItem item : equipment.getItems()) {
+                for (final TriggerItem triggerItem : chargedItem.items) {
+                    if (item.getId() == triggerItem.itemId) {
+                        if (!equipmentItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !equipmentItemDynamic || !triggerItem.fixedCharges.isPresent()) {
+                            equipmentItemId = Optional.of(item.getId());
 
-                                if (!triggerItem.fixedCharges.isPresent()) {
-                                    equipmentItemDynamic = true;
-                                }
+                            if (!triggerItem.fixedCharges.isPresent()) {
+                                equipmentItemDynamic = true;
                             }
                         }
                     }
@@ -323,7 +297,7 @@ public class Store {
         final int[] storeableItemIds = new int[storageItems.length];
 
         for (int i = 0; i < storageItems.length; i ++) {
-            storeableItemIds[i] = storageItems[i].itemId;
+            storeableItemIds[i] = storageItems[i].getId();
         }
 
         return notInMenuTargets(storeableItemIds);
@@ -384,8 +358,8 @@ public class Store {
     public int getInventoryItemQuantity(final int itemId) {
         int quantity = 0;
 
-        for (final StorageItem storageItem : currentInventoryItems) {
-            if (storageItem.itemId == itemId) {
+        for (final StorageItem storageItem : inventory.getItems()) {
+            if (storageItem.getId() == itemId) {
                 quantity += storageItem.getQuantity();
             }
         }
@@ -396,11 +370,9 @@ public class Store {
     public int getEquipmentItemQuantity(final int itemId) {
         int quantity = 0;
 
-        if (equipment.isPresent()) {
-            for (final Item item : equipment.get().getItems()) {
-                if (item.getId() == itemId) {
-                    quantity += item.getQuantity();
-                }
+        for (final StorageItem item : equipment.getItems()) {
+            if (item.getId() == itemId) {
+                quantity += item.getQuantity();
             }
         }
 
@@ -410,8 +382,8 @@ public class Store {
     public int getPreviousInventoryItemQuantity(final int itemId) {
         int quantity = 0;
 
-        for (final StorageItem storageItem : previousInventoryItems) {
-            if (storageItem.itemId == itemId) {
+        for (final StorageItem storageItem : previousInventory.getItems()) {
+            if (storageItem.getId() == itemId) {
                 quantity += storageItem.getQuantity();
             }
         }
@@ -420,8 +392,8 @@ public class Store {
     }
 
     public boolean inventoryContainsItem(final int itemId) {
-        for (final StorageItem storageItem : currentInventoryItems) {
-            if (storageItem.itemId == itemId) {
+        for (final StorageItem storageItem : inventory.getItems()) {
+            if (storageItem.getId() == itemId) {
                 return true;
             }
         }
@@ -430,9 +402,7 @@ public class Store {
     }
 
     public boolean equipmentContainsItem(final int ...itemIds) {
-        if (!equipment.isPresent()) return false;
-
-        for (final Item equipmentItem : equipment.get().getItems()) {
+        for (final StorageItem equipmentItem : equipment.getItems()) {
             for (final int itemId : itemIds) {
                 if (equipmentItem.getId() == itemId) {
                     return true;
@@ -443,56 +413,17 @@ public class Store {
         return false;
     }
 
-    private void updateStorage(final ItemContainerChanged event) {
-        final List<Integer> itemIds = new ArrayList<>();
-
-        // Update items.
-        for (final Item item : event.getItemContainer().getItems()) {
-            if (item.getId() != -1 && item.getQuantity() > 0 && dailyResetItemIds.contains(item.getId())) {
-                itemIds.add(item.getId());
-            }
-        }
-
-        final StringBuilder storageStringBuilder = new StringBuilder();
-        for (final Integer itemId : itemIds) {
-            storageStringBuilder.append(itemId).append(",");
-        }
-        final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
-
-        // Save storage string to config.
-        if (event.getContainerId() == InventoryID.BANK.getId()) {
-            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
-        } else if (event.getContainerId() == InventoryID.INVENTORY.getId()) {
-            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_inventory, storageString);
-        } else if (event.getContainerId() == InventoryID.EQUIPMENT.getId()) {
-            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_equipment, storageString);
-        }
-    }
-
-    private Set<Integer> getAllItems() {
-        final Set<Integer> allItems = new HashSet<>();
-
-        final String storageBank = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank);
-        final String storageInventory = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_inventory);
-        final String storageEquipment = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_equipment);
-
-        final List<String> storages = new ArrayList<>();
-        storages.addAll(Arrays.asList(storageBank.split(",")));
-        storages.addAll(Arrays.asList(storageInventory.split(",")));
-        storages.addAll(Arrays.asList(storageEquipment.split(",")));
-
-        for (final String itemId : storages) {
-            try {
-                allItems.add(Integer.parseInt(itemId));
-            } catch (final Exception ignored) {}
-        }
-
+    private List<StorageItem> getAllItems() {
+        final List<StorageItem> allItems = new ArrayList<>();
+        allItems.addAll(inventory.getItems());
+        allItems.addAll(equipment.getItems());
+        allItems.addAll(bank.getItems());
         return allItems;
     }
 
     public boolean itemInPossession(final int itemId) {
-        for (final int item : getAllItems()) {
-            if (item == itemId) {
+        for (final StorageItem item : getAllItems()) {
+            if (item.getId() == itemId) {
                 return true;
             }
         }
@@ -506,18 +437,16 @@ public class Store {
         final Map<Integer, Integer> quantitiesNew = new HashMap<>();
         final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
 
-        if (inventory.isPresent()) {
-            for (final Item itemNew : inventory.get().getItems()) {
-                if (isInvalidItem(itemNew) || quantitiesNew.containsKey(itemNew.getId())) continue;
-                quantitiesNew.put(itemNew.getId(), inventory.get().count(itemNew.getId()));
-            }
+        for (final StorageItem itemNew : inventory.getItems()) {
+            if (quantitiesNew.containsKey(itemNew.getId())) continue;
+            quantitiesNew.put(itemNew.getId(), inventory.count(itemNew.getId()));
+        }
 
-            for (final StorageItem itemOld : previousInventoryItems) {
-                if (quantitiesBefore.containsKey(itemOld.itemId)) {
-                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
-                } else {
-                    quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
-                }
+        for (final StorageItem itemOld : previousInventory.getItems()) {
+            if (quantitiesBefore.containsKey(itemOld.getId())) {
+                quantitiesBefore.put(itemOld.getId(), quantitiesBefore.get(itemOld.getId()) + itemOld.getQuantity());
+            } else {
+                quantitiesBefore.put(itemOld.getId(), itemOld.getQuantity());
             }
         }
 
@@ -543,18 +472,16 @@ public class Store {
         final Map<Integer, Integer> quantitiesNew = new HashMap<>();
         final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
 
-        if (bank.isPresent()) {
-            for (final Item itemNew : bank.get().getItems()) {
-                if (isInvalidItem(itemNew) || quantitiesNew.containsKey(itemNew.getId())) continue;
-                quantitiesNew.put(itemNew.getId(), bank.get().count(itemNew.getId()));
-            }
+        for (final StorageItem itemNew : bank.getItems()) {
+            if (quantitiesNew.containsKey(itemNew.getId())) continue;
+            quantitiesNew.put(itemNew.getId(), bank.count(itemNew.getId()));
+        }
 
-            for (final StorageItem itemOld : previousBankItems) {
-                if (quantitiesBefore.containsKey(itemOld.itemId)) {
-                    quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
-                } else {
-                    quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
-                }
+        for (final StorageItem itemOld : previousBank.getItems()) {
+            if (quantitiesBefore.containsKey(itemOld.getId())) {
+                quantitiesBefore.put(itemOld.getId(), quantitiesBefore.get(itemOld.getId()) + itemOld.getQuantity());
+            } else {
+                quantitiesBefore.put(itemOld.getId(), itemOld.getQuantity());
             }
         }
 
@@ -572,10 +499,6 @@ public class Store {
         }
 
         return itemsDifference;
-    }
-
-    private boolean isInvalidItem(final Item item) {
-        return item == null || item.getId() == -1 || item.getId() == 6512;
     }
 
     public void addConsumerToNextTickQueue(final Runnable consumer) {
