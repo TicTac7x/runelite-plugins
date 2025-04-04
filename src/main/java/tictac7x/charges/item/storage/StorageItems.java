@@ -1,8 +1,6 @@
 package tictac7x.charges.item.storage;
 
-import net.runelite.api.Item;
-import net.runelite.api.ItemContainer;
-import net.runelite.api.events.ItemContainerChanged;
+import tictac7x.charges.customEvents.CustomItemContainerChanged;
 
 import java.util.*;
 
@@ -11,7 +9,7 @@ public class StorageItems {
 
     public StorageItems() {}
 
-    public StorageItems(final StorageItemContainerChanged itemContainerChanged) {
+    public StorageItems(final CustomItemContainerChanged itemContainerChanged) {
         for (final StorageItem item : itemContainerChanged.getItems()) {
             if (items.containsKey(item.getId())) continue;
             items.put(item.getId(), new StorageItem(item.getId(), itemContainerChanged.count(item.getId())));

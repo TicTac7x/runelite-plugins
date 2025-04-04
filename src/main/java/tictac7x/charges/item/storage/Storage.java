@@ -5,18 +5,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.runelite.api.Item;
-import net.runelite.api.ItemContainer;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class Storage {
@@ -98,6 +95,10 @@ public class Storage {
 
         final Optional<StorageItem> item = getItem(itemId);
         put(itemId, (item.isPresent() ? item.get().getQuantity() : 0) + quantity);
+    }
+
+    public void add(final StorageItem item) {
+        add(item.getId(), item.getQuantity());
     }
 
     public void add(final Optional<StorageItem> item) {
@@ -242,7 +243,7 @@ public class Storage {
         }
     }
 
-    public void updateFromItemContainer(final StorageItemContainerChanged itemContainer) {
+    public void updateFromItemContainer(final CustomItemContainerChanged itemContainer) {
         storage = new StorageItems(itemContainer);
     }
 

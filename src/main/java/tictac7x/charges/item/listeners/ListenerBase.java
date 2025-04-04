@@ -12,10 +12,9 @@ import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.AdvancedMenuEntry;
+import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 
 import java.util.Optional;
-import java.util.regex.Matcher;
 
 public abstract class ListenerBase {
     protected final Client client;
@@ -155,7 +154,7 @@ public abstract class ListenerBase {
         // Use storage item on charged item check.
         if (trigger.onUseStorageItemOnChargedItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean isValid = false;
-            loopChecker: for (final AdvancedMenuEntry menuEntry : chargedItem.store.menuOptionsClicked) {
+            loopChecker: for (final CustomMenuOptionClicked menuEntry : chargedItem.store.menuOptionsClicked) {
                 if (!menuEntry.target.contains(" -> ")) {
                     continue;
                 };
@@ -185,7 +184,7 @@ public abstract class ListenerBase {
         // Use charged item on storage item check.
         if (trigger.onUseChargedItemOnStorageItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean useCheck = false;
-            useCheckLooper: for (final AdvancedMenuEntry menuEntry : chargedItem.store.menuOptionsClicked) {
+            useCheckLooper: for (final CustomMenuOptionClicked menuEntry : chargedItem.store.menuOptionsClicked) {
                 if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
                 for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {

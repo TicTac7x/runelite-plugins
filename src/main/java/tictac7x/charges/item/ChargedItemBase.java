@@ -1,8 +1,6 @@
 package tictac7x.charges.item;
 
 import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
-import net.runelite.api.Item;
 import net.runelite.api.events.*;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -14,16 +12,15 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.listeners.*;
-import tictac7x.charges.item.storage.StorageItemContainerChanged;
+import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.AdvancedMenuEntry;
+import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Store;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
-import java.util.Optional;
 
 public abstract class ChargedItemBase {
     public final String configKey;
@@ -224,7 +221,7 @@ public abstract class ChargedItemBase {
         listenerOnAnimationChanged.trigger(event);
     }
 
-    public void onItemContainerChanged(final StorageItemContainerChanged event) {
+    public void onItemContainerChanged(final CustomItemContainerChanged event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnItemContainerChanged.trigger(event);
     }
@@ -248,7 +245,7 @@ public abstract class ChargedItemBase {
         listenerOnUserAction.trigger();
     }
 
-    public void onMenuOptionClicked(final AdvancedMenuEntry event) {
+    public void onMenuOptionClicked(final CustomMenuOptionClicked event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnMenuOptionClicked.trigger(event);
     }

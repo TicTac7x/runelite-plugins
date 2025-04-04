@@ -1,9 +1,6 @@
 package tictac7x.charges.item.listeners;
 
 import net.runelite.api.Client;
-import net.runelite.api.Item;
-import net.runelite.api.ItemContainer;
-import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -11,7 +8,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.storage.StorageItemContainerChanged;
+import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -22,7 +19,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         super(client, itemManager, chargedItem, notifier, config);
     }
 
-    public void trigger(final StorageItemContainerChanged itemContainerChanged) {
+    public void trigger(final CustomItemContainerChanged itemContainerChanged) {
         // Get quantity from amount in item container.
         for (final TriggerItem triggerItem : chargedItem.items) {
             if (triggerItem.quantityCharges.isPresent()) {
@@ -87,7 +84,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final StorageItemContainerChanged itemContainerChanged) {
+    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomItemContainerChanged itemContainerChanged) {
         if (!(triggerBase instanceof OnItemContainerChanged)) return false;
         final OnItemContainerChanged trigger = (OnItemContainerChanged) triggerBase;
 

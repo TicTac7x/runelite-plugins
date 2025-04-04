@@ -29,4 +29,8 @@ public class StorageItem {
     public void decreaseQuantity(final int quantity) {
         this.quantity = Math.max(this.quantity - quantity, 0);
     }
+
+    public void increaseQuantity(final int quantity) {
+        this.quantity += quantity;
+    }
 }

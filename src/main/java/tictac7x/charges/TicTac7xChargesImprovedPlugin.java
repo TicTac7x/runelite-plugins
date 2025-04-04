@@ -24,10 +24,10 @@ import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
-import tictac7x.charges.item.storage.StorageItemContainerChanged;
+import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
-import tictac7x.charges.store.AdvancedMenuEntry;
+import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.store.Store;
 
 import javax.inject.Inject;
@@ -392,22 +392,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onItemContainerChanged(final ItemContainerChanged event) {
-		final StorageItemContainerChanged itemContainerChanged = new StorageItemContainerChanged(event, itemManager);
+		final CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(event, itemManager);
 		store.onItemContainerChanged(itemContainerChanged);
-
-		for (final ChargedItemBase infobox : chargedItems) {
-			infobox.onItemContainerChanged(itemContainerChanged);
-		}
-
-//		String itemContainer = String.valueOf(event.getContainerId());
-//		for (final Item item : event.getItemContainer().getItems()) {
-//			itemContainer += "\r\n" +
-//				item.getId() + ": " + itemManager.getItemComposition(item.getId()).getName() +
-//				", quantity: " + item.getQuantity();
-//		}
-//		System.out.println("ITEM CONTAINER | " +
-//			itemContainer
-//		);
 	}
 
 	@Subscribe
@@ -466,38 +452,34 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		final AdvancedMenuEntry advancedMenuEntry = new AdvancedMenuEntry(event, client);
+		int impostorId = -1;
+		try {
+			impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
+		} catch (final Exception ignored) {}
 
-		System.out.println("MENU OPTION | " +
-			"event id: " + advancedMenuEntry.eventId +
-			", option: " + advancedMenuEntry.option +
-			", target: " + advancedMenuEntry.target +
-			", action id: " + advancedMenuEntry.actionId +
-			", action name: " + advancedMenuEntry.action +
-			", item id: " + advancedMenuEntry.itemId +
-			", impostor id: " + advancedMenuEntry.impostorId
-		);
+		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, impostorId);
+		System.out.println(customMenuOptionClicked);
 
 		if (
 			// Menu option not found.
-			advancedMenuEntry.option.isEmpty() ||
+			customMenuOptionClicked.option.isEmpty() ||
 			// Not menu.
-			advancedMenuEntry.target.isEmpty() && (
-				!advancedMenuEntry.option.contains("Buy-") &&
-				!advancedMenuEntry.option.equals("Continue")
+			customMenuOptionClicked.target.isEmpty() && (
+				!customMenuOptionClicked.option.contains("Buy-") &&
+				!customMenuOptionClicked.option.equals("Continue")
 			) ||
 			// Start use by clicking on item.
-			advancedMenuEntry.option.equals("Use") && advancedMenuEntry.action.equals("WIDGET_TARGET") ||
+			customMenuOptionClicked.option.equals("Use") && customMenuOptionClicked.action.equals("WIDGET_TARGET") ||
 			// Cancel option.
-			advancedMenuEntry.action.equals("CANCEL") ||
+			customMenuOptionClicked.action.equals("CANCEL") ||
 			// RuneLite specific action.
-			advancedMenuEntry.action.equals("RUNELITE")
+			customMenuOptionClicked.action.equals("RUNELITE")
 		) return;
 
-		store.onMenuOptionClicked(advancedMenuEntry);
+		store.onMenuOptionClicked(customMenuOptionClicked);
 
 		for (final ChargedItemBase chargedItem : chargedItems) {
-			chargedItem.onMenuOptionClicked(advancedMenuEntry);
+			chargedItem.onMenuOptionClicked(customMenuOptionClicked);
 		}
 	}
 

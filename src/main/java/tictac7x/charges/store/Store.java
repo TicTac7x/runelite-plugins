@@ -1,27 +1,25 @@
 package tictac7x.charges.store;
 
-import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
-import net.runelite.api.Item;
-import net.runelite.api.ItemContainer;
-import net.runelite.api.Skill;
+import net.runelite.api.*;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.StatChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.storage.StorageItemContainerChanged;
+import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Store {
     private final Client client;
@@ -36,17 +34,18 @@ public class Store {
     private int lastChatMessagesTick = 0;
     private List<String> lastChatMessages = new ArrayList<>();
 
-    public StorageItemContainerChanged inventory = new StorageItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
-    public StorageItemContainerChanged previousInventory = new StorageItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
-    public StorageItemContainerChanged equipment = new StorageItemContainerChanged(InventoryID.EQUIPMENT.getId(), new ArrayList<>());
-    public StorageItemContainerChanged bank = new StorageItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
-    public StorageItemContainerChanged previousBank = new StorageItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
+    public CustomItemContainerChanged inventory = new CustomItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
+    public CustomItemContainerChanged previousInventory = new CustomItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
+    public CustomItemContainerChanged equipment = new CustomItemContainerChanged(InventoryID.EQUIPMENT.getId(), new ArrayList<>());
+    public CustomItemContainerChanged bank = new CustomItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
+    public CustomItemContainerChanged previousBank = new CustomItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
 
 
     public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
-
-    public final List<AdvancedMenuEntry> menuOptionsClicked = new ArrayList<>();
+    public final List<CustomMenuOptionClicked> menuOptionsClicked = new ArrayList<>();
     private final Map<Skill, Integer> skillsXp = new HashMap<>();
+
+    final Pattern withdrawPattern = Pattern.compile("Withdraw-(?<amount>.+)");
 
     public Store(final Client client, final ItemManager itemManager, final ConfigManager configManager) {
         this.client = client;
@@ -112,34 +111,38 @@ public class Store {
         skillsXp.put(event.getSkill(), event.getXp());
     }
 
-    public void onItemContainerChanged(final StorageItemContainerChanged itemContainerChanged) {
+    public void onItemContainerChanged(final CustomItemContainerChanged itemContainerChanged) {
         runNextGameTickQueue();
 
         if (
-            itemContainerChanged.getContainerId() != InventoryID.BANK.getId() &&
-            itemContainerChanged.getContainerId() != InventoryID.INVENTORY.getId() &&
-            itemContainerChanged.getContainerId() != InventoryID.EQUIPMENT.getId()
-        ) return;
+            itemContainerChanged.getContainerId() == InventoryID.BANK.getId() ||
+            itemContainerChanged.getContainerId() == InventoryID.INVENTORY.getId() ||
+            itemContainerChanged.getContainerId() == InventoryID.EQUIPMENT.getId()
+        ) {
+            // Update inventory, save previous items.
+            if (itemContainerChanged.getContainerId() == InventoryID.INVENTORY.getId()) {
+                previousInventory = inventory;
+                inventory = itemContainerChanged;
+            } else if (itemContainerChanged.getContainerId() == InventoryID.EQUIPMENT.getId()) {
+                equipment = itemContainerChanged;
+            } else if (itemContainerChanged.getContainerId() == InventoryID.BANK.getId()) {
+                previousBank = bank;
+                bank = itemContainerChanged;
 
-        // Update inventory, save previous items.
-        if (itemContainerChanged.getContainerId() == InventoryID.INVENTORY.getId()) {
-            previousInventory = inventory;
-            inventory = itemContainerChanged;
-        } else if (itemContainerChanged.getContainerId() == InventoryID.EQUIPMENT.getId()) {
-            equipment = itemContainerChanged;
-        } else if (itemContainerChanged.getContainerId() == InventoryID.BANK.getId()) {
-            previousBank = bank;
-            bank = itemContainerChanged;
-
-            final StringBuilder storageStringBuilder = new StringBuilder();
-            for (final StorageItem item : itemContainerChanged.getItems()) {
-                storageStringBuilder.append(item.getId()).append(",");
+                final StringBuilder storageStringBuilder = new StringBuilder();
+                for (final StorageItem item : itemContainerChanged.getItems()) {
+                    storageStringBuilder.append(item.getId()).append(",");
+                }
+                final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
             }
-            final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
-            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
+
+            updateChargedItemsPrimaryId(itemContainerChanged.getContainerId() == InventoryID.BANK.getId());
         }
 
-        updateChargedItemsPrimaryId(itemContainerChanged.getContainerId() == InventoryID.BANK.getId());
+        for (final ChargedItemBase infobox : chargedItems) {
+            infobox.onItemContainerChanged(itemContainerChanged);
+        }
     }
 
     private void updateChargedItemsPrimaryId(final boolean checkBank) {
@@ -210,7 +213,9 @@ public class Store {
         }
     }
 
-    public void onMenuOptionClicked(final AdvancedMenuEntry advancedMenuEntry) {
+    public void onMenuOptionClicked(final CustomMenuOptionClicked customMenuOptionClicked) {
+        checkBankWithdraw(customMenuOptionClicked);
+
         // Gametick changed, clear previous menu entries since they are no longer valid.
         if (gametick >= gametick_before + 2) {
             gametick = 0; gametick_before = 0;
@@ -218,7 +223,34 @@ public class Store {
         }
 
         // Save menu option and target for other triggers to use.
-        menuOptionsClicked.add(advancedMenuEntry);
+        menuOptionsClicked.add(customMenuOptionClicked);
+    }
+
+    private void checkBankWithdraw(final CustomMenuOptionClicked customMenuOptionClicked) {
+        final Matcher matcher = withdrawPattern.matcher(customMenuOptionClicked.option);
+        if (!matcher.find()) return;
+
+        final String amountString = matcher.group("amount");
+        if (amountString.equals("X")) return;
+
+        final int amount =
+            amountString.equals("All") ? bank.count(customMenuOptionClicked.itemId) :
+            amountString.equals("All-but-1") ? bank.count(customMenuOptionClicked.itemId) - 1 :
+            Integer.parseInt(amountString);
+
+        final ItemComposition itemComposition = itemManager.getItemComposition(customMenuOptionClicked.itemId);
+
+        // Copy of current inventory.
+        final CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(inventory);
+
+        // Add new items.
+        if (itemComposition.isStackable() || client.getVarbitValue(3958) == 1) {
+            itemContainerChanged.addStackableItem(new StorageItem(customMenuOptionClicked.itemId, amount));
+        } else {
+            itemContainerChanged.addNonStackableItem(new StorageItem(customMenuOptionClicked.itemId, Math.min(amount, 28 - inventory.getItems().size())));
+        }
+
+        onItemContainerChanged(itemContainerChanged);
     }
 
     private void runNextGameTickQueue() {
@@ -261,7 +293,7 @@ public class Store {
 
         // Keep only last menu entry.
         if (menuOptionsClicked.size() > 1) {
-            final AdvancedMenuEntry lastMenuEntry = menuOptionsClicked.get(menuOptionsClicked.size() - 1);
+            final CustomMenuOptionClicked lastMenuEntry = menuOptionsClicked.get(menuOptionsClicked.size() - 1);
             menuOptionsClicked.clear();
             menuOptionsClicked.add(lastMenuEntry);
         }
@@ -279,8 +311,8 @@ public class Store {
 
     public boolean inMenuTargets(final String ...targets) {
         for (final String target : targets) {
-            for (final AdvancedMenuEntry advancedMenuEntry : menuOptionsClicked) {
-                if (advancedMenuEntry.target.contains(target)) {
+            for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+                if (customMenuOptionClicked.target.contains(target)) {
                     return true;
                 }
             }
@@ -308,9 +340,9 @@ public class Store {
     }
 
     public boolean inMenuOptions(final String ...options) {
-        for (final AdvancedMenuEntry advancedMenuEntry : menuOptionsClicked) {
+        for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
             for (final String option : options) {
-                if (advancedMenuEntry.option.equals(option)) {
+                if (customMenuOptionClicked.option.equals(option)) {
                     return true;
                 }
             }
@@ -324,9 +356,9 @@ public class Store {
     }
 
     public boolean inMenuOptionIds(final int ...menuOptionIds) {
-        for (final AdvancedMenuEntry advancedMenuEntry : menuOptionsClicked) {
+        for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
             for (final int menuOptionId : menuOptionIds) {
-                if (advancedMenuEntry.eventId == menuOptionId) {
+                if (customMenuOptionClicked.eventId == menuOptionId) {
                     return true;
                 }
             }
@@ -340,9 +372,9 @@ public class Store {
     }
 
     public boolean inMenuImpostors(final int ...impostorIds) {
-        for (final AdvancedMenuEntry advancedMenuEntry : menuOptionsClicked) {
+        for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
             for (final int impostorId : impostorIds) {
-                if (advancedMenuEntry.impostorId == impostorId) {
+                if (customMenuOptionClicked.impostorId == impostorId) {
                     return true;
                 }
             }
