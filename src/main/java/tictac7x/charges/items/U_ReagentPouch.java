@@ -111,7 +111,7 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
 
             new OnMenuOptionClicked("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory).consumer(() -> {
                 for (final StorageItem item : store.inventory.getItems()) {
-                    store.addConsumerToNextTickQueue(() -> storage.add(item));
+                    storage.add(item);
                 }
             }),
 

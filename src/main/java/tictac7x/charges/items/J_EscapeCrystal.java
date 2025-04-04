@@ -88,7 +88,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     private boolean isAboutToActivate() {
-        return isActivated() && isInCombat() && (getSecondsRemainingUntilActivation() <= config.getEscapeCrystalTimeRemainingWarning());
+        return config.getEscapeCrystalTimeRemainingWarning() > 0 && isActivated() && isInCombat() && getSecondsRemainingUntilActivation() <= config.getEscapeCrystalTimeRemainingWarning();
     }
 
     @Override

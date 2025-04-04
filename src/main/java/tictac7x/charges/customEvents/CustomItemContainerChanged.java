@@ -93,7 +93,7 @@ public class CustomItemContainerChanged {
 
     @Override
     public String toString() {
-        String string = "ITEM CONTAINER CHANGED: " + itemContainerId + "\r\n";
+        String string = "ITEM CONTAINER CHANGED: | item container id: " + itemContainerId + "\r\n";
 
         for (final StorageItem item : items) {
             string += item.getId() + ", quantity: " + item.getQuantity() + "\r\n";

@@ -458,7 +458,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		} catch (final Exception ignored) {}
 
 		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, impostorId);
-		System.out.println(customMenuOptionClicked);
 
 		if (
 			// Menu option not found.
@@ -477,10 +476,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		) return;
 
 		store.onMenuOptionClicked(customMenuOptionClicked);
-
-		for (final ChargedItemBase chargedItem : chargedItems) {
-			chargedItem.onMenuOptionClicked(customMenuOptionClicked);
-		}
+		store.addConsumerToNextTickQueue(() -> {
+			for (final ChargedItemBase chargedItem : chargedItems) {
+				chargedItem.onMenuOptionClicked(customMenuOptionClicked);
+			}
+		});
 	}
 
 	final List<Integer> scriptIdsToIgnore = Arrays.asList(
