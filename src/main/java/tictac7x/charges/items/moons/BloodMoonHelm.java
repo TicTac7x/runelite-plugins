@@ -17,8 +17,8 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class EclipseMoonChestplate extends ChargedItem {
-    public EclipseMoonChestplate(
+public class BloodMoonHelm extends ChargedItem {
+    public BloodMoonHelm(
             final Client client,
             final ClientThread clientThread,
             final ConfigManager configManager,
@@ -30,18 +30,18 @@ public class EclipseMoonChestplate extends ChargedItem {
             final Store store,
             final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.moons_gear + "_eclipse_chestplate", ItemID.ECLIPSE_MOON_CHESTPLATE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.moons_gear + "_blood_helm", ItemID.BLOOD_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.ECLIPSE_MOON_CHESTPLATE).fixedCharges(3000),
-            new TriggerItem(ItemID.ECLIPSE_MOON_CHESTPLATE_29031),
-            new TriggerItem(ItemID.ECLIPSE_MOON_CHESTPLATE_29840),
-            new TriggerItem(ItemID.ECLIPSE_MOON_CHESTPLATE_BROKEN).fixedCharges(0),
+            new TriggerItem(ItemID.BLOOD_MOON_HELM).fixedCharges(3000),
+            new TriggerItem(ItemID.BLOOD_MOON_HELM_29047),
+            new TriggerItem(ItemID.BLOOD_MOON_HELM_29848),
+            new TriggerItem(ItemID.BLOOD_MOON_HELM_BROKEN).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{
             // Check.
-            new OnChatMessage("Your Eclipse moon chestplate has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
+            new OnChatMessage("Your Blood moon helm has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
             // In combat.
             new OnCombat(90).isEquipped().decreaseCharges(1),

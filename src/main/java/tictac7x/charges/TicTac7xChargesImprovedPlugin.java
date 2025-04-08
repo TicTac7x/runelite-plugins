@@ -28,7 +28,7 @@ import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
-import tictac7x.charges.items.moons.EclipseMoonChestplate;
+import tictac7x.charges.items.moons.*;
 import tictac7x.charges.store.Store;
 
 import javax.inject.Inject;
@@ -354,7 +354,15 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new VeracsFlail(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 
 			// Moons armor set.
+			new BloodMoonHelm(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new BloodMoonChestplate(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new BloodMoonTassets(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new BlueMoonHelm(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new BlueMoonChestplate(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new BlueMoonTassets(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new EclipseMoonHelm(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new EclipseMoonChestplate(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new EclipseMoonTassets(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 		};
 
 		store.setChargedItems(chargedItems);

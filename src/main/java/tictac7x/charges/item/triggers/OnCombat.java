@@ -7,6 +7,5 @@ public class OnCombat extends TriggerBase {
 
     public OnCombat(final int ticksInCombat) {
         this.ticksInCombat = ticksInCombat;
-        this.isEquipped = Optional.of(true);
     }
 }

@@ -24,7 +24,7 @@ public class ChargedItem extends ChargedItemBase {
     public String getCharges(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
-                return String.valueOf(triggerItem.fixedCharges.get());
+                return getChargesMinified(triggerItem.fixedCharges.get());
             }
         }
 
@@ -33,7 +33,7 @@ public class ChargedItem extends ChargedItemBase {
         }
 
         if (getChargesFromConfig() >= 0) {
-            return String.valueOf(getChargesFromConfig());
+            return getChargesMinified(getChargesFromConfig());
         }
 
         return "?";

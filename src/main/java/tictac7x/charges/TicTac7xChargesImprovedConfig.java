@@ -447,7 +447,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = moons_gear + infobox,
-            name = "Moons set",
+            name = "Moons gear",
             description = "",
             section = infoboxes
         ) default boolean moonsSetInfobox() { return true; }
@@ -2067,9 +2067,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getIbansStaffCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = moons_gear,
-            name = moons_gear,
-            description = moons_gear,
+            keyName = moons_gear + "_eclipse_chestplate",
+            name = moons_gear + "_eclipse_chestplate",
+            description = moons_gear + "_eclipse_chestplate",
             section = debug
         ) default int getEclipseMoonChestplateCharges() { return Charges.UNKNOWN; }
 
