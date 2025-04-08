@@ -27,7 +27,7 @@ public class ToragsPlatelegs extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Torag's legs", ItemID.TORAGS_PLATELEGS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Torag's legs", 80_000, ItemID.TORAGS_PLATELEGS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TORAGS_PLATELEGS).fixedCharges(100),
             new TriggerItem(ItemID.TORAGS_PLATELEGS_100),

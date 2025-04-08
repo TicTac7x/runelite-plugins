@@ -4,4 +4,5 @@ public enum CombatTimeDegradableStyle {
     CHARGES,
     PERCENTAGE,
     TIME,
+    MONEY,
 }

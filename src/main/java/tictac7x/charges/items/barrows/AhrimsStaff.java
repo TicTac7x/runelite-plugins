@@ -27,7 +27,7 @@ public class AhrimsStaff extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Ahrim's weapon", ItemID.AHRIMS_STAFF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's weapon", 100_000, ItemID.AHRIMS_STAFF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.AHRIMS_STAFF).fixedCharges(100),
             new TriggerItem(ItemID.AHRIMS_STAFF_100),

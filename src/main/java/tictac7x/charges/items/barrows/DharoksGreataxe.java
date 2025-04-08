@@ -27,7 +27,7 @@ public class DharoksGreataxe extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Dharok's weapon", ItemID.DHAROKS_GREATAXE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Dharok's weapon", 100_000, ItemID.DHAROKS_GREATAXE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DHAROKS_GREATAXE).fixedCharges(100),
             new TriggerItem(ItemID.DHAROKS_GREATAXE_100),

@@ -2,6 +2,7 @@ package tictac7x.charges.items.barrows;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -17,8 +18,11 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Store;
 
 public class _BarrowsItem extends ChargedItem {
+    private final int totalRepairCost;
+
     public _BarrowsItem(
         final String itemName,
+        final int totalRepairCost,
         final int itemId,
         final Client client,
         final ClientThread clientThread,
@@ -45,6 +49,7 @@ public class _BarrowsItem extends ChargedItem {
             store,
             gson
         );
+        this.totalRepairCost = totalRepairCost;
 
         this.triggers = new TriggerBase[]{
             new OnChatMessage(itemName + ": (?<percentage>.+)% remaining until the next degradation.").matcherConsumer((m) -> {
@@ -75,6 +80,11 @@ public class _BarrowsItem extends ChargedItem {
             case TIME:
                 final double hours = (double) (getChargesFromConfig() * 90 * 600) / 1000 / 3600;
                 return String.format("%." + (hours % 1 == 0 ? "0" : "1") + "fh", hours);
+            case MONEY:
+                final double modifier = 1 - (client.getRealSkillLevel(Skill.SMITHING) / 200.0);
+                final double repairFraction = (double) (3000 - getChargesFromConfig()) / 3000;
+                final int repairCost = (int) Math.ceil(totalRepairCost * modifier * repairFraction);
+                return super.getChargesMinified(repairCost) + "gp";
             case CHARGES:
             default:
                 return super.getChargesMinified(itemId);

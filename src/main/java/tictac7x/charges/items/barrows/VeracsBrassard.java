@@ -27,7 +27,7 @@ public class VeracsBrassard extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Verac's body", ItemID.VERACS_BRASSARD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Verac's body", 90_000, ItemID.VERACS_BRASSARD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.VERACS_BRASSARD).fixedCharges(100),
             new TriggerItem(ItemID.VERACS_BRASSARD_100),

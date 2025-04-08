@@ -26,7 +26,7 @@ public class AhrimsHood extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Ahrim's hood", ItemID.AHRIMS_HOOD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's hood", 60_000, ItemID.AHRIMS_HOOD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.AHRIMS_HOOD).fixedCharges(100),
             new TriggerItem(ItemID.AHRIMS_HOOD_100),

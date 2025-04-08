@@ -27,7 +27,7 @@ public class VeracsHelm extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Verac's helmet", ItemID.VERACS_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Verac's helmet", 60_000, ItemID.VERACS_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.VERACS_HELM).fixedCharges(100),
             new TriggerItem(ItemID.VERACS_HELM_100),

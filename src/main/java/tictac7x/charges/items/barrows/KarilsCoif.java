@@ -27,7 +27,7 @@ public class KarilsCoif extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Karil's coif", ItemID.KARILS_COIF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Karil's coif", 60_000, ItemID.KARILS_COIF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KARILS_COIF).fixedCharges(100),
             new TriggerItem(ItemID.KARILS_COIF_100),

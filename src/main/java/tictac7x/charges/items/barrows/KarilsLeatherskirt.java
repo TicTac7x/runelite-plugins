@@ -29,7 +29,7 @@ public class KarilsLeatherskirt extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Karil's skirt", ItemID.KARILS_LEATHERSKIRT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Karil's skirt", 80_000, ItemID.KARILS_LEATHERSKIRT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KARILS_LEATHERSKIRT).fixedCharges(100),
             new TriggerItem(ItemID.KARILS_LEATHERSKIRT_100),

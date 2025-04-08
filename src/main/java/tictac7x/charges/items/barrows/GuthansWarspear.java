@@ -27,7 +27,7 @@ public class GuthansWarspear extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Guthan's weapon", ItemID.GUTHANS_WARSPEAR, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Guthan's weapon", 100_000, ItemID.GUTHANS_WARSPEAR, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.GUTHANS_WARSPEAR).fixedCharges(100),
             new TriggerItem(ItemID.GUTHANS_WARSPEAR_100),

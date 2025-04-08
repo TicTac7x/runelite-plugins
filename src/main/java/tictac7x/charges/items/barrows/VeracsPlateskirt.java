@@ -27,7 +27,7 @@ public class VeracsPlateskirt extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Verac's skirt", ItemID.VERACS_PLATESKIRT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Verac's skirt", 80_000, ItemID.VERACS_PLATESKIRT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.VERACS_PLATESKIRT).fixedCharges(100),
             new TriggerItem(ItemID.VERACS_PLATESKIRT_100),

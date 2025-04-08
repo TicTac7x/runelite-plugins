@@ -27,7 +27,7 @@ public class GuthansPlatebody extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Guthan's body", ItemID.GUTHANS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Guthan's body", 90_000, ItemID.GUTHANS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.GUTHANS_PLATEBODY).fixedCharges(100),
             new TriggerItem(ItemID.GUTHANS_PLATEBODY_100),

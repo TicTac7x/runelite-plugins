@@ -27,7 +27,7 @@ public class ToragsHelm extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Torag's helmet", ItemID.TORAGS_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Torag's helmet", 60_000, ItemID.TORAGS_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TORAGS_HELM).fixedCharges(100),
             new TriggerItem(ItemID.TORAGS_HELM_100),

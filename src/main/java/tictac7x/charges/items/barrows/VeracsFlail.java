@@ -27,7 +27,7 @@ public class VeracsFlail extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Verac's weapon", ItemID.VERACS_FLAIL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Verac's weapon", 100_000, ItemID.VERACS_FLAIL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.VERACS_FLAIL).fixedCharges(100),
             new TriggerItem(ItemID.VERACS_FLAIL_100),

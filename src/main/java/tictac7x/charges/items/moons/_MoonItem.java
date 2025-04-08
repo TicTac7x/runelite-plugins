@@ -2,6 +2,7 @@ package tictac7x.charges.items.moons;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -21,10 +22,15 @@ public class _MoonItem extends ChargedItem {
     protected String getChargesMinified(final int itemId) {
         switch (config.combatTimeDegradableStyle()) {
             case PERCENTAGE:
-                return getChargesFromConfig() * 100 / 3000 + "%";
+                return getChargesFromConfig() * 100 / 3000 + "";
             case TIME:
                 final double hours = (double) (getChargesFromConfig() * 90 * 600) / 1000 / 3600;
                 return String.format("%." + (hours % 1 == 0 ? "0" : "1") + "fh", hours);
+            case MONEY:
+                final double modifier = 1 - (client.getRealSkillLevel(Skill.SMITHING) / 200.0);
+                final double repairFraction = (double) (3000 - getChargesFromConfig()) / 3000;
+                final int repairCost = (int) Math.ceil(1_500_000 * modifier * repairFraction);
+                return super.getChargesMinified(repairCost) + "gp";
             case CHARGES:
             default:
                 return super.getChargesMinified(itemId);

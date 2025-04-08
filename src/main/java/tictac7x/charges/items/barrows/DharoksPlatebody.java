@@ -27,7 +27,7 @@ public class DharoksPlatebody extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Dharok's body", ItemID.DHAROKS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Dharok's body", 90_000, ItemID.DHAROKS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DHAROKS_PLATEBODY).fixedCharges(100),
             new TriggerItem(ItemID.DHAROKS_PLATEBODY_100),

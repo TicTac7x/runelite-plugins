@@ -27,7 +27,7 @@ public class ToragsHammers extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Torag's weapon", ItemID.TORAGS_HAMMERS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Torag's weapon", 100_000, ItemID.TORAGS_HAMMERS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TORAGS_HAMMERS).fixedCharges(100),
             new TriggerItem(ItemID.TORAGS_HAMMERS_100),
