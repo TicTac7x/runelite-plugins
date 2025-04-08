@@ -618,19 +618,19 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	private void checkForChargesReset() {
-		if (!config.showDailyReset()) return;
-
 		final String date = LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE);
 		if (date.equals(config.getResetDate())) return;
 
 		configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.date, date);
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onResetDaily());
 
-		chatMessageManager.queue(QueuedMessage.builder()
-			.type(ChatMessageType.CONSOLE)
-			.runeLiteFormattedMessage("<colHIGHLIGHT>Daily item charges have been reset.")
-			.build()
-		);
+		if (config.showDailyReset()) {
+			chatMessageManager.queue(QueuedMessage.builder()
+				.type(ChatMessageType.CONSOLE)
+				.runeLiteFormattedMessage("<colHIGHLIGHT>Daily item charges have been reset.")
+				.build()
+			);
+		}
 	}
 
 	private void configMigration() {
