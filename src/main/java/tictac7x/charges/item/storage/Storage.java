@@ -245,6 +245,7 @@ public class Storage {
 
     public void updateFromItemContainer(final CustomItemContainerChanged itemContainer) {
         storage = new StorageItems(itemContainer);
+        save();
     }
 
     public int getCharges() {

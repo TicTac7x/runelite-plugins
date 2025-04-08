@@ -2189,8 +2189,8 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = chugging_barrel + storage,
-            name = chugging_barrel,
-            description = chugging_barrel,
+            name = chugging_barrel + storage,
+            description = chugging_barrel + storage,
             section = debug
         ) default String getChuggingBarrelStorage() { return ""; }
 
