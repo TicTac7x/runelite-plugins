@@ -190,10 +190,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Override
 	protected void startUp() {
+		configMigration();
 		keyManager.registerKeyListener(this);
 		mouseManager.registerMouseListener(this);
 		mouseManager.registerMouseWheelListener(this);
-		configMigration();
 
 		store = new Store(client, itemManager, configManager);
 
@@ -374,7 +374,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		overlayManager.add(overlayChargedItems);
 
 		// Items infoboxes.
-		chargedItemsInfoboxes.clear();
 		for (final ChargedItemBase chargedItem : chargedItems) {
 			final ChargedItemInfobox chargedItemInfobox = new ChargedItemInfobox(chargedItem, itemManager, infoBoxManager, configManager, config, this);
 			chargedItemsInfoboxes.add(chargedItemInfobox);
@@ -387,9 +386,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		keyManager.unregisterKeyListener(this);
 		mouseManager.unregisterMouseListener(this);
 		mouseManager.unregisterMouseWheelListener(this);
-
 		overlayManager.remove(overlayChargedItems);
 		chargedItemsInfoboxes.forEach(chargedItemInfobox -> infoBoxManager.removeInfoBox(chargedItemInfobox));
+		chargedItemsInfoboxes.clear();
 	}
 
 	@Subscribe
