@@ -22,7 +22,7 @@ public class _MoonItem extends ChargedItem {
     protected String getChargesMinified(final int itemId) {
         switch (config.combatTimeDegradableStyle()) {
             case PERCENTAGE:
-                return getChargesFromConfig() * 100 / 3000 + "";
+                return getChargesFromConfig() * 100 / 3000 + "%";
             case TIME:
                 final double hours = (double) (getChargesFromConfig() * 90 * 600) / 1000 / 3600;
                 return String.format("%." + (hours % 1 == 0 ? "0" : "1") + "fh", hours);
