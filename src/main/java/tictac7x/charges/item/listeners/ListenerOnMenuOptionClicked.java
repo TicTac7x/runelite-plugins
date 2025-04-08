@@ -42,6 +42,7 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
         for (final String option : trigger.options) {
             if (event.option.equals(option)) {
                 optionCheck = true;
+                break;
             }
         }
         if (!optionCheck) return false;
