@@ -17,7 +17,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class BlueMoonChestplate extends ChargedItem {
+public class BlueMoonChestplate extends _MoonItem {
     public BlueMoonChestplate(
             final Client client,
             final ClientThread clientThread,
@@ -30,7 +30,7 @@ public class BlueMoonChestplate extends ChargedItem {
             final Store store,
             final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.moons_gear + "_blue_chestplate", ItemID.BLUE_MOON_CHESTPLATE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("blue_chestplate", ItemID.BLUE_MOON_CHESTPLATE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BLUE_MOON_CHESTPLATE).fixedCharges(3000),

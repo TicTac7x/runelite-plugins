@@ -17,7 +17,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class EclipseMoonHelm extends ChargedItem {
+public class EclipseMoonHelm extends _MoonItem {
     public EclipseMoonHelm(
             final Client client,
             final ClientThread clientThread,
@@ -30,7 +30,7 @@ public class EclipseMoonHelm extends ChargedItem {
             final Store store,
             final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.moons_gear + "_eclipse_helm", ItemID.ECLIPSE_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("eclipse_helm", ItemID.ECLIPSE_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ECLIPSE_MOON_HELM).fixedCharges(3000),

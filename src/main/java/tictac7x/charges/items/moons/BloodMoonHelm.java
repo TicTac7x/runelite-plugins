@@ -17,7 +17,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class BloodMoonHelm extends ChargedItem {
+public class BloodMoonHelm extends _MoonItem {
     public BloodMoonHelm(
             final Client client,
             final ClientThread clientThread,
@@ -30,7 +30,7 @@ public class BloodMoonHelm extends ChargedItem {
             final Store store,
             final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.moons_gear + "_blood_helm", ItemID.BLOOD_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("blood_helm", ItemID.BLOOD_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BLOOD_MOON_HELM).fixedCharges(3000),
