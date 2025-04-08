@@ -66,4 +66,18 @@ public class _BarrowsItem extends ChargedItem {
             new OnCombat(90).isEquipped().decreaseCharges(1),
         };
     }
+
+    @Override
+    protected String getChargesMinified(final int itemId) {
+        switch (config.combatTimeDegradableStyle()) {
+            case PERCENTAGE:
+                return getChargesFromConfig() * 100 / 1000 + "%";
+            case TIME:
+                final double hours = (double) (getChargesFromConfig() * 90 * 600) / 1000 / 3600;
+                return String.format("%." + (hours % 1 == 0 ? "0" : "1") + "fh", hours);
+            case CHARGES:
+            default:
+                return super.getChargesMinified(itemId);
+        }
+    }
 }

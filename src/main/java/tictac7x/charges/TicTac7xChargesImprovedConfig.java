@@ -2,6 +2,7 @@ package tictac7x.charges;
 
 import net.runelite.client.config.*;
 import tictac7x.charges.store.Charges;
+import tictac7x.charges.store.CombatTimeDegradableStyle;
 import tictac7x.charges.store.ItemActivity;
 import tictac7x.charges.store.ItemOverlayLocation;
 
@@ -227,11 +228,19 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean showUnlimited() { return true; }
 
         @ConfigItem(
+            keyName = "combat_degradable_style",
+            name = "Time degradable style",
+            description = "How to show charges for combat time degradable gear",
+            section = general,
+            position = 9
+        ) default CombatTimeDegradableStyle combatTimeDegradableStyle() { return CombatTimeDegradableStyle.CHARGES; }
+
+        @ConfigItem(
             keyName = "show_daily_reset",
             name = "Show daily reset message",
             description = "Show message in chatbox when items daily charges have been reset",
             section = general,
-            position = 9
+            position = 10
         ) default boolean showDailyReset() { return false; }
 
     @ConfigSection(

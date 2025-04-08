@@ -129,7 +129,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Moon gear added.<br>" +
-		"<colHIGHLIGHT>* In combat charges tracking support added for barrows and moon gear."
+		"<colHIGHLIGHT>* In combat charges tracking support added for barrows and moon gear.<br>" +
+		"<colHIGHLIGHT>* Combat time degradable items styles can be changed to charges/percentages/time."
 	;
 
 	private final int VARBIT_MINUTES = 8354;

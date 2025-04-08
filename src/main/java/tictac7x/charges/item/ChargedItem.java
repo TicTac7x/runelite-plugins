@@ -85,7 +85,7 @@ public class ChargedItem extends ChargedItemBase {
         setCharges(this.getChargesFromConfig() + charges);
     }
 
-    private int getChargesFromConfig() {
+    protected int getChargesFromConfig() {
         final Optional<String> charges = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
 
         if (!charges.isPresent()) {
