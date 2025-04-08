@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class DharoksGreataxe extends ChargedItem {
+public class DharoksGreataxe extends _BarrowsItem {
     public DharoksGreataxe(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +27,14 @@ public class DharoksGreataxe extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.DHAROKS_GREATAXE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Dharok's weapon", ItemID.DHAROKS_GREATAXE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DHAROKS_GREATAXE).fixedCharges(100),
-            new TriggerItem(ItemID.DHAROKS_GREATAXE_100).fixedCharges(100),
-            new TriggerItem(ItemID.DHAROKS_GREATAXE_75).fixedCharges(75),
-            new TriggerItem(ItemID.DHAROKS_GREATAXE_50).fixedCharges(50),
-            new TriggerItem(ItemID.DHAROKS_GREATAXE_25).fixedCharges(25),
-            new TriggerItem(ItemID.DHAROKS_GREATAXE_0).fixedCharges(0)
+            new TriggerItem(ItemID.DHAROKS_GREATAXE_100),
+            new TriggerItem(ItemID.DHAROKS_GREATAXE_75),
+            new TriggerItem(ItemID.DHAROKS_GREATAXE_50),
+            new TriggerItem(ItemID.DHAROKS_GREATAXE_25),
+            new TriggerItem(ItemID.DHAROKS_GREATAXE_0).fixedCharges(0),
         };
     }
 }

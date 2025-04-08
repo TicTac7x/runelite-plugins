@@ -125,10 +125,11 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.5.23";
-	private final String pluginMessage = "" +
+	private final String pluginVersion = "v0.6";
+	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Amulet of chemistry added."
+		"<colHIGHLIGHT>* Moon gear added.<br>" +
+		"<colHIGHLIGHT>* In combat charges tracking support added for barrows and moon gear."
 	;
 
 	private final int VARBIT_MINUTES = 8354;

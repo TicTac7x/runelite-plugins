@@ -16,7 +16,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class AhrimsRobetop extends ChargedItem {
+public class AhrimsRobetop extends _BarrowsItem {
     public AhrimsRobetop(
         final Client client,
         final ClientThread clientThread,
@@ -29,17 +29,14 @@ public class AhrimsRobetop extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.AHRIMS_ROBETOP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's body", ItemID.AHRIMS_ROBETOP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.AHRIMS_ROBETOP).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_100).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_75).fixedCharges(75),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_50).fixedCharges(50),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_25).fixedCharges(25),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_0).fixedCharges(0)
-        };
-        this.triggers = new TriggerBase[]{
-            new OnChatMessage("Ahrim's body has broken!").notification(),
+            new TriggerItem(ItemID.AHRIMS_ROBETOP_100),
+            new TriggerItem(ItemID.AHRIMS_ROBETOP_75),
+            new TriggerItem(ItemID.AHRIMS_ROBETOP_50),
+            new TriggerItem(ItemID.AHRIMS_ROBETOP_25),
+            new TriggerItem(ItemID.AHRIMS_ROBETOP_0).fixedCharges(0),
         };
     }
 }

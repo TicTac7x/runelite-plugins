@@ -85,9 +85,10 @@ public class ChargedItemInfobox extends InfoBox {
     }
 
     private boolean isChargedItemInfoboxEnabled() {
-        final String configKey = (chargedItem.configKey.contains(TicTac7xChargesImprovedConfig.moons_gear)
-            ? TicTac7xChargesImprovedConfig.moons_gear
-            : chargedItem.configKey
+        final String configKey = (
+            chargedItem.configKey.contains(TicTac7xChargesImprovedConfig.barrows_gear) ? TicTac7xChargesImprovedConfig.barrows_gear :
+            chargedItem.configKey.contains(TicTac7xChargesImprovedConfig.moons_gear) ? TicTac7xChargesImprovedConfig.moons_gear :
+            chargedItem.configKey
         ) + TicTac7xChargesImprovedConfig.infobox;
 
         final Optional<String> visible = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));

@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class GuthansPlatebody extends ChargedItem {
+public class GuthansPlatebody extends _BarrowsItem {
     public GuthansPlatebody(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +27,14 @@ public class GuthansPlatebody extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.GUTHANS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Guthan's body", ItemID.GUTHANS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.GUTHANS_PLATEBODY).fixedCharges(100),
-            new TriggerItem(ItemID.GUTHANS_PLATEBODY_100).fixedCharges(100),
-            new TriggerItem(ItemID.GUTHANS_PLATEBODY_75).fixedCharges(75),
-            new TriggerItem(ItemID.GUTHANS_PLATEBODY_50).fixedCharges(50),
-            new TriggerItem(ItemID.GUTHANS_PLATEBODY_25).fixedCharges(25),
-            new TriggerItem(ItemID.GUTHANS_PLATEBODY_0).fixedCharges(0)
+            new TriggerItem(ItemID.GUTHANS_PLATEBODY_100),
+            new TriggerItem(ItemID.GUTHANS_PLATEBODY_75),
+            new TriggerItem(ItemID.GUTHANS_PLATEBODY_50),
+            new TriggerItem(ItemID.GUTHANS_PLATEBODY_25),
+            new TriggerItem(ItemID.GUTHANS_PLATEBODY_0).fixedCharges(0),
         };
     }
 }

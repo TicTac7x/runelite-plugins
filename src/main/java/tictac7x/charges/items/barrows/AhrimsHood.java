@@ -10,11 +10,10 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class AhrimsHood extends ChargedItem {
+public class AhrimsHood extends _BarrowsItem {
     public AhrimsHood(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +26,14 @@ public class AhrimsHood extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.AHRIMS_HOOD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's hood", ItemID.AHRIMS_HOOD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.AHRIMS_HOOD).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_HOOD_100).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_HOOD_75).fixedCharges(75),
-            new TriggerItem(ItemID.AHRIMS_HOOD_50).fixedCharges(50),
-            new TriggerItem(ItemID.AHRIMS_HOOD_25).fixedCharges(25),
-            new TriggerItem(ItemID.AHRIMS_HOOD_0).fixedCharges(0)
+            new TriggerItem(ItemID.AHRIMS_HOOD_100),
+            new TriggerItem(ItemID.AHRIMS_HOOD_75),
+            new TriggerItem(ItemID.AHRIMS_HOOD_50),
+            new TriggerItem(ItemID.AHRIMS_HOOD_25),
+            new TriggerItem(ItemID.AHRIMS_HOOD_0).fixedCharges(0),
         };
     }
 }

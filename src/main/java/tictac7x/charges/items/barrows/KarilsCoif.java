@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class KarilsCoif extends ChargedItem {
+public class KarilsCoif extends _BarrowsItem {
     public KarilsCoif(
         final Client client,
         final ClientThread clientThread,
@@ -27,13 +27,13 @@ public class KarilsCoif extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.KARILS_COIF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Karil's coif", ItemID.KARILS_COIF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KARILS_COIF).fixedCharges(100),
-            new TriggerItem(ItemID.KARILS_COIF_100).fixedCharges(100),
-            new TriggerItem(ItemID.KARILS_COIF_75).fixedCharges(75),
-            new TriggerItem(ItemID.KARILS_COIF_50).fixedCharges(50),
-            new TriggerItem(ItemID.KARILS_COIF_25).fixedCharges(25),
+            new TriggerItem(ItemID.KARILS_COIF_100),
+            new TriggerItem(ItemID.KARILS_COIF_75),
+            new TriggerItem(ItemID.KARILS_COIF_50),
+            new TriggerItem(ItemID.KARILS_COIF_25),
             new TriggerItem(ItemID.KARILS_COIF_0).fixedCharges(0)
         };
     }

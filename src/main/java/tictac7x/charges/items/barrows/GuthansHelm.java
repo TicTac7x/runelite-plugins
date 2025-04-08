@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class GuthansHelm extends ChargedItem {
+public class GuthansHelm extends _BarrowsItem {
     public GuthansHelm(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +27,14 @@ public class GuthansHelm extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.GUTHANS_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Guthan's helmet", ItemID.GUTHANS_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.GUTHANS_HELM).fixedCharges(100),
-            new TriggerItem(ItemID.GUTHANS_HELM_100).fixedCharges(100),
-            new TriggerItem(ItemID.GUTHANS_HELM_75).fixedCharges(75),
-            new TriggerItem(ItemID.GUTHANS_HELM_50).fixedCharges(50),
-            new TriggerItem(ItemID.GUTHANS_HELM_25).fixedCharges(25),
-            new TriggerItem(ItemID.GUTHANS_HELM_0).fixedCharges(0)
+            new TriggerItem(ItemID.GUTHANS_HELM_100),
+            new TriggerItem(ItemID.GUTHANS_HELM_75),
+            new TriggerItem(ItemID.GUTHANS_HELM_50),
+            new TriggerItem(ItemID.GUTHANS_HELM_25),
+            new TriggerItem(ItemID.GUTHANS_HELM_0).fixedCharges(0),
         };
     }
 }

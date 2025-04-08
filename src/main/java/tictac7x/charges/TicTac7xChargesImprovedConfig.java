@@ -1913,6 +1913,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean showDebugIds() { return false; }
 
         @ConfigItem(
+            keyName = barrows_gear + "_ahrims_hood",
+            name = barrows_gear + "_ahrims_hood",
+            description = barrows_gear + "_ahrims_hood",
+            section = debug
+        ) default int ahrimsHoodCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
             keyName = ring_of_pursuit,
             name = ring_of_pursuit,
             description = ring_of_pursuit,

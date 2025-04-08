@@ -16,7 +16,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class KarilsLeathertop extends ChargedItem {
+public class KarilsLeathertop extends _BarrowsItem {
     public KarilsLeathertop(
         final Client client,
         final ClientThread clientThread,
@@ -29,17 +29,14 @@ public class KarilsLeathertop extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.KARILS_LEATHERTOP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Karil's body", ItemID.KARILS_LEATHERTOP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KARILS_LEATHERTOP).fixedCharges(100),
-            new TriggerItem(ItemID.KARILS_LEATHERTOP_100).fixedCharges(100),
-            new TriggerItem(ItemID.KARILS_LEATHERTOP_75).fixedCharges(75),
-            new TriggerItem(ItemID.KARILS_LEATHERTOP_50).fixedCharges(50),
-            new TriggerItem(ItemID.KARILS_LEATHERTOP_25).fixedCharges(25),
+            new TriggerItem(ItemID.KARILS_LEATHERTOP_100),
+            new TriggerItem(ItemID.KARILS_LEATHERTOP_75),
+            new TriggerItem(ItemID.KARILS_LEATHERTOP_50),
+            new TriggerItem(ItemID.KARILS_LEATHERTOP_25),
             new TriggerItem(ItemID.KARILS_LEATHERTOP_0).fixedCharges(0)
-        };
-        this.triggers = new TriggerBase[] {
-            new OnChatMessage("Karil's body has broken!").notification()
         };
     }
 }

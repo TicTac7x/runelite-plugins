@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class ToragsPlatebody extends ChargedItem {
+public class ToragsPlatebody extends _BarrowsItem {
     public ToragsPlatebody(
         final Client client,
         final ClientThread clientThread,
@@ -27,13 +27,13 @@ public class ToragsPlatebody extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.TORAGS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Torag's body", ItemID.TORAGS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.TORAGS_PLATEBODY).fixedCharges(100),
-            new TriggerItem(ItemID.TORAGS_PLATEBODY_100).fixedCharges(100),
-            new TriggerItem(ItemID.TORAGS_PLATEBODY_75).fixedCharges(75),
-            new TriggerItem(ItemID.TORAGS_PLATEBODY_50).fixedCharges(50),
-            new TriggerItem(ItemID.TORAGS_PLATEBODY_25).fixedCharges(25),
+            new TriggerItem(ItemID.TORAGS_PLATEBODY_100),
+            new TriggerItem(ItemID.TORAGS_PLATEBODY_75),
+            new TriggerItem(ItemID.TORAGS_PLATEBODY_50),
+            new TriggerItem(ItemID.TORAGS_PLATEBODY_25),
             new TriggerItem(ItemID.TORAGS_PLATEBODY_0).fixedCharges(0)
         };
     }

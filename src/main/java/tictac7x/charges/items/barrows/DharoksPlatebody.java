@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class DharoksPlatebody extends ChargedItem {
+public class DharoksPlatebody extends _BarrowsItem {
     public DharoksPlatebody(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +27,14 @@ public class DharoksPlatebody extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.DHAROKS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Dharok's body", ItemID.DHAROKS_PLATEBODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.DHAROKS_PLATEBODY).fixedCharges(100),
-            new TriggerItem(ItemID.DHAROKS_PLATEBODY_100).fixedCharges(100),
-            new TriggerItem(ItemID.DHAROKS_PLATEBODY_75).fixedCharges(75),
-            new TriggerItem(ItemID.DHAROKS_PLATEBODY_50).fixedCharges(50),
-            new TriggerItem(ItemID.DHAROKS_PLATEBODY_25).fixedCharges(25),
-            new TriggerItem(ItemID.DHAROKS_PLATEBODY_0).fixedCharges(0)
+            new TriggerItem(ItemID.DHAROKS_PLATEBODY_100),
+            new TriggerItem(ItemID.DHAROKS_PLATEBODY_75),
+            new TriggerItem(ItemID.DHAROKS_PLATEBODY_50),
+            new TriggerItem(ItemID.DHAROKS_PLATEBODY_25),
+            new TriggerItem(ItemID.DHAROKS_PLATEBODY_0).fixedCharges(0),
         };
     }
 }

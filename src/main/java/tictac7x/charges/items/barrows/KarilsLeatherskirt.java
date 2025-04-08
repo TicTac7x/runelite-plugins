@@ -16,7 +16,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class KarilsLeatherskirt extends ChargedItem {
+public class KarilsLeatherskirt extends _BarrowsItem {
     public KarilsLeatherskirt(
         final Client client,
         final ClientThread clientThread,
@@ -29,17 +29,14 @@ public class KarilsLeatherskirt extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.KARILS_LEATHERSKIRT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Karil's skirt", ItemID.KARILS_LEATHERSKIRT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.KARILS_LEATHERSKIRT).fixedCharges(100),
-            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_100).fixedCharges(100),
-            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_75).fixedCharges(75),
-            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_50).fixedCharges(50),
-            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_25).fixedCharges(25),
+            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_100),
+            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_75),
+            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_50),
+            new TriggerItem(ItemID.KARILS_LEATHERSKIRT_25),
             new TriggerItem(ItemID.KARILS_LEATHERSKIRT_0).fixedCharges(0)
-        };
-        this.triggers = new TriggerBase[]{
-            new OnChatMessage("Karil's skirt has broken!").notification()
         };
     }
 }

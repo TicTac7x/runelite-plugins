@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class GuthansWarspear extends ChargedItem {
+public class GuthansWarspear extends _BarrowsItem {
     public GuthansWarspear(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +27,14 @@ public class GuthansWarspear extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.GUTHANS_WARSPEAR, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Guthan's weapon", ItemID.GUTHANS_WARSPEAR, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.GUTHANS_WARSPEAR).fixedCharges(100),
-            new TriggerItem(ItemID.GUTHANS_WARSPEAR_100).fixedCharges(100),
-            new TriggerItem(ItemID.GUTHANS_WARSPEAR_75).fixedCharges(75),
-            new TriggerItem(ItemID.GUTHANS_WARSPEAR_50).fixedCharges(50),
-            new TriggerItem(ItemID.GUTHANS_WARSPEAR_25).fixedCharges(25),
-            new TriggerItem(ItemID.GUTHANS_WARSPEAR_0).fixedCharges(0)
+            new TriggerItem(ItemID.GUTHANS_WARSPEAR_100),
+            new TriggerItem(ItemID.GUTHANS_WARSPEAR_75),
+            new TriggerItem(ItemID.GUTHANS_WARSPEAR_50),
+            new TriggerItem(ItemID.GUTHANS_WARSPEAR_25),
+            new TriggerItem(ItemID.GUTHANS_WARSPEAR_0).fixedCharges(0),
         };
     }
 }

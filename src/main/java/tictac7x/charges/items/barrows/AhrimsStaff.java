@@ -14,7 +14,7 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class AhrimsStaff extends ChargedItem {
+public class AhrimsStaff extends _BarrowsItem {
     public AhrimsStaff(
         final Client client,
         final ClientThread clientThread,
@@ -27,14 +27,14 @@ public class AhrimsStaff extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.barrows_gear, ItemID.AHRIMS_STAFF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's weapon", ItemID.AHRIMS_STAFF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.AHRIMS_STAFF).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_STAFF_100).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_STAFF_75).fixedCharges(75),
-            new TriggerItem(ItemID.AHRIMS_STAFF_50).fixedCharges(50),
-            new TriggerItem(ItemID.AHRIMS_STAFF_25).fixedCharges(25),
-            new TriggerItem(ItemID.AHRIMS_STAFF_0).fixedCharges(0)
+            new TriggerItem(ItemID.AHRIMS_STAFF_100),
+            new TriggerItem(ItemID.AHRIMS_STAFF_75),
+            new TriggerItem(ItemID.AHRIMS_STAFF_50),
+            new TriggerItem(ItemID.AHRIMS_STAFF_25),
+            new TriggerItem(ItemID.AHRIMS_STAFF_0).fixedCharges(0),
         };
     }
 }
