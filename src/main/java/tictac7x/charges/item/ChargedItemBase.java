@@ -55,6 +55,7 @@ public abstract class ChargedItemBase {
     private final ListenerOnUserAction listenerOnUserAction;
     private final ListenerOnMenuOptionClicked listenerOnMenuOptionClicked;
     private final ListenerOnScriptPreFired listenerOnScriptPreFired;
+    private final ListenerOnCombat listenerOnCombat;
 
     public boolean inInventory = false;
     public boolean inEquipment = false;
@@ -100,6 +101,7 @@ public abstract class ChargedItemBase {
         listenerOnUserAction = new ListenerOnUserAction(client, itemManager, this, notifier, config);
         listenerOnMenuOptionClicked = new ListenerOnMenuOptionClicked(client, itemManager, this, notifier, config);
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(client, itemManager, this, notifier, config);
+        listenerOnCombat = new ListenerOnCombat(client, itemManager, this, notifier, config);
     }
 
     public abstract String getCharges(final int itemId);
@@ -253,5 +255,10 @@ public abstract class ChargedItemBase {
     public void onScriptPreFired(final ScriptPreFired event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnScriptPreFired.trigger(event);
+    }
+
+    public void onCombat() {
+        if (!inInventoryOrEquipment()) return;
+        listenerOnCombat.trigger();
     }
 }

@@ -1,9 +1,7 @@
 package tictac7x.charges.store;
 
 import net.runelite.api.*;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.StatChanged;
+import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
@@ -25,9 +23,11 @@ public class Store {
     private final Client client;
     private final ItemManager itemManager;
     private final ConfigManager configManager;
+    private final int HIGHEST_MONSTER_ATTACK_SPEED = 8;
 
     private int gametick = 0;
     private int gametick_before = 0;
+    private int lastCombatCountdown = 0;
 
     private ChargedItemBase[] chargedItems = new ChargedItemBase[]{};
     private List<Integer> dailyResetItemIds = new ArrayList<>();
@@ -297,6 +297,13 @@ public class Store {
             menuOptionsClicked.clear();
             menuOptionsClicked.add(lastMenuEntry);
         }
+
+        if (lastCombatCountdown > 0) {
+            for (final ChargedItemBase chargedItem : chargedItems) {
+                chargedItem.onCombat();
+            }
+            lastCombatCountdown--;
+        }
     }
 
     public boolean inMenuTargets(final int ...itemIds) {
@@ -535,5 +542,17 @@ public class Store {
 
     public void addConsumerToNextTickQueue(final Runnable consumer) {
         nextTickQueue.add(consumer);
+    }
+
+    public void onHitSplatApplied(final HitsplatApplied event) {
+        if (event.getHitsplat().isMine()) {
+            lastCombatCountdown =  HIGHEST_MONSTER_ATTACK_SPEED;
+        }
+    }
+
+    public void onGraphicChanged(final GraphicChanged event) {
+        if (event.getActor() == client.getLocalPlayer() && event.getActor().getGraphic() == GraphicID.SPLASH) {
+            lastCombatCountdown = HIGHEST_MONSTER_ATTACK_SPEED;
+        }
     }
 }

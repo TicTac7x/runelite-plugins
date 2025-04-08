@@ -28,6 +28,7 @@ import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
+import tictac7x.charges.items.moons.EclipseMoonChestplate;
 import tictac7x.charges.store.Store;
 
 import javax.inject.Inject;
@@ -351,6 +352,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new VeracsBrassard(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new VeracsPlateskirt(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new VeracsFlail(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+
+			// Moons armor set.
+			new EclipseMoonChestplate(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 		};
 
 		store.setChargedItems(chargedItems);
@@ -399,6 +403,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onGraphicChanged(final GraphicChanged event) {
 		if (event.getActor() != client.getLocalPlayer()) return;
+		store.onGraphicChanged(event);
 
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onGraphicChanged(event));
 
@@ -415,6 +420,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onHitsplatApplied(final HitsplatApplied event) {
+		store.onHitSplatApplied(event);
+
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(event));
 
 //		System.out.println("HITSPLAT | " +

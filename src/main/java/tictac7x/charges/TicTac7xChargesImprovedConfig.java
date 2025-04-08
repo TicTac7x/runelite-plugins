@@ -25,6 +25,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String crystal_helm = "crystal_helm";
     String crystal_legs = "crystal_legs";
     String barrows_gear = "barrows_gear";
+    String moons_gear = "moons_gear";
 
     // Helms
     String circlet_of_water = "circlet_of_water";
@@ -443,6 +444,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean barrowsInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = moons_gear + infobox,
+            name = "Moons set",
+            description = "",
+            section = infoboxes
+        ) default boolean moonsSetInfobox() { return true; }
 
         @ConfigItem(
             keyName = crystal_body + infobox,
@@ -1220,6 +1228,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean barrowsOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = moons_gear + overlay,
+            name = "Moons gear",
+            description = "",
+            section = overlays
+        ) default boolean moonsGearOverlay() { return true; }
 
         @ConfigItem(
             keyName = bonecrusher + overlay,
@@ -2050,6 +2065,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = ibans_staff,
             section = debug
         ) default int getIbansStaffCharges() { return Charges.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = moons_gear,
+            name = moons_gear,
+            description = moons_gear,
+            section = debug
+        ) default int getEclipseMoonChestplateCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
             keyName = pharaohs_sceptre,
