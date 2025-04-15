@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class OnHitsplatApplied extends TriggerBase {
     public final HitsplatTarget hitsplatTarget;
-    public HitsplatGroup hitsplatGroup = HitsplatGroup.REGULAR;
+    public final HitsplatGroup hitsplatGroup;
 
     public Optional<Boolean> moreThanZeroDamage = Optional.empty();
     public Optional<String> hasTargetName = Optional.empty();
@@ -18,6 +18,12 @@ public class OnHitsplatApplied extends TriggerBase {
 
     public OnHitsplatApplied(final HitsplatTarget hitsplatTarget) {
         this.hitsplatTarget = hitsplatTarget;
+        this.hitsplatGroup = HitsplatGroup.SUCCESSFUL;
+    }
+
+    public OnHitsplatApplied(final HitsplatTarget hitsplatTarget, final HitsplatGroup hitsplatGroup) {
+        this.hitsplatTarget = hitsplatTarget;
+        this.hitsplatGroup = hitsplatGroup;
     }
 
     public OnHitsplatApplied moreThanZeroDamage() {

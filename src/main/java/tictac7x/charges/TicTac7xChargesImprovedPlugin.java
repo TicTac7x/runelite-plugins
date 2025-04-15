@@ -129,10 +129,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Amulet of chemistry added.<br>" +
-		"<colHIGHLIGHT>* Chugging barrel fixes.<br>" +
 		"<colHIGHLIGHT>* Moon gear added.<br>" +
 		"<colHIGHLIGHT>* In combat charges tracking support added for barrows and moon gear.<br>" +
-		"<colHIGHLIGHT>* Combat time degradable items styles can be changed to charges/percentages/time."
+		"<colHIGHLIGHT>* Combat time degradable items styles can be changed to charges/percentages/time.<br>" +
+		"<colHIGHLIGHT>* Chugging barrel and Efaritay's aid fixes."
 	;
 
 	private final int VARBIT_MINUTES = 8354;

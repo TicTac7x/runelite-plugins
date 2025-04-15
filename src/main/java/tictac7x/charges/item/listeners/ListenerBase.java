@@ -247,6 +247,11 @@ public abstract class ListenerBase {
             return false;
         }
 
+        // Specific item equipped check.
+        if (trigger.itemEquipped.isPresent() && !chargedItem.store.equipmentContainsItem(trigger.itemEquipped.get())) {
+            return false;
+        }
+
         return true;
     }
 }

@@ -25,12 +25,7 @@ public class _MoonItem extends ChargedItem {
                 return getChargesFromConfig() * 100 / 3000 + "%";
             case TIME:
                 final double hours = (double) (getChargesFromConfig() * 90 * 600) / 1000 / 3600;
-                return String.format("%." + (hours % 1 == 0 ? "0" : "1") + "fh", hours);
-            case MONEY:
-                final double modifier = 1 - (client.getRealSkillLevel(Skill.SMITHING) / 200.0);
-                final double repairFraction = (double) (3000 - getChargesFromConfig()) / 3000;
-                final int repairCost = (int) Math.ceil(1_500_000 * modifier * repairFraction);
-                return super.getChargesMinified(repairCost) + "gp";
+                return String.format("%.1fh", hours).replaceAll("\\.0", "");
             case CHARGES:
             default:
                 return super.getChargesMinified(itemId);

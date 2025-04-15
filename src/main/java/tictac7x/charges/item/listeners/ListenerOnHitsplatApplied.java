@@ -33,7 +33,7 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (triggerUsed) {
+            if (triggerUsed && !trigger.multiTrigger) {
                 // Once per game tick check.
                 if (trigger.oncePerGameTick.isPresent()) {
                     trigger.triggerTick = client.getTickCount();
@@ -64,12 +64,25 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             return false;
         }
 
-        // Hitsplay group check.
-        if (trigger.hitsplatGroup == HitsplatGroup.REGULAR && (
-            hitsplat.getHitsplatType() != HitsplatID.DAMAGE_ME &&
-            hitsplat.getHitsplatType() != HitsplatID.DAMAGE_MAX_ME
-        )) {
-            return false;
+        // All hitsplat check.
+        if (trigger.hitsplatGroup == HitsplatGroup.ALL) {
+            if (
+                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_ME &&
+                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_MAX_ME &&
+                hitsplat.getHitsplatType() != HitsplatID.BLOCK_ME
+            ) {
+                return false;
+            }
+        }
+
+        // Successful hitsplat check.
+        if (trigger.hitsplatGroup == HitsplatGroup.SUCCESSFUL) {
+            if (
+                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_ME &&
+                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_MAX_ME
+            ) {
+                return false;
+            }
         }
 
         // More than zero damage.

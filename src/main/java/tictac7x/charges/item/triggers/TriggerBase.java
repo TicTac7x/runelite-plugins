@@ -24,6 +24,7 @@ public abstract class TriggerBase {
     public Optional<Boolean> runConsumerOnNextGameTick = Optional.empty();
     public Optional<int[]> varbitCheck = Optional.empty();
     public Optional<int[][]> isWidgetVisible = Optional.empty();
+    public Optional<int[]> itemEquipped = Optional.empty();
     public boolean multiTrigger = false;
 
     // Actions.
@@ -201,6 +202,11 @@ public abstract class TriggerBase {
 
     public TriggerBase isWidgetVisible(final int[] ...widgetIds) {
         this.isWidgetVisible = Optional.of(widgetIds);
+        return this;
+    }
+
+    public TriggerBase itemEquipped(final int ...itemId) {
+        this.itemEquipped = Optional.of(itemId);
         return this;
     }
 }
