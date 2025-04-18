@@ -91,6 +91,28 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 39527, 39528
             ),
 
+            // Plank Make on Log in Inventory
+            new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
+                    "Plank Make -> Logs").requiredItem(ItemID.PLANK_SACK).consumer(
+                    () -> {
+                        storage.add(ItemID.PLANK, 1);
+                    }),
+            new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
+                    "Plank Make -> Oak logs").requiredItem(ItemID.PLANK_SACK).consumer(
+                    () -> {
+                        storage.add(ItemID.OAK_PLANK, 1);
+                    }),
+            new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
+                    "Plank Make -> Teak logs").requiredItem(ItemID.PLANK_SACK).consumer(
+                    () -> {
+                        storage.add(ItemID.TEAK_PLANK, 1);
+                    }),
+            new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
+                    "Plank Make -> Mahogany logs").requiredItem(ItemID.PLANK_SACK).consumer(
+                    () -> {
+                        storage.add(ItemID.MAHOGANY_PLANK, 1);
+                    }),
+
             // Mahogany homes - 1 plank
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
                 storage.removeAndPrioritizeInventory(getPlankIdBasedOnXpAndPlanks(xp, 1), 1);
