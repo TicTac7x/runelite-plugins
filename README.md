@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.6
+# Item Charges Improved - v0.6.1
 
 Show charges of various items that are in inventory or equipped
 
@@ -48,6 +48,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Efaritay's aid
 - Escape crystal
 - Explorer's ring
+- Games necklace
 - Giantsoul amulet
 - Necklace of passage
 - Pendant of ates

@@ -71,6 +71,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String escape_crystal_inactivity_period = "escape_crystal_inactivity_period";
     String escape_crystal_time_remaining_warning = "escape_crystal_time_remaining_warning";
     String explorers_ring = "explorers_ring";
+    String games_necklace = "games_necklace";
     String giantsoul_amulet = "giantsoul_amulet";
     String necklace_of_passage = "necklace_of_passage";
     String pendant_of_ates = "pendant_of_ates";
