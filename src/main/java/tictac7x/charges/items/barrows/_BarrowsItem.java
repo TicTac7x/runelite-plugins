@@ -54,16 +54,13 @@ public class _BarrowsItem extends ChargedItem {
         this.triggers = new TriggerBase[]{
             new OnChatMessage(itemName + ": (?<percentage>.+)% remaining until the next degradation.").matcherConsumer((m) -> {
                 final int percentage = Integer.parseInt(m.group("percentage"));
+                final int chargesUsedInCurrentTier = (100 - percentage) * 250 / 100;
 
                 for (final CustomMenuOptionClicked menuOptionClicked : store.menuOptionsClicked) {
-                    if (menuOptionClicked.target.contains("100")) {
-                        setCharges(1000 - (percentage * 250 / 100));
-                    } else if (menuOptionClicked.target.contains("75")) {
-                        setCharges(750 - (percentage * 250 / 100));
-                    } else if (menuOptionClicked.target.contains("50")) {
-                        setCharges(500 - (percentage * 250 / 100));
-                    } else if (menuOptionClicked.target.contains("25")) {
-                        setCharges(250 - (percentage * 250 / 100));
+                    if (menuOptionClicked.target.contains(itemManager.getItemComposition(itemId).getName())) {
+                        final int currentTierMaxCharges = Integer.parseInt(menuOptionClicked.target.replaceAll("\\D", "")) * 10;
+                        setCharges(currentTierMaxCharges - chargesUsedInCurrentTier);
+                        return;
                     }
                 }
             }),

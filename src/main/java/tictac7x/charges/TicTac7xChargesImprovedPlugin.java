@@ -128,7 +128,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.6.1";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Games necklace added."
+		"<colHIGHLIGHT>* Games necklace added.<br>" +
+		"<colHIGHLIGHT>* Barrows charges formula fixed."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -243,7 +244,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_GiantsoulAmulet(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_NecklaceOfPassage(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_PhoenixNecklace(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new J_DodgyNecklace(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gsv0on),
+			new J_DodgyNecklace(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_PendantOfAtes(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_CelestialRing(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_RingOfDueling(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
