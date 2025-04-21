@@ -1,10 +1,7 @@
 package tictac7x.charges;
 
 import net.runelite.client.config.*;
-import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.CombatTimeDegradableStyle;
-import tictac7x.charges.store.ItemActivity;
-import tictac7x.charges.store.ItemOverlayLocation;
+import tictac7x.charges.store.*;
 
 import java.awt.Color;
 
@@ -70,6 +67,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String escape_crystal_status = "escape_crystal_status";
     String escape_crystal_inactivity_period = "escape_crystal_inactivity_period";
     String escape_crystal_time_remaining_warning = "escape_crystal_time_remaining_warning";
+    String escape_crystal_time_remaining_unit = "escape_crystal_time_remaining_unit";
     String explorers_ring = "explorers_ring";
     String games_necklace = "games_necklace";
     String giantsoul_amulet = "giantsoul_amulet";
@@ -295,11 +293,19 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = escape_crystal_time_remaining_warning,
-            name = "Time remaining warning",
-            description = "How many seconds before you are warned before Escape crystal activates",
+            name = "Time remaining alert",
+            description = "How many time before you are warned before Escape crystal activates",
             position = 4,
             section = escape_crystal_section
         ) default int getEscapeCrystalTimeRemainingWarning() { return 5; }
+
+        @ConfigItem(
+            keyName = escape_crystal_time_remaining_unit,
+            name = "Time remaining unit",
+            description = "What unit to use for escape crystal activation (ticks is more precise)",
+            position = 5,
+            section = escape_crystal_section
+        ) default EscapeCrystalTimeRemainingUnit getEscapeCrystalTimeRemainingUnit() { return EscapeCrystalTimeRemainingUnit.TICKS; }
 
     @ConfigSection(
         name = "Infoboxes",
@@ -1895,7 +1901,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             name = version,
             description = "Version of the plugin for update message",
             section = debug,
-            position = 1
+            position = -4
         ) default String getVersion() { return ""; }
 
         @ConfigItem(
@@ -1903,24 +1909,24 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             name = "Date",
             description = "Date to check for charges reset when logging in",
             section = debug,
-            position = 2
+            position = -3
         ) default String getResetDate() { return ""; }
-
-        @ConfigItem(
-            keyName = storage_bank,
-            name = storage_bank,
-            description = "All player bank items to check for daily resets",
-            section = debug,
-            position = 3
-        ) default String getStorageBank() { return ""; }
 
         @ConfigItem(
             keyName = debug_ids,
             name = "Debug IDs",
             description = "Shows animation and graphics ids within ingame messages to add support for new items",
             section = debug,
-            position = 4
+            position = -2
         ) default boolean showDebugIds() { return false; }
+
+        @ConfigItem(
+            keyName = storage_bank,
+            name = storage_bank,
+            description = "All player bank items to check for daily resets",
+            section = debug,
+            position = 1
+        ) default String getStorageBank() { return ""; }
 
         @ConfigItem(
             keyName = barrows_gear + "_ahrims_hood",

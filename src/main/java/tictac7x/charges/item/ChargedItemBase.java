@@ -11,6 +11,7 @@ import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.listeners.*;
 import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -56,6 +57,7 @@ public abstract class ChargedItemBase {
     private final ListenerOnMenuOptionClicked listenerOnMenuOptionClicked;
     private final ListenerOnScriptPreFired listenerOnScriptPreFired;
     private final ListenerOnCombat listenerOnCombat;
+    private final ListenerOnGameTick listenerOnGameTick;
 
     public boolean inInventory = false;
     public boolean inEquipment = false;
@@ -102,6 +104,7 @@ public abstract class ChargedItemBase {
         listenerOnMenuOptionClicked = new ListenerOnMenuOptionClicked(client, itemManager, this, notifier, config);
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(client, itemManager, this, notifier, config);
         listenerOnCombat = new ListenerOnCombat(client, itemManager, this, notifier, config);
+        listenerOnGameTick = new ListenerOnGameTick(client, itemManager, this, notifier, config);
     }
 
     public abstract String getCharges(final int itemId);
@@ -190,7 +193,7 @@ public abstract class ChargedItemBase {
         }
     }
 
-    public void onHitsplatApplied(final HitsplatApplied event) {
+    public void onHitsplatApplied(final CustomHitsplatApplied event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnHitsplatApplied.trigger(event);
     }
@@ -260,5 +263,10 @@ public abstract class ChargedItemBase {
     public void onCombat() {
         if (!inInventoryOrEquipment()) return;
         listenerOnCombat.trigger();
+    }
+
+    public void onGameTick(final GameTick event) {
+        if (!inInventoryOrEquipment()) return;
+        listenerOnGameTick.trigger(event);
     }
 }

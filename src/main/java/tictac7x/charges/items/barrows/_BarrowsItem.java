@@ -2,6 +2,7 @@ package tictac7x.charges.items.barrows;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import net.runelite.api.ItemID;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -52,6 +53,7 @@ public class _BarrowsItem extends ChargedItem {
         this.totalRepairCost = totalRepairCost;
 
         this.triggers = new TriggerBase[]{
+            // Check.
             new OnChatMessage(itemName + ": (?<percentage>.+)% remaining until the next degradation.").matcherConsumer((m) -> {
                 final int percentage = Integer.parseInt(m.group("percentage"));
                 final int chargesUsedInCurrentTier = (100 - percentage) * 250 / 100;
@@ -65,6 +67,7 @@ public class _BarrowsItem extends ChargedItem {
                 }
             }),
 
+            // Degrade in combat.
             new OnCombat(90).isEquipped().decreaseCharges(1),
         };
     }

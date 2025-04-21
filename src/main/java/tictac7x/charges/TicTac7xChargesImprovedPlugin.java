@@ -21,6 +21,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
+import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
@@ -129,7 +130,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Games necklace added.<br>" +
-		"<colHIGHLIGHT>* Barrows charges formula fixed."
+		"<colHIGHLIGHT>* Barrows charges formula fixed.<br>" +
+		"<colHIGHLIGHT>* Escape crystal now uses ticks by default for more precise remaining time."
 	;
 
 	private final int VARBIT_MINUTES = 8354;
@@ -429,17 +431,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onHitsplatApplied(final HitsplatApplied event) {
-		store.onHitSplatApplied(event);
+		final CustomHitsplatApplied hitsplatApplied = new CustomHitsplatApplied(event, client);
+		store.onHitSplatApplied(hitsplatApplied);
 
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(event));
-
-//		System.out.println("HITSPLAT | " +
-//			"actor: " + (event.getActor() == client.getLocalPlayer() ? "self" : "enemy -> " + event.getActor().getName()) +
-//			", type: " + event.getHitsplat().getHitsplatType() +
-//			", amount:" + event.getHitsplat().getAmount() +
-//			", others: " + event.getHitsplat().isOthers() +
-//			", mine: " + event.getHitsplat().isMine()
-//		);
+		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(hitsplatApplied));
 	}
 
 	@Subscribe
@@ -605,8 +600,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	@Subscribe
-	public void onGameTick(final GameTick gametick) {
-		store.onGameTick(gametick);
+	public void onGameTick(final GameTick event) {
+		store.onGameTick(event);
+		Arrays.stream(chargedItems).forEach(infobox -> infobox.onGameTick(event));
 	}
 
 	@Subscribe

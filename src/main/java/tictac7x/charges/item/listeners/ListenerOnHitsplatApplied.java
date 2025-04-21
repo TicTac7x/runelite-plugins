@@ -1,12 +1,11 @@
 package tictac7x.charges.item.listeners;
 
 import net.runelite.api.Client;
-import net.runelite.api.Hitsplat;
 import net.runelite.api.HitsplatID;
-import net.runelite.api.events.HitsplatApplied;
 import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnHitsplatApplied;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -23,7 +22,7 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
         this.weaponAttackStyle = new WeaponAttackStyle(client);
     }
 
-    public void trigger(final HitsplatApplied event) {
+    public void trigger(final CustomHitsplatApplied event) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(triggerBase, event)) continue;
             final OnHitsplatApplied trigger = (OnHitsplatApplied) triggerBase;
@@ -44,32 +43,31 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final HitsplatApplied event) {
+    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomHitsplatApplied event) {
         if (!(triggerBase instanceof OnHitsplatApplied)) return false;
         final OnHitsplatApplied trigger = (OnHitsplatApplied) triggerBase;
-        final Hitsplat hitsplat = event.getHitsplat();
 
         // Hitsplat caused by other player check.
-        if (event.getHitsplat().isOthers()) {
+        if (!event.byMe) {
             return false;
         }
 
         // Hitsplat self check.
-        if (trigger.hitsplatTarget == HitsplatTarget.SELF && event.getActor() != client.getLocalPlayer()) {
+        if (trigger.hitsplatTarget == HitsplatTarget.SELF && !event.toMe) {
             return false;
         }
 
         // Hitsplat enemy check.
-        if (trigger.hitsplatTarget == HitsplatTarget.ENEMY && event.getActor() == client.getLocalPlayer()) {
+        if (trigger.hitsplatTarget == HitsplatTarget.ENEMY && event.toMe) {
             return false;
         }
 
         // All hitsplat check.
         if (trigger.hitsplatGroup == HitsplatGroup.ALL) {
             if (
-                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_ME &&
-                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_MAX_ME &&
-                hitsplat.getHitsplatType() != HitsplatID.BLOCK_ME
+                event.type != HitsplatID.DAMAGE_ME &&
+                event.type != HitsplatID.DAMAGE_MAX_ME &&
+                event.type != HitsplatID.BLOCK_ME
             ) {
                 return false;
             }
@@ -78,20 +76,20 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
         // Successful hitsplat check.
         if (trigger.hitsplatGroup == HitsplatGroup.SUCCESSFUL) {
             if (
-                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_ME &&
-                hitsplat.getHitsplatType() != HitsplatID.DAMAGE_MAX_ME
+                event.type != HitsplatID.DAMAGE_ME &&
+                event.type != HitsplatID.DAMAGE_MAX_ME
             ) {
                 return false;
             }
         }
 
         // More than zero damage.
-        if (trigger.moreThanZeroDamage.isPresent() && hitsplat.getAmount() == 0) {
+        if (trigger.moreThanZeroDamage.isPresent() && event.amount == 0) {
             return false;
         }
 
         // Name check.
-        if (trigger.hasTargetName.isPresent() && (event.getActor().getName() == null || !event.getActor().getName().equals(trigger.hasTargetName.get()))) {
+        if (trigger.hasTargetName.isPresent() && (event.actor.getName() == null || !event.actor.getName().equals(trigger.hasTargetName.get()))) {
             return false;
         }
 

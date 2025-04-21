@@ -6,6 +6,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
@@ -27,7 +28,8 @@ public class Store {
 
     private int gametick = 0;
     private int gametick_before = 0;
-    private int lastCombatCountdown = 0;
+    private int inCombatTicksRemainingDamageDoneToOthers = 0;
+    private int inCombatTicksRemainingDamageDoneToMe = 0;
 
     private ChargedItemBase[] chargedItems = new ChargedItemBase[]{};
     private List<Integer> dailyResetItemIds = new ArrayList<>();
@@ -298,12 +300,14 @@ public class Store {
             menuOptionsClicked.add(lastMenuEntry);
         }
 
-        if (lastCombatCountdown > 0) {
+        if (isInCombat()) {
             for (final ChargedItemBase chargedItem : chargedItems) {
                 chargedItem.onCombat();
             }
-            lastCombatCountdown--;
         }
+
+        inCombatTicksRemainingDamageDoneToOthers = Math.max(0, inCombatTicksRemainingDamageDoneToOthers - 1);
+        inCombatTicksRemainingDamageDoneToMe = Math.max(0, inCombatTicksRemainingDamageDoneToMe - 1);
     }
 
     public boolean inMenuTargets(final int ...itemIds) {
@@ -544,15 +548,27 @@ public class Store {
         nextTickQueue.add(consumer);
     }
 
-    public void onHitSplatApplied(final HitsplatApplied event) {
-        if (event.getHitsplat().isMine()) {
-            lastCombatCountdown =  HIGHEST_MONSTER_ATTACK_SPEED;
+    public void onHitSplatApplied(final CustomHitsplatApplied event) {
+        if (event.byMe) {
+            inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
+        }
+
+        if (event.toMe) {
+            inCombatTicksRemainingDamageDoneToMe = HIGHEST_MONSTER_ATTACK_SPEED;
         }
     }
 
     public void onGraphicChanged(final GraphicChanged event) {
         if (event.getActor() == client.getLocalPlayer() && event.getActor().getGraphic() == GraphicID.SPLASH) {
-            lastCombatCountdown = HIGHEST_MONSTER_ATTACK_SPEED;
+            inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
         }
+    }
+
+    public boolean isInCombat() {
+        return inCombatTicksRemainingDamageDoneToOthers > 0;
+    }
+
+    public boolean isLockedInCombat() {
+        return inCombatTicksRemainingDamageDoneToMe > 0;
     }
 }
