@@ -36,7 +36,6 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Amulet of chemistry
 - Binding necklace
 - Bracelet of clay
-- Bracelet of flamtaer
 - Bracelet of slaughter
 - Burning amulet
 - Camulet
@@ -49,6 +48,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Escape crystal
 - Expeditious bracelet
 - Explorer's ring
+- Flamtaer bracelet
 - Games necklace
 - Giantsoul amulet
 - Necklace of passage
