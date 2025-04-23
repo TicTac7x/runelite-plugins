@@ -30,9 +30,8 @@ public class J_AlchemistsAmulet extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemId.ALCHEMISTS_AMULET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.ALCHEMISTS_AMULET).fixedCharges(0),
-            new TriggerItem(ItemId.ALCHEMISTS_AMULET_29990).needsToBeEquipped(), //Charged
-            new TriggerItem(ItemId.ALCHEMISTS_AMULET_29992).needsToBeEquipped(), //???
+            new TriggerItem(ItemId.ALCHEMISTS_AMULET).needsToBeEquipped(),
+            new TriggerItem(ItemId.ALCHEMISTS_AMULET_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

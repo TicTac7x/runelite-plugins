@@ -30,7 +30,7 @@ public class J_XericsTalisman extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.xerics_talisman, ItemId.XERICS_TALISMAN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.XERICS_TALISMAN_INERT).fixedCharges(0),
+            new TriggerItem(ItemId.XERICS_TALISMAN_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.XERICS_TALISMAN),
         };
 

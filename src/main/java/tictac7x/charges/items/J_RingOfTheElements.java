@@ -31,7 +31,7 @@ public class J_RingOfTheElements extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.RING_OF_THE_ELEMENTS),
-            new TriggerItem(ItemId.RING_OF_THE_ELEMENTS_26818),
+            new TriggerItem(ItemId.RING_OF_THE_ELEMENTS_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

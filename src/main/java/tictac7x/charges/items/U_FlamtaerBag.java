@@ -3,8 +3,6 @@ package tictac7x.charges.items;
 import com.google.gson.Gson;
 import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
-import net.runelite.api.Skill;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -19,12 +17,7 @@ import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
 import tictac7x.charges.store.WidgetId;
 
-import java.util.Arrays;
-import java.util.Optional;
-
-import static tictac7x.charges.store.ItemContainerId.BANK;
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
-
 
 public class U_FlamtaerBag extends ChargedItemWithStorage {
 //    private boolean flamtaerBagEmptyDialogVisible = false;
@@ -50,7 +43,6 @@ public class U_FlamtaerBag extends ChargedItemWithStorage {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.FLAMTAER_BAG),
-            new TriggerItem(ItemId.FLAMTAER_BAG_25630),
         };
 
         this.triggers = new TriggerBase[]{

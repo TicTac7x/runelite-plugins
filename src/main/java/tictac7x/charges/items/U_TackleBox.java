@@ -11,14 +11,12 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.ItemContainerId;
 import tictac7x.charges.store.Store;
 import tictac7x.charges.store.WidgetId;
@@ -92,7 +90,7 @@ public class U_TackleBox extends ChargedItemWithStorage {
             new StorableItem(ItemId.SANDWORMS),
             new StorableItem(ItemId.FISH_OFFCUTS),
             new StorableItem(ItemId.FISH_CHUNKS),
-            new StorableItem(ItemId.FISHING_POTION1),
+            new StorableItem(ItemId.FISHING_POTION_1),
             new StorableItem(ItemId.FISHING_POTION2),
             new StorableItem(ItemId.FISHING_POTION3),
             new StorableItem(ItemId.FISHING_POTION4),

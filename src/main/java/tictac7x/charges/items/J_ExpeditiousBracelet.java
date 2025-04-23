@@ -16,8 +16,8 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
-public class J_SlaughterBracelet extends ChargedItem {
-    public J_SlaughterBracelet(
+public class J_ExpeditiousBracelet extends ChargedItem {
+    public J_ExpeditiousBracelet(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,
@@ -29,24 +29,24 @@ public class J_SlaughterBracelet extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.slaughter_bracelet, ItemId.BRACELET_OF_SLAUGHTER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.expeditious_bracelet, ItemId.EXPEDITIOUS_BRACELET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),
+            new TriggerItem(ItemId.EXPEDITIOUS_BRACELET).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[] {
             // Check.
-            new OnChatMessage("Your bracelet of slaughter has (?<charges>.+) charges? left.").setDynamicallyCharges(),
+            new OnChatMessage("Your expeditious bracelet has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Charge used.
-            new OnChatMessage("Your bracelet of slaughter prevents your slayer count from decreasing. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
+            new OnChatMessage("Your expeditious bracelet helps you progress your slayer( task)? faster. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Bracelet fully used.
-            new OnChatMessage("Your bracelet of slaughter prevents your slayer count from decreasing. It then crumbles to dust.").setFixedCharges(30).notification("Your slaughter bracelet crumbles to dust."),
+            new OnChatMessage("Your expeditious bracelet helps you progress your slayer faster. It then crumbles to dust.").setFixedCharges(30).notification("Your expeditious bracelet crumbles to dust."),
 
             // Break.
-            new OnChatMessage("The bracelet shatters. Your next bracelet of slaughter will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),
+            new OnChatMessage("The bracelet shatters. Your next expeditious bracelet will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),
         };
     }
 }

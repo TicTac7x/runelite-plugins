@@ -36,7 +36,7 @@ public class U_SeedBox extends ChargedItemWithStorage {
         super(TicTac7xChargesImprovedConfig.seed_box, ItemId.SEED_BOX, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.SEED_BOX),
-            new TriggerItem(ItemId.OPEN_SEED_BOX),
+            new TriggerItem(ItemId.SEED_BOX_OPEN),
         };
         this.triggers = new TriggerBase[] {
             // Check or empty.

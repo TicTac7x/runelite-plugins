@@ -31,11 +31,11 @@ public class S_CrystalShield extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.crystal_shield, ItemId.CRYSTAL_SHIELD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.crystal_shield, ItemId.CRYSTAL_SHIELD_DEGRADED, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.CRYSTAL_SHIELD),
-            new TriggerItem(ItemId.CRYSTAL_SHIELD_24127),
+            new TriggerItem(ItemId.CRYSTAL_SHIELD_DEGRADED),
         };
 
         this.triggers = new TriggerBase[] {

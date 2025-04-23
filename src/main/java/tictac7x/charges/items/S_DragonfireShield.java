@@ -33,9 +33,9 @@ public class S_DragonfireShield extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.dragonfire_shield, ItemId.DRAGONFIRE_SHIELD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.DRAGONFIRE_SHIELD_11284).fixedCharges(0),
+            new TriggerItem(ItemId.DRAGONFIRE_SHIELD_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.DRAGONFIRE_SHIELD),
-            new TriggerItem(ItemId.DRAGONFIRE_WARD_22003).fixedCharges(0),
+            new TriggerItem(ItemId.DRAGONFIRE_WARD_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.DRAGONFIRE_WARD)
         };
 

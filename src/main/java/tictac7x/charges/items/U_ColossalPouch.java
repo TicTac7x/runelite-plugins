@@ -50,7 +50,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.COLOSSAL_POUCH),
-            new TriggerItem(ItemId.COLOSSAL_POUCH_26786), // Degraded
+            new TriggerItem(ItemId.COLOSSAL_POUCH_DEGRADED),
         };
 
         this.triggers = new TriggerBase[]{

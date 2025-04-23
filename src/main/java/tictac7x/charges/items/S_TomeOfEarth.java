@@ -33,7 +33,7 @@ public class S_TomeOfEarth extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.tome_of_earth, ItemId.TOME_OF_EARTH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOME_OF_EARTH_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemId.TOME_OF_EARTH_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.TOME_OF_EARTH).needsToBeEquipped(),
         };
 

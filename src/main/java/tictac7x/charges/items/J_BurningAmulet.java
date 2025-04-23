@@ -29,14 +29,14 @@ public class J_BurningAmulet extends ChargedItem {
             final Store store,
             final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.burning_amulet, ItemId.BURNING_AMULET1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.burning_amulet, ItemId.BURNING_AMULET_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BURNING_AMULET1).fixedCharges(1),
-            new TriggerItem(ItemId.BURNING_AMULET2).fixedCharges(2),
-            new TriggerItem(ItemId.BURNING_AMULET3).fixedCharges(3),
-            new TriggerItem(ItemId.BURNING_AMULET4).fixedCharges(4),
-            new TriggerItem(ItemId.BURNING_AMULET5).fixedCharges(5),
+            new TriggerItem(ItemId.BURNING_AMULET_1).fixedCharges(1),
+            new TriggerItem(ItemId.BURNING_AMULET_2).fixedCharges(2),
+            new TriggerItem(ItemId.BURNING_AMULET_3).fixedCharges(3),
+            new TriggerItem(ItemId.BURNING_AMULET_4).fixedCharges(4),
+            new TriggerItem(ItemId.BURNING_AMULET_5).fixedCharges(5),
         };
 
         this.triggers = new TriggerBase[]{

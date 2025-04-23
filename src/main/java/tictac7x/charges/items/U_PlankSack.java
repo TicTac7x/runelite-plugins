@@ -55,7 +55,6 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.PLANK_SACK),
-            new TriggerItem(ItemId.PLANK_SACK_25629),
         };
 
         this.triggers = new TriggerBase[]{

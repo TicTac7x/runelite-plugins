@@ -2,7 +2,6 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.gameval.ItemID;
 import net.runelite.api.gameval.VarbitID;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -13,10 +12,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.EscapeCrystalTimeRemainingUnit;
-import tictac7x.charges.store.ItemActivity;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.*;
 
 import java.awt.*;
 import java.time.Duration;
@@ -38,10 +34,10 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemId.TOB_TELEPORT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemId.ESCAPE_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOB_TELEPORT).quantityCharges().hideOverlay(),
+            new TriggerItem(ItemId.ESCAPE_CRYSTAL).quantityCharges().hideOverlay(),
         };
 
         this.triggers = new TriggerBase[]{

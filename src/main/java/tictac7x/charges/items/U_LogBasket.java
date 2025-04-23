@@ -62,7 +62,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.LOG_BASKET),
-            new TriggerItem(ItemId.OPEN_LOG_BASKET),
+            new TriggerItem(ItemId.LOG_BASKET_OPEN),
         };
         this.triggers = new TriggerBase[] {
             // Check while empty.
@@ -92,23 +92,23 @@ public class U_LogBasket extends ChargedItemWithStorage {
             }).onItemClick(),
 
             // Miscellania support.
-            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.OPEN_LOG_BASKET).addToStorage(ItemId.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.MAPLE_LOGS, 0),
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
                 lastLogs = getStorageItemFromName(m.group("logs"), 1);
                 storage.add(lastLogs);
                 infernalQuantityTracker++;
-            }).requiredItem(ItemId.OPEN_LOG_BASKET),
+            }).requiredItem(ItemId.LOG_BASKET_OPEN),
 
             // Extra logs from nature offerings.
-            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemId.OPEN_LOG_BASKET).runConsumerOnNextGameTick(() -> {
+            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemId.LOG_BASKET_OPEN).runConsumerOnNextGameTick(() -> {
                 if (lastLogs.isPresent()) {
                     storage.add(lastLogs.get().getId(), 1);
                 }
             }),
 
-            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.OPEN_LOG_BASKET).pickUpToStorage(),
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.LOG_BASKET_OPEN).pickUpToStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
@@ -145,7 +145,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
                     storage.remove(lastLogs.get().getId(), 1);
                     infernalQuantityTracker--;
                 }
-            }).requiredItem(ItemId.OPEN_LOG_BASKET),
+            }).requiredItem(ItemId.LOG_BASKET_OPEN),
         };
     }
 }

@@ -3,7 +3,6 @@ package tictac7x.charges.items;
 import com.google.gson.Gson;
 import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -11,12 +10,9 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Store;
-
-import java.util.Optional;
 
 public class J_GiantsoulAmulet extends ChargedItem {
     public J_GiantsoulAmulet(
@@ -31,11 +27,11 @@ public class J_GiantsoulAmulet extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.giantsoul_amulet, 30637, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.giantsoul_amulet, ItemId.GIANTSOUL_AMULET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(30637).fixedCharges(0),
-            new TriggerItem(30638),
+            new TriggerItem(ItemId.GIANTSOUL_AMULET_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.GIANTSOUL_AMULET),
         };
 
         this.triggers = new TriggerBase[] {

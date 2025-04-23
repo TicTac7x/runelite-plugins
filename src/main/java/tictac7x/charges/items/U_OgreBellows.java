@@ -27,9 +27,9 @@ public class U_OgreBellows extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ogre_bellows, ItemId.OGRE_BELLOWS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ogre_bellows, ItemId.OGRE_BELLOWS_0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.OGRE_BELLOWS).fixedCharges(0),
+            new TriggerItem(ItemId.OGRE_BELLOWS_0).fixedCharges(0),
             new TriggerItem(ItemId.OGRE_BELLOWS_1).fixedCharges(1),
             new TriggerItem(ItemId.OGRE_BELLOWS_2).fixedCharges(2),
             new TriggerItem(ItemId.OGRE_BELLOWS_3).fixedCharges(3),

@@ -31,15 +31,15 @@ public class U_CoalBag extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.coal_bag, ItemId.COAL_BAG_12019, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.coal_bag, ItemId.COAL_BAG, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage
             .storableItems(new StorableItem(ItemId.COAL).checkName("Coal"))
             .setMaximumTotalQuantity(27)
-            .setMaximumTotalQuantityWithEquippedItem(36, ItemId.SMITHING_CAPE, ItemId.HITPOINTS_CAPET);
+            .setMaximumTotalQuantityWithEquippedItem(36, ItemId.SMITHING_CAPE, ItemId.SMITHING_CAPE_TRIMMED);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.COAL_BAG_12019),
-            new TriggerItem(ItemId.OPEN_COAL_BAG),
+            new TriggerItem(ItemId.COAL_BAG),
+            new TriggerItem(ItemId.COAL_BAG_OPEN),
         };
         this.triggers = new TriggerBase[] {
             // Check or empty.
@@ -66,9 +66,7 @@ public class U_CoalBag extends ChargedItemWithStorage {
             // Extra coal mined by varrock platebody.
             new OnChatMessage(
                 "(You manage to mine some coal.|Your Celestial ring allows you to mine an additional ore.|The Varrock platebody enabled you to mine an additional ore.)"
-            ).onMenuOption("Mine").onMenuTarget("Coal rocks").requiredItem(ItemId.OPEN_COAL_BAG).consumer(() -> {
-                storage.add(ItemId.COAL, 1);
-            }),
+            ).onMenuOption("Mine").onMenuTarget("Coal rocks").requiredItem(ItemId.COAL_BAG_OPEN).addToStorage(ItemId.COAL, 1),
 
             // Superheat spells.
             new OnXpDrop(Skill.SMITHING).onMenuOption("Cast").onMenuTarget(

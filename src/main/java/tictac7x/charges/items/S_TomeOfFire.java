@@ -33,7 +33,7 @@ public class S_TomeOfFire extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.tome_of_fire, ItemId.TOME_OF_FIRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOME_OF_FIRE_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemId.TOME_OF_FIRE_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.TOME_OF_FIRE).needsToBeEquipped(),
         };
 

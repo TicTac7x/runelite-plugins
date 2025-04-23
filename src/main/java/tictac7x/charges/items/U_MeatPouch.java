@@ -34,7 +34,7 @@ public class U_MeatPouch extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.meat_pouch, ItemId.SMALL_MEAT_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.meat_pouch, ItemId.MEAT_POUCH_SMALL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
             // Tracking.
             new StorableItem(ItemId.RAW_BEAST_MEAT),
@@ -56,10 +56,10 @@ public class U_MeatPouch extends ChargedItemWithStorage {
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SMALL_MEAT_POUCH).maxCharges(14),
-            new TriggerItem(ItemId.SMALL_MEAT_POUCH_OPEN).maxCharges(14),
-            new TriggerItem(ItemId.LARGE_MEAT_POUCH).maxCharges(28),
-            new TriggerItem(ItemId.LARGE_MEAT_POUCH_OPEN).maxCharges(28),
+            new TriggerItem(ItemId.MEAT_POUCH_SMALL).maxCharges(14),
+            new TriggerItem(ItemId.MEAT_POUCH_SMALL_OPEN).maxCharges(14),
+            new TriggerItem(ItemId.MEAT_POUCH_LARGE).maxCharges(28),
+            new TriggerItem(ItemId.MEAT_POUCH_LARGE_OPEN).maxCharges(28),
         };
 
         this.triggers = new TriggerBase[]{
@@ -89,26 +89,26 @@ public class U_MeatPouch extends ChargedItemWithStorage {
             new OnMenuEntryAdded("Destroy").hide(),
 
             // Tracking.
-            new OnChatMessage("You manage to noose a polar kebbit that is hiding in the snowdrift.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
-            new OnChatMessage("You manage to noose a common kebbit that is hiding in the bush.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
-            new OnChatMessage("You manage to noose a Feldip weasel that is hiding in the bush.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
-            new OnChatMessage("You manage to noose a desert devil that is hiding in the sand.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
-            new OnChatMessage("You manage to noose a razor-backed kebbit that is hiding in the bush.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
+            new OnChatMessage("You manage to noose a polar kebbit that is hiding in the snowdrift.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
+            new OnChatMessage("You manage to noose a common kebbit that is hiding in the bush.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
+            new OnChatMessage("You manage to noose a Feldip weasel that is hiding in the bush.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
+            new OnChatMessage("You manage to noose a desert devil that is hiding in the sand.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
+            new OnChatMessage("You manage to noose a razor-backed kebbit that is hiding in the bush.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_BEAST_MEAT),
 
             // Deadfall.
-            new OnChatMessage("You've caught a wild kebbit.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_WILD_KEBBIT),
-            new OnChatMessage("You've caught a barb-tailed kebbit.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_BARBTAILED_KEBBIT),
-            new OnChatMessage("You've caught a pyre fox.").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_PYRE_FOX),
+            new OnChatMessage("You've caught a wild kebbit.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_WILD_KEBBIT),
+            new OnChatMessage("You've caught a barb-tailed kebbit.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_BARBTAILED_KEBBIT),
+            new OnChatMessage("You've caught a pyre fox.").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_PYRE_FOX),
 
             // Pitfalls.
-            new OnChatMessage("You've caught a spined larupia!").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_LARUPIA),
-            new OnChatMessage("You've caught a horned graahk!").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_GRAAHK),
-            new OnChatMessage("You've caught a sabre-?toothed kyatt!").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_KYATT),
-            new OnChatMessage("You've caught a sunlight antelope!").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_SUNLIGHT_ANTELOPE),
-            new OnChatMessage("You've caught a moonlight antelope!").requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).addToStorage(ItemId.RAW_MOONLIGHT_ANTELOPE),
+            new OnChatMessage("You've caught a spined larupia!").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_LARUPIA),
+            new OnChatMessage("You've caught a horned graahk!").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_GRAAHK),
+            new OnChatMessage("You've caught a sabre-?toothed kyatt!").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_KYATT),
+            new OnChatMessage("You've caught a sunlight antelope!").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_SUNLIGHT_ANTELOPE),
+            new OnChatMessage("You've caught a moonlight antelope!").requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).addToStorage(ItemId.RAW_MOONLIGHT_ANTELOPE),
 
             // Aerial.
-            new OnXpDrop(Skill.HUNTER, 156).requiredItem(ItemId.SMALL_MEAT_POUCH_OPEN, ItemId.LARGE_MEAT_POUCH_OPEN).hasChatMessage("You retrieve the falcon as well as the fur of the dead kebbit.").consumer(() -> {
+            new OnXpDrop(Skill.HUNTER, 156).requiredItem(ItemId.MEAT_POUCH_SMALL_OPEN, ItemId.MEAT_POUCH_LARGE_OPEN).hasChatMessage("You retrieve the falcon as well as the fur of the dead kebbit.").consumer(() -> {
                 storage.add(ItemId.RAW_DASHING_KEBBIT, 1);
             }),
         };

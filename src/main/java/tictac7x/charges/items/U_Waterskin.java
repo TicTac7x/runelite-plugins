@@ -27,13 +27,13 @@ public class U_Waterskin extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.waterskin, ItemId.WATERSKIN0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.waterskin, ItemId.WATERSKIN_0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.WATERSKIN0).fixedCharges(0),
-            new TriggerItem(ItemId.WATERSKIN1).fixedCharges(1),
-            new TriggerItem(ItemId.WATERSKIN2).fixedCharges(2),
-            new TriggerItem(ItemId.WATERSKIN3).fixedCharges(3),
-            new TriggerItem(ItemId.WATERSKIN4).fixedCharges(4),
+            new TriggerItem(ItemId.WATERSKIN_0).fixedCharges(0),
+            new TriggerItem(ItemId.WATERSKIN_1).fixedCharges(1),
+            new TriggerItem(ItemId.WATERSKIN_2).fixedCharges(2),
+            new TriggerItem(ItemId.WATERSKIN_3).fixedCharges(3),
+            new TriggerItem(ItemId.WATERSKIN_4).fixedCharges(4),
         };
     }
 }

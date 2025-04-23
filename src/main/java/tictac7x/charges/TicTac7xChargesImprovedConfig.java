@@ -53,8 +53,8 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String amulet_of_chemistry = "amulet_of_chemistry";
     String binding_necklace = "binding_necklace";
     String bracelet_of_clay = "bracelet_of_clay";
-    String bracelet_of_expeditious = "bracelet_of_expeditious";
-    String bracelet_of_flamtaer = "bracelet_of_flamtaer";
+    String bracelet_of_slaughter = "bracelet_of_slaughter";
+    String expeditious_bracelet = "expeditious_bracelet";
     String burning_amulet = "burning_amulet";
     String camulet = "camulet";
     String castle_wars_bracelet = "castle_wars_bracelet";
@@ -69,6 +69,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String escape_crystal_time_remaining_warning = "escape_crystal_time_remaining_warning";
     String escape_crystal_time_remaining_unit = "escape_crystal_time_remaining_unit";
     String explorers_ring = "explorers_ring";
+    String flamtaer_bracelet = "flamtaer_bracelet";
     String games_necklace = "games_necklace";
     String giantsoul_amulet = "giantsoul_amulet";
     String necklace_of_passage = "necklace_of_passage";
@@ -84,7 +85,6 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String ring_of_suffering_status = "ring_of_suffering_status";
     String ring_of_the_elements = "ring_of_the_elements";
     String skills_necklace = "skills_necklace";
-    String slaughter_bracelet = "slaughter_bracelet";
     String slayer_ring = "slayer_ring";
     String xerics_talisman = "xerics_talisman";
 
@@ -567,21 +567,21 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean braceletOfClayInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_expeditious + infobox,
+            keyName = expeditious_bracelet + infobox,
             name = "Expeditious bracelet",
             description = "",
             section = infoboxes
         ) default boolean expeditiousBraceletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_flamtaer + infobox,
+            keyName = flamtaer_bracelet + infobox,
             name = "Flamtaer bracelet",
             description = "",
             section = infoboxes
         ) default boolean flamtaerBraceletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = slaughter_bracelet + infobox,
+            keyName = bracelet_of_slaughter + infobox,
             name = "Bracelet of slaughter",
             description = "",
             section = infoboxes
@@ -1281,21 +1281,21 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean braceletOfClayOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_expeditious + overlay,
+            keyName = expeditious_bracelet + overlay,
             name = "Expeditious bracelet",
             description = "",
             section = overlays
         ) default boolean expeditiousBraceletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_flamtaer + overlay,
+            keyName = flamtaer_bracelet + overlay,
             name = "Flamtaer bracelet",
             description = "",
             section = overlays
         ) default boolean flamtaerBraceletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = slaughter_bracelet + overlay,
+            keyName = bracelet_of_slaughter + overlay,
             name = "Bracelet of slaughter",
             description = "",
             section = overlays
@@ -2006,9 +2006,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getBottomlessCompostBucketStorage() { return ""; }
 
         @ConfigItem(
-            keyName = slaughter_bracelet,
-            name = slaughter_bracelet,
-            description = slaughter_bracelet,
+            keyName = bracelet_of_slaughter,
+            name = bracelet_of_slaughter,
+            description = bracelet_of_slaughter,
             section = debug
         ) default int getBraceletOfSlaughterCharges() { return Charges.UNKNOWN; }
 
@@ -2048,9 +2048,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getCrystalBowCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = bracelet_of_expeditious,
-            name = bracelet_of_expeditious,
-            description = bracelet_of_expeditious,
+            keyName = expeditious_bracelet,
+            name = expeditious_bracelet,
+            description = expeditious_bracelet,
             section = debug
         ) default int getBraceletOfExpeditiousCharges() { return Charges.UNKNOWN; }
 

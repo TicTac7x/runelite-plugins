@@ -73,7 +73,7 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.REAGENT_POUCH),
-            new TriggerItem(ItemId.OPEN_REAGENT_POUCH),
+            new TriggerItem(ItemId.REAGENT_POUCH_OPEN),
         };
 
         this.triggers = new TriggerBase[] {
@@ -122,10 +122,10 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             new OnChatMessage("You mix the (?<item>.+) into (your|the unfinished)( antifire)? (potion|antidote\\+\\+).*").matcherConsumer((m) -> {
                 final Optional<StorageItem> item = getStorageItemFromName(m.group("item"), 1);
                 storage.remove(item);
-            }).requiredItem(ItemId.OPEN_REAGENT_POUCH),
+            }).requiredItem(ItemId.REAGENT_POUCH_OPEN),
 
             // Pick
-            new OnChatMessage("You pick some whiteberries").requiredItem(ItemId.OPEN_REAGENT_POUCH).consumer(() -> {
+            new OnChatMessage("You pick some whiteberries").requiredItem(ItemId.REAGENT_POUCH_OPEN).consumer(() -> {
                 storage.add(ItemId.WHITE_BERRIES, 1);
             }),
         };

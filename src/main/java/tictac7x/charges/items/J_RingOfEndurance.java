@@ -36,7 +36,7 @@ public class J_RingOfEndurance extends ChargedItem {
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.RING_OF_ENDURANCE),
             new TriggerItem(ItemId.RING_OF_ENDURANCE_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.RING_OF_ENDURANCE_UNCHARGED_24844).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_ENDURANCE_NOCHARGES).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

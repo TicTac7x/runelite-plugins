@@ -33,7 +33,7 @@ public class U_SoulBearer extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.SOUL_BEARER),
-            new TriggerItem(ItemId.DAMAGED_SOUL_BEARER).fixedCharges(0),
+            new TriggerItem(ItemId.SOUL_BEARER_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

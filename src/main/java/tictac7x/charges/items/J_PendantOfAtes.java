@@ -30,7 +30,7 @@ public class J_PendantOfAtes extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.pendant_of_ates, ItemId.PENDANT_OF_ATES, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.PENDANT_OF_ATES_INERT).fixedCharges(0),
+            new TriggerItem(ItemId.PENDANT_OF_ATES_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.PENDANT_OF_ATES),
         };
 

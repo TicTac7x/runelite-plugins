@@ -26,7 +26,6 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static tictac7x.charges.store.ItemContainerId.BANK;
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_FishBarrel extends ChargedItemWithStorage {
@@ -45,6 +44,14 @@ public class U_FishBarrel extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(TicTac7xChargesImprovedConfig.fish_barrel, ItemId.FISH_BARREL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+
+        this.items = new TriggerItem[]{
+            new TriggerItem(ItemId.FISH_BARREL),
+            new TriggerItem(ItemId.FISH_BARREL_OPEN),
+            new TriggerItem(ItemId.FISH_SACK_BARREL),
+            new TriggerItem(ItemId.FISH_SACK_BARREL_OPEN),
+        };
+
         storage = storage.setMaximumTotalQuantity(28).storableItems(
             // Small net
             new StorableItem(ItemId.RAW_SHRIMPS).checkName("Shrimp"),
@@ -61,8 +68,7 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.RAW_HERRING).checkName("Herring"),
             new StorableItem(ItemId.RAW_TROUT).checkName("Trout"),
             new StorableItem(ItemId.RAW_PIKE).checkName("Pike"),
-            new StorableItem(ItemId.RAW_SLIMY_EEL).checkName("Slimy swamp eel"),
-            new StorableItem(ItemId.RAW_SLIMY_EEL).checkName("Slimy eel"),
+            new StorableItem(ItemId.RAW_SLIMY_EEL).checkName("Slimy swamp eel", "Slimy eel"),
             new StorableItem(ItemId.RAW_SALMON).checkName("Salmon"),
             new StorableItem(ItemId.RAW_RAINBOW_FISH).checkName("Rainbow fish"),
             new StorableItem(ItemId.RAW_CAVE_EEL).checkName("Cave eel"),
@@ -97,13 +103,6 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.RAW_MANTA_RAY).checkName("Manta ray")
         );
 
-        this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.FISH_BARREL),
-            new TriggerItem(ItemId.OPEN_FISH_BARREL),
-            new TriggerItem(ItemId.FISH_SACK_BARREL),
-            new TriggerItem(ItemId.OPEN_FISH_SACK_BARREL),
-        };
-
         this.triggers = new TriggerBase[]{
             // Check or empty already empty.
             new OnChatMessage("(Your|The) barrel is empty.").onItemClick().emptyStorage(),
@@ -112,12 +111,10 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             new OnChatMessage("You catch (a|an|some) (?<fish>.+).").matcherConsumer(m -> {
                 lastCaughtFish = getStorageItemFromName(m.group("fish"), 1);
                 storage.add(lastCaughtFish);
-            }).requiredItem(ItemId.OPEN_FISH_BARREL, ItemId.OPEN_FISH_SACK_BARREL),
+            }).requiredItem(ItemId.FISH_BARREL_OPEN, ItemId.FISH_SACK_BARREL_OPEN),
 
             // Extra fish.
-            new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemId.OPEN_FISH_BARREL, ItemId.OPEN_FISH_SACK_BARREL).consumer(() -> {
-                storage.add(lastCaughtFish.get().getId(), 1);
-            }),
+            new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemId.FISH_BARREL_OPEN, ItemId.FISH_SACK_BARREL_OPEN).addToStorage(lastCaughtFish.get().getId(), 1),
 
             // Replace "Empty" with proper "Empty to bank".
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),

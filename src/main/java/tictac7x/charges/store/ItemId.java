@@ -281,21 +281,6 @@ public class ItemId {
     public static final int FORESTRY_BASKET = ItemID.FORESTRY_BASKET_CLOSED;
     public static final int FORESTRY_BASKET_OPEN = ItemID.FORESTRY_BASKET_OPEN;
 
-    // Log basket
-    public static final int LOGS = ItemID.LOGS;
-    public static final int ACHEY_TREE_LOGS = ItemID.ACHEY_TREE_LOGS;
-    public static final int OAK_LOGS = ItemID.OAK_LOGS;
-    public static final int WILLOW_LOGS = ItemID.WILLOW_LOGS;
-    public static final int TEAK_LOGS = ItemID.TEAK_LOGS;
-    public static final int JUNIPER_LOGS = ItemID.JUNIPER_LOGS;
-    public static final int MAPLE_LOGS = ItemID.MAPLE_LOGS;
-    public static final int MAHOGANY_LOGS = ItemID.MAHOGANY_LOGS;
-    public static final int ARCTIC_PINE_LOGS = ItemID.ARCTIC_PINE_LOG;
-    public static final int YEW_LOGS = ItemID.YEW_LOGS;
-    public static final int BLISTERWOOD_LOGS = ItemID.BLISTERWOOD_LOGS;
-    public static final int MAGIC_LOGS = ItemID.MAGIC_LOGS;
-    public static final int REDWOOD_LOGS = ItemID.REDWOOD_LOGS;
-
     // Forestry kit
     public static final int FORESTRY_KIT = ItemID.FORESTRY_KIT;
     public static final int ANIMAINFUSED_BARK = ItemID.FORESTRY_CURRENCY;
@@ -346,6 +331,780 @@ public class ItemId {
     // Sunlight moth mix
     public static final int SUNLIGHT_MOTH_MIX_1 = ItemID.HUNTER_MIX_SUNMOTH_1DOSE;
     public static final int SUNLIGHT_MOTH_MIX_2 = ItemID.HUNTER_MIX_SUNMOTH_2DOSE;
+
+    // Circlet of water
+    public static final int CIRCLET_OF_WATER = ItemID.WATER_CIRCLET_CHARGED;
+    public static final int CIRCLET_OF_WATER_UNCHARGED = ItemID.WATER_CIRCLET;
+
+    // Kandarin headgear
+    public static final int KANDARIN_HEADGEAR_3 = ItemID.SEERS_HEADBAND_HARD;
+    public static final int KANDARIN_HEADGEAR_4 = ItemID.SEERS_HEADBAND_ELITE;
+
+    // Alchemists amulet
+    public static final int ALCHEMISTS_AMULET = ItemID.AMULET_OF_CHEMISTRY_IMBUED_CHARGED;
+    public static final int ALCHEMISTS_AMULET_UNCHARGED = ItemID.AMULET_OF_CHEMISTRY_IMBUED_UNCHARGED;
+
+    // Amulet of blood fury
+    public static final int AMULET_OF_BLOOD_FURY = ItemID.BLOOD_AMULET;
+
+    // Amulet of chemistry
+    public static final int AMULET_OF_CHEMISTRY = ItemID.AMULET_OF_CHEMISTRY;
+
+    // Binding necklace
+    public static final int BINDING_NECKLACE = ItemID.MAGIC_EMERALD_NECKLACE;
+
+    // Bracelet of clay
+    public static final int BRACELET_OF_CLAY = ItemID.JEWL_BRACELET_OF_CLAY;
+    public static final int SOFT_CLAY = ItemID.SOFTCLAY;
+
+    // Bracelet of slaughter
+    public static final int BRACELET_OF_SLAUGHTER = ItemID.BRACELET_OF_SLAUGHTER;
+
+    // Burning amulet
+    public static final int BURNING_AMULET_1 = ItemID.BURNING_AMULET_1;
+    public static final int BURNING_AMULET_2 = ItemID.BURNING_AMULET_2;
+    public static final int BURNING_AMULET_3 = ItemID.BURNING_AMULET_3;
+    public static final int BURNING_AMULET_4 = ItemID.BURNING_AMULET_4;
+    public static final int BURNING_AMULET_5 = ItemID.BURNING_AMULET_5;
+
+    // Camulet
+    public static final int CAMULET = ItemID.CAMULET;
+
+    // Castle wars bracelet
+    public static final int CASTLE_WARS_BRACELET_1 = ItemID.JEWL_CASTLEWARS_BRACELET;
+    public static final int CASTLE_WARS_BRACELET_2 = ItemID.JEWL_CASTLEWARS_BRACELET2;
+    public static final int CASTLE_WARS_BRACELET_3 = ItemID.JEWL_CASTLEWARS_BRACELET3;
+
+    // Celestial ring
+    public static final int CELESTIAL_RING = ItemID.CELESTIAL_RING_CHARGED;
+    public static final int CELESTIAL_RING_UNCHARGED = ItemID.CELESTIAL_RING;
+    public static final int CELESTIAL_SIGNET = ItemID.CELESTIAL_SIGNET_CHARGED;
+    public static final int CELESTIAL_SIGNET_UNCHARGED = ItemID.CELESTIAL_SIGNET;
+
+    // Desert amulet
+    public static final int DESERT_AMULET_2 = ItemID.DESERT_AMULET_MEDIUM;
+    public static final int DESERT_AMULET_3 = ItemID.DESERT_AMULET_HARD;
+    public static final int DESERT_AMULET_4 = ItemID.DESERT_AMULET_ELITE;
+
+    // Digsite pendant
+    public static final int DIGSITE_PENDANT_1 = ItemID.NECKLACE_OF_DIGSITE_1;
+    public static final int DIGSITE_PENDANT_2 = ItemID.NECKLACE_OF_DIGSITE_2;
+    public static final int DIGSITE_PENDANT_3 = ItemID.NECKLACE_OF_DIGSITE_3;
+    public static final int DIGSITE_PENDANT_4 = ItemID.NECKLACE_OF_DIGSITE_4;
+    public static final int DIGSITE_PENDANT_5 = ItemID.NECKLACE_OF_DIGSITE_5;
+
+    // Dodgy necklace
+    public static final int DODGY_NECKLACE = ItemID.DODGY_NECKLACE;
+
+    // Efaritays aid
+    public static final int EFARITAYS_AID = ItemID.VAMPYRE_RING;
+    public static final int BLESSED_AXE = ItemID.ANMA_AXE;
+    public static final int SILVER_SICKLE = ItemID.SILVER_SICKLE;
+    public static final int SILVER_SICKLE_BLESSED = ItemID.SILVER_SICKLE_BLESSED;
+    public static final int EMERALD_SICKLE_BLESSED = ItemID.SILVER_SICKLE_EMERALD;
+    public static final int EMERALD_SICKLE_BLESSED_ENCHANTED = ItemID.SILVER_SICKLE_ENCHANTED;
+    public static final int RUBY_SICKLE_BLESSED = ItemID.SILVER_SICKLE_RUBY;
+    public static final int RUBY_SICKLE_BLESSED_ENCHANTED = ItemID.SILVER_SICKLE_RUBY_ENCHANTED;
+    public static final int BLISTERWOOD_SICKLE = ItemID.BLISTERWOOD_SICKLE;
+    public static final int IVANDIS_FLAIL = ItemID.IVANDIS_FLAIL;
+    public static final int BLISTERWOOD_FLAIL = ItemID.BLISTERWOOD_FLAIL;
+    public static final int SILVERLIGHT = ItemID.SILVERLIGHT;
+    public static final int DARKLIGHT = ItemID.DARKLIGHT;
+    public static final int EMBERLIGHT = ItemID.EMBERLIGHT;
+    public static final int ROD_OF_IVANDIS_1 = ItemID.BURGH_ROD_COMMAND_FINAL_1;
+    public static final int ROD_OF_IVANDIS_2 = ItemID.BURGH_ROD_COMMAND_FINAL_2;
+    public static final int ROD_OF_IVANDIS_3 = ItemID.BURGH_ROD_COMMAND_FINAL_3;
+    public static final int ROD_OF_IVANDIS_4 = ItemID.BURGH_ROD_COMMAND_FINAL_4;
+    public static final int ROD_OF_IVANDIS_5 = ItemID.BURGH_ROD_COMMAND_FINAL_5;
+    public static final int ROD_OF_IVANDIS_6 = ItemID.BURGH_ROD_COMMAND_FINAL_6;
+    public static final int ROD_OF_IVANDIS_7 = ItemID.BURGH_ROD_COMMAND_FINAL_7;
+    public static final int ROD_OF_IVANDIS_8 = ItemID.BURGH_ROD_COMMAND_FINAL_8;
+    public static final int ROD_OF_IVANDIS_9 = ItemID.BURGH_ROD_COMMAND_FINAL_9;
+    public static final int ROD_OF_IVANDIS_10 = ItemID.BURGH_ROD_COMMAND_FINAL_10;
+    public static final int WOLFBANE = ItemID.DAGGER_WOLFBANE;
+    public static final int SILVER_BOLTS = ItemID.XBOWS_CROSSBOW_BOLTS_SILVER;
+
+    // Escape crystal
+    public static final int ESCAPE_CRYSTAL = ItemID.TOB_TELEPORT;
+
+    // Expeditious bracelet
+    public static final int EXPEDITIOUS_BRACELET = ItemID.EXPEDITIOUS_BRACELET;
+
+    // Explorers ring
+    public static final int EXPLORERS_RING_1 = ItemID.LUMBRIDGE_RING_EASY;
+    public static final int EXPLORERS_RING_2 = ItemID.LUMBRIDGE_RING_MEDIUM;
+    public static final int EXPLORERS_RING_3 = ItemID.LUMBRIDGE_RING_HARD;
+    public static final int EXPLORERS_RING_4 = ItemID.LUMBRIDGE_RING_ELITE;
+
+    // Flamtaer bracelet
+    public static final int FLAMTAER_BRACELET = ItemID.FLAMTAER_BRACELET;
+
+    // Games necklace
+    public static final int GAMES_NECKLACE_1 = ItemID.NECKLACE_OF_MINIGAMES_1;
+    public static final int GAMES_NECKLACE_2 = ItemID.NECKLACE_OF_MINIGAMES_2;
+    public static final int GAMES_NECKLACE_3 = ItemID.NECKLACE_OF_MINIGAMES_3;
+    public static final int GAMES_NECKLACE_4 = ItemID.NECKLACE_OF_MINIGAMES_4;
+    public static final int GAMES_NECKLACE_5 = ItemID.NECKLACE_OF_MINIGAMES_5;
+    public static final int GAMES_NECKLACE_6 = ItemID.NECKLACE_OF_MINIGAMES_6;
+    public static final int GAMES_NECKLACE_7 = ItemID.NECKLACE_OF_MINIGAMES_7;
+    public static final int GAMES_NECKLACE_8 = ItemID.NECKLACE_OF_MINIGAMES_8;
+
+    // Giantsoul amulet
+    public static final int GIANTSOUL_AMULET = ItemID.GIANTSOUL_AMULET_CHARGED;
+    public static final int GIANTSOUL_AMULET_UNCHARGED = ItemID.GIANTSOUL_AMULET_UNCHARGED;
+
+    // Necklace of passage
+    public static final int NECKLACE_OF_PASSAGE_1 = ItemID.NECKLACE_OF_PASSAGE_1;
+    public static final int NECKLACE_OF_PASSAGE_2 = ItemID.NECKLACE_OF_PASSAGE_2;
+    public static final int NECKLACE_OF_PASSAGE_3 = ItemID.NECKLACE_OF_PASSAGE_3;
+    public static final int NECKLACE_OF_PASSAGE_4 = ItemID.NECKLACE_OF_PASSAGE_4;
+    public static final int NECKLACE_OF_PASSAGE_5 = ItemID.NECKLACE_OF_PASSAGE_5;
+
+    // Pendant of ates
+    public static final int PENDANT_OF_ATES = ItemID.PENDANT_OF_ATES;
+    public static final int PENDANT_OF_ATES_UNCHARGED = ItemID.PENDANT_OF_ATES_EMPTY;
+
+    // Phoenix necklace
+    public static final int PHOENIX_NECKLACE = ItemID.JEWL_NECKLACE_OF_PHOENIX;
+
+    // Ring of dueling
+    public static final int RING_OF_DUELING_1 = ItemID.RING_OF_DUELING_1;
+    public static final int RING_OF_DUELING_2 = ItemID.RING_OF_DUELING_2;
+    public static final int RING_OF_DUELING_3 = ItemID.RING_OF_DUELING_3;
+    public static final int RING_OF_DUELING_4 = ItemID.RING_OF_DUELING_4;
+    public static final int RING_OF_DUELING_5 = ItemID.RING_OF_DUELING_5;
+    public static final int RING_OF_DUELING_6 = ItemID.RING_OF_DUELING_6;
+    public static final int RING_OF_DUELING_7 = ItemID.RING_OF_DUELING_7;
+    public static final int RING_OF_DUELING_8 = ItemID.RING_OF_DUELING_8;
+
+    // Ring of endurance
+    public static final int RING_OF_ENDURANCE = ItemID.RING_OF_ENDURANCE;
+    public static final int RING_OF_ENDURANCE_UNCHARGED = ItemID.RING_OF_ENDURANCE_UNCHARGED;
+    public static final int RING_OF_ENDURANCE_NOCHARGES = ItemID.RING_OF_ENDURANCE_NOCHARGES;
+
+    // Ring of forging
+    public static final int RING_OF_FORGING = ItemID.RING_OF_FORGING;
+
+    // Ring of pursuit
+    public static final int RING_OF_PURSUIT = ItemID.RING_OF_PURSUIT;
+
+    // Ring of recoil
+    public static final int RING_OF_RECOIL = ItemID.RING_OF_RECOIL;
+
+    // Ring of shadows
+    public static final int RING_OF_SHADOWS = ItemID.RING_OF_SHADOWS;
+    public static final int RING_OF_SHADOWS_UNCHARGED = ItemID.RING_OF_SHADOWS_UNCHARGED;
+
+    // Ring of suffering
+    public static final int RING_OF_SUFFERING_UNCHARGED = ItemID.ZENYTE_RING_ENCHANTED;
+    public static final int RING_OF_SUFFERING_UNCHARGED_IMBUED_NMZ = ItemID.NZONE_ZENYTE_RING_ENCHANTED;
+    public static final int RING_OF_SUFFERING_UNCHARGED_IMBUED_SW = ItemID.SW_ZENYTE_RING_ENCHANTED;
+    public static final int RING_OF_SUFFERING_UNCHARGED_IMBUED_PVP = ItemID.PVPA_ZENYTE_RING_ENCHANTED;
+    public static final int RING_OF_SUFFERING = ItemID.ZENYTE_RING_ENCHANTED_RECOIL;
+    public static final int RING_OF_SUFFERING_IMBUED_NMZ = ItemID.NZONE_ZENYTE_RING_ENCHANTED_RECOIL;
+    public static final int RING_OF_SUFFERING_IMBUED_SW = ItemID.SW_ZENYTE_RING_ENCHANTED_RECOIL;
+    public static final int RING_OF_SUFFERING_IMBUED_PVP = ItemID.PVPA_ZENYTE_RING_ENCHANTED_RECOIL;
+
+    // Ring of the elements
+    public static final int RING_OF_THE_ELEMENTS = ItemID.RING_OF_ELEMENTS_CHARGED;
+    public static final int RING_OF_THE_ELEMENTS_UNCHARGED = ItemID.RING_OF_ELEMENTS;
+
+    // Skills necklace
+    public static final int SKILLS_NECKLACE_0 = ItemID.JEWL_NECKLACE_OF_SKILLS;
+    public static final int SKILLS_NECKLACE_1 = ItemID.JEWL_NECKLACE_OF_SKILLS_1;
+    public static final int SKILLS_NECKLACE_2 = ItemID.JEWL_NECKLACE_OF_SKILLS_2;
+    public static final int SKILLS_NECKLACE_3 = ItemID.JEWL_NECKLACE_OF_SKILLS_3;
+    public static final int SKILLS_NECKLACE_4 = ItemID.JEWL_NECKLACE_OF_SKILLS_4;
+    public static final int SKILLS_NECKLACE_5 = ItemID.JEWL_NECKLACE_OF_SKILLS_5;
+    public static final int SKILLS_NECKLACE_6 = ItemID.JEWL_NECKLACE_OF_SKILLS_6;
+
+    // Slayer ring
+    public static final int SLAYER_RING_1 = ItemID.SLAYER_RING_1;
+    public static final int SLAYER_RING_2 = ItemID.SLAYER_RING_2;
+    public static final int SLAYER_RING_3 = ItemID.SLAYER_RING_3;
+    public static final int SLAYER_RING_4 = ItemID.SLAYER_RING_4;
+    public static final int SLAYER_RING_5 = ItemID.SLAYER_RING_5;
+    public static final int SLAYER_RING_6 = ItemID.SLAYER_RING_6;
+    public static final int SLAYER_RING_7 = ItemID.SLAYER_RING_7;
+    public static final int SLAYER_RING_8 = ItemID.SLAYER_RING_8;
+
+    // Xeric's talisman
+    public static final int XERICS_TALISMAN = ItemID.XERIC_TALISMAN;
+    public static final int XERICS_TALISMAN_UNCHARGED = ItemID.XERIC_TALISMAN_EMPTY;
+
+    // Chronicle
+    public static final int CHRONICLE = ItemID.CHRONICLE;
+
+    // Crystal shield
+    public static final int CRYSTAL_SHIELD = ItemID.CRYSTAL_SHIELD_2500;
+    public static final int CRYSTAL_SHIELD_DEGRADED = ItemID.CRYSTAL_SHIELD;
+
+    // Dragonfire shield
+    public static final int DRAGONFIRE_SHIELD = ItemID.DRAGONFIRE_SHIELD;
+    public static final int DRAGONFIRE_SHIELD_UNCHARGED = ItemID.DRAGONFIRE_SHIELD_UNCHARGED;
+    public static final int DRAGONFIRE_WARD = ItemID.DRAGONFIRE_WARD;
+    public static final int DRAGONFIRE_WARD_UNCHARGED = ItemID.DRAGONFIRE_WARD_UNCHARGED;
+
+    // Kharedst memoirs
+    public static final int KHAREDSTS_MEMOIRS = ItemID.VEOS_KHAREDSTS_MEMOIRS;
+    public static final int BOOK_OF_THE_DEAD = ItemID.BOOK_OF_THE_DEAD;
+
+    // Tome of earth
+    public static final int TOME_OF_EARTH = ItemID.TOME_OF_EARTH;
+    public static final int TOME_OF_EARTH_UNCHARGED = ItemID.TOME_OF_EARTH_UNCHARGED;
+
+    // Tome of water
+    public static final int TOME_OF_WATER = ItemID.TOME_OF_WATER;
+    public static final int TOME_OF_WATER_UNCHARGED = ItemID.TOME_OF_WATER_UNCHARGED;
+
+    // Tome of fire
+    public static final int TOME_OF_FIRE = ItemID.TOME_OF_FIRE;
+    public static final int TOME_OF_FIRE_UNCHARGED = ItemID.TOME_OF_FIRE_UNCHARGED;
+
+    // Ash sanctifier
+    public static final int ASH_SANCTIFIER = ItemID.ASH_SANCTIFIER;
+
+    // Bone crusher
+    public static final int BONECRUSHER = ItemID.BONECRUSHER;
+    public static final int BONECRUSHER_NECKLACE = ItemID.BONECRUSHER_NECKLACE;
+
+    // Bottomless compost bucket
+    public static final int BOTTOMLESS_COMPOST_BUCKET = ItemID.BOTTOMLESS_COMPOST_BUCKET_FILLED;
+    public static final int BOTTOMLESS_COMPOST_BUCKET_UNCHARGED = ItemID.BOTTOMLESS_COMPOST_BUCKET;
+    public static final int ULTRACOMPOST = ItemID.BUCKET_ULTRACOMPOST;
+    public static final int SUPERCOMPOST = ItemID.BUCKET_SUPERCOMPOST;
+    public static final int COMPOST = ItemID.BUCKET_COMPOST;
+    public static final int BUCKET = ItemID.BUCKET_EMPTY;
+
+    // Chugging barrel
+    public static final int CHUGGING_BARREL = ItemID.MM_PREPOT_DEVICE;
+    public static final int CHUGGING_BARREL_DISASSEMBLED = ItemID.MM_PREPOT_DEVICE_DISASSEMBLED;
+    public static final int ATTACK_POTION_1 = ItemID._1DOSE1ATTACK;
+    public static final int ANTIPOISON_1 = ItemID._1DOSEANTIPOISON;
+    public static final int RELICYMS_BALM_1 = ItemID.RELICYMS_BALM1;
+    public static final int STRENGTH_POTION_1 = ItemID._1DOSE1STRENGTH;
+    public static final int RESTORE_POTION_1 = ItemID._1DOSESTATRESTORE;
+    public static final int GUTHIX_BALANCE_1 = ItemID.BURGH_GUTHIX_BALANCE_1;
+    public static final int ENERGY_POTION_1 = ItemID._1DOSE1ENERGY;
+    public static final int DEFENCE_POTION_1 = ItemID._1DOSE1DEFENSE;
+    public static final int AGILITY_POTION_1 = ItemID._1DOSE1AGILITY;
+    public static final int COMBAT_POTION_1 = ItemID._1DOSECOMBAT;
+    public static final int PRAYER_POTION_1 = ItemID._1DOSEPRAYERRESTORE;
+    public static final int SUPER_ATTACK_1 = ItemID._1DOSE2ATTACK;
+    public static final int SUPER_ANTIPOISON_1 = ItemID._1DOSE2ANTIPOISON;
+    public static final int FISHING_POTION_1 = ItemID._1DOSEFISHERSPOTION;
+    public static final int SUPER_ENERGY_POTION_1 = ItemID._1DOSE2ENERGY;
+    public static final int HUNTER_POTION_1 = ItemID._1DOSEHUNTING;
+    public static final int GOADING_POTION_1 = ItemID._1DOSEGOADING;
+    public static final int SUPER_STRENGTH_1 = ItemID._1DOSE2STRENGTH;
+    public static final int MAGIC_ESSENCE_1 = ItemID._1DOSEMAGICESS;
+    public static final int PRAYER_REGENERATION_POTION_1 = ItemID._1DOSE1PRAYER_REGENERATION;
+    public static final int SUPER_RESTORE_1 = ItemID._1DOSE2RESTORE;
+    public static final int SANFEW_SERUM_1 = ItemID.SANFEW_SALVE_1_DOSE;
+    public static final int SUPER_DEFENCE_1 = ItemID._1DOSE2DEFENSE;
+    public static final int ANTIDOTE_1 = ItemID.ANTIDOTE_1;
+    public static final int ANTIFIRE_POTION_1 = ItemID._1DOSE1ANTIDRAGON;
+    public static final int DIVINE_SUPER_ATTACK_POTION_1 = ItemID._1DOSEDIVINEATTACK;
+    public static final int DIVINE_SUPER_DEFENCE_POTION_1 = ItemID._1DOSEDIVINEDEFENCE;
+    public static final int DIVINE_SUPER_STRENGTH_POTION_1 = ItemID._1DOSEDIVINESTRENGTH;
+    public static final int RANGING_POTION_1 = ItemID._1DOSERANGERSPOTION;
+    public static final int DIVINE_RANGING_POTION_1 = ItemID._1DOSEDIVINERANGE;
+    public static final int MAGIC_POTION_1 = ItemID._1DOSE1MAGIC;
+    public static final int STAMINA_POTION_1 = ItemID._1DOSESTAMINA;
+    public static final int ZAMORAK_BREW_1 = ItemID._1DOSEPOTIONOFZAMORAK;
+    public static final int DIVINE_MAGIC_POTION_1 = ItemID._1DOSEDIVINEMAGIC;
+    public static final int ANTIDOTE1_5958 = ItemID.ANTIDOTE__1;
+    public static final int BASTION_POTION_1 = ItemID._1DOSEBASTION;
+    public static final int BATTLEMAGE_POTION_1 = ItemID._1DOSEBATTLEMAGE;
+    public static final int SARADOMIN_BREW_1 = ItemID.BR_1DOSEPOTIONOFSARADOMIN;
+    public static final int EXTENDED_ANTIFIRE_1 = ItemID._1DOSE2ANTIDRAGON;
+    public static final int ANCIENT_BREW_1 = ItemID._1DOSEANCIENTBREW;
+    public static final int DIVINE_BASTION_POTION_1 = ItemID._1DOSEDIVINEBASTION;
+    public static final int DIVINE_BATTLEMAGE_POTION_1 = ItemID._1DOSEDIVINEBATTLEMAGE;
+    public static final int ANTIVENOM_1 = ItemID.ANTIVENOM1;
+    public static final int MENAPHITE_REMEDY_1 = ItemID._1DOSESTATRENEWAL;
+    public static final int SUPER_COMBAT_POTION_1 = ItemID._1DOSE2COMBAT;
+    public static final int FORGOTTEN_BREW_1 = ItemID._1DOSEFORGOTTENBREW;
+    public static final int SUPER_ANTIFIRE_POTION_1 = ItemID._1DOSE3ANTIDRAGON;
+    public static final int ANTIVENOM_PLUS_1 = ItemID.ANTIVENOM_1;
+    public static final int EXTENDED_ANTIVENOM_1 = ItemID.EXTENDED_ANTIVENOM_1;
+    public static final int DIVINE_SUPER_COMBAT_POTION_1 = ItemID._1DOSEDIVINECOMBAT;
+    public static final int EXTENDED_SUPER_ANTIFIRE_1 = ItemID._1DOSE4ANTIDRAGON;
+    public static final int ATTACK_MIX_1 = ItemID.BRUTAL_1DOSE1ATTACK;
+    public static final int ANTIPOISON_MIX_1 = ItemID.BRUTAL_1DOSEANTIPOISON;
+    public static final int RELICYMS_MIX_1 = ItemID.BRUTAL_RELICYMS_BALM1;
+    public static final int STRENGTH_MIX_1 = ItemID.BRUTAL_1DOSE1STRENGTH;
+    public static final int RESTORE_MIX_1 = ItemID.BRUTAL_1DOSESTATRESTORE;
+    public static final int ENERGY_MIX_1 = ItemID.BRUTAL_1DOSE1ENERGY;
+    public static final int DEFENCE_MIX_1 = ItemID.BRUTAL_1DOSE1DEFENSE;
+    public static final int AGILITY_MIX_1 = ItemID.BRUTAL_1DOSE1AGILITY;
+    public static final int COMBAT_MIX_1 = ItemID.BRUTAL_1DOSECOMBAT;
+    public static final int PRAYER_MIX_1 = ItemID.BRUTAL_1DOSEPRAYERRESTORE;
+    public static final int SUPERATTACK_MIX_1 = ItemID.BRUTAL_1DOSE2ATTACK;
+    public static final int ANTIPOISON_SUPERMIX_1 = ItemID.BRUTAL_1DOSE2ANTIPOISON;
+    public static final int FISHING_MIX_1 = ItemID.BRUTAL_1DOSEFISHERSPOTION;
+    public static final int SUPER_ENERGY_MIX_1 = ItemID.BRUTAL_1DOSE2ENERGY;
+    public static final int HUNTING_MIX_1 = ItemID.BRUTAL_1DOSE1HUNTING;
+    public static final int SUPER_STR_MIX_1 = ItemID.BRUTAL_1DOSE2STRENGTH;
+    public static final int MAGIC_ESSENCE_MIX_1 = ItemID.BRUTAL_1DOSEMAGICESS;
+    public static final int SUPER_RESTORE_MIX_1 = ItemID.BRUTAL_1DOSE2RESTORE;
+    public static final int SUPER_DEFENCE_MIX_1 = ItemID.BRUTAL_1DOSE2DEFENSE;
+    public static final int ANTIDOTE_MIX_1 = ItemID.BRUTAL_ANTIDOTE_1;
+    public static final int ANTIFIRE_MIX_1 = ItemID.BRUTAL_1DOSE1ANTIDRAGON;
+    public static final int RANGING_MIX_1 = ItemID.BRUTAL_1DOSERANGERSPOTION;
+    public static final int MAGIC_MIX_1 = ItemID.BRUTAL_1DOSE1MAGIC;
+    public static final int ZAMORAK_MIX_1 = ItemID.BRUTAL_1DOSEPOTIONOFZAMORAK;
+    public static final int STAMINA_MIX_1 = ItemID.BRUTAL_1DOSESTAMINA;
+    public static final int EXTENDED_ANTIFIRE_MIX_1 = ItemID.BRUTAL_1DOSE2ANTIDRAGON;
+    public static final int ANCIENT_MIX_1 = ItemID.BRUTAL_1DOSEANCIENTBREW;
+    public static final int SUPER_ANTIFIRE_MIX_1 = ItemID.BRUTAL_1DOSE3ANTIDRAGON;
+    public static final int EXTENDED_SUPER_ANTIFIRE_MIX_1 = ItemID.BRUTAL_1DOSE4ANTIDRAGON;
+
+    // Coal bag
+    public static final int COAL_BAG = ItemID.COAL_BAG;
+    public static final int COAL_BAG_OPEN = ItemID.COAL_BAG_OPEN;
+    public static final int COAL = ItemID.COAL;
+    public static final int SMITHING_CAPE = ItemID.SKILLCAPE_SMITHING;
+    public static final int SMITHING_CAPE_TRIMMED = ItemID.SKILLCAPE_SMITHING_TRIMMED;
+
+    // Colossal pouch
+    public static final int COLOSSAL_POUCH = ItemID.RCU_POUCH_COLOSSAL;
+    public static final int COLOSSAL_POUCH_DEGRADED = ItemID.RCU_POUCH_COLOSSAL_DEGRADE;
+    public static final int RUNE_ESSENCE = ItemID.BLANKRUNE;
+    public static final int PURE_ESSENCE = ItemID.BLANKRUNE_HIGH;
+    public static final int DAEYALT_ESSENCE = ItemID.BLANKRUNE_DAEYALT;
+    public static final int GUARDIAN_ESSENCE = ItemID.GOTR_GUARDIAN_ESSENCE;
+
+    // Crystal saw
+    public static final int CRYSTAL_SAW = ItemID.EYEGLO_CRYSTAL_SAW;
+
+    // Eternal teleport crystal
+    public static final int ETERNAL_TELEPORT_CRYSTAL = ItemID.PRIF_TELEPORT_CRYSTAL;
+
+    // Fish barrel
+    public static final int FISH_BARREL = ItemID.FISH_BARREL_CLOSED;
+    public static final int FISH_BARREL_OPEN = ItemID.FISH_BARREL_OPEN;
+    public static final int FISH_SACK_BARREL = ItemID.FISH_SACK_BARREL_CLOSED;
+    public static final int FISH_SACK_BARREL_OPEN = ItemID.FISH_SACK_BARREL_OPEN;
+    public static final int RAW_SHRIMPS = ItemID.RAW_SHRIMP;
+    public static final int RAW_ANCHOVIES = ItemID.RAW_ANCHOVIES;
+    public static final int RAW_MONKFISH = ItemID.RAW_MONKFISH;
+    public static final int RAW_MACKEREL = ItemID.RAW_MACKEREL;
+    public static final int RAW_COD = ItemID.RAW_COD;
+    public static final int RAW_BASS = ItemID.RAW_BASS;
+    public static final int RAW_SARDINE = ItemID.RAW_SARDINE;
+    public static final int RAW_HERRING = ItemID.RAW_HERRING;
+    public static final int RAW_TROUT = ItemID.RAW_TROUT;
+    public static final int RAW_PIKE = ItemID.RAW_PIKE;
+    public static final int RAW_SLIMY_EEL = ItemID.MORT_SLIMEY_EEL;
+    public static final int RAW_SALMON = ItemID.RAW_SALMON;
+    public static final int RAW_RAINBOW_FISH = ItemID.HUNTING_RAW_FISH_SPECIAL;
+    public static final int RAW_CAVE_EEL = ItemID.RAW_CAVE_EEL;
+    public static final int RAW_LAVA_EEL = ItemID.RAW_LAVA_EEL;
+    public static final int INFERNAL_EEL = ItemID.INFERNAL_EEL;
+    public static final int RAW_ANGLERFISH = ItemID.RAW_ANGLERFISH;
+    public static final int SACRED_EEL = ItemID.SNAKEBOSS_EEL;
+    public static final int RAW_TUNA = ItemID.RAW_TUNA;
+    public static final int RAW_SWORDFISH = ItemID.RAW_SWORDFISH;
+    public static final int RAW_SHARK = ItemID.RAW_SHARK;
+    public static final int BLUEGILL = ItemID.AERIAL_FISHING_BLUEGILL;
+    public static final int COMMON_TENCH = ItemID.AERIAL_FISHING_COMMON_TENCH;
+    public static final int MOTTLED_EEL = ItemID.AERIAL_FISHING_MOTTLED_EEL;
+    public static final int GREATER_SIREN = ItemID.AERIAL_FISHING_GREATER_SIREN;
+    public static final int RAW_LOBSTER = ItemID.RAW_LOBSTER;
+    public static final int RAW_DARK_CRAB = ItemID.RAW_DARK_CRAB;
+    public static final int LEAPING_TROUT = ItemID.BRUT_SPAWNING_TROUT;
+    public static final int LEAPING_SALMON = ItemID.BRUT_SPAWNING_SALMON;
+    public static final int LEAPING_STURGEON = ItemID.BRUT_STURGEON;
+    public static final int RAW_KARAMBWAN = ItemID.TBWT_RAW_KARAMBWAN;
+    public static final int RAW_SEA_TURTLE = ItemID.RAW_SEATURTLE;
+    public static final int RAW_MANTA_RAY = ItemID.RAW_MANTARAY;
+
+    // Flamtaer bag
+    public static final int FLAMTAER_BAG = ItemID.FLAMTAER_BAG;
+    public static final int TIMBER_BEAM = ItemID.TIMBERBEAM;
+    public static final int LIMESTONE_BRICK = ItemID.LIMESTONEBRICK;
+    public static final int SWAMP_PASTE = ItemID.SWAMPPASTE;
+
+    // Fungicide spray
+    public static final int FUNGICIDE_SPRAY_0 = ItemID.SLAYER_SPRAY_PUMP_0;
+    public static final int FUNGICIDE_SPRAY_1 = ItemID.SLAYER_SPRAY_PUMP_1;
+    public static final int FUNGICIDE_SPRAY_2 = ItemID.SLAYER_SPRAY_PUMP_2;
+    public static final int FUNGICIDE_SPRAY_3 = ItemID.SLAYER_SPRAY_PUMP_3;
+    public static final int FUNGICIDE_SPRAY_4 = ItemID.SLAYER_SPRAY_PUMP_4;
+    public static final int FUNGICIDE_SPRAY_5 = ItemID.SLAYER_SPRAY_PUMP_5;
+    public static final int FUNGICIDE_SPRAY_6 = ItemID.SLAYER_SPRAY_PUMP_6;
+    public static final int FUNGICIDE_SPRAY_7 = ItemID.SLAYER_SPRAY_PUMP_7;
+    public static final int FUNGICIDE_SPRAY_8 = ItemID.SLAYER_SPRAY_PUMP_8;
+    public static final int FUNGICIDE_SPRAY_9 = ItemID.SLAYER_SPRAY_PUMP_9;
+    public static final int FUNGICIDE_SPRAY_10 = ItemID.SLAYER_SPRAY_PUMP_10;
+
+    // Fur pouch
+    public static final int FUR_POUCH_SMALL = ItemID.HG_FURPOUCH_SMALL;
+    public static final int FUR_POUCH_SMALL_OPEN = ItemID.HG_FURPOUCH_SMALL_OPEN;
+    public static final int FUR_POUCH_MEDIUM = ItemID.HG_FURPOUCH_MED;
+    public static final int FUR_POUCH_MEDIUM_OPEN = ItemID.HG_FURPOUCH_MED_OPEN;
+    public static final int FUR_POUCH_LARGE = ItemID.HG_FURPOUCH_LARGE;
+    public static final int FUR_POUCH_LARGE_OPEN = ItemID.HG_FURPOUCH_LARGE_OPEN;
+    public static final int POLAR_KEBBIT_FUR = ItemID.HUNTINGBEAST_POLAR_FUR;
+    public static final int COMMON_KEBBIT_FUR = ItemID.HUNTINGBEAST_WOODLAND_FUR;
+    public static final int FELDIP_WEASEL_FUR = ItemID.HUNTINGBEAST_JUNGLE_FUR;
+    public static final int DESERT_DEVIL_FUR = ItemID.HUNTINGBEAST_DESERT_FUR;
+    public static final int FOX_FUR = ItemID.HUNTING_FENNECFOX_FUR;
+    public static final int LARUPIA_FUR = ItemID.HUNTING_FUR_JAGUAR_PERFECT;
+    public static final int LARUPIA_FUR_TATTY = ItemID.HUNTING_FUR_JAGUAR_SHABBY;
+    public static final int GRAAHK_FUR = ItemID.HUNTING_FUR_LEOPARD_PERFECT;
+    public static final int GRAAHK_FUR_TATTY = ItemID.HUNTING_FUR_LEOPARD_SHABBY;
+    public static final int KYATT_FUR = ItemID.HUNTING_FUR_TIGER_PERFECT;
+    public static final int KYATT_FUR_TATTY = ItemID.HUNTING_FUR_TIGER_SHABBY;
+    public static final int SUNLIGHT_ANTELOPE_FUR = ItemID.HUNTING_ANTELOPESUN_FUR;
+    public static final int MOONLIGHT_ANTELOPE_FUR = ItemID.HUNTING_ANTELOPEMOON_FUR;
+    public static final int SPOTTED_KEBBIT_FUR = ItemID.HUNTINGBEAST_SPEEDY_FUR;
+    public static final int DARK_KEBBIT_FUR = ItemID.HUNTINGBEAST_SILENT_FUR;
+    public static final int DASHING_KEBBIT_FUR = ItemID.HUNTINGBEAST_SPEEDY2_FUR;
+
+    // Gem bag
+    public static final int GEM_BAG = ItemID.GEM_BAG;
+    public static final int GEM_BAG_OPEN = ItemID.GEM_BAG_OPEN;
+    public static final int UNCUT_SAPPHIRE = ItemID.UNCUT_SAPPHIRE;
+    public static final int UNCUT_EMERALD = ItemID.UNCUT_EMERALD;
+    public static final int UNCUT_RUBY = ItemID.UNCUT_RUBY;
+    public static final int UNCUT_DIAMOND = ItemID.UNCUT_DIAMOND;
+    public static final int UNCUT_DRAGONSTONE = ItemID.UNCUT_DRAGONSTONE;
+
+    // Gricollers can
+    public static final int GRICOLLERS_CAN = ItemID.ZEAH_WATERINGCAN;
+
+    // Herb sack
+    public static final int HERB_SACK = ItemID.SLAYER_HERB_SACK;
+    public static final int HERB_SACK_OPEN = ItemID.SLAYER_HERB_SACK_OPEN;
+    public static final int GRIMY_GUAM_LEAF = ItemID.UNIDENTIFIED_GUAM;
+    public static final int GRIMY_MARRENTILL = ItemID.UNIDENTIFIED_MARENTILL;
+    public static final int GRIMY_TARROMIN = ItemID.UNIDENTIFIED_TARROMIN;
+    public static final int GRIMY_HARRALANDER = ItemID.UNIDENTIFIED_HARRALANDER;
+    public static final int GRIMY_RANARR_WEED = ItemID.UNIDENTIFIED_RANARR;
+    public static final int GRIMY_TOADFLAX = ItemID.UNIDENTIFIED_TOADFLAX;
+    public static final int GRIMY_IRIT_LEAF = ItemID.UNIDENTIFIED_IRIT;
+    public static final int GRIMY_AVANTOE = ItemID.UNIDENTIFIED_AVANTOE;
+    public static final int GRIMY_KWUARM = ItemID.UNIDENTIFIED_KWUARM;
+    public static final int GRIMY_HUASCA = ItemID.UNIDENTIFIED_HUASCA;
+    public static final int GRIMY_SNAPDRAGON = ItemID.UNIDENTIFIED_SNAPDRAGON;
+    public static final int GRIMY_CADANTINE = ItemID.UNIDENTIFIED_CADANTINE;
+    public static final int GRIMY_LANTADYME = ItemID.UNIDENTIFIED_LANTADYME;
+    public static final int GRIMY_DWARF_WEED = ItemID.UNIDENTIFIED_DWARF_WEED;
+    public static final int GRIMY_TORSTOL = ItemID.UNIDENTIFIED_TORSTOL;
+
+    // Huntsmans kit
+    public static final int HUNTSMANS_KIT = ItemID.HUNTSMANS_KIT;
+    public static final int BIRD_SNARE = ItemID.HUNTING_OJIBWAY_BIRD_SNARE;
+    public static final int BUTTERFLY_NET = ItemID.HUNTING_BUTTERFLY_NET;
+    public static final int BUTTERFLY_JAR = ItemID.BUTTERFLY_JAR;
+    public static final int RABBIT_SNARE = ItemID.HUNTING_SNARE;
+    public static final int SMALL_FISHING_NET = ItemID.NET;
+    public static final int MAGIC_BOX = ItemID.MAGIC_IMP_BOX;
+    public static final int TEASING_STICK = ItemID.HUNTING_TEASING_STICK;
+    public static final int WOOD_CAMO_TOP = ItemID.HUNTING_CAMOFLAUGE_ROBE_WOOD;
+    public static final int WOOD_CAMO_LEGS = ItemID.HUNTING_TROUSERS_WOOD;
+    public static final int JUNGLE_CAMO_TOP = ItemID.HUNTING_CAMOFLAUGE_ROBE_JUNGLE;
+    public static final int JUNGLE_CAMO_LEGS = ItemID.HUNTING_TROUSERS_JUNGLE;
+    public static final int LARUPIA_HAT = ItemID.HUNTING_HAT_JAGUAR;
+    public static final int LARUPIA_TOP = ItemID.HUNTING_TORSO_JAGUAR;
+    public static final int LARUPIA_LEGS = ItemID.HUNTING_TROUSERS_JAGUAR;
+    public static final int KYATT_HAT = ItemID.HUNTING_HAT_TIGER;
+    public static final int KYATT_TOP = ItemID.HUNTING_TORSO_TIGER;
+    public static final int KYATT_LEGS = ItemID.HUNTING_TROUSERS_TIGER;
+    public static final int GUILD_HUNTER_HEADWEAR = ItemID.HG_HUNTER_HOOD;
+    public static final int GUILD_HUNTER_TOP = ItemID.HG_HUNTER_TOP;
+    public static final int GUILD_HUNTER_LEGS = ItemID.HG_HUNTER_LEGS;
+    public static final int GUILD_HUNTER_BOOTS = ItemID.HG_HUNTER_BOOTS;
+    public static final int NOOSE_WAND = ItemID.NOOSE_WAND;
+    public static final int MAGIC_BUTTERFLY_NET = ItemID.II_MAGIC_BUTTERFLY_NET;
+    public static final int BOX_TRAP = ItemID.HUNTING_BOX_TRAP;
+    public static final int UNLIT_TORCH = ItemID.TORCH_UNLIT;
+    public static final int ROPE = ItemID.ROPE;
+    public static final int HUNTERS_SPEAR = ItemID.HG_HUNTER_SPEAR;
+    public static final int POLAR_CAMO_TOP = ItemID.HUNTING_CAMOFLAUGE_ROBE_POLAR;
+    public static final int POLAR_CAMO_LEGS = ItemID.HUNTING_TROUSERS_POLAR;
+    public static final int DESERT_CAMO_TOP = ItemID.HUNTING_CAMOFLAUGE_ROBE_DESERT;
+    public static final int DESERT_CAMO_LEGS = ItemID.HUNTING_TROUSERS_DESERT;
+    public static final int GRAAHK_HEADDRESS = ItemID.HUNTING_HAT_LEOPARD;
+    public static final int GRAAHK_TOP = ItemID.HUNTING_TORSO_LEOPARD;
+    public static final int GRAAHK_LEGS = ItemID.HUNTING_TROUSERS_LEOPARD;
+    public static final int HUNTER_HOOD = ItemID.SKILLCAPE_HUNTING_HOOD;
+    public static final int HUNTER_CAPE = ItemID.SKILLCAPE_HUNTING;
+    public static final int HUNTER_CAPE_TRIMMED = ItemID.SKILLCAPE_HUNTING_TRIMMED;
+    public static final int IMPLING_JAR = ItemID.II_IMPLING_JAR;
+
+    // Jar generator
+    public static final int JAR_GENERATOR = ItemID.II_JAR_GENERATOR;
+
+    // Log basket
+    public static final int LOG_BASKET = ItemID.LOG_BASKET_CLOSED;
+    public static final int LOG_BASKET_OPEN = ItemID.LOG_BASKET_OPEN;
+    public static final int LOGS = ItemID.LOGS;
+    public static final int ACHEY_TREE_LOGS = ItemID.ACHEY_TREE_LOGS;
+    public static final int OAK_LOGS = ItemID.OAK_LOGS;
+    public static final int WILLOW_LOGS = ItemID.WILLOW_LOGS;
+    public static final int TEAK_LOGS = ItemID.TEAK_LOGS;
+    public static final int JUNIPER_LOGS = ItemID.JUNIPER_LOGS;
+    public static final int MAPLE_LOGS = ItemID.MAPLE_LOGS;
+    public static final int MAHOGANY_LOGS = ItemID.MAHOGANY_LOGS;
+    public static final int ARCTIC_PINE_LOGS = ItemID.ARCTIC_PINE_LOG;
+    public static final int YEW_LOGS = ItemID.YEW_LOGS;
+    public static final int BLISTERWOOD_LOGS = ItemID.BLISTERWOOD_LOGS;
+    public static final int MAGIC_LOGS = ItemID.MAGIC_LOGS;
+    public static final int REDWOOD_LOGS = ItemID.REDWOOD_LOGS;
+
+    // Master scroll book
+    public static final int MASTER_SCROLL_BOOK = ItemID.BOOKOFSCROLLS_CHARGED;
+    public static final int MASTER_SCROLL_BOOK_UNCHARGED = ItemID.BOOKOFSCROLLS_EMPTY;
+    public static final int TELEPORTSCROLL_NARDAH = ItemID.TELEPORTSCROLL_NARDAH;
+    public static final int TELEPORTSCROLL_DIGSITE = ItemID.TELEPORTSCROLL_DIGSITE;
+    public static final int TELEPORTSCROLL_FELDIP_HILLS = ItemID.TELEPORTSCROLL_FELDIP;
+    public static final int TELEPORTSCROLL_LUNAR_ISLE = ItemID.TELEPORTSCROLL_LUNARISLE;
+    public static final int TELEPORTSCROLL_MORTTON = ItemID.TELEPORTSCROLL_MORTTON;
+    public static final int TELEPORTSCROLL_PEST_CONTROL = ItemID.TELEPORTSCROLL_PESTCONTROL;
+    public static final int TELEPORTSCROLL_PISCATORIS = ItemID.TELEPORTSCROLL_PISCATORIS;
+    public static final int TELEPORTSCROLL_TAI_BWO_WANNAI = ItemID.TELEPORTSCROLL_TAIBWO;
+    public static final int TELEPORTSCROLL_IORWERTH_CAMP = ItemID.TELEPORTSCROLL_ELF;
+    public static final int TELEPORTSCROLL_MOS_LEHARMLESS = ItemID.TELEPORTSCROLL_MOSLES;
+    public static final int TELEPORTSCROLL_LUMBERYARD = ItemID.TELEPORTSCROLL_LUMBERYARD;
+    public static final int TELEPORTSCROLL_ZULANDRA = ItemID.TELEPORTSCROLL_ZULANDRA;
+    public static final int TELEPORTSCROLL_KEY_MASTER = ItemID.TELEPORTSCROLL_CERBERUS;
+    public static final int TELEPORTSCROLL_REVENANTS_CAVE = ItemID.TELEPORTSCROLL_REVENANTS;
+    public static final int TELEPORTSCROLL_WATSON = ItemID.TELEPORTSCROLL_WATSON;
+    public static final int TELEPORTSCROLL_GUTHIXIAN_TEMPLE = ItemID.TELEPORTSCROLL_GUTHIXIAN_TEMPLE;
+    public static final int TELEPORTSCROLL_SPIDER_CAVE = ItemID.TELEPORTSCROLL_SPIDERCAVE;
+    public static final int TELEPORTSCROLL_COLOSSAL_WYRM = ItemID.TELEPORTSCROLL_COLOSSAL_WYRM;
+
+    // Meat pouch
+    public static final int MEAT_POUCH_SMALL = ItemID.HG_MEATPOUCH_SMALL;
+    public static final int MEAT_POUCH_SMALL_OPEN = ItemID.HG_MEATPOUCH_SMALL_OPEN;
+    public static final int MEAT_POUCH_LARGE = ItemID.HG_MEATPOUCH_LARGE;
+    public static final int MEAT_POUCH_LARGE_OPEN = ItemID.HG_MEATPOUCH_LARGE_OPEN;
+    public static final int RAW_BEAST_MEAT = ItemID.SPIT_RAW_BEAST_MEAT;
+    public static final int RAW_WILD_KEBBIT = ItemID.HUNTINGBEAST_WILD_MEAT;
+    public static final int RAW_BARBTAILED_KEBBIT = ItemID.HUNTINGBEAST_BARBED_MEAT;
+    public static final int RAW_PYRE_FOX = ItemID.HUNTING_FENNECFOX_MEAT;
+    public static final int RAW_LARUPIA = ItemID.HUNTING_LARUPIA_MEAT;
+    public static final int RAW_GRAAHK = ItemID.HUNTING_GRAAHK_MEAT;
+    public static final int RAW_KYATT = ItemID.HUNTING_KYATT_MEAT;
+    public static final int RAW_SUNLIGHT_ANTELOPE = ItemID.HUNTING_ANTELOPESUN_MEAT;
+    public static final int RAW_MOONLIGHT_ANTELOPE = ItemID.HUNTING_ANTELOPEMOON_MEAT;
+    public static final int RAW_DASHING_KEBBIT = ItemID.HUNTINGBEAST_SPEEDY2_MEAT;
+
+    // Ogre bellows
+    public static final int OGRE_BELLOWS_0 = ItemID.EMPTY_OGRE_BELLOWS;
+    public static final int OGRE_BELLOWS_1 = ItemID.FILLED_OGRE_BELLOW1;
+    public static final int OGRE_BELLOWS_2 = ItemID.FILLED_OGRE_BELLOW2;
+    public static final int OGRE_BELLOWS_3 = ItemID.FILLED_OGRE_BELLOW3;
+
+    // Plank sack
+    public static final int PLANK_SACK = ItemID.PLANK_SACK;
+    public static final int PLANK = ItemID.WOODPLANK;
+    public static final int OAK_PLANK = ItemID.PLANK_OAK;
+    public static final int TEAK_PLANK = ItemID.PLANK_TEAK;
+    public static final int MAHOGANY_PLANK = ItemID.PLANK_MAHOGANY;
+    public static final int SAWMILL_VOUCHER = ItemID.FORESTRY_SAWMILL_VOUCHER;
+
+    // Quetzal whistle
+    public static final int QUETZAL_WHISTLE_BASIC = ItemID.HG_QUETZALWHISTLE_BASIC;
+    public static final int QUETZAL_WHISTLE_ENHANCED = ItemID.HG_QUETZALWHISTLE_ENHANCED;
+    public static final int QUETZAL_WHISTLE_PERFECTED = ItemID.HG_QUETZALWHISTLE_PERFECTED;
+    public static final int QUETZAL_FEED = ItemID.VMQ2_QUETZAL_FEED;
+
+    // Reagent pouch
+    public static final int REAGENT_POUCH = ItemID.MM_SECONDARY_POUCH;
+    public static final int REAGENT_POUCH_OPEN = ItemID.MM_SECONDARY_POUCH_OPEN;
+    public static final int EYE_OF_NEWT = ItemID.EYE_OF_NEWT;
+    public static final int LIMPWURT_ROOT = ItemID.LIMPWURT_ROOT;
+    public static final int RED_SPIDERS_EGGS = ItemID.RED_SPIDERS_EGGS;
+    public static final int TOADS_LEGS = ItemID.TOADS_LEGS;
+    public static final int SNAPE_GRASS = ItemID.SNAPE_GRASS;
+    public static final int MORT_MYRE_FUNGUS = ItemID.MORTMYREMUSHROOM;
+    public static final int WHITE_BERRIES = ItemID.WHITE_BERRIES;
+    public static final int JANGERBERRIES = ItemID.JANGERBERRIES;
+    public static final int POISON_IVY_BERRIES = ItemID.POISONIVY_BERRIES;
+    public static final int POTATO_CACTUS = ItemID.CACTUS_POTATO;
+    public static final int CACTUS_SPINE = ItemID.CACTUS_SPINE;
+    public static final int ASHES = ItemID.ASHES;
+    public static final int CHOCOLATE_DUST = ItemID.CHOCOLATE_DUST;
+    public static final int DRAGON_SCALE_DUST = ItemID.DRAGON_SCALE_DUST;
+    public static final int GOAT_HORN_DUST = ItemID.GROUND_DESERT_GOAT_HORN;
+    public static final int GORAK_CLAW_POWDER = ItemID.FAIRYTALE2_GROUND_GORAK_CLAWS;
+    public static final int KEBBIT_TEETH_DUST = ItemID.HUNTINGBEAST_SABRETEETH_DUST;
+    public static final int SILVER_DUST = ItemID.SILVER_DUST;
+    public static final int UNICORN_HORN_DUST = ItemID.UNICORN_HORN_DUST;
+    public static final int WINE_OF_ZAMORAK = ItemID.WINE_OF_ZAMORAK;
+    public static final int ALDARIUM = ItemID.ALDARIUM;
+    public static final int YEW_ROOTS = ItemID.YEW_ROOTS;
+    public static final int MAGIC_ROOTS = ItemID.MAGIC_ROOTS;
+    public static final int CRUSHED_NEST = ItemID.CRUSHED_BIRD_NEST;
+    public static final int CRUSHED_SUPERIOR_DRAGON_BONES = ItemID.CRUSHED_DRAGON_BONES;
+    public static final int NAIL_BEAST_NAILS = ItemID.NAIL_BEAST_NAIL;
+    public static final int LILY_OF_THE_SANDS = ItemID.LILY_OF_THE_SANDS;
+    public static final int CAVIAR = ItemID.BRUT_CAVIAR;
+    public static final int ROE = ItemID.BRUT_ROE;
+
+    // Seed box
+    public static final int SEED_BOX = ItemID.SEED_BOX;
+    public static final int SEED_BOX_OPEN = ItemID.SEED_BOX_OPEN;
+    public static final int POTATO_SEED = ItemID.POTATO_SEED;
+    public static final int ONION_SEED = ItemID.ONION_SEED;
+    public static final int CABBAGE_SEED = ItemID.CABBAGE_SEED;
+    public static final int TOMATO_SEED = ItemID.TOMATO_SEED;
+    public static final int SWEETCORN_SEED = ItemID.SWEETCORN_SEED;
+    public static final int STRAWBERRY_SEED = ItemID.STRAWBERRY_SEED;
+    public static final int WATERMELON_SEED = ItemID.WATERMELON_SEED;
+    public static final int SNAPE_GRASS_SEED = ItemID.SNAPE_GRASS_SEED;
+    public static final int BARLEY_SEED = ItemID.BARLEY_SEED;
+    public static final int HAMMERSTONE_SEED = ItemID.HAMMERSTONE_HOP_SEED;
+    public static final int ASGARNIAN_SEED = ItemID.ASGARNIAN_HOP_SEED;
+    public static final int JUTE_SEED = ItemID.JUTE_SEED;
+    public static final int YANILLIAN_SEED = ItemID.YANILLIAN_HOP_SEED;
+    public static final int KRANDORIAN_SEED = ItemID.KRANDORIAN_HOP_SEED;
+    public static final int WILDBLOOD_SEED = ItemID.WILDBLOOD_HOP_SEED;
+    public static final int ACORN = ItemID.ACORN;
+    public static final int WILLOW_SEED = ItemID.WILLOW_SEED;
+    public static final int MAPLE_SEED = ItemID.MAPLE_SEED;
+    public static final int YEW_SEED = ItemID.YEW_SEED;
+    public static final int MAGIC_SEED = ItemID.MAGIC_TREE_SEED;
+    public static final int REDWOOD_TREE_SEED = ItemID.REDWOOD_TREE_SEED;
+    public static final int APPLE_TREE_SEED = ItemID.APPLE_TREE_SEED;
+    public static final int BANANA_TREE_SEED = ItemID.BANANA_TREE_SEED;
+    public static final int ORANGE_TREE_SEED = ItemID.ORANGE_TREE_SEED;
+    public static final int CURRY_TREE_SEED = ItemID.CURRY_TREE_SEED;
+    public static final int PINEAPPLE_SEED = ItemID.PINEAPPLE_TREE_SEED;
+    public static final int PAPAYA_TREE_SEED = ItemID.PAPAYA_TREE_SEED;
+    public static final int PALM_TREE_SEED = ItemID.PALM_TREE_SEED;
+    public static final int DRAGONFRUIT_TREE_SEED = ItemID.DRAGONFRUIT_TREE_SEED;
+    public static final int REDBERRY_SEED = ItemID.REDBERRY_BUSH_SEED;
+    public static final int CADAVABERRY_SEED = ItemID.CADAVABERRY_BUSH_SEED;
+    public static final int DWELLBERRY_SEED = ItemID.DWELLBERRY_BUSH_SEED;
+    public static final int JANGERBERRY_SEED = ItemID.JANGERBERRY_BUSH_SEED;
+    public static final int WHITEBERRY_SEED = ItemID.WHITEBERRY_BUSH_SEED;
+    public static final int POISON_IVY_SEED = ItemID.POISONIVY_BUSH_SEED;
+    public static final int MARIGOLD_SEED = ItemID.MARIGOLD_SEED;
+    public static final int ROSEMARY_SEED = ItemID.ROSEMARY_SEED;
+    public static final int NASTURTIUM_SEED = ItemID.NASTURTIUM_SEED;
+    public static final int WOAD_SEED = ItemID.WOAD_SEED;
+    public static final int LIMPWURT_SEED = ItemID.LIMPWURT_SEED;
+    public static final int WHITE_LILY_SEED = ItemID.WHITE_LILY_SEED;
+    public static final int GUAM_SEED = ItemID.GUAM_SEED;
+    public static final int MARRENTILL_SEED = ItemID.MARRENTILL_SEED;
+    public static final int TARROMIN_SEED = ItemID.TARROMIN_SEED;
+    public static final int HARRALANDER_SEED = ItemID.HARRALANDER_SEED;
+    public static final int RANARR_SEED = ItemID.RANARR_SEED;
+    public static final int TOADFLAX_SEED = ItemID.TOADFLAX_SEED;
+    public static final int IRIT_SEED = ItemID.IRIT_SEED;
+    public static final int AVANTOE_SEED = ItemID.AVANTOE_SEED;
+    public static final int KWUARM_SEED = ItemID.KWUARM_SEED;
+    public static final int SNAPDRAGON_SEED = ItemID.SNAPDRAGON_SEED;
+    public static final int CADANTINE_SEED = ItemID.CADANTINE_SEED;
+    public static final int LANTADYME_SEED = ItemID.LANTADYME_SEED;
+    public static final int DWARF_WEED_SEED = ItemID.DWARF_WEED_SEED;
+    public static final int TORSTOL_SEED = ItemID.TORSTOL_SEED;
+    public static final int SEAWEED_SPORE = ItemID.SEAWEED_SEED;
+    public static final int TEAK_SEED = ItemID.TEAK_SEED;
+    public static final int GRAPE_SEED = ItemID.GRAPE_SEED;
+    public static final int MUSHROOM_SPORE = ItemID.MUSHROOM_SEED;
+    public static final int MAHOGANY_SEED = ItemID.MAHOGANY_SEED;
+    public static final int CACTUS_SEED = ItemID.CACTUS_SEED;
+    public static final int BELLADONNA_SEED = ItemID.BELLADONNA_SEED;
+    public static final int POTATO_CACTUS_SEED = ItemID.POTATO_CACTUS_SEED;
+    public static final int HESPORI_SEED = ItemID.HESPORI_SEED;
+    public static final int CALQUAT_TREE_SEED = ItemID.CALQUAT_TREE_SEED;
+    public static final int CRYSTAL_ACORN = ItemID.CRYSTAL_TREE_SEED;
+    public static final int KRONOS_SEED = ItemID.KRONOS_SEED;
+    public static final int IASOR_SEED = ItemID.IASOR_SEED;
+    public static final int ATTAS_SEED = ItemID.ATTAS_SEED;
+    public static final int SPIRIT_SEED = ItemID.SPIRIT_TREE_SEED;
+    public static final int CELASTRUS_SEED = ItemID.CELASTRUS_TREE_SEED;
+
+    // Soul bearer
+    public static final int SOUL_BEARER = ItemID.ARCEUUS_SOULBEARER;
+    public static final int SOUL_BEARER_UNCHARGED = ItemID.ARCEUUS_SOULBEARER_DAMAGED;
+
+    // Strange old lockpick
+    public static final int STRANGE_OLD_LOCKPICK = ItemID.STRANGE_OLD_LOCKPICK_FULL;
+    public static final int STRANGE_OLD_LOCKPICK_DEGRADED = ItemID.STRANGE_OLD_LOCKPICK;
+
+    // Tackle box
+    public static final int TACKLE_BOX = ItemID.TACKLE_BOX;
+    public static final int ANGLER_HAT = ItemID.TRAWLER_REWARD_HAT;
+    public static final int ANGLER_TOP = ItemID.TRAWLER_REWARD_TOP;
+    public static final int ANGLER_WADERS = ItemID.TRAWLER_REWARD_LEGS;
+    public static final int ANGLER_BOOTS = ItemID.TRAWLER_REWARD_BOOTS;
+    public static final int SPIRIT_ANGLER_HEADBAND = ItemID.SPIRIT_ANGLER_HAT;
+    public static final int SPIRIT_ANGLER_TOP = ItemID.SPIRIT_ANGLER_TOP;
+    public static final int SPIRIT_ANGLER_WADERS = ItemID.SPIRIT_ANGLER_LEGS;
+    public static final int SPIRIT_ANGLER_BOOTS = ItemID.SPIRIT_ANGLER_BOOTS;
+    public static final int SPIRIT_FLAKES = ItemID.SPIRIT_FLAKES;
+    public static final int FISHBOWL_HELMET = ItemID.HUNDRED_PIRATE_DIVING_HELMET;
+    public static final int FLIPPERS = ItemID.MUDSKIPPER_FLIPPERS;
+    public static final int DARK_FLIPPERS = ItemID.DARK_FLIPPERS;
+    public static final int DIVING_APPARATUS = ItemID.HUNDRED_PIRATE_DIVING_BACKPACK;
+    public static final int TINY_NET = ItemID.TINY_NET;
+    public static final int RADAS_BLESSING_1 = ItemID.ZEAH_BLESSING_EASY;
+    public static final int RADAS_BLESSING_2 = ItemID.ZEAH_BLESSING_MEDIUM;
+    public static final int RADAS_BLESSING_3 = ItemID.ZEAH_BLESSING_HARD;
+    public static final int RADAS_BLESSING_4 = ItemID.ZEAH_BLESSING_ELITE;
+    public static final int HARPOON = ItemID.HARPOON;
+    public static final int BARBTAIL_HARPOON = ItemID.HUNTING_BARBED_HARPOON;
+    public static final int DRAGON_HARPOON = ItemID.DRAGON_HARPOON;
+    public static final int DRAGON_HARPOON_OR = ItemID.TRAILBLAZER_HARPOON_NO_INFERNAL;
+    public static final int DRAGON_HARPOON_OR_30349 = ItemID.TRAILBLAZER_RELOADED_HARPOON_NO_INFERNAL;
+    public static final int INFERNAL_HARPOON = ItemID.INFERNAL_HARPOON;
+    public static final int INFERNAL_HARPOON_UNCHARGED = ItemID.INFERNAL_HARPOON_EMPTY;
+    public static final int INFERNAL_HARPOON_UNCHARGED_25367 = ItemID.TRAILBLAZER_HARPOON_EMPTY;
+    public static final int INFERNAL_HARPOON_UNCHARGED_30343 = ItemID.TRAILBLAZER_RELOADED_HARPOON_EMPTY;
+    public static final int INFERNAL_HARPOON_OR = ItemID.TRAILBLAZER_HARPOON;
+    public static final int INFERNAL_HARPOON_OR_30342 = ItemID.TRAILBLAZER_RELOADED_HARPOON;
+    public static final int CRYSTAL_HARPOON = ItemID.CRYSTAL_HARPOON;
+    public static final int CRYSTAL_HARPOON_23864 = ItemID.GAUNTLET_HARPOON;
+    public static final int CRYSTAL_HARPOON_INACTIVE = ItemID.CRYSTAL_HARPOON_INACTIVE;
+    public static final int MERFOLK_TRIDENT = ItemID.MERFOLK_TRIDENT;
+    public static final int FISHING_ROD = ItemID.FISHING_ROD;
+    public static final int PEARL_FISHING_ROD = ItemID.FISHINGROD_PEARL;
+    public static final int FLY_FISHING_ROD = ItemID.FLY_FISHING_ROD;
+    public static final int PEARL_FLY_FISHING_ROD = ItemID.FISHINGROD_PEARL_FLY;
+    public static final int OILY_FISHING_ROD = ItemID.OILY_FISHING_ROD;
+    public static final int OILY_PEARL_FISHING_ROD = ItemID.FISHINGROD_PEARL_OILY;
+    public static final int BARBARIAN_ROD = ItemID.BRUT_FISHING_ROD;
+    public static final int PEARL_BARBARIAN_ROD = ItemID.FISHINGROD_PEARL_BRUT;
+    public static final int BIG_FISHING_NET = ItemID.BIG_NET;
+    public static final int DRIFT_NET = ItemID.FOSSIL_DRIFT_NET;
+    public static final int LOBSTER_POT = ItemID.LOBSTER_POT;
+    public static final int KARAMBWAN_VESSEL = ItemID.TBWT_KARAMBWAN_VESSEL;
+    public static final int KARAMBWAN_VESSEL_3159 = ItemID.TBWT_KARAMBWAN_VESSEL_LOADED_WITH_KARAMBWANJI;
+    public static final int RAW_KARAMBWANJI = ItemID.TBWT_RAW_KARAMBWANJI;
+    public static final int FISHING_BAIT = ItemID.FISHING_BAIT;
+    public static final int FEATHER = ItemID.FEATHER;
+    public static final int DARK_FISHING_BAIT = ItemID.WILDERNESS_FISHING_BAIT;
+    public static final int SANDWORMS = ItemID.PISCARILIUS_SANDWORMS;
+    public static final int FISH_OFFCUTS = ItemID.BRUT_FISH_CUTS;
+    public static final int FISH_CHUNKS = ItemID.FISH_CHUNKS;
+    public static final int FISHING_POTION2 = ItemID._2DOSEFISHERSPOTION;
+    public static final int FISHING_POTION3 = ItemID._3DOSEFISHERSPOTION;
+    public static final int FISHING_POTION4 = ItemID._4DOSEFISHERSPOTION;
+    public static final int MOLCH_PEARL = ItemID.AERIAL_FISHING_PEARL;
+    public static final int STRIPY_FEATHER = ItemID.HUNTING_STRIPY_BIRD_FEATHER;
+
+    // Teleport crystal
+    public static final int TELEPORT_CRYSTAL_0 = ItemID.GAUNTLET_TELEPORT_CRYSTAL;
+    public static final int TELEPORT_CRYSTAL_1 = ItemID.MOURNING_TELEPORT_CRYSTAL_1;
+    public static final int TELEPORT_CRYSTAL_2 = ItemID.MOURNING_TELEPORT_CRYSTAL_2;
+    public static final int TELEPORT_CRYSTAL_3 = ItemID.MOURNING_TELEPORT_CRYSTAL_3;
+    public static final int TELEPORT_CRYSTAL_4 = ItemID.MOURNING_TELEPORT_CRYSTAL_4;
+    public static final int TELEPORT_CRYSTAL_5 = ItemID.MOURNING_TELEPORT_CRYSTAL_5;
+
+    // Waterskin
+    public static final int WATERSKIN_0 = ItemID.WATER_SKIN0;
+    public static final int WATERSKIN_1 = ItemID.WATER_SKIN1;
+    public static final int WATERSKIN_2 = ItemID.WATER_SKIN2;
+    public static final int WATERSKIN_3 = ItemID.WATER_SKIN3;
+    public static final int WATERSKIN_4 = ItemID.WATER_SKIN4;
+
 
     // Iban's staff
     public static final int IBANS_STAFF = ItemID.IBANSTAFF;

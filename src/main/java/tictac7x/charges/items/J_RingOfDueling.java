@@ -27,17 +27,17 @@ public class J_RingOfDueling extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ring_of_dueling, ItemId.RING_OF_DUELING1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_dueling, ItemId.RING_OF_DUELING_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.RING_OF_DUELING1).fixedCharges(1),
-            new TriggerItem(ItemId.RING_OF_DUELING2).fixedCharges(2),
-            new TriggerItem(ItemId.RING_OF_DUELING3).fixedCharges(3),
-            new TriggerItem(ItemId.RING_OF_DUELING4).fixedCharges(4),
-            new TriggerItem(ItemId.RING_OF_DUELING5).fixedCharges(5),
-            new TriggerItem(ItemId.RING_OF_DUELING6).fixedCharges(6),
-            new TriggerItem(ItemId.RING_OF_DUELING7).fixedCharges(7),
-            new TriggerItem(ItemId.RING_OF_DUELING8).fixedCharges(8),
+            new TriggerItem(ItemId.RING_OF_DUELING_1).fixedCharges(1),
+            new TriggerItem(ItemId.RING_OF_DUELING_2).fixedCharges(2),
+            new TriggerItem(ItemId.RING_OF_DUELING_3).fixedCharges(3),
+            new TriggerItem(ItemId.RING_OF_DUELING_4).fixedCharges(4),
+            new TriggerItem(ItemId.RING_OF_DUELING_5).fixedCharges(5),
+            new TriggerItem(ItemId.RING_OF_DUELING_6).fixedCharges(6),
+            new TriggerItem(ItemId.RING_OF_DUELING_7).fixedCharges(7),
+            new TriggerItem(ItemId.RING_OF_DUELING_8).fixedCharges(8),
         };
     }
 }

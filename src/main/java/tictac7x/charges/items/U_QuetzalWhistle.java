@@ -34,12 +34,12 @@ public class U_QuetzalWhistle extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.quetzal_whistle, ItemId.BASIC_QUETZAL_WHISTLE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.quetzal_whistle, ItemId.QUETZAL_WHISTLE_BASIC, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BASIC_QUETZAL_WHISTLE).maxCharges(5),
-            new TriggerItem(ItemId.ENHANCED_QUETZAL_WHISTLE).maxCharges(20),
-            new TriggerItem(ItemId.PERFECTED_QUETZAL_WHISTLE).maxCharges(50),
+            new TriggerItem(ItemId.QUETZAL_WHISTLE_BASIC).maxCharges(5),
+            new TriggerItem(ItemId.QUETZAL_WHISTLE_ENHANCED).maxCharges(20),
+            new TriggerItem(ItemId.QUETZAL_WHISTLE_PERFECTED).maxCharges(50),
         };
 
         this.triggers = new TriggerBase[] {
@@ -56,9 +56,9 @@ public class U_QuetzalWhistle extends ChargedItem {
             new OnChatMessage("You craft yourself a basic quetzal whistle.").setFixedCharges(0),
 
             // Fully charged.
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.BASIC_QUETZAL_WHISTLE).setFixedCharges(5),
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.ENHANCED_QUETZAL_WHISTLE).setFixedCharges(20),
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.PERFECTED_QUETZAL_WHISTLE).setFixedCharges(50),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.QUETZAL_WHISTLE_BASIC).setFixedCharges(5),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.QUETZAL_WHISTLE_ENHANCED).setFixedCharges(20),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.QUETZAL_WHISTLE_PERFECTED).setFixedCharges(50),
 
             // Partially charged.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {

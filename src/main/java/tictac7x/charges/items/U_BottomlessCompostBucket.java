@@ -37,7 +37,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemId.BOTTOMLESS_COMPOST_BUCKET_22997, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemId.BOTTOMLESS_COMPOST_BUCKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.setMaximumTotalQuantity(10_000).storableItems(
             new StorableItem(ItemId.ULTRACOMPOST).checkName("ultra"),
             new StorableItem(ItemId.SUPERCOMPOST).checkName("super"),
@@ -45,8 +45,8 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BOTTOMLESS_COMPOST_BUCKET).fixedCharges(0),
-            new TriggerItem(ItemId.BOTTOMLESS_COMPOST_BUCKET_22997),
+            new TriggerItem(ItemId.BOTTOMLESS_COMPOST_BUCKET_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.BOTTOMLESS_COMPOST_BUCKET),
         };
 
         this.triggers = new TriggerBase[] {

@@ -28,16 +28,15 @@ public class U_TeleportCrystal extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.teleport_crystal, ItemId.TELEPORT_CRYSTAL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.teleport_crystal, ItemId.TELEPORT_CRYSTAL_0, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TELEPORT_CRYSTAL).fixedCharges(0),
+            new TriggerItem(ItemId.TELEPORT_CRYSTAL_0).fixedCharges(0),
             new TriggerItem(ItemId.TELEPORT_CRYSTAL_1).fixedCharges(1),
             new TriggerItem(ItemId.TELEPORT_CRYSTAL_2).fixedCharges(2),
             new TriggerItem(ItemId.TELEPORT_CRYSTAL_3).fixedCharges(3),
             new TriggerItem(ItemId.TELEPORT_CRYSTAL_4).fixedCharges(4),
             new TriggerItem(ItemId.TELEPORT_CRYSTAL_5).fixedCharges(5),
-            new TriggerItem(ItemId.ETERNAL_TELEPORT_CRYSTAL).fixedCharges(Charges.UNLIMITED),
         };
     }
 }

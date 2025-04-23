@@ -35,6 +35,10 @@ public class U_HuntsmansKit extends ChargedItemWithStorage {
         final Gson gson
     ) {
         super(TicTac7xChargesImprovedConfig.huntsmans_kit, ItemId.HUNTSMANS_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        this.items = new TriggerItem[]{
+            new TriggerItem(ItemId.HUNTSMANS_KIT)
+        };
+
         this.storage = storage.storableItems(
             new StorableItem(ItemId.BIRD_SNARE),
             new StorableItem(ItemId.BUTTERFLY_NET),
@@ -73,13 +77,9 @@ public class U_HuntsmansKit extends ChargedItemWithStorage {
             new StorableItem(ItemId.GRAAHK_LEGS),
             new StorableItem(ItemId.HUNTER_HOOD),
             new StorableItem(ItemId.HUNTER_CAPE),
-            new StorableItem(ItemId.HUNTER_CAPET),
+            new StorableItem(ItemId.HUNTER_CAPE_TRIMMED),
             new StorableItem(ItemId.IMPLING_JAR)
         );
-
-        this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.HUNTSMANS_KIT)
-        };
 
         this.triggers = new TriggerBase[]{
             // Fill from inventory.
