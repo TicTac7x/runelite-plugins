@@ -45,6 +45,7 @@ import java.util.*;
 @PluginDescriptor(
 	name = "Item Charges Improved",
 	description = "Show charges of various items",
+	conflicts = "Item Charges",
 	tags = {
 		"charges",
 		"barrows",
