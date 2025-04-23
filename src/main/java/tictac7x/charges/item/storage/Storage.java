@@ -142,8 +142,8 @@ public class Storage {
     }
 
     public void removeAndPrioritizeInventory(final Optional<Integer> itemId, final int quantity) {
-        if (ItemId.isPresent()) {
-            this.removeAndPrioritizeInventory(ItemId.get(), quantity);
+        if (itemId.isPresent()) {
+            this.removeAndPrioritizeInventory(itemId.get(), quantity);
         }
     }
 

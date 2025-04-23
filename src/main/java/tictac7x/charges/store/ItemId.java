@@ -545,6 +545,12 @@ public class ItemId {
     public static final int DRAGONFIRE_WARD = ItemID.DRAGONFIRE_WARD;
     public static final int DRAGONFIRE_WARD_UNCHARGED = ItemID.DRAGONFIRE_WARD_UNCHARGED;
 
+    // Falador shield
+    public static final int FALADOR_SHIELD_1 = ItemID.FALADOR_SHIELD_EASY;
+    public static final int FALADOR_SHIELD_2 = ItemID.FALADOR_SHIELD_MEDIUM;
+    public static final int FALADOR_SHIELD_3 = ItemID.FALADOR_SHIELD_HARD;
+    public static final int FALADOR_SHIELD_4= ItemID.FALADOR_SHIELD_ELITE;
+
     // Kharedst memoirs
     public static final int KHAREDSTS_MEMOIRS = ItemID.VEOS_KHAREDSTS_MEMOIRS;
     public static final int BOOK_OF_THE_DEAD = ItemID.BOOK_OF_THE_DEAD;

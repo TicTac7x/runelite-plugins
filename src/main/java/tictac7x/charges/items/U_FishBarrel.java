@@ -114,7 +114,9 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             }).requiredItem(ItemId.FISH_BARREL_OPEN, ItemId.FISH_SACK_BARREL_OPEN),
 
             // Extra fish.
-            new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemId.FISH_BARREL_OPEN, ItemId.FISH_SACK_BARREL_OPEN).addToStorage(lastCaughtFish.get().getId(), 1),
+            new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemId.FISH_BARREL_OPEN, ItemId.FISH_SACK_BARREL_OPEN).consumer(() -> {
+                storage.add(lastCaughtFish);
+            }),
 
             // Replace "Empty" with proper "Empty to bank".
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
