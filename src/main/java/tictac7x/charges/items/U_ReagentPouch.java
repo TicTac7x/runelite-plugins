@@ -2,6 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import net.runelite.api.Skill;
 import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRepresentation;
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_ReagentPouch extends ChargedItemWithStorage {
@@ -124,9 +126,15 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
                 storage.remove(item);
             }).requiredItem(ItemId.REAGENT_POUCH_OPEN),
 
-            // Pick
+            // Pick whiteberries
             new OnChatMessage("You pick some whiteberries").requiredItem(ItemId.REAGENT_POUCH_OPEN).consumer(() -> {
                 storage.add(ItemId.WHITE_BERRIES, 1);
+            }),
+            // Harvest snape grass
+            new OnXpDrop(Skill.FARMING).onMenuOption("Harvest").onMenuTarget("Snape grass plant").addToStorage(ItemId.SNAPE_GRASS, 1),
+            // Pick mort myre fungus
+            new OnChatMessage("You pick (?<quantity>.+) mushrooms? from the log.").matcherConsumer(m -> {
+                storage.add(ItemId.MORT_MYRE_FUNGUS, getNumberFromWordRepresentation(m.group("quantity")));
             }),
         };
     }

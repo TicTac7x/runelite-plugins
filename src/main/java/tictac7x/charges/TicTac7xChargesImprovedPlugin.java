@@ -21,6 +21,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
+import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
@@ -176,7 +177,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private Gson gson;
 
 	@Provides
-	TicTac7xChargesImprovedConfig provideConfig(ConfigManager configManager) {
+	TicTac7xChargesImprovedConfig provideConfig(final ConfigManager configManager) {
 		return configManager.getConfig(TicTac7xChargesImprovedConfig.class);
 	}
 
@@ -185,7 +186,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private ChargedItemOverlay overlayChargedItems;
 
 	private ChargedItemBase[] chargedItems;
-	private List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
+	private final List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
 
 	private final ZoneId timezone = ZoneId.of("Europe/London");
 
@@ -395,14 +396,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
-		store.setLastChatMessages(event);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onChatMessage(event));
-
-//		System.out.println("MESSAGE | " +
-//			"type: " + event.getType().name() +
-//			", message: " + getCleanChatMessage(event) +
-//			", sender: " + event.getSender()
-//		);
+		final CustomChatMessage chatMessage = new CustomChatMessage(event);
+		store.onChatMessage(chatMessage);
+		Arrays.stream(chargedItems).forEach(infobox -> infobox.onChatMessage(chatMessage));
 	}
 
 	@Subscribe
@@ -433,7 +429,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onHitsplatApplied(final HitsplatApplied event) {
 		final CustomHitsplatApplied hitsplatApplied = new CustomHitsplatApplied(event, client);
 		store.onHitSplatApplied(hitsplatApplied);
-
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(hitsplatApplied));
 	}
 
@@ -463,12 +458,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		int impostorId = -1;
-		try {
-			impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
-		} catch (final Exception ignored) {}
-
-		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, impostorId);
+		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, client);
 
 		if (
 			// Menu option not found.
@@ -523,9 +513,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 //		} catch (final Exception ignored) {}
 //		System.out.println("SCRIPT FIRED | " + scriptDebug);
 
-		for (final ChargedItemBase chargedItem : chargedItems) {
-			chargedItem.onScriptPreFired(event);
-		}
+		Arrays.stream(chargedItems).forEach(infobox -> infobox.onScriptPreFired(event));
 	}
 
 	@Subscribe
@@ -619,7 +607,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	private void onUserAction() {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onUserAction());
+		Arrays.stream(chargedItems).forEach(ChargedItemBase::onUserAction);
 	}
 
 	private void checkForChargesReset() {
@@ -627,7 +615,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		if (date.equals(config.getResetDate())) return;
 
 		configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.date, date);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onResetDaily());
+		Arrays.stream(chargedItems).forEach(ChargedItemBase::onResetDaily);
 
 		if (config.showDailyReset()) {
 			chatMessageManager.queue(QueuedMessage.builder()

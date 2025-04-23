@@ -11,6 +11,7 @@ import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.listeners.*;
 import tictac7x.charges.customEvents.CustomItemContainerChanged;
@@ -187,8 +188,8 @@ public abstract class ChargedItemBase {
         return thousands + (thousands < 10 && hundreds > 0 ? "." + hundreds : "") + "K";
     }
 
-    public void onChatMessage(final ChatMessage event) {
-        if (event.getMessage().contains("The banker charges") || inInventoryOrEquipment()) {
+    public void onChatMessage(final CustomChatMessage event) {
+        if (event.message.contains("The banker charges") || inInventoryOrEquipment()) {
             listenerOnChatMessage.trigger(event);
         }
     }

@@ -6,6 +6,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.item.ChargedItemBase;
@@ -19,6 +20,10 @@ import tictac7x.charges.item.triggers.TriggerItem;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.awt.Font.DIALOG;
+import static net.runelite.api.ChatMessageType.GAMEMESSAGE;
+import static net.runelite.api.ChatMessageType.SPAM;
 
 public class Store {
     private final Client client;
@@ -59,8 +64,8 @@ public class Store {
         return lastChatMessages;
     }
 
-    public void setLastChatMessages(final ChatMessage event) {
-        switch (event.getType()) {
+    public void onChatMessage(final CustomChatMessage chatMessage) {
+        switch (chatMessage.type) {
             case GAMEMESSAGE:
             case DIALOG:
             case SPAM:
@@ -75,7 +80,7 @@ public class Store {
             lastChatMessagesTick = tick;
         }
 
-        lastChatMessages.add(TicTac7xChargesImprovedPlugin.getCleanChatMessage(event));
+        lastChatMessages.add(chatMessage.message);
     }
 
     public void setChargedItems(final ChargedItemBase[] chargedItems) {

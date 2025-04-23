@@ -12,13 +12,18 @@ public class CustomMenuOptionClicked {
     public final int itemId;
     public final int impostorId;
 
-    public CustomMenuOptionClicked(final MenuOptionClicked event, final int impostorId) {
+    public CustomMenuOptionClicked(final MenuOptionClicked event, final Client client) {
         this.eventId = event.getId();
         this.target = event.getMenuTarget().replaceAll("</?col.*?>", "");
         this.option = event.getMenuOption().replaceAll("</?col.*?>", "");
         this.actionId = event.getMenuAction().getId();
         this.action = event.getMenuAction().name();
         this.itemId = event.getItemId();
+
+        int impostorId = -1;
+        try {
+            impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
+        } catch (final Exception ignored) {}
         this.impostorId = impostorId;
     }
 

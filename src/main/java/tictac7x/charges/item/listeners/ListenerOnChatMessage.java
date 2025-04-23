@@ -6,6 +6,7 @@ import net.runelite.client.Notifier;
 import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnChatMessage;
@@ -20,14 +21,13 @@ public class ListenerOnChatMessage extends ListenerBase {
         super(client, itemManager, chargedItem, notifier, config);
     }
 
-    public void trigger(final ChatMessage event) {
+    public void trigger(final CustomChatMessage event) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(triggerBase, event)) continue;
             boolean triggerUsed = false;
             final OnChatMessage trigger = (OnChatMessage) triggerBase;
 
-            final String message = TicTac7xChargesImprovedPlugin.getCleanChatMessage(event);
-            final Matcher matcher = trigger.message.matcher(message);
+            final Matcher matcher = trigger.message.matcher(event.message);
             matcher.find();
 
             if (trigger.setDynamically.isPresent() && (chargedItem instanceof ChargedItem)) {
@@ -56,7 +56,7 @@ public class ListenerOnChatMessage extends ListenerBase {
             }
 
             if (trigger.stringConsumer.isPresent()) {
-                trigger.stringConsumer.get().accept(message);
+                trigger.stringConsumer.get().accept(event.message);
                 triggerUsed = true;
             }
 
@@ -68,13 +68,12 @@ public class ListenerOnChatMessage extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final ChatMessage event) {
+    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomChatMessage event) {
         if (!(triggerBase instanceof OnChatMessage)) return false;
         final OnChatMessage trigger = (OnChatMessage) triggerBase;
 
         // Message check.
-        final String message = TicTac7xChargesImprovedPlugin.getCleanChatMessage(event);
-        final Matcher matcher = trigger.message.matcher(message);
+        final Matcher matcher = trigger.message.matcher(event.message);
         if (!matcher.find()) {
             return false;
         }
