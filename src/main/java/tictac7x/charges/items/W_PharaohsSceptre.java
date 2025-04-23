@@ -33,26 +33,9 @@ public class W_PharaohsSceptre extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.pharaohs_sceptre, ItemId.PHARAOHS_SCEPTRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9045),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9046),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9047),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9048),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9049),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9050),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9051),
-
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13074),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13075),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13076),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13077),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13078),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_16176),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_21445),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_21446),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_26948),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_26950),
             new TriggerItem(ItemId.PHARAOHS_SCEPTRE_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_INITIAL),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE),
         };
         
         this.triggers = new TriggerBase[]{

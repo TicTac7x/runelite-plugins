@@ -66,6 +66,8 @@ public class J_EfaritaysAid extends ChargedItem {
                 ItemId.BLISTERWOOD_SICKLE,
                 ItemId.SILVERLIGHT,
                 ItemId.DARKLIGHT,
+                ItemId.ARCLIGHT,
+                ItemId.ARCLIGHT_UNCHARGED,
                 ItemId.EMBERLIGHT,
                 ItemId.ROD_OF_IVANDIS_1,
                 ItemId.ROD_OF_IVANDIS_2,

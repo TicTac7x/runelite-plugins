@@ -30,11 +30,11 @@ public class W_TridentOfTheSwampE extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.trident_of_the_swamp_e, ItemId.TRIDENT_OF_THE_SWAMP_E, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.trident_of_the_swamp_e, ItemId.TRIDENT_OF_THE_SWAMP_ENCHANTED, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.UNCHARGED_TOXIC_TRIDENT_E).fixedCharges(0),
-            new TriggerItem(ItemId.TRIDENT_OF_THE_SWAMP_E),
+            new TriggerItem(ItemId.TRIDENT_OF_THE_SWAMP_ENCHANTED_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.TRIDENT_OF_THE_SWAMP_ENCHANTED),
         };
 
         this.triggers = new TriggerBase[] {

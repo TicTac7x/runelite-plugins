@@ -33,7 +33,7 @@ public class W_TridentOfTheSwamp extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.trident_of_the_swamp, ItemId.TRIDENT_OF_THE_SWAMP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.UNCHARGED_TOXIC_TRIDENT).fixedCharges(0),
+            new TriggerItem(ItemId.TRIDENT_OF_THE_SWAMP_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.TRIDENT_OF_THE_SWAMP),
         };
 

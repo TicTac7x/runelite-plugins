@@ -33,16 +33,14 @@ public class W_BowOfFaerdhinen extends ChargedItem {
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.BOW_OF_FAERDHINEN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.BOW_OF_FAERDHINEN),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_27187),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25869).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25884).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25886).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25888).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25890).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25892).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25894).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25896).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_ITHELL).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_IORWERTH).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_TRAHAEARN).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_CADARN).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_CRWYS).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_MEILYR).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_AMLODD).fixedCharges(Charges.UNLIMITED),
         };
 
         this.triggers = new TriggerBase[] {

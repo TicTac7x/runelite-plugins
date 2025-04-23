@@ -27,10 +27,10 @@ public class W_SlayerStaffE extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.slayer_staff_e, ItemId.SLAYERS_STAFF_E, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.slayer_staff_e, ItemId.SLAYER_STAFF_ENCHANTED, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SLAYERS_STAFF_E)
+            new TriggerItem(ItemId.SLAYER_STAFF_ENCHANTED)
         };
 
         this.triggers = new TriggerBase[] {

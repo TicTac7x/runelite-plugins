@@ -1105,11 +1105,56 @@ public class ItemId {
     public static final int WATERSKIN_3 = ItemID.WATER_SKIN3;
     public static final int WATERSKIN_4 = ItemID.WATER_SKIN4;
 
+    // Arclight
+    public static final int ARCLIGHT = ItemID.ARCLIGHT;
+    public static final int ARCLIGHT_UNCHARGED = ItemID.ARCLIGHT_INACTIVE;
+
+    // Bow of faerdhinen
+    public static final int BOW_OF_FAERDHINEN_INACTIVE = ItemID.BOW_OF_FAERDHINEN_INACTIVE;
+    public static final int BOW_OF_FAERDHINEN = ItemID.BOW_OF_FAERDHINEN;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED = ItemID.BOW_OF_FAERDHINEN_INFINITE;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_ITHELL = ItemID.BOW_OF_FAERDHINEN_INFINITE_ITHELL;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_IORWERTH = ItemID.BOW_OF_FAERDHINEN_INFINITE_IORWERTH;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_TRAHAEARN = ItemID.BOW_OF_FAERDHINEN_INFINITE_TRAHAEARN;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_CADARN = ItemID.BOW_OF_FAERDHINEN_INFINITE_CADARN;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_CRWYS = ItemID.BOW_OF_FAERDHINEN_INFINITE_CRWYS;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_MEILYR = ItemID.BOW_OF_FAERDHINEN_INFINITE_MEILYR;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_AMLODD = ItemID.BOW_OF_FAERDHINEN_INFINITE_AMLODD;
+
+    // Crystal bow
+    public static final int CRYSTAL_BOW = 0;
+
+    // Crystal halberd
+    public static final int CRYSTAL_HALBERD = 0;
+
+    // Enchanted lyre
+    public static final int ENCHANTED_LYRE_0 = ItemID.VIKING_ENCHANTED_STRUNG_LYRE;
+    public static final int ENCHANTED_LYRE_1 = ItemID.MAGIC_STRUNG_LYRE;
+    public static final int ENCHANTED_LYRE_2 = ItemID.MAGIC_STRUNG_LYRE_2;
+    public static final int ENCHANTED_LYRE_3 = ItemID.MAGIC_STRUNG_LYRE_3;
+    public static final int ENCHANTED_LYRE_4 = ItemID.MAGIC_STRUNG_LYRE_4;
+    public static final int ENCHANTED_LYRE_5 = ItemID.MAGIC_STRUNG_LYRE_5;
+    public static final int ENCHANTED_LYRE_IMBUED = ItemID.MAGIC_STRUNG_LYRE_INFINITE;
+
+    // Bryophyta' staff
+    public static final int BRYOPHYTAS_STAFF = ItemID.NATURE_STAFF_CHARGED;
+    public static final int BRYOPHYTAS_STAFF_UNCHARGED = ItemID.NATURE_STAFF_UNCHARGED;
 
     // Iban's staff
     public static final int IBANS_STAFF = ItemID.IBANSTAFF;
     public static final int IBANS_STAFF_BROKEN = ItemID.BROKENIBANSTAFF;
     public static final int IBANS_STAFF_UPGRADED = ItemID.IBANSTAFF_UPGRADED;
+
+    // Pharaoh's sceptre
+    public static final int PHARAOHS_SCEPTRE_UNCHARGED = ItemID.PHARAOHS_SCEPTRE;
+    public static final int PHARAOHS_SCEPTRE = ItemID.PHARAOHS_SCEPTRE_CHARGED;
+    public static final int PHARAOHS_SCEPTRE_INITIAL = ItemID.PHARAOHS_SCEPTRE_CHARGED_INITIAL;
+
+    // Sanguinesti staff
+    public static final int SANGUINESTI_STAFF = ItemID.SANGUINESTI_STAFF;
+    public static final int SANGUINESTI_STAFF_UNCHARGED = ItemID.SANGUINESTI_STAFF_UNCHARGED;
+    public static final int SANGUINESTI_STAFF_HOLY = ItemID.SANGUINESTI_STAFF_OR;
+    public static final int SANGUINESTI_STAFF_HOLY_UNCHARGED = ItemID.SANGUINESTI_STAFF_UNCHARGED_OR;
 
     // Scythe of vitur
     public static final int SCYTHE_OF_VITUR = ItemID.SCYTHE_OF_VITUR;
@@ -1122,6 +1167,24 @@ public class ItemId {
     // Skull sceptre
     public static final int SKULL_SCEPTRE = ItemID.SOS_SKULL_SCEPTRE;
     public static final int SKULL_SCEPTRE_IMBUED = ItemID.SOS_SKULL_SCEPTRE_IMBUED;
+
+    // Slayer staff enchanted
+    public static final int SLAYER_STAFF_ENCHANTED = ItemID.SLAYER_STAFF_ENCHANTED;
+
+    // Toxic staff of the dead
+    public static final int TOXIC_STAFF_OF_THE_DEAD = ItemID.TOXIC_SOTD_CHARGED;
+    public static final int TOXIC_STAFF_OF_THE_DEAD_UNCHARGED = ItemID.TOXIC_SOTD;
+
+    // Tridents
+    public static final int TRIDENT_OF_THE_SEAS_UNCHARGED = ItemID.TOTS_UNCHARGED;
+    public static final int TRIDENT_OF_THE_SEAS = ItemID.TOTS_CHARGED;
+    public static final int TRIDENT_OF_THE_SEAS_FULL = ItemID.TOTS;
+    public static final int TRIDENT_OF_THE_SEAS_ENCHANTED = ItemID.TOTS_I_CHARGED;
+    public static final int TRIDENT_OF_THE_SEAS_ENCHANTED_UNCHARGED = ItemID.TOTS_I_UNCHARGED;
+    public static final int TRIDENT_OF_THE_SWAMP = ItemID.TOXIC_TOTS_CHARGED;
+    public static final int TRIDENT_OF_THE_SWAMP_UNCHARGED = ItemID.TOXIC_TOTS_UNCHARGED;
+    public static final int TRIDENT_OF_THE_SWAMP_ENCHANTED = ItemID.TOXIC_TOTS_I_CHARGED;
+    public static final int TRIDENT_OF_THE_SWAMP_ENCHANTED_UNCHARGED = ItemID.TOXIC_TOTS_I_UNCHARGED;
 
     // Tumekens shadow
     public static final int TUMEKENS_SHADOW = ItemID.TUMEKENS_SHADOW;

@@ -33,34 +33,7 @@ public class W_CrystalBow extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.crystal_bow, ItemId.CRYSTAL_BOW, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.CRYSTAL_BOW),
-            new TriggerItem(ItemId.CRYSTAL_BOW_24123),
-            new TriggerItem(ItemId.CRYSTAL_BOW_110),
-            new TriggerItem(ItemId.CRYSTAL_BOW_110_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_210),
-            new TriggerItem(ItemId.CRYSTAL_BOW_210_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_310),
-            new TriggerItem(ItemId.CRYSTAL_BOW_310_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_410),
-            new TriggerItem(ItemId.CRYSTAL_BOW_410_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_510),
-            new TriggerItem(ItemId.CRYSTAL_BOW_510_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_610),
-            new TriggerItem(ItemId.CRYSTAL_BOW_610_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_710),
-            new TriggerItem(ItemId.CRYSTAL_BOW_710_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_810),
-            new TriggerItem(ItemId.CRYSTAL_BOW_810_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_910),
-            new TriggerItem(ItemId.CRYSTAL_BOW_910_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_FULL),
-            new TriggerItem(ItemId.CRYSTAL_BOW_FULL_I),
-            new TriggerItem(ItemId.CRYSTAL_BOW_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.NEW_CRYSTAL_BOW),
-            new TriggerItem(ItemId.NEW_CRYSTAL_BOW_4213),
-            new TriggerItem(ItemId.NEW_CRYSTAL_BOW_16888),
-            new TriggerItem(ItemId.NEW_CRYSTAL_BOW_I),
-            new TriggerItem(ItemId.NEW_CRYSTAL_BOW_I_16889),
+                // TODO
         };
 
         this.triggers = new TriggerBase[] {

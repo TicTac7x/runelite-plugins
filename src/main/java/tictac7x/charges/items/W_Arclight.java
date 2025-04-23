@@ -36,6 +36,7 @@ public class W_Arclight extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.ARCLIGHT),
+            new TriggerItem(ItemId.ARCLIGHT_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

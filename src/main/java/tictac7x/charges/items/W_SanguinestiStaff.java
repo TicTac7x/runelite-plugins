@@ -34,8 +34,8 @@ public class W_SanguinestiStaff extends ChargedItem {
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.SANGUINESTI_STAFF),
             new TriggerItem(ItemId.SANGUINESTI_STAFF_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.HOLY_SANGUINESTI_STAFF),
-            new TriggerItem(ItemId.HOLY_SANGUINESTI_STAFF_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.SANGUINESTI_STAFF_HOLY),
+            new TriggerItem(ItemId.SANGUINESTI_STAFF_HOLY_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {
