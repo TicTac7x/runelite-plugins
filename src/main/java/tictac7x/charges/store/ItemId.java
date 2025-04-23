@@ -1128,10 +1128,14 @@ public class ItemId {
     public static final int BOW_OF_FAERDHINEN_CORRUPTED_AMLODD = ItemID.BOW_OF_FAERDHINEN_INFINITE_AMLODD;
 
     // Crystal bow
-    public static final int CRYSTAL_BOW = 0;
+    public static final int CRYSTAL_BOW = ItemID.CRYSTAL_BOW;
+    public static final int CRYSTAL_BOW_FULL = ItemID.CRYSTAL_BOW_2500;
+    public static final int CRYSTAL_BOW_UNCHARGED = ItemID.CRYSTAL_BOW_INACTIVE;
 
     // Crystal halberd
-    public static final int CRYSTAL_HALBERD = 0;
+    public static final int CRYSTAL_HALBERD = ItemID.CRYSTAL_HALBERD;
+    public static final int CRYSTAL_HALBERD_FULL = ItemID.CRYSTAL_HALBERD_2500;
+    public static final int CRYSTAL_HALBERD_UNCHARGED = ItemID.CRYSTAL_HALBERD_INACTIVE;
 
     // Enchanted lyre
     public static final int ENCHANTED_LYRE_0 = ItemID.VIKING_ENCHANTED_STRUNG_LYRE;

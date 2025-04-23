@@ -33,7 +33,9 @@ public class W_CrystalBow extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.crystal_bow, ItemId.CRYSTAL_BOW, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-                // TODO
+            new TriggerItem(ItemId.CRYSTAL_BOW_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BOW),
+            new TriggerItem(ItemId.CRYSTAL_BOW_FULL).fixedCharges(2500),
         };
 
         this.triggers = new TriggerBase[] {

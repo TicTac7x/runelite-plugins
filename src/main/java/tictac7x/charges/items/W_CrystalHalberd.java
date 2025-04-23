@@ -34,7 +34,9 @@ public class W_CrystalHalberd extends ChargedItem {
     ) {
         super(TicTac7xChargesImprovedConfig.crystal_halberd, ItemId.CRYSTAL_HALBERD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-                // TODO
+            new TriggerItem(ItemId.CRYSTAL_HALBERD_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HALBERD),
+            new TriggerItem(ItemId.CRYSTAL_HALBERD_FULL).fixedCharges(2500),
         };
         this.triggers = new TriggerBase[]{
             // Check.
