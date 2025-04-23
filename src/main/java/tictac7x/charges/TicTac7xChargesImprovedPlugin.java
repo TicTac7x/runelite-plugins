@@ -134,8 +134,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Games necklace added.<br>" +
+		"<colHIGHLIGHT>* Imp in a box added.<br>" +
 		"<colHIGHLIGHT>* Barrows charges formula fixed.<br>" +
-		"<colHIGHLIGHT>* Escape crystal now uses ticks by default for more precise remaining time."
+		"<colHIGHLIGHT>* Escape crystal now uses ticks by default for more precise remaining time.<br>" +
+		"<colHIGHLIGHT>* Seed box fixes, reagent pouch improvements."
 	;
 
 	@Inject
