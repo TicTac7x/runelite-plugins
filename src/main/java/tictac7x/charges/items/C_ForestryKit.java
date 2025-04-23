@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -35,33 +35,33 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemId.FORESTRY_KIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.storage = storage.storableItems(
-            new StorableItem(ItemID.ANIMAINFUSED_BARK).specificOrder(1),
-            new StorableItem(ItemID.FORESTERS_RATION).specificOrder(2),
-            new StorableItem(ItemID.NATURE_OFFERINGS).specificOrder(3),
-            new StorableItem(ItemID.SECATEURS_ATTACHMENT).specificOrder(4),
-            new StorableItem(ItemID.LEAVES).displayName("Regular leaves").checkName("regular").specificOrder(5),
-            new StorableItem(ItemID.OAK_LEAVES).checkName("oak").specificOrder(6),
-            new StorableItem(ItemID.WILLOW_LEAVES).checkName("willow").specificOrder(7),
-            new StorableItem(ItemID.MAPLE_LEAVES).checkName("maple").specificOrder(8),
-            new StorableItem(ItemID.YEW_LEAVES).checkName("yew").specificOrder(9),
-            new StorableItem(ItemID.MAGIC_LEAVES).checkName("magic").specificOrder(10),
-            new StorableItem(ItemID.FORESTRY_HAT).specificOrder(11),
-            new StorableItem(ItemID.FORESTRY_TOP).specificOrder(12),
-            new StorableItem(ItemID.FORESTRY_LEGS).specificOrder(13),
-            new StorableItem(ItemID.FORESTRY_BOOTS).specificOrder(14),
-            new StorableItem(ItemID.LUMBERJACK_HAT).specificOrder(15),
-            new StorableItem(ItemID.LUMBERJACK_TOP).specificOrder(16),
-            new StorableItem(ItemID.LUMBERJACK_LEGS).specificOrder(17),
-            new StorableItem(ItemID.LUMBERJACK_BOOTS).specificOrder(18),
-            new StorableItem(ItemID.WOODCUTTING_CAPE).specificOrder(19),
-            new StorableItem(ItemID.WOODCUT_CAPET).specificOrder(20)
+            new StorableItem(ItemId.ANIMAINFUSED_BARK).specificOrder(1),
+            new StorableItem(ItemId.FORESTERS_RATION).specificOrder(2),
+            new StorableItem(ItemId.NATURE_OFFERINGS).specificOrder(3),
+            new StorableItem(ItemId.SECATEURS_ATTACHMENT).specificOrder(4),
+            new StorableItem(ItemId.LEAVES).displayName("Regular leaves").checkName("regular").specificOrder(5),
+            new StorableItem(ItemId.OAK_LEAVES).checkName("oak").specificOrder(6),
+            new StorableItem(ItemId.WILLOW_LEAVES).checkName("willow").specificOrder(7),
+            new StorableItem(ItemId.MAPLE_LEAVES).checkName("maple").specificOrder(8),
+            new StorableItem(ItemId.YEW_LEAVES).checkName("yew").specificOrder(9),
+            new StorableItem(ItemId.MAGIC_LEAVES).checkName("magic").specificOrder(10),
+            new StorableItem(ItemId.FORESTRY_HAT).specificOrder(11),
+            new StorableItem(ItemId.FORESTRY_TOP).specificOrder(12),
+            new StorableItem(ItemId.FORESTRY_LEGS).specificOrder(13),
+            new StorableItem(ItemId.FORESTRY_BOOTS).specificOrder(14),
+            new StorableItem(ItemId.LUMBERJACK_HAT).specificOrder(15),
+            new StorableItem(ItemId.LUMBERJACK_TOP).specificOrder(16),
+            new StorableItem(ItemId.LUMBERJACK_LEGS).specificOrder(17),
+            new StorableItem(ItemId.LUMBERJACK_BOOTS).specificOrder(18),
+            new StorableItem(ItemId.WOODCUTTING_CAPE).specificOrder(19),
+            new StorableItem(ItemId.WOODCUT_CAPET).specificOrder(20)
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.FORESTRY_KIT),
+            new TriggerItem(ItemId.FORESTRY_KIT),
         };
 
         this.triggers = new TriggerBase[]{
@@ -80,22 +80,22 @@ public class C_ForestryKit extends ChargedItemWithStorage {
 
             // Get bark from an event.
             new OnChatMessage("You've been awarded (?<bark>.+) Anima-infused bark.").matcherConsumer(m -> {
-                storage.add(ItemID.ANIMAINFUSED_BARK, Integer.parseInt(m.group("bark")));
+                storage.add(ItemId.ANIMAINFUSED_BARK, Integer.parseInt(m.group("bark")));
             }),
 
             // Use ration when choping.
             new OnChatMessage("You consume a Forester's ration to fuel a mighty chop.").consumer(() -> {
-                storage.removeAndPrioritizeInventory(ItemID.FORESTERS_RATION, 1);
+                storage.removeAndPrioritizeInventory(ItemId.FORESTERS_RATION, 1);
             }),
 
             // Nature offering used.
             new OnChatMessage("The nature offerings enabled you to chop an extra log").consumer(() -> {
-                storage.removeAndPrioritizeInventory(ItemID.NATURE_OFFERINGS, 1);
+                storage.removeAndPrioritizeInventory(ItemId.NATURE_OFFERINGS, 1);
             }),
 
             // Out of rations.
             new OnChatMessage("You've eaten your last Forester's ration.").consumer(() -> {
-                storage.put(ItemID.FORESTERS_RATION, 0);
+                storage.put(ItemId.FORESTERS_RATION, 0);
             }),
 
             // Fill from inventory.
@@ -185,6 +185,6 @@ public class C_ForestryKit extends ChargedItemWithStorage {
                 break;
         }
 
-        storage.removeAndPrioritizeInventory(ItemID.ANIMAINFUSED_BARK, animaBarkPerItem * amountToBuy);
+        storage.removeAndPrioritizeInventory(ItemId.ANIMAINFUSED_BARK, animaBarkPerItem * amountToBuy);
     }
 }

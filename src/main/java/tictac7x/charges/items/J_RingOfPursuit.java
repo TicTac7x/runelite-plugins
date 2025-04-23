@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -29,10 +29,10 @@ public class J_RingOfPursuit extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ring_of_pursuit, ItemID.RING_OF_PURSUIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_pursuit, ItemId.RING_OF_PURSUIT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.RING_OF_PURSUIT).needsToBeEquipped(),
+            new TriggerItem(ItemId.RING_OF_PURSUIT).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[]{

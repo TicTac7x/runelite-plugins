@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,10 +30,10 @@ public class J_AmuletOfChemistry extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.amulet_of_chemistry, ItemID.AMULET_OF_CHEMISTRY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.amulet_of_chemistry, ItemId.AMULET_OF_CHEMISTRY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.AMULET_OF_CHEMISTRY).needsToBeEquipped()
+            new TriggerItem(ItemId.AMULET_OF_CHEMISTRY).needsToBeEquipped()
         };
 
         this.triggers = new TriggerBase[] {

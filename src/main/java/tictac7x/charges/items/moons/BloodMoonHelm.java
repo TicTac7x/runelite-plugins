@@ -2,7 +2,7 @@ package tictac7x.charges.items.moons;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,13 +30,13 @@ public class BloodMoonHelm extends _MoonItem {
             final Store store,
             final Gson gson
     ) {
-        super("blood_helm", ItemID.BLOOD_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("blood_helm", ItemId.BLOOD_MOON_HELM, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BLOOD_MOON_HELM).fixedCharges(3000),
-            new TriggerItem(ItemID.BLOOD_MOON_HELM_29047),
-            new TriggerItem(ItemID.BLOOD_MOON_HELM_29848),
-            new TriggerItem(ItemID.BLOOD_MOON_HELM_BROKEN).fixedCharges(0),
+            new TriggerItem(ItemId.BLOOD_MOON_HELM).fixedCharges(3000),
+            new TriggerItem(ItemId.BLOOD_MOON_HELM_29047),
+            new TriggerItem(ItemId.BLOOD_MOON_HELM_29848),
+            new TriggerItem(ItemId.BLOOD_MOON_HELM_BROKEN).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{

@@ -2,7 +2,7 @@ package tictac7x.charges.items.barrows;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -26,14 +26,14 @@ public class AhrimsHood extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Ahrim's hood", 60_000, ItemID.AHRIMS_HOOD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's hood", ItemId.AHRIMS_HOOD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.AHRIMS_HOOD).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_HOOD_100),
-            new TriggerItem(ItemID.AHRIMS_HOOD_75),
-            new TriggerItem(ItemID.AHRIMS_HOOD_50),
-            new TriggerItem(ItemID.AHRIMS_HOOD_25),
-            new TriggerItem(ItemID.AHRIMS_HOOD_0).fixedCharges(0),
+            new TriggerItem(ItemId.AHRIMS_HOOD).fixedCharges(1000),
+            new TriggerItem(ItemId.AHRIMS_HOOD_100),
+            new TriggerItem(ItemId.AHRIMS_HOOD_75),
+            new TriggerItem(ItemId.AHRIMS_HOOD_50),
+            new TriggerItem(ItemId.AHRIMS_HOOD_25),
+            new TriggerItem(ItemId.AHRIMS_HOOD_0).fixedCharges(0),
         };
     }
 }

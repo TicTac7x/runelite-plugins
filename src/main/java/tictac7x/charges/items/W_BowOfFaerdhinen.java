@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -28,21 +28,21 @@ public class W_BowOfFaerdhinen extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bow_of_faerdhinen, ItemID.BOW_OF_FAERDHINEN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bow_of_faerdhinen, ItemId.BOW_OF_FAERDHINEN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_27187),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25869).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25884).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25886).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25888).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25890).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25892).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25894).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.BOW_OF_FAERDHINEN_C_25896).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_27187),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25869).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25884).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25886).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25888).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25890).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25892).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25894).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_C_25896).fixedCharges(Charges.UNLIMITED),
         };
 
         this.triggers = new TriggerBase[] {

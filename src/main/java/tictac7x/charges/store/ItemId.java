@@ -1,0 +1,162 @@
+package tictac7x.charges.store;
+
+import net.runelite.api.gameval.ItemID;
+
+public class ItemId {
+    // Ahrim.
+    public static int AHRIMS_HOOD = ItemID.BARROWS_AHRIM_HEAD;
+    public static int AHRIMS_HOOD_100 = ItemID.BARROWS_AHRIM_HEAD_100;
+    public static int AHRIMS_HOOD_75 = ItemID.BARROWS_AHRIM_HEAD_75;
+    public static int AHRIMS_HOOD_50 = ItemID.BARROWS_AHRIM_HEAD_50;
+    public static int AHRIMS_HOOD_25 = ItemID.BARROWS_AHRIM_HEAD_25;
+    public static int AHRIMS_HOOD_0 = ItemID.BARROWS_AHRIM_HEAD_BROKEN;
+    public static int AHRIMS_ROBETOP = ItemID.BARROWS_AHRIM_BODY;
+    public static int AHRIMS_ROBETOP_100 = ItemID.BARROWS_AHRIM_BODY_100;
+    public static int AHRIMS_ROBETOP_75 = ItemID.BARROWS_AHRIM_BODY_75;
+    public static int AHRIMS_ROBETOP_50 = ItemID.BARROWS_AHRIM_BODY_50;
+    public static int AHRIMS_ROBETOP_25 = ItemID.BARROWS_AHRIM_BODY_25;
+    public static int AHRIMS_ROBETOP_0 = ItemID.BARROWS_AHRIM_BODY_BROKEN;
+    public static int AHRIMS_ROBESKIRT = ItemID.BARROWS_AHRIM_LEGS;
+    public static int AHRIMS_ROBESKIRT_100 = ItemID.BARROWS_AHRIM_LEGS_100;
+    public static int AHRIMS_ROBESKIRT_75 = ItemID.BARROWS_AHRIM_LEGS_75;
+    public static int AHRIMS_ROBESKIRT_50 = ItemID.BARROWS_AHRIM_LEGS_50;
+    public static int AHRIMS_ROBESKIRT_25 = ItemID.BARROWS_AHRIM_LEGS_25;
+    public static int AHRIMS_ROBESKIRT_0 = ItemID.BARROWS_AHRIM_LEGS_BROKEN;
+    public static int AHRIMS_STAFF = ItemID.BARROWS_AHRIM_WEAPON;
+    public static int AHRIMS_STAFF_100 = ItemID.BARROWS_AHRIM_WEAPON_100;
+    public static int AHRIMS_STAFF_75 = ItemID.BARROWS_AHRIM_WEAPON_75;
+    public static int AHRIMS_STAFF_50 = ItemID.BARROWS_AHRIM_WEAPON_50;
+    public static int AHRIMS_STAFF_25 = ItemID.BARROWS_AHRIM_WEAPON_25;
+    public static int AHRIMS_STAFF_0 = ItemID.BARROWS_AHRIM_WEAPON_BROKEN;
+
+    // Dharok.
+    public static int DHAROKS_HELM = ItemID.BARROWS_AHRIM_HEAD;
+    public static int DHAROKS_HELM_100 = ItemID.BARROWS_AHRIM_HEAD_100;
+    public static int DHAROKS_HELM_75 = ItemID.BARROWS_AHRIM_HEAD_75;
+    public static int DHAROKS_HELM_50 = ItemID.BARROWS_AHRIM_HEAD_50;
+    public static int DHAROKS_HELM_25 = ItemID.BARROWS_AHRIM_HEAD_25;
+    public static int DHAROKS_HELM_0 = ItemID.BARROWS_AHRIM_HEAD_BROKEN;
+    public static int DHAROKS_PLATEBODY = ItemID.BARROWS_DHAROK_BODY;
+    public static int DHAROKS_PLATEBODY_100 = ItemID.BARROWS_DHAROK_BODY_100;
+    public static int DHAROKS_PLATEBODY_75 = ItemID.BARROWS_DHAROK_BODY_75;
+    public static int DHAROKS_PLATEBODY_50 = ItemID.BARROWS_DHAROK_BODY_50;
+    public static int DHAROKS_PLATEBODY_25 = ItemID.BARROWS_DHAROK_BODY_25;
+    public static int DHAROKS_PLATEBODY_0 = ItemID.BARROWS_DHAROK_BODY_BROKEN;
+    public static int DHAROKS_PLATELEGS = ItemID.BARROWS_DHAROK_LEGS;
+    public static int DHAROKS_PLATELEGS_100 = ItemID.BARROWS_DHAROK_LEGS_100;
+    public static int DHAROKS_PLATELEGS_75 = ItemID.BARROWS_DHAROK_LEGS_75;
+    public static int DHAROKS_PLATELEGS_50 = ItemID.BARROWS_DHAROK_LEGS_50;
+    public static int DHAROKS_PLATELEGS_25 = ItemID.BARROWS_DHAROK_LEGS_25;
+    public static int DHAROKS_PLATELEGS_0 = ItemID.BARROWS_DHAROK_LEGS_BROKEN;
+    public static int DHAROKS_GREATAXE = ItemID.BARROWS_DHAROK_WEAPON;
+    public static int DHAROKS_GREATAXE_100 = ItemID.BARROWS_DHAROK_WEAPON_100;
+    public static int DHAROKS_GREATAXE_75 = ItemID.BARROWS_DHAROK_WEAPON_75;
+    public static int DHAROKS_GREATAXE_50 = ItemID.BARROWS_DHAROK_WEAPON_50;
+    public static int DHAROKS_GREATAXE_25 = ItemID.BARROWS_DHAROK_WEAPON_25;
+    public static int DHAROKS_GREATAXE_0 = ItemID.BARROWS_DHAROK_WEAPON_BROKEN;
+
+    // Guthan.
+    public static int GUTHANS_HELM = ItemID.BARROWS_GUTHAN_HEAD;
+    public static int GUTHANS_HELM_100 = ItemID.BARROWS_GUTHAN_HEAD_100;
+    public static int GUTHANS_HELM_75 = ItemID.BARROWS_GUTHAN_HEAD_75;
+    public static int GUTHANS_HELM_50 = ItemID.BARROWS_GUTHAN_HEAD_50;
+    public static int GUTHANS_HELM_25 = ItemID.BARROWS_GUTHAN_HEAD_25;
+    public static int GUTHANS_HELM_0 = ItemID.BARROWS_GUTHAN_HEAD_BROKEN;
+    public static int GUTHANS_PLATEBODY = ItemID.BARROWS_GUTHAN_BODY;
+    public static int GUTHANS_PLATEBODY_100 = ItemID.BARROWS_GUTHAN_BODY_100;
+    public static int GUTHANS_PLATEBODY_75 = ItemID.BARROWS_GUTHAN_BODY_75;
+    public static int GUTHANS_PLATEBODY_50 = ItemID.BARROWS_GUTHAN_BODY_50;
+    public static int GUTHANS_PLATEBODY_25 = ItemID.BARROWS_GUTHAN_BODY_25;
+    public static int GUTHANS_PLATEBODY_0 = ItemID.BARROWS_GUTHAN_BODY_BROKEN;
+    public static int GUTHANS_CHAINSKIRT = ItemID.BARROWS_GUTHAN_LEGS;
+    public static int GUTHANS_CHAINSKIRT_100 = ItemID.BARROWS_GUTHAN_LEGS_100;
+    public static int GUTHANS_CHAINSKIRT_75 = ItemID.BARROWS_GUTHAN_LEGS_75;
+    public static int GUTHANS_CHAINSKIRT_50 = ItemID.BARROWS_GUTHAN_LEGS_50;
+    public static int GUTHANS_CHAINSKIRT_25 = ItemID.BARROWS_GUTHAN_LEGS_25;
+    public static int GUTHANS_CHAINSKIRT_0 = ItemID.BARROWS_GUTHAN_LEGS_BROKEN;
+    public static int GUTHANS_WARSPEAR = ItemID.BARROWS_GUTHAN_WEAPON;
+    public static int GUTHANS_WARSPEAR_100 = ItemID.BARROWS_GUTHAN_WEAPON_100;
+    public static int GUTHANS_WARSPEAR_75 = ItemID.BARROWS_GUTHAN_WEAPON_75;
+    public static int GUTHANS_WARSPEAR_50 = ItemID.BARROWS_GUTHAN_WEAPON_50;
+    public static int GUTHANS_WARSPEAR_25 = ItemID.BARROWS_GUTHAN_WEAPON_25;
+    public static int GUTHANS_WARSPEAR_0 = ItemID.BARROWS_GUTHAN_WEAPON_BROKEN;
+
+    // Karil.
+    public static int KARILS_COIF = ItemID.BARROWS_KARIL_HEAD;
+    public static int KARILS_COIF_100 = ItemID.BARROWS_KARIL_HEAD_100;
+    public static int KARILS_COIF_75 = ItemID.BARROWS_KARIL_HEAD_75;
+    public static int KARILS_COIF_50 = ItemID.BARROWS_KARIL_HEAD_50;
+    public static int KARILS_COIF_25 = ItemID.BARROWS_KARIL_HEAD_25;
+    public static int KARILS_COIF_0 = ItemID.BARROWS_KARIL_HEAD_BROKEN;
+    public static int KARILS_LEATHERTOP = ItemID.BARROWS_KARIL_BODY;
+    public static int KARILS_LEATHERTOP_100 = ItemID.BARROWS_KARIL_BODY_100;
+    public static int KARILS_LEATHERTOP_75 = ItemID.BARROWS_KARIL_BODY_75;
+    public static int KARILS_LEATHERTOP_50 = ItemID.BARROWS_KARIL_BODY_50;
+    public static int KARILS_LEATHERTOP_25 = ItemID.BARROWS_KARIL_BODY_25;
+    public static int KARILS_LEATHERTOP_0 = ItemID.BARROWS_KARIL_BODY_BROKEN;
+    public static int KARILS_LEATHERSKIRT = ItemID.BARROWS_KARIL_LEGS;
+    public static int KARILS_LEATHERSKIRT_100 = ItemID.BARROWS_KARIL_LEGS_100;
+    public static int KARILS_LEATHERSKIRT_75 = ItemID.BARROWS_KARIL_LEGS_75;
+    public static int KARILS_LEATHERSKIRT_50 = ItemID.BARROWS_KARIL_LEGS_50;
+    public static int KARILS_LEATHERSKIRT_25 = ItemID.BARROWS_KARIL_LEGS_25;
+    public static int KARILS_LEATHERSKIRT_0 = ItemID.BARROWS_KARIL_LEGS_BROKEN;
+    public static int KARILS_CROSSBOW = ItemID.BARROWS_KARIL_WEAPON;
+    public static int KARILS_CROSSBOW_100 = ItemID.BARROWS_KARIL_WEAPON_100;
+    public static int KARILS_CROSSBOW_75 = ItemID.BARROWS_KARIL_WEAPON_75;
+    public static int KARILS_CROSSBOW_50 = ItemID.BARROWS_KARIL_WEAPON_50;
+    public static int KARILS_CROSSBOW_25 = ItemID.BARROWS_KARIL_WEAPON_25;
+    public static int KARILS_CROSSBOW_0 = ItemID.BARROWS_KARIL_WEAPON_BROKEN;
+
+    // Torag.
+    public static int TORAGS_HELM = ItemID.BARROWS_TORAG_HEAD;
+    public static int TORAGS_HELM_100 = ItemID.BARROWS_TORAG_HEAD_100;
+    public static int TORAGS_HELM_75 = ItemID.BARROWS_TORAG_HEAD_75;
+    public static int TORAGS_HELM_50 = ItemID.BARROWS_TORAG_HEAD_50;
+    public static int TORAGS_HELM_25 = ItemID.BARROWS_TORAG_HEAD_25;
+    public static int TORAGS_HELM_0 = ItemID.BARROWS_TORAG_HEAD_BROKEN;
+    public static int TORAGS_PLATEBODY = ItemID.BARROWS_TORAG_BODY;
+    public static int TORAGS_PLATEBODY_100 = ItemID.BARROWS_TORAG_BODY_100;
+    public static int TORAGS_PLATEBODY_75 = ItemID.BARROWS_TORAG_BODY_75;
+    public static int TORAGS_PLATEBODY_50 = ItemID.BARROWS_TORAG_BODY_50;
+    public static int TORAGS_PLATEBODY_25 = ItemID.BARROWS_TORAG_BODY_25;
+    public static int TORAGS_PLATEBODY_0 = ItemID.BARROWS_TORAG_BODY_BROKEN;
+    public static int TORAGS_PLATELEGS = ItemID.BARROWS_TORAG_LEGS;
+    public static int TORAGS_PLATELEGS_100 = ItemID.BARROWS_TORAG_LEGS_100;
+    public static int TORAGS_PLATELEGS_75 = ItemID.BARROWS_TORAG_LEGS_75;
+    public static int TORAGS_PLATELEGS_50 = ItemID.BARROWS_TORAG_LEGS_50;
+    public static int TORAGS_PLATELEGS_25 = ItemID.BARROWS_TORAG_LEGS_25;
+    public static int TORAGS_PLATELEGS_0 = ItemID.BARROWS_TORAG_LEGS_BROKEN;
+    public static int TORAGS_HAMMERS = ItemID.BARROWS_TORAG_WEAPON;
+    public static int TORAGS_HAMMERS_100 = ItemID.BARROWS_TORAG_WEAPON_100;
+    public static int TORAGS_HAMMERS_75 = ItemID.BARROWS_TORAG_WEAPON_75;
+    public static int TORAGS_HAMMERS_50 = ItemID.BARROWS_TORAG_WEAPON_50;
+    public static int TORAGS_HAMMERS_25 = ItemID.BARROWS_TORAG_WEAPON_25;
+    public static int TORAGS_HAMMERS_0 = ItemID.BARROWS_TORAG_WEAPON_BROKEN;
+
+    // Verac.
+    public static int VERACS_HELM = ItemID.BARROWS_VERAC_HEAD;
+    public static int VERACS_HELM_100 = ItemID.BARROWS_VERAC_HEAD_100;
+    public static int VERACS_HELM_75 = ItemID.BARROWS_VERAC_HEAD_75;
+    public static int VERACS_HELM_50 = ItemID.BARROWS_VERAC_HEAD_50;
+    public static int VERACS_HELM_25 = ItemID.BARROWS_VERAC_HEAD_25;
+    public static int VERACS_HELM_0 = ItemID.BARROWS_VERAC_HEAD_BROKEN;
+    public static int VERACS_BRASSARD = ItemID.BARROWS_VERAC_BODY;
+    public static int VERACS_BRASSARD_100 = ItemID.BARROWS_VERAC_BODY_100;
+    public static int VERACS_BRASSARD_75 = ItemID.BARROWS_VERAC_BODY_75;
+    public static int VERACS_BRASSARD_50 = ItemID.BARROWS_VERAC_BODY_50;
+    public static int VERACS_BRASSARD_25 = ItemID.BARROWS_VERAC_BODY_25;
+    public static int VERACS_BRASSARD_0 = ItemID.BARROWS_VERAC_BODY_BROKEN;
+    public static int VERACS_PLATESKIRT = ItemID.BARROWS_VERAC_LEGS;
+    public static int VERACS_PLATESKIRT_100 = ItemID.BARROWS_VERAC_LEGS_100;
+    public static int VERACS_PLATESKIRT_75 = ItemID.BARROWS_VERAC_LEGS_75;
+    public static int VERACS_PLATESKIRT_50 = ItemID.BARROWS_VERAC_LEGS_50;
+    public static int VERACS_PLATESKIRT_25 = ItemID.BARROWS_VERAC_LEGS_25;
+    public static int VERACS_PLATESKIRT_0 = ItemID.BARROWS_VERAC_LEGS_BROKEN;
+    public static int VERACS_FLAIL = ItemID.BARROWS_VERAC_WEAPON;
+    public static int VERACS_FLAIL_100 = ItemID.BARROWS_VERAC_WEAPON_100;
+    public static int VERACS_FLAIL_75 = ItemID.BARROWS_VERAC_WEAPON_75;
+    public static int VERACS_FLAIL_50 = ItemID.BARROWS_VERAC_WEAPON_50;
+    public static int VERACS_FLAIL_25 = ItemID.BARROWS_VERAC_WEAPON_25;
+    public static int VERACS_FLAIL_0 = ItemID.BARROWS_VERAC_WEAPON_BROKEN;
+
+}

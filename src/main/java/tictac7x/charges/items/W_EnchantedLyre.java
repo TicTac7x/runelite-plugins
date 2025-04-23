@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -29,16 +29,16 @@ public class W_EnchantedLyre extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.enchanted_lyre, ItemID.ENCHANTED_LYRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.enchanted_lyre, ItemId.ENCHANTED_LYRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.LYRE).fixedCharges(0),
-            new TriggerItem(ItemID.ENCHANTED_LYRE).fixedCharges(0),
-            new TriggerItem(ItemID.ENCHANTED_LYRE1).fixedCharges(1),
-            new TriggerItem(ItemID.ENCHANTED_LYRE2).fixedCharges(2),
-            new TriggerItem(ItemID.ENCHANTED_LYRE3).fixedCharges(3),
-            new TriggerItem(ItemID.ENCHANTED_LYRE4).fixedCharges(4),
-            new TriggerItem(ItemID.ENCHANTED_LYRE5).fixedCharges(5),
+            new TriggerItem(ItemId.LYRE).fixedCharges(0),
+            new TriggerItem(ItemId.ENCHANTED_LYRE).fixedCharges(0),
+            new TriggerItem(ItemId.ENCHANTED_LYRE1).fixedCharges(1),
+            new TriggerItem(ItemId.ENCHANTED_LYRE2).fixedCharges(2),
+            new TriggerItem(ItemId.ENCHANTED_LYRE3).fixedCharges(3),
+            new TriggerItem(ItemId.ENCHANTED_LYRE4).fixedCharges(4),
+            new TriggerItem(ItemId.ENCHANTED_LYRE5).fixedCharges(5),
         };
 
         this.triggers = new TriggerBase[]{

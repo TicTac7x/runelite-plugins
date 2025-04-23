@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -29,11 +29,11 @@ public class U_SoulBearer extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.soul_bearer, ItemID.SOUL_BEARER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.soul_bearer, ItemId.SOUL_BEARER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.SOUL_BEARER),
-            new TriggerItem(ItemID.DAMAGED_SOUL_BEARER).fixedCharges(0),
+            new TriggerItem(ItemId.SOUL_BEARER),
+            new TriggerItem(ItemId.DAMAGED_SOUL_BEARER).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

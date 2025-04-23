@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -34,12 +34,12 @@ public class U_QuetzalWhistle extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.quetzal_whistle, ItemID.BASIC_QUETZAL_WHISTLE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.quetzal_whistle, ItemId.BASIC_QUETZAL_WHISTLE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BASIC_QUETZAL_WHISTLE).maxCharges(5),
-            new TriggerItem(ItemID.ENHANCED_QUETZAL_WHISTLE).maxCharges(20),
-            new TriggerItem(ItemID.PERFECTED_QUETZAL_WHISTLE).maxCharges(50),
+            new TriggerItem(ItemId.BASIC_QUETZAL_WHISTLE).maxCharges(5),
+            new TriggerItem(ItemId.ENHANCED_QUETZAL_WHISTLE).maxCharges(20),
+            new TriggerItem(ItemId.PERFECTED_QUETZAL_WHISTLE).maxCharges(50),
         };
 
         this.triggers = new TriggerBase[] {
@@ -56,28 +56,28 @@ public class U_QuetzalWhistle extends ChargedItem {
             new OnChatMessage("You craft yourself a basic quetzal whistle.").setFixedCharges(0),
 
             // Fully charged.
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemID.BASIC_QUETZAL_WHISTLE).setFixedCharges(5),
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemID.ENHANCED_QUETZAL_WHISTLE).setFixedCharges(20),
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemID.PERFECTED_QUETZAL_WHISTLE).setFixedCharges(50),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.BASIC_QUETZAL_WHISTLE).setFixedCharges(5),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.ENHANCED_QUETZAL_WHISTLE).setFixedCharges(20),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.PERFECTED_QUETZAL_WHISTLE).setFixedCharges(50),
 
             // Partially charged.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {
                 for (final StorageItem item : itemsDifference.getItems()) {
                     switch (item.getId()) {
-                        case ItemID.QUETZAL_FEED:
-                        case ItemID.RAW_WILD_KEBBIT:
-                        case ItemID.RAW_BARBTAILED_KEBBIT:
-                        case ItemID.RAW_LARUPIA:
+                        case ItemId.QUETZAL_FEED:
+                        case ItemId.RAW_WILD_KEBBIT:
+                        case ItemId.RAW_BARBTAILED_KEBBIT:
+                        case ItemId.RAW_LARUPIA:
                             increaseCharges(Math.abs(item.getQuantity()));
                             break;
-                        case ItemID.RAW_GRAAHK:
-                        case ItemID.RAW_KYATT:
-                        case ItemID.RAW_PYRE_FOX:
+                        case ItemId.RAW_GRAAHK:
+                        case ItemId.RAW_KYATT:
+                        case ItemId.RAW_PYRE_FOX:
                             increaseCharges(Math.abs(item.getQuantity()) * 2);
                             break;
-                        case ItemID.RAW_DASHING_KEBBIT:
-                        case ItemID.RAW_SUNLIGHT_ANTELOPE:
-                        case ItemID.RAW_MOONLIGHT_ANTELOPE:
+                        case ItemId.RAW_DASHING_KEBBIT:
+                        case ItemId.RAW_SUNLIGHT_ANTELOPE:
+                        case ItemId.RAW_MOONLIGHT_ANTELOPE:
                             increaseCharges(Math.abs(item.getQuantity()) * 3);
                             break;
                     }

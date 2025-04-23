@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -32,25 +32,25 @@ public class A_CrystalBody extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.crystal_body, ItemID.CRYSTAL_BODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.crystal_body, ItemId.CRYSTAL_BODY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.CRYSTAL_BODY),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27697),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27709),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27721),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27733),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27745),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27757),
-            new TriggerItem(ItemID.CRYSTAL_BODY_27769),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27699).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27711).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27723).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27735).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27747).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27759).fixedCharges(0),
-            new TriggerItem(ItemID.CRYSTAL_BODY_INACTIVE_27771).fixedCharges(0)
+            new TriggerItem(ItemId.CRYSTAL_BODY),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27697),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27709),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27721),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27733),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27745),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27757),
+            new TriggerItem(ItemId.CRYSTAL_BODY_27769),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27699).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27711).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27723).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27735).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27747).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27759).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE_27771).fixedCharges(0)
         };
 
         this.triggers = new TriggerBase[] {

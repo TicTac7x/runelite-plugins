@@ -38,10 +38,10 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemID.TOB_TELEPORT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemId.TOB_TELEPORT, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.TOB_TELEPORT).quantityCharges().hideOverlay(),
+            new TriggerItem(ItemId.TOB_TELEPORT).quantityCharges().hideOverlay(),
         };
 
         this.triggers = new TriggerBase[]{

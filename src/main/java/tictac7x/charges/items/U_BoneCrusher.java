@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -32,11 +32,11 @@ public class U_BoneCrusher extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bonecrusher, ItemID.BONECRUSHER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bonecrusher, ItemId.BONECRUSHER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BONECRUSHER),
-            new TriggerItem(ItemID.BONECRUSHER_NECKLACE)
+            new TriggerItem(ItemId.BONECRUSHER),
+            new TriggerItem(ItemId.BONECRUSHER_NECKLACE)
         };
 
         this.triggers = new TriggerBase[] {

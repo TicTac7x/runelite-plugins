@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -31,11 +31,11 @@ public class W_BryophytasStaff extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bryophytas_staff, ItemID.BRYOPHYTAS_STAFF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bryophytas_staff, ItemId.BRYOPHYTAS_STAFF, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BRYOPHYTAS_STAFF_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemID.BRYOPHYTAS_STAFF)
+            new TriggerItem(ItemId.BRYOPHYTAS_STAFF_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.BRYOPHYTAS_STAFF)
         };
 
         this.triggers = new TriggerBase[] {

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -37,16 +37,16 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemID.BOTTOMLESS_COMPOST_BUCKET_22997, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemId.BOTTOMLESS_COMPOST_BUCKET_22997, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage = storage.setMaximumTotalQuantity(10_000).storableItems(
-            new StorableItem(ItemID.ULTRACOMPOST).checkName("ultra"),
-            new StorableItem(ItemID.SUPERCOMPOST).checkName("super"),
-            new StorableItem(ItemID.COMPOST).checkName("regular").displayName("Regular compost")
+            new StorableItem(ItemId.ULTRACOMPOST).checkName("ultra"),
+            new StorableItem(ItemId.SUPERCOMPOST).checkName("super"),
+            new StorableItem(ItemId.COMPOST).checkName("regular").displayName("Regular compost")
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BOTTOMLESS_COMPOST_BUCKET).fixedCharges(0),
-            new TriggerItem(ItemID.BOTTOMLESS_COMPOST_BUCKET_22997),
+            new TriggerItem(ItemId.BOTTOMLESS_COMPOST_BUCKET).fixedCharges(0),
+            new TriggerItem(ItemId.BOTTOMLESS_COMPOST_BUCKET_22997),
         };
 
         this.triggers = new TriggerBase[] {
@@ -107,7 +107,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
             }),
 
             // Fill compost from bin.
-            new OnXpDrop(Skill.FARMING).unallowedItem(ItemID.BUCKET).onMenuOption("Take").onMenuTarget("Compost Bin", "Big Compost Bin").consumer(() -> {
+            new OnXpDrop(Skill.FARMING).unallowedItem(ItemId.BUCKET).onMenuOption("Take").onMenuTarget("Compost Bin", "Big Compost Bin").consumer(() -> {
                 if (getCompostType().isPresent()) {
                     storage.add(getCompostType().get().getId(), 2);
                 }

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,11 +30,11 @@ public class S_TomeOfWater extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.tome_of_water, ItemID.TOME_OF_WATER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.tome_of_water, ItemId.TOME_OF_WATER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.TOME_OF_WATER_EMPTY).fixedCharges(0),
-            new TriggerItem(ItemID.TOME_OF_WATER).needsToBeEquipped(),
+            new TriggerItem(ItemId.TOME_OF_WATER_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemId.TOME_OF_WATER).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[] {

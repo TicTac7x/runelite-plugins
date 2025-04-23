@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -29,10 +29,10 @@ public class J_SlaughterBracelet extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.slaughter_bracelet, ItemID.BRACELET_OF_SLAUGHTER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.slaughter_bracelet, ItemId.BRACELET_OF_SLAUGHTER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),
+            new TriggerItem(ItemId.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[] {

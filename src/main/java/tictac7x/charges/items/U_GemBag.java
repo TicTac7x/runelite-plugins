@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -35,18 +35,18 @@ public class U_GemBag extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.gem_bag, ItemID.GEM_BAG_12020, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.gem_bag, ItemId.GEM_BAG_12020, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumIndividualQuantity(60).storableItems(
-            new StorableItem(ItemID.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
-            new StorableItem(ItemID.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),
-            new StorableItem(ItemID.UNCUT_RUBY).checkName("Ruby").specificOrder(3),
-            new StorableItem(ItemID.UNCUT_DIAMOND).checkName("Diamond").specificOrder(4),
-            new StorableItem(ItemID.UNCUT_DRAGONSTONE).checkName("Dragonstone").specificOrder(5)
+            new StorableItem(ItemId.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
+            new StorableItem(ItemId.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),
+            new StorableItem(ItemId.UNCUT_RUBY).checkName("Ruby").specificOrder(3),
+            new StorableItem(ItemId.UNCUT_DIAMOND).checkName("Diamond").specificOrder(4),
+            new StorableItem(ItemId.UNCUT_DRAGONSTONE).checkName("Dragonstone").specificOrder(5)
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.GEM_BAG_12020),
-            new TriggerItem(ItemID.OPEN_GEM_BAG),
+            new TriggerItem(ItemId.GEM_BAG_12020),
+            new TriggerItem(ItemId.OPEN_GEM_BAG),
         };
 
         this.triggers = new TriggerBase[]{
@@ -55,17 +55,17 @@ public class U_GemBag extends ChargedItemWithStorage {
 
             // Empty and Check.
             new OnChatMessage("(Left in bag: )?Sapphires: (?<sapphires>.+) / Emeralds: (?<emeralds>.+) / Rubies: (?<rubies>.+) Diamonds: (?<diamonds>.+) / Dragonstones: (?<dragonstones>.+)").matcherConsumer(m -> {
-                storage.put(ItemID.UNCUT_SAPPHIRE, Integer.parseInt(m.group("sapphires")));
-                storage.put(ItemID.UNCUT_EMERALD, Integer.parseInt(m.group("emeralds")));
-                storage.put(ItemID.UNCUT_RUBY, Integer.parseInt(m.group("rubies")));
-                storage.put(ItemID.UNCUT_DIAMOND, Integer.parseInt(m.group("diamonds")));
-                storage.put(ItemID.UNCUT_DRAGONSTONE, Integer.parseInt(m.group("dragonstones")));
+                storage.put(ItemId.UNCUT_SAPPHIRE, Integer.parseInt(m.group("sapphires")));
+                storage.put(ItemId.UNCUT_EMERALD, Integer.parseInt(m.group("emeralds")));
+                storage.put(ItemId.UNCUT_RUBY, Integer.parseInt(m.group("rubies")));
+                storage.put(ItemId.UNCUT_DIAMOND, Integer.parseInt(m.group("diamonds")));
+                storage.put(ItemId.UNCUT_DRAGONSTONE, Integer.parseInt(m.group("dragonstones")));
             }),
 
             // Mining regular or gem rocks.
             new OnChatMessage("You just (found|mined) (a|an) (?<gem>.+)!").matcherConsumer(m -> {
                 storage.add(getStorageItemFromName(m.group("gem"), 1));
-            }).requiredItem(ItemID.OPEN_GEM_BAG),
+            }).requiredItem(ItemId.OPEN_GEM_BAG),
 
             // Pickpocketing.
             new OnChatMessage("The following stolen loot gets added to your gem bag: Uncut (?<gem>.+) x (?<quantity>.+).").matcherConsumer(m -> {
@@ -88,24 +88,24 @@ public class U_GemBag extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Pick up.
-            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemID.OPEN_GEM_BAG).pickUpToStorage(),
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.OPEN_GEM_BAG).pickUpToStorage(),
 
             // Telegrab.
-            new OnXpDrop(Skill.MAGIC).requiredItem(ItemID.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
+            new OnXpDrop(Skill.MAGIC).requiredItem(ItemId.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
                 "Uncut sapphire"
-            ).addToStorage(ItemID.UNCUT_SAPPHIRE, 1),
-            new OnXpDrop(Skill.MAGIC).requiredItem(ItemID.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
+            ).addToStorage(ItemId.UNCUT_SAPPHIRE, 1),
+            new OnXpDrop(Skill.MAGIC).requiredItem(ItemId.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
                 "Uncut emerald"
-            ).addToStorage(ItemID.UNCUT_EMERALD, 1),
-            new OnXpDrop(Skill.MAGIC).requiredItem(ItemID.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
+            ).addToStorage(ItemId.UNCUT_EMERALD, 1),
+            new OnXpDrop(Skill.MAGIC).requiredItem(ItemId.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
                 "Uncut ruby"
-            ).addToStorage(ItemID.UNCUT_RUBY, 1),
-            new OnXpDrop(Skill.MAGIC).requiredItem(ItemID.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
+            ).addToStorage(ItemId.UNCUT_RUBY, 1),
+            new OnXpDrop(Skill.MAGIC).requiredItem(ItemId.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
                 "Uncut diamond"
-            ).addToStorage(ItemID.UNCUT_DIAMOND, 1),
-            new OnXpDrop(Skill.MAGIC).requiredItem(ItemID.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
+            ).addToStorage(ItemId.UNCUT_DIAMOND, 1),
+            new OnXpDrop(Skill.MAGIC).requiredItem(ItemId.OPEN_GEM_BAG).onMenuOption("Cast").onMenuTarget(
                 "Uncut dragonstone"
-            ).addToStorage(ItemID.UNCUT_DRAGONSTONE, 1),
+            ).addToStorage(ItemId.UNCUT_DRAGONSTONE, 1),
 
             // Replace "Empty" with proper "Empty to bank".
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),

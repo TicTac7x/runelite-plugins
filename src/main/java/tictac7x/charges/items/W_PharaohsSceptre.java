@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,29 +30,29 @@ public class W_PharaohsSceptre extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.pharaohs_sceptre, ItemID.PHARAOHS_SCEPTRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.pharaohs_sceptre, ItemId.PHARAOHS_SCEPTRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9045),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9046),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9047),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9048),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9049),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9050),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_9051),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9045),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9046),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9047),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9048),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9049),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9050),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_9051),
 
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_13074),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_13075),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_13076),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_13077),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_13078),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_16176),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_21445),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_21446),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_26948),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_26950),
-            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13074),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13075),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13076),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13077),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_13078),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_16176),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_21445),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_21446),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_26948),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_26950),
+            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_UNCHARGED).fixedCharges(0),
         };
         
         this.triggers = new TriggerBase[]{

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
@@ -43,26 +43,26 @@ public class U_LogBasket extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.log_basket, ItemID.LOG_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumTotalQuantity(28).storableItems(
-            new StorableItem(ItemID.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
-            new StorableItem(ItemID.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
-            new StorableItem(ItemID.OAK_LOGS).checkName("Oak logs"),
-            new StorableItem(ItemID.WILLOW_LOGS).checkName("Willow logs"),
-            new StorableItem(ItemID.TEAK_LOGS).checkName("Teak logs"),
-            new StorableItem(ItemID.JUNIPER_LOGS).checkName("Juniper logs"),
-            new StorableItem(ItemID.MAPLE_LOGS).checkName("Maple logs"),
-            new StorableItem(ItemID.MAHOGANY_LOGS).checkName("Mahogany logs"),
-            new StorableItem(ItemID.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
-            new StorableItem(ItemID.YEW_LOGS).checkName("Yew logs"),
-            new StorableItem(ItemID.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
-            new StorableItem(ItemID.MAGIC_LOGS).checkName("Magic logs"),
-            new StorableItem(ItemID.REDWOOD_LOGS).checkName("Redwood logs")
+            new StorableItem(ItemId.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
+            new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
+            new StorableItem(ItemId.OAK_LOGS).checkName("Oak logs"),
+            new StorableItem(ItemId.WILLOW_LOGS).checkName("Willow logs"),
+            new StorableItem(ItemId.TEAK_LOGS).checkName("Teak logs"),
+            new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
+            new StorableItem(ItemId.MAPLE_LOGS).checkName("Maple logs"),
+            new StorableItem(ItemId.MAHOGANY_LOGS).checkName("Mahogany logs"),
+            new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
+            new StorableItem(ItemId.YEW_LOGS).checkName("Yew logs"),
+            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
+            new StorableItem(ItemId.MAGIC_LOGS).checkName("Magic logs"),
+            new StorableItem(ItemId.REDWOOD_LOGS).checkName("Redwood logs")
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.LOG_BASKET),
-            new TriggerItem(ItemID.OPEN_LOG_BASKET),
+            new TriggerItem(ItemId.LOG_BASKET),
+            new TriggerItem(ItemId.OPEN_LOG_BASKET),
         };
         this.triggers = new TriggerBase[] {
             // Check while empty.
@@ -92,23 +92,23 @@ public class U_LogBasket extends ChargedItemWithStorage {
             }).onItemClick(),
 
             // Miscellania support.
-            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemID.OPEN_LOG_BASKET).addToStorage(ItemID.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.OPEN_LOG_BASKET).addToStorage(ItemId.MAPLE_LOGS, 0),
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
                 lastLogs = getStorageItemFromName(m.group("logs"), 1);
                 storage.add(lastLogs);
                 infernalQuantityTracker++;
-            }).requiredItem(ItemID.OPEN_LOG_BASKET),
+            }).requiredItem(ItemId.OPEN_LOG_BASKET),
 
             // Extra logs from nature offerings.
-            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemID.OPEN_LOG_BASKET).runConsumerOnNextGameTick(() -> {
+            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemId.OPEN_LOG_BASKET).runConsumerOnNextGameTick(() -> {
                 if (lastLogs.isPresent()) {
                     storage.add(lastLogs.get().getId(), 1);
                 }
             }),
 
-            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemID.OPEN_LOG_BASKET).pickUpToStorage(),
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.OPEN_LOG_BASKET).pickUpToStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
@@ -145,7 +145,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
                     storage.remove(lastLogs.get().getId(), 1);
                     infernalQuantityTracker--;
                 }
-            }).requiredItem(ItemID.OPEN_LOG_BASKET),
+            }).requiredItem(ItemId.OPEN_LOG_BASKET),
         };
     }
 }

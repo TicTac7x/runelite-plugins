@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -27,11 +27,11 @@ public class F_MoonlightMothMix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.moonlight_moth_mix, ItemID.MOONLIGHT_MOTH_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.moonlight_moth_mix, ItemId.MOONLIGHT_MOTH_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.MOONLIGHT_MOTH_MIX_1).fixedCharges(1),
-            new TriggerItem(ItemID.MOONLIGHT_MOTH_MIX_2).fixedCharges(2),
+            new TriggerItem(ItemId.MOONLIGHT_MOTH_MIX_1).fixedCharges(1),
+            new TriggerItem(ItemId.MOONLIGHT_MOTH_MIX_2).fixedCharges(2),
         };
     }
 

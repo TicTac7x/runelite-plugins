@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -31,19 +31,19 @@ public class C_ArdougneCloak extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ardougne_cloak, ItemID.ARDOUGNE_CLOAK_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ardougne_cloak, ItemId.ARDOUGNE_CLOAK_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.ARDOUGNE_CLOAK_1).fixedCharges(Charges.UNLIMITED),
-            new TriggerItem(ItemID.ARDOUGNE_CLOAK_2),
-            new TriggerItem(ItemID.ARDOUGNE_CLOAK_3),
-            new TriggerItem(ItemID.ARDOUGNE_CLOAK_4).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.ARDOUGNE_CLOAK_1).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.ARDOUGNE_CLOAK_2),
+            new TriggerItem(ItemId.ARDOUGNE_CLOAK_3),
+            new TriggerItem(ItemId.ARDOUGNE_CLOAK_4).fixedCharges(Charges.UNLIMITED),
         };
 
         this.triggers = new TriggerBase[] {
             new OnChatMessage("You have used (?<used>.+) of your (?<total>.+) Ardougne Farm teleports for today.").setDifferenceCharges(),
-            new OnResetDaily().specificItem(ItemID.ARDOUGNE_CLOAK_2).setFixedCharges(3),
-            new OnResetDaily().specificItem(ItemID.ARDOUGNE_CLOAK_3).setFixedCharges(5),
+            new OnResetDaily().specificItem(ItemId.ARDOUGNE_CLOAK_2).setFixedCharges(3),
+            new OnResetDaily().specificItem(ItemId.ARDOUGNE_CLOAK_3).setFixedCharges(5),
         };
     }
 }

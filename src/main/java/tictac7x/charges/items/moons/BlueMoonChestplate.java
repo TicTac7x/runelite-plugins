@@ -2,7 +2,7 @@ package tictac7x.charges.items.moons;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,13 +30,13 @@ public class BlueMoonChestplate extends _MoonItem {
             final Store store,
             final Gson gson
     ) {
-        super("blue_chestplate", ItemID.BLUE_MOON_CHESTPLATE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("blue_chestplate", ItemId.BLUE_MOON_CHESTPLATE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BLUE_MOON_CHESTPLATE).fixedCharges(3000),
-            new TriggerItem(ItemID.BLUE_MOON_CHESTPLATE_29037),
-            new TriggerItem(ItemID.BLUE_MOON_CHESTPLATE_29843),
-            new TriggerItem(ItemID.BLUE_MOON_CHESTPLATE_BROKEN).fixedCharges(0),
+            new TriggerItem(ItemId.BLUE_MOON_CHESTPLATE).fixedCharges(3000),
+            new TriggerItem(ItemId.BLUE_MOON_CHESTPLATE_29037),
+            new TriggerItem(ItemId.BLUE_MOON_CHESTPLATE_29843),
+            new TriggerItem(ItemId.BLUE_MOON_CHESTPLATE_BROKEN).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{

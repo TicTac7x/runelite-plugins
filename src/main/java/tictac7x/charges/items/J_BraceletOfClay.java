@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -31,10 +31,10 @@ public class J_BraceletOfClay extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_clay, ItemID.BRACELET_OF_CLAY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.bracelet_of_clay, ItemId.BRACELET_OF_CLAY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BRACELET_OF_CLAY).needsToBeEquipped(),
+            new TriggerItem(ItemId.BRACELET_OF_CLAY).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[] {
@@ -43,15 +43,15 @@ public class J_BraceletOfClay extends ChargedItem {
 
             // Mine clay.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Clay rocks").consumer(() -> {
-                final int clayBefore = store.getPreviousInventoryItemQuantity(ItemID.SOFT_CLAY);
-                final int clayAfter = store.getInventoryItemQuantity(ItemID.SOFT_CLAY);
+                final int clayBefore = store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
+                final int clayAfter = store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
                 decreaseCharges(clayAfter - clayBefore);
             }),
 
             // Mine soft clay.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Soft clay rocks").consumer(() -> {
-                final int clayBefore = store.getPreviousInventoryItemQuantity(ItemID.SOFT_CLAY);
-                final int clayAfter = store.getInventoryItemQuantity(ItemID.SOFT_CLAY);
+                final int clayBefore = store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
+                final int clayAfter = store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
 
                 // At least 2 soft clay was mined.
                 if (clayAfter - clayBefore >= 2) {

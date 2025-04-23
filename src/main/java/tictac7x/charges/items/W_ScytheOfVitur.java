@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -31,15 +31,15 @@ public class W_ScytheOfVitur extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.scythe_of_vitur, ItemID.SCYTHE_OF_VITUR, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.scythe_of_vitur, ItemId.SCYTHE_OF_VITUR, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.SCYTHE_OF_VITUR),
-            new TriggerItem(ItemID.SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemID.HOLY_SCYTHE_OF_VITUR),
-            new TriggerItem(ItemID.HOLY_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemID.SANGUINE_SCYTHE_OF_VITUR),
-            new TriggerItem(ItemID.SANGUINE_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.SCYTHE_OF_VITUR),
+            new TriggerItem(ItemId.SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.HOLY_SCYTHE_OF_VITUR),
+            new TriggerItem(ItemId.HOLY_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.SANGUINE_SCYTHE_OF_VITUR),
+            new TriggerItem(ItemId.SANGUINE_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
@@ -41,32 +41,32 @@ public class U_FlamtaerBag extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.flamtaer_bag, ItemID.FLAMTAER_BAG, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.flamtaer_bag, ItemId.FLAMTAER_BAG, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.storableItems(
-            new StorableItem(ItemID.TIMBER_BEAM).specificOrder(1),
-            new StorableItem(ItemID.LIMESTONE_BRICK).specificOrder(2),
-            new StorableItem(ItemID.SWAMP_PASTE).specificOrder(3)
+            new StorableItem(ItemId.TIMBER_BEAM).specificOrder(1),
+            new StorableItem(ItemId.LIMESTONE_BRICK).specificOrder(2),
+            new StorableItem(ItemId.SWAMP_PASTE).specificOrder(3)
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.FLAMTAER_BAG),
-            new TriggerItem(ItemID.FLAMTAER_BAG_25630),
+            new TriggerItem(ItemId.FLAMTAER_BAG),
+            new TriggerItem(ItemId.FLAMTAER_BAG_25630),
         };
 
         this.triggers = new TriggerBase[]{
             // Check.
             new OnChatMessage("Timber beams: (?<beams>.+) Limestone bricks: (?<bricks>.+) Swamp paste: (?<paste>.+)").matcherConsumer(m -> {
                 storage.clear();
-                storage.put(ItemID.TIMBER_BEAM, Integer.parseInt(m.group("beams")));
-                storage.put(ItemID.LIMESTONE_BRICK, Integer.parseInt(m.group("bricks")));
-                storage.put(ItemID.SWAMP_PASTE, Integer.parseInt(m.group("paste")));
+                storage.put(ItemId.TIMBER_BEAM, Integer.parseInt(m.group("beams")));
+                storage.put(ItemId.LIMESTONE_BRICK, Integer.parseInt(m.group("bricks")));
+                storage.put(ItemId.SWAMP_PASTE, Integer.parseInt(m.group("paste")));
             }),
 
             // Repaired.
             new OnChatMessage("Your temple repair resource pool is full").consumer(() -> {
-                storage.removeAndPrioritizeInventory(ItemID.TIMBER_BEAM, 1);
-                storage.removeAndPrioritizeInventory(ItemID.LIMESTONE_BRICK, 1);
-                storage.removeAndPrioritizeInventory(ItemID.SWAMP_PASTE, 5);
+                storage.removeAndPrioritizeInventory(ItemId.TIMBER_BEAM, 1);
+                storage.removeAndPrioritizeInventory(ItemId.LIMESTONE_BRICK, 1);
+                storage.removeAndPrioritizeInventory(ItemId.SWAMP_PASTE, 5);
             }),
 
             // Replace "Empty" with proper "Empty to inventory" at bank.

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -32,13 +32,13 @@ public class B_FremennikSeaBoots extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, ItemID.FREMENNIK_SEA_BOOTS_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, ItemId.FREMENNIK_SEA_BOOTS_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.FREMENNIK_SEA_BOOTS_1),
-            new TriggerItem(ItemID.FREMENNIK_SEA_BOOTS_2),
-            new TriggerItem(ItemID.FREMENNIK_SEA_BOOTS_3),
-            new TriggerItem(ItemID.FREMENNIK_SEA_BOOTS_4).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_1),
+            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_2),
+            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_3),
+            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_4).fixedCharges(Charges.UNLIMITED),
         };
 
         this.triggers = new TriggerBase[]{
@@ -49,9 +49,9 @@ public class B_FremennikSeaBoots extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem(ItemID.FREMENNIK_SEA_BOOTS_1).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FREMENNIK_SEA_BOOTS_2).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemID.FREMENNIK_SEA_BOOTS_3).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemId.FREMENNIK_SEA_BOOTS_1).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemId.FREMENNIK_SEA_BOOTS_2).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemId.FREMENNIK_SEA_BOOTS_3).setFixedCharges(1),
         };
     }
 }

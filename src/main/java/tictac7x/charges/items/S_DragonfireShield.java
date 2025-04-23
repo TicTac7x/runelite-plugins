@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,13 +30,13 @@ public class S_DragonfireShield extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.dragonfire_shield, ItemID.DRAGONFIRE_SHIELD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.dragonfire_shield, ItemId.DRAGONFIRE_SHIELD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.DRAGONFIRE_SHIELD_11284).fixedCharges(0),
-            new TriggerItem(ItemID.DRAGONFIRE_SHIELD),
-            new TriggerItem(ItemID.DRAGONFIRE_WARD_22003).fixedCharges(0),
-            new TriggerItem(ItemID.DRAGONFIRE_WARD)
+            new TriggerItem(ItemId.DRAGONFIRE_SHIELD_11284).fixedCharges(0),
+            new TriggerItem(ItemId.DRAGONFIRE_SHIELD),
+            new TriggerItem(ItemId.DRAGONFIRE_WARD_22003).fixedCharges(0),
+            new TriggerItem(ItemId.DRAGONFIRE_WARD)
         };
 
         this.triggers = new TriggerBase[]{

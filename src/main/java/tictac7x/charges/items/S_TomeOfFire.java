@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,11 +30,11 @@ public class S_TomeOfFire extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.tome_of_fire, ItemID.TOME_OF_FIRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.tome_of_fire, ItemId.TOME_OF_FIRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.TOME_OF_FIRE_EMPTY).fixedCharges(0),
-            new TriggerItem(ItemID.TOME_OF_FIRE).needsToBeEquipped(),
+            new TriggerItem(ItemId.TOME_OF_FIRE_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemId.TOME_OF_FIRE).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[] {

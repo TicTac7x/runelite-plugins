@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -27,12 +27,12 @@ public class J_AlchemistsAmulet extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemID.ALCHEMISTS_AMULET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemId.ALCHEMISTS_AMULET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.ALCHEMISTS_AMULET).fixedCharges(0),
-            new TriggerItem(ItemID.ALCHEMISTS_AMULET_29990).needsToBeEquipped(), //Charged
-            new TriggerItem(ItemID.ALCHEMISTS_AMULET_29992).needsToBeEquipped(), //???
+            new TriggerItem(ItemId.ALCHEMISTS_AMULET).fixedCharges(0),
+            new TriggerItem(ItemId.ALCHEMISTS_AMULET_29990).needsToBeEquipped(), //Charged
+            new TriggerItem(ItemId.ALCHEMISTS_AMULET_29992).needsToBeEquipped(), //???
         };
 
         this.triggers = new TriggerBase[] {

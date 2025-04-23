@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -32,11 +32,11 @@ public class H_KandarinHeadgear extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.kandarin_headgear, ItemID.KANDARIN_HEADGEAR_3, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.kandarin_headgear, ItemId.KANDARIN_HEADGEAR_3, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.KANDARIN_HEADGEAR_3),
-            new TriggerItem(ItemID.KANDARIN_HEADGEAR_4).fixedCharges(Charges.UNLIMITED),
+            new TriggerItem(ItemId.KANDARIN_HEADGEAR_3),
+            new TriggerItem(ItemId.KANDARIN_HEADGEAR_4).fixedCharges(Charges.UNLIMITED),
         };
 
         this.triggers = new TriggerBase[] {
@@ -47,7 +47,7 @@ public class H_KandarinHeadgear extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem(ItemID.KANDARIN_HEADGEAR_3).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemId.KANDARIN_HEADGEAR_3).setFixedCharges(1),
         };
     }
 }

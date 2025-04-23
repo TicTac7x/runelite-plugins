@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,10 +30,10 @@ public class J_EfaritaysAid extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.efaritays_aid, ItemID.EFARITAYS_AID, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.efaritays_aid, ItemId.EFARITAYS_AID, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.EFARITAYS_AID).needsToBeEquipped()
+            new TriggerItem(ItemId.EFARITAYS_AID).needsToBeEquipped()
         };
 
         this.triggers = new TriggerBase[]{
@@ -54,35 +54,35 @@ public class J_EfaritaysAid extends ChargedItem {
 
             // Additional charge used with silver melee weapon on successful hit.
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).hasTargetName("Vampyre Juvinate").combatStyle(CombatStyle.MELEE).isEquipped().multiTrigger().itemEquipped(
-                ItemID.BLESSED_AXE,
-                ItemID.IVANDIS_FLAIL,
-                ItemID.BLISTERWOOD_FLAIL,
-                ItemID.SILVER_SICKLE,
-                ItemID.SILVER_SICKLE_B,
-                ItemID.EMERALD_SICKLE_B,
-                ItemID.ENCHANTED_EMERALD_SICKLE_B,
-                ItemID.RUBY_SICKLE_B,
-                ItemID.ENCHANTED_RUBY_SICKLE_B,
-                ItemID.BLISTERWOOD_SICKLE,
-                ItemID.SILVERLIGHT,
-                ItemID.DARKLIGHT,
-                ItemID.EMBERLIGHT,
-                ItemID.ROD_OF_IVANDIS_1,
-                ItemID.ROD_OF_IVANDIS_2,
-                ItemID.ROD_OF_IVANDIS_3,
-                ItemID.ROD_OF_IVANDIS_4,
-                ItemID.ROD_OF_IVANDIS_5,
-                ItemID.ROD_OF_IVANDIS_6,
-                ItemID.ROD_OF_IVANDIS_7,
-                ItemID.ROD_OF_IVANDIS_8,
-                ItemID.ROD_OF_IVANDIS_9,
-                ItemID.ROD_OF_IVANDIS_10,
-                ItemID.WOLFBANE
+                ItemId.BLESSED_AXE,
+                ItemId.IVANDIS_FLAIL,
+                ItemId.BLISTERWOOD_FLAIL,
+                ItemId.SILVER_SICKLE,
+                ItemId.SILVER_SICKLE_B,
+                ItemId.EMERALD_SICKLE_B,
+                ItemId.ENCHANTED_EMERALD_SICKLE_B,
+                ItemId.RUBY_SICKLE_B,
+                ItemId.ENCHANTED_RUBY_SICKLE_B,
+                ItemId.BLISTERWOOD_SICKLE,
+                ItemId.SILVERLIGHT,
+                ItemId.DARKLIGHT,
+                ItemId.EMBERLIGHT,
+                ItemId.ROD_OF_IVANDIS_1,
+                ItemId.ROD_OF_IVANDIS_2,
+                ItemId.ROD_OF_IVANDIS_3,
+                ItemId.ROD_OF_IVANDIS_4,
+                ItemId.ROD_OF_IVANDIS_5,
+                ItemId.ROD_OF_IVANDIS_6,
+                ItemId.ROD_OF_IVANDIS_7,
+                ItemId.ROD_OF_IVANDIS_8,
+                ItemId.ROD_OF_IVANDIS_9,
+                ItemId.ROD_OF_IVANDIS_10,
+                ItemId.WOLFBANE
             ).decreaseCharges(1),
 
             // Additional charge used with silver bolts on successful hit.
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).hasTargetName("Vampyre Juvinate").combatStyle(CombatStyle.RANGED).isEquipped().multiTrigger().itemEquipped(
-                ItemID.SILVER_BOLTS
+                ItemId.SILVER_BOLTS
             ).decreaseCharges(1),
         };
     }

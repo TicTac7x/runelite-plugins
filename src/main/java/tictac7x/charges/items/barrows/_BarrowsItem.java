@@ -2,8 +2,6 @@ package tictac7x.charges.items.barrows;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
-import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -19,11 +17,8 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Store;
 
 public class _BarrowsItem extends ChargedItem {
-    private final int totalRepairCost;
-
     public _BarrowsItem(
         final String itemName,
-        final int totalRepairCost,
         final int itemId,
         final Client client,
         final ClientThread clientThread,
@@ -50,7 +45,6 @@ public class _BarrowsItem extends ChargedItem {
             store,
             gson
         );
-        this.totalRepairCost = totalRepairCost;
 
         this.triggers = new TriggerBase[]{
             // Check.

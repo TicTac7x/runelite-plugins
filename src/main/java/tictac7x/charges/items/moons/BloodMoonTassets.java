@@ -2,7 +2,7 @@ package tictac7x.charges.items.moons;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,13 +30,13 @@ public class BloodMoonTassets extends _MoonItem {
             final Store store,
             final Gson gson
     ) {
-        super("blood_tassets", ItemID.BLOOD_MOON_TASSETS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("blood_tassets", ItemId.BLOOD_MOON_TASSETS, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.BLOOD_MOON_TASSETS).fixedCharges(3000),
-            new TriggerItem(ItemID.BLOOD_MOON_TASSETS_29045),
-            new TriggerItem(ItemID.BLOOD_MOON_TASSETS_29847),
-            new TriggerItem(ItemID.BLOOD_MOON_TASSETS_BROKEN).fixedCharges(0),
+            new TriggerItem(ItemId.BLOOD_MOON_TASSETS).fixedCharges(3000),
+            new TriggerItem(ItemId.BLOOD_MOON_TASSETS_29045),
+            new TriggerItem(ItemId.BLOOD_MOON_TASSETS_29847),
+            new TriggerItem(ItemId.BLOOD_MOON_TASSETS_BROKEN).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{

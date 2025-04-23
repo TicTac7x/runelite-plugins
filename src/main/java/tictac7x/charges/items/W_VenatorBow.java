@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -27,11 +27,11 @@ public class W_VenatorBow extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.venator_bow, ItemID.VENATOR_BOW, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.venator_bow, ItemId.VENATOR_BOW, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.VENATOR_BOW_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemID.VENATOR_BOW)
+            new TriggerItem(ItemId.VENATOR_BOW_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.VENATOR_BOW)
         };
 
         this.triggers = new TriggerBase[] {

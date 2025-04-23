@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -32,10 +32,10 @@ public class J_AmuletOfBloodFury extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.amulet_of_blood_fury, ItemID.AMULET_OF_BLOOD_FURY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.amulet_of_blood_fury, ItemId.AMULET_OF_BLOOD_FURY, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.AMULET_OF_BLOOD_FURY),
+            new TriggerItem(ItemId.AMULET_OF_BLOOD_FURY),
         };
 
         this.triggers = new TriggerBase[]{

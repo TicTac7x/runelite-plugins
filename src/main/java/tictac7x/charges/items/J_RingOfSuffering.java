@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -31,17 +31,17 @@ public class J_RingOfSuffering extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ring_of_suffering, ItemID.RING_OF_SUFFERING, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_suffering, ItemId.RING_OF_SUFFERING, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.RING_OF_SUFFERING).fixedCharges(0),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_I).fixedCharges(0),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_I_25246).fixedCharges(0),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_I_26761).fixedCharges(0),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_R),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_RI),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_RI_25248),
-            new TriggerItem(ItemID.RING_OF_SUFFERING_RI_26762),
+            new TriggerItem(ItemId.RING_OF_SUFFERING).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_I).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_I_25246).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_I_26761).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_R),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_RI),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_RI_25248),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_RI_26762),
         };
 
         this.triggers = new TriggerBase[]{

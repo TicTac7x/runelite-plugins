@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -27,9 +27,9 @@ public class J_PhoenixNecklace extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.phoenix_necklace, ItemID.PHOENIX_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.phoenix_necklace, ItemId.PHOENIX_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.PHOENIX_NECKLACE).fixedCharges(1).needsToBeEquipped(),
+            new TriggerItem(ItemId.PHOENIX_NECKLACE).fixedCharges(1).needsToBeEquipped(),
         };
     }
 }

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -31,12 +31,12 @@ public class J_RingOfEndurance extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ring_of_endurance, ItemID.RING_OF_ENDURANCE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_endurance, ItemId.RING_OF_ENDURANCE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.RING_OF_ENDURANCE),
-            new TriggerItem(ItemID.RING_OF_ENDURANCE_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemID.RING_OF_ENDURANCE_UNCHARGED_24844).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_ENDURANCE),
+            new TriggerItem(ItemId.RING_OF_ENDURANCE_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.RING_OF_ENDURANCE_UNCHARGED_24844).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[] {

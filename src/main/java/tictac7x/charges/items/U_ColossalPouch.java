@@ -3,7 +3,7 @@ package tictac7x.charges.items;
 import com.google.gson.Gson;
 
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -40,17 +40,17 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemID.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemId.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.storage = storage.storableItems(
-            new StorableItem(ItemID.RUNE_ESSENCE),
-            new StorableItem(ItemID.PURE_ESSENCE),
-            new StorableItem(ItemID.DAEYALT_ESSENCE),
-            new StorableItem(ItemID.GUARDIAN_ESSENCE)
+            new StorableItem(ItemId.RUNE_ESSENCE),
+            new StorableItem(ItemId.PURE_ESSENCE),
+            new StorableItem(ItemId.DAEYALT_ESSENCE),
+            new StorableItem(ItemId.GUARDIAN_ESSENCE)
         ).setMaximumTotalQuantity(40).setHoldsSingleType(true);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.COLOSSAL_POUCH),
-            new TriggerItem(ItemID.COLOSSAL_POUCH_26786), // Degraded
+            new TriggerItem(ItemId.COLOSSAL_POUCH),
+            new TriggerItem(ItemId.COLOSSAL_POUCH_26786), // Degraded
         };
 
         this.triggers = new TriggerBase[]{
@@ -59,10 +59,10 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Guardians of the rift.
             new OnChatMessage("The rift becomes active!").consumer(() -> {
-                storage.put(ItemID.GUARDIAN_ESSENCE, 0);
+                storage.put(ItemId.GUARDIAN_ESSENCE, 0);
             }),
             new OnVarbitChanged(13691, 0).consumer(() -> {
-                storage.put(ItemID.GUARDIAN_ESSENCE, 0);
+                storage.put(ItemId.GUARDIAN_ESSENCE, 0);
             }),
 
             // Check.
@@ -72,16 +72,16 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
                 int essenceId;
                 switch (m.group("essence")) {
                     case "normal":
-                        essenceId = ItemID.RUNE_ESSENCE;
+                        essenceId = ItemId.RUNE_ESSENCE;
                         break;
                     case "pure":
-                        essenceId = ItemID.PURE_ESSENCE;
+                        essenceId = ItemId.PURE_ESSENCE;
                         break;
                     case "daeyalt":
-                        essenceId = ItemID.DAEYALT_ESSENCE;
+                        essenceId = ItemId.DAEYALT_ESSENCE;
                         break;
                     case "guardian":
-                        essenceId = ItemID.GUARDIAN_ESSENCE;
+                        essenceId = ItemId.GUARDIAN_ESSENCE;
                         break;
                     default:
                         return;
@@ -104,14 +104,14 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Fill from inventory.
             new OnMenuOptionClicked("Fill").runConsumerOnNextGameTick(() -> {
-                if (store.inventoryContainsItem(ItemID.GUARDIAN_ESSENCE)) {
-                    storage.add(ItemID.GUARDIAN_ESSENCE, store.getInventoryItemQuantity(ItemID.GUARDIAN_ESSENCE));
-                } else if (store.inventoryContainsItem(ItemID.DAEYALT_ESSENCE)) {
-                    storage.add(ItemID.DAEYALT_ESSENCE, store.getInventoryItemQuantity(ItemID.DAEYALT_ESSENCE));
-                } else if (store.inventoryContainsItem(ItemID.PURE_ESSENCE)) {
-                    storage.add(ItemID.PURE_ESSENCE, store.getInventoryItemQuantity(ItemID.PURE_ESSENCE));
-                } else if (store.inventoryContainsItem(ItemID.RUNE_ESSENCE)) {
-                    storage.add(ItemID.RUNE_ESSENCE, store.getInventoryItemQuantity(ItemID.RUNE_ESSENCE));
+                if (store.inventoryContainsItem(ItemId.GUARDIAN_ESSENCE)) {
+                    storage.add(ItemId.GUARDIAN_ESSENCE, store.getInventoryItemQuantity(ItemId.GUARDIAN_ESSENCE));
+                } else if (store.inventoryContainsItem(ItemId.DAEYALT_ESSENCE)) {
+                    storage.add(ItemId.DAEYALT_ESSENCE, store.getInventoryItemQuantity(ItemId.DAEYALT_ESSENCE));
+                } else if (store.inventoryContainsItem(ItemId.PURE_ESSENCE)) {
+                    storage.add(ItemId.PURE_ESSENCE, store.getInventoryItemQuantity(ItemId.PURE_ESSENCE));
+                } else if (store.inventoryContainsItem(ItemId.RUNE_ESSENCE)) {
+                    storage.add(ItemId.RUNE_ESSENCE, store.getInventoryItemQuantity(ItemId.RUNE_ESSENCE));
                 }
             }),
 

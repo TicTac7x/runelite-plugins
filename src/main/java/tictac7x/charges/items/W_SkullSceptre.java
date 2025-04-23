@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -30,11 +30,11 @@ public class W_SkullSceptre extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.skull_sceptre, ItemID.SKULL_SCEPTRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.skull_sceptre, ItemId.SKULL_SCEPTRE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.SKULL_SCEPTRE),
-            new TriggerItem(ItemID.SKULL_SCEPTRE_I)
+            new TriggerItem(ItemId.SKULL_SCEPTRE),
+            new TriggerItem(ItemId.SKULL_SCEPTRE_I)
         };
 
         this.triggers = new TriggerBase[] {

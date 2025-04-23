@@ -2,7 +2,7 @@ package tictac7x.charges.items.barrows;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -10,9 +10,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Store;
 
@@ -29,14 +26,14 @@ public class AhrimsRobetop extends _BarrowsItem {
         final Store store,
         final Gson gson
     ) {
-        super("Ahrim's body", 90_000, ItemID.AHRIMS_ROBETOP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super("Ahrim's body", ItemId.AHRIMS_ROBETOP, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.AHRIMS_ROBETOP).fixedCharges(100),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_100),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_75),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_50),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_25),
-            new TriggerItem(ItemID.AHRIMS_ROBETOP_0).fixedCharges(0),
+            new TriggerItem(ItemId.AHRIMS_ROBETOP).fixedCharges(1000),
+            new TriggerItem(ItemId.AHRIMS_ROBETOP_100),
+            new TriggerItem(ItemId.AHRIMS_ROBETOP_75),
+            new TriggerItem(ItemId.AHRIMS_ROBETOP_50),
+            new TriggerItem(ItemId.AHRIMS_ROBETOP_25),
+            new TriggerItem(ItemId.AHRIMS_ROBETOP_0).fixedCharges(0),
         };
     }
 }

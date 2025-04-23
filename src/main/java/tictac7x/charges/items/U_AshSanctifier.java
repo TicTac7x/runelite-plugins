@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -32,9 +32,9 @@ public class U_AshSanctifier extends ChargedItemWithStatus {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ash_sanctifier, ItemID.ASH_SANCTIFIER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ash_sanctifier, ItemId.ASH_SANCTIFIER, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.ASH_SANCTIFIER),
+            new TriggerItem(ItemId.ASH_SANCTIFIER),
         };
         this.triggers = new TriggerBase[]{
             // Check.

@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -29,11 +29,11 @@ public class W_ToxicStaffOfTheDead extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.toxic_staff_of_the_dead, ItemID.TOXIC_STAFF_OF_THE_DEAD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.toxic_staff_of_the_dead, ItemId.TOXIC_STAFF_OF_THE_DEAD, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.TOXIC_STAFF_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemID.TOXIC_STAFF_OF_THE_DEAD)
+            new TriggerItem(ItemId.TOXIC_STAFF_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.TOXIC_STAFF_OF_THE_DEAD)
         };
 
         this.triggers = new TriggerBase[] {

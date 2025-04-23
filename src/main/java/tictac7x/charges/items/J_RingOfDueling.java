@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -27,17 +27,17 @@ public class J_RingOfDueling extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.ring_of_dueling, ItemID.RING_OF_DUELING1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.ring_of_dueling, ItemId.RING_OF_DUELING1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.RING_OF_DUELING1).fixedCharges(1),
-            new TriggerItem(ItemID.RING_OF_DUELING2).fixedCharges(2),
-            new TriggerItem(ItemID.RING_OF_DUELING3).fixedCharges(3),
-            new TriggerItem(ItemID.RING_OF_DUELING4).fixedCharges(4),
-            new TriggerItem(ItemID.RING_OF_DUELING5).fixedCharges(5),
-            new TriggerItem(ItemID.RING_OF_DUELING6).fixedCharges(6),
-            new TriggerItem(ItemID.RING_OF_DUELING7).fixedCharges(7),
-            new TriggerItem(ItemID.RING_OF_DUELING8).fixedCharges(8),
+            new TriggerItem(ItemId.RING_OF_DUELING1).fixedCharges(1),
+            new TriggerItem(ItemId.RING_OF_DUELING2).fixedCharges(2),
+            new TriggerItem(ItemId.RING_OF_DUELING3).fixedCharges(3),
+            new TriggerItem(ItemId.RING_OF_DUELING4).fixedCharges(4),
+            new TriggerItem(ItemId.RING_OF_DUELING5).fixedCharges(5),
+            new TriggerItem(ItemId.RING_OF_DUELING6).fixedCharges(6),
+            new TriggerItem(ItemId.RING_OF_DUELING7).fixedCharges(7),
+            new TriggerItem(ItemId.RING_OF_DUELING8).fixedCharges(8),
         };
     }
 }

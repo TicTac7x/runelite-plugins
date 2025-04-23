@@ -2,7 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import net.runelite.api.ItemID;
+import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
@@ -45,17 +45,17 @@ public class U_PlankSack extends ChargedItemWithStorage {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        super(TicTac7xChargesImprovedConfig.plank_sack, ItemId.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
         storage.setMaximumTotalQuantity(28).emptyIsNegative().storableItems(
-            new StorableItem(ItemID.PLANK).checkName("Regular plank"),
-            new StorableItem(ItemID.OAK_PLANK).checkName("Oak plank"),
-            new StorableItem(ItemID.TEAK_PLANK).checkName("Teak plank"),
-            new StorableItem(ItemID.MAHOGANY_PLANK).checkName("Mahogany plank")
+            new StorableItem(ItemId.PLANK).checkName("Regular plank"),
+            new StorableItem(ItemId.OAK_PLANK).checkName("Oak plank"),
+            new StorableItem(ItemId.TEAK_PLANK).checkName("Teak plank"),
+            new StorableItem(ItemId.MAHOGANY_PLANK).checkName("Mahogany plank")
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemID.PLANK_SACK),
-            new TriggerItem(ItemID.PLANK_SACK_25629),
+            new TriggerItem(ItemId.PLANK_SACK),
+            new TriggerItem(ItemId.PLANK_SACK_25629),
         };
 
         this.triggers = new TriggerBase[]{
@@ -65,10 +65,10 @@ public class U_PlankSack extends ChargedItemWithStorage {
             // Check.
             new OnChatMessage("Basic planks: (?<regular>.+), Oak planks: (?<oak>.+), Teak planks: (?<teak>.+), Mahogany planks: (?<mahogany>.+)").matcherConsumer(m -> {
                 storage.clear();
-                storage.put(ItemID.PLANK, Integer.parseInt(m.group("regular")));
-                storage.put(ItemID.OAK_PLANK, Integer.parseInt(m.group("oak")));
-                storage.put(ItemID.TEAK_PLANK, Integer.parseInt(m.group("teak")));
-                storage.put(ItemID.MAHOGANY_PLANK, Integer.parseInt(m.group("mahogany")));
+                storage.put(ItemId.PLANK, Integer.parseInt(m.group("regular")));
+                storage.put(ItemId.OAK_PLANK, Integer.parseInt(m.group("oak")));
+                storage.put(ItemId.TEAK_PLANK, Integer.parseInt(m.group("teak")));
+                storage.put(ItemId.MAHOGANY_PLANK, Integer.parseInt(m.group("mahogany")));
             }),
 
             // Empty to inventory.
@@ -86,20 +86,20 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
-                storage.removeAndPrioritizeInventory(ItemID.MAHOGANY_PLANK, 2);
+                storage.removeAndPrioritizeInventory(ItemId.MAHOGANY_PLANK, 2);
             }).onMenuOptionId(
                 39527, 39528
             ),
 
             // Plank Make on Log in Inventory
             new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
-                "Plank Make -> Logs").addToStorage(ItemID.PLANK, 1),
+                "Plank Make -> Logs").addToStorage(ItemId.PLANK, 1),
             new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
-                "Plank Make -> Oak logs").addToStorage(ItemID.OAK_PLANK, 1),
+                "Plank Make -> Oak logs").addToStorage(ItemId.OAK_PLANK, 1),
             new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
-                "Plank Make -> Teak logs").addToStorage(ItemID.TEAK_PLANK, 1),
+                "Plank Make -> Teak logs").addToStorage(ItemId.TEAK_PLANK, 1),
             new OnXpDrop(Skill.MAGIC).onMenuOption("Cast").onMenuTarget(
-                "Plank Make -> Mahogany logs").addToStorage(ItemID.MAHOGANY_PLANK, 1),
+                "Plank Make -> Mahogany logs").addToStorage(ItemId.MAHOGANY_PLANK, 1),
 
             // Mahogany homes - 1 plank
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
@@ -245,21 +245,21 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
                 final int sawmillLogId = (int) script.getScriptEvent().getArguments()[2];
                 switch (sawmillLogId) {
-                    case ItemID.LOGS:
-                        this.sawmillLogId = Optional.of(ItemID.LOGS);
-                        this.sawmillPlankId = Optional.of(ItemID.PLANK);
+                    case ItemId.LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.PLANK);
                         break;
-                    case ItemID.OAK_LOGS:
-                        this.sawmillLogId = Optional.of(ItemID.OAK_LOGS);
-                        this.sawmillPlankId = Optional.of(ItemID.OAK_PLANK);
+                    case ItemId.OAK_LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.OAK_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.OAK_PLANK);
                         break;
-                    case ItemID.TEAK_LOGS:
-                        this.sawmillLogId = Optional.of(ItemID.TEAK_LOGS);
-                        this.sawmillPlankId = Optional.of(ItemID.TEAK_PLANK);
+                    case ItemId.TEAK_LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.TEAK_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.TEAK_PLANK);
                         break;
-                    case ItemID.MAHOGANY_LOGS:
-                        this.sawmillLogId = Optional.of(ItemID.MAHOGANY_LOGS);
-                        this.sawmillPlankId = Optional.of(ItemID.MAHOGANY_PLANK);
+                    case ItemId.MAHOGANY_LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.MAHOGANY_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.MAHOGANY_PLANK);
                         break;
                 }
             }),
@@ -268,7 +268,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
                 final int logsDifference = itemsDifference.count(sawmillLogId.get());
                 final int planksDifference = itemsDifference.count(sawmillPlankId.get());
-                final int vouchersDifference = itemsDifference.count(ItemID.SAWMILL_VOUCHER);
+                final int vouchersDifference = itemsDifference.count(ItemId.SAWMILL_VOUCHER);
 
                 storage.add(this.sawmillPlankId.get(), Math.abs(logsDifference) + Math.abs(vouchersDifference) - Math.abs(planksDifference));
 
@@ -285,16 +285,16 @@ public class U_PlankSack extends ChargedItemWithStorage {
             final int amount = Integer.parseInt(matcher.group("amount"));
             switch (type) {
                 case "Plank":
-                    homeBuildingWidgetMaterialsUsed.put(ItemID.PLANK, amount);
+                    homeBuildingWidgetMaterialsUsed.put(ItemId.PLANK, amount);
                     break;
                 case "Oak plank":
-                    homeBuildingWidgetMaterialsUsed.put(ItemID.OAK_PLANK, amount);
+                    homeBuildingWidgetMaterialsUsed.put(ItemId.OAK_PLANK, amount);
                     break;
                 case "Teak plank":
-                    homeBuildingWidgetMaterialsUsed.put(ItemID.TEAK_PLANK, amount);
+                    homeBuildingWidgetMaterialsUsed.put(ItemId.TEAK_PLANK, amount);
                     break;
                 case "Mahogany plank":
-                    homeBuildingWidgetMaterialsUsed.put(ItemID.MAHOGANY_PLANK, amount);
+                    homeBuildingWidgetMaterialsUsed.put(ItemId.MAHOGANY_PLANK, amount);
                     break;
             }
         }
@@ -309,7 +309,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
             xp >= 67 && xp <= 70 && planks == 3 ||
             xp >= 88 && xp <= 92 && planks == 4
         ) {
-            return Optional.of(ItemID.PLANK);
+            return Optional.of(ItemId.PLANK);
 
         // Oak planks
         } else if (
@@ -319,7 +319,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
             xp >= 144 && xp <= 148 && planks == 3 ||
             xp >= 192 && xp <= 198 && planks == 4
         ) {
-            return Optional.of(ItemID.OAK_PLANK);
+            return Optional.of(ItemId.OAK_PLANK);
 
         // Teak planks
         } else if (
@@ -329,7 +329,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
             xp >= 216 && xp <= 222 && planks == 3 ||
             xp >= 216 && xp <= 297 && planks == 4
         ) {
-            return Optional.of(ItemID.TEAK_PLANK);
+            return Optional.of(ItemId.TEAK_PLANK);
 
         // Mahogany planks
         } else if (
@@ -339,7 +339,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
             xp >= 336 && xp <= 345 && planks == 3 ||
             xp >= 448 && xp <= 460 && planks == 4
         ) {
-            return Optional.of(ItemID.MAHOGANY_PLANK);
+            return Optional.of(ItemId.MAHOGANY_PLANK);
         }
 
         return Optional.empty();
