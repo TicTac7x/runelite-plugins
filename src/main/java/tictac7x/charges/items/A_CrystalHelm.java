@@ -36,21 +36,21 @@ public class A_CrystalHelm extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.CRYSTAL_HELM),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27705),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27717),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27729),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27741),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27753),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27765),
-            new TriggerItem(ItemId.CRYSTAL_HELM_27777),
+            new TriggerItem(ItemId.CRYSTAL_HELM_HEFIN),
+            new TriggerItem(ItemId.CRYSTAL_HELM_ITHELL),
+            new TriggerItem(ItemId.CRYSTAL_HELM_IORWERTH),
+            new TriggerItem(ItemId.CRYSTAL_HELM_TRAHAEARN),
+            new TriggerItem(ItemId.CRYSTAL_HELM_CADARN),
+            new TriggerItem(ItemId.CRYSTAL_HELM_CRWYS),
+            new TriggerItem(ItemId.CRYSTAL_HELM_AMLODD),
             new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27707).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27719).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27731).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27743).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27755).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27767).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE_27779).fixedCharges(0)
+            new TriggerItem(ItemId.CRYSTAL_HELM_HEFIN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_ITHELL_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_IORWERTH_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_TRAHAEARN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_CADARN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_CRWYS_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_AMLODD_INACTIVE).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{

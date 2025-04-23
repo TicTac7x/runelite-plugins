@@ -34,13 +34,14 @@ public class W_IbansStaff extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.IBANS_STAFF),
-            new TriggerItem(ItemId.IBANS_STAFF_1410),
-            new TriggerItem(ItemId.IBANS_STAFF_U),
+            new TriggerItem(ItemId.IBANS_STAFF_BROKEN),
+            new TriggerItem(ItemId.IBANS_STAFF_UPGRADED),
         };
 
         this.triggers = new TriggerBase[]{
             // Check.
             new OnChatMessage("You have (?<charges>.+) charges left on the staff.").setDynamicallyCharges().onItemClick(),
+
             // Attack.
             new OnGraphicChanged(87).isEquipped().decreaseCharges(1),
         };

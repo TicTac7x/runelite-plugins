@@ -45,15 +45,15 @@ public class C_Coffin extends ChargedItemWithStorage {
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.BROKEN_COFFIN).fixedCharges(0),
             new TriggerItem(ItemId.BRONZE_COFFIN).maxCharges(3),
-            new TriggerItem(ItemId.OPEN_BRONZE_COFFIN).maxCharges(3),
+            new TriggerItem(ItemId.BRONZE_COFFIN_OPEN).maxCharges(3),
             new TriggerItem(ItemId.STEEL_COFFIN).maxCharges(8),
-            new TriggerItem(ItemId.OPEN_STEEL_COFFIN).maxCharges(8),
+            new TriggerItem(ItemId.STEEL_COFFIN_OPEN).maxCharges(8),
             new TriggerItem(ItemId.BLACK_COFFIN).maxCharges(14),
-            new TriggerItem(ItemId.OPEN_BLACK_COFFIN).maxCharges(14),
+            new TriggerItem(ItemId.BLACK_COFFIN_OPEN).maxCharges(14),
             new TriggerItem(ItemId.SILVER_COFFIN).maxCharges(20),
-            new TriggerItem(ItemId.OPEN_SILVER_COFFIN).maxCharges(20),
+            new TriggerItem(ItemId.SILVER_COFFIN_OPEN).maxCharges(20),
             new TriggerItem(ItemId.GOLD_COFFIN).maxCharges(28),
-            new TriggerItem(ItemId.OPEN_GOLD_COFFIN).maxCharges(28),
+            new TriggerItem(ItemId.GOLD_COFFIN_OPEN).maxCharges(28),
         };
 
         this.triggers = new TriggerBase[] {

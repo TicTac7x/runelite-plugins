@@ -85,12 +85,12 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             new StorableItem(ItemId.LUMBERJACK_LEGS).specificOrder(30),
             new StorableItem(ItemId.LUMBERJACK_BOOTS).specificOrder(31),
             new StorableItem(ItemId.WOODCUTTING_CAPE).specificOrder(32),
-            new StorableItem(ItemId.WOODCUT_CAPET).specificOrder(33)
+            new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED).specificOrder(33)
         );
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.FORESTRY_BASKET),
-            new TriggerItem(ItemId.OPEN_FORESTRY_BASKET),
+            new TriggerItem(ItemId.FORESTRY_BASKET_OPEN),
         };
 
         this.triggers = new TriggerBase[]{
@@ -115,7 +115,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                 storage.put(ItemId.LUMBERJACK_LEGS, storageItems.count(ItemId.LUMBERJACK_LEGS));
                 storage.put(ItemId.LUMBERJACK_BOOTS, storageItems.count(ItemId.LUMBERJACK_BOOTS));
                 storage.put(ItemId.WOODCUTTING_CAPE, storageItems.count(ItemId.WOODCUTTING_CAPE));
-                storage.put(ItemId.WOODCUT_CAPET, storageItems.count(ItemId.WOODCUT_CAPET));
+                storage.put(ItemId.WOODCUTTING_CAPE_TRIMMED, storageItems.count(ItemId.WOODCUTTING_CAPE_TRIMMED));
             }),
 
             // Get leaves while chopping wood.
@@ -197,23 +197,23 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             }),
 
             // Miscellania support.
-            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.OPEN_FORESTRY_BASKET).addToStorage(ItemId.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.FORESTRY_BASKET_OPEN).addToStorage(ItemId.MAPLE_LOGS, 0),
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
                 lastLogs = getStorageItemFromName(m.group("logs"), 1);
                 storage.add(lastLogs);
                 infernalQuantityTracker++;
-            }).requiredItem(ItemId.OPEN_FORESTRY_BASKET),
+            }).requiredItem(ItemId.FORESTRY_BASKET_OPEN),
 
             // Extra logs from nature offerings.
-            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemId.OPEN_FORESTRY_BASKET).runConsumerOnNextGameTick(() -> {
+            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemId.FORESTRY_BASKET_OPEN).runConsumerOnNextGameTick(() -> {
                 if (lastLogs.isPresent()) {
                     storage.add(lastLogs.get().getId(), 1);
                 }
             }),
 
-            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.OPEN_FORESTRY_BASKET).pickUpToStorage(),
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.FORESTRY_BASKET_OPEN).pickUpToStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
@@ -265,7 +265,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                     storage.remove(lastLogs.get().getId(), 1);
                     infernalQuantityTracker--;
                 }
-            }).requiredItem(ItemId.OPEN_FORESTRY_BASKET),
+            }).requiredItem(ItemId.FORESTRY_BASKET_OPEN),
         };
     }
 

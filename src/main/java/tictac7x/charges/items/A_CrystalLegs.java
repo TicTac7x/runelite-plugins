@@ -36,21 +36,21 @@ public class A_CrystalLegs extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.CRYSTAL_LEGS),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27701),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27713),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27725),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27737),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27749),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27761),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_27773),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_HEFIN),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_ITHELL),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_IORWERTH),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_TRAHAEARN),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_CADARN),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_CRWYS),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_AMLODD),
             new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27703).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27715).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27727).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27739).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27751).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27763).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE_27775).fixedCharges(0)
+            new TriggerItem(ItemId.CRYSTAL_LEGS_HEFIN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_ITHELL_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_IORWERTH_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_TRAHAEARN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_CADARN_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_CRWYS_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_AMLODD_INACTIVE).fixedCharges(0),
         };
 
         this.triggers = new TriggerBase[]{

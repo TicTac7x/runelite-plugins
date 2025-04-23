@@ -57,7 +57,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             new StorableItem(ItemId.LUMBERJACK_LEGS).specificOrder(17),
             new StorableItem(ItemId.LUMBERJACK_BOOTS).specificOrder(18),
             new StorableItem(ItemId.WOODCUTTING_CAPE).specificOrder(19),
-            new StorableItem(ItemId.WOODCUT_CAPET).specificOrder(20)
+            new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED).specificOrder(20)
         );
 
         this.items = new TriggerItem[]{

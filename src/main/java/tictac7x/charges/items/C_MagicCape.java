@@ -35,7 +35,7 @@ public class C_MagicCape extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.MAGIC_CAPE),
-            new TriggerItem(ItemId.MAGIC_CAPET)
+            new TriggerItem(ItemId.MAGIC_CAPE_TRIMMED)
         };
 
         this.triggers = new TriggerBase[] {

@@ -34,7 +34,7 @@ public class W_SkullSceptre extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.SKULL_SCEPTRE),
-            new TriggerItem(ItemId.SKULL_SCEPTRE_I)
+            new TriggerItem(ItemId.SKULL_SCEPTRE_IMBUED)
         };
 
         this.triggers = new TriggerBase[] {
