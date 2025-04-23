@@ -2,6 +2,8 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import tictac7x.charges.item.triggers.OnAnimationChanged;
+import tictac7x.charges.store.AnimationId;
 import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -37,6 +39,7 @@ public class J_RingOfShadows extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[] {
+            // Check.
             new OnChatMessage("Your ring of shadows has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
             // Charge.
@@ -45,7 +48,8 @@ public class J_RingOfShadows extends ChargedItem {
             // Charge.
             new OnChatMessage("You add .+ charges? to the ring of shadows. It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
-            // TODO - teleport
+            // Teleport.
+            new OnAnimationChanged(AnimationId.RING_OF_SHADOWS_TELEPORT).decreaseCharges(1),
 
             // Auto-charge.
             new OnChatMessage("The banker charges your Ring of shadows using (?<bloodrune>.+)x Blood rune.*").matcherConsumer(m -> {

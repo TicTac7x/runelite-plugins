@@ -357,7 +357,6 @@ public class Storage {
                     }
                 }
             }
-
         }
 
         return Optional.empty();

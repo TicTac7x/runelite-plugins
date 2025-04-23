@@ -31,6 +31,7 @@ import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.items.moons.*;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.VarbitId;
 
 import javax.inject.Inject;
 import java.awt.event.KeyEvent;
@@ -133,8 +134,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Barrows charges formula fixed.<br>" +
 		"<colHIGHLIGHT>* Escape crystal now uses ticks by default for more precise remaining time."
 	;
-
-	private final int VARBIT_MINUTES = 8354;
 
 	@Inject
 	private Client client;
@@ -575,7 +574,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onVarbitChanged(event));
 
 		// If server minutes are 0, it's a new day!
-		if (event.getVarbitId() == VARBIT_MINUTES && client.getGameState() == GameState.LOGGED_IN && event.getValue() == 0) {
+		if (event.getVarbitId() == VarbitId.MINUTES && client.getGameState() == GameState.LOGGED_IN && event.getValue() == 0) {
 			checkForChargesReset();
 		}
 

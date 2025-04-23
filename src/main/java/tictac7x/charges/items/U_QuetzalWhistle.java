@@ -2,6 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import tictac7x.charges.store.AnimationId;
 import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -47,7 +48,7 @@ public class U_QuetzalWhistle extends ChargedItem {
             new OnChatMessage("Your quetzal whistle has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
             // Teleport.
-            new OnAnimationChanged(10944).decreaseCharges(1),
+            new OnAnimationChanged(AnimationId.QUETZAL_WHISTLE_BIRD).decreaseCharges(1),
 
             // Teleport menu entry.
             new OnMenuEntryAdded("Signal").replaceOption("Teleport"),

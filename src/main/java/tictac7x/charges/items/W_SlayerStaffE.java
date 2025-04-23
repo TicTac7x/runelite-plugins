@@ -2,6 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import tictac7x.charges.store.AnimationId;
 import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -41,7 +42,7 @@ public class W_SlayerStaffE extends ChargedItem {
             new OnChatMessage("Your staff has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
             // Attack.
-            new OnAnimationChanged(1576).isEquipped().decreaseCharges(1),
+            new OnAnimationChanged(AnimationId.SLAYER_STAFF_CAST).isEquipped().decreaseCharges(1),
         };
     }
 }

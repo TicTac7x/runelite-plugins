@@ -2,6 +2,7 @@ package tictac7x.charges.items;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
+import tictac7x.charges.store.AnimationId;
 import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
@@ -127,7 +128,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
             new OnItemContainerChanged(ItemContainerId.CHUGGING_BARREL).updateStorage(),
 
             // Drink.
-            new OnAnimationChanged(11645).consumer(() -> {
+            new OnAnimationChanged(AnimationId.CHUGGING_BARREL_DRINK).consumer(() -> {
                 for (final StorageItem storageItem : storage.getStorage().getItems()) {
                     storage.put(storageItem.getId(), storageItem.getQuantity() - 1);
                 }
@@ -138,6 +139,9 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),
+
+            // Unify "Open" to "Configure"
+            new OnMenuEntryAdded("Open").replaceOption("Configure"),
         };
     }
 

@@ -1004,6 +1004,7 @@ public class ItemId {
     public static final int TOADFLAX_SEED = ItemID.TOADFLAX_SEED;
     public static final int IRIT_SEED = ItemID.IRIT_SEED;
     public static final int AVANTOE_SEED = ItemID.AVANTOE_SEED;
+    public static final int HUASCA_SEED = ItemID.HUASCA_SEED;
     public static final int KWUARM_SEED = ItemID.KWUARM_SEED;
     public static final int SNAPDRAGON_SEED = ItemID.SNAPDRAGON_SEED;
     public static final int CADANTINE_SEED = ItemID.CADANTINE_SEED;

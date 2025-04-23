@@ -53,6 +53,9 @@ public class J_Camulet extends ChargedItem {
 
             // Replace check.
             new OnMenuEntryAdded("Check-charge").replaceOption("Check"),
+
+            // Replace rub
+            new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
         };
     }
 }
