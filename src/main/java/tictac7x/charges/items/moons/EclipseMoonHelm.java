@@ -10,7 +10,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnCombat;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -34,8 +33,7 @@ public class EclipseMoonHelm extends _MoonItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.ECLIPSE_MOON_HELM).fixedCharges(3000),
-            new TriggerItem(ItemId.ECLIPSE_MOON_HELM_29035),
-            new TriggerItem(ItemId.ECLIPSE_MOON_HELM_29842),
+            new TriggerItem(ItemId.ECLIPSE_MOON_HELM_DEGRADED),
             new TriggerItem(ItemId.ECLIPSE_MOON_HELM_BROKEN).fixedCharges(0),
         };
 

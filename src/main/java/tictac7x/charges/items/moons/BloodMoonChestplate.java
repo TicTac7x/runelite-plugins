@@ -10,7 +10,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnCombat;
 import tictac7x.charges.item.triggers.TriggerBase;
@@ -34,8 +33,7 @@ public class BloodMoonChestplate extends _MoonItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.BLOOD_MOON_CHESTPLATE).fixedCharges(3000),
-            new TriggerItem(ItemId.BLOOD_MOON_CHESTPLATE_29043),
-            new TriggerItem(ItemId.BLOOD_MOON_CHESTPLATE_29846),
+            new TriggerItem(ItemId.BLOOD_MOON_CHESTPLATE_DEGRADED),
             new TriggerItem(ItemId.BLOOD_MOON_CHESTPLATE_BROKEN).fixedCharges(0),
         };
 
