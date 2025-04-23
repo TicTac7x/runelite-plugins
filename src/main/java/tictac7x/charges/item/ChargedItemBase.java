@@ -24,6 +24,8 @@ import tictac7x.charges.store.Store;
 import javax.annotation.Nonnull;
 import java.awt.Color;
 
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
+
 public abstract class ChargedItemBase {
     public final String configKey;
     protected final Client client;
@@ -171,7 +173,7 @@ public abstract class ChargedItemBase {
 
     protected String getChargesMinified(final int charges) {
         // Unlimited.
-        if (charges == Charges.UNLIMITED) return "∞";
+        if (charges == Charges.UNLIMITED) return INFINITE_SYMBOL;
 
         // Unknown.
         if (charges == Charges.UNKNOWN) return "?";

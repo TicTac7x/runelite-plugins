@@ -841,6 +841,10 @@ public class ItemId {
     public static final int HUNTER_CAPE_TRIMMED = ItemID.SKILLCAPE_HUNTING_TRIMMED;
     public static final int IMPLING_JAR = ItemID.II_IMPLING_JAR;
 
+    // Imp in a box
+    public static final int IMP_IN_A_BOX_1 = ItemID.MAGIC_IMP_BOX_HALF;
+    public static final int IMP_IN_A_BOX_2 = ItemID.MAGIC_IMP_BOX_FULL;
+
     // Jar generator
     public static final int JAR_GENERATOR = ItemID.II_JAR_GENERATOR;
 

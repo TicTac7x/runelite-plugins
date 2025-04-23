@@ -11,6 +11,8 @@ import tictac7x.charges.item.ChargedItemBase;
 import java.awt.Color;
 import java.util.Optional;
 
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
+
 public class ChargedItemInfobox extends InfoBox {
     private final ChargedItemBase chargedItem;
     private final ItemManager itemManager;
@@ -64,7 +66,7 @@ public class ChargedItemInfobox extends InfoBox {
         if (
             !config.showInfoboxes() ||
             !isChargedItemInfoboxEnabled() ||
-            chargedItem.getCharges(itemId).equals("∞") && !config.showUnlimited() ||
+            chargedItem.getCharges(itemId).equals(INFINITE_SYMBOL) && !config.showUnlimited() ||
             (!chargedItem.inInventory() && !chargedItem.inEquipment())
         ) {
             return false;

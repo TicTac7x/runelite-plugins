@@ -21,6 +21,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
+import net.runelite.client.util.OSType;
 import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.ChargedItemBase;
@@ -189,6 +190,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
 
 	private final ZoneId timezone = ZoneId.of("Europe/London");
+	public static final String INFINITE_SYMBOL = OSType.getOSType() == OSType.MacOS ? "inf" : "∞";
 
 	@Override
 	protected void startUp() {
@@ -289,6 +291,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_GricollersCan(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_HerbSack(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_HuntsmansKit(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new U_ImpInABox(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_JarGenerator(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_LogBasket(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new U_MasterScrollBook(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),

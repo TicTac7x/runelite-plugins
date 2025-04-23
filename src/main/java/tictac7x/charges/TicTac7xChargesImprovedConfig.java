@@ -122,6 +122,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String master_scroll_book = "master_scroll_book";
     String meat_pouch = "meat_pouch";
     String huntsmans_kit = "huntsmans_kit";
+    String imp_in_a_box = "imp_in_a_box";
     String ogre_bellows = "ogre_bellows";
     String plank_sack = "plank_sack";
     String quetzal_whistle = "quetzal_whistle";
@@ -427,6 +428,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean huntsmansKitInfobox() { return true; }
 
         @ConfigItem(
+            keyName = imp_in_a_box + infobox,
+            name = "Imp in a box",
+            description = "",
+            section = infoboxes
+        ) default boolean impInABoxInfobox() { return true; }
+
+        @ConfigItem(
             keyName = bow_of_faerdhinen + infobox,
             name = "Bow of faerdhinen",
             description = "",
@@ -579,6 +587,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean flamtaerBraceletInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = games_necklace + infobox,
+            name = "Games necklace",
+            description = "",
+            section = infoboxes
+        ) default boolean gamesNecklaceInfobox() { return true; }
 
         @ConfigItem(
             keyName = bracelet_of_slaughter + infobox,
@@ -1218,6 +1233,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean huntsmansKitOverlay() { return true; }
 
         @ConfigItem(
+            keyName = imp_in_a_box + overlay,
+            name = "Imp in a box",
+            description = "",
+            section = overlays
+        ) default boolean impInABoxOverlay() { return true; }
+
+        @ConfigItem(
             keyName = arclight + overlay,
             name = "Arclight",
             description = "",
@@ -1293,6 +1315,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean flamtaerBraceletOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = games_necklace + overlay,
+            name = "Games necklace",
+            description = "",
+            section = overlays
+        ) default boolean gamesNecklaceOverlay() { return true; }
 
         @ConfigItem(
             keyName = bracelet_of_slaughter + overlay,

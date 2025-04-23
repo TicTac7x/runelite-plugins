@@ -19,6 +19,8 @@ import tictac7x.charges.store.ItemOverlayLocation;
 import java.awt.*;
 import java.util.Optional;
 
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
+
 public class ChargedItemOverlay extends WidgetItemOverlay {
     private final Client client;
     private final TooltipManager tooltipManager;
@@ -82,7 +84,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
             !isChargedItemOverlayEnabled(chargedItem.get()) ||
 
             // Infinity charges hidden.
-            !config.showUnlimited() && chargedItem.get().getCharges(itemId).equals("∞") ||
+            !config.showUnlimited() && chargedItem.get().getCharges(itemId).equals(INFINITE_SYMBOL) ||
             !config.showUnlimited() && triggerItem.get().fixedCharges.isPresent() && triggerItem.get().fixedCharges.get().equals(Charges.UNLIMITED) ||
 
             // Hide overlays in bank.
