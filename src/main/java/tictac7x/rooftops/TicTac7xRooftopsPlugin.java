@@ -72,6 +72,7 @@ public class TicTac7xRooftopsPlugin extends Plugin {
 			new Ardougne(),
 
 			// Other.
+			new Prifddinas(),
 			new Varlamore(),
 			new ApeAtoll()
 		});

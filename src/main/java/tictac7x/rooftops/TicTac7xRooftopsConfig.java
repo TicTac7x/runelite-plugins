@@ -64,6 +64,8 @@ public interface TicTac7xRooftopsConfig extends Config {
 			section = obstacles
 		) default Color getObstacleStopColor() { return new Color(255, 0, 0, 80); }
 
+		
+
 	@ConfigSection(
 		name = "Marks of graces",
 		description = "Marks of graces",
@@ -86,4 +88,21 @@ public interface TicTac7xRooftopsConfig extends Config {
 			position = 2,
 			section = marks_of_graces
 		) default boolean showMarkOfGraceStop() { return true; }
+
+		@Alpha
+		@ConfigItem(
+			keyName = "portal_color",
+			name = "Portal color",
+			description = "Color of the portal highlights.",
+			position = 3,
+			section = marks_of_graces
+		) default Color getPortalColor() { return new Color(0, 150, 255, 80); }
+
+		@ConfigItem(
+			keyName = "show_portal_stops",
+			name = "Show portal stop obstacles",
+			description = "Show obstacles as a stop when a portal is present",
+			position = 4,
+			section = marks_of_graces
+		) default boolean showPortalStops() { return true; }
 }

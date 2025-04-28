@@ -7,6 +7,8 @@ import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import tictac7x.rooftops.course.CoursesManager;
 import tictac7x.rooftops.course.Obstacle;
+import tictac7x.rooftops.course.Portal;
+import net.runelite.api.TileObject;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -54,6 +56,15 @@ public class Overlay extends net.runelite.client.ui.overlay.Overlay {
         // Mark of graces.
         for (final Tile mark : coursesManager.getMarksOfGraces()) {
             renderShape(graphics, mark.getItemLayer().getCanvasTilePoly(), config.getMarkOfGraceColor());
+        }
+
+        // Portals
+        if (coursesManager.getCourse().isPresent()) {
+            for (final Portal portal : coursesManager.getCourse().get().portals) {
+                if (portal.getTileObject().isPresent()) {
+                    renderShape(graphics, portal.getTileObject().get().getClickbox(), config.getPortalColor());
+                }
+            }
         }
 
         return null;
