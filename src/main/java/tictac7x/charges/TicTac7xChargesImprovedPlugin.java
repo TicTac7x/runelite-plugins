@@ -47,7 +47,6 @@ import java.util.*;
 @PluginDescriptor(
 	name = "Item Charges Improved",
 	description = "Show charges of various items",
-	conflicts = "Item Charges",
 	tags = {
 		"charges",
 		"barrows",
@@ -130,7 +129,7 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.6.1";
+	private final String pluginVersion = "v0.6.2";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Games necklace added.<br>" +
