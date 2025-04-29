@@ -68,7 +68,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.STAMINA_POTION_1),
             new StorableItem(ItemId.ZAMORAK_BREW_1),
             new StorableItem(ItemId.DIVINE_MAGIC_POTION_1),
-            new StorableItem(ItemId.ANTIDOTE1_5958),
+            new StorableItem(ItemId.ANTIDOTE_PLUS_PLUS_1),
             new StorableItem(ItemId.BASTION_POTION_1),
             new StorableItem(ItemId.BATTLEMAGE_POTION_1),
             new StorableItem(ItemId.SARADOMIN_BREW_1),
@@ -113,7 +113,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.ZAMORAK_MIX_1),
             new StorableItem(ItemId.STAMINA_MIX_1),
             new StorableItem(ItemId.EXTENDED_ANTIFIRE_MIX_1),
-            new StorableItem(ItemId.ANCIENT_MIX_1),
+            new StorableItem(ItemId.ANCIENT_BREW_MIX_1),
             new StorableItem(ItemId.SUPER_ANTIFIRE_MIX_1),
             new StorableItem(ItemId.EXTENDED_SUPER_ANTIFIRE_MIX_1)
         );

@@ -27,7 +27,7 @@ import java.awt.Color;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public abstract class ChargedItemBase {
-    public final String configKey;
+    final String configKey;
     protected final Client client;
     protected final ClientThread clientThread;
     protected final ItemManager itemManager;
@@ -113,6 +113,15 @@ public abstract class ChargedItemBase {
     public abstract String getCharges(final int itemId);
 
     public abstract String getTotalCharges();
+
+    public String getConfigKey() {
+        return (
+            configKey.startsWith(TicTac7xChargesImprovedConfig.potion_) ? TicTac7xChargesImprovedConfig.potion_ :
+            configKey.startsWith(TicTac7xChargesImprovedConfig.barrows_gear_) ? TicTac7xChargesImprovedConfig.barrows_gear_ :
+            configKey.startsWith(TicTac7xChargesImprovedConfig.moons_gear_) ? TicTac7xChargesImprovedConfig.moons_gear_ :
+            configKey
+        ).replaceAll("_$", "");
+    }
 
     public boolean inInventory() {
         return inInventory;

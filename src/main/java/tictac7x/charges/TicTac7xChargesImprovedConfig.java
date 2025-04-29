@@ -14,16 +14,16 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String storage_bank = "storage_bank";
     String date = "date";
     String debug_ids = "debug_ids";
-    String infobox = "_infobox";
-    String overlay = "_overlay";
-    String storage = "_storage";
+    String _infobox = "_infobox";
+    String _overlay = "_overlay";
+    String _storage = "_storage";
 
     // Armor sets
     String crystal_body = "crystal_body";
     String crystal_helm = "crystal_helm";
     String crystal_legs = "crystal_legs";
-    String barrows_gear = "barrows_gear";
-    String moons_gear = "moons_gear";
+    String barrows_gear_ = "barrows_gear_";
+    String moons_gear_ = "moons_gear_";
 
     // Helms
     String circlet_of_water = "circlet_of_water";
@@ -39,7 +39,8 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String forestry_kit = "forestry_kit";
     String magic_cape = "magic_cape";
 
-    // Foods
+    // Potions
+    String potion_ = "potion_";
     String ruby_harvest_mix = "ruby_harvest_mix";
     String sapphire_glacialis_mix = "sapphire_glacialis_mix";
     String snowy_knight_mix = "snowy_knight_mix";
@@ -316,798 +317,763 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     ) String infoboxes = "infoboxes";
 
         @ConfigItem(
-            keyName = binding_necklace + infobox,
+            keyName = binding_necklace + _infobox,
             name = "Binding necklace",
             description = "",
             section = infoboxes
         ) default boolean bindingNecklaceInfobox() { return true; }
 
         @ConfigItem(
-            keyName = pendant_of_ates + infobox,
+            keyName = pendant_of_ates + _infobox,
             name = "Pendant of ates",
             description = "",
             section = infoboxes
         ) default boolean pendantOfAtesInfobox() { return true; }
 
         @ConfigItem(
-            keyName = digsite_pendant + infobox,
+            keyName = digsite_pendant + _infobox,
             name = "Digsite pendant",
             description = "",
             section = infoboxes
         ) default boolean digsitePendantInfobox() { return true; }
 
         @ConfigItem(
-            keyName = tumekens_shadow + infobox,
+            keyName = tumekens_shadow + _infobox,
             name = "Tumeken's shadow",
             description = "",
             section = infoboxes
         ) default boolean tumekensShadowInfobox() { return true; }
 
         @ConfigItem(
-            keyName = master_scroll_book + infobox,
+            keyName = master_scroll_book + _infobox,
             name = "Master scroll book",
             description = "",
             section = infoboxes
         ) default boolean masterScrollBookInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ruby_harvest_mix + infobox,
-            name = "Ruby harvest mix",
+            keyName = "potion" + _infobox,
+            name = "Potions",
             description = "",
             section = infoboxes
-        ) default boolean rubyHarvestMixInfobox() { return false; }
+        ) default boolean potionsInfobox() { return false; }
 
         @ConfigItem(
-            keyName = sapphire_glacialis_mix + infobox,
-            name = "Sapphire glacialis mix",
-            description = "",
-            section = infoboxes
-        ) default boolean sapphireGlacialisMixInfobox() { return false; }
-
-        @ConfigItem(
-            keyName = snowy_knight_mix + infobox,
-            name = "Snowy knight mix",
-            description = "",
-            section = infoboxes
-        ) default boolean snowyKnightMixInfobox() { return false; }
-
-        @ConfigItem(
-            keyName = black_warlock_mix + infobox,
-            name = "Black warlock mix",
-            description = "",
-            section = infoboxes
-        ) default boolean blackWarlockInfobox() { return false; }
-
-        @ConfigItem(
-            keyName = sunlight_moth_mix + infobox,
-            name = "Sunlight moth mix",
-            description = "",
-            section = infoboxes
-        ) default boolean sunlightMothMixInfobox() { return false; }
-
-        @ConfigItem(
-            keyName = moonlight_moth_mix + infobox,
-            name = "Moonlight moth mix",
-            description = "",
-            section = infoboxes
-        ) default boolean moonlightMothMixInfobox() { return false; }
-
-        @ConfigItem(
-            keyName = reagent_pouch + infobox,
+            keyName = reagent_pouch + _infobox,
             name = "Reagent pouch",
             description = "",
             section = infoboxes
         ) default boolean reagentPouchInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_dueling + infobox,
+            keyName = ring_of_dueling + _infobox,
             name = "Ring of dueling",
             description = "",
             section = infoboxes
         ) default boolean ringOfDuelingInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_forging + infobox,
+            keyName = ring_of_forging + _infobox,
             name = "Ring of forging",
             description = "",
             section = infoboxes
         ) default boolean ringOfForgingInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_pursuit + infobox,
+            keyName = ring_of_pursuit + _infobox,
             name = "Ring of pursuit",
             description = "",
             section = infoboxes
         ) default boolean ringOfPursuitInfobox() { return true; }
 
         @ConfigItem(
-            keyName = huntsmans_kit + infobox,
+            keyName = huntsmans_kit + _infobox,
             name = "Huntsman's kit",
             description = "",
             section = infoboxes
         ) default boolean huntsmansKitInfobox() { return true; }
 
         @ConfigItem(
-            keyName = imp_in_a_box + infobox,
+            keyName = imp_in_a_box + _infobox,
             name = "Imp in a box",
             description = "",
             section = infoboxes
         ) default boolean impInABoxInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bow_of_faerdhinen + infobox,
+            keyName = bow_of_faerdhinen + _infobox,
             name = "Bow of faerdhinen",
             description = "",
             section = infoboxes
         ) default boolean bowOfFaerdhinenInfobox() { return true; }
 
         @ConfigItem(
-            keyName = venator_bow + infobox,
+            keyName = venator_bow + _infobox,
             name = "Venator bow",
             description = "",
             section = infoboxes
         ) default boolean venatorBowInfobox() { return true; }
 
         @ConfigItem(
-            keyName = meat_pouch + infobox,
+            keyName = meat_pouch + _infobox,
             name = "Meat pouch",
             description = "",
             section = infoboxes
         ) default boolean meatPouchInfobox() { return true; }
 
         @ConfigItem(
-            keyName = western_banner + infobox,
+            keyName = western_banner + _infobox,
             name = "Western banner",
             description = "",
             section = infoboxes
         ) default boolean westernBannerInfobox() { return true; }
 
         @ConfigItem(
-            keyName = barrows_gear + infobox,
+            keyName = barrows_gear_ + _infobox,
             name = "Barrows set",
             description = "",
             section = infoboxes
         ) default boolean barrowsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = moons_gear + infobox,
+            keyName = moons_gear_ + _infobox,
             name = "Moons gear",
             description = "",
             section = infoboxes
         ) default boolean moonsSetInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_body + infobox,
+            keyName = crystal_body + _infobox,
             name = "Crystal body",
             description = "",
             section = infoboxes
         ) default boolean crystalBodyInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_helm + infobox,
+            keyName = crystal_helm + _infobox,
             name = "Crystal helm",
             description = "",
             section = infoboxes
         ) default boolean crystalHelmInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_legs + infobox,
+            keyName = crystal_legs + _infobox,
             name = "Crystal legs",
             description = "",
             section = infoboxes
         ) default boolean crystalLegsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = fremennik_sea_boots + infobox,
+            keyName = fremennik_sea_boots + _infobox,
             name = "Fremennik sea boots",
             description = "",
             section = infoboxes
         ) default boolean fremennikSeaBootsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ardougne_cloak + infobox,
+            keyName = ardougne_cloak + _infobox,
             name = "Ardougne cloak",
             description = "",
             section = infoboxes
         ) default boolean ardougneCloakInfobox() { return true; }
 
         @ConfigItem(
-            keyName = coffin + infobox,
+            keyName = coffin + _infobox,
             name = "Coffin",
             description = "",
             section = infoboxes
         ) default boolean coffinInfobox() { return true; }
 
         @ConfigItem(
-            keyName = forestry_basket + infobox,
+            keyName = forestry_basket + _infobox,
             name = "Forestry basket",
             description = "",
             section = infoboxes
         ) default boolean forestryBasketInfobox() { return true; }
 
         @ConfigItem(
-            keyName = forestry_kit + infobox,
+            keyName = forestry_kit + _infobox,
             name = "Forestry kit",
             description = "",
             section = infoboxes
         ) default boolean forestryKitInfobox() { return true; }
 
         @ConfigItem(
-            keyName = fur_pouch + infobox,
+            keyName = fur_pouch + _infobox,
             name = "Fur pouch",
             description = "",
             section = infoboxes
         ) default boolean furPouchInfobox() { return true; }
 
         @ConfigItem(
-            keyName = magic_cape + infobox,
+            keyName = magic_cape + _infobox,
             name = "Magic cape",
             description = "",
             section = infoboxes
         ) default boolean magicCapeInfobox() { return true; }
 
         @ConfigItem(
-            keyName = circlet_of_water + infobox,
+            keyName = circlet_of_water + _infobox,
             name = "Circlet of water",
             description = "",
             section = infoboxes
         ) default boolean circletOfWaterInfobox() { return true; }
 
         @ConfigItem(
-            keyName = chugging_barrel + infobox,
+            keyName = chugging_barrel + _infobox,
             name = "Chugging barrel",
             description = "",
             section = infoboxes
         ) default boolean chuggingBarrelInfobox() { return true; }
 
         @ConfigItem(
-            keyName = kandarin_headgear + infobox,
+            keyName = kandarin_headgear + _infobox,
             name = "Kandarin Headgear",
             description = "",
             section = infoboxes
         ) default boolean kandarinHeadgearInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_clay + infobox,
+            keyName = bracelet_of_clay + _infobox,
             name = "Bracelet of clay",
             description = "",
             section = infoboxes
         ) default boolean braceletOfClayInfobox() { return true; }
 
         @ConfigItem(
-            keyName = expeditious_bracelet + infobox,
+            keyName = expeditious_bracelet + _infobox,
             name = "Expeditious bracelet",
             description = "",
             section = infoboxes
         ) default boolean expeditiousBraceletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = flamtaer_bracelet + infobox,
+            keyName = flamtaer_bracelet + _infobox,
             name = "Flamtaer bracelet",
             description = "",
             section = infoboxes
         ) default boolean flamtaerBraceletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = games_necklace + infobox,
+            keyName = games_necklace + _infobox,
             name = "Games necklace",
             description = "",
             section = infoboxes
         ) default boolean gamesNecklaceInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_slaughter + infobox,
+            keyName = bracelet_of_slaughter + _infobox,
             name = "Bracelet of slaughter",
             description = "",
             section = infoboxes
         ) default boolean braceletOfSlaughterInfobox() { return true; }
 
         @ConfigItem(
-            keyName = camulet + infobox,
+            keyName = camulet + _infobox,
             name = "Camulet",
             description = "",
             section = infoboxes
         ) default boolean camuletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = castle_wars_bracelet + infobox,
+            keyName = castle_wars_bracelet + _infobox,
             name = "Castle wars bracelet",
             description = "",
             section = infoboxes
         ) default boolean castleWarsBraceletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = desert_amulet + infobox,
+            keyName = desert_amulet + _infobox,
             name = "Desert amulet",
             description = "",
             section = infoboxes
         ) default boolean desertAmuletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = escape_crystal + infobox,
+            keyName = escape_crystal + _infobox,
             name = "Escape crystal",
             description = "",
             section = infoboxes
         ) default boolean escapeCrystalInfobox() { return true; }
 
         @ConfigItem(
-            keyName = dodgy_necklace + infobox,
+            keyName = dodgy_necklace + _infobox,
             name = "Dodgy necklace",
             description = "",
             section = infoboxes
         ) default boolean dodgyNecklaceInfobox() { return true; }
 
         @ConfigItem(
-            keyName = necklace_of_passage + infobox,
+            keyName = necklace_of_passage + _infobox,
             name = "Necklace of passage",
             description = "",
             section = infoboxes
         ) default boolean necklaceOfPassageInfobox() { return true; }
 
         @ConfigItem(
-            keyName = phoenix_necklace + infobox,
+            keyName = phoenix_necklace + _infobox,
             name = "Phoenix necklace",
             description = "",
             section = infoboxes
         ) default boolean phoenixNecklaceInfobox() { return true; }
 
         @ConfigItem(
-            keyName = celestial_ring + infobox,
+            keyName = celestial_ring + _infobox,
             name = "Celestial ring",
             description = "",
             section = infoboxes
         ) default boolean celestialRingInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_the_elements + infobox,
+            keyName = ring_of_the_elements + _infobox,
             name = "Ring of the elements",
             description = "",
             section = infoboxes
         ) default boolean ringOfTheElementsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_endurance + infobox,
+            keyName = ring_of_endurance + _infobox,
             name = "Ring of endurance",
             description = "",
             section = infoboxes
         ) default boolean ringOfEnduranceInfobox() { return true; }
 
         @ConfigItem(
-            keyName = explorers_ring + infobox,
+            keyName = explorers_ring + _infobox,
             name = "Explorer's ring",
             description = "",
             section = infoboxes
         ) default boolean explorersRingInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_recoil + infobox,
+            keyName = ring_of_recoil + _infobox,
             name = "Ring of recoil",
             description = "",
             section = infoboxes
         ) default boolean ringOfRecoilInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_shadows + infobox,
+            keyName = ring_of_shadows + _infobox,
             name = "Ring of shadows",
             description = "",
             section = infoboxes
         ) default boolean ringOfShadowsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = slayer_ring + infobox,
+            keyName = slayer_ring + _infobox,
             name = "Slayer ring",
             description = "",
             section = infoboxes
         ) default boolean slayerRingInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_suffering + infobox,
+            keyName = ring_of_suffering + _infobox,
             name = "Ring of suffering",
             description = "",
             section = infoboxes
         ) default boolean ringOfSufferingInfobox() { return true; }
 
         @ConfigItem(
-            keyName = xerics_talisman + infobox,
+            keyName = xerics_talisman + _infobox,
             name = "Xeric's talisman",
             description = "",
             section = infoboxes
         ) default boolean xericsTalismanInfobox() { return true; }
 
         @ConfigItem(
-            keyName = chronicle + infobox,
+            keyName = chronicle + _infobox,
             name = "Chronicle",
             description = "",
             section = infoboxes
         ) default boolean chronicleInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_shield + infobox,
+            keyName = crystal_shield + _infobox,
             name = "Crystal shield",
             description = "",
             section = infoboxes
         ) default boolean crystalShieldInfobox() { return true; }
 
         @ConfigItem(
-            keyName = dragonfire_shield + infobox,
+            keyName = dragonfire_shield + _infobox,
             name = "Dragonfire shield",
             description = "",
             section = infoboxes
         ) default boolean dragonfireShieldInfobox() { return true; }
 
         @ConfigItem(
-            keyName = falador_shield + infobox,
+            keyName = falador_shield + _infobox,
             name = "Falador shield",
             description = "",
             section = infoboxes
         ) default boolean faladorShieldInfobox() { return true; }
 
         @ConfigItem(
-            keyName = kharedsts_memoirs + infobox,
+            keyName = kharedsts_memoirs + _infobox,
             name = "Kharedst's memoirs",
             description = "",
             section = infoboxes
         ) default boolean kharedstsMemoirsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = kharedsts_memoirs + infobox,
+            keyName = kharedsts_memoirs + _infobox,
             name = "Book of the dead",
             description = "",
             section = infoboxes
         ) default boolean bookOfTheDeadInfobox() { return true; }
 
         @ConfigItem(
-            keyName = tome_of_earth + infobox,
+            keyName = tome_of_earth + _infobox,
             name = "Tome of earth",
             description = "",
             section = infoboxes
         ) default boolean tomeOfEarthInfobox() { return true; }
 
         @ConfigItem(
-            keyName = tome_of_fire + infobox,
+            keyName = tome_of_fire + _infobox,
             name = "Tome of fire",
             description = "",
             section = infoboxes
         ) default boolean tomeOfFireInfobox() { return true; }
 
         @ConfigItem(
-            keyName = tome_of_water + infobox,
+            keyName = tome_of_water + _infobox,
             name = "Tome of water",
             description = "",
             section = infoboxes
         ) default boolean tomeOfWaterInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ash_sanctifier + infobox,
+            keyName = ash_sanctifier + _infobox,
             name = "Ash sanctifier",
             description = "",
             section = infoboxes
         ) default boolean ashSanctifierInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bonecrusher + infobox,
+            keyName = bonecrusher + _infobox,
             name = "Bonecrusher",
             description = "",
             section = infoboxes
         ) default boolean bonecrusherInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bottomless_compost_bucket + infobox,
+            keyName = bottomless_compost_bucket + _infobox,
             name = "Bottomless compost bucket",
             description = "",
             section = infoboxes
         ) default boolean bottomlessCompostBucketInfobox() { return true; }
 
         @ConfigItem(
-            keyName = coal_bag + infobox,
+            keyName = coal_bag + _infobox,
             name = "Coal bag",
             description = "",
             section = infoboxes
         ) default boolean coalBagInfobox() { return true; }
 
         @ConfigItem(
-            keyName = colossal_pouch + infobox,
+            keyName = colossal_pouch + _infobox,
             name = "Colossal pouch",
             description = "",
             section = infoboxes
         ) default boolean colossalPouchInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_saw + infobox,
+            keyName = crystal_saw + _infobox,
             name = "Crystal saw",
             description = "",
             section = infoboxes
         ) default boolean crystalSawInfobox() { return true; }
 
         @ConfigItem(
-            keyName = fish_barrel + infobox,
+            keyName = fish_barrel + _infobox,
             name = "Fish barrel",
             description = "",
             section = infoboxes
         ) default boolean fishBarrelInfobox() { return true; }
 
         @ConfigItem(
-            keyName = flamtaer_bag + infobox,
+            keyName = flamtaer_bag + _infobox,
             name = "Flamtaer bag",
             description = "",
             section = infoboxes
         ) default boolean flamtaerBagInfobox() { return true; }
 
         @ConfigItem(
-            keyName = fungicide_spray + infobox,
+            keyName = fungicide_spray + _infobox,
             name = "Fungicide spray",
             description = "",
             section = infoboxes
         ) default boolean fungicideSprayInfobox() { return true; }
 
         @ConfigItem(
-            keyName = gem_bag + infobox,
+            keyName = gem_bag + _infobox,
             name = "Gem bag",
             description = "",
             section = infoboxes
         ) default boolean gemBagInfobox() { return true; }
 
         @ConfigItem(
-            keyName = giantsoul_amulet + infobox,
+            keyName = giantsoul_amulet + _infobox,
             name = "Giantsoul amulet",
             description = "",
             section = infoboxes
         ) default boolean giantsoulAmuletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = gricollers_can + infobox,
+            keyName = gricollers_can + _infobox,
             name = "Gricoller's can",
             description = "",
             section = infoboxes
         ) default boolean gricollersCanInfobox() { return true; }
 
         @ConfigItem(
-            keyName = herb_sack + infobox,
+            keyName = herb_sack + _infobox,
             name = "Herb sack",
             description = "",
             section = infoboxes
         ) default boolean herbSackInfobox() { return true; }
 
         @ConfigItem(
-            keyName = jar_generator + infobox,
+            keyName = jar_generator + _infobox,
             name = "Jar generator",
             description = "",
             section = infoboxes
         ) default boolean jarGeneratorInfobox() { return true; }
 
         @ConfigItem(
-            keyName = log_basket + infobox,
+            keyName = log_basket + _infobox,
             name = "Log basket",
             description = "",
             section = infoboxes
         ) default boolean logBasketInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ogre_bellows + infobox,
+            keyName = ogre_bellows + _infobox,
             name = "Ogre bellows",
             description = "",
             section = infoboxes
         ) default boolean ogreBellowsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = plank_sack + infobox,
+            keyName = plank_sack + _infobox,
             name = "Plank sack",
             description = "",
             section = infoboxes
         ) default boolean plankSackInfobox() { return true; }
 
         @ConfigItem(
-            keyName = quetzal_whistle + infobox,
+            keyName = quetzal_whistle + _infobox,
             name = "Quetzal whistle",
             description = "",
             section = infoboxes
         ) default boolean quetzalWhistleInfobox() { return true; }
 
         @ConfigItem(
-            keyName = seed_box + infobox,
+            keyName = seed_box + _infobox,
             name = "Seed box",
             description = "",
             section = infoboxes
         ) default boolean seedBoxInfobox() { return true; }
 
         @ConfigItem(
-            keyName = skills_necklace + infobox,
+            keyName = skills_necklace + _infobox,
             name = "Skills necklace",
             description = "",
             section = infoboxes
         ) default boolean skillsNecklaceInfobox() { return true; }
 
         @ConfigItem(
-            keyName = soul_bearer + infobox,
+            keyName = soul_bearer + _infobox,
             name = "Soul bearer",
             description = "",
             section = infoboxes
         ) default boolean soulBearerInfobox() { return true; }
 
         @ConfigItem(
-            keyName = strange_old_lockpick + infobox,
+            keyName = strange_old_lockpick + _infobox,
             name = "Strange old lockpick",
             description = "",
             section = infoboxes
         ) default boolean strangeOldLockpickInfobox() { return true; }
 
         @ConfigItem(
-            keyName = tackle_box + infobox,
+            keyName = tackle_box + _infobox,
             name = "Tackle box",
             description = "",
             section = infoboxes
         ) default boolean tackleBoxInfobox() { return true; }
 
         @ConfigItem(
-            keyName = teleport_crystal + infobox,
+            keyName = teleport_crystal + _infobox,
             name = "Teleport crystal",
             description = "",
             section = infoboxes
         ) default boolean teleportCrystalInfobox() { return true; }
 
         @ConfigItem(
-            keyName = eternal_teleport_crystal + infobox,
+            keyName = eternal_teleport_crystal + _infobox,
             name = "Eternal teleport crystal",
             description = "",
             section = infoboxes
         ) default boolean eternalTeleportCrystalInfobox() { return true; }
 
         @ConfigItem(
-            keyName = waterskin + infobox,
+            keyName = waterskin + _infobox,
             name = "Waterskin",
             description = "",
             section = infoboxes
         ) default boolean waterskinInfobox() { return true; }
 
         @ConfigItem(
-            keyName = arclight + infobox,
+            keyName = arclight + _infobox,
             name = "Arclight",
             description = "",
             section = infoboxes
         ) default boolean arclightInfobox() { return true; }
 
         @ConfigItem(
-            keyName = bryophytas_staff + infobox,
+            keyName = bryophytas_staff + _infobox,
             name = "Bryophyta's staff",
             description = "",
             section = infoboxes
         ) default boolean bryophytasStaffInfobox() { return true; }
 
         @ConfigItem(
-            keyName = burning_amulet + infobox,
+            keyName = burning_amulet + _infobox,
             name = "Burning amulet",
             description = "",
             section = infoboxes
         ) default boolean burninAmuletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_bow + infobox,
+            keyName = crystal_bow + _infobox,
             name = "Crystal bow",
             description = "",
             section = infoboxes
         ) default boolean crystalBowInfobox() { return true; }
 
         @ConfigItem(
-            keyName = crystal_halberd + infobox,
+            keyName = crystal_halberd + _infobox,
             name = "Crystal halberd",
             description = "",
             section = infoboxes
         ) default boolean crystalHalberdInfobox() { return true; }
 
         @ConfigItem(
-            keyName = efaritays_aid + infobox,
+            keyName = efaritays_aid + _infobox,
             name = "Efaritay's aid",
             description = "",
             section = infoboxes
         ) default boolean efaritaysAidInfobox() { return true; }
 
         @ConfigItem(
-            keyName = enchanted_lyre + infobox,
+            keyName = enchanted_lyre + _infobox,
             name = "Enchanted Lyre",
             description = "",
             section = infoboxes
         ) default boolean enchantedLyreInfobox() { return true; }
 
         @ConfigItem(
-            keyName = ibans_staff + infobox,
+            keyName = ibans_staff + _infobox,
             name = "Iban's staff",
             description = "",
             section = infoboxes
         ) default boolean ibansStaffInfobox() { return true; }
 
         @ConfigItem(
-            keyName = pharaohs_sceptre + infobox,
+            keyName = pharaohs_sceptre + _infobox,
             name = "Pharaoh's sceptre",
             description = "",
             section = infoboxes
         ) default boolean pharaohsSceptreInfobox() { return true; }
 
         @ConfigItem(
-            keyName = sanguinesti_staff + infobox,
+            keyName = sanguinesti_staff + _infobox,
             name = "Sanguinesti staff",
             description = "",
             section = infoboxes
         ) default boolean sanguinestiStaffInfobox() { return true; }
 
         @ConfigItem(
-            keyName = scythe_of_vitur + infobox,
+            keyName = scythe_of_vitur + _infobox,
             name = "Scythe of Vitur",
             description = "",
             section = infoboxes
         ) default boolean scytheOfViturInfobox() { return true; }
 
         @ConfigItem(
-            keyName = skull_sceptre + infobox,
+            keyName = skull_sceptre + _infobox,
             name = "Skull sceptre",
             description = "",
             section = infoboxes
         ) default boolean skullSceptreInfobox() { return true; }
 
         @ConfigItem(
-            keyName = slayer_staff_e + infobox,
+            keyName = slayer_staff_e + _infobox,
             name = "Slayer staff (e)",
             description = "",
             section = infoboxes
         ) default boolean slayerStaffEInfobox() { return true; }
 
         @ConfigItem(
-            keyName = toxic_staff_of_the_dead + infobox,
+            keyName = toxic_staff_of_the_dead + _infobox,
             name = "Toxic staff of the dead",
             description = "",
             section = infoboxes
         ) default boolean toxicStaffOfTheDeadInfobox() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_seas + infobox,
+            keyName = trident_of_the_seas + _infobox,
             name = "Trident of the seas",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSeasInfobox() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_seas_e + infobox,
+            keyName = trident_of_the_seas_e + _infobox,
             name = "Trident of the seas (e)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSeasEInfobox() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_swamp + infobox,
+            keyName = trident_of_the_swamp + _infobox,
             name = "Trident of the swamp",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampInfobox() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_swamp_e + infobox,
+            keyName = trident_of_the_swamp_e + _infobox,
             name = "Trident of the swamp (e)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampEInfobox() { return true; }
 
         @ConfigItem(
-            keyName = warped_sceptre + infobox,
+            keyName = warped_sceptre + _infobox,
             name = "Warped sceptre",
             description = "",
             section = infoboxes
         ) default boolean warpedSceptreInfobox() { return true; }
 
         @ConfigItem(
-            keyName = alchemists_amulet + infobox,
+            keyName = alchemists_amulet + _infobox,
             name = "Alchemist's amulet",
             description = "",
             section = infoboxes
         ) default boolean alchemistsAmuletInfobox() { return true; }
 
         @ConfigItem(
-            keyName = amulet_of_blood_fury + infobox,
+            keyName = amulet_of_blood_fury + _infobox,
             name = "Amulet of blood fury",
             description = "",
             section = infoboxes
         ) default boolean amuletOfBloodFuryInfobox() { return true; }
 
         @ConfigItem(
-            keyName = amulet_of_chemistry + infobox,
+            keyName = amulet_of_chemistry + _infobox,
             name = "Amulet of chemistry",
             description = "",
             section = infoboxes
@@ -1121,798 +1087,763 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     ) String overlays = "overlays";
 
         @ConfigItem(
-            keyName = binding_necklace + overlay,
+            keyName = binding_necklace + _overlay,
             name = "Binding necklace",
             description = "",
             section = overlays
         ) default boolean bindingNecklaceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = pendant_of_ates + overlay,
+            keyName = pendant_of_ates + _overlay,
             name = "Pendant of ates",
             description = "",
             section = overlays
         ) default boolean pendantOfAtesOverlay() { return true; }
 
         @ConfigItem(
-            keyName = digsite_pendant + overlay,
+            keyName = digsite_pendant + _overlay,
             name = "Digsite pendant",
             description = "",
             section = overlays
         ) default boolean digsitePendantOverlay() { return true; }
 
         @ConfigItem(
-            keyName = tumekens_shadow + overlay,
+            keyName = tumekens_shadow + _overlay,
             name = "Tumeken's shadow",
             description = "",
             section = overlays
         ) default boolean tumekensShadowOverlay() { return true; }
 
         @ConfigItem(
-            keyName = master_scroll_book + overlay,
+            keyName = master_scroll_book + _overlay,
             name = "Master scroll book",
             description = "",
             section = overlays
         ) default boolean masterScrollBookOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ruby_harvest_mix + overlay,
-            name = "Ruby harvest mix",
+            keyName = "potion" + _overlay,
+            name = "Potions",
             description = "",
             section = overlays
-        ) default boolean rubyHarvestMixOverlay() { return true; }
+        ) default boolean potionsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = sapphire_glacialis_mix + overlay,
-            name = "Sapphire glacialis mix",
-            description = "",
-            section = overlays
-        ) default boolean sapphireGlacialisMixOverlay() { return true; }
-
-        @ConfigItem(
-            keyName = snowy_knight_mix + overlay,
-            name = "Snowy knight mix",
-            description = "",
-            section = overlays
-        ) default boolean snowyKnightMixOverlay() { return true; }
-
-        @ConfigItem(
-            keyName = black_warlock_mix + overlay,
-            name = "Black warlock mix",
-            description = "",
-            section = overlays
-        ) default boolean blackWarlockOverlay() { return true; }
-
-        @ConfigItem(
-            keyName = sunlight_moth_mix + overlay,
-            name = "Sunlight moth mix",
-            description = "",
-            section = overlays
-        ) default boolean sunlightMothMixOverlay() { return true; }
-
-        @ConfigItem(
-            keyName = moonlight_moth_mix + overlay,
-            name = "Moonlight moth mix",
-            description = "",
-            section = overlays
-        ) default boolean moonlightMothMixOverlay() { return true; }
-
-        @ConfigItem(
-            keyName = reagent_pouch + overlay,
+            keyName = reagent_pouch + _overlay,
             name = "Reagent pouch",
             description = "",
             section = overlays
         ) default boolean reagentPouchOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_dueling + overlay,
+            keyName = ring_of_dueling + _overlay,
             name = "Ring of dueling",
             description = "",
             section = overlays
         ) default boolean ringOfDuelingOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_forging + overlay,
+            keyName = ring_of_forging + _overlay,
             name = "Ring of forging",
             description = "",
             section = overlays
         ) default boolean ringOfForgingOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_pursuit + overlay,
+            keyName = ring_of_pursuit + _overlay,
             name = "Ring of pursuit",
             description = "",
             section = overlays
         ) default boolean ringOfPursuitOverlay() { return true; }
 
         @ConfigItem(
-            keyName = huntsmans_kit + overlay,
+            keyName = huntsmans_kit + _overlay,
             name = "Huntsman's kit",
             description = "",
             section = overlays
         ) default boolean huntsmansKitOverlay() { return true; }
 
         @ConfigItem(
-            keyName = imp_in_a_box + overlay,
+            keyName = imp_in_a_box + _overlay,
             name = "Imp in a box",
             description = "",
             section = overlays
         ) default boolean impInABoxOverlay() { return true; }
 
         @ConfigItem(
-            keyName = arclight + overlay,
+            keyName = arclight + _overlay,
             name = "Arclight",
             description = "",
             section = overlays
         ) default boolean arclightOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ardougne_cloak + overlay,
+            keyName = ardougne_cloak + _overlay,
             name = "Ardougne cloak",
             description = "",
             section = overlays
         ) default boolean ardougneCloakOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ash_sanctifier + overlay,
+            keyName = ash_sanctifier + _overlay,
             name = "Ash sanctifier",
             description = "",
             section = overlays
         ) default boolean ashSanctifierOverlay() { return true; }
 
         @ConfigItem(
-            keyName = barrows_gear + overlay,
+            keyName = barrows_gear_ + _overlay,
             name = "Barrows set",
             description = "",
             section = overlays
         ) default boolean barrowsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = moons_gear + overlay,
+            keyName = moons_gear_ + _overlay,
             name = "Moons gear",
             description = "",
             section = overlays
         ) default boolean moonsGearOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bonecrusher + overlay,
+            keyName = bonecrusher + _overlay,
             name = "Bonecrusher",
             description = "",
             section = overlays
         ) default boolean bonecrusherOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bottomless_compost_bucket + overlay,
+            keyName = bottomless_compost_bucket + _overlay,
             name = "Bottomless compost bucket",
             description = "",
             section = overlays
         ) default boolean bottomlessCompostBucketOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bow_of_faerdhinen + overlay,
+            keyName = bow_of_faerdhinen + _overlay,
             name = "Bow of faerdhinen",
             description = "",
             section = overlays
         ) default boolean bowOfFaerdhinenOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_clay + overlay,
+            keyName = bracelet_of_clay + _overlay,
             name = "Bracelet of clay",
             description = "",
             section = overlays
         ) default boolean braceletOfClayOverlay() { return true; }
 
         @ConfigItem(
-            keyName = expeditious_bracelet + overlay,
+            keyName = expeditious_bracelet + _overlay,
             name = "Expeditious bracelet",
             description = "",
             section = overlays
         ) default boolean expeditiousBraceletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = flamtaer_bracelet + overlay,
+            keyName = flamtaer_bracelet + _overlay,
             name = "Flamtaer bracelet",
             description = "",
             section = overlays
         ) default boolean flamtaerBraceletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = games_necklace + overlay,
+            keyName = games_necklace + _overlay,
             name = "Games necklace",
             description = "",
             section = overlays
         ) default boolean gamesNecklaceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bracelet_of_slaughter + overlay,
+            keyName = bracelet_of_slaughter + _overlay,
             name = "Bracelet of slaughter",
             description = "",
             section = overlays
         ) default boolean braceletOfSlaughterOverlay() { return true; }
 
         @ConfigItem(
-            keyName = camulet + overlay,
+            keyName = camulet + _overlay,
             name = "Camulet",
             description = "",
             section = overlays
         ) default boolean camuletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = castle_wars_bracelet + overlay,
+            keyName = castle_wars_bracelet + _overlay,
             name = "Castle wars bracelet",
             description = "",
             section = overlays
         ) default boolean castleWarsBraceletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = celestial_ring + overlay,
+            keyName = celestial_ring + _overlay,
             name = "Celestial ring",
             description = "",
             section = overlays
         ) default boolean celestialRingOverlay() { return true; }
 
         @ConfigItem(
-            keyName = chronicle + overlay,
+            keyName = chronicle + _overlay,
             name = "Chronicle",
             description = "",
             section = overlays
         ) default boolean chronicleOverlay() { return true; }
 
         @ConfigItem(
-            keyName = circlet_of_water + overlay,
+            keyName = circlet_of_water + _overlay,
             name = "Circlet of water",
             description = "",
             section = overlays
         ) default boolean circletOfWaterOverlay() { return true; }
 
         @ConfigItem(
-            keyName = chugging_barrel + overlay,
+            keyName = chugging_barrel + _overlay,
             name = "Chugging barrel",
             description = "",
             section = overlays
         ) default boolean chuggingBarrelOverlay() { return true; }
 
         @ConfigItem(
-            keyName = coal_bag + overlay,
+            keyName = coal_bag + _overlay,
             name = "Coal bag",
             description = "",
             section = overlays
         ) default boolean coalBagOverlay() { return true; }
 
         @ConfigItem(
-            keyName = colossal_pouch + overlay,
+            keyName = colossal_pouch + _overlay,
             name = "Colossal pouch",
             description = "",
             section = overlays
         ) default boolean colossalPouchOverlay() { return true; }
 
         @ConfigItem(
-            keyName = coffin + overlay,
+            keyName = coffin + _overlay,
             name = "Coffin",
             description = "",
             section = overlays
         ) default boolean coffinOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_body + overlay,
+            keyName = crystal_body + _overlay,
             name = "Crystal body",
             description = "",
             section = overlays
         ) default boolean crystalBodyOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_helm + overlay,
+            keyName = crystal_helm + _overlay,
             name = "Crystal helm",
             description = "",
             section = overlays
         ) default boolean crystalHelmOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_legs + overlay,
+            keyName = crystal_legs + _overlay,
             name = "Crystal legs",
             description = "",
             section = overlays
         ) default boolean crystalLegsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_saw + overlay,
+            keyName = crystal_saw + _overlay,
             name = "Crystal saw",
             description = "",
             section = overlays
         ) default boolean crystalSawOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_shield + overlay,
+            keyName = crystal_shield + _overlay,
             name = "Crystal shield",
             description = "",
             section = overlays
         ) default boolean crystalShieldOverlay() { return true; }
 
         @ConfigItem(
-            keyName = desert_amulet + overlay,
+            keyName = desert_amulet + _overlay,
             name = "Desert amulet",
             description = "",
             section = overlays
         ) default boolean desertAmuletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = dragonfire_shield + overlay,
+            keyName = dragonfire_shield + _overlay,
             name = "Dragonfire shield",
             description = "",
             section = overlays
         ) default boolean dragonfireShieldOverlay() { return true; }
 
         @ConfigItem(
-            keyName = falador_shield + overlay,
+            keyName = falador_shield + _overlay,
             name = "Falador shield",
             description = "",
             section = overlays
         ) default boolean faladorShieldOverlay() { return true; }
 
         @ConfigItem(
-            keyName = fur_pouch + overlay,
+            keyName = fur_pouch + _overlay,
             name = "Fur pouch",
             description = "",
             section = overlays
         ) default boolean furPouchOverlay() { return true; }
 
         @ConfigItem(
-            keyName = escape_crystal + overlay,
+            keyName = escape_crystal + _overlay,
             name = "Escape crystal",
             description = "",
             section = overlays
         ) default boolean escapeCrystalOverlay() { return true; }
 
         @ConfigItem(
-            keyName = explorers_ring + overlay,
+            keyName = explorers_ring + _overlay,
             name = "Explorer's ring",
             description = "",
             section = overlays
         ) default boolean explorersRingOverlay() { return true; }
 
         @ConfigItem(
-            keyName = dodgy_necklace + overlay,
+            keyName = dodgy_necklace + _overlay,
             name = "Dodgy necklace",
             description = "",
             section = overlays
         ) default boolean dodgyNecklaceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = fish_barrel + overlay,
+            keyName = fish_barrel + _overlay,
             name = "Fish barrel",
             description = "",
             section = overlays
         ) default boolean fishBarrelOverlay() { return true; }
 
         @ConfigItem(
-            keyName = flamtaer_bag + overlay,
+            keyName = flamtaer_bag + _overlay,
             name = "Flamtaer bag",
             description = "",
             section = overlays
         ) default boolean flamtaerBagOverlay() { return true; }
 
         @ConfigItem(
-            keyName = forestry_basket + overlay,
+            keyName = forestry_basket + _overlay,
             name = "Forestry basket",
             description = "",
             section = overlays
         ) default boolean forestryBasketOverlay() { return true; }
 
         @ConfigItem(
-            keyName = forestry_kit + overlay,
+            keyName = forestry_kit + _overlay,
             name = "Forestry kit",
             description = "",
             section = overlays
         ) default boolean forestryKitOverlay() { return true; }
 
         @ConfigItem(
-            keyName = fremennik_sea_boots + overlay,
+            keyName = fremennik_sea_boots + _overlay,
             name = "Fremennik sea boots",
             description = "",
             section = overlays
         ) default boolean fremennikSeaBootsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = fungicide_spray + overlay,
+            keyName = fungicide_spray + _overlay,
             name = "Fungicide spray",
             description = "",
             section = overlays
         ) default boolean fungicideSprayOverlay() { return true; }
 
         @ConfigItem(
-            keyName = gem_bag + overlay,
+            keyName = gem_bag + _overlay,
             name = "Gem bag",
             description = "",
             section = overlays
         ) default boolean gemBagOverlay() { return true; }
 
         @ConfigItem(
-            keyName = giantsoul_amulet + overlay,
+            keyName = giantsoul_amulet + _overlay,
             name = "Giantsoul amulet",
             description = "",
             section = overlays
         ) default boolean giantsoulAmuletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = gricollers_can + overlay,
+            keyName = gricollers_can + _overlay,
             name = "Gricoller's can",
             description = "",
             section = overlays
         ) default boolean gricollersCanOverlay() { return true; }
 
         @ConfigItem(
-            keyName = herb_sack + overlay,
+            keyName = herb_sack + _overlay,
             name = "Herb sack",
             description = "",
             section = overlays
         ) default boolean herbSackOverlay() { return true; }
 
         @ConfigItem(
-            keyName = jar_generator + overlay,
+            keyName = jar_generator + _overlay,
             name = "Jar generator",
             description = "",
             section = overlays
         ) default boolean jarGeneratorOverlay() { return true; }
 
         @ConfigItem(
-            keyName = kandarin_headgear + overlay,
+            keyName = kandarin_headgear + _overlay,
             name = "Kandarin Headgear",
             description = "",
             section = overlays
         ) default boolean kandarinHeadgearOverlay() { return true; }
 
         @ConfigItem(
-            keyName = kharedsts_memoirs + overlay,
+            keyName = kharedsts_memoirs + _overlay,
             name = "Kharedst's memoirs",
             description = "",
             section = overlays
         ) default boolean kharedstsMemoirsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = kharedsts_memoirs + overlay,
+            keyName = kharedsts_memoirs + _overlay,
             name = "Book of the dead",
             description = "",
             section = overlays
         ) default boolean bookOfTheDeadOverlay() { return true; }
 
         @ConfigItem(
-            keyName = log_basket + overlay,
+            keyName = log_basket + _overlay,
             name = "Log basket",
             description = "",
             section = overlays
         ) default boolean logBasketOverlay() { return true; }
 
         @ConfigItem(
-            keyName = magic_cape + overlay,
+            keyName = magic_cape + _overlay,
             name = "Magic cape",
             description = "",
             section = overlays
         ) default boolean magicCapeOverlay() { return true; }
 
         @ConfigItem(
-            keyName = meat_pouch + overlay,
+            keyName = meat_pouch + _overlay,
             name = "Meat pouch",
             description = "",
             section = overlays
         ) default boolean meatPouchOverlay() { return true; }
 
         @ConfigItem(
-            keyName = necklace_of_passage + overlay,
+            keyName = necklace_of_passage + _overlay,
             name = "Necklace of passage",
             description = "",
             section = overlays
         ) default boolean necklaceOfPassageOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ogre_bellows + overlay,
+            keyName = ogre_bellows + _overlay,
             name = "Ogre bellows",
             description = "",
             section = overlays
         ) default boolean ogreBellowsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = phoenix_necklace + overlay,
+            keyName = phoenix_necklace + _overlay,
             name = "Phoenix necklace",
             description = "",
             section = overlays
         ) default boolean phoenixNecklaceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = plank_sack + overlay,
+            keyName = plank_sack + _overlay,
             name = "Plank sack",
             description = "",
             section = overlays
         ) default boolean plankSackOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_recoil + overlay,
+            keyName = ring_of_recoil + _overlay,
             name = "Ring of recoil",
             description = "",
             section = overlays
         ) default boolean ringOfRecoilOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_shadows + overlay,
+            keyName = ring_of_shadows + _overlay,
             name = "Ring of shadows",
             description = "",
             section = overlays
         ) default boolean ringOfShadowsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_suffering + overlay,
+            keyName = ring_of_suffering + _overlay,
             name = "Ring of suffering",
             description = "",
             section = overlays
         ) default boolean ringOfSufferingOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_the_elements + overlay,
+            keyName = ring_of_the_elements + _overlay,
             name = "Ring of the elements",
             description = "",
             section = overlays
         ) default boolean ringOfTheElementsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ring_of_endurance + overlay,
+            keyName = ring_of_endurance + _overlay,
             name = "Ring of endurance",
             description = "",
             section = overlays
         ) default boolean ringOfEnduranceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = seed_box + overlay,
+            keyName = seed_box + _overlay,
             name = "Seed box",
             description = "",
             section = overlays
         ) default boolean seedBoxOverlay() { return true; }
 
         @ConfigItem(
-            keyName = skills_necklace + overlay,
+            keyName = skills_necklace + _overlay,
             name = "Skills necklace",
             description = "",
             section = overlays
         ) default boolean skillsNecklaceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = slayer_ring + overlay,
+            keyName = slayer_ring + _overlay,
             name = "Slayer ring",
             description = "",
             section = overlays
         ) default boolean slayerRingOverlay() { return true; }
 
         @ConfigItem(
-            keyName = soul_bearer + overlay,
+            keyName = soul_bearer + _overlay,
             name = "Soul bearer",
             description = "",
             section = overlays
         ) default boolean soulBearerOverlay() { return true; }
 
         @ConfigItem(
-            keyName = strange_old_lockpick + overlay,
+            keyName = strange_old_lockpick + _overlay,
             name = "Strange old lockpick",
             description = "",
             section = overlays
         ) default boolean strangeOldLockpickOverlay() { return true; }
 
         @ConfigItem(
-            keyName = tackle_box + overlay,
+            keyName = tackle_box + _overlay,
             name = "Tackle box",
             description = "",
             section = overlays
         ) default boolean tackleBoxOverlay() { return true; }
 
         @ConfigItem(
-            keyName = teleport_crystal + overlay,
+            keyName = teleport_crystal + _overlay,
             name = "Teleport crystal",
             description = "",
             section = overlays
         ) default boolean teleportCrystalOverlay() { return true; }
 
         @ConfigItem(
-            keyName = eternal_teleport_crystal + overlay,
+            keyName = eternal_teleport_crystal + _overlay,
             name = "Eternal teleport crystal",
             description = "",
             section = overlays
         ) default boolean eternalTeleportCrystalOverlay() { return true; }
 
         @ConfigItem(
-            keyName = tome_of_earth + overlay,
+            keyName = tome_of_earth + _overlay,
             name = "Tome of earth",
             description = "",
             section = overlays
         ) default boolean tomeOfEarthOverlay() { return true; }
 
         @ConfigItem(
-            keyName = tome_of_fire + overlay,
+            keyName = tome_of_fire + _overlay,
             name = "Tome of fire",
             description = "",
             section = overlays
         ) default boolean tomeOfFireOverlay() { return true; }
 
         @ConfigItem(
-            keyName = tome_of_water + overlay,
+            keyName = tome_of_water + _overlay,
             name = "Tome of water",
             description = "",
             section = overlays
         ) default boolean tomeOfWaterOverlay() { return true; }
 
         @ConfigItem(
-            keyName = venator_bow + overlay,
+            keyName = venator_bow + _overlay,
             name = "Venator bow",
             description = "",
             section = overlays
         ) default boolean venatorBowOverlay() { return true; }
 
         @ConfigItem(
-            keyName = waterskin + overlay,
+            keyName = waterskin + _overlay,
             name = "Waterskin",
             description = "",
             section = overlays
         ) default boolean waterskinOverlay() { return true; }
 
         @ConfigItem(
-            keyName = western_banner + overlay,
+            keyName = western_banner + _overlay,
             name = "Western banner",
             description = "",
             section = overlays
         ) default boolean westernBannerOverlay() { return true; }
 
         @ConfigItem(
-            keyName = bryophytas_staff + overlay,
+            keyName = bryophytas_staff + _overlay,
             name = "Bryophyta's staff",
             description = "",
             section = overlays
         ) default boolean bryophytasStaffOverlay() { return true; }
 
         @ConfigItem(
-            keyName = burning_amulet + overlay,
+            keyName = burning_amulet + _overlay,
             name = "Burning amulet",
             description = "",
             section = overlays
         ) default boolean burningAmuletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_bow + overlay,
+            keyName = crystal_bow + _overlay,
             name = "Crystal bow",
             description = "",
             section = overlays
         ) default boolean crystalBowOverlay() { return true; }
 
         @ConfigItem(
-            keyName = crystal_halberd + overlay,
+            keyName = crystal_halberd + _overlay,
             name = "Crystal halberd",
             description = "",
             section = overlays
         ) default boolean crystalHalberdOverlay() { return true; }
 
         @ConfigItem(
-            keyName = efaritays_aid + overlay,
+            keyName = efaritays_aid + _overlay,
             name = "Efaritay's aid",
             description = "",
             section = overlays
         ) default boolean efaritaysAidOverlay() { return true; }
 
         @ConfigItem(
-            keyName = enchanted_lyre + overlay,
+            keyName = enchanted_lyre + _overlay,
             name = "Enchanted Lyre",
             description = "",
             section = overlays
         ) default boolean enchantedLyreOverlay() { return true; }
 
         @ConfigItem(
-            keyName = ibans_staff + overlay,
+            keyName = ibans_staff + _overlay,
             name = "Iban's staff",
             description = "",
             section = overlays
         ) default boolean ibansStaffOverlay() { return true; }
 
         @ConfigItem(
-            keyName = pharaohs_sceptre + overlay,
+            keyName = pharaohs_sceptre + _overlay,
             name = "Pharaoh's sceptre",
             description = "",
             section = overlays
         ) default boolean pharaohsSceptreOverlay() { return true; }
 
         @ConfigItem(
-            keyName = quetzal_whistle + overlay,
+            keyName = quetzal_whistle + _overlay,
             name = "Quetzal whistle",
             description = "",
             section = overlays
         ) default boolean quetzalWhistleOverlay() { return true; }
 
         @ConfigItem(
-            keyName = sanguinesti_staff + overlay,
+            keyName = sanguinesti_staff + _overlay,
             name = "Sanguinesti staff",
             description = "",
             section = overlays
         ) default boolean sanguinestiStaffOverlay() { return true; }
 
         @ConfigItem(
-            keyName = scythe_of_vitur + overlay,
+            keyName = scythe_of_vitur + _overlay,
             name = "Scythe of Vitur",
             description = "",
             section = overlays
         ) default boolean scytheOfViturOverlay() { return true; }
 
         @ConfigItem(
-            keyName = skull_sceptre + overlay,
+            keyName = skull_sceptre + _overlay,
             name = "Skull sceptre",
             description = "",
             section = overlays
         ) default boolean skullSceptreOverlay() { return true; }
 
         @ConfigItem(
-            keyName = slayer_staff_e + overlay,
+            keyName = slayer_staff_e + _overlay,
             name = "Slayer staff (e)",
             description = "",
             section = overlays
         ) default boolean slayerStaffEOverlay() { return true; }
 
         @ConfigItem(
-            keyName = toxic_staff_of_the_dead + overlay,
+            keyName = toxic_staff_of_the_dead + _overlay,
             name = "Toxic staff of the dead",
             description = "",
             section = overlays
         ) default boolean toxicStaffOfTheDeadOverlay() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_seas + overlay,
+            keyName = trident_of_the_seas + _overlay,
             name = "Trident of the seas",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSeasOverlay() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_seas_e + overlay,
+            keyName = trident_of_the_seas_e + _overlay,
             name = "Trident of the seas (e)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSeasEOverlay() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_swamp + overlay,
+            keyName = trident_of_the_swamp + _overlay,
             name = "Trident of the swamp",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampOverlay() { return true; }
 
         @ConfigItem(
-            keyName = trident_of_the_swamp_e + overlay,
+            keyName = trident_of_the_swamp_e + _overlay,
             name = "Trident of the swamp (e)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampEOverlay() { return true; }
 
         @ConfigItem(
-            keyName = warped_sceptre + overlay,
+            keyName = warped_sceptre + _overlay,
             name = "Warped sceptre",
             description = "",
             section = overlays
         ) default boolean warpedSceptreOverlay() { return true; }
 
         @ConfigItem(
-            keyName = xerics_talisman + overlay,
+            keyName = xerics_talisman + _overlay,
             name = "Xeric's talisman",
             description = "",
             section = overlays
         ) default boolean xericsTalismanOverlay() { return true; }
 
         @ConfigItem(
-            keyName = alchemists_amulet + overlay,
+            keyName = alchemists_amulet + _overlay,
             name = "Alchemist's amulet",
             description = "",
             section = overlays
         ) default boolean alchemistsAmuletOverlay() { return true; }
 
         @ConfigItem(
-            keyName = amulet_of_blood_fury + overlay,
+            keyName = amulet_of_blood_fury + _overlay,
             name = "Amulet of blood fury",
             description = "",
             section = overlays
         ) default boolean amuletOfBloodFuryOverlay() { return true; }
 
         @ConfigItem(
-            keyName = amulet_of_chemistry + overlay,
+            keyName = amulet_of_chemistry + _overlay,
             name = "Amulet of chemistry",
             description = "",
             section = overlays
@@ -1958,9 +1889,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getStorageBank() { return ""; }
 
         @ConfigItem(
-            keyName = barrows_gear + "_ahrims_hood",
-            name = barrows_gear + "_ahrims_hood",
-            description = barrows_gear + "_ahrims_hood",
+            keyName = barrows_gear_ + "_ahrims_hood",
+            name = barrows_gear_ + "_ahrims_hood",
+            description = barrows_gear_ + "_ahrims_hood",
             section = debug
         ) default int ahrimsHoodCharges() { return Charges.UNKNOWN; }
 
@@ -2028,9 +1959,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getKharedstsMemoirsCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = bottomless_compost_bucket + storage,
-            name = bottomless_compost_bucket + storage,
-            description = bottomless_compost_bucket + storage,
+            keyName = bottomless_compost_bucket + _storage,
+            name = bottomless_compost_bucket + _storage,
+            description = bottomless_compost_bucket + _storage,
             section = debug
         ) default String getBottomlessCompostBucketStorage() { return ""; }
 
@@ -2091,16 +2022,16 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getFaladorShieldCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = fish_barrel + storage,
-            name = fish_barrel + storage,
-            description = fish_barrel + storage,
+            keyName = fish_barrel + _storage,
+            name = fish_barrel + _storage,
+            description = fish_barrel + _storage,
             section = debug
         ) default String getFishBarrelStorage() { return ""; }
 
         @ConfigItem(
-            keyName = flamtaer_bag + storage,
-            name = flamtaer_bag + storage,
-            description = flamtaer_bag + storage,
+            keyName = flamtaer_bag + _storage,
+            name = flamtaer_bag + _storage,
+            description = flamtaer_bag + _storage,
             section = debug
         ) default String getFlamtaerBagStorage() { return ""; }
 
@@ -2119,9 +2050,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getIbansStaffCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = moons_gear + "_eclipse_chestplate",
-            name = moons_gear + "_eclipse_chestplate",
-            description = moons_gear + "_eclipse_chestplate",
+            keyName = moons_gear_ + "_eclipse_chestplate",
+            name = moons_gear_ + "_eclipse_chestplate",
+            description = moons_gear_ + "_eclipse_chestplate",
             section = debug
         ) default int getEclipseMoonChestplateCharges() { return Charges.UNKNOWN; }
 
@@ -2133,9 +2064,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getPharaohsSceptreCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = reagent_pouch + storage,
-            name = reagent_pouch + storage,
-            description = reagent_pouch + storage,
+            keyName = reagent_pouch + _storage,
+            name = reagent_pouch + _storage,
+            description = reagent_pouch + _storage,
             section = debug
         ) default String getReagentPouchStorage() { return ""; }
 
@@ -2224,9 +2155,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getCircletOfWaterCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = chugging_barrel + storage,
-            name = chugging_barrel + storage,
-            description = chugging_barrel + storage,
+            keyName = chugging_barrel + _storage,
+            name = chugging_barrel + _storage,
+            description = chugging_barrel + _storage,
             section = debug
         ) default String getChuggingBarrelStorage() { return ""; }
 
@@ -2252,30 +2183,30 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getCoffinCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = huntsmans_kit + storage,
-            name = huntsmans_kit + storage,
-            description = huntsmans_kit + storage,
+            keyName = huntsmans_kit + _storage,
+            name = huntsmans_kit + _storage,
+            description = huntsmans_kit + _storage,
             section = debug
         ) default String getHuntsmansKitStorage() { return ""; }
 
         @ConfigItem(
-            keyName = log_basket + storage,
-            name = log_basket + storage,
-            description = log_basket + storage,
+            keyName = log_basket + _storage,
+            name = log_basket + _storage,
+            description = log_basket + _storage,
             section = debug
         ) default String getLogBasketStorage() { return ""; }
 
         @ConfigItem(
-            keyName = forestry_basket + storage,
-            name = forestry_basket + storage,
-            description = forestry_basket + storage,
+            keyName = forestry_basket + _storage,
+            name = forestry_basket + _storage,
+            description = forestry_basket + _storage,
             section = debug
         ) default String getForestryBasketStorage() { return ""; }
 
         @ConfigItem(
-            keyName = forestry_kit + storage,
-            name = forestry_kit + storage,
-            description = forestry_kit + storage,
+            keyName = forestry_kit + _storage,
+            name = forestry_kit + _storage,
+            description = forestry_kit + _storage,
             section = debug
         ) default String getForestryKitStorage() { return ""; }
 
@@ -2294,16 +2225,16 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getMagicCapeCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = meat_pouch + storage,
-            name = meat_pouch + storage,
-            description = meat_pouch + storage,
+            keyName = meat_pouch + _storage,
+            name = meat_pouch + _storage,
+            description = meat_pouch + _storage,
             section = debug
         ) default String getMeatPouchStorageCharges() { return ""; }
 
         @ConfigItem(
-            keyName = gem_bag + storage,
-            name = gem_bag + storage,
-            description = gem_bag + storage,
+            keyName = gem_bag + _storage,
+            name = gem_bag + _storage,
+            description = gem_bag + _storage,
             section = debug
         ) default String getGemBagStorageCharges() { return ""; }
 
@@ -2315,9 +2246,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getSeedBoxCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = seed_box + storage,
-            name = seed_box + storage,
-            description = seed_box + storage,
+            keyName = seed_box + _storage,
+            name = seed_box + _storage,
+            description = seed_box + _storage,
             section = debug
         ) default String getSeedBoxStorage() { return ""; }
 
@@ -2364,9 +2295,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getCoalBagCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = colossal_pouch + storage,
-            name = colossal_pouch + storage,
-            description = colossal_pouch + storage,
+            keyName = colossal_pouch + _storage,
+            name = colossal_pouch + _storage,
+            description = colossal_pouch + _storage,
             section = debug
         ) default String getColossalPouchStorage() { return ""; }
 
@@ -2378,9 +2309,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getColossalPouchDecayCount() { return 0; };
 
         @ConfigItem(
-            keyName = herb_sack + storage,
-            name = herb_sack + storage,
-            description = herb_sack + storage,
+            keyName = herb_sack + _storage,
+            name = herb_sack + _storage,
+            description = herb_sack + _storage,
             section = debug
         ) default String getHerbSackStorage() { return ""; }
 
@@ -2441,9 +2372,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getFremennikSeaBootsCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = fur_pouch + storage,
-            name = fur_pouch + storage,
-            description = fur_pouch + storage,
+            keyName = fur_pouch + _storage,
+            name = fur_pouch + _storage,
+            description = fur_pouch + _storage,
             section = debug
         ) default String getFurPouchStorageCharges() { return ""; }
 
@@ -2455,9 +2386,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getJarGeneratorCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = explorers_ring + storage,
-            name = explorers_ring + storage,
-            description = explorers_ring + storage,
+            keyName = explorers_ring + _storage,
+            name = explorers_ring + _storage,
+            description = explorers_ring + _storage,
             section = debug
         ) default String getExplorersRingCharges() { return ""; }
 
@@ -2518,9 +2449,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getQuetzalWhistleCharges() { return Charges.UNKNOWN; }
 
         @ConfigItem(
-            keyName = tackle_box + storage,
-            name = tackle_box + storage,
-            description = tackle_box + storage,
+            keyName = tackle_box + _storage,
+            name = tackle_box + _storage,
+            description = tackle_box + _storage,
             section = debug
         ) default String getTackleBoxStorage() { return ""; }
 

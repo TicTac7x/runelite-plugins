@@ -1,8 +1,7 @@
-package tictac7x.charges.items;
+package tictac7x.charges.items.potions;
 
 import com.google.gson.Gson;
 import net.runelite.api.Client;
-import tictac7x.charges.store.ItemId;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -10,12 +9,12 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.ItemId;
 import tictac7x.charges.store.Store;
 
-public class F_MoonlightMothMix extends ChargedItem {
-    public F_MoonlightMothMix(
+public class P_AntidotePlusPlus extends _Potion {
+    public P_AntidotePlusPlus(
         final Client client,
         final ClientThread clientThread,
         final ConfigManager configManager,
@@ -27,16 +26,11 @@ public class F_MoonlightMothMix extends ChargedItem {
         final Store store,
         final Gson gson
     ) {
-        super(TicTac7xChargesImprovedConfig.moonlight_moth_mix, ItemId.MOONLIGHT_MOTH_MIX_1, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
-
-        this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.MOONLIGHT_MOTH_MIX_1).fixedCharges(1),
-            new TriggerItem(ItemId.MOONLIGHT_MOTH_MIX_2).fixedCharges(2),
-        };
-    }
-
-    @Override
-    public String getTooltip() {
-        return "Moonlight moth mix: " + getTotalCharges();
+        super("antidote_plus_plus", new TriggerItem[]{
+            new TriggerItem(ItemId.ANTIDOTE_PLUS_PLUS_1).fixedCharges(1),
+            new TriggerItem(ItemId.ANTIDOTE_PLUS_PLUS_2).fixedCharges(2),
+            new TriggerItem(ItemId.ANTIDOTE_PLUS_PLUS_3).fixedCharges(3),
+            new TriggerItem(ItemId.ANTIDOTE_PLUS_PLUS_4).fixedCharges(4),
+        }, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
     }
 }

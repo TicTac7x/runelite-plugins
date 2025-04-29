@@ -32,7 +32,7 @@ public class _BarrowsItem extends ChargedItem {
         final Gson gson
     ) {
         super(
-            TicTac7xChargesImprovedConfig.barrows_gear + "_" + itemName.toLowerCase().replaceAll("'", "").replaceAll(" ", "_"),
+            TicTac7xChargesImprovedConfig.barrows_gear_ + itemName.toLowerCase().replaceAll("'", "").replaceAll(" ", "_"),
             itemId,
             client,
             clientThread,

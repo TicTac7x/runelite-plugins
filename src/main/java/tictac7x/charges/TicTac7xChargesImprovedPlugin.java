@@ -32,6 +32,7 @@ import tictac7x.charges.items.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.items.moons.*;
+import tictac7x.charges.items.potions.*;
 import tictac7x.charges.store.Store;
 import tictac7x.charges.store.VarbitId;
 
@@ -218,14 +219,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new C_ForestryKit(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new C_MagicCape(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 
-			// Foods
-			new F_BlackWarlockMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new F_MoonlightMothMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new F_RubyHarvestMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new F_SapphireGlacialisMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new F_SnowyKnightMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-			new F_SunlightMothMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
-
 			// Helms
 			new H_CircletOfWater(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new H_KandarinHeadgear(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -265,6 +258,16 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_RingOfSuffering(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_SkillsNecklace(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 			new J_XericsTalisman(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+
+			// Potions
+			new P_Absorption(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_Agility(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_BlackWarlockMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_MoonlightMothMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_RubyHarvestMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_SapphireGlacialisMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_SnowyKnightMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
+			new P_SunlightMothMix(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
 
 			// Shields
 			new S_Chronicle(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson),
@@ -636,12 +639,12 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		final Optional<String> necklaceOfPassageInfobox = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_infobox"));
 
 		if (necklaceOfPassageOverlay.isPresent()) {
-			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig.overlay, necklaceOfPassageOverlay.get().equals("true"));
+			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig._overlay, necklaceOfPassageOverlay.get().equals("true"));
 			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_overlay");
 		}
 
 		if (necklaceOfPassageInfobox.isPresent()) {
-			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig.infobox, necklaceOfPassageInfobox.get().equals("true"));
+			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig._infobox, necklaceOfPassageInfobox.get().equals("true"));
 			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_infobox");
 		}
 	}

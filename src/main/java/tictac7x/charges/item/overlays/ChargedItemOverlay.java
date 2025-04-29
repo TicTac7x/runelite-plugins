@@ -156,17 +156,8 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
     }
 
     private boolean isChargedItemOverlayEnabled(final ChargedItemBase chargedItem) {
-        final String configKey = (
-            chargedItem.configKey.contains(TicTac7xChargesImprovedConfig.barrows_gear) ? TicTac7xChargesImprovedConfig.barrows_gear :
-            chargedItem.configKey.contains(TicTac7xChargesImprovedConfig.moons_gear) ? TicTac7xChargesImprovedConfig.moons_gear :
-            chargedItem.configKey
-        ) + TicTac7xChargesImprovedConfig.overlay;
-
+        final String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._overlay;
         final Optional<String> visible = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
-        if (visible.isPresent() && visible.get().equals("true")) {
-            return true;
-        }
-
-        return false;
+        return visible.isPresent() && visible.get().equals("true");
     }
 }
