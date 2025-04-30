@@ -48,7 +48,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String sunlight_moth_mix = "sunlight_moth_mix";
     String moonlight_moth_mix = "moonlight_moth_mix";
 
-    // Jewellery
+    // Jewelery
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
     String amulet_of_chemistry = "amulet_of_chemistry";

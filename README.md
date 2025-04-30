@@ -30,7 +30,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 ### Foods
 - Hunter mixes
 
-### Jewellery
+### Jewelery
 - Alchemists amulet
 - Amulet of blood fury
 - Amulet of chemistry

@@ -22,7 +22,7 @@ public class J_AmuletOfBloodFury extends ChargedItem {
             new OnChatMessage("You have successfully created an Amulet of blood fury.").setFixedCharges(10000),
 
             // Check.
-            new OnChatMessage("Your Amulet of blood fury (will work|can perform) for (?<charges>.+) more hits?.").setDynamicallyCharges(),
+            new OnChatMessage("Your Amulet of blood fury (will work for|can perform) (?<charges>.+) more hits?.").setDynamicallyCharges(),
 
             // Charge.
             new OnChatMessage("You have successfully added .+ hits? to your Amulet of blood fury. It will now work for (?<charges>.+) more hits?.").setDynamicallyCharges(),

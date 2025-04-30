@@ -241,7 +241,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new H_CircletOfWater(provider),
 			new H_KandarinHeadgear(provider),
 
-			// Jewellery
+			// Jewelery
 			new J_AlchemistsAmulet(provider),
 			new J_AmuletOfBloodFury(provider),
 			new J_AmuletOfChemistry(provider),
