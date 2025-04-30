@@ -147,10 +147,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.6.3";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Potion doses support added.<br>" +
-		"<colHIGHLIGHT>* Ring of wealth support added.<br>" +
-		"<colHIGHLIGHT>* Combat bracelet support added.<br>" +
-		"<colHIGHLIGHT>* Amulet of glory support added."
+		"<colHIGHLIGHT>* Potion doses added.<br>" +
+		"<colHIGHLIGHT>* Ring of wealth added.<br>" +
+		"<colHIGHLIGHT>* Combat bracelet added.<br>" +
+		"<colHIGHLIGHT>* Amulet of glory added.<br>" +
+		"<colHIGHLIGHT>* Blood essence added."
 	;
 
 	@Inject
@@ -243,6 +244,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_AmuletOfBloodFury(provider),
 			new J_AmuletOfChemistry(provider),
 			new J_AmuletOfGlory(provider),
+			new U_BloodEssence(provider),
 			new J_BindingNecklace(provider),
 			new J_BraceletOfClay(provider),
 			new J_BraceletOfSlaughter(provider),

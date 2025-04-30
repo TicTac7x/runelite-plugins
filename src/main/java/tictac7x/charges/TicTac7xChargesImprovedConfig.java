@@ -104,6 +104,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
     // Utilities
     String ash_sanctifier = "ash_sanctifier";
+    String blood_essence = "blood_essence";
     String ash_sanctifier_status = "ash_sanctifier_status";
     String bonecrusher = "bonecrusher";
     String bonecrusher_status = "bonecrusher_status";
@@ -768,6 +769,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean ashSanctifierInfobox() { return true; }
 
         @ConfigItem(
+            keyName = blood_essence + _infobox,
+            name = "Blood essence",
+            description = "",
+            section = infoboxes
+        ) default boolean bloodEssenceInfobox() { return true; }
+
+        @ConfigItem(
             keyName = bonecrusher + _infobox,
             name = "Bonecrusher",
             description = "",
@@ -1214,6 +1222,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean ashSanctifierOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = blood_essence + _overlay,
+            name = "Blood essence",
+            description = "",
+            section = overlays
+        ) default boolean bloodEssenceOverlay() { return true; }
 
         @ConfigItem(
             keyName = barrows_gear_ + _overlay,

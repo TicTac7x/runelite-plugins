@@ -370,6 +370,10 @@ public class ItemId {
     // Binding necklace
     public static final int BINDING_NECKLACE = ItemID.MAGIC_EMERALD_NECKLACE;
 
+    // Blood essence
+    public static final int BLOOD_ESSENCE_INACTIVE = ItemID.BLOOD_ESSENCE_INACTIVE;
+    public static final int BLOOD_ESSENCE_ACTIVE = ItemID.BLOOD_ESSENCE_ACTIVE;
+
     // Bracelet of clay
     public static final int BRACELET_OF_CLAY = ItemID.JEWL_BRACELET_OF_CLAY;
     public static final int SOFT_CLAY = ItemID.SOFTCLAY;

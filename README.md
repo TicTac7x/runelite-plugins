@@ -34,6 +34,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Alchemists amulet
 - Amulet of blood fury
 - Amulet of chemistry
+- Amulet of glory
 - Binding necklace
 - Bracelet of clay
 - Bracelet of slaughter
@@ -41,6 +42,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Camulet
 - Castle wars bracelet
 - Celestial ring
+- Combat bracelet
 - Desert amulet
 - Digsite pendant
 - Dodgy necklace
@@ -62,6 +64,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Ring of shadows
 - Ring of suffering
 - Ring of the elements
+- Ring of wealth
 - Skills necklace
 - Slayer ring
 - Xeric's talisman
@@ -78,6 +81,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 
 ### Utilities
 - Ash sanctifier
+- Blood essence
 - Bonecrusher
 - Bottomless compost bucket
 - Chugging barrel
