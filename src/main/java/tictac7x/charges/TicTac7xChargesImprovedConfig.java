@@ -52,6 +52,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
     String amulet_of_chemistry = "amulet_of_chemistry";
+    String amulet_of_glory = "amulet_of_glory";
     String binding_necklace = "binding_necklace";
     String bracelet_of_clay = "bracelet_of_clay";
     String bracelet_of_slaughter = "bracelet_of_slaughter";
@@ -60,6 +61,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String camulet = "camulet";
     String castle_wars_bracelet = "castle_wars_bracelet";
     String celestial_ring = "celestial_ring";
+    String combat_bracelet = "combat_bracelet";
     String desert_amulet = "desert_amulet";
     String digsite_pendant = "digsite_pendant";
     String dodgy_necklace = "dodgy_necklace";
@@ -85,6 +87,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String ring_of_suffering = "ring_of_suffering";
     String ring_of_suffering_status = "ring_of_suffering_status";
     String ring_of_the_elements = "ring_of_the_elements";
+    String ring_of_wealth = "ring_of_wealth";
     String skills_necklace = "skills_necklace";
     String slayer_ring = "slayer_ring";
     String xerics_talisman = "xerics_talisman";
@@ -625,11 +628,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean celestialRingInfobox() { return true; }
 
         @ConfigItem(
+            keyName = combat_bracelet + _infobox,
+            name = "Combat bracelet",
+            description = "",
+            section = infoboxes
+        ) default boolean combatBraceletInfobox() { return true; }
+
+        @ConfigItem(
             keyName = ring_of_the_elements + _infobox,
             name = "Ring of the elements",
             description = "",
             section = infoboxes
         ) default boolean ringOfTheElementsInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = ring_of_wealth + _infobox,
+            name = "Ring of wealth",
+            description = "",
+            section = infoboxes
+        ) default boolean ringOfWealthInfobox() { return true; }
 
         @ConfigItem(
             keyName = ring_of_endurance + _infobox,
@@ -1079,6 +1096,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = infoboxes
         ) default boolean amuletOfChemistryInfobox() { return true; }
 
+        @ConfigItem(
+            keyName = amulet_of_glory + _infobox,
+            name = "Amulet of glory",
+            description = "",
+            section = infoboxes
+        ) default boolean amuletOfGloryInfobox() { return true; }
+
     @ConfigSection(
         name = "Overlays",
         description = "Choose for which charged items number is shown next to it",
@@ -1281,6 +1305,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean celestialRingOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = combat_bracelet + _overlay,
+            name = "Combat bracelet",
+            description = "",
+            section = overlays
+        ) default boolean combatBraceletOverlay() { return true; }
 
         @ConfigItem(
             keyName = chronicle + _overlay,
@@ -1584,6 +1615,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean ringOfTheElementsOverlay() { return true; }
 
         @ConfigItem(
+            keyName = ring_of_wealth + _overlay,
+            name = "Ring of wealth",
+            description = "",
+            section = overlays
+        ) default boolean ringOfWealthOverlay() { return true; }
+
+        @ConfigItem(
             keyName = ring_of_endurance + _overlay,
             name = "Ring of endurance",
             description = "",
@@ -1848,6 +1886,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean amuletOfChemistryOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = amulet_of_glory + _overlay,
+            name = "Amulet of glory",
+            description = "",
+            section = overlays
+        ) default boolean amuletOfGloryOverlay() { return true; }
 
     @ConfigSection(
         name = "Debug",

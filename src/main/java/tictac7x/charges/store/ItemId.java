@@ -350,6 +350,23 @@ public class ItemId {
     // Amulet of chemistry
     public static final int AMULET_OF_CHEMISTRY = ItemID.AMULET_OF_CHEMISTRY;
 
+    // Amulet of glory
+    public static final int AMULET_OF_GLORY = ItemID.AMULET_OF_GLORY;
+    public static final int AMULET_OF_GLORY_1 = ItemID.AMULET_OF_GLORY_1;
+    public static final int AMULET_OF_GLORY_2 = ItemID.AMULET_OF_GLORY_2;
+    public static final int AMULET_OF_GLORY_3 = ItemID.AMULET_OF_GLORY_3;
+    public static final int AMULET_OF_GLORY_4 = ItemID.AMULET_OF_GLORY_4;
+    public static final int AMULET_OF_GLORY_5 = ItemID.AMULET_OF_GLORY_5;
+    public static final int AMULET_OF_GLORY_6 = ItemID.AMULET_OF_GLORY_6;
+    public static final int AMULET_OF_GLORY_ETERNAL = ItemID.AMULET_OF_GLORY_INF;
+    public static final int AMULET_OF_GLORY_TRIMMED = ItemID.TRAIL_AMULET_OF_GLORY;
+    public static final int AMULET_OF_GLORY_TRIMMED_1 = ItemID.TRAIL_AMULET_OF_GLORY_1;
+    public static final int AMULET_OF_GLORY_TRIMMED_2 = ItemID.TRAIL_AMULET_OF_GLORY_2;
+    public static final int AMULET_OF_GLORY_TRIMMED_3 = ItemID.TRAIL_AMULET_OF_GLORY_3;
+    public static final int AMULET_OF_GLORY_TRIMMED_4 = ItemID.TRAIL_AMULET_OF_GLORY_4;
+    public static final int AMULET_OF_GLORY_TRIMMED_5 = ItemID.TRAIL_AMULET_OF_GLORY_5;
+    public static final int AMULET_OF_GLORY_TRIMMED_6 = ItemID.TRAIL_AMULET_OF_GLORY_6;
+
     // Binding necklace
     public static final int BINDING_NECKLACE = ItemID.MAGIC_EMERALD_NECKLACE;
 
@@ -380,6 +397,15 @@ public class ItemId {
     public static final int CELESTIAL_RING_UNCHARGED = ItemID.CELESTIAL_RING;
     public static final int CELESTIAL_SIGNET = ItemID.CELESTIAL_SIGNET_CHARGED;
     public static final int CELESTIAL_SIGNET_UNCHARGED = ItemID.CELESTIAL_SIGNET;
+
+    // Combat bracelet
+    public static final int COMBAT_BRACELET = ItemID.JEWL_BRACELET_OF_COMBAT;
+    public static final int COMBAT_BRACELET_1 = ItemID.JEWL_BRACELET_OF_COMBAT_1;
+    public static final int COMBAT_BRACELET_2 = ItemID.JEWL_BRACELET_OF_COMBAT_2;
+    public static final int COMBAT_BRACELET_3 = ItemID.JEWL_BRACELET_OF_COMBAT_3;
+    public static final int COMBAT_BRACELET_4 = ItemID.JEWL_BRACELET_OF_COMBAT_4;
+    public static final int COMBAT_BRACELET_5 = ItemID.JEWL_BRACELET_OF_COMBAT_5;
+    public static final int COMBAT_BRACELET_6 = ItemID.JEWL_BRACELET_OF_COMBAT_6;
 
     // Desert amulet
     public static final int DESERT_AMULET_2 = ItemID.DESERT_AMULET_MEDIUM;
@@ -508,6 +534,21 @@ public class ItemId {
     // Ring of the elements
     public static final int RING_OF_THE_ELEMENTS = ItemID.RING_OF_ELEMENTS_CHARGED;
     public static final int RING_OF_THE_ELEMENTS_UNCHARGED = ItemID.RING_OF_ELEMENTS;
+
+    // Ring of wealth
+    public static final int RING_OF_WEALTH_0 = ItemID.RING_OF_WEALTH;
+    public static final int RING_OF_WEALTH_1 = ItemID.RING_OF_WEALTH_1;
+    public static final int RING_OF_WEALTH_2 = ItemID.RING_OF_WEALTH_2;
+    public static final int RING_OF_WEALTH_3 = ItemID.RING_OF_WEALTH_3;
+    public static final int RING_OF_WEALTH_4 = ItemID.RING_OF_WEALTH_4;
+    public static final int RING_OF_WEALTH_5 = ItemID.RING_OF_WEALTH_5;
+    public static final int RING_OF_WEALTH_IMBUED_0 = ItemID.RING_OF_WEALTH_I;
+    public static final int RING_OF_WEALTH_IMBUED_1 = ItemID.RING_OF_WEALTH_I1;
+    public static final int RING_OF_WEALTH_IMBUED_2 = ItemID.RING_OF_WEALTH_I2;
+    public static final int RING_OF_WEALTH_IMBUED_3 = ItemID.RING_OF_WEALTH_I3;
+    public static final int RING_OF_WEALTH_IMBUED_4 = ItemID.RING_OF_WEALTH_I4;
+    public static final int RING_OF_WEALTH_IMBUED_5 = ItemID.RING_OF_WEALTH_I5;
+
 
     // Skills necklace
     public static final int SKILLS_NECKLACE_0 = ItemID.JEWL_NECKLACE_OF_SKILLS;
