@@ -1,34 +1,15 @@
 package tictac7x.charges.items.weapons;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 public class W_BowOfFaerdhinen extends ChargedItem {
-    public W_BowOfFaerdhinen(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.bow_of_faerdhinen, ItemId.BOW_OF_FAERDHINEN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public W_BowOfFaerdhinen(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.bow_of_faerdhinen, ItemId.BOW_OF_FAERDHINEN, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.BOW_OF_FAERDHINEN_INACTIVE).fixedCharges(0),

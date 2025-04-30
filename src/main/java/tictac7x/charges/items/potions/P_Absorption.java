@@ -11,26 +11,16 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.Store;
 
 public class P_Absorption extends _Potion {
-    public P_Absorption(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
+    public P_Absorption(final Provider provider) {
         super("absorption", new TriggerItem[]{
             new TriggerItem(ItemId.ABSORPTION_1).fixedCharges(1),
             new TriggerItem(ItemId.ABSORPTION_2).fixedCharges(2),
             new TriggerItem(ItemId.ABSORPTION_3).fixedCharges(3),
             new TriggerItem(ItemId.ABSORPTION_4).fixedCharges(4),
-        }, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        }, provider);
     }
 }

@@ -1,19 +1,16 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
 import net.runelite.api.events.ItemDespawned;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnItemPickup;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.Provider;
 
 public class ListenerOnItemPickup extends ListenerBase {
-    public ListenerOnItemPickup(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnItemPickup(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
     }
 
     public void trigger(final ItemDespawned event) {
@@ -60,17 +57,17 @@ public class ListenerOnItemPickup extends ListenerBase {
         }
 
         // Menu option check.
-        if (!chargedItem.store.inMenuOptions("Take")) {
+        if (!provider.store.inMenuOptions("Take")) {
             return false;
         }
 
         // Menu target check.
-        if (!chargedItem.store.inMenuTargets(event.getItem().getId())) {
+        if (!provider.store.inMenuTargets(event.getItem().getId())) {
             return false;
         }
 
         // Player location check.
-        if (client.getLocalPlayer().getWorldLocation().distanceTo(event.getTile().getWorldLocation()) > 1) {
+        if (provider.client.getLocalPlayer().getWorldLocation().distanceTo(event.getTile().getWorldLocation()) > 1) {
             return false;
         }
 

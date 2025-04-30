@@ -1,38 +1,25 @@
 package tictac7x.charges.item;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.JagexColors;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import java.awt.Color;
 import java.util.Comparator;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ChargedItemWithStorage extends ChargedItemBase {
     public Storage storage;
 
-    public ChargedItemWithStorage(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
-        super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
-        this.storage = new Storage(this, configKey, itemManager, configManager, store, gson);
-
-        clientThread.invokeLater(() -> {
-            loadCharges();
-        });
+    public ChargedItemWithStorage(final String configKey, final int itemId, final Provider provider) {
+        super(configKey, itemId, provider);
+        this.storage = new Storage(this, configKey, provider);
+        provider.clientThread.invokeLater(this::loadCharges);
     }
 
     @Override
@@ -95,7 +82,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     public Color getTextColor() {
         // Full storage is positive.
         if (storage.emptyIsNegative && storage.isFull()) {
-            return config.getColorActivated();
+            return provider.config.getColorActivated();
         }
 
         // Full storage is negative.
@@ -103,12 +90,12 @@ public class ChargedItemWithStorage extends ChargedItemBase {
             storage.emptyIsNegative && storage.isEmpty() ||
             !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getCharges(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
         ) {
-            return config.getColorEmpty();
+            return provider.config.getColorEmpty();
         }
 
         // Storage is empty.
         if (getQuantity() == 0) {
-            return config.getColorDefault();
+            return provider.config.getColorDefault();
         }
 
         return super.getTextColor();

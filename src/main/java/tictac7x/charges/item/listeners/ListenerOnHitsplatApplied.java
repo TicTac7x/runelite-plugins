@@ -9,6 +9,7 @@ import tictac7x.charges.customEvents.CustomHitsplatApplied;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnHitsplatApplied;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.WeaponAttackStyle;
 import tictac7x.charges.store.HitsplatGroup;
 import tictac7x.charges.store.HitsplatTarget;
@@ -16,10 +17,10 @@ import tictac7x.charges.store.HitsplatTarget;
 public class ListenerOnHitsplatApplied extends ListenerBase {
     private final WeaponAttackStyle weaponAttackStyle;
 
-    public ListenerOnHitsplatApplied(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnHitsplatApplied(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
 
-        this.weaponAttackStyle = new WeaponAttackStyle(client);
+        this.weaponAttackStyle = new WeaponAttackStyle(provider.client);
     }
 
     public void trigger(final CustomHitsplatApplied event) {
@@ -35,7 +36,7 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             if (triggerUsed && !trigger.multiTrigger) {
                 // Once per game tick check.
                 if (trigger.oncePerGameTick.isPresent()) {
-                    trigger.triggerTick = client.getTickCount();
+                    trigger.triggerTick = provider.client.getTickCount();
                 }
 
                 return;
@@ -94,7 +95,7 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
         }
 
         // Once per game tick check.
-        if (trigger.oncePerGameTick.isPresent() && client.getTickCount() == trigger.triggerTick) {
+        if (trigger.oncePerGameTick.isPresent() && provider.client.getTickCount() == trigger.triggerTick) {
             return false;
         }
 

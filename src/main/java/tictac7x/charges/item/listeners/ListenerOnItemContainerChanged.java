@@ -1,9 +1,5 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
@@ -13,10 +9,11 @@ import tictac7x.charges.item.storage.StorageItems;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.Provider;
 
 public class ListenerOnItemContainerChanged extends ListenerBase {
-    public ListenerOnItemContainerChanged(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnItemContainerChanged(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
     }
 
     public void trigger(final CustomItemContainerChanged itemContainerChanged) {
@@ -62,12 +59,12 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
             }
 
             if (trigger.onInventoryDifference.isPresent()) {
-                trigger.onInventoryDifference.get().accept(chargedItem.store.getInventoryItemsDifference());
+                trigger.onInventoryDifference.get().accept(provider.store.getInventoryItemsDifference());
                 triggerUsed = true;
             }
 
             if (trigger.onBankDifference.isPresent()) {
-                trigger.onBankDifference.get().accept(chargedItem.store.getBankItemsDifference());
+                trigger.onBankDifference.get().accept(provider.store.getBankItemsDifference());
                 triggerUsed = true;
             }
 

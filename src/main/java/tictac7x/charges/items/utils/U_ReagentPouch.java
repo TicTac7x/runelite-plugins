@@ -1,22 +1,14 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import tictac7x.charges.store.ItemId;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.WidgetId;
 
 import java.util.Optional;
@@ -25,19 +17,8 @@ import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRe
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_ReagentPouch extends ChargedItemWithStorage {
-    public U_ReagentPouch(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.reagent_pouch, ItemId.REAGENT_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public U_ReagentPouch(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.reagent_pouch, ItemId.REAGENT_POUCH, provider);
         storage.emptyIsNegative().setMaximumIndividualQuantity(26).storableItems(
             new StorableItem(ItemId.EYE_OF_NEWT).checkName("Eye of newt"),
             new StorableItem(ItemId.LIMPWURT_ROOT).checkName("Limpwurt root"),
@@ -102,14 +83,14 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             new OnItemContainerChanged(INVENTORY).onInventoryDifference(inventoryDifference -> {
                 for (final StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
                     // Item was put into the reagent pouch, but there is more in inventory, meaning that item is filled to maximum.
-                    if (store.inventory.hasItem(inventoryDifferenceItem.getId())) {
+                    if (provider.store.inventory.hasItem(inventoryDifferenceItem.getId())) {
                         storage.put(inventoryDifferenceItem.getId(), 26);
                     }
                 }
             }).onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             new OnMenuOptionClicked("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory).consumer(() -> {
-                for (final StorageItem item : store.inventory.getItems()) {
+                for (final StorageItem item : provider.store.inventory.getItems()) {
                     storage.add(item);
                 }
             }),

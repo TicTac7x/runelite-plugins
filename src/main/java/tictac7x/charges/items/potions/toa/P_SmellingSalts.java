@@ -12,24 +12,14 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.items.potions._Potion;
 import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.Store;
 
 public class P_SmellingSalts extends _Potion {
-    public P_SmellingSalts(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
+    public P_SmellingSalts(final Provider provider) {
         super("toa_smelling_salts", new TriggerItem[]{
             new TriggerItem(ItemId.TOA_SMELLING_SALTS_1).fixedCharges(1),
             new TriggerItem(ItemId.TOA_SMELLING_SALTS_2).fixedCharges(2),
-        }, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+        }, provider);
     }
 }

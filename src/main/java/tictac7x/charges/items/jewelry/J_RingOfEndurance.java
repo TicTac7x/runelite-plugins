@@ -1,37 +1,18 @@
 package tictac7x.charges.items.jewelry;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
 public class J_RingOfEndurance extends ChargedItem {
-    public J_RingOfEndurance(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.ring_of_endurance, ItemId.RING_OF_ENDURANCE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public J_RingOfEndurance(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.ring_of_endurance, ItemId.RING_OF_ENDURANCE, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.RING_OF_ENDURANCE),
@@ -51,7 +32,7 @@ public class J_RingOfEndurance extends ChargedItem {
 
             // Uncharge.
             new OnMenuOptionClicked("Yes").runConsumerOnNextGameTick(() -> {
-                final Optional<Widget> unchargeWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 584, 0, 2);
+                final Optional<Widget> unchargeWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
                 if (unchargeWidget.isPresent() && unchargeWidget.get().getText().equals("Are you sure you want to uncharge your Ring of endurance?")) {
                     setCharges(0);
                 }

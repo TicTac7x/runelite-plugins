@@ -1,24 +1,19 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.Provider;
 
 import java.util.regex.Matcher;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
 
 public class ListenerOnChatMessage extends ListenerBase {
-    public ListenerOnChatMessage(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnChatMessage(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
     }
 
     public void trigger(final CustomChatMessage event) {

@@ -1,34 +1,15 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 
 public class U_SeedBox extends ChargedItemWithStorage {
-    public U_SeedBox(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.seed_box, ItemId.SEED_BOX, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public U_SeedBox(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.seed_box, ItemId.SEED_BOX, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.SEED_BOX),

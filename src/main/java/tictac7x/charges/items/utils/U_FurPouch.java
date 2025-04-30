@@ -1,64 +1,41 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.*;
 import net.runelite.api.Skill;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.Store;
-import tictac7x.charges.store.WidgetId;
 
 import static tictac7x.charges.store.ItemContainerId.BANK;
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_FurPouch extends ChargedItemWithStorage {
-    public U_FurPouch(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.fur_pouch, ItemId.FUR_POUCH_SMALL, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
-        this.storage = storage
-            .storableItems(
-                // Tracking.
-                new StorableItem(ItemId.POLAR_KEBBIT_FUR),
-                new StorableItem(ItemId.COMMON_KEBBIT_FUR),
-                new StorableItem(ItemId.FELDIP_WEASEL_FUR),
-                new StorableItem(ItemId.DESERT_DEVIL_FUR),
+    public U_FurPouch(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.fur_pouch, ItemId.FUR_POUCH_SMALL, provider);
+        this.storage = storage.storableItems(
+            // Tracking.
+            new StorableItem(ItemId.POLAR_KEBBIT_FUR),
+            new StorableItem(ItemId.COMMON_KEBBIT_FUR),
+            new StorableItem(ItemId.FELDIP_WEASEL_FUR),
+            new StorableItem(ItemId.DESERT_DEVIL_FUR),
 
-                // Deadfall.
-                new StorableItem(ItemId.FOX_FUR),
+            // Deadfall.
+            new StorableItem(ItemId.FOX_FUR),
 
-                // Pitfalls.
-                new StorableItem(ItemId.LARUPIA_FUR),
-                new StorableItem(ItemId.GRAAHK_FUR),
-                new StorableItem(ItemId.KYATT_FUR),
-                new StorableItem(ItemId.SUNLIGHT_ANTELOPE_FUR),
-                new StorableItem(ItemId.MOONLIGHT_ANTELOPE_FUR),
+            // Pitfalls.
+            new StorableItem(ItemId.LARUPIA_FUR),
+            new StorableItem(ItemId.GRAAHK_FUR),
+            new StorableItem(ItemId.KYATT_FUR),
+            new StorableItem(ItemId.SUNLIGHT_ANTELOPE_FUR),
+            new StorableItem(ItemId.MOONLIGHT_ANTELOPE_FUR),
 
-                // Aerial.
-                new StorableItem(ItemId.SPOTTED_KEBBIT_FUR),
-                new StorableItem(ItemId.DARK_KEBBIT_FUR),
-                new StorableItem(ItemId.DASHING_KEBBIT_FUR)
-            );
+            // Aerial.
+            new StorableItem(ItemId.SPOTTED_KEBBIT_FUR),
+            new StorableItem(ItemId.DARK_KEBBIT_FUR),
+            new StorableItem(ItemId.DASHING_KEBBIT_FUR)
+        );
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.FUR_POUCH_SMALL).maxCharges(14),

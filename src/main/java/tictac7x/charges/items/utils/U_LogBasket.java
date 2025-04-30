@@ -1,23 +1,15 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.WidgetId;
 
 import java.util.Optional;
@@ -31,19 +23,8 @@ public class U_LogBasket extends ChargedItemWithStorage {
     private Optional<StorageItem> lastLogs = Optional.empty();
     private int infernalQuantityTracker = 0;
 
-    public U_LogBasket(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public U_LogBasket(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, provider);
         storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemId.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
             new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
@@ -127,7 +108,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
 
             // Leprechaun.
             new OnMenuOptionClicked("Continue").consumer(() -> {
-                final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 219, 1, 2);
+                final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 219, 1, 2);
                 if (bankWoodcuttingResourcesWidget.isPresent() && bankWoodcuttingResourcesWidget.get().getText().equals("Only bank woodcutting resources")) {
                     storage.clear();
                 }

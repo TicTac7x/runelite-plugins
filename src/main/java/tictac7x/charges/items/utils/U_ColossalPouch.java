@@ -1,25 +1,13 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-
-import net.runelite.api.Client;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.*;
 import net.runelite.api.Skill;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.Store;
-import tictac7x.charges.store.WidgetId;
 
 import java.awt.*;
 import java.util.Optional;
@@ -28,19 +16,8 @@ import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRe
 import static tictac7x.charges.store.ItemContainerId.INVENTORY;
 
 public class U_ColossalPouch extends ChargedItemWithStorage {
-    public U_ColossalPouch(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemId.COLOSSAL_POUCH, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public U_ColossalPouch(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemId.COLOSSAL_POUCH, provider);
         this.storage = storage.storableItems(
             new StorableItem(ItemId.RUNE_ESSENCE),
             new StorableItem(ItemId.PURE_ESSENCE),
@@ -92,26 +69,26 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
 
             // Decay.
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
-                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, config.getColossalPouchDecayCount() + 1);
+                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, provider.config.getColossalPouchDecayCount() + 1);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
             // Repair.
             new OnChatMessage("Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
-                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, 0);
+                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, 0);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
             // Fill from inventory.
             new OnMenuOptionClicked("Fill").runConsumerOnNextGameTick(() -> {
-                if (store.inventoryContainsItem(ItemId.GUARDIAN_ESSENCE)) {
-                    storage.add(ItemId.GUARDIAN_ESSENCE, store.getInventoryItemQuantity(ItemId.GUARDIAN_ESSENCE));
-                } else if (store.inventoryContainsItem(ItemId.DAEYALT_ESSENCE)) {
-                    storage.add(ItemId.DAEYALT_ESSENCE, store.getInventoryItemQuantity(ItemId.DAEYALT_ESSENCE));
-                } else if (store.inventoryContainsItem(ItemId.PURE_ESSENCE)) {
-                    storage.add(ItemId.PURE_ESSENCE, store.getInventoryItemQuantity(ItemId.PURE_ESSENCE));
-                } else if (store.inventoryContainsItem(ItemId.RUNE_ESSENCE)) {
-                    storage.add(ItemId.RUNE_ESSENCE, store.getInventoryItemQuantity(ItemId.RUNE_ESSENCE));
+                if (provider.store.inventoryContainsItem(ItemId.GUARDIAN_ESSENCE)) {
+                    storage.add(ItemId.GUARDIAN_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.GUARDIAN_ESSENCE));
+                } else if (provider.store.inventoryContainsItem(ItemId.DAEYALT_ESSENCE)) {
+                    storage.add(ItemId.DAEYALT_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.DAEYALT_ESSENCE));
+                } else if (provider.store.inventoryContainsItem(ItemId.PURE_ESSENCE)) {
+                    storage.add(ItemId.PURE_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.PURE_ESSENCE));
+                } else if (provider.store.inventoryContainsItem(ItemId.RUNE_ESSENCE)) {
+                    storage.add(ItemId.RUNE_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.RUNE_ESSENCE));
                 }
             }),
 
@@ -119,8 +96,8 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             new OnMenuOptionClicked("Use").menuOptionConsumer(advancedMenuEntry -> {
                 final Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target, 0);
                 if (essence.isPresent()) {
-                    essence.get().setQuantity(store.getInventoryItemQuantity(essence.get().getId()));
-                    store.nextTickQueue.add(() -> storage.add(essence));
+                    essence.get().setQuantity(provider.store.getInventoryItemQuantity(essence.get().getId()));
+                    provider.store.nextTickQueue.add(() -> storage.add(essence));
                 }
             }).onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
@@ -155,10 +132,10 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
     @Override
     public Color getTextColor() {
         if (storage.isFull()) {
-            if (config.getColossalPouchDecayCount() == 0) {
-                return config.getColorActivated();
+            if (provider.config.getColossalPouchDecayCount() == 0) {
+                return provider.config.getColorActivated();
             } else {
-                return config.getColorEmpty();
+                return provider.config.getColorEmpty();
             }
         }
 
@@ -171,8 +148,8 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
     private final int[] CAPACITY_25 = {8, 5, 2}; // TODO: verify these
 
     public int getPouchCapacity() {
-        final int decayCount = config.getColossalPouchDecayCount();
-        final int runecraftLevel = this.client.getRealSkillLevel(Skill.RUNECRAFT);
+        final int decayCount = provider.config.getColossalPouchDecayCount();
+        final int runecraftLevel = provider.client.getRealSkillLevel(Skill.RUNECRAFT);
 
         if (runecraftLevel >= 85) {
             return CAPACITY_85[Math.min(CAPACITY_85.length - 1, decayCount)];

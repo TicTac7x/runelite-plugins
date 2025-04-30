@@ -1,14 +1,6 @@
 package tictac7x.charges.items.capes;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
@@ -17,22 +9,11 @@ import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 public class C_Coffin extends ChargedItemWithStorage {
-    public C_Coffin(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.coffin, ItemId.GOLD_COFFIN, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public C_Coffin(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.coffin, ItemId.GOLD_COFFIN, provider);
         this.storage = storage.storableItems(
             new StorableItem(ItemId.LOAR_REMAINS).checkName("Loar"),
             new StorableItem(ItemId.PHRIN_REMAINS).checkName("Phrin"),

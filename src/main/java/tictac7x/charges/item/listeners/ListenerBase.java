@@ -1,10 +1,6 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
@@ -13,22 +9,17 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
 public abstract class ListenerBase {
-    protected final Client client;
-    protected final ItemManager itemManager;
+    protected final Provider provider;
     protected final ChargedItemBase chargedItem;
-    protected final Notifier notifier;
-    protected final TicTac7xChargesImprovedConfig config;
 
-    public ListenerBase(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        this.client = client;
-        this.itemManager = itemManager;
+    public ListenerBase(final Provider provider, final ChargedItemBase chargedItem) {
+        this.provider = provider;
         this.chargedItem = chargedItem;
-        this.notifier = notifier;
-        this.config = config;
     }
 
     boolean trigger(final TriggerBase trigger) {
@@ -73,7 +64,7 @@ public abstract class ListenerBase {
         // Consumer.
         if (trigger.consumer.isPresent()) {
             if (trigger.runConsumerOnNextGameTick.isPresent() && trigger.runConsumerOnNextGameTick.get()) {
-                chargedItem.store.nextTickQueue.add(trigger.consumer.get());
+                chargedItem.provider.store.nextTickQueue.add(trigger.consumer.get());
             } else {
                 trigger.consumer.get().run();
             }
@@ -94,7 +85,7 @@ public abstract class ListenerBase {
 
         // Notification
         if (trigger.notificationCustom.isPresent()) {
-            notifier.notify(trigger.notificationCustom.get());
+            provider.notifier.notify(trigger.notificationCustom.get());
             triggerUsed = true;
         }
 
@@ -105,7 +96,7 @@ public abstract class ListenerBase {
         // Specific item check.
         specificItemCheck: if (trigger.requiredItem.isPresent()) {
             for (final int itemId : trigger.requiredItem.get()) {
-                if (chargedItem.store.inventoryContainsItem(itemId) || chargedItem.store.equipmentContainsItem(itemId)) {
+                if (chargedItem.provider.store.inventoryContainsItem(itemId) || chargedItem.provider.store.equipmentContainsItem(itemId)) {
                     break specificItemCheck;
                 }
             }
@@ -115,46 +106,46 @@ public abstract class ListenerBase {
         // Unallowed items check.
         if (trigger.unallowedItem.isPresent()) {
             for (final int itemId : trigger.unallowedItem.get()) {
-                if (chargedItem.store.inventoryContainsItem(itemId) || chargedItem.store.equipmentContainsItem(itemId)) {
+                if (chargedItem.provider.store.inventoryContainsItem(itemId) || chargedItem.provider.store.equipmentContainsItem(itemId)) {
                     return false;
                 }
             }
         }
 
         // On item click check.
-        if (trigger.onItemClick.isPresent() && chargedItem.store.notInMenuTargets(chargedItem.itemId)) {
+        if (trigger.onItemClick.isPresent() && chargedItem.provider.store.notInMenuTargets(chargedItem.itemId)) {
             return false;
         }
 
         // Menu option check.
-        if (trigger.onMenuOption.isPresent() && chargedItem.store.notInMenuOptions(trigger.onMenuOption.get())) {
+        if (trigger.onMenuOption.isPresent() && chargedItem.provider.store.notInMenuOptions(trigger.onMenuOption.get())) {
             return false;
         }
 
         // Menu option ids check.
-        if (trigger.onMenuOptionId.isPresent() && chargedItem.store.notInMenuOptionIds(trigger.onMenuOptionId.get())) {
+        if (trigger.onMenuOptionId.isPresent() && chargedItem.provider.store.notInMenuOptionIds(trigger.onMenuOptionId.get())) {
             return false;
         }
 
         // Menu target check.
-        if (trigger.onMenuTarget.isPresent() && !trigger.onHover && chargedItem.store.notInMenuTargets(trigger.onMenuTarget.get())) {
+        if (trigger.onMenuTarget.isPresent() && !trigger.onHover && chargedItem.provider.store.notInMenuTargets(trigger.onMenuTarget.get())) {
             return false;
         }
 
         // Menu impostor id check.
-        if (trigger.onMenuImpostor.isPresent() && chargedItem.store.notInMenuImpostors(trigger.onMenuImpostor.get())) {
+        if (trigger.onMenuImpostor.isPresent() && chargedItem.provider.store.notInMenuImpostors(trigger.onMenuImpostor.get())) {
             return false;
         }
 
         // Equipped check.
-        if (trigger.isEquipped.isPresent() && !chargedItem.store.equipmentContainsItem(chargedItem.itemId)) {
+        if (trigger.isEquipped.isPresent() && !chargedItem.provider.store.equipmentContainsItem(chargedItem.itemId)) {
             return false;
         }
 
         // Use storage item on charged item check.
         if (trigger.onUseStorageItemOnChargedItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean isValid = false;
-            loopChecker: for (final CustomMenuOptionClicked menuEntry : chargedItem.store.menuOptionsClicked) {
+            loopChecker: for (final CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
                 if (!menuEntry.target.contains(" -> ")) {
                     continue;
                 };
@@ -167,8 +158,8 @@ public abstract class ListenerBase {
                 }
                 for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
-                        itemOne.equals(itemManager.getItemComposition(storeableItem.getId()).getName()) ||
-                        itemTwo.equals(itemManager.getItemComposition(storeableItem.getId()).getName())
+                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.getId()).getName()) ||
+                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.getId()).getName())
                     ) {
                         isValid = true;
                         break loopChecker;
@@ -184,11 +175,11 @@ public abstract class ListenerBase {
         // Use charged item on storage item check.
         if (trigger.onUseChargedItemOnStorageItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean useCheck = false;
-            useCheckLooper: for (final CustomMenuOptionClicked menuEntry : chargedItem.store.menuOptionsClicked) {
-                if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
+            useCheckLooper: for (final CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
+                if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(provider.itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
                 for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
-                    if (menuEntry.target.split(" -> ")[1].equals(itemManager.getItemComposition(storageItem.getId()).getName())) {
+                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.getId()).getName())) {
                         useCheck = true;
                         break useCheckLooper;
                     }
@@ -208,7 +199,7 @@ public abstract class ListenerBase {
         if (trigger.hasChatMessage.isPresent()) {
             boolean matches = false;
 
-            for (final String message : chargedItem.store.getLastChatMessages()) {
+            for (final String message : chargedItem.provider.store.getLastChatMessages()) {
                 if (trigger.hasChatMessage.get().matcher(message).find()) {
                     matches = true;
                     break;
@@ -222,7 +213,7 @@ public abstract class ListenerBase {
 
         // Varbit check.
         if (trigger.varbitCheck.isPresent()) {
-            if (client.getVarbitValue(trigger.varbitCheck.get()[0]) != trigger.varbitCheck.get()[1]) {
+            if (provider.client.getVarbitValue(trigger.varbitCheck.get()[0]) != trigger.varbitCheck.get()[1]) {
                 return false;
             }
         }
@@ -231,7 +222,7 @@ public abstract class ListenerBase {
         if (trigger.isWidgetVisible.isPresent()) {
             boolean widgetVisible = false;
             for (final int[] widgetIds : trigger.isWidgetVisible.get()) {
-                final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, widgetIds[0], widgetIds[1]);
+                final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, widgetIds[0], widgetIds[1]);
                 if (widget.isPresent() && !widget.get().isHidden()) {
                     widgetVisible = true;
                     break;
@@ -248,7 +239,7 @@ public abstract class ListenerBase {
         }
 
         // Specific item equipped check.
-        if (trigger.itemEquipped.isPresent() && !chargedItem.store.equipmentContainsItem(trigger.itemEquipped.get())) {
+        if (trigger.itemEquipped.isPresent() && !chargedItem.provider.store.equipmentContainsItem(trigger.itemEquipped.get())) {
             return false;
         }
 

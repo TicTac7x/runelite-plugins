@@ -1,14 +1,7 @@
 package tictac7x.charges.item;
 
-import net.runelite.api.Client;
 import net.runelite.api.events.*;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.JagexColors;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.customEvents.CustomChatMessage;
@@ -19,7 +12,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
@@ -27,18 +20,9 @@ import java.awt.Color;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public abstract class ChargedItemBase {
+    public final Provider provider;
+
     final String configKey;
-    protected final Client client;
-    protected final ClientThread clientThread;
-    protected final ItemManager itemManager;
-    protected final InfoBoxManager infoBoxManager;
-    protected final ConfigManager configManager;
-    protected final ChatMessageManager chatMessageManager;
-    protected final Notifier notifier;
-    protected final TicTac7xChargesImprovedConfig config;
-
-    public final Store store;
-
     public int itemId;
 
     public TriggerItem[] items = new TriggerItem[]{};
@@ -68,46 +52,30 @@ public abstract class ChargedItemBase {
     public ChargedItemBase(
         final String configKey,
         final int itemId,
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store
+        final Provider provider
     ) {
+        this.provider = provider;
+
         this.itemId = itemId;
         this.configKey = configKey;
 
-        this.client = client;
-        this.clientThread = clientThread;
-        this.configManager = configManager;
-        this.itemManager = itemManager;
-        this.infoBoxManager = infoBoxManager;
-        this.chatMessageManager = chatMessageManager;
-        this.notifier = notifier;
-        this.config = config;
-        this.store = store;
-
-        listenerOnChatMessage = new ListenerOnChatMessage(client, itemManager, this, notifier, config);
-        listenerOnItemContainerChanged = new ListenerOnItemContainerChanged(client, itemManager, this, notifier, config);
-        listenerOnItemPickup = new ListenerOnItemPickup(client, itemManager, this, notifier, config);
-        listenerOnXpDrop = new ListenerOnXpDrop(client, itemManager, this, notifier, config);
-        listenerOnStatChanged = new ListenerOnStatChanged(client, itemManager, this, notifier, config);
-        listenerOnMenuEntryAdded = new ListenerOnMenuEntryAdded(client, itemManager, this, notifier, config);
-        listenerOnResetDaily = new ListenerOnResetDaily(client, itemManager, this, notifier, config);
-        listenerOnGraphicChanged = new ListenerOnGraphicChanged(client, itemManager, this, notifier, config);
-        listenerOnAnimationChanged = new ListenerOnAnimationChanged(client, itemManager, this, notifier, config);
-        listenerOnHitsplatApplied = new ListenerOnHitsplatApplied(client, itemManager, this, notifier, config);
-        listenerOnWidgetLoaded = new ListenerOnWidgetLoaded(client, itemManager, this, notifier, config);
-        listenerOnVarbitChanged = new ListenerOnVarbitChanged(client, itemManager, this, notifier, config);
-        listenerOnUserAction = new ListenerOnUserAction(client, itemManager, this, notifier, config);
-        listenerOnMenuOptionClicked = new ListenerOnMenuOptionClicked(client, itemManager, this, notifier, config);
-        listenerOnScriptPreFired = new ListenerOnScriptPreFired(client, itemManager, this, notifier, config);
-        listenerOnCombat = new ListenerOnCombat(client, itemManager, this, notifier, config);
-        listenerOnGameTick = new ListenerOnGameTick(client, itemManager, this, notifier, config);
+        listenerOnChatMessage = new ListenerOnChatMessage(provider, this);
+        listenerOnItemContainerChanged = new ListenerOnItemContainerChanged(provider, this);
+        listenerOnItemPickup = new ListenerOnItemPickup(provider, this);
+        listenerOnXpDrop = new ListenerOnXpDrop(provider, this);
+        listenerOnStatChanged = new ListenerOnStatChanged(provider, this);
+        listenerOnMenuEntryAdded = new ListenerOnMenuEntryAdded(provider, this);
+        listenerOnResetDaily = new ListenerOnResetDaily(provider, this);
+        listenerOnGraphicChanged = new ListenerOnGraphicChanged(provider, this);
+        listenerOnAnimationChanged = new ListenerOnAnimationChanged(provider, this);
+        listenerOnHitsplatApplied = new ListenerOnHitsplatApplied(provider, this);
+        listenerOnWidgetLoaded = new ListenerOnWidgetLoaded(provider, this);
+        listenerOnVarbitChanged = new ListenerOnVarbitChanged(provider, this);
+        listenerOnUserAction = new ListenerOnUserAction(provider, this);
+        listenerOnMenuOptionClicked = new ListenerOnMenuOptionClicked(provider, this);
+        listenerOnScriptPreFired = new ListenerOnScriptPreFired(provider, this);
+        listenerOnCombat = new ListenerOnCombat(provider, this);
+        listenerOnGameTick = new ListenerOnGameTick(provider, this);
     }
 
     public abstract String getCharges(final int itemId);
@@ -151,7 +119,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getItemName() {
-        return itemManager.getItemComposition(itemId).getName();
+        return provider.itemManager.getItemComposition(itemId).getName();
     }
 
     public boolean needsToBeEquipped() {
@@ -160,20 +128,20 @@ public abstract class ChargedItemBase {
 
     public Color getTextColor() {
         if (getCharges(itemId).equals("?")) {
-            return config.getColorUnknown();
+            return provider.config.getColorUnknown();
         }
 
         if (getCharges(itemId).equals("0") || needsToBeEquipped() && !inEquipment()) {
-            return config.getColorEmpty();
+            return provider.config.getColorEmpty();
         }
 
-        return config.getColorDefault();
+        return provider.config.getColorDefault();
     }
 
     public Color getTextColor(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent() && triggerItem.fixedCharges.get() == 0) {
-                return config.getColorEmpty();
+                return provider.config.getColorEmpty();
             }
         }
 
@@ -212,7 +180,7 @@ public abstract class ChargedItemBase {
 
     public void onWidgetLoaded(final WidgetLoaded event) {
         if (!inInventoryOrEquipment()) return;
-        clientThread.invokeLater(() -> {
+        provider.clientThread.invokeLater(() -> {
             listenerOnWidgetLoaded.trigger(event);
         });
     }

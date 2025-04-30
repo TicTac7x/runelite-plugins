@@ -1,37 +1,18 @@
 package tictac7x.charges.items.jewelry;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
 public class J_BindingNecklace extends ChargedItem {
-    public J_BindingNecklace(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.binding_necklace, ItemId.BINDING_NECKLACE, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public J_BindingNecklace(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.binding_necklace, ItemId.BINDING_NECKLACE, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.BINDING_NECKLACE).needsToBeEquipped(),
@@ -52,13 +33,13 @@ public class J_BindingNecklace extends ChargedItem {
 
             // Destroy.
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
-                final Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 584, 0, 2);
+                final Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
                 if (
                     destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?") &&
                     script.getScriptEvent().getArguments().length >= 5 &&
                     script.getScriptEvent().getArguments()[4].toString().equals("Yes")
                 ) {
-                    store.addConsumerToNextTickQueue(() -> setCharges(16));
+                    provider.store.addConsumerToNextTickQueue(() -> setCharges(16));
                 }
             }),
         };

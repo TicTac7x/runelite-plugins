@@ -1,22 +1,14 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.WidgetId;
 
 import java.util.HashMap;
@@ -33,19 +25,8 @@ public class U_PlankSack extends ChargedItemWithStorage {
     private Optional<Integer> sawmillLogId = Optional.empty();
     private Optional<Integer> sawmillPlankId = Optional.empty();
 
-    public U_PlankSack(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.plank_sack, ItemId.PLANK_SACK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public U_PlankSack(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.plank_sack, ItemId.PLANK_SACK, provider);
         storage.setMaximumTotalQuantity(28).emptyIsNegative().storableItems(
             new StorableItem(ItemId.PLANK).checkName("Regular plank"),
             new StorableItem(ItemId.OAK_PLANK).checkName("Oak plank"),
@@ -221,7 +202,7 @@ public class U_PlankSack extends ChargedItemWithStorage {
                 if (keyChar < 48 || keyChar > 57) return;
                 final int nthItemToBuild = keyChar - 48;
 
-                final Optional<Widget> materialsWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 458, 3 + nthItemToBuild, 3);
+                final Optional<Widget> materialsWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 458, 3 + nthItemToBuild, 3);
                 if (!materialsWidget.isPresent()) return;
 
                 addPlanksToBeUsedFromHomeMaterialsWidgetText(materialsWidget.get().getText());

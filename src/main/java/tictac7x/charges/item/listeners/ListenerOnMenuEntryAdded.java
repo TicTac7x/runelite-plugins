@@ -1,23 +1,20 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.events.MenuEntryAdded;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ReplaceTarget;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListenerOnMenuEntryAdded extends ListenerBase {
-    public ListenerOnMenuEntryAdded(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnMenuEntryAdded(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
     }
 
     public void trigger(final MenuEntryAdded event) {
@@ -60,13 +57,13 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
             if (trigger.hide.isPresent() && trigger.menuEntryOption.isPresent()) {
                 final List<MenuEntry> newMenuEntries = new ArrayList<>();
 
-                for (final MenuEntry entry : client.getMenuEntries()) {
+                for (final MenuEntry entry : provider.client.getMenuEntries()) {
                     if (!entry.getOption().equals(trigger.menuEntryOption.get())) {
                         newMenuEntries.add(entry);
                     }
                 }
 
-                client.setMenuEntries(newMenuEntries.toArray(new MenuEntry[0]));
+                provider.client.setMenuEntries(newMenuEntries.toArray(new MenuEntry[0]));
                 triggerUsed = true;
             }
 
@@ -112,7 +109,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
         }
 
         // Hide config check.
-        if (trigger.hide.isPresent() && !config.hideDestroy()) {
+        if (trigger.hide.isPresent() && !provider.config.hideDestroy()) {
             return false;
         }
 
@@ -136,7 +133,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
         replaceImpostorIdCheck: if (trigger.replaceImpostorIds.isPresent()) {
             for (final int impostorId : trigger.replaceImpostorIds.get()) {
                 try {
-                    if (client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId() == impostorId) {
+                    if (provider.client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId() == impostorId) {
                         break replaceImpostorIdCheck;
                     }
                 } catch (final Exception ignored) {}

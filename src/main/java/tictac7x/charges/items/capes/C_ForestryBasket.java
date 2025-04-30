@@ -1,25 +1,14 @@
 package tictac7x.charges.items.capes;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.*;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.Store;
-import tictac7x.charges.store.WidgetId;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -35,19 +24,8 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
     private final String menuOptionFillLeavesFromBank = "Fill leaves from bank";
     private final String menuOptionEmptyLeavesToBank = "Empty leaves to bank";
 
-    public C_ForestryBasket(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public C_ForestryBasket(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, provider);
 
         this.storage = storage.storableItems(
             // Log basket.
@@ -247,7 +225,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             // Leprechaun.
             new OnMenuOptionClicked("Continue").consumer(() -> {
-                final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 219, 1, 2);
+                final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 219, 1, 2);
                 if (bankWoodcuttingResourcesWidget.isPresent() && bankWoodcuttingResourcesWidget.get().getText().equals("Only bank woodcutting resources")) {
                     emptyLogBasket();
                 }
@@ -270,11 +248,11 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
     }
 
     private void purchaseFromFriendlyForesterShop(final int amountToBuy) {
-        final Optional<Widget> forestryShopWidget = TicTac7xChargesImprovedPlugin.getWidget(client, 819, 3);
+        final Optional<Widget> forestryShopWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 819, 3);
         if (!forestryShopWidget.isPresent()) return;
 
         int animaBarkPerItem = 0;
-        final int selectedShopItem = client.getVarpValue(3869);
+        final int selectedShopItem = provider.client.getVarpValue(3869);
         switch (selectedShopItem) {
             case 0: // Forestry kit
                 break;

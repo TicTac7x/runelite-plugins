@@ -1,28 +1,22 @@
 package tictac7x.charges.item.storage;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
 public class Storage {
     private final ChargedItemWithStorage chargedItem;
     private final String storageConfigKey;
-    private final ItemManager itemManager;
-    private final ConfigManager configManager;
-    private final Store store;
-    private final Gson gson;
+    private final Provider provider;
 
     protected StorageItems storage = new StorageItems();
 
@@ -36,13 +30,10 @@ public class Storage {
     private StorableItem[] storableItems = new StorableItem[]{};
 
 
-    public Storage(final ChargedItemWithStorage chargedItem, final String configKey, final ItemManager itemManager, final ConfigManager configManager, final Store store, final Gson gson) {
+    public Storage(final ChargedItemWithStorage chargedItem, final String configKey, final Provider provider) {
         this.chargedItem = chargedItem;
         this.storageConfigKey = configKey + "_storage";
-        this.itemManager = itemManager;
-        this.configManager = configManager;
-        this.store = store;
-        this.gson = gson;
+        this.provider = provider;
     }
 
     public Storage setMaximumTotalQuantity(final int quantity) {
@@ -138,7 +129,7 @@ public class Storage {
     }
 
     public void removeAndPrioritizeInventory(final int itemId, final int quantity) {
-        this.remove(itemId, Math.max(quantity - store.getInventoryItemQuantity(itemId), 0));
+        this.remove(itemId, Math.max(quantity - provider.store.getInventoryItemQuantity(itemId), 0));
     }
 
     public void removeAndPrioritizeInventory(final Optional<Integer> itemId, final int quantity) {
@@ -202,7 +193,7 @@ public class Storage {
     }
 
     public void fillFromInventory() {
-        for (final StorageItem itemDifference : store.getInventoryItemsDifference().getItems()) {
+        for (final StorageItem itemDifference : provider.store.getInventoryItemsDifference().getItems()) {
             if (isStorageItem(itemDifference) && itemDifference.getQuantity() < 0) {
                 add(itemDifference.getId(), Math.abs(itemDifference.getQuantity()));
             }
@@ -220,13 +211,13 @@ public class Storage {
     }
 
     public void emptyToInventory() {
-        for (final StorageItem itemDifference : store.getInventoryItemsDifference().getItems()) {
+        for (final StorageItem itemDifference : provider.store.getInventoryItemsDifference().getItems()) {
             storage.getItem(itemDifference.getId()).ifPresent(item -> item.decreaseQuantity(itemDifference.getQuantity()));
         }
     }
 
     public void emptyToInventoryWithoutItemContainerChanged() {
-        int inventorySpaceFree = store.getInventoryEmptySlots();
+        int inventorySpaceFree = provider.store.getInventoryEmptySlots();
 
         for (final StorageItem storageItem : storage.getItems()) {
             if (storageItem.getQuantity() > 0) {
@@ -238,7 +229,7 @@ public class Storage {
     }
 
     public void emptyToBank() {
-        for (final StorageItem itemDifference : store.getBankItemsDifference().getItems()) {
+        for (final StorageItem itemDifference : provider.store.getBankItemsDifference().getItems()) {
             storage.getItem(itemDifference.getId()).ifPresent(item -> item.decreaseQuantity(itemDifference.getQuantity()));
         }
     }
@@ -267,7 +258,7 @@ public class Storage {
 
         // Load storage from config.
         try {
-            final String jsonString = configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey);
+            final String jsonString = provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey);
             final JsonArray jsonStorage = (JsonArray) (new JsonParser()).parse(jsonString);
 
             for (final JsonElement jsonStorageItem : jsonStorage) {
@@ -291,7 +282,7 @@ public class Storage {
             jsonStorage.add(jsonItem);
         }
 
-        configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey, gson.toJson(jsonStorage));
+        provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey, provider.gson.toJson(jsonStorage));
     }
 
     private Optional<StorageItem> getItem(final int itemId) {
@@ -331,7 +322,7 @@ public class Storage {
         }
 
         // Maximum storage with specific item equipped.
-        if (maximumTotalQuantityWithItemEquipped.isPresent() && maximumTotalQuantityWithItemEquippedItems.isPresent() && store.equipmentContainsItem(maximumTotalQuantityWithItemEquippedItems.get())) {
+        if (maximumTotalQuantityWithItemEquipped.isPresent() && maximumTotalQuantityWithItemEquippedItems.isPresent() && provider.store.equipmentContainsItem(maximumTotalQuantityWithItemEquippedItems.get())) {
             return maximumTotalQuantityWithItemEquipped;
         }
 
@@ -351,7 +342,7 @@ public class Storage {
                     if (
                         name.equalsIgnoreCase(checkName) ||
                         name.toLowerCase().contains(checkName.toLowerCase()) ||
-                        name.contains(itemManager.getItemComposition(storableItem.getId()).getName())
+                        name.contains(provider.itemManager.getItemComposition(storableItem.getId()).getName())
                     ) {
                         return Optional.of(new StorageItem(storableItem.getId(), quantity));
                     }
@@ -387,11 +378,11 @@ public class Storage {
             }
         }
 
-        return itemManager.getItemComposition(storageItem.getId()).getName();
+        return provider.itemManager.getItemComposition(storageItem.getId()).getName();
     }
 
     public boolean isStorableItemInInventory() {
-        for (final StorageItem inventoryItem : store.inventory.getItems()) {
+        for (final StorageItem inventoryItem : provider.store.inventory.getItems()) {
             for (final StorableItem storableItem : storableItems) {
                 if (inventoryItem.getId() == storableItem.getId()) {
                     return true;

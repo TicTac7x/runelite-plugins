@@ -1,49 +1,23 @@
 package tictac7x.charges.items.barrows;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.customEvents.CustomMenuOptionClicked;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnCombat;
 import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 public class _BarrowsItem extends ChargedItem {
     public _BarrowsItem(
-        final String itemName,
-        final int itemId,
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
+            final String itemName,
+            final int itemId,
+            final Provider provider
+            ) {
         super(
             TicTac7xChargesImprovedConfig.barrows_gear_ + itemName.toLowerCase().replaceAll("'", "").replaceAll(" ", "_"),
             itemId,
-            client,
-            clientThread,
-            configManager,
-            itemManager,
-            infoBoxManager,
-            chatMessageManager,
-            notifier,
-            config,
-            store,
-            gson
+            provider
         );
 
         this.triggers = new TriggerBase[]{
@@ -52,8 +26,8 @@ public class _BarrowsItem extends ChargedItem {
                 final int percentage = Integer.parseInt(m.group("percentage"));
                 final int chargesUsedInCurrentTier = (100 - percentage) * 250 / 100;
 
-                for (final CustomMenuOptionClicked menuOptionClicked : store.menuOptionsClicked) {
-                    if (menuOptionClicked.target.contains(itemManager.getItemComposition(itemId).getName())) {
+                for (final CustomMenuOptionClicked menuOptionClicked : provider.store.menuOptionsClicked) {
+                    if (menuOptionClicked.target.contains(provider.itemManager.getItemComposition(itemId).getName())) {
                         final int currentTierMaxCharges = Integer.parseInt(menuOptionClicked.target.replaceAll("\\D", "")) * 10;
                         setCharges(currentTierMaxCharges - chargesUsedInCurrentTier);
                         return;
@@ -68,7 +42,7 @@ public class _BarrowsItem extends ChargedItem {
 
     @Override
     protected String getChargesMinified(final int itemId) {
-        switch (config.combatTimeDegradableStyle()) {
+        switch (provider.config.combatTimeDegradableStyle()) {
             case PERCENTAGE:
                 return getChargesFromConfig() * 100 / 1000 + "%";
             case TIME:

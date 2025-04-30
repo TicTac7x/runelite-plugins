@@ -1,15 +1,7 @@
 package tictac7x.charges.items.utils;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
 import tictac7x.charges.store.ItemId;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.JagexColors;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
@@ -19,24 +11,13 @@ import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.OnVarbitChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
 public class U_MasterScrollBook extends ChargedItemWithStorage {
-    public U_MasterScrollBook(
-        final Client client,
-        final ClientThread clientThread,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
-    ) {
-        super(TicTac7xChargesImprovedConfig.master_scroll_book, ItemId.MASTER_SCROLL_BOOK, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store, gson);
+    public U_MasterScrollBook(final Provider provider) {
+        super(TicTac7xChargesImprovedConfig.master_scroll_book, ItemId.MASTER_SCROLL_BOOK, provider);
         storage = storage.setMaximumIndividualQuantity(1000).storableItems(
             new StorableItem(ItemId.TELEPORTSCROLL_NARDAH).displayName("Nardah").specificOrder(1),
             new StorableItem(ItemId.TELEPORTSCROLL_DIGSITE).displayName("Digsite").specificOrder(2),
@@ -90,8 +71,8 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
     @Override
     public String getCharges(final int itemId) {
-        final int varbit10966 = client.getVarbitValue(10966);
-        final int varbit10968 = client.getVarbitValue(10968);
+        final int varbit10966 = provider.client.getVarbitValue(10966);
+        final int varbit10968 = provider.client.getVarbitValue(10968);
 
         // Default teleport not set, show all scrolls.
         if (varbit10966 == 0 && varbit10968 == 0) {
@@ -114,8 +95,8 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
     @Override
     public String getTooltip() {
-        final int varbit10966 = client.getVarbitValue(10966);
-        final int varbit10968 = client.getVarbitValue(10968);
+        final int varbit10966 = provider.client.getVarbitValue(10966);
+        final int varbit10968 = provider.client.getVarbitValue(10968);
 
         // Default teleport not set, show all scrolls.
         if (varbit10966 == 0 && varbit10968 == 0) {
@@ -126,7 +107,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
         // Default teleport set, but no teleports.
         if (!storage.getStorage().hasItem(storage.getStorableItems()[teleportScrollIndex].getId())) {
-            return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", config.getColorEmpty()));
+            return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", provider.config.getColorEmpty()));
         }
 
         final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[teleportScrollIndex];
@@ -140,12 +121,12 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     }
 
     private String getDefaultTeleportLocation() {
-        final int varbit10966 = client.getVarbitValue(10966);
-        final int varbit10968 = client.getVarbitValue(10968);
+        final int varbit10966 = provider.client.getVarbitValue(10966);
+        final int varbit10968 = provider.client.getVarbitValue(10968);
 
         // Default teleport not set, show default.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return itemManager.getItemComposition(itemId).getName();
+            return provider.itemManager.getItemComposition(itemId).getName();
 
         // Default teleport set, show correct location display name.
         } else {

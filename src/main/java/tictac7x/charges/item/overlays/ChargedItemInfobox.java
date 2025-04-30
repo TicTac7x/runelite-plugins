@@ -1,12 +1,9 @@
 package tictac7x.charges.item.overlays;
 
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
+import tictac7x.charges.store.Provider;
 
 import java.awt.Color;
 import java.util.Optional;
@@ -14,28 +11,18 @@ import java.util.Optional;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public class ChargedItemInfobox extends InfoBox {
+    private final Provider provider;
     private final ChargedItemBase chargedItem;
-    private final ItemManager itemManager;
-    private final InfoBoxManager infoBoxManager;
-    private final TicTac7xChargesImprovedConfig config;
-    private final ConfigManager configManager;
 
     private int itemId;
 
     public ChargedItemInfobox(
-        final ChargedItemBase chargedItem,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ConfigManager configManager,
-        final TicTac7xChargesImprovedConfig config,
-        final TicTac7xChargesImprovedPlugin plugin
+        final Provider provider,
+        final ChargedItemBase chargedItem
     ) {
-        super(itemManager.getImage(chargedItem.itemId), plugin);
+        super(provider.itemManager.getImage(chargedItem.itemId), provider.plugin);
+        this.provider = provider;
         this.chargedItem = chargedItem;
-        this.itemManager = itemManager;
-        this.infoBoxManager = infoBoxManager;
-        this.configManager = configManager;
-        this.config = config;
         this.itemId = chargedItem.itemId;
     }
 
@@ -64,9 +51,9 @@ public class ChargedItemInfobox extends InfoBox {
         updateInfobox();
 
         if (
-            !config.showInfoboxes() ||
+            !provider.config.showInfoboxes() ||
             !isChargedItemInfoboxEnabled() ||
-            chargedItem.getCharges(itemId).equals(INFINITE_SYMBOL) && !config.showUnlimited() ||
+            chargedItem.getCharges(itemId).equals(INFINITE_SYMBOL) && !provider.config.showUnlimited() ||
             (!chargedItem.inInventory() && !chargedItem.inEquipment())
         ) {
             return false;
@@ -81,14 +68,14 @@ public class ChargedItemInfobox extends InfoBox {
             itemId = chargedItem.itemId;
 
             // Update infobox image.
-            setImage(itemManager.getImage(itemId));
-            infoBoxManager.updateInfoBoxImage(this);
+            setImage(provider.itemManager.getImage(itemId));
+            provider.infoBoxManager.updateInfoBoxImage(this);
         }
     }
 
     private boolean isChargedItemInfoboxEnabled() {
         final String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._infobox;
-        final Optional<String> visible = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        final Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
         return visible.isPresent() && visible.get().equals("true");
     }
 }

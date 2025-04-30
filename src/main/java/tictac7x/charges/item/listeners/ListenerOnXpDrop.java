@@ -1,18 +1,15 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.api.events.StatChanged;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnXpDrop;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.Provider;
 
 public class ListenerOnXpDrop extends ListenerBase {
-    public ListenerOnXpDrop(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnXpDrop(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
     }
 
     public void trigger(final StatChanged event) {
@@ -22,7 +19,7 @@ public class ListenerOnXpDrop extends ListenerBase {
             boolean triggerUsed = false;
 
             if (trigger.xpAmountConsumer.isPresent()) {
-                trigger.xpAmountConsumer.get().accept(event.getXp() - chargedItem.store.getSkillXp(trigger.skill).get());
+                trigger.xpAmountConsumer.get().accept(event.getXp() - provider.store.getSkillXp(trigger.skill).get());
                 triggerUsed = true;
             }
 
@@ -46,16 +43,16 @@ public class ListenerOnXpDrop extends ListenerBase {
 
         // XP drop check.
         if (
-            !chargedItem.store.getSkillXp(skill).isPresent() ||
-            chargedItem.store.getSkillXp(skill).get() == event.getXp()
+            !provider.store.getSkillXp(skill).isPresent() ||
+            provider.store.getSkillXp(skill).get() == event.getXp()
         ) {
             return false;
         }
 
         // Amount check.
         if (trigger.amount.isPresent() && (
-            !chargedItem.store.getSkillXp(trigger.skill).isPresent() ||
-            trigger.amount.get() != (event.getXp() - chargedItem.store.getSkillXp(trigger.skill).get()))
+            !provider.store.getSkillXp(trigger.skill).isPresent() ||
+            trigger.amount.get() != (event.getXp() - provider.store.getSkillXp(trigger.skill).get()))
         ) {
             return false;
         }

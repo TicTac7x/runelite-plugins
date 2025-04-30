@@ -1,16 +1,13 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Client;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.item.triggers.TriggerBase;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -18,8 +15,8 @@ import java.util.regex.Matcher;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
 
 public class ListenerOnWidgetLoaded extends ListenerBase {
-    public ListenerOnWidgetLoaded(final Client client, final ItemManager itemManager, final ChargedItemBase chargedItem, final Notifier notifier, final TicTac7xChargesImprovedConfig config) {
-        super(client, itemManager, chargedItem, notifier, config);
+    public ListenerOnWidgetLoaded(final Provider provider, final ChargedItemBase chargedItem) {
+        super(provider, chargedItem);
     }
 
     public void trigger(final WidgetLoaded event) {
@@ -28,7 +25,7 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
 
             boolean triggerUsed = false;
             final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
-            final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, trigger.groupId, trigger.childId, trigger.subChildId);
+            final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, trigger.groupId, trigger.childId, trigger.subChildId);
             if (!widget.isPresent()) continue;
 
             if (trigger.text.isPresent()) {
@@ -70,7 +67,7 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
         }
 
         // Widget existance check.
-        final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(client, trigger.groupId, trigger.childId, trigger.subChildId);
+        final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, trigger.groupId, trigger.childId, trigger.subChildId);
         if (!widget.isPresent()) {
             return false;
         }

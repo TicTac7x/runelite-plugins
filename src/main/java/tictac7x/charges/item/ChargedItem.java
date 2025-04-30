@@ -1,25 +1,17 @@
 package tictac7x.charges.item;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Charges;
-import tictac7x.charges.store.Store;
+import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public class ChargedItem extends ChargedItemBase {
-    public ChargedItem(String configKey, int itemId, Client client, ClientThread clientThread, ConfigManager configManager, ItemManager itemManager, InfoBoxManager infoBoxManager, ChatMessageManager chatMessageManager, Notifier notifier, TicTac7xChargesImprovedConfig config, Store store, final Gson gson) {
-        super(configKey, itemId, client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, config, store);
+    public ChargedItem(final String configKey, final int itemId, final Provider provider) {
+        super(configKey, itemId, provider);
     }
 
     @Override
@@ -49,8 +41,8 @@ public class ChargedItem extends ChargedItemBase {
 
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.fixedCharges.isPresent()) {
-                totalFixedCharges += store.getInventoryItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
-                equipmentFixedCharges += store.getEquipmentItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
+                totalFixedCharges += provider.store.getInventoryItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
+                equipmentFixedCharges += provider.store.getEquipmentItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
                 fixedItemsFound = true;
             }
         }
@@ -75,7 +67,7 @@ public class ChargedItem extends ChargedItemBase {
             Math.max(0, charges);
 
         if (this.getChargesFromConfig() != charges) {
-            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey, charges);
+            provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey, charges);
         }
     }
 
@@ -88,7 +80,7 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     protected int getChargesFromConfig() {
-        final Optional<String> charges = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        final Optional<String> charges = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
 
         if (!charges.isPresent()) {
             return Charges.UNKNOWN;
