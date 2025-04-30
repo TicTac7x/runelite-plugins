@@ -1,6 +1,6 @@
 package tictac7x.charges.items.capes;
 
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
@@ -8,7 +8,7 @@ import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ItemContainerId;
+import tictac7x.charges.store.ids.ItemContainerId;
 import tictac7x.charges.store.Provider;
 
 public class C_Coffin extends ChargedItemWithStorage {

@@ -4,6 +4,7 @@ import tictac7x.charges.store.*;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.ItemId;
 
 public class J_EfaritaysAid extends ChargedItem {
     public J_EfaritaysAid(final Provider provider) {

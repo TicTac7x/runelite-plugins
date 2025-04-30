@@ -9,13 +9,16 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.ItemContainerId;
+import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.WidgetId;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static tictac7x.charges.store.ItemContainerId.BANK;
-import static tictac7x.charges.store.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.BANK;
+import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class C_ForestryBasket extends ChargedItemWithStorage {
     private Optional<StorageItem> lastLogs = Optional.empty();

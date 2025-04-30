@@ -5,6 +5,7 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.ItemId;
 
 import java.awt.*;
 import java.time.Duration;

@@ -4,7 +4,6 @@ import net.runelite.api.*;
 import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.customEvents.CustomChatMessage;
 import tictac7x.charges.customEvents.CustomHitsplatApplied;
@@ -13,17 +12,13 @@ import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.customEvents.CustomItemContainerChanged;
 import tictac7x.charges.item.storage.StorageItems;
-import tictac7x.charges.item.triggers.OnResetDaily;
-import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.ids.GraphicId;
+import tictac7x.charges.store.ids.ItemContainerId;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.awt.Font.DIALOG;
-import static net.runelite.api.ChatMessageType.GAMEMESSAGE;
-import static net.runelite.api.ChatMessageType.SPAM;
 
 public class Store {
     private final Client client;
@@ -37,15 +32,14 @@ public class Store {
     private int inCombatTicksRemainingDamageDoneToMe = 0;
 
     private ChargedItemBase[] chargedItems = new ChargedItemBase[]{};
-    private List<Integer> dailyResetItemIds = new ArrayList<>();
     private int lastChatMessagesTick = 0;
     private List<String> lastChatMessages = new ArrayList<>();
 
-    public CustomItemContainerChanged inventory = new CustomItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
-    public CustomItemContainerChanged previousInventory = new CustomItemContainerChanged(InventoryID.INVENTORY.getId(), new ArrayList<>());
-    public CustomItemContainerChanged equipment = new CustomItemContainerChanged(InventoryID.EQUIPMENT.getId(), new ArrayList<>());
-    public CustomItemContainerChanged bank = new CustomItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
-    public CustomItemContainerChanged previousBank = new CustomItemContainerChanged(InventoryID.BANK.getId(), new ArrayList<>());
+    public CustomItemContainerChanged inventory = new CustomItemContainerChanged(ItemContainerId.INVENTORY, new ArrayList<>());
+    public CustomItemContainerChanged previousInventory = new CustomItemContainerChanged(ItemContainerId.INVENTORY, new ArrayList<>());
+    public CustomItemContainerChanged equipment = new CustomItemContainerChanged(ItemContainerId.EQUIPMENT, new ArrayList<>());
+    public CustomItemContainerChanged bank = new CustomItemContainerChanged(ItemContainerId.BANK, new ArrayList<>());
+    public CustomItemContainerChanged previousBank = new CustomItemContainerChanged(ItemContainerId.BANK, new ArrayList<>());
 
 
     public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
@@ -85,21 +79,6 @@ public class Store {
 
     public void setChargedItems(final ChargedItemBase[] chargedItems) {
         this.chargedItems = chargedItems;
-
-        List<Integer> dailyResetItemIds = new ArrayList<>();
-        Arrays.stream(chargedItems).filter(chargedItem -> {
-            for (final TriggerBase trigger : chargedItem.triggers) {
-                if (trigger instanceof OnResetDaily) {
-                    return true;
-                }
-            }
-            return false;
-        }).forEach(chargedItem -> {
-            for (final TriggerItem triggerItem : chargedItem.items) {
-                dailyResetItemIds.add(triggerItem.itemId);
-            }
-        });
-        this.dailyResetItemIds = dailyResetItemIds;
     }
 
     public Optional<Integer> getSkillXp(final Skill skill) {
@@ -122,17 +101,17 @@ public class Store {
         runNextGameTickQueue();
 
         if (
-            itemContainerChanged.getContainerId() == InventoryID.BANK.getId() ||
-            itemContainerChanged.getContainerId() == InventoryID.INVENTORY.getId() ||
-            itemContainerChanged.getContainerId() == InventoryID.EQUIPMENT.getId()
+            itemContainerChanged.getContainerId() == ItemContainerId.BANK ||
+            itemContainerChanged.getContainerId() == ItemContainerId.INVENTORY ||
+            itemContainerChanged.getContainerId() == ItemContainerId.EQUIPMENT
         ) {
             // Update inventory, save previous items.
-            if (itemContainerChanged.getContainerId() == InventoryID.INVENTORY.getId()) {
+            if (itemContainerChanged.getContainerId() == ItemContainerId.INVENTORY) {
                 previousInventory = inventory;
                 inventory = itemContainerChanged;
-            } else if (itemContainerChanged.getContainerId() == InventoryID.EQUIPMENT.getId()) {
+            } else if (itemContainerChanged.getContainerId() == ItemContainerId.EQUIPMENT) {
                 equipment = itemContainerChanged;
-            } else if (itemContainerChanged.getContainerId() == InventoryID.BANK.getId()) {
+            } else if (itemContainerChanged.getContainerId() == ItemContainerId.BANK) {
                 previousBank = bank;
                 bank = itemContainerChanged;
 
@@ -144,7 +123,7 @@ public class Store {
                 configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
             }
 
-            updateChargedItemsPrimaryId(itemContainerChanged.getContainerId() == InventoryID.BANK.getId());
+            updateChargedItemsPrimaryId(itemContainerChanged.getContainerId() == ItemContainerId.BANK);
         }
 
         for (final ChargedItemBase infobox : chargedItems) {
@@ -564,7 +543,7 @@ public class Store {
     }
 
     public void onGraphicChanged(final GraphicChanged event) {
-        if (event.getActor() == client.getLocalPlayer() && event.getActor().getGraphic() == GraphicID.SPLASH) {
+        if (event.getActor() == client.getLocalPlayer() && event.getActor().getGraphic() == GraphicId.SPLASH) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
         }
     }

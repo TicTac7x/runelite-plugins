@@ -7,9 +7,11 @@ import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.WidgetId;
 
-import static tictac7x.charges.store.ItemContainerId.BANK;
-import static tictac7x.charges.store.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.BANK;
+import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class U_HerbSack extends ChargedItemWithStorage {
     public U_HerbSack(final Provider provider) {

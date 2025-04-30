@@ -9,6 +9,9 @@ import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.ids.ItemContainerId;
+import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.WidgetId;
 
 public class U_HuntsmansKit extends ChargedItemWithStorage {
     public U_HuntsmansKit(final Provider provider) {

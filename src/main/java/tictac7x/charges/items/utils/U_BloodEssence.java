@@ -6,8 +6,8 @@ import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ItemContainerId;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemContainerId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 public class U_BloodEssence extends ChargedItemWithStatus {

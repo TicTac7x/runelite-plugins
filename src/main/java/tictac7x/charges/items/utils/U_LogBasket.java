@@ -1,6 +1,6 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -10,14 +10,14 @@ import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.WidgetId;
+import tictac7x.charges.store.ids.WidgetId;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static tictac7x.charges.store.ItemContainerId.BANK;
-import static tictac7x.charges.store.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.BANK;
+import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class U_LogBasket extends ChargedItemWithStorage {
     private Optional<StorageItem> lastLogs = Optional.empty();

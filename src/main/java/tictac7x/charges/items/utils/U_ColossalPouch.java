@@ -8,12 +8,15 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.ItemContainerId;
+import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.WidgetId;
 
 import java.awt.*;
 import java.util.Optional;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRepresentation;
-import static tictac7x.charges.store.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class U_ColossalPouch extends ChargedItemWithStorage {
     public U_ColossalPouch(final Provider provider) {

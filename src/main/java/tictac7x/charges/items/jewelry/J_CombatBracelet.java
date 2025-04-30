@@ -3,7 +3,7 @@ package tictac7x.charges.items.jewelry;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 public class J_CombatBracelet extends ChargedItem {

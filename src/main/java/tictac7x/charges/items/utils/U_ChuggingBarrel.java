@@ -6,6 +6,9 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.AnimationId;
+import tictac7x.charges.store.ids.ItemContainerId;
+import tictac7x.charges.store.ids.ItemId;
 
 public class U_ChuggingBarrel extends ChargedItemWithStorage {
     public U_ChuggingBarrel(final Provider provider) {

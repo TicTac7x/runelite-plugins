@@ -1,15 +1,15 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.WidgetId;
+import tictac7x.charges.store.ids.WidgetId;
 
-import static tictac7x.charges.store.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class U_FlamtaerBag extends ChargedItemWithStorage {
 //    private boolean flamtaerBagEmptyDialogVisible = false;

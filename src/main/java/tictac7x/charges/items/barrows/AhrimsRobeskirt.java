@@ -1,7 +1,7 @@
 package tictac7x.charges.items.barrows;
 
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 public class AhrimsRobeskirt extends _BarrowsItem {

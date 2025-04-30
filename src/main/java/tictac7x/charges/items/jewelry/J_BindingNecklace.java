@@ -1,6 +1,6 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.widgets.Widget;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;

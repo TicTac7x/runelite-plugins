@@ -2,7 +2,7 @@ package tictac7x.charges.items.potions.toa;
 
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.items.potions._Potion;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 public class P_TearsOfElidinis extends _Potion {

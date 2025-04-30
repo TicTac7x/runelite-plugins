@@ -3,7 +3,7 @@ package tictac7x.charges.items.utils;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 public class U_ImpInABox extends ChargedItemWithStatus {

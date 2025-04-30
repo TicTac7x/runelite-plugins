@@ -1,4 +1,4 @@
-package tictac7x.charges.store;
+package tictac7x.charges.store.ids;
 
 public final class WidgetId {
     public static final int[] BANK = new int[]{12, 1};

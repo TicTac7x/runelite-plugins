@@ -48,7 +48,7 @@ import tictac7x.charges.items.utils.*;
 import tictac7x.charges.items.weapons.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.Store;
-import tictac7x.charges.store.VarbitId;
+import tictac7x.charges.store.ids.VarbitId;
 
 import javax.inject.Inject;
 import java.awt.event.KeyEvent;
@@ -140,7 +140,8 @@ import java.util.*;
 		"pouch",
 		"pursuit",
 		"book",
-		"scroll"
+		"scroll",
+		"potion"
 	}
 )
 

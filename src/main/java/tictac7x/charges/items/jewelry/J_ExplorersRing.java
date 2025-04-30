@@ -1,22 +1,13 @@
 package tictac7x.charges.items.jewelry;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.Varbits;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorageMultipleCharges;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Charges;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.Store;
 
 class ExplorersRingStorageItemId {
     public static final int TELEPORTS = -1000;

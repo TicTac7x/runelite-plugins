@@ -1,11 +1,11 @@
 package tictac7x.charges.items.capes;
 
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.VarbitId;
+import tictac7x.charges.store.ids.VarbitId;
 
 public class C_MagicCape extends ChargedItem {
     public C_MagicCape(final Provider provider) {

@@ -1,6 +1,6 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ItemId;
+import tictac7x.charges.store.ids.ItemId;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
