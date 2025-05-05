@@ -26,12 +26,18 @@ public class U_BloodEssence extends ChargedItemWithStatus {
             // Charge used.
             new OnChatMessage("You manage to extract power from the Blood Essence and craft (?<charges>.+) extra runes?.").decreaseDynamicallyCharges(),
 
+            // Depleted.
+            new OnChatMessage("Your blood essence falls apart, drained of energy.").setFixedCharges(0).deactivate(),
+
+            // Activate.
+            new OnChatMessage("You activate the blood essence.").setFixedCharges(1000).activate(),
+
             // Status from inventory.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).itemsConsumer(items -> {
-                if (items.hasItem(ItemId.BLOOD_ESSENCE_INACTIVE)) {
-                    deactivate();
-                } else if (items.hasItem(ItemId.BLOOD_ESSENCE_ACTIVE)) {
+                if (items.hasItem(ItemId.BLOOD_ESSENCE_ACTIVE)) {
                     activate();
+                } else if (items.hasItem(ItemId.BLOOD_ESSENCE_INACTIVE)) {
+                    deactivate();
                 }
             }),
         };

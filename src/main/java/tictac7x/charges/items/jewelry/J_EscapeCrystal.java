@@ -67,12 +67,22 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     @Override
-    public Color getTextColor() {
-        return isAboutToActivate() ? Color.YELLOW : super.getTextColor();
+    public Color getTextColor(int itemId) {
+        return getTotalTextColor();
+    }
+
+    @Override
+    public Color getTotalTextColor() {
+        return isAboutToActivate() ? Color.YELLOW : super.getTotalTextColor();
     }
 
     @Override
     public String getChargesString(final int itemId) {
+        return getTotalChargesString();
+    }
+
+    @Override
+    public String getTotalChargesString() {
         if (provider.config.getEscapeCrystalStatus() == TicTac7xChargesImprovedConfig.ItemActivity.DEACTIVATED || (!inInventory() && !inEquipment())) { return TicTac7xChargesImprovedPlugin.getChargesMinified(ChargeId.UNLIMITED); }
         if (provider.config.getEscapeCrystalInactivityPeriod() == ChargeId.UNKNOWN) { return TicTac7xChargesImprovedPlugin.getChargesMinified(ChargeId.UNKNOWN); }
 
@@ -89,10 +99,5 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
             default:
                 return String.valueOf(timeRemainingUntilActivation);
         }
-    }
-
-    @Override
-    public String getTotalChargesString() {
-        return getChargesString(itemId);
     }
 }

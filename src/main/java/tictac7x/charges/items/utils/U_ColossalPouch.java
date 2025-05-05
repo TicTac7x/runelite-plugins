@@ -133,7 +133,12 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
     }
 
     @Override
-    public Color getTextColor() {
+    public Color getTextColor(final int itemId) {
+        return getTotalTextColor();
+    }
+
+    @Override
+    public Color getTotalTextColor() {
         if (storage.isFull()) {
             if (provider.config.getColossalPouchDecayCount() == 0) {
                 return provider.config.getColorActivated();
@@ -142,7 +147,7 @@ public class U_ColossalPouch extends ChargedItemWithStorage {
             }
         }
 
-        return super.getTextColor();
+        return super.getTotalTextColor();
     }
 
     private final int[] CAPACITY_85 = {40, 35, 30, 25, 20, 15, 10, 5};

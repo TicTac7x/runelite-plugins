@@ -145,7 +145,7 @@ public abstract class ChargedItemBase {
         return provider.config.getColorDefault();
     }
 
-    public Color getTextColor() {
+    public Color getTotalTextColor() {
         return getColorForCharges(getTotalCharges());
     }
 

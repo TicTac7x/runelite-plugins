@@ -49,7 +49,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     @Override
-    public Color getTextColor() {
+    public Color getTotalTextColor() {
         if (isActivated()) {
             return provider.config.getColorActivated();
         }
@@ -58,6 +58,6 @@ public class ChargedItemWithStatus extends ChargedItem {
             return provider.config.getColorEmpty();
         }
 
-        return super.getTextColor();
+        return super.getTotalTextColor();
     }
 }

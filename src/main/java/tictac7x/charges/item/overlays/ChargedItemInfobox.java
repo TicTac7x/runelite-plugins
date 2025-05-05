@@ -43,7 +43,7 @@ public class ChargedItemInfobox extends InfoBox {
 
     @Override
     public Color getTextColor() {
-        return chargedItem.getTextColor();
+        return chargedItem.getTotalTextColor();
     }
 
     @Override

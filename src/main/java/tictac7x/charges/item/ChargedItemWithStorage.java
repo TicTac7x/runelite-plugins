@@ -86,11 +86,11 @@ public class ChargedItemWithStorage extends ChargedItemBase {
             return provider.config.getColorDefault();
         }
 
-        return super.getTextColor();
+        return super.getTotalTextColor();
     }
 
     @Override
-    public Color getTextColor() {
+    public Color getTotalTextColor() {
         return getStorageTextColor();
     }
 
