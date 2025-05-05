@@ -17,7 +17,11 @@ public class S_Chronicle extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[] {
-            new OnChatMessage("Your book has (?<charges>.+) charges? left.").setDynamicallyCharges().onItemClick()
+            // Check plural.
+            new OnChatMessage("Your book has (?<charges>.+) charges? left.").setDynamicallyCharges().onItemClick(),
+
+            // Check single.
+            new OnChatMessage("You have one charge left in your book.").setFixedCharges(1).onItemClick(),
         };
     }
 }
