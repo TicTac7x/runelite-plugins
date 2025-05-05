@@ -76,13 +76,13 @@ public class StorageOverlay extends OverlayPanel {
     }
 
     private void updateImages() {
-        final String visibleString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.visible);
-        final String hiddenString = configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.hidden);
+        final Optional<String> visibleString = Optional.ofNullable(configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.visible));
+        final Optional<String> hiddenString = Optional.ofNullable(configManager.getConfiguration(TicTac7xStorageConfig.group, this.configKey + TicTac7xStorageConfig.hidden));
 
         clientThread.invoke(() -> {
             final List<ImageComponent> images = new ArrayList<>();
 
-            for (final StorageItem item : storage.getItems(visibleString, hiddenString, false)) {
+            for (final StorageItem item : storage.getItems(visibleString.orElse(""), hiddenString.orElse(""), false)) {
                 images.add(new ImageComponent(this.itemManager.getImage(item.id, item.getQuantity(), true)));
             }
 
