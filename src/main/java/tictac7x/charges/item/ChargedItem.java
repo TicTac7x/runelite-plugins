@@ -7,34 +7,24 @@ import tictac7x.charges.store.Provider;
 
 import java.util.Optional;
 
-import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
-
 public class ChargedItem extends ChargedItemBase {
     public ChargedItem(final String configKey, final int itemId, final Provider provider) {
         super(configKey, itemId, provider);
     }
 
     @Override
-    public String getCharges(final int itemId) {
+    public int getCharges(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
-                return getChargesMinified(triggerItem.fixedCharges.get());
+                return triggerItem.fixedCharges.get();
             }
         }
 
-        if (getChargesFromConfig() == ChargeId.UNLIMITED) {
-            return INFINITE_SYMBOL;
-        }
-
-        if (getChargesFromConfig() >= 0) {
-            return getChargesMinified(getChargesFromConfig());
-        }
-
-        return "?";
+        return getChargesFromConfig();
     }
 
     @Override
-    public String getTotalCharges() {
+    public int getTotalCharges() {
         int totalFixedCharges = 0;
         int equipmentFixedCharges = 0;
         boolean fixedItemsFound = false;
@@ -50,8 +40,8 @@ public class ChargedItem extends ChargedItemBase {
         try {
             if (getChargesFromConfig() == ChargeId.UNKNOWN && fixedItemsFound) {
                 return equipmentFixedCharges > 0 ?
-                    getChargesMinified(equipmentFixedCharges) :
-                    getChargesMinified(totalFixedCharges);
+                    equipmentFixedCharges :
+                    totalFixedCharges;
             }
         } catch (final Exception ignored) {}
 

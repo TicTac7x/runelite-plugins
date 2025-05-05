@@ -5,7 +5,6 @@ import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.storage.StorageItems;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
 
 import java.awt.Color;
@@ -46,7 +45,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
         return storage.getStorageItemFromName(name, quantity);
     }
 
-    public int getQuantity() {
+    private int getQuantities() {
         int quantity = 0;
 
         for (final StorageItem storageItem : getStorage().getItems()) {
@@ -59,27 +58,16 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public String getCharges(final int itemId) {
-        int quantity = getQuantity();
-
-        if (quantity == ChargeId.UNKNOWN) {
-            return "?";
-        }
-
-        return getChargesMinified(quantity);
+    public int getCharges(int itemId) {
+        return getQuantities();
     }
 
     @Override
-    public String getTotalCharges() {
-        return getCharges(itemId);
+    public int getTotalCharges() {
+        return getQuantities();
     }
 
-    private void loadCharges() {
-        storage.loadStorage();
-    }
-
-    @Override
-    public Color getTextColor() {
+    private Color getStorageTextColor() {
         // Full storage is positive.
         if (storage.emptyIsNegative && storage.isFull()) {
             return provider.config.getColorActivated();
@@ -87,17 +75,31 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
         // Full storage is negative.
         if (
-            storage.emptyIsNegative && storage.isEmpty() ||
-            !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getCharges(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
+                storage.emptyIsNegative && storage.isEmpty() ||
+                        !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getChargesString(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
         ) {
             return provider.config.getColorEmpty();
         }
 
         // Storage is empty.
-        if (getQuantity() == 0) {
+        if (getTotalCharges() == 0) {
             return provider.config.getColorDefault();
         }
 
         return super.getTextColor();
+    }
+
+    @Override
+    public Color getTextColor() {
+        return getStorageTextColor();
+    }
+
+    @Override
+    public Color getTextColor(final int itemId) {
+        return getStorageTextColor();
+    }
+
+    private void loadCharges() {
+        storage.loadStorage();
     }
 }

@@ -69,28 +69,37 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         };
     }
 
-    @Override
-    public String getCharges(final int itemId) {
+    private int getDefaultTeleportsOrTotal() {
         final int varbit10966 = provider.client.getVarbitValue(10966);
         final int varbit10968 = provider.client.getVarbitValue(10968);
 
         // Default teleport not set, show all scrolls.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return super.getCharges(itemId);
+            return super.getTotalCharges();
         }
 
         // Default teleport set, but no teleports.
         if (!storage.getStorage().hasItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].getId())) {
-            return "0";
+            return 0;
         }
 
         final Optional<StorageItem> storageItem = storage.getStorage().getItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].getId());
 
         if (!storageItem.isPresent()) {
-            return "0";
+            return 0;
         }
 
-        return String.valueOf(storageItem.get().getQuantity());
+        return storageItem.get().getQuantity();
+    }
+
+    @Override
+    public int getCharges(final int itemId) {
+        return getDefaultTeleportsOrTotal();
+    }
+
+    @Override
+    public int getTotalCharges() {
+        return getDefaultTeleportsOrTotal();
     }
 
     @Override

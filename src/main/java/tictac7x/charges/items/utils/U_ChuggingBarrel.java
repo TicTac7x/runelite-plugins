@@ -128,8 +128,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
         };
     }
 
-    @Override
-    public String getCharges(final int itemId) {
+    private int getMinimumSips() {
         int sipsMinimum = 0;
 
         for (final StorageItem storageItem : storage.getStorage().getItems()) {
@@ -138,7 +137,17 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
             }
         }
 
-        return String.valueOf(sipsMinimum);
+        return sipsMinimum;
+    }
+
+    @Override
+    public int getCharges(final int itemId) {
+        return getMinimumSips();
+    }
+
+    @Override
+    public int getTotalCharges() {
+        return getMinimumSips();
     }
 
     @Override

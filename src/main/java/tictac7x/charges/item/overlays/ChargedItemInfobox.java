@@ -33,7 +33,7 @@ public class ChargedItemInfobox extends InfoBox {
 
     @Override
     public String getText() {
-        return chargedItem.getTotalCharges();
+        return chargedItem.getTotalChargesString();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ChargedItemInfobox extends InfoBox {
         if (
             !provider.config.showInfoboxes() ||
             !isChargedItemInfoboxEnabled() ||
-            chargedItem.getCharges(itemId).equals(INFINITE_SYMBOL) && !provider.config.showUnlimited() ||
+            chargedItem.getChargesString(itemId).equals(INFINITE_SYMBOL) && !provider.config.showUnlimited() ||
             (!chargedItem.inInventory() && !chargedItem.inEquipment())
         ) {
             return false;

@@ -4,6 +4,7 @@ import net.runelite.api.events.*;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.util.ColorUtil;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.events.CustomChatMessage;
 import tictac7x.charges.events.CustomHitsplatApplied;
 import tictac7x.charges.item.listeners.*;
@@ -11,13 +12,11 @@ import tictac7x.charges.events.CustomItemContainerChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.events.CustomMenuOptionClicked;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.ids.ChargeId;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
-
-import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public abstract class ChargedItemBase {
     public final Provider provider;
@@ -78,9 +77,17 @@ public abstract class ChargedItemBase {
         listenerOnGameTick = new ListenerOnGameTick(provider, this);
     }
 
-    public abstract String getCharges(final int itemId);
+    public abstract int getCharges(final int itemId);
 
-    public abstract String getTotalCharges();
+    public abstract int getTotalCharges();
+
+    public String getChargesString(final int itemId) {
+        return TicTac7xChargesImprovedPlugin.getChargesMinified(getCharges(itemId));
+    }
+
+    public String getTotalChargesString() {
+        return TicTac7xChargesImprovedPlugin.getChargesMinified(getTotalCharges());
+    }
 
     public String getConfigKey() {
         return (
@@ -104,7 +111,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getTooltip() {
-        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(String.valueOf(getCharges(itemId)), JagexColors.MENU_TARGET);
+        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(String.valueOf(getChargesString(itemId)), JagexColors.MENU_TARGET);
     }
 
     @Nonnull
@@ -126,45 +133,24 @@ public abstract class ChargedItemBase {
         return getCurrentItem().needsToBeEquipped.isPresent();
     }
 
-    public Color getTextColor() {
-        if (getCharges(itemId).equals("?")) {
+    private Color getColorForCharges(final int charges) {
+        if (charges == ChargeId.UNKNOWN) {
             return provider.config.getColorUnknown();
         }
 
-        if (getCharges(itemId).equals("0") || needsToBeEquipped() && !inEquipment()) {
+        if (charges == 0 || needsToBeEquipped() && !inEquipment()) {
             return provider.config.getColorEmpty();
         }
 
         return provider.config.getColorDefault();
     }
 
-    public Color getTextColor(final int itemId) {
-        for (final TriggerItem triggerItem : items) {
-            if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent() && triggerItem.fixedCharges.get() == 0) {
-                return provider.config.getColorEmpty();
-            }
-        }
-
-        return getTextColor();
+    public Color getTextColor() {
+        return getColorForCharges(getTotalCharges());
     }
 
-    protected String getChargesMinified(final int charges) {
-        // Unlimited.
-        if (charges == ChargeId.UNLIMITED) return INFINITE_SYMBOL;
-
-        // Unknown.
-        if (charges == ChargeId.UNKNOWN) return "?";
-
-        // Show as is.
-        if (charges < 1000) return String.valueOf(charges);
-
-        // Minify to use millions (M).
-        if (charges >= 1000000) return charges / 1000000 + "M";
-
-        // Minify to use thousands (K).
-        final int thousands = charges / 1000;
-        final int hundreds = Math.min((charges % 1000 + 50) / 100, 9);
-        return thousands + (thousands < 10 && hundreds > 0 ? "." + hundreds : "") + "K";
+    public Color getTextColor(final int itemId) {
+        return getColorForCharges(getCharges(itemId));
     }
 
     public void onChatMessage(final CustomChatMessage event) {

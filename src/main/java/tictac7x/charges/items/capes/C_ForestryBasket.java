@@ -174,7 +174,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                     storage.put(getStorageItemFromName(matcher.group("logs"), Integer.parseInt(matcher.group("quantity"))));
                 }
 
-                infernalQuantityTracker = getQuantity();
+                infernalQuantityTracker = getLogsInBasket();
             }),
 
             // Miscellania support.
@@ -336,7 +336,9 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
         storage.put(ItemId.REDWOOD_LOGS, 0);
     }
 
-    private boolean isLogsInBasket() {
+    private int getLogsInBasket() {
+        int logs = 0;
+
         for (final StorageItem storageItem : storage.getStorage().getItems()) {
             if (storageItem.getQuantity() == 0) continue;
 
@@ -354,10 +356,16 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                 case ItemId.BLISTERWOOD_LOGS:
                 case ItemId.MAGIC_LOGS:
                 case ItemId.REDWOOD_LOGS:
-                    return true;
+                    logs += storageItem.getQuantity();
+                    break;
             }
         }
-        return false;
+
+        return logs;
+    }
+
+    private boolean isLogsInBasket() {
+        return getLogsInBasket() > 0;
     }
 
     private boolean isLeavesInBasket() {

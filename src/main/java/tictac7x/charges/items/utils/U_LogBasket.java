@@ -69,7 +69,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
                     storage.put(getStorageItemFromName(matcher.group("logs"), Integer.parseInt(matcher.group("quantity"))));
                 }
 
-                infernalQuantityTracker = getQuantity();
+                infernalQuantityTracker = getTotalCharges();
             }).onItemClick(),
 
             // Miscellania support.

@@ -48,6 +48,7 @@ import tictac7x.charges.items.utils.*;
 import tictac7x.charges.items.weapons.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.Store;
+import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.ids.VarbitId;
 
 import javax.inject.Inject;
@@ -145,7 +146,7 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.6.3";
+	private final String pluginVersion = "v0.6.4";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Potion doses added.<br>" +
@@ -905,6 +906,25 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		}
 
 		return result + current;
+	}
+
+	public static String getChargesMinified(final int charges) {
+		// Unlimited.
+		if (charges == ChargeId.UNLIMITED) return INFINITE_SYMBOL;
+
+		// Unknown.
+		if (charges == ChargeId.UNKNOWN) return "?";
+
+		// Show as is.
+		if (charges < 1000) return String.valueOf(charges);
+
+		// Minify to use millions (M).
+		if (charges >= 1000000) return charges / 1000000 + "M";
+
+		// Minify to use thousands (K).
+		final int thousands = charges / 1000;
+		final int hundreds = Math.min((charges % 1000 + 50) / 100, 9);
+		return thousands + (thousands < 10 && hundreds > 0 ? "." + hundreds : "") + "K";
 	}
 }
 

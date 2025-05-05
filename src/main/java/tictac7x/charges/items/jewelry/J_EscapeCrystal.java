@@ -2,6 +2,7 @@ package tictac7x.charges.items.jewelry;
 
 import net.runelite.api.gameval.VarbitID;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
@@ -71,9 +72,9 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     @Override
-    public String getCharges(final int itemId) {
-        if (provider.config.getEscapeCrystalStatus() == TicTac7xChargesImprovedConfig.ItemActivity.DEACTIVATED || (!inInventory() && !inEquipment())) { return "\u221E"; }
-        if (provider.config.getEscapeCrystalInactivityPeriod() == ChargeId.UNKNOWN) { return "?"; }
+    public String getChargesString(final int itemId) {
+        if (provider.config.getEscapeCrystalStatus() == TicTac7xChargesImprovedConfig.ItemActivity.DEACTIVATED || (!inInventory() && !inEquipment())) { return TicTac7xChargesImprovedPlugin.getChargesMinified(ChargeId.UNLIMITED); }
+        if (provider.config.getEscapeCrystalInactivityPeriod() == ChargeId.UNKNOWN) { return TicTac7xChargesImprovedPlugin.getChargesMinified(ChargeId.UNKNOWN); }
 
         final long timeRemainingUntilActivation = getTimeRemainingUntilActivation();
         if (!alertedAboutActivation && isAboutToActivate()) {
@@ -88,5 +89,10 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
             default:
                 return String.valueOf(timeRemainingUntilActivation);
         }
+    }
+
+    @Override
+    public String getTotalChargesString() {
+        return getChargesString(itemId);
     }
 }

@@ -19,7 +19,7 @@ public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorag
     }
 
     @Override
-    public String getCharges(final int itemId) {
+    public String getChargesString(final int itemId) {
         String individualCharges = "";
 
         int validItems = 0;

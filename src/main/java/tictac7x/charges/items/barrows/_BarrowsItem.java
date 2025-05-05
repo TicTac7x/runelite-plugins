@@ -8,6 +8,8 @@ import tictac7x.charges.item.triggers.OnCombat;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
+import java.awt.*;
+
 public class _BarrowsItem extends ChargedItem {
     public _BarrowsItem(
             final String itemName,
@@ -41,16 +43,23 @@ public class _BarrowsItem extends ChargedItem {
     }
 
     @Override
-    protected String getChargesMinified(final int itemId) {
+    public String getChargesString(final int itemId) {
+        final int charges = getCharges(itemId);
+
         switch (provider.config.combatTimeDegradableStyle()) {
             case PERCENTAGE:
-                return getChargesFromConfig() * 100 / 1000 + "%";
+                return charges * 100 / 1000 + "%";
             case TIME:
-                final double hours = (double) (getChargesFromConfig() * 90 * 600) / 1000 / 3600;
+                final double hours = (double) (charges * 90 * 600) / 1000 / 3600;
                 return String.format("%.1fh", hours).replaceAll("\\.0", "");
             case CHARGES:
             default:
-                return super.getChargesMinified(itemId);
+                return super.getChargesString(itemId);
         }
+    }
+
+    @Override
+    public String getTotalChargesString() {
+        return getChargesString(itemId);
     }
 }

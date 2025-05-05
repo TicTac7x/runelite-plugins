@@ -14,6 +14,6 @@ public class P_SunlightMothMix extends _Potion {
 
     @Override
     public String getTooltip() {
-        return "Sunlight moth mix: " + getTotalCharges();
+        return "Sunlight moth mix: " + this.getTotalChargesString();
     }
 }

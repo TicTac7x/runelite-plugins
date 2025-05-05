@@ -83,7 +83,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
             !isChargedItemOverlayEnabled(chargedItem.get()) ||
 
             // Infinity charges hidden.
-            !config.showUnlimited() && chargedItem.get().getCharges(itemId).equals(INFINITE_SYMBOL) ||
+            !config.showUnlimited() && chargedItem.get().getChargesString(itemId).equals(INFINITE_SYMBOL) ||
             !config.showUnlimited() && triggerItem.get().fixedCharges.isPresent() && triggerItem.get().fixedCharges.get().equals(ChargeId.UNLIMITED) ||
 
             // Hide overlays in bank.
@@ -94,7 +94,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         ) return;
 
         // Get default charges from charged item.
-        String charges = chargedItem.get().getCharges(itemId);
+        String charges = chargedItem.get().getChargesString(itemId);
         Color color = chargedItem.get().getTextColor(itemId);
 
         graphics.setFont(FontManager.getRunescapeSmallFont());
@@ -126,7 +126,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         charges_component.setColor(color);
 
         // Override for bank items.
-        if (isBankWidget(widgetItem) && !chargedItem.get().getCharges(itemId).equals("?")) {
+        if (isBankWidget(widgetItem) && !chargedItem.get().getChargesString(itemId).equals("?")) {
             charges_component.setColor(config.getColorDefault());
         }
 
