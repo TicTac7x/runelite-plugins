@@ -6,7 +6,7 @@ import tictac7x.charges.store.Provider;
 
 public class _MoonItem extends ChargedItem {
     public _MoonItem(final String configKey, final int itemId, final Provider provider) {
-        super(TicTac7xChargesImprovedConfig.moons_gear_ + configKey, itemId, provider);
+        super(TicTac7xChargesImprovedConfig.moons_gear + "_" + configKey, itemId, provider);
     }
 
     @Override

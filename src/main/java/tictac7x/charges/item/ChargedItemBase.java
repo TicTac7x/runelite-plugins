@@ -92,8 +92,8 @@ public abstract class ChargedItemBase {
     public String getConfigKey() {
         return (
             configKey.startsWith(TicTac7xChargesImprovedConfig.potion_) ? TicTac7xChargesImprovedConfig.potion_ :
-            configKey.startsWith(TicTac7xChargesImprovedConfig.barrows_gear_) ? TicTac7xChargesImprovedConfig.barrows_gear_ :
-            configKey.startsWith(TicTac7xChargesImprovedConfig.moons_gear_) ? TicTac7xChargesImprovedConfig.moons_gear_ :
+            configKey.startsWith(TicTac7xChargesImprovedConfig.barrows_gear) ? TicTac7xChargesImprovedConfig.barrows_gear :
+            configKey.startsWith(TicTac7xChargesImprovedConfig.moons_gear) ? TicTac7xChargesImprovedConfig.moons_gear :
             configKey
         ).replaceAll("_$", "");
     }

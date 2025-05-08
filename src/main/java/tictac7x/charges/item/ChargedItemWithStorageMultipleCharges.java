@@ -1,17 +1,7 @@
 package tictac7x.charges.item;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.Store;
 
 public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorage {
     public ChargedItemWithStorageMultipleCharges(final String configKey, final int itemId, final Provider provider) {
@@ -20,6 +10,11 @@ public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorag
 
     @Override
     public String getChargesString(final int itemId) {
+        return getTotalChargesString();
+    }
+
+    @Override
+    public String getTotalChargesString() {
         String individualCharges = "";
 
         int validItems = 0;

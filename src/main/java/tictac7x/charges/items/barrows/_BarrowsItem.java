@@ -8,8 +8,6 @@ import tictac7x.charges.item.triggers.OnCombat;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
-import java.awt.*;
-
 public class _BarrowsItem extends ChargedItem {
     public _BarrowsItem(
             final String itemName,
@@ -17,7 +15,7 @@ public class _BarrowsItem extends ChargedItem {
             final Provider provider
             ) {
         super(
-            TicTac7xChargesImprovedConfig.barrows_gear_ + itemName.toLowerCase().replaceAll("'", "").replaceAll(" ", "_"),
+            TicTac7xChargesImprovedConfig.barrows_gear + "_" + itemName.toLowerCase().replaceAll("'", "").replaceAll(" ", "_"),
             itemId,
             provider
         );

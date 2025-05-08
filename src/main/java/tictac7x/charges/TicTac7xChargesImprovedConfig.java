@@ -44,8 +44,8 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String crystal_body = "crystal_body";
     String crystal_helm = "crystal_helm";
     String crystal_legs = "crystal_legs";
-    String barrows_gear_ = "barrows_gear_";
-    String moons_gear_ = "moons_gear_";
+    String barrows_gear = "barrows_gear";
+    String moons_gear = "moons_gear";
 
     // Helms
     String circlet_of_water = "circlet_of_water";
@@ -449,15 +449,15 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean westernBannerInfobox() { return true; }
 
         @ConfigItem(
-            keyName = barrows_gear_ + _infobox,
-            name = "Barrows set",
+            keyName = barrows_gear + _infobox,
+            name = "Barrows armor",
             description = "",
             section = infoboxes
         ) default boolean barrowsInfobox() { return true; }
 
         @ConfigItem(
-            keyName = moons_gear_ + _infobox,
-            name = "Moons gear",
+            keyName = moons_gear + _infobox,
+            name = "Moons armor",
             description = "",
             section = infoboxes
         ) default boolean moonsSetInfobox() { return true; }
@@ -1247,15 +1247,15 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bloodEssenceOverlay() { return true; }
 
         @ConfigItem(
-            keyName = barrows_gear_ + _overlay,
-            name = "Barrows set",
+            keyName = barrows_gear + _overlay,
+            name = "Barrows armor",
             description = "",
             section = overlays
         ) default boolean barrowsOverlay() { return true; }
 
         @ConfigItem(
-            keyName = moons_gear_ + _overlay,
-            name = "Moons gear",
+            keyName = moons_gear + _overlay,
+            name = "Moons armor",
             description = "",
             section = overlays
         ) default boolean moonsGearOverlay() { return true; }
@@ -1965,9 +1965,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getStorageBank() { return ""; }
 
         @ConfigItem(
-            keyName = barrows_gear_ + "_ahrims_hood",
-            name = barrows_gear_ + "_ahrims_hood",
-            description = barrows_gear_ + "_ahrims_hood",
+            keyName = barrows_gear + "_ahrims_hood",
+            name = barrows_gear + "_ahrims_hood",
+            description = barrows_gear + "_ahrims_hood",
             section = debug
         ) default int ahrimsHoodCharges() { return ChargeId.UNKNOWN; }
 
@@ -2126,9 +2126,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getIbansStaffCharges() { return ChargeId.UNKNOWN; }
 
         @ConfigItem(
-            keyName = moons_gear_ + "_eclipse_chestplate",
-            name = moons_gear_ + "_eclipse_chestplate",
-            description = moons_gear_ + "_eclipse_chestplate",
+            keyName = moons_gear + "_eclipse_chestplate",
+            name = moons_gear + "_eclipse_chestplate",
+            description = moons_gear + "_eclipse_chestplate",
             section = debug
         ) default int getEclipseMoonChestplateCharges() { return ChargeId.UNKNOWN; }
 
