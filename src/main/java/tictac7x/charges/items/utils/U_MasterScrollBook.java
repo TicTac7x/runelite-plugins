@@ -1,5 +1,6 @@
 package tictac7x.charges.items.utils;
 
+import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.util.ColorUtil;
@@ -13,6 +14,7 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
+import java.awt.*;
 import java.util.Optional;
 
 public class U_MasterScrollBook extends ChargedItemWithStorage {
@@ -36,7 +38,8 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
             new StorableItem(ItemId.TELEPORTSCROLL_WATSON).displayName("Watson").specificOrder(15),
             new StorableItem(ItemId.TELEPORTSCROLL_GUTHIXIAN_TEMPLE).displayName("Guthixian Temple").specificOrder(16),
             new StorableItem(ItemId.TELEPORTSCROLL_SPIDER_CAVE).displayName("Spider Cave").specificOrder(17),
-            new StorableItem(ItemId.TELEPORTSCROLL_COLOSSAL_WYRM).displayName("Colossal Wyrm").specificOrder(18)
+            new StorableItem(ItemId.TELEPORTSCROLL_COLOSSAL_WYRM).displayName("Colossal Wyrm").specificOrder(18),
+            new StorableItem(ItemId.TELEPORTSCROLL_CHASM_OF_FIRE).displayName("Chasm of Fire").specificOrder(19)
         );
 
         this.items = new TriggerItem[]{
@@ -63,6 +66,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
             new OnVarbitChanged(10967).varbitValueConsumer(charges -> storage.put(ItemId.TELEPORTSCROLL_GUTHIXIAN_TEMPLE, charges)),
             new OnVarbitChanged(10995).varbitValueConsumer(charges -> storage.put(ItemId.TELEPORTSCROLL_SPIDER_CAVE, charges)),
             new OnVarbitChanged(11029).varbitValueConsumer(charges -> storage.put(ItemId.TELEPORTSCROLL_COLOSSAL_WYRM, charges)),
+            new OnVarbitChanged(16238).varbitValueConsumer(charges -> storage.put(ItemId.TELEPORTSCROLL_CHASM_OF_FIRE, charges)),
 
             // Replace default teleport option.
             new OnMenuEntryAdded("Teleport").replaceTargetDynamically("Master scroll book", this::getDefaultTeleportLocation),
@@ -70,6 +74,8 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     }
 
     private int getDefaultTeleportsOrTotal() {
+        // First varbit goes from 0 - 14, where 0 means default scroll is not set.
+        // Second varbit is set to 1, if the selected scroll is after 14th scroll.
         final int varbit10966 = provider.client.getVarbitValue(10966);
         final int varbit10968 = provider.client.getVarbitValue(10968);
 
@@ -78,18 +84,20 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
             return super.getTotalCharges();
         }
 
-        // Default teleport set, but no teleports.
-        if (!storage.getStorage().hasItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].getId())) {
+        final int selectedScrollIndex = varbit10968 * 15 + varbit10966 - 1;
+
+        // Unsupported scroll selected.
+        if (selectedScrollIndex >= storage.getStorableItems().length) {
+            return ChargeId.UNKNOWN;
+        }
+
+        final Optional<StorageItem> selectedScroll = storage.getStorage().getItem(storage.getStorableItems()[selectedScrollIndex].getId());
+
+        if (!selectedScroll.isPresent()) {
             return 0;
         }
 
-        final Optional<StorageItem> storageItem = storage.getStorage().getItem(storage.getStorableItems()[varbit10968 * 15 + varbit10966 - 1].getId());
-
-        if (!storageItem.isPresent()) {
-            return 0;
-        }
-
-        return storageItem.get().getQuantity();
+        return selectedScroll.get().getQuantity();
     }
 
     @Override
@@ -103,6 +111,16 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     }
 
     @Override
+    public Color getTextColor(int itemId) {
+        return getTotalTextColor();
+    }
+
+    @Override
+    public Color getTotalTextColor() {
+        return getTotalCharges() == 0 ? Color.red : super.getTotalTextColor();
+    }
+
+    @Override
     public String getTooltip() {
         final int varbit10966 = provider.client.getVarbitValue(10966);
         final int varbit10968 = provider.client.getVarbitValue(10968);
@@ -112,14 +130,19 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
             return super.getTooltip();
         }
 
-        final int teleportScrollIndex = varbit10968 * 15 + varbit10966 - 1;
+        final int selectedScrollIndex = varbit10968 * 15 + varbit10966 - 1;
+
+        // Unsupported scroll selected.
+        if (selectedScrollIndex >= storage.getStorableItems().length) {
+            return "?";
+        }
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().hasItem(storage.getStorableItems()[teleportScrollIndex].getId())) {
+        if (!storage.getStorage().hasItem(storage.getStorableItems()[selectedScrollIndex].getId())) {
             return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", provider.config.getColorEmpty()));
         }
 
-        final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[teleportScrollIndex];
+        final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[selectedScrollIndex];
         final Optional<StorageItem> defaultTeleportScrollStorageItem = storage.getStorage().getItem(defaultTeleportScrollStoreableItem.getId());
 
         if (!defaultTeleportScrollStorageItem.isPresent()) {

@@ -1149,6 +1149,7 @@ public final class ItemId {
     public static final int TELEPORTSCROLL_GUTHIXIAN_TEMPLE = ItemID.TELEPORTSCROLL_GUTHIXIAN_TEMPLE;
     public static final int TELEPORTSCROLL_SPIDER_CAVE = ItemID.TELEPORTSCROLL_SPIDERCAVE;
     public static final int TELEPORTSCROLL_COLOSSAL_WYRM = ItemID.TELEPORTSCROLL_COLOSSAL_WYRM;
+    public static final int TELEPORTSCROLL_CHASM_OF_FIRE = ItemID.TELEPORTSCROLL_CHASMOFFIRE;
 
     // Meat pouch
     public static final int MEAT_POUCH_SMALL = ItemID.HG_MEATPOUCH_SMALL;
