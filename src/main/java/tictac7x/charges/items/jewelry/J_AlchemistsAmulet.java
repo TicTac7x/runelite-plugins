@@ -27,9 +27,8 @@ public class J_AlchemistsAmulet extends ChargedItem {
             new OnChatMessage("You uncharge your Alchemist's amulet, regaining .+ amulets of chemistry in the process.").setFixedCharges(0),
 
             // Use charge
-            new OnChatMessage("Your Alchemist's amulet helps you create a 4-dose potion. It no longer has any charges.").setFixedCharges(0),
-            new OnChatMessage("Your Alchemist's amulet helps you create a 4-dose potion. It has one charge left.").setFixedCharges(1),
-            new OnChatMessage("Your Alchemist's amulet helps you create a 4-dose potion. It has (?<charges>.+) charges left.").setDynamicallyCharges(),
+            new OnChatMessage("Your Alchemist's amulet helps you create a .-dose potion. It no longer has any charges.").setFixedCharges(0),
+            new OnChatMessage("Your Alchemist's amulet helps you create a .-dose potion. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Auto-charge
             new OnChatMessage("The banker charges your Alchemist's amulet using (?<amulets>.+)x Amulet of chemistry.*").matcherConsumer(m -> {

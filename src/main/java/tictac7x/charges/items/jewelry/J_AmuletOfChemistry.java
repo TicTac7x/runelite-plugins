@@ -22,9 +22,8 @@ public class J_AmuletOfChemistry extends ChargedItem {
             new OnChatMessage("Your amulet of chemistry has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Use charge
-            new OnChatMessage("Your amulet of chemistry helps you create a 4-dose potion. It then crumbles to dust.").setFixedCharges(5),
-            new OnChatMessage("Your amulet of chemistry helps you create a 4-dose potion. It has one charge left.").setFixedCharges(1),
-            new OnChatMessage("Your amulet of chemistry helps you create a 4-dose potion. It has (?<charges>.+) charges left.").setDynamicallyCharges(),
+            new OnChatMessage("Your amulet of chemistry helps you create a .-dose potion. It then crumbles to dust.").setFixedCharges(5),
+            new OnChatMessage("Your amulet of chemistry helps you create a .-dose potion. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Status from break dialog
             new OnWidgetLoaded(219, 1, 0).text("Status: (?<charges>.+) charges? left.").setDynamically().onItemClick(),
