@@ -1,19 +1,26 @@
 package tictac7x.storage.panel;
 
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import tictac7x.storage.storage.Storage;
 import tictac7x.storage.storage.StorageItem;
+import tictac7x.storage.utils.Provider;
 
-import javax.swing.*;
-import java.util.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class PanelItems extends JPanel {
-    private final ItemManager itemManager;
+    private final Provider provider;
     private final Map<String, PanelItem> itemPanels = new LinkedHashMap<>();
 
-    public PanelItems(final ItemManager itemManager) {
-        this.itemManager = itemManager;
+    public PanelItems(final Provider provider) {
+        this.provider = provider;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(7, 7, 0, -7));
         setBackground(ColorScheme.DARKER_GRAY_COLOR);
@@ -28,7 +35,7 @@ public class PanelItems extends JPanel {
                 visibleMultiKeys.add(multiKey);
 
                 if (!itemPanels.containsKey(multiKey)) {
-                    final PanelItem panelItem = new PanelItem(new StorageItem(item), storage.itemContainerId, itemManager);
+                    final PanelItem panelItem = new PanelItem(new StorageItem(item), storage.itemContainerId, provider);
                     itemPanels.put(multiKey, panelItem);
                 }
             }

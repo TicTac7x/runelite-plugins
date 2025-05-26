@@ -2,33 +2,30 @@ package tictac7x.storage.storage;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import tictac7x.storage.TicTac7xStorageConfig;
+import tictac7x.storage.utils.Provider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigStorage extends Storage {
     public final String configKey;
-    private final ClientThread clientThread;
-    private final ConfigManager configManager;
+    public final Provider provider;
 
-    public ConfigStorage(final String configKey, final int itemContainerId, final ClientThread clientThread, final ConfigManager configManager) {
+    public ConfigStorage(final String configKey, final int itemContainerId, final Provider provider) {
         super(itemContainerId);
         this.configKey = configKey;
-        this.clientThread = clientThread;
-        this.configManager = configManager;
+        this.provider = provider;
     }
 
     public void loadFromConfig(final ItemManager itemManager) {
-        final String storageJsonString = configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
+        final String storageJsonString = provider.configManager.getConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage);
 
         try {
             final JsonObject jsonObject = (JsonObject) new JsonParser().parse(storageJsonString);
 
-            clientThread.invoke(() -> {
+            provider.clientThread.invoke(() -> {
                 final List<StorageItem> items = new ArrayList<>();
 
                 for (final String itemKey : jsonObject.keySet()) {
@@ -50,7 +47,7 @@ public class ConfigStorage extends Storage {
     }
 
     protected void updateConfig() {
-        configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
+        provider.configManager.setConfiguration(TicTac7xStorageConfig.group, configKey + TicTac7xStorageConfig.storage, getJsonString());
     }
 
     private String getJsonString() {

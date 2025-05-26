@@ -9,6 +9,7 @@ import net.runelite.client.events.ConfigChanged;
 import tictac7x.storage.TicTac7xStorageConfig;
 import tictac7x.storage.storage.BankStorage;
 import tictac7x.storage.storage.Storage;
+import tictac7x.storage.utils.Provider;
 import tictac7x.storage.utils.WidgetId;
 
 import java.util.Optional;
@@ -16,15 +17,13 @@ import java.util.Optional;
 import static tictac7x.storage.TicTac7xStoragePlugin.getWidget;
 
 public class LunarLootChest extends Storage {
-    private final Client client;
-    private final TicTac7xStorageConfig config;
+    private final Provider provider;
     private final BankStorage bank;
     private Optional<Widget> lunarChestWidget = Optional.empty();
 
-    public LunarLootChest(final int itemContainerId, final BankStorage bank, final Client client, final TicTac7xStorageConfig config) {
+    public LunarLootChest(final int itemContainerId, final BankStorage bank, final Provider provider) {
         super(itemContainerId);
-        this.client = client;
-        this.config = config;
+        this.provider = provider;
         this.bank = bank;
     }
 
@@ -35,7 +34,7 @@ public class LunarLootChest extends Storage {
 
     public void onWidgetLoaded(final WidgetLoaded event) {
         if (event.getGroupId() == WidgetId.LUNAR_LOOT_CHEST[0]) {
-            lunarChestWidget = getWidget(WidgetId.LUNAR_LOOT_CHEST, client);
+            lunarChestWidget = getWidget(WidgetId.LUNAR_LOOT_CHEST, provider.client);
             updateWidget();
         }
     }
@@ -56,7 +55,7 @@ public class LunarLootChest extends Storage {
         if (lunarChestWidget.isPresent()) {
             final Optional<Widget> close = Optional.ofNullable(lunarChestWidget.get().getStaticChildren()[0].getChild(11));
             if (close.isPresent()) {
-                close.get().setHidden(config.hideLunarChestClose());
+                close.get().setHidden(provider.config.hideLunarChestClose());
             }
         }
     }

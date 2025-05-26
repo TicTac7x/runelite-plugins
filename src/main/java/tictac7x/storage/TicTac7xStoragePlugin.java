@@ -2,8 +2,16 @@ package tictac7x.storage;
 
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
-import net.runelite.api.events.*;
+import net.runelite.api.ChatMessageType;
+import net.runelite.api.Client;
+import net.runelite.api.GameState;
+import net.runelite.api.Item;
+import net.runelite.api.ItemComposition;
+import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.events.WidgetClosed;
+import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -16,6 +24,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.overlay.OverlayManager;
+import tictac7x.storage.overlays.BankOverlay;
 import tictac7x.storage.overlays.InventoryOverlay;
 import tictac7x.storage.overlays.StorageOverlay;
 import tictac7x.storage.panel.PanelNavigator;
@@ -27,11 +36,17 @@ import tictac7x.storage.storage.Storage;
 import tictac7x.storage.storage.ConfigStorage;
 import tictac7x.storage.storageManagers.LunarLootChest;
 import tictac7x.storage.utils.ItemContainerId;
+import tictac7x.storage.utils.Provider;
 import tictac7x.storage.utils.WidgetId;
 
 import javax.inject.Inject;
-import javax.swing.*;
-import java.util.*;
+import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @PluginDescriptor(
@@ -40,12 +55,10 @@ import java.util.*;
 	tags = { "storage", "bank", "inventory", "item", "poh" }
 )
 public class TicTac7xStoragePlugin extends Plugin {
-	private String pluginVersion = "v0.6";
+	private String pluginVersion = "v0.6.2";
 	private String pluginMessage = "" +
 		"<colHIGHLIGHT>Storage " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Player house items now searchable from the panel.<br>" +
-		"<colHIGHLIGHT>* Panel performance improvements.<br>" +
-		"<colHIGHLIGHT>* Lunar chest support."
+		"<colHIGHLIGHT>* Setting to hide bank overlay items with 0 quantity, enabled by default."
 	;
 
 	@Inject
@@ -77,6 +90,8 @@ public class TicTac7xStoragePlugin extends Plugin {
 		return configManager.getConfig(TicTac7xStorageConfig.class);
 	}
 
+	private Provider provider;
+
 	private List<Storage> storages;
 
 	private StorageOverlay[] storageOverlays;
@@ -90,29 +105,34 @@ public class TicTac7xStoragePlugin extends Plugin {
 	@Override
 	protected void startUp() {
 		configMigration();
+		provider = new Provider(client, clientThread, configManager, itemManager, config);
+
 		storages = new ArrayList<>();
 
-		final BankStorage bankStorage = new BankStorage(clientThread, configManager);
+		final BankStorage bankStorage = new BankStorage(provider);
 		storages.add(bankStorage);
 
 		final Storage inventoryStorage = new Storage(ItemContainerId.INVENTORY);
 		storages.add(inventoryStorage);
 
-		final ConfigStorage homeStorage = new ConfigStorage(TicTac7xStorageConfig.home, ItemContainerId.HOME, clientThread, configManager);
+		final ConfigStorage homeStorage = new ConfigStorage(TicTac7xStorageConfig.home, ItemContainerId.HOME, provider);
 		storages.add(homeStorage);
 
-		lunarLootChest = new LunarLootChest(ItemContainerId.LUNAR_LOOT_CHEST, bankStorage, client, config);
+		lunarLootChest = new LunarLootChest(ItemContainerId.LUNAR_LOOT_CHEST, bankStorage, provider);
 		storages.add(lunarLootChest);
 
-		new DepositBox(client, inventoryStorage, bankStorage);
+		new DepositBox(inventoryStorage, bankStorage, provider);
 
 		storageOverlays = new StorageOverlay[]{
-			new InventoryOverlay(TicTac7xStorageConfig.inventory, inventoryStorage, WidgetId.INVENTORY, client, clientThread, overlayManager, configManager, itemManager, config),
-			new StorageOverlay(TicTac7xStorageConfig.bank, bankStorage, WidgetId.BANK, client, clientThread, overlayManager, configManager, itemManager, config)
+			new InventoryOverlay(TicTac7xStorageConfig.inventory, inventoryStorage, WidgetId.INVENTORY, provider),
+			new BankOverlay(TicTac7xStorageConfig.bank, bankStorage, WidgetId.BANK, provider)
 		};
+		for (final StorageOverlay storageOverlay : storageOverlays) {
+			overlayManager.add(storageOverlay);
+		}
 
 		// Panel
-		storagePanel = new StoragePanel(Arrays.asList(bankStorage, homeStorage), clientThread, itemManager);
+		storagePanel = new StoragePanel(Arrays.asList(bankStorage, homeStorage), provider);
 		panelNavigator = new PanelNavigator(clientToolbar, config, storagePanel);
 
 		// Load storage items from config.
@@ -128,7 +148,7 @@ public class TicTac7xStoragePlugin extends Plugin {
 		panelNavigator.shutDown();
 
 		for (final StorageOverlay storageOverlay : storageOverlays) {
-			storageOverlay.shutDown();
+			overlayManager.remove(storageOverlay);
 		}
 	}
 

@@ -98,11 +98,19 @@ public interface TicTac7xStorageConfig extends Config {
 		) default boolean hideBank() { return true; }
 
 		@ConfigItem(
+			keyName = bank + "hide_zero",
+			name = "Hide 0 quantity items",
+			description = "Don't show the item in the overlay if theres none in the bank",
+			section = bank,
+			position = 3
+		) default boolean hideBankZeroQuantityItems() { return true; }
+
+		@ConfigItem(
 			keyName = bank + visible,
 			name = "Visible items",
 			description = "Names of the items to show in the bank overlay (all if empty)",
 			section = bank,
-			position = 3
+			position = 4
 		) default String getBankVisible() { return "Coins"; }
 
 		@ConfigItem(
@@ -110,7 +118,7 @@ public interface TicTac7xStorageConfig extends Config {
 			name = "Hidden items",
 			description = "Names of the items to hide in the bank overlay",
 			section = bank,
-			position = 4
+			position = 5
 		) default String getBankHidden() { return ""; }
 
 	@ConfigSection(
