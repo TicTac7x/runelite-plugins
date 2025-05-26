@@ -1,15 +1,10 @@
 package tictac7x.storage.overlays;
 
-import net.runelite.api.Client;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
-import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.util.ImageUtil;
-import tictac7x.storage.TicTac7xStorageConfig;
 import tictac7x.storage.storage.Storage;
+import tictac7x.storage.utils.Provider;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -24,8 +19,8 @@ public class InventoryOverlay extends StorageOverlay {
     private Optional<ImageComponent> freeWithInventoryImage = Optional.empty();
     private Optional<ImageComponent> freeWithLabel = Optional.empty();
 
-    public InventoryOverlay(final String configKey, final Storage storage, final int[] widgetIds, final Client client, final ClientThread clientThread, final OverlayManager overlayManager, final ConfigManager configManager, final ItemManager itemManager, final TicTac7xStorageConfig config) {
-        super(configKey, storage, widgetIds, client, clientThread, overlayManager, configManager, itemManager, config);
+    public InventoryOverlay(final String configKey, final Storage storage, final int[] widgetIds, final Provider provider) {
+        super(configKey, storage, widgetIds, provider);
         this.inventoryIcon = ImageUtil.loadImageResource(getClass(), "/inventory.png");
         storage.addOnChangeListener(this::updateFreeImages);
     }
@@ -37,7 +32,7 @@ public class InventoryOverlay extends StorageOverlay {
 
     @Override
     protected void renderBefore() {
-        switch (config.getInventoryEmpty()) {
+        switch (provider.config.getInventoryEmpty()) {
             case TOP:
                 this.renderFreeWithLabel();
                 return;
@@ -50,7 +45,7 @@ public class InventoryOverlay extends StorageOverlay {
 
     @Override
     protected void renderAfter() {
-        switch (config.getInventoryEmpty()) {
+        switch (provider.config.getInventoryEmpty()) {
             case LAST:
                 if (freeWithInventoryImage.isPresent()) {
                     itemsPanelComponent.getChildren().add(freeWithInventoryImage.get());

@@ -1,14 +1,18 @@
 package tictac7x.storage.panel;
 
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.util.ImageUtil;
 import tictac7x.storage.storage.StorageItem;
 import tictac7x.storage.utils.ItemContainerId;
+import tictac7x.storage.utils.Provider;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 
@@ -18,7 +22,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelItem extends JLayeredPane {
-    private final ItemManager itemManager;
+    private final Provider provider;
     private final StorageItem item;
     public final int itemContainerId;
 
@@ -28,8 +32,8 @@ public class PanelItem extends JLayeredPane {
     private static final int ICON_SIZE = 15;
 
 
-    public PanelItem(final StorageItem item, final int itemContainerId, final ItemManager itemManager) {
-        this.itemManager = itemManager;
+    public PanelItem(final StorageItem item, final int itemContainerId, final Provider provider) {
+        this.provider = provider;
         this.item = item;
         this.itemContainerId = itemContainerId;
 
@@ -49,7 +53,7 @@ public class PanelItem extends JLayeredPane {
         final int itemLabelWidth = ITEM_WIDTH + (hasIcon ? - ICON_SIZE - 7 : -0);
         final JLabel itemLabel = new JLabel();
         itemLabel.setPreferredSize(new Dimension(itemLabelWidth, ITEM_HEIGHT));
-        itemLabel.setIcon(getCachedIcon(item.id, item.getQuantity(), itemManager));
+        itemLabel.setIcon(getCachedIcon(item.id, item.getQuantity(), provider.itemManager));
         itemLabel.setText(item.name);
         itemLabel.setHorizontalAlignment(SwingConstants.LEFT);
         itemLabel.setBounds(5, 0, itemLabelWidth - 5, ITEM_HEIGHT);

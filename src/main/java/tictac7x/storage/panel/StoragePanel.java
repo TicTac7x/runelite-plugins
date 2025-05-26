@@ -1,25 +1,25 @@
 package tictac7x.storage.panel;
 
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import tictac7x.storage.storage.Storage;
+import tictac7x.storage.utils.Provider;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
 import java.util.List;
 
 public class StoragePanel extends PluginPanel {
-    private final ClientThread clientThread;
-
+    private final Provider provider;
     private final PanelItems panelItems;
     private final List<Storage> storages;
     private String search = "";
 
-    public StoragePanel(final List<Storage> storages, final ClientThread clientThread, final ItemManager itemManager) {
+    public StoragePanel(final List<Storage> storages, final Provider provider) {
         super(false);
-        this.clientThread = clientThread;
+        this.provider = provider;
         this.storages = storages;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -29,7 +29,7 @@ public class StoragePanel extends PluginPanel {
         add(panelSearch, BorderLayout.NORTH);
 
         // Panel items.
-        panelItems = new PanelItems(itemManager);
+        panelItems = new PanelItems(provider);
 
         // Panel scroller.
         final JScrollPane scroller = new JScrollPane(panelItems);
@@ -48,7 +48,7 @@ public class StoragePanel extends PluginPanel {
     public void searchItems(final String search) {
         this.search = search;
 
-        clientThread.invoke(() -> {
+        provider.clientThread.invoke(() -> {
             panelItems.update(storages, search);
         });
     }
