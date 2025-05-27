@@ -150,7 +150,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Amulet of chemistry and Alchemist's amulet improvements.<br>" +
-		"<colHIGHLIGHT>* Aether runes support for Binding necklace."
+		"<colHIGHLIGHT>* Aether runes support for Binding necklace.<br>" +
+		"<colHIGHLIGHT>* Quetzal whistle fixes."
 	;
 
 	@Inject

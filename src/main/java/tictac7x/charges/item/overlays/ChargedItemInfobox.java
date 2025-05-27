@@ -53,8 +53,8 @@ public class ChargedItemInfobox extends InfoBox {
         if (
             !provider.config.showInfoboxes() ||
             !isChargedItemInfoboxEnabled() ||
-            chargedItem.getChargesString(itemId).equals(INFINITE_SYMBOL) && !provider.config.showUnlimited() ||
-            (!chargedItem.inInventory() && !chargedItem.inEquipment())
+            (!chargedItem.inInventory() && !chargedItem.inEquipment()) ||
+            chargedItem.getChargesString(itemId).equals(INFINITE_SYMBOL) && !provider.config.showUnlimited()
         ) {
             return false;
         }

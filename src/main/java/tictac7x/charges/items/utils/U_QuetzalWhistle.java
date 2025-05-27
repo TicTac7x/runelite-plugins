@@ -43,7 +43,7 @@ public class U_QuetzalWhistle extends ChargedItem {
             new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemId.QUETZAL_WHISTLE_PERFECTED).setFixedCharges(50),
 
             // Partially charged.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {
+            new OnItemContainerChanged(ItemContainerId.INVENTORY).onMenuOption("Recharge-whistle").hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {
                 for (final StorageItem item : itemsDifference.getItems()) {
                     switch (item.getId()) {
                         case ItemId.QUETZAL_FEED:

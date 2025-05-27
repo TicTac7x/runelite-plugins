@@ -49,12 +49,15 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     public void setCharges(int charges) {
-        charges =
-            // Unlimited
-            charges == ChargeId.UNLIMITED ? charges :
+        // Minimum of 0 charges.
+        if (charges != ChargeId.UNKNOWN && charges != ChargeId.UNLIMITED) {
+            charges = Math.max(0, charges);
+        }
 
-            // 0 -> charges
-            Math.max(0, charges);
+        // Maximum charges check.
+        if (getMaxCharges().isPresent()) {
+            charges = Math.min(charges, getMaxCharges().get());
+        }
 
         if (this.getChargesFromConfig() != charges) {
             provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey, charges);

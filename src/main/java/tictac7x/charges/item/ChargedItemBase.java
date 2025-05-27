@@ -17,6 +17,7 @@ import tictac7x.charges.store.ids.ChargeId;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
+import java.util.Optional;
 
 public abstract class ChargedItemBase {
     public final Provider provider;
@@ -131,6 +132,16 @@ public abstract class ChargedItemBase {
 
     public boolean needsToBeEquipped() {
         return getCurrentItem().needsToBeEquipped.isPresent();
+    }
+
+    public Optional<Integer> getMaxCharges() {
+        for (final TriggerItem item : items) {
+            if (item.itemId == itemId && item.maxCharges.isPresent()) {
+                return item.maxCharges;
+            }
+        }
+
+        return Optional.empty();
     }
 
     private Color getColorForCharges(final int charges) {
