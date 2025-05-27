@@ -5,7 +5,6 @@ import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.VarbitId;
 
 public class C_MagicCape extends ChargedItem {
     public C_MagicCape(final Provider provider) {
@@ -17,7 +16,14 @@ public class C_MagicCape extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[] {
-            new OnVarbitChanged(VarbitId.MAGIC_CAPE_CHARGES_USED).varbitValueConsumer(chargesUsed -> setCharges(5 - chargesUsed)),
+            // After spellbook swap.
+            new OnChatMessage("You have changed your spellbook (?<used>.+)/(?<total>.+) times today.").setDifferenceCharges(),
+
+            // Spellbook swap widget.
+            new OnWidgetLoaded(219, 1, 0).text("Choose spellbook: \\((?<charges>.+)/5 left\\)").setDynamically(),
+
+            // Daily reset.
+            new OnResetDaily().setFixedCharges(5),
         };
     }
 }

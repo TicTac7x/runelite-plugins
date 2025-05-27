@@ -575,6 +575,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		final CustomHitsplatApplied hitsplatApplied = new CustomHitsplatApplied(event, client);
 		store.onHitSplatApplied(hitsplatApplied);
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(hitsplatApplied));
+
+		System.out.println(hitsplatApplied);
 	}
 
 	@Subscribe
