@@ -152,7 +152,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Ring of returning added.<br>" +
 		"<colHIGHLIGHT>* Amulet of chemistry and Alchemist's amulet improvements.<br>" +
 		"<colHIGHLIGHT>* Aether runes support for Binding necklace.<br>" +
-		"<colHIGHLIGHT>* Quetzal whistle fixes."
+		"<colHIGHLIGHT>* Quetzal whistle fixes.<br>" +
+		"<colHIGHLIGHT>* Expeditious bracelet fixes."
 	;
 
 	@Inject

@@ -24,7 +24,7 @@ public class J_ExpeditiousBracelet extends ChargedItem {
             new OnChatMessage("Your expeditious bracelet helps you progress your slayer( task)? faster. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Bracelet fully used.
-            new OnChatMessage("Your expeditious bracelet helps you progress your slayer faster. It then crumbles to dust.").setFixedCharges(30),
+            new OnChatMessage("Your expeditious bracelet helps you progress your slayer task faster. It then crumbles to dust.").setFixedCharges(30),
 
             // Break.
             new OnChatMessage("The bracelet shatters. Your next expeditious bracelet will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),
