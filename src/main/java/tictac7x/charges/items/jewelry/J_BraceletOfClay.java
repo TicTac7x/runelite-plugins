@@ -41,7 +41,7 @@ public class J_BraceletOfClay extends ChargedItem {
             }),
 
             // Crumbles.
-            new OnChatMessage("Your bracelet of clay crumbles to dust.").setFixedCharges(28).notification("Your clay bracelet crumbles to dust.")
+            new OnChatMessage("Your bracelet of clay crumbles to dust.").setFixedCharges(28),
         };
     }
 }

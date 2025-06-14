@@ -20,7 +20,7 @@ public class W_TridentOfTheSwampE extends ChargedItem {
 
         this.triggers = new TriggerBase[] {
             // Ran out of charges.
-            new OnChatMessage("Your Trident of the swamp \\(e\\) has run out of charges.").notification().setFixedCharges(0),
+            new OnChatMessage("Your Trident of the swamp \\(e\\) has run out of charges.").setFixedCharges(0),
 
             // Check, one charge left.
             new OnChatMessage("Your Trident of the swamp \\(e\\) has one charge.").setFixedCharges(1),

@@ -32,7 +32,7 @@ public class U_BoneCrusher extends ChargedItemWithStatus {
             new OnChatMessage("You remove all the charges from the bonecrusher( necklace)?.").setFixedCharges(0),
 
             // Ran out.
-            new OnChatMessage("Your bonecrusher( necklace)? has run out of charges.").notification().setFixedCharges(0),
+            new OnChatMessage("Your bonecrusher( necklace)? has run out of charges.").setFixedCharges(0),
 
             // Activate.
             new OnChatMessage("The bonecrusher( necklace)? has been deactivated").deactivate(),

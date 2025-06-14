@@ -83,12 +83,6 @@ public abstract class ListenerBase {
             triggerUsed = true;
         }
 
-        // Notification
-        if (trigger.notificationCustom.isPresent()) {
-            provider.notifier.notify(trigger.notificationCustom.get());
-            triggerUsed = true;
-        }
-
         return triggerUsed;
     }
 

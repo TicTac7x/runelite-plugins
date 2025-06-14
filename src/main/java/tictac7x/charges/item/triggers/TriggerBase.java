@@ -33,8 +33,6 @@ public abstract class TriggerBase {
     public Optional<Integer> decreaseCharges = Optional.empty();
     public Optional<Runnable> consumer = Optional.empty();
 
-    public Optional<String> notificationCustom = Optional.empty();
-
     // Storage.
     public Optional<Boolean> emptyStorage = Optional.empty();
     public Optional<Boolean> emptyStorageToInventory = Optional.empty();
@@ -136,11 +134,6 @@ public abstract class TriggerBase {
 
     public TriggerBase deactivate() {
         this.deactivate = Optional.of(true);
-        return this;
-    }
-
-    public TriggerBase notification(final String notification) {
-        this.notificationCustom = Optional.of(notification);
         return this;
     }
 

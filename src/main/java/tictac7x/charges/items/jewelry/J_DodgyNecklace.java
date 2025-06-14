@@ -25,7 +25,7 @@ public class J_DodgyNecklace extends ChargedItem {
             new OnChatMessage("Your dodgy necklace protects you. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Breaks.
-            new OnChatMessage("Your dodgy necklace protects you. It then crumbles to dust.").setFixedCharges(10).notification("Your dodgy necklace crumbles to dust."),
+            new OnChatMessage("Your dodgy necklace protects you. It then crumbles to dust.").setFixedCharges(10),
 
             // Break.
             new OnChatMessage("The necklace shatters. Your next dodgy necklace will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),

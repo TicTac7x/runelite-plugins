@@ -34,7 +34,7 @@ public class U_SoulBearer extends ChargedItem {
             new OnChatMessage("Your soul bearer carries the ensouled heads to your bank. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Last charge used.
-            new OnChatMessage("Your soul bearer carries the ensouled heads to your bank. It has run out of charges.").notification().setFixedCharges(0),
+            new OnChatMessage("Your soul bearer carries the ensouled heads to your bank. It has run out of charges.").setFixedCharges(0),
 
             // Auto-charge.
             new OnChatMessage("The banker charges your Soul bearer using (?<bloodrune>.+)x Blood rune.*").matcherConsumer(m -> {

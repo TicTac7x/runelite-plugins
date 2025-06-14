@@ -21,7 +21,7 @@ public class W_TridentOfTheSeas extends ChargedItem {
 
         this.triggers = new TriggerBase[] {
             // Ran out of charges.
-            new OnChatMessage("Your Trident of the seas has run out of charges.").notification().setFixedCharges(0),
+            new OnChatMessage("Your Trident of the seas has run out of charges.").setFixedCharges(0),
 
             // Check, one charge left.
             new OnChatMessage("Your Trident of the seas has one charge.").setFixedCharges(1),

@@ -27,7 +27,7 @@ public class J_RingOfRecoil extends ChargedItem {
             new OnChatMessage("The ring is fully charged. There would be no point in breaking it.").onItemClick().setFixedCharges(40),
 
             // Shattered.
-            new OnChatMessage("Your Ring of Recoil has shattered.").notification().setFixedCharges(40),
+            new OnChatMessage("Your Ring of Recoil has shattered.").setFixedCharges(40),
 
             // Take damage.
             new OnHitsplatApplied(HitsplatTarget.SELF, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().isEquipped().decreaseCharges(1),

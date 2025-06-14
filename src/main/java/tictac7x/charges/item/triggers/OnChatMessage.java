@@ -13,7 +13,6 @@ public class OnChatMessage extends TriggerBase {
     public Optional<Boolean> decreaseDynamically = Optional.empty();
     public Optional<Boolean> useDifference = Optional.empty();
     public Optional<Consumer<Matcher>> matcherConsumer = Optional.empty();
-    public Optional<Boolean> notification = Optional.empty();
     public Optional<Consumer<String>> stringConsumer = Optional.empty();
 
     public OnChatMessage(final String message) {
@@ -27,11 +26,6 @@ public class OnChatMessage extends TriggerBase {
 
     public OnChatMessage matcherConsumer(final Consumer<Matcher> consumer) {
         this.matcherConsumer = Optional.of(consumer);
-        return this;
-    }
-
-    public OnChatMessage notification() {
-        this.notification = Optional.of(true);
         return this;
     }
 
