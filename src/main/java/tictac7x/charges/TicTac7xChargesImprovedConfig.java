@@ -688,6 +688,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean ringOfRecoilInfobox() { return true; }
 
         @ConfigItem(
+            keyName = ring_of_returning + _infobox,
+            name = "Ring of returning",
+            description = "",
+            section = infoboxes
+        ) default boolean ringOfReturningInfobox() { return true; }
+
+        @ConfigItem(
             keyName = ring_of_shadows + _infobox,
             name = "Ring of shadows",
             description = "",
@@ -1624,6 +1631,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean ringOfRecoilOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = ring_of_returning + _overlay,
+            name = "Ring of returning",
+            description = "",
+            section = overlays
+        ) default boolean ringOfReturningOverlay() { return true; }
 
         @ConfigItem(
             keyName = ring_of_shadows + _overlay,
