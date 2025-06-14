@@ -1,5 +1,6 @@
 package tictac7x.charges.items.shields;
 
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -24,7 +25,7 @@ public class S_CrystalShield extends ChargedItem {
             new OnChatMessage("Your crystal shield has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
             // Get hit.
-            new OnHitsplatApplied(HitsplatTarget.SELF).moreThanZeroDamage().isEquipped().decreaseCharges(1)
+            new OnHitsplatApplied(HitsplatTarget.SELF, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().isEquipped().decreaseCharges(1)
         };
     }
 }

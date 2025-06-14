@@ -1,5 +1,6 @@
 package tictac7x.charges.items.jewelry;
 
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
@@ -34,7 +35,7 @@ public class J_RingOfSuffering extends ChargedItemWithStatus {
             new OnChatMessage("You load your ring with .+ rings? of recoil. It now has (?<charges>.+) recoil charges.").setDynamicallyCharges(),
 
             // Get hit.
-            new OnHitsplatApplied(HitsplatTarget.SELF).moreThanZeroDamage().isEquipped().isActivated().decreaseCharges(1),
+            new OnHitsplatApplied(HitsplatTarget.SELF, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().isEquipped().isActivated().decreaseCharges(1),
 
             // Disable.
             new OnChatMessage("You disable the recoil effect of your ring.").deactivate(),

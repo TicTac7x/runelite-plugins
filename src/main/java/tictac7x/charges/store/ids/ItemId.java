@@ -1587,4 +1587,11 @@ public final class ItemId {
     public static final int TOA_SILK_DRESSING_2 = ItemID.TOA_SUPPLY_HEAL_OVERTIME_2;
     public static final int TOA_SMELLING_SALTS_1 = ItemID.TOA_SUPPLY_STATS_1;
     public static final int TOA_SMELLING_SALTS_2 = ItemID.TOA_SUPPLY_STATS_2;
+
+    // Ring of returning
+    public static final int RING_OF_RETURNING_1 = ItemID.RING_OF_RETURNING_1;
+    public static final int RING_OF_RETURNING_2 = ItemID.RING_OF_RETURNING_2;
+    public static final int RING_OF_RETURNING_3 = ItemID.RING_OF_RETURNING_3;
+    public static final int RING_OF_RETURNING_4 = ItemID.RING_OF_RETURNING_4;
+    public static final int RING_OF_RETURNING_5 = ItemID.RING_OF_RETURNING_5;
 }

@@ -31,7 +31,7 @@ public class J_EfaritaysAid extends ChargedItem {
             new OnWidgetLoaded(219, 1, 0).text("Status: (?<charges>.+) charges? left.").setDynamically().onMenuOption("Break").onMenuTarget("Efaritay's aid"),
 
             // Attack tier-2 vampyre.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY).hasTargetName("Vampyre Juvinate").isEquipped().multiTrigger().decreaseCharges(1),
+            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).hasTargetName("Vampyre Juvinate").isEquipped().multiTrigger().decreaseCharges(1),
 
             // Additional charge used with silver melee weapon on successful hit.
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).hasTargetName("Vampyre Juvinate").combatStyle(CombatStyle.MELEE).isEquipped().multiTrigger().itemEquipped(

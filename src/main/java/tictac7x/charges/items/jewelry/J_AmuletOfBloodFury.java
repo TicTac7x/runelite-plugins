@@ -8,6 +8,7 @@ import tictac7x.charges.item.triggers.OnHitsplatApplied;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.enums.CombatStyle;
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.enums.HitsplatTarget;
 import tictac7x.charges.store.ids.ItemId;
 
@@ -30,7 +31,7 @@ public class J_AmuletOfBloodFury extends ChargedItem {
             new OnChatMessage("You have successfully added .+ hits? to your Amulet of blood fury. It will now work for (?<charges>.+) more hits?.").setDynamicallyCharges(),
 
             // Take damage.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY).combatStyle(CombatStyle.MELEE).isEquipped().decreaseCharges(1),
+            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).combatStyle(CombatStyle.MELEE).isEquipped().decreaseCharges(1),
         };
     }
 }

@@ -273,6 +273,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_ExplorersRing(provider),
 			new J_RingOfPursuit(provider),
 			new J_RingOfRecoil(provider),
+			new J_RingOfReturning(provider),
 			new J_RingOfShadows(provider),
 			new J_SlayerRing(provider),
 			new J_RingOfSuffering(provider),
@@ -575,8 +576,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		final CustomHitsplatApplied hitsplatApplied = new CustomHitsplatApplied(event, client);
 		store.onHitSplatApplied(hitsplatApplied);
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(hitsplatApplied));
-
-		System.out.println(hitsplatApplied);
 	}
 
 	@Subscribe

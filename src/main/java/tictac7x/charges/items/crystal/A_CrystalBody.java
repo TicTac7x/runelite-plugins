@@ -1,5 +1,6 @@
 package tictac7x.charges.items.crystal;
 
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -36,7 +37,7 @@ public class A_CrystalBody extends ChargedItem {
 
         this.triggers = new TriggerBase[] {
             new OnChatMessage("Your crystal body has (?<charges>.+) charges? remaining").setDynamicallyCharges().onItemClick(),
-            new OnHitsplatApplied(SELF).isEquipped().decreaseCharges(1)
+            new OnHitsplatApplied(SELF, HitsplatGroup.SUCCESSFUL).isEquipped().decreaseCharges(1)
         };
     }
 }

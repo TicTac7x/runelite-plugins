@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -24,7 +25,7 @@ public class W_Arclight extends ChargedItem {
             new OnChatMessage("Your arclight has (?<charges>.+) charges?( left)?.").setDynamicallyCharges(),
             new OnChatMessage("Your arclight can perform (?<charges>.+) more attacks.").setDynamicallyCharges(),
             new OnChatMessage("Your arclight has degraded.").notification().setFixedCharges(0),
-            new OnHitsplatApplied(ENEMY).isEquipped().decreaseCharges(1),
+            new OnHitsplatApplied(ENEMY, HitsplatGroup.SUCCESSFUL).isEquipped().decreaseCharges(1),
         };
     }
 }

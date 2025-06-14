@@ -3,6 +3,9 @@ package tictac7x.charges.store.ids;
 import net.runelite.api.gameval.AnimationID;
 
 public final class AnimationId {
+    public static final int HUMAN_SCYTHE_SWEEP = AnimationID.HUMAN_SCYTHE_SWEEP;
+    public static final int HUMAN_SPEAR_SPIKE = AnimationID.HUMAN_SPEAR_SPIKE;
+    public static final int HUMAN_SWORD_SLASH = AnimationID.HUMAN_SWORD_SLASH;
     public static final int HUMAN_BOW = AnimationID.HUMAN_BOW;
     public static final int CHUGGING_BARREL_DRINK = AnimationID.PREPOT_DEVICE_DRINK_FULL;
     public static final int SLAYER_STAFF_CAST = AnimationID.SLAYER_MAGICDART_CAST;

@@ -1,5 +1,7 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.item.triggers.OnAnimationChanged;
+import tictac7x.charges.store.ids.AnimationId;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -23,8 +25,11 @@ public class W_CrystalHalberd extends ChargedItem {
             // Check.
             new OnChatMessage("Your crystal halberd has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
-            // Attack.
-            new OnHitsplatApplied(ENEMY).oncePerGameTick().isEquipped().decreaseCharges(1),
+            // Attack with stab.
+            new OnAnimationChanged(AnimationId.HUMAN_SPEAR_SPIKE).isEquipped().decreaseCharges(1),
+
+            // Attack with slash.
+            new OnAnimationChanged(AnimationId.HUMAN_SCYTHE_SWEEP).isEquipped().decreaseCharges(1),
         };
     }
 }

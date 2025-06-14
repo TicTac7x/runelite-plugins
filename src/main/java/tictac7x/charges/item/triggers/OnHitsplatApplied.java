@@ -16,11 +16,6 @@ public class OnHitsplatApplied extends TriggerBase {
     public Optional<CombatStyle> combatStyle = Optional.empty();
     public int triggerTick = 0;
 
-    public OnHitsplatApplied(final HitsplatTarget hitsplatTarget) {
-        this.hitsplatTarget = hitsplatTarget;
-        this.hitsplatGroup = HitsplatGroup.SUCCESSFUL;
-    }
-
     public OnHitsplatApplied(final HitsplatTarget hitsplatTarget, final HitsplatGroup hitsplatGroup) {
         this.hitsplatTarget = hitsplatTarget;
         this.hitsplatGroup = hitsplatGroup;

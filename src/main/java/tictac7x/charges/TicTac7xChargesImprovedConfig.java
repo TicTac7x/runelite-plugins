@@ -99,6 +99,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String ring_of_forging = "ring_of_forging";
     String ring_of_pursuit = "ring_of_pursuit";
     String ring_of_recoil = "ring_of_recoil";
+    String ring_of_returning = "ring_of_returning";
     String ring_of_shadows = "ring_of_shadows";
     String ring_of_suffering = "ring_of_suffering";
     String ring_of_suffering_status = "ring_of_suffering_status";

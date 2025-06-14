@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -34,7 +35,7 @@ public class W_ScytheOfVitur extends ChargedItem {
             new OnChatMessage("You apply (?<charges>.+) charges to your (Holy s|Sanguine s|S)cythe of vitur.").setDynamicallyCharges(),
 
             // Attack.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY).moreThanZeroDamage().oncePerGameTick().isEquipped().decreaseCharges(1),
+            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().oncePerGameTick().isEquipped().decreaseCharges(1),
         };
     }
 }

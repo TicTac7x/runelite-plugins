@@ -1,5 +1,6 @@
 package tictac7x.charges.items.jewelry;
 
+import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -29,7 +30,7 @@ public class J_RingOfRecoil extends ChargedItem {
             new OnChatMessage("Your Ring of Recoil has shattered.").notification().setFixedCharges(40),
 
             // Take damage.
-            new OnHitsplatApplied(HitsplatTarget.SELF).moreThanZeroDamage().isEquipped().decreaseCharges(1),
+            new OnHitsplatApplied(HitsplatTarget.SELF, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().isEquipped().decreaseCharges(1),
 
             // Check from break dialog.
             new OnWidgetLoaded(219, 1, 0).text("Status: (?<charges>.+) damage points? left.").setDynamically(),
