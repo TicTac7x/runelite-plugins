@@ -70,9 +70,17 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             }
         }
 
-        // Successful hitsplat check.
+        // Hitsplat check.
         if (trigger.hitsplatGroup == HitsplatGroup.SUCCESSFUL) {
             if (
+                event.type != HitsplatID.DAMAGE_ME &&
+                event.type != HitsplatID.DAMAGE_MAX_ME
+            ) {
+                return false;
+            }
+        } else if (trigger.hitsplatGroup == HitsplatGroup.ALL) {
+            if (
+                event.type != HitsplatID.BLOCK_ME &&
                 event.type != HitsplatID.DAMAGE_ME &&
                 event.type != HitsplatID.DAMAGE_MAX_ME
             ) {
@@ -86,8 +94,17 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
         }
 
         // Name check.
-        if (trigger.hasTargetName.isPresent() && (event.actor.getName() == null || !event.actor.getName().equals(trigger.hasTargetName.get()))) {
-            return false;
+        if (trigger.hasTargetName.isPresent()) {
+            boolean nameCheck = false;
+            for (final String name : trigger.hasTargetName.get()) {
+                if (event.actor.getName() != null && event.actor.getName().equals(name)) {
+                    nameCheck = true;
+                    break;
+                }
+            }
+            if (!nameCheck) {
+                return false;
+            }
         }
 
         // Once per game tick check.

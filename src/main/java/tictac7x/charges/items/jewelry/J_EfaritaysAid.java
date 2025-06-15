@@ -24,49 +24,34 @@ public class J_EfaritaysAid extends ChargedItem {
             // Break.
             new OnChatMessage("The ring shatters. Your next Efaritay's aid ring will start afresh from (?<charges>.+) charges.").setDynamicallyCharges(),
 
+            // Low charges.
+            new OnChatMessage("Your ring has 10 charges left.").isEquipped().setFixedCharges(10),
+
             // Out of charges.
-            new OnChatMessage("Your ring crumbles to dust.").setFixedCharges(0),
+            new OnChatMessage("Your ring crumbles to dust.").setFixedCharges(200),
 
             // Charges from break dialog.
             new OnWidgetLoaded(219, 1, 0).text("Status: (?<charges>.+) charges? left.").setDynamically().onMenuOption("Break").onMenuTarget("Efaritay's aid"),
 
             // Attack tier-2 vampyre.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).hasTargetName("Vampyre Juvinate").isEquipped().multiTrigger().decreaseCharges(1),
+            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).hasTargetName(
+                // Tier 1
+                "Count Draynor",
+                "Dessous",
+                "Feral Vampyre",
+                "Kroy",
+                "Vampyre Juvenile",
 
-            // Additional charge used with silver melee weapon on successful hit.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).hasTargetName("Vampyre Juvinate").combatStyle(CombatStyle.MELEE).isEquipped().multiTrigger().itemEquipped(
-                ItemId.BLESSED_AXE,
-                ItemId.IVANDIS_FLAIL,
-                ItemId.BLISTERWOOD_FLAIL,
-                ItemId.SILVER_SICKLE,
-                ItemId.SILVER_SICKLE_BLESSED,
-                ItemId.EMERALD_SICKLE_BLESSED,
-                ItemId.EMERALD_SICKLE_BLESSED_ENCHANTED,
-                ItemId.RUBY_SICKLE_BLESSED,
-                ItemId.RUBY_SICKLE_BLESSED_ENCHANTED,
-                ItemId.BLISTERWOOD_SICKLE,
-                ItemId.SILVERLIGHT,
-                ItemId.DARKLIGHT,
-                ItemId.ARCLIGHT,
-                ItemId.ARCLIGHT_UNCHARGED,
-                ItemId.EMBERLIGHT,
-                ItemId.ROD_OF_IVANDIS_1,
-                ItemId.ROD_OF_IVANDIS_2,
-                ItemId.ROD_OF_IVANDIS_3,
-                ItemId.ROD_OF_IVANDIS_4,
-                ItemId.ROD_OF_IVANDIS_5,
-                ItemId.ROD_OF_IVANDIS_6,
-                ItemId.ROD_OF_IVANDIS_7,
-                ItemId.ROD_OF_IVANDIS_8,
-                ItemId.ROD_OF_IVANDIS_9,
-                ItemId.ROD_OF_IVANDIS_10,
-                ItemId.WOLFBANE
-            ).decreaseCharges(1),
+                // Tier 2
+                "Vampyre Juvinate",
 
-            // Additional charge used with silver bolts on successful hit.
-            new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).hasTargetName("Vampyre Juvinate").combatStyle(CombatStyle.RANGED).isEquipped().multiTrigger().itemEquipped(
-                ItemId.SILVER_BOLTS
-            ).decreaseCharges(1),
+                // Tier 3
+                "Damien Leucurte",
+                "Ranis Drakan",
+                "Vanstrom Klause",
+                "Vyrewatch Sentinel",
+                "Vyrewatch"
+            ).isEquipped().decreaseCharges(1),
         };
     }
 }

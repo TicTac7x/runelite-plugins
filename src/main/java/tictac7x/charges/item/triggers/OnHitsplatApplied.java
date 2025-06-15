@@ -11,7 +11,7 @@ public class OnHitsplatApplied extends TriggerBase {
     public final HitsplatGroup hitsplatGroup;
 
     public Optional<Boolean> moreThanZeroDamage = Optional.empty();
-    public Optional<String> hasTargetName = Optional.empty();
+    public Optional<String[]> hasTargetName = Optional.empty();
     public Optional<Boolean> oncePerGameTick = Optional.empty();
     public Optional<CombatStyle> combatStyle = Optional.empty();
     public int triggerTick = 0;
@@ -26,7 +26,7 @@ public class OnHitsplatApplied extends TriggerBase {
         return this;
     }
 
-    public OnHitsplatApplied hasTargetName(final String name) {
+    public OnHitsplatApplied hasTargetName(final String ...name) {
         this.hasTargetName = Optional.of(name);
         return this;
     }
