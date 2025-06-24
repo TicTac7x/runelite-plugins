@@ -583,7 +583,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onAnimationChanged(final AnimationChanged event) {
-		if (event.getActor() != client.getLocalPlayer() || event.getActor().getAnimation() == -1) return;
+		if (event.getActor().getAnimation() == -1) return;
 
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onAnimationChanged(event));
 

@@ -7,9 +7,12 @@ import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.enums.CombatStyle;
 import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.enums.HitsplatTarget;
+import tictac7x.charges.store.ids.AnimationId;
 import tictac7x.charges.store.ids.ItemId;
 
 public class J_EfaritaysAid extends ChargedItem {
+    private boolean attackedVampyre = false;
+
     public J_EfaritaysAid(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.efaritays_aid, ItemId.EFARITAYS_AID, provider);
 
@@ -51,7 +54,15 @@ public class J_EfaritaysAid extends ChargedItem {
                 "Vanstrom Klause",
                 "Vyrewatch Sentinel",
                 "Vyrewatch"
-            ).isEquipped().decreaseCharges(1),
+            ).isEquipped().decreaseCharges(1).consumer(() -> {
+                attackedVampyre = true;
+            }),
+            new OnAnimationChanged(AnimationId.THRALL_SKELETON, AnimationId.THRALL_GHOST, AnimationId.THRALL_ZOMBIE).actorName("null").isEquipped().consumer(() -> {
+                if (attackedVampyre) {
+                    increaseCharges(1);
+                    attackedVampyre = false;
+                }
+            }),
         };
     }
 }

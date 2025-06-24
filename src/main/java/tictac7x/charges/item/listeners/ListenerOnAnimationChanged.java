@@ -6,6 +6,8 @@ import tictac7x.charges.item.triggers.OnAnimationChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
+import java.util.Objects;
+
 public class ListenerOnAnimationChanged extends ListenerBase {
     public ListenerOnAnimationChanged(final Provider provider, final ChargedItemBase chargedItem) {
         super(provider, chargedItem);
@@ -30,8 +32,13 @@ public class ListenerOnAnimationChanged extends ListenerBase {
         if (!(triggerBase instanceof OnAnimationChanged)) return false;
         final OnAnimationChanged trigger = (OnAnimationChanged) triggerBase;
 
+        // Actor name check.
+        if (trigger.actorName.isPresent()) {
+            if (!Objects.equals(event.getActor().getName(), trigger.actorName.get())) {
+                return false;
+            }
         // Player check.
-        if (event.getActor() != provider.client.getLocalPlayer()) {
+        } else if (event.getActor() != provider.client.getLocalPlayer()) {
             return false;
         }
 

@@ -86,6 +86,8 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             ) {
                 return false;
             }
+        } else if (trigger.hitsplatGroup == HitsplatGroup.BLOCKED && event.type != HitsplatID.BLOCK_ME) {
+            return false;
         }
 
         // More than zero damage.

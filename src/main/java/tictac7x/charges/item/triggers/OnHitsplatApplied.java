@@ -31,12 +31,12 @@ public class OnHitsplatApplied extends TriggerBase {
         return this;
     }
 
-    public TriggerBase oncePerGameTick() {
+    public OnHitsplatApplied oncePerGameTick() {
         this.oncePerGameTick = Optional.of(true);
         return this;
     }
 
-    public TriggerBase combatStyle(final CombatStyle combatStyle) {
+    public OnHitsplatApplied combatStyle(final CombatStyle combatStyle) {
         this.combatStyle = Optional.of(combatStyle);
         return this;
     }
