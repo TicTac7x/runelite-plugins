@@ -67,7 +67,21 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             new StorableItem(ItemId.LUMBERJACK_BOOTS).specificOrder(31),
             new StorableItem(ItemId.WOODCUTTING_CAPE).specificOrder(32),
             new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED).specificOrder(33)
-        );
+        ).setMaximumComboQuantity(new int[]{
+            ItemId.LOGS,
+            ItemId.ACHEY_TREE_LOGS,
+            ItemId.OAK_LOGS,
+            ItemId.WILLOW_LOGS,
+            ItemId.TEAK_LOGS,
+            ItemId.JUNIPER_LOGS,
+            ItemId.MAPLE_LOGS,
+            ItemId.MAHOGANY_LOGS,
+            ItemId.ARCTIC_PINE_LOGS,
+            ItemId.YEW_LOGS,
+            ItemId.BLISTERWOOD_LOGS,
+            ItemId.MAGIC_LOGS,
+            ItemId.REDWOOD_LOGS,
+        }, 28);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.FORESTRY_BASKET),

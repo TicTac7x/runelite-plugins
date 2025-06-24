@@ -10,7 +10,9 @@ import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.utils.MaximumComboQuantity;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class Storage {
@@ -28,6 +30,7 @@ public class Storage {
     public boolean emptyIsNegative = false;
     private Optional<Integer> maximumIndividualQuantity = Optional.empty();
     private StorableItem[] storableItems = new StorableItem[]{};
+    public Optional<MaximumComboQuantity> maximumTotalComboQuantity = Optional.empty();
 
 
     public Storage(final ChargedItemWithStorage chargedItem, final String configKey, final Provider provider) {
@@ -166,6 +169,7 @@ public class Storage {
             quantity = maximumIndividualQuantity.get();
         }
 
+        // Maximum total quantity.
         final Optional<Integer> maximumTotalQuantity = getMaximumTotalQuantity();
         if (maximumTotalQuantity.isPresent()) {
             int newTotalQuantity = 0;
@@ -177,6 +181,26 @@ public class Storage {
 
             if (newTotalQuantity > maximumTotalQuantity.get()) {
                 quantity -= newTotalQuantity - maximumTotalQuantity.get();
+            }
+        }
+
+        // Maximum total combo quantity.
+        if (maximumTotalComboQuantity.isPresent() && Arrays.stream(maximumTotalComboQuantity.get().itemIds).filter(id -> id == itemId).findAny().isPresent()) {
+            int comboQuantity = 0;
+
+            for (final int comboItemId : maximumTotalComboQuantity.get().itemIds) {
+                if (comboItemId == itemId) {
+                    comboQuantity += quantity;
+                } else {
+                    final Optional<StorageItem> comboItem = getItem(comboItemId);
+                    if (comboItem.isPresent()) {
+                        comboQuantity += comboItem.get().getQuantity();
+                    }
+                }
+            }
+
+            if (comboQuantity > maximumTotalComboQuantity.get().quantity) {
+                quantity -= comboQuantity - maximumTotalComboQuantity.get().quantity;
             }
         }
 
@@ -391,5 +415,10 @@ public class Storage {
         }
 
         return false;
+    }
+
+    public Storage setMaximumComboQuantity(final int[] itemIds, final int quantity) {
+        this.maximumTotalComboQuantity = Optional.of(new MaximumComboQuantity(itemIds, quantity));
+        return this;
     }
 }
