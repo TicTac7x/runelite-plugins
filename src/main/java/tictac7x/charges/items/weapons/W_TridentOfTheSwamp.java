@@ -32,7 +32,7 @@ public class W_TridentOfTheSwamp extends ChargedItem {
             new OnChatMessage("You add .* charges? to the Trident of the swamp. New total: (?<charges>.+)").setDynamicallyCharges(),
 
             // Attack.
-            new OnGraphicChanged(1251).isEquipped().decreaseCharges(1),
+            new OnGraphicChanged(665).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
             new OnChatMessage("The banker charges your Trident of the swamp using (?<deathrune>.+)x Death rune.*").matcherConsumer(m -> {
