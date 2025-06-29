@@ -51,7 +51,7 @@ public class CoursesManager {
         // Check portals
         for (final Portal portal : course.get().portals) {
             portal.checkAndSetTileObject(tileObject);
-        }
+       }
     }
 
     public void onGameStateChanged(final GameStateChanged event) {
@@ -156,8 +156,9 @@ public class CoursesManager {
                 
                 // If we found the obstacle and player is close to a portal
                 if (currentObstacle != null) {
-                    Optional<Portal> nearbyPortal = course.get().findNearbyPortal(player.getWorldLocation(), 3);
-                    if (nearbyPortal.isPresent()) {
+                    Optional<Portal> nearbyPortal = course.get().findNearbyPortal(player.getWorldLocation(), 6);
+
+                    if (nearbyPortal.isPresent()&& nearbyPortal.get().getTileObject().get().getClickbox()!=null) {
                         return true;
                     }
                 }

@@ -1,5 +1,5 @@
 package tictac7x.rooftops.course;
-
+import net.runelite.api.Client;
 import net.runelite.api.TileObject;
 import net.runelite.api.coords.WorldPoint;
 

@@ -62,7 +62,14 @@ public class Overlay extends net.runelite.client.ui.overlay.Overlay {
         if (coursesManager.getCourse().isPresent()) {
             for (final Portal portal : coursesManager.getCourse().get().portals) {
                 if (portal.getTileObject().isPresent()) {
-                    renderShape(graphics, portal.getTileObject().get().getClickbox(), config.getPortalColor());
+                    TileObject obj = portal.getTileObject().get();
+                    Shape clickbox = obj.getClickbox();
+
+                    if (clickbox != null) {
+                        renderShape(graphics, clickbox, config.getPortalColor());
+                    } else {
+                        // Inactive portal: don't render
+                    }
                 }
             }
         }

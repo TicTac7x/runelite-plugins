@@ -40,7 +40,7 @@ public class Prifddinas extends Course {
 
            new Portal[]{ 
                 new Portal(36241, 2, new int[][]{{3257, 6111}}).nextObstacle(36225), // Portal on top of bank
-                new Portal(36242, 0, new int[][]{{3270, 6116}}).nextObstacle(36229), // Portal by Dark Hole in garden (or 36247?)
+                new Portal(36242, 0, new int[][]{{3270, 6116}}).nextObstacle(36231), // Portal by Dark Hole in garden (or 36247?)
                 new Portal(36243, 2, new int[][]{{2258, 3386}}).nextObstacle(36234), // Portal after first Rope Bridge
                 new Portal(36244, 2, new int[][]{{2243, 3395}}).nextObstacle(36235), // Portal before second Rope Bridge
                 new Portal(36245, 2, new int[][]{{2248, 3405}}).nextObstacle(36236), // Portal before Tightrope

@@ -207,6 +207,7 @@ public abstract class Course {
                             
                             // Clear the portal after use to prevent reuse
                             portal.clearTileObject();
+                            obstacle.clearTileObject();
                             return true;
                         }
                     }
