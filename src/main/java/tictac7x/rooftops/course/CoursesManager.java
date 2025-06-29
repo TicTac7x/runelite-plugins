@@ -32,6 +32,7 @@ public class CoursesManager {
     private final Pattern regexLapComplete = Pattern.compile(".*lap count is:.*");
 
     private final List<Tile> marksOfGraces = new ArrayList<>();
+    private final List<TileObject> portalObjects = new ArrayList<>();
     private final List<Integer> menuOptionsClicked = new ArrayList<>();
     private Optional<Course> course = Optional.empty();
 
@@ -47,13 +48,21 @@ public class CoursesManager {
                 obstacle.checkAndSetTileObject(tileObject);
             }
         }
+        // Check portals
+        for (final Portal portal : course.get().portals) {
+            portal.checkAndSetTileObject(tileObject);
+       }
     }
 
     public void onGameStateChanged(final GameStateChanged event) {
         // Clear previous obstacles objects (since they will spawn again).
         if (event.getGameState() == GameState.LOADING) {
-            if (course.isPresent()) course.get().clearObstaclesTileObjects();
+            if (course.isPresent()) {
+                course.get().clearObstaclesTileObjects();
+                course.get().clearPortalTileObjects();
+            }
             marksOfGraces.clear();
+            portalObjects.clear();
             course = Optional.empty();
         }
     }
@@ -72,6 +81,19 @@ public class CoursesManager {
 
     public void onGameTick(final GameTick ignored) {
         checkStartObstacle();
+
+        // Check if player completed an obstacle by position (for obstacles that don't give XP)
+        if (course.isPresent() && course.get().getCurrentObstacle().isPresent() && course.get().isDoingObstacle()) {
+            Obstacle currentObstacle = course.get().getCurrentObstacle().get();
+            if (currentObstacle.completeAt.isPresent()) {
+                int[] completeAt = currentObstacle.completeAt.get();
+                WorldPoint playerLocation = client.getLocalPlayer().getWorldLocation();
+                
+                if (playerLocation.getX() == completeAt[0] && playerLocation.getY() == completeAt[1]) {
+                    completeObstacle(menuOptionsClicked);
+                }
+            }
+        }
     }
 
     public void onChatMessage(final ChatMessage event) {
@@ -118,6 +140,31 @@ public class CoursesManager {
                 }
             }
         }
+
+        // Check for portals near the player
+        if (config.showPortalStops()) {
+            Player player = client.getLocalPlayer();
+            if (player != null) {
+                // Find the current obstacle
+                Obstacle currentObstacle = null;
+                for (Obstacle obstacle : course.get().obstacles) {
+                    if (obstacle.id == obstacleId) {
+                        currentObstacle = obstacle;
+                        break;
+                    }
+                }
+                
+                // If we found the obstacle and player is close to a portal
+                if (currentObstacle != null) {
+                    Optional<Portal> nearbyPortal = course.get().findNearbyPortal(player.getWorldLocation(), 6);
+
+                    if (nearbyPortal.isPresent()&& nearbyPortal.get().getTileObject().get().getClickbox()!=null) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
 
         return false;
     }
@@ -203,6 +250,22 @@ public class CoursesManager {
 
     public void onMenuOptionClicked(final MenuOptionClicked event) {
         if (course.isPresent()) {
+            // Check if player clicked on a portal
+            for (final Portal portal : course.get().portals) {
+                if (portal.getTileObject().isPresent() && 
+                    event.getId() == portal.id) {
+                    // Player clicked a portal, mark it as used
+                    if (portal.nextObstacles.isPresent() && !portal.nextObstacles.get().isEmpty()) {
+                        int nextObstacleId = portal.nextObstacles.get().get(0);
+                        // Add the target obstacle ID to menuOptionsClicked
+                        menuOptionsClicked.add(nextObstacleId);
+                    }
+                    course.get().usePortal(portal.id);
+                    return;
+                }
+            }
+            
+            // Check if player clicked on an obstacle
             for (final Obstacle obstacle : course.get().obstacles) {
                 if (event.getId() == obstacle.id) {
                     menuOptionsClicked.add(event.getId());

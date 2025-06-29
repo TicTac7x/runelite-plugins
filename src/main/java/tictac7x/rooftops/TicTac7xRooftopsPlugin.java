@@ -22,7 +22,7 @@ import javax.inject.Inject;
 @Slf4j
 @PluginDescriptor(
 	name = "Rooftop Agility Improved",
-	description = "Improved clickboxes for rooftop agility courses",
+	description = "Improved es for rooftop agility courses",
 	tags = { "roof", "rooftop", "agility", "mark", "grace", "graceful" }
 )
 public class TicTac7xRooftopsPlugin extends Plugin {
@@ -72,6 +72,7 @@ public class TicTac7xRooftopsPlugin extends Plugin {
 			new Ardougne(),
 
 			// Other.
+			new Prifddinas(),
 			new Varlamore(),
 			new ApeAtoll()
 		});
