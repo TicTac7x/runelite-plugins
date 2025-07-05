@@ -1,6 +1,6 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.ItemID;
+import net.runelite.api.gameval.ItemID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
@@ -10,7 +10,7 @@ public class ImplingJars extends DailyInfobox {
     private final String tooltip = "Buy %d impling jars from Elnock Inquisitor at Puro-Puro";
 
     public ImplingJars(final Provider provider) {
-        super(TicTac7xDailyTasksConfig.impling_jars, provider.itemManager.getImage(ItemID.IMPLING_JAR), provider);
+        super(TicTac7xDailyTasksConfig.impling_jars, provider.itemManager.getImage(ItemID.II_IMPLING_JAR), provider);
     }
 
     @Override

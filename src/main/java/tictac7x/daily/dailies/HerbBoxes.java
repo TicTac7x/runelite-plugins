@@ -1,7 +1,7 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
+import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
@@ -11,14 +11,14 @@ public class HerbBoxes extends DailyInfobox {
     private final String tooltip = "Buy %d herb boxes from Nightmare Zone rewards shop.";
 
     public HerbBoxes(final Provider provider) {
-        super(TicTac7xDailyTasksConfig.herb_boxes, provider.itemManager.getImage(ItemID.HERB_BOX), provider);
+        super(TicTac7xDailyTasksConfig.herb_boxes, provider.itemManager.getImage(ItemID.NZONE_HERBBOX), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
             provider.config.showHerbBoxes() &&
-            provider.client.getVarbitValue(Varbits.ACCOUNT_TYPE) == 0 && // 0 - REGULAR ACCOUNT
+            provider.client.getVarbitValue(VarbitID.IRONMAN) == 0 && // 0 - REGULAR ACCOUNT
             getHerbBoxesAmount() > 0
         );
     }
@@ -34,6 +34,6 @@ public class HerbBoxes extends DailyInfobox {
     }
 
     private int getHerbBoxesAmount() {
-        return HERB_BOXES_DAILY - provider.client.getVarbitValue(Varbits.DAILY_HERB_BOXES_COLLECTED);
+        return HERB_BOXES_DAILY - provider.client.getVarbitValue(VarbitID.NZONE_HERBBOXES_PURCHASED);
     }
 }

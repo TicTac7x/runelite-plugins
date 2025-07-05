@@ -1,10 +1,7 @@
 package tictac7x.daily.common;
 
-import net.runelite.api.Client;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
-import tictac7x.daily.TicTac7xDailyTasksConfig;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -44,5 +41,11 @@ public abstract class DailyInfobox extends InfoBox {
 
     public boolean isDiaryCompleted(final int diary) {
         return provider.client.getVarbitValue(diary) == 1;
+    }
+
+    @Override
+    public void setImage(final BufferedImage image) {
+        super.setImage(image);
+        provider.infoBoxManager.updateInfoBoxImage(this);
     }
 }

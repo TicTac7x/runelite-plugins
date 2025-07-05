@@ -1,7 +1,7 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
+import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
@@ -17,7 +17,7 @@ public class Battlestaves extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showBattlestaves() &&
-            !isDiaryCompleted(Varbits.DAILY_STAVES_COLLECTED)
+            !isDiaryCompleted(VarbitID.ZAFF_LAST_CLAIMED)
         );
     }
 
@@ -32,10 +32,10 @@ public class Battlestaves extends DailyInfobox {
     }
 
     private int getRemainingBattlestavesAmount() {
-        final boolean easy   = isDiaryCompleted(Varbits.DIARY_VARROCK_EASY);
-        final boolean medium = isDiaryCompleted(Varbits.DIARY_VARROCK_MEDIUM);
-        final boolean hard   = isDiaryCompleted(Varbits.DIARY_VARROCK_HARD);
-        final boolean elite  = isDiaryCompleted(Varbits.DIARY_VARROCK_ELITE);
+        final boolean easy   = isDiaryCompleted(VarbitID.VARROCK_DIARY_EASY_COMPLETE);
+        final boolean medium = isDiaryCompleted(VarbitID.VARROCK_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = isDiaryCompleted(VarbitID.VARROCK_DIARY_HARD_COMPLETE);
+        final boolean elite  = isDiaryCompleted(VarbitID.VARROCK_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 120;
         if (easy && medium && hard) return 60;
