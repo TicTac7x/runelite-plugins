@@ -11,7 +11,7 @@ import tictac7x.charges.store.ids.ItemId;
 
 public class U_Ectophial extends ChargedItem {
     public U_Ectophial(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.royal_seed_pod, ItemId.ECTOPHIAL, provider);
+        super(TicTac7xChargesImprovedConfig.ectophial, ItemId.ECTOPHIAL, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.ECTOPHIAL_EMPTY).fixedCharges(0),
