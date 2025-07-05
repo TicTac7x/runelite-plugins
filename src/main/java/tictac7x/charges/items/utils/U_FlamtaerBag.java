@@ -17,9 +17,9 @@ public class U_FlamtaerBag extends ChargedItemWithStorage {
     public U_FlamtaerBag(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.flamtaer_bag, ItemId.FLAMTAER_BAG, provider);
         storage.storableItems(
-            new StorableItem(ItemId.TIMBER_BEAM).specificOrder(1),
-            new StorableItem(ItemId.LIMESTONE_BRICK).specificOrder(2),
-            new StorableItem(ItemId.SWAMP_PASTE).specificOrder(3)
+            new StorableItem(ItemId.TIMBER_BEAM),
+            new StorableItem(ItemId.LIMESTONE_BRICK),
+            new StorableItem(ItemId.SWAMP_PASTE)
         );
 
         this.items = new TriggerItem[]{

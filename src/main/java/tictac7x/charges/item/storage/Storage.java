@@ -381,30 +381,6 @@ public class Storage {
         return storableItems;
     }
 
-    public int getStorageItemOrder(final StorageItem storageItem) {
-        for (final StorableItem storableItem : storableItems) {
-            if (storableItem.getId() == storageItem.getId()) {
-                if (storableItem.order.isPresent()) {
-                    return storableItem.order.get();
-                }
-            }
-        }
-
-        return Integer.MAX_VALUE;
-    }
-
-    public String getStorageItemName(final StorageItem storageItem) {
-        for (final StorableItem storableItem : storableItems) {
-            if (storableItem.getId() == storageItem.getId()) {
-                if (storableItem.displayName.isPresent()) {
-                    return storableItem.displayName.get();
-                }
-            }
-        }
-
-        return provider.itemManager.getItemComposition(storageItem.getId()).getName();
-    }
-
     public boolean isStorableItemInInventory() {
         for (final StorageItem inventoryItem : provider.store.inventory.getItems()) {
             for (final StorableItem storableItem : storableItems) {
@@ -420,5 +396,9 @@ public class Storage {
     public Storage setMaximumComboQuantity(final int[] itemIds, final int quantity) {
         this.maximumTotalComboQuantity = Optional.of(new MaximumComboQuantity(itemIds, quantity));
         return this;
+    }
+
+    public boolean hasItem(final int itemId) {
+        return storage.hasItem(itemId);
     }
 }

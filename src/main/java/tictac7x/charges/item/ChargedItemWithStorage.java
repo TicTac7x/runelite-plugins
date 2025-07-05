@@ -2,6 +2,7 @@ package tictac7x.charges.item;
 
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.util.ColorUtil;
+import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.storage.StorageItems;
@@ -24,13 +25,14 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     @Override
     public String getTooltip() {
         String tooltip = "";
-        for (final StorageItem storageItem : storage.getStorage().getItems().stream()
-            .sorted(Comparator.comparing(storageItem -> storage.getStorageItemOrder(storageItem)))
-            .collect(Collectors.toList())
-        ) {
-            if (storageItem.getQuantity() > 0) {
-                tooltip += storage.getStorageItemName(storageItem) + ": ";
-                tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.getQuantity()), JagexColors.MENU_TARGET) + "</br>";
+
+        for (final StorableItem storableItem : storage.getStorableItems()) {
+            final Optional<StorageItem> storageItem = storage.getStorage().getItem(storableItem.getId());
+            if (storageItem.isPresent() && storageItem.get().getQuantity() > 0) {
+                // Name
+                tooltip += (storableItem.displayName.isPresent() ? storableItem.displayName.get() : provider.itemManager.getItemComposition(storageItem.get().getId()).getName()) + ": ";
+                // Quantity
+                tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.get().getQuantity()), JagexColors.MENU_TARGET) + "</br>";
             }
         }
 
@@ -75,8 +77,8 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
         // Full storage is negative.
         if (
-                storage.emptyIsNegative && storage.isEmpty() ||
-                        !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getChargesString(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
+            storage.emptyIsNegative && storage.isEmpty() ||
+            !storage.emptyIsNegative && storage.getMaximumTotalQuantity().isPresent() && getChargesString(itemId).equals(String.valueOf(storage.getMaximumTotalQuantity().get()))
         ) {
             return provider.config.getColorEmpty();
         }

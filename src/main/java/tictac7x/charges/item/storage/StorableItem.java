@@ -5,7 +5,6 @@ import java.util.Optional;
 public class StorableItem extends StorageItem {
     public Optional<String[]> checkName = Optional.empty();
     public Optional<String> displayName = Optional.empty();
-    public Optional<Integer> order = Optional.empty();
 
     public StorableItem(int itemId) {
         super(itemId);
@@ -17,11 +16,6 @@ public class StorableItem extends StorageItem {
 
     public StorableItem checkName(final String ...checkName) {
         this.checkName = Optional.of(checkName);
-        return this;
-    }
-
-    public StorableItem specificOrder(final int order) {
-        this.order = Optional.of(order);
         return this;
     }
 

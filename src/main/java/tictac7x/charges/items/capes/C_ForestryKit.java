@@ -19,26 +19,26 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         super(TicTac7xChargesImprovedConfig.forestry_kit, ItemId.FORESTRY_KIT, provider);
 
         this.storage = storage.storableItems(
-            new StorableItem(ItemId.ANIMAINFUSED_BARK).specificOrder(1),
-            new StorableItem(ItemId.FORESTERS_RATION).specificOrder(2),
-            new StorableItem(ItemId.NATURE_OFFERINGS).specificOrder(3),
-            new StorableItem(ItemId.SECATEURS_ATTACHMENT).specificOrder(4),
-            new StorableItem(ItemId.LEAVES).displayName("Regular leaves").checkName("regular").specificOrder(5),
-            new StorableItem(ItemId.OAK_LEAVES).checkName("oak").specificOrder(6),
-            new StorableItem(ItemId.WILLOW_LEAVES).checkName("willow").specificOrder(7),
-            new StorableItem(ItemId.MAPLE_LEAVES).checkName("maple").specificOrder(8),
-            new StorableItem(ItemId.YEW_LEAVES).checkName("yew").specificOrder(9),
-            new StorableItem(ItemId.MAGIC_LEAVES).checkName("magic").specificOrder(10),
-            new StorableItem(ItemId.FORESTRY_HAT).specificOrder(11),
-            new StorableItem(ItemId.FORESTRY_TOP).specificOrder(12),
-            new StorableItem(ItemId.FORESTRY_LEGS).specificOrder(13),
-            new StorableItem(ItemId.FORESTRY_BOOTS).specificOrder(14),
-            new StorableItem(ItemId.LUMBERJACK_HAT).specificOrder(15),
-            new StorableItem(ItemId.LUMBERJACK_TOP).specificOrder(16),
-            new StorableItem(ItemId.LUMBERJACK_LEGS).specificOrder(17),
-            new StorableItem(ItemId.LUMBERJACK_BOOTS).specificOrder(18),
-            new StorableItem(ItemId.WOODCUTTING_CAPE).specificOrder(19),
-            new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED).specificOrder(20)
+            new StorableItem(ItemId.ANIMAINFUSED_BARK),
+            new StorableItem(ItemId.FORESTERS_RATION),
+            new StorableItem(ItemId.NATURE_OFFERINGS),
+            new StorableItem(ItemId.SECATEURS_ATTACHMENT),
+            new StorableItem(ItemId.LEAVES).displayName("Regular leaves").checkName("regular"),
+            new StorableItem(ItemId.OAK_LEAVES).checkName("oak"),
+            new StorableItem(ItemId.WILLOW_LEAVES).checkName("willow"),
+            new StorableItem(ItemId.MAPLE_LEAVES).checkName("maple"),
+            new StorableItem(ItemId.YEW_LEAVES).checkName("yew"),
+            new StorableItem(ItemId.MAGIC_LEAVES).checkName("magic"),
+            new StorableItem(ItemId.FORESTRY_HAT),
+            new StorableItem(ItemId.FORESTRY_TOP),
+            new StorableItem(ItemId.FORESTRY_LEGS),
+            new StorableItem(ItemId.FORESTRY_BOOTS),
+            new StorableItem(ItemId.LUMBERJACK_HAT),
+            new StorableItem(ItemId.LUMBERJACK_TOP),
+            new StorableItem(ItemId.LUMBERJACK_LEGS),
+            new StorableItem(ItemId.LUMBERJACK_BOOTS),
+            new StorableItem(ItemId.WOODCUTTING_CAPE),
+            new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED)
         );
 
         this.items = new TriggerItem[]{

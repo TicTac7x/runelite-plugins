@@ -21,25 +21,25 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
     public U_MasterScrollBook(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.master_scroll_book, ItemId.MASTER_SCROLL_BOOK, provider);
         storage = storage.setMaximumIndividualQuantity(1000).storableItems(
-            new StorableItem(ItemId.TELEPORTSCROLL_NARDAH).displayName("Nardah").specificOrder(1),
-            new StorableItem(ItemId.TELEPORTSCROLL_DIGSITE).displayName("Digsite").specificOrder(2),
-            new StorableItem(ItemId.TELEPORTSCROLL_FELDIP_HILLS).displayName("Feldip Hills").specificOrder(3),
-            new StorableItem(ItemId.TELEPORTSCROLL_LUNAR_ISLE).displayName("Lunar Isle").specificOrder(4),
-            new StorableItem(ItemId.TELEPORTSCROLL_MORTTON).displayName("Mort'ton").specificOrder(5),
-            new StorableItem(ItemId.TELEPORTSCROLL_PEST_CONTROL).displayName("Pest Control").specificOrder(6),
-            new StorableItem(ItemId.TELEPORTSCROLL_PISCATORIS).displayName("Piscatoris").specificOrder(7),
-            new StorableItem(ItemId.TELEPORTSCROLL_TAI_BWO_WANNAI).displayName("Tai Bwo Wannai").specificOrder(8),
-            new StorableItem(ItemId.TELEPORTSCROLL_IORWERTH_CAMP).displayName("Iorwerth Camp").specificOrder(9),
-            new StorableItem(ItemId.TELEPORTSCROLL_MOS_LEHARMLESS).displayName("Mos Le' Harmless").specificOrder(10),
-            new StorableItem(ItemId.TELEPORTSCROLL_LUMBERYARD).displayName("Lumberyard").specificOrder(11),
-            new StorableItem(ItemId.TELEPORTSCROLL_ZULANDRA).displayName("Zul-Andra").specificOrder(12),
-            new StorableItem(ItemId.TELEPORTSCROLL_KEY_MASTER).displayName("Key Master").specificOrder(13),
-            new StorableItem(ItemId.TELEPORTSCROLL_REVENANTS_CAVE).displayName("Revenant Caves").specificOrder(14),
-            new StorableItem(ItemId.TELEPORTSCROLL_WATSON).displayName("Watson").specificOrder(15),
-            new StorableItem(ItemId.TELEPORTSCROLL_GUTHIXIAN_TEMPLE).displayName("Guthixian Temple").specificOrder(16),
-            new StorableItem(ItemId.TELEPORTSCROLL_SPIDER_CAVE).displayName("Spider Cave").specificOrder(17),
-            new StorableItem(ItemId.TELEPORTSCROLL_COLOSSAL_WYRM).displayName("Colossal Wyrm").specificOrder(18),
-            new StorableItem(ItemId.TELEPORTSCROLL_CHASM_OF_FIRE).displayName("Chasm of Fire").specificOrder(19)
+            new StorableItem(ItemId.TELEPORTSCROLL_NARDAH).displayName("Nardah"),
+            new StorableItem(ItemId.TELEPORTSCROLL_DIGSITE).displayName("Digsite"),
+            new StorableItem(ItemId.TELEPORTSCROLL_FELDIP_HILLS).displayName("Feldip Hills"),
+            new StorableItem(ItemId.TELEPORTSCROLL_LUNAR_ISLE).displayName("Lunar Isle"),
+            new StorableItem(ItemId.TELEPORTSCROLL_MORTTON).displayName("Mort'ton"),
+            new StorableItem(ItemId.TELEPORTSCROLL_PEST_CONTROL).displayName("Pest Control"),
+            new StorableItem(ItemId.TELEPORTSCROLL_PISCATORIS).displayName("Piscatoris"),
+            new StorableItem(ItemId.TELEPORTSCROLL_TAI_BWO_WANNAI).displayName("Tai Bwo Wannai"),
+            new StorableItem(ItemId.TELEPORTSCROLL_IORWERTH_CAMP).displayName("Iorwerth Camp"),
+            new StorableItem(ItemId.TELEPORTSCROLL_MOS_LEHARMLESS).displayName("Mos Le' Harmless"),
+            new StorableItem(ItemId.TELEPORTSCROLL_LUMBERYARD).displayName("Lumberyard"),
+            new StorableItem(ItemId.TELEPORTSCROLL_ZULANDRA).displayName("Zul-Andra"),
+            new StorableItem(ItemId.TELEPORTSCROLL_KEY_MASTER).displayName("Key Master"),
+            new StorableItem(ItemId.TELEPORTSCROLL_REVENANTS_CAVE).displayName("Revenant Caves"),
+            new StorableItem(ItemId.TELEPORTSCROLL_WATSON).displayName("Watson"),
+            new StorableItem(ItemId.TELEPORTSCROLL_GUTHIXIAN_TEMPLE).displayName("Guthixian Temple"),
+            new StorableItem(ItemId.TELEPORTSCROLL_SPIDER_CAVE).displayName("Spider Cave"),
+            new StorableItem(ItemId.TELEPORTSCROLL_COLOSSAL_WYRM).displayName("Colossal Wyrm"),
+            new StorableItem(ItemId.TELEPORTSCROLL_CHASM_OF_FIRE).displayName("Chasm of Fire")
         );
 
         this.items = new TriggerItem[]{

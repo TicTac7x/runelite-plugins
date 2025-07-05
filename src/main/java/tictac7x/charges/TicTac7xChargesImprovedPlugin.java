@@ -146,15 +146,10 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.6.6";
+	private final String pluginVersion = "v0.6.7";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Ring of returning added.<br>" +
-		"<colHIGHLIGHT>* Amulet of chemistry and Alchemist's amulet improvements.<br>" +
-		"<colHIGHLIGHT>* Aether runes support for Binding necklace.<br>" +
-		"<colHIGHLIGHT>* Quetzal whistle fixes.<br>" +
-		"<colHIGHLIGHT>* Expeditious bracelet fixes.<br>" +
-		"<colHIGHLIGHT>* Efaritay's aid fixes"
+		"<colHIGHLIGHT>* Beehive event support for log basket and forestry basket.<br>"
 	;
 
 	@Inject
@@ -608,6 +603,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, client);
+		System.out.println(customMenuOptionClicked);
 
 		if (
 			// Menu option not found.

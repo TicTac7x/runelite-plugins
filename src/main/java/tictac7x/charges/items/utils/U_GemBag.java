@@ -22,11 +22,11 @@ public class U_GemBag extends ChargedItemWithStorage {
         };
 
         storage.setMaximumIndividualQuantity(60).storableItems(
-            new StorableItem(ItemId.UNCUT_SAPPHIRE).checkName("Sapphire").specificOrder(1),
-            new StorableItem(ItemId.UNCUT_EMERALD).checkName("Emerald").specificOrder(2),
-            new StorableItem(ItemId.UNCUT_RUBY).checkName("Ruby").specificOrder(3),
-            new StorableItem(ItemId.UNCUT_DIAMOND).checkName("Diamond").specificOrder(4),
-            new StorableItem(ItemId.UNCUT_DRAGONSTONE).checkName("Dragonstone").specificOrder(5)
+            new StorableItem(ItemId.UNCUT_SAPPHIRE).checkName("Sapphire"),
+            new StorableItem(ItemId.UNCUT_EMERALD).checkName("Emerald"),
+            new StorableItem(ItemId.UNCUT_RUBY).checkName("Ruby"),
+            new StorableItem(ItemId.UNCUT_DIAMOND).checkName("Diamond"),
+            new StorableItem(ItemId.UNCUT_DRAGONSTONE).checkName("Dragonstone")
         );
 
         this.triggers = new TriggerBase[]{
