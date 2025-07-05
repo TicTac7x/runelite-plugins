@@ -104,6 +104,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Ogre bellows
 - Plank sack
 - Reagent pouch
+- Royal seed pod
 - Seed box
 - Soul bearer
 - Strange old lockpick

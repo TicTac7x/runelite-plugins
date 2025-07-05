@@ -149,7 +149,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.6.7";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Beehive event support for log basket and forestry basket.<br>"
+		"<colHIGHLIGHT>* Beehive event support for log basket and forestry basket.<br>" +
+		"<colHIGHLIGHT>* Royal seed pod added."
 	;
 
 	@Inject
@@ -441,6 +442,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_QuetzalWhistle(provider),
 			new U_PlankSack(provider),
 			new U_ReagentPouch(provider),
+			new U_RoyalSeedPod(provider),
 			new U_SeedBox(provider),
 			new U_SoulBearer(provider),
 			new U_StrangeOldLockpick(provider),
@@ -603,7 +605,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
 		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, client);
-		System.out.println(customMenuOptionClicked);
 
 		if (
 			// Menu option not found.

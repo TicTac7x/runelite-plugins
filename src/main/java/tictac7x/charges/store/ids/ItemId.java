@@ -1594,4 +1594,7 @@ public final class ItemId {
     public static final int RING_OF_RETURNING_3 = ItemID.RING_OF_RETURNING_3;
     public static final int RING_OF_RETURNING_4 = ItemID.RING_OF_RETURNING_4;
     public static final int RING_OF_RETURNING_5 = ItemID.RING_OF_RETURNING_5;
+
+    // Royal seed pod
+    public static final int ROYAL_SEED_POD = ItemID.MM2_ROYAL_SEED_POD;
 }

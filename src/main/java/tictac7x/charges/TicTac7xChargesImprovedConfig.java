@@ -149,6 +149,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String plank_sack = "plank_sack";
     String quetzal_whistle = "quetzal_whistle";
     String reagent_pouch = "reagent_pouch";
+    String royal_seed_pod = "royal_seed_pod";
     String seed_box = "seed_box";
     String soul_bearer = "soul_bearer";
     String strange_old_lockpick = "strange_old_lockpick";
@@ -385,6 +386,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean reagentPouchInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = royal_seed_pod + _infobox,
+            name = "Royal seed pod",
+            description = "",
+            section = infoboxes
+        ) default boolean royalSeedPodInfobox() { return false; }
 
         @ConfigItem(
             keyName = ring_of_dueling + _infobox,
@@ -1190,6 +1198,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean reagentPouchOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = royal_seed_pod + _overlay,
+            name = "Royal seed pod",
+            description = "",
+            section = overlays
+        ) default boolean royalSeedPodOverlay() { return false; }
 
         @ConfigItem(
             keyName = ring_of_dueling + _overlay,
