@@ -12,9 +12,7 @@ import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.TicTac7xDailyTasksPlugin;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
@@ -60,7 +58,7 @@ public class KingdomOfMiscellania extends DailyInfobox {
         if (event.getVarbitId() != VARBIT_KINGDOM_APPROVAL) return;
         if (Arrays.stream(MISCELLANIA_REGIONS).noneMatch(region -> region == client.getLocalPlayer().getWorldLocation().getRegionID())) return;
 
-        configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor_date, LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE));
+        configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor_date, LocalDate.now(timezone).toString());
         configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor, event.getValue());
     }
 
