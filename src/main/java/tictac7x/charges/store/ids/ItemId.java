@@ -1597,4 +1597,8 @@ public final class ItemId {
 
     // Royal seed pod
     public static final int ROYAL_SEED_POD = ItemID.MM2_ROYAL_SEED_POD;
+
+    // Ectophial
+    public static final int ECTOPHIAL = ItemID.ECTOPHIAL;
+    public static final int ECTOPHIAL_EMPTY = ItemID.ECTOPHIAL_EMPTY;
 }

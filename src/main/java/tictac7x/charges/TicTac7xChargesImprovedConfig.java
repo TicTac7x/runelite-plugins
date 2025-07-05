@@ -131,6 +131,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String colossal_pouch = "colossal_pouch";
     String colossal_pouch_decay_count = "colossal_pouch_decay_count";
     String crystal_saw = "crystal_saw";
+    String ectophial = "ectophial";
     String enchanted_lyre = "enchanted_lyre";
     String fish_barrel = "fish_barrel";
     String flamtaer_bag = "flamtaer_bag";
@@ -843,6 +844,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean crystalSawInfobox() { return true; }
 
         @ConfigItem(
+            keyName = ectophial + _infobox,
+            name = "Ectophial",
+            description = "",
+            section = infoboxes
+        ) default boolean ectophialInfobox() { return false; }
+
+        @ConfigItem(
             keyName = fish_barrel + _infobox,
             name = "Fish barrel",
             description = "",
@@ -1436,6 +1444,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean crystalSawOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = ectophial + _overlay,
+            name = "Ectophial",
+            description = "",
+            section = overlays
+        ) default boolean ectophialOverlay() { return false; }
 
         @ConfigItem(
             keyName = crystal_shield + _overlay,

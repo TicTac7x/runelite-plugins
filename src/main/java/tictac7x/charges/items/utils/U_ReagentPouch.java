@@ -104,16 +104,20 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
                 storage.remove(item);
             }).requiredItem(ItemId.REAGENT_POUCH_OPEN),
 
-            // Pick whiteberries
+            // Harvesting
             new OnChatMessage("You pick some whiteberries").requiredItem(ItemId.REAGENT_POUCH_OPEN).consumer(() -> {
                 storage.add(ItemId.WHITE_BERRIES, 1);
             }),
-            // Harvest snape grass
+            new OnChatMessage("You carefully pick a spine from the cactus").consumer(() -> {
+                storage.add(ItemId.CACTUS_SPINE, 1);
+            }),
             new OnXpDrop(Skill.FARMING).onMenuOption("Harvest").onMenuTarget("Snape grass plant").addToStorage(ItemId.SNAPE_GRASS, 1),
-            // Pick mort myre fungus
             new OnChatMessage("You pick (?<quantity>.+) mushrooms? from the log.").matcherConsumer(m -> {
                 storage.add(ItemId.MORT_MYRE_FUNGUS, getNumberFromWordRepresentation(m.group("quantity")));
             }),
+
+            // Hide destroy.
+            new OnMenuEntryAdded("Destroy").hide(),
         };
     }
 
