@@ -1,20 +1,18 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Varbits;
-import net.runelite.client.game.ItemManager;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
+import tictac7x.daily.common.Provider;
 
 import java.util.Random;
 
 public class RandomRunes extends DailyInfobox {
     private final String tooltip = "Claim %d random runes from Lundail at Mage Arena bank";
 
-    public RandomRunes(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.random_runes, itemManager.getImage(getRandomRuneId()), client, config, plugin);
+    public RandomRunes(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.random_runes, provider.itemManager.getImage(getRandomRuneId()), provider);
     }
 
     static private int getRandomRuneId() {
@@ -38,7 +36,7 @@ public class RandomRunes extends DailyInfobox {
     @Override
     public boolean isShowing() {
         return (
-            config.showRandomRunes() &&
+            provider.config.showRandomRunes() &&
             isDiaryCompleted(Varbits.DIARY_WILDERNESS_EASY) &&
             !isDiaryCompleted(Varbits.DAILY_RUNES_COLLECTED)
         );

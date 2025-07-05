@@ -1,26 +1,24 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Varbits;
-import net.runelite.client.game.ItemManager;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
+import tictac7x.daily.common.Provider;
 
 public class BowStrings extends DailyInfobox {
     private final String tooltip = "Exchange flax to %d bow strings from the Flax Keeper at Seers Village";
 
-    public BowStrings(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.bow_strings, itemManager.getImage(ItemID.BOW_STRING), client, config, plugin);
+    public BowStrings(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.bow_strings, provider.itemManager.getImage(ItemID.BOW_STRING), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
-            config.showBowStrings() &&
+            provider.config.showBowStrings() &&
             isDiaryCompleted(Varbits.DIARY_KANDARIN_EASY) &&
-            client.getVarbitValue(Varbits.DAILY_FLAX_STATE) == 0
+            provider.client.getVarbitValue(Varbits.DAILY_FLAX_STATE) == 0
         );
     }
 

@@ -10,18 +10,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public abstract class DailyInfobox extends InfoBox {
-    protected final Client client;
-    protected final TicTac7xDailyTasksConfig config;
-    protected final TicTac7xDailyTasksPlugin plugin;
-
+    protected final Provider provider;
     protected final String id;
 
-    public DailyInfobox(final String id, final BufferedImage image, final Client client, final TicTac7xDailyTasksConfig config, final TicTac7xDailyTasksPlugin plugin) {
-        super(image, plugin);
+    public DailyInfobox(final String id, final BufferedImage image, final Provider provider) {
+        super(image, provider.plugin);
         this.id = id;
-        this.client = client;
-        this.config = config;
-        this.plugin = plugin;
+        this.provider = provider;
     }
 
     abstract public boolean isShowing();
@@ -48,6 +43,6 @@ public abstract class DailyInfobox extends InfoBox {
     public void onVarbitChanged(final VarbitChanged event) {}
 
     public boolean isDiaryCompleted(final int diary) {
-        return client.getVarbitValue(diary) == 1;
+        return provider.client.getVarbitValue(diary) == 1;
     }
 }

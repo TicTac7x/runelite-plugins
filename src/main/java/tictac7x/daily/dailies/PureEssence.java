@@ -1,24 +1,22 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Varbits;
-import net.runelite.client.game.ItemManager;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
+import tictac7x.daily.common.Provider;
 
 public class PureEssence extends DailyInfobox {
     private final String tooltip = "Collect %d pure essence from Wizard Cromperty at East-Ardougne";
 
-    public PureEssence(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.pure_essence, itemManager.getImage(ItemID.PURE_ESSENCE), client, config, plugin);
+    public PureEssence(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.pure_essence, provider.itemManager.getImage(ItemID.PURE_ESSENCE), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
-            config.showPureEssence() &&
+            provider.config.showPureEssence() &&
             isDiaryCompleted(Varbits.DIARY_ARDOUGNE_EASY) &&
             isDiaryCompleted(Varbits.DIARY_ARDOUGNE_MEDIUM) &&
             !isDiaryCompleted(Varbits.DAILY_ESSENCE_COLLECTED)

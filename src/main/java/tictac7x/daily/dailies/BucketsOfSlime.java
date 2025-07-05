@@ -1,24 +1,22 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Varbits;
-import net.runelite.client.game.ItemManager;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
+import tictac7x.daily.common.Provider;
 
 public class BucketsOfSlime extends DailyInfobox {
     private final String tooltip = "Exchange %d bones to buckets of slime and bonemeal from Robin at Porty Phasmatys";
 
-    public BucketsOfSlime(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.buckets_of_slime, itemManager.getImage(ItemID.BUCKET_OF_SLIME), client, config, plugin);
+    public BucketsOfSlime(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.buckets_of_slime, provider.itemManager.getImage(ItemID.BUCKET_OF_SLIME), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
-            config.showBucketsOfSlime() &&
+            provider.config.showBucketsOfSlime() &&
             isDiaryCompleted(Varbits.DIARY_MORYTANIA_EASY) &&
             isDiaryCompleted(Varbits.DIARY_MORYTANIA_MEDIUM) &&
             getRemainingBucketsOfSlimeAmount() > 0
@@ -48,6 +46,6 @@ public class BucketsOfSlime extends DailyInfobox {
         if (easy && medium) { buckets_of_slime = 13; } else
         if (easy) { buckets_of_slime = 0; }
 
-        return buckets_of_slime - client.getVarbitValue(Varbits.DAILY_BONEMEAL_STATE);
+        return buckets_of_slime - provider.client.getVarbitValue(Varbits.DAILY_BONEMEAL_STATE);
     }
 }

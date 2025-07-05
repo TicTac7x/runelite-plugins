@@ -1,24 +1,22 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Varbits;
-import net.runelite.client.game.ItemManager;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
+import tictac7x.daily.common.Provider;
 
 public class Dynamite extends DailyInfobox {
     private final String tooltip = "Claim %d dynamite from Thirus at Lovakengj";
 
-    public Dynamite(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.dynamite, itemManager.getImage(ItemID.DYNAMITE), client, config, plugin);
+    public Dynamite(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.dynamite, provider.itemManager.getImage(ItemID.DYNAMITE), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
-            config.showDynamite() &&
+            provider.config.showDynamite() &&
             isDiaryCompleted(Varbits.DIARY_KOUREND_EASY) &&
             isDiaryCompleted(Varbits.DIARY_KOUREND_MEDIUM) &&
             !isDiaryCompleted(Varbits.DAILY_DYNAMITE_COLLECTED)

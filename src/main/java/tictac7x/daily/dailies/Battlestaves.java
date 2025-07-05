@@ -1,24 +1,22 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.Varbits;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
-import net.runelite.client.game.ItemManager;
+import tictac7x.daily.common.Provider;
 
 public class Battlestaves extends DailyInfobox {
     private final String tooltip = "Buy %d battlestaves from Zaff at Varrock for %d,000 coins";
 
-    public Battlestaves(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.battlestaves, itemManager.getImage(ItemID.BATTLESTAFF), client, config, plugin);
+    public Battlestaves(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.battlestaves, provider.itemManager.getImage(ItemID.BATTLESTAFF), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
-            config.showBattlestaves() &&
+            provider.config.showBattlestaves() &&
             !isDiaryCompleted(Varbits.DAILY_STAVES_COLLECTED)
         );
     }
