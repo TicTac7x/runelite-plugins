@@ -17,8 +17,8 @@ public class BucketsOfSlime extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showBucketsOfSlime() &&
-            isDiaryCompleted(VarbitID.MORYTANIA_DIARY_EASY_COMPLETE) &&
-            isDiaryCompleted(VarbitID.MORYTANIA_DIARY_MEDIUM_COMPLETE) &&
+            varbitEqualsOne(VarbitID.MORYTANIA_DIARY_EASY_COMPLETE) &&
+            varbitEqualsOne(VarbitID.MORYTANIA_DIARY_MEDIUM_COMPLETE) &&
             getRemainingBucketsOfSlimeAmount() > 0
         );
     }
@@ -36,10 +36,10 @@ public class BucketsOfSlime extends DailyInfobox {
     private int getRemainingBucketsOfSlimeAmount() {
         int buckets_of_slime = 0;
 
-        final boolean easy   = isDiaryCompleted(VarbitID.MORYTANIA_DIARY_EASY_COMPLETE);
-        final boolean medium = isDiaryCompleted(VarbitID.MORYTANIA_DIARY_MEDIUM_COMPLETE);
-        final boolean hard   = isDiaryCompleted(VarbitID.MORYTANIA_DIARY_HARD_COMPLETE);
-        final boolean elite  = isDiaryCompleted(VarbitID.MORYTANIA_DIARY_ELITE_COMPLETE);
+        final boolean easy   = varbitEqualsOne(VarbitID.MORYTANIA_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.MORYTANIA_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.MORYTANIA_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.MORYTANIA_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) { buckets_of_slime = 39; } else
         if (easy && medium && hard) { buckets_of_slime = 26; } else

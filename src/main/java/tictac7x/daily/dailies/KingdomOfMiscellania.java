@@ -4,14 +4,13 @@ import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
@@ -20,7 +19,6 @@ public class KingdomOfMiscellania extends DailyInfobox {
     private final ZoneId timezone = ZoneId.of("UTC");
     private final String tooltip = "You need to work harder to increase your kingdom of Miscellania favor: " + percentageFormat;
 
-    private final int VARBIT_KINGDOM_APPROVAL = 72;
     private final int FAVOR_MAX = 127;
     private final double FAVOR_LOST_MODIFIER_WITHOUT_ROYAL_TROUBLE = 0.975;
     private final double FAVOR_LOST_MODIFIER_WITH_ROYAL_TROUBLE = 0.99;
@@ -51,10 +49,10 @@ public class KingdomOfMiscellania extends DailyInfobox {
 
     @Override
     public void onVarbitChanged(final VarbitChanged event) {
-        if (event.getVarbitId() != VARBIT_KINGDOM_APPROVAL) return;
+        if (event.getVarbitId() != VarbitID.MISC_APPROVAL) return;
         if (Arrays.stream(MISCELLANIA_REGIONS).noneMatch(region -> region == provider.client.getLocalPlayer().getWorldLocation().getRegionID())) return;
 
-        provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor_date, LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE));
+        provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor_date, LocalDate.now(timezone).toString());
         provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor, event.getValue());
     }
 

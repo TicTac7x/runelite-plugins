@@ -1,7 +1,7 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
+import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
@@ -10,16 +10,16 @@ public class PureEssence extends DailyInfobox {
     private final String tooltip = "Collect %d pure essence from Wizard Cromperty at East-Ardougne";
 
     public PureEssence(final Provider provider) {
-        super(TicTac7xDailyTasksConfig.pure_essence, provider.itemManager.getImage(ItemID.PURE_ESSENCE), provider);
+        super(TicTac7xDailyTasksConfig.pure_essence, provider.itemManager.getImage(ItemID.BLANKRUNE_HIGH), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
             provider.config.showPureEssence() &&
-            isDiaryCompleted(Varbits.DIARY_ARDOUGNE_EASY) &&
-            isDiaryCompleted(Varbits.DIARY_ARDOUGNE_MEDIUM) &&
-            !isDiaryCompleted(Varbits.DAILY_ESSENCE_COLLECTED)
+            varbitEqualsOne(VarbitID.ARDOUGNE_DIARY_EASY_COMPLETE) &&
+            varbitEqualsOne(VarbitID.ARDOUGNE_DIARY_MEDIUM_COMPLETE) &&
+            !varbitEqualsOne(VarbitID.ARDOUGNE_FREE_ESSENCE)
         );
     }
 
@@ -34,10 +34,10 @@ public class PureEssence extends DailyInfobox {
     }
 
     private int getPureEssenceAmount() {
-        final boolean easy   = isDiaryCompleted(Varbits.DIARY_ARDOUGNE_EASY);
-        final boolean medium = isDiaryCompleted(Varbits.DIARY_ARDOUGNE_MEDIUM);
-        final boolean hard   = isDiaryCompleted(Varbits.DIARY_ARDOUGNE_HARD);
-        final boolean elite  = isDiaryCompleted(Varbits.DIARY_ARDOUGNE_ELITE);
+        final boolean easy   = varbitEqualsOne(VarbitID.ARDOUGNE_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.ARDOUGNE_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.ARDOUGNE_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.ARDOUGNE_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 250;
         if (easy && medium && hard) return 150;

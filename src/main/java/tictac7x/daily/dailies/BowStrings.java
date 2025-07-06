@@ -17,7 +17,7 @@ public class BowStrings extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showBowStrings() &&
-            isDiaryCompleted(VarbitID.KANDARIN_DIARY_EASY_COMPLETE) &&
+            varbitEqualsOne(VarbitID.KANDARIN_DIARY_EASY_COMPLETE) &&
             provider.client.getVarbitValue(VarbitID.SEERS_FREE_FLAX) == 0
         );
     }
@@ -33,10 +33,10 @@ public class BowStrings extends DailyInfobox {
     }
 
     private int getRemainingBowStringsAmount() {
-        final boolean easy   = isDiaryCompleted(VarbitID.KANDARIN_DIARY_EASY_COMPLETE);
-        final boolean medium = isDiaryCompleted(VarbitID.KANDARIN_DIARY_MEDIUM_COMPLETE);
-        final boolean hard   = isDiaryCompleted(VarbitID.KANDARIN_DIARY_HARD_COMPLETE);
-        final boolean elite  = isDiaryCompleted(VarbitID.KANDARIN_DIARY_ELITE_COMPLETE);
+        final boolean easy   = varbitEqualsOne(VarbitID.KANDARIN_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.KANDARIN_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.KANDARIN_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.KANDARIN_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 250;
         if (easy && medium && hard) return 120;

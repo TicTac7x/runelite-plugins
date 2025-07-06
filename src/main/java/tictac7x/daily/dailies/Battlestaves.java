@@ -17,7 +17,7 @@ public class Battlestaves extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showBattlestaves() &&
-            !isDiaryCompleted(VarbitID.ZAFF_LAST_CLAIMED)
+            !varbitEqualsOne(VarbitID.ZAFF_LAST_CLAIMED)
         );
     }
 
@@ -32,10 +32,10 @@ public class Battlestaves extends DailyInfobox {
     }
 
     private int getRemainingBattlestavesAmount() {
-        final boolean easy   = isDiaryCompleted(VarbitID.VARROCK_DIARY_EASY_COMPLETE);
-        final boolean medium = isDiaryCompleted(VarbitID.VARROCK_DIARY_MEDIUM_COMPLETE);
-        final boolean hard   = isDiaryCompleted(VarbitID.VARROCK_DIARY_HARD_COMPLETE);
-        final boolean elite  = isDiaryCompleted(VarbitID.VARROCK_DIARY_ELITE_COMPLETE);
+        final boolean easy   = varbitEqualsOne(VarbitID.VARROCK_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.VARROCK_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.VARROCK_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.VARROCK_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 120;
         if (easy && medium && hard) return 60;

@@ -1,7 +1,7 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
+import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
@@ -17,17 +17,13 @@ public class RandomRunes extends DailyInfobox {
 
     static private int getRandomRuneId() {
         final int[] rune_ids = new int[]{
-            ItemID.FIRE_RUNE,
-            ItemID.WATER_RUNE,
-            ItemID.AIR_RUNE,
-            ItemID.EARTH_RUNE,
-            ItemID.MIND_RUNE,
-            ItemID.BODY_RUNE,
-            ItemID.NATURE_RUNE,
-            ItemID.CHAOS_RUNE,
-            ItemID.LAW_RUNE,
-            ItemID.COSMIC_RUNE,
-            ItemID.DEATH_RUNE
+            ItemID.MINDRUNE,
+            ItemID.BODYRUNE,
+            ItemID.COSMICRUNE,
+            ItemID.NATURERUNE,
+            ItemID.LAWRUNE,
+            ItemID.CHAOSRUNE,
+            ItemID.DEATHRUNE,
         };
         final int random = new Random().nextInt(rune_ids.length);
         return rune_ids[random];
@@ -37,8 +33,8 @@ public class RandomRunes extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showRandomRunes() &&
-            isDiaryCompleted(Varbits.DIARY_WILDERNESS_EASY) &&
-            !isDiaryCompleted(Varbits.DAILY_RUNES_COLLECTED)
+            varbitEqualsOne(VarbitID.WILDERNESS_DIARY_EASY_COMPLETE) &&
+            !varbitEqualsOne(VarbitID.LUNDAIL_LAST_CLAIMED)
         );
     }
 
@@ -53,10 +49,10 @@ public class RandomRunes extends DailyInfobox {
     }
 
     private int getRandomRunesAmount() {
-        final boolean easy   = isDiaryCompleted(Varbits.DIARY_WILDERNESS_EASY);
-        final boolean medium = isDiaryCompleted(Varbits.DIARY_WILDERNESS_MEDIUM);
-        final boolean hard   = isDiaryCompleted(Varbits.DIARY_WILDERNESS_HARD);
-        final boolean elite  = isDiaryCompleted(Varbits.DIARY_WILDERNESS_ELITE);
+        final boolean easy   = varbitEqualsOne(VarbitID.WILDERNESS_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.WILDERNESS_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.WILDERNESS_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.WILDERNESS_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 200;
         if (easy && medium && hard) return 120;

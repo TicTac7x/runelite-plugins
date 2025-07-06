@@ -22,7 +22,7 @@ public class BucketsOfSand extends DailyInfobox {
             provider.config.showBucketsOfSand() &&
             provider.client.getVarbitValue(VarbitID.IRONMAN) != 2 && // 2 - ULTIMATE IRONMAN
             Quest.THE_HAND_IN_THE_SAND.getState(provider.client) == QuestState.FINISHED &&
-            !isDiaryCompleted(VarbitID.YANILLE_SAND_CLAIMED)
+            !varbitEqualsOne(VarbitID.YANILLE_SAND_CLAIMED)
         );
     }
 

@@ -17,9 +17,9 @@ public class Dynamite extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showDynamite() &&
-            isDiaryCompleted(VarbitID.KOUREND_DIARY_EASY_COMPLETE) &&
-            isDiaryCompleted(VarbitID.KOUREND_DIARY_MEDIUM_COMPLETE) &&
-            !isDiaryCompleted(VarbitID.KOUREND_FREE_DYNAMITE)
+            varbitEqualsOne(VarbitID.KOUREND_DIARY_EASY_COMPLETE) &&
+            varbitEqualsOne(VarbitID.KOUREND_DIARY_MEDIUM_COMPLETE) &&
+            !varbitEqualsOne(VarbitID.KOUREND_FREE_DYNAMITE)
         );
     }
 
@@ -34,10 +34,10 @@ public class Dynamite extends DailyInfobox {
     }
 
     private int getDynamiteAmount() {
-        final boolean easy   = isDiaryCompleted(VarbitID.KOUREND_DIARY_EASY_COMPLETE);
-        final boolean medium = isDiaryCompleted(VarbitID.KOUREND_DIARY_MEDIUM_COMPLETE);
-        final boolean hard   = isDiaryCompleted(VarbitID.KOUREND_DIARY_HARD_COMPLETE);
-        final boolean elite  = isDiaryCompleted(VarbitID.KOUREND_DIARY_ELITE_COMPLETE);
+        final boolean easy   = varbitEqualsOne(VarbitID.KOUREND_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.KOUREND_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.KOUREND_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.KOUREND_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 80;
         if (easy && medium && hard) return 40;

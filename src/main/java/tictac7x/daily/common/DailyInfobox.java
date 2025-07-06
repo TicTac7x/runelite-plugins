@@ -39,13 +39,7 @@ public abstract class DailyInfobox extends InfoBox {
 
     public void onVarbitChanged(final VarbitChanged event) {}
 
-    public boolean isDiaryCompleted(final int diary) {
-        return provider.client.getVarbitValue(diary) == 1;
-    }
-
-    @Override
-    public void setImage(final BufferedImage image) {
-        super.setImage(image);
-        provider.infoBoxManager.updateInfoBoxImage(this);
+    public boolean varbitEqualsOne(final int varbit) {
+        return provider.client.getVarbitValue(varbit) == 1;
     }
 }

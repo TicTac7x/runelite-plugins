@@ -18,7 +18,7 @@ public class ExplorersRingAlchemy extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showExplorersRingAlchemy() &&
-            isDiaryCompleted(VarbitID.LUMBRIDGE_DIARY_EASY_COMPLETE) &&
+            varbitEqualsOne(VarbitID.LUMBRIDGE_DIARY_EASY_COMPLETE) &&
             getRemainingAlchemyUses() > 0
         );
     }
@@ -34,7 +34,7 @@ public class ExplorersRingAlchemy extends DailyInfobox {
     }
 
     private int getRemainingAlchemyUses() {
-        return 30 - provider.client.getVarbitValue(VarbitID.CHARGES_ALCHEMISTS_AMULET_QUANTITY);
+        return 30 - provider.client.getVarbitValue(VarbitID.LUMBRIDGE_FREE_ALCHS);
     }
 
     @Override
@@ -45,6 +45,7 @@ public class ExplorersRingAlchemy extends DailyInfobox {
             case VarbitID.LUMBRIDGE_DIARY_HARD_COMPLETE:
             case VarbitID.LUMBRIDGE_DIARY_ELITE_COMPLETE:
                 setImage(provider.itemManager.getImage(getExplorerRingId()));
+                provider.infoBoxManager.updateInfoBoxImage(this);
         }
     }
 
