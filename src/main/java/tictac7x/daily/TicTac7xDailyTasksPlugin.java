@@ -20,6 +20,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
 import tictac7x.daily.common.DailyInfobox;
+import tictac7x.daily.common.Provider;
 import tictac7x.daily.dailies.Battlestaves;
 import tictac7x.daily.dailies.BowStrings;
 import tictac7x.daily.dailies.BucketsOfSand;
@@ -88,24 +89,43 @@ public class TicTac7xDailyTasksPlugin extends Plugin {
         return configManager.getConfig(TicTac7xDailyTasksConfig.class);
     }
 
-    private final String plugin_version = "v0.3";
+    private final String plugin_version = "v0.3.1";
     private final String plugin_message = "" +
         "<colHIGHLIGHT>Daily Tasks " + plugin_version + ":<br>" +
-        "<colHIGHLIGHT>* New daily to remind you buy 10 impling jars from Elnock Inquisitor.<br>" +
-        "<colHIGHLIGHT>* New daily to remind you to use explorers ring alchemy charges."
+        "<colHIGHLIGHT>* Duplicate infoboxes fixed."
     ;
+    private Provider provider;
     private DailyInfobox[] dailyInfoboxes = new DailyInfobox[]{};
 
     @Override
     protected void startUp() {
-        if (client.getGameState() == GameState.LOGGED_IN) {
-            generateInfoboxes();
+        provider = new Provider(client, itemManager, infoBoxManager, configManager, config, this);
+
+        dailyInfoboxes = new DailyInfobox[]{
+            new Battlestaves(provider),
+            new BucketsOfSand(provider),
+            new PureEssence(provider),
+            new BucketsOfSlime(provider),
+            new OgreArrows(provider),
+            new BowStrings(provider),
+            new Dynamite(provider),
+            new RandomRunes(provider),
+            new HerbBoxes(provider),
+            new KingdomOfMiscellania(provider),
+            new ImplingJars(provider),
+            new ExplorersRingAlchemy(provider),
+        };
+
+        for (final DailyInfobox infobox : dailyInfoboxes) {
+            infoBoxManager.addInfoBox(infobox);
         }
     }
 
     @Override
     protected void shutDown() {
-        removeOldInfoboxes();
+        for (final DailyInfobox infobox : dailyInfoboxes) {
+            infoBoxManager.removeInfoBox(infobox);
+        }
     }
 
     @Subscribe
@@ -119,8 +139,6 @@ public class TicTac7xDailyTasksPlugin extends Plugin {
     public void onGameStateChanged(final GameStateChanged event) {
         if (event.getGameState() != GameState.LOGGED_IN) return;
 
-        generateInfoboxes();
-
         // Send message about plugin updates for once.
         if (!config.getVersion().isEmpty() && !config.getVersion().equals(plugin_version)) {
             configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.version, plugin_version);
@@ -129,42 +147,6 @@ public class TicTac7xDailyTasksPlugin extends Plugin {
                 .runeLiteFormattedMessage(plugin_message)
                 .build()
             );
-        }
-    }
-
-    private void generateInfoboxes() {
-        new Thread(() -> {
-            // Sleep for 2 gameticks to make sure diary checks are read correctly.
-            try { Thread.sleep(1200); } catch (final Exception ignored) {}
-
-            clientThread.invokeLater(() -> {
-                removeOldInfoboxes();
-
-                dailyInfoboxes = new DailyInfobox[]{
-                    new Battlestaves(client, config, itemManager, this),
-                    new BucketsOfSand(client, config, itemManager, this),
-                    new PureEssence(client, config, itemManager, this),
-                    new BucketsOfSlime(client, config, itemManager, this),
-                    new OgreArrows(client, config, itemManager, this),
-                    new BowStrings(client, config, itemManager, this),
-                    new Dynamite(client, config, itemManager, this),
-                    new RandomRunes(client, config, itemManager, this),
-                    new HerbBoxes(client, config, itemManager, this),
-                    new KingdomOfMiscellania(client, config, configManager, itemManager, this),
-                    new ImplingJars(client, config, itemManager, this),
-                    new ExplorersRingAlchemy(client, config, itemManager, this),
-                };
-
-                for (final DailyInfobox infobox : dailyInfoboxes) {
-                    infoBoxManager.addInfoBox(infobox);
-                }
-            });
-        }).start();
-    }
-
-    private void removeOldInfoboxes() {
-        for (final DailyInfobox infobox : dailyInfoboxes) {
-            infoBoxManager.removeInfoBox(infobox);
         }
     }
 }

@@ -1,37 +1,24 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Client;
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
-import net.runelite.client.game.ItemManager;
+import net.runelite.api.events.VarbitChanged;
+import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
-import tictac7x.daily.TicTac7xDailyTasksPlugin;
 import tictac7x.daily.common.DailyInfobox;
+import tictac7x.daily.common.Provider;
 
 public class ExplorersRingAlchemy extends DailyInfobox {
     private final String tooltip = "You have %d alchemy uses left on your Explorers ring";
 
-    public ExplorersRingAlchemy(final Client client, final TicTac7xDailyTasksConfig config, final ItemManager itemManager, final TicTac7xDailyTasksPlugin plugin) {
-        super(TicTac7xDailyTasksConfig.explorers_ring_alchemy, itemManager.getImage(getPlayerExplorerRingId(client)), client, config, plugin);
-    }
-
-    static private int getPlayerExplorerRingId(final Client client) {
-        final boolean easy   = client.getVarbitValue(Varbits.DIARY_LUMBRIDGE_EASY) == 1;
-        final boolean medium = client.getVarbitValue(Varbits.DIARY_LUMBRIDGE_MEDIUM) == 1;
-        final boolean hard   = client.getVarbitValue(Varbits.DIARY_LUMBRIDGE_HARD) == 1;
-        final boolean elite  = client.getVarbitValue(Varbits.DIARY_LUMBRIDGE_ELITE) == 1;
-
-        if (easy && medium && hard && elite) return ItemID.EXPLORERS_RING_4;
-        if (easy && medium && hard) return ItemID.EXPLORERS_RING_3;
-        if (easy && medium) return ItemID.EXPLORERS_RING_2;
-        return ItemID.EXPLORERS_RING_1;
+    public ExplorersRingAlchemy(final Provider provider) {
+        super(TicTac7xDailyTasksConfig.explorers_ring_alchemy, provider.itemManager.getImage(ItemID.LUMBRIDGE_RING_EASY), provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
-            config.showExplorersRingAlchemy() &&
-            isDiaryCompleted(Varbits.DIARY_LUMBRIDGE_EASY) &&
+            provider.config.showExplorersRingAlchemy() &&
+            varbitEqualsOne(VarbitID.LUMBRIDGE_DIARY_EASY_COMPLETE) &&
             getRemainingAlchemyUses() > 0
         );
     }
@@ -47,6 +34,30 @@ public class ExplorersRingAlchemy extends DailyInfobox {
     }
 
     private int getRemainingAlchemyUses() {
-        return 30 - client.getVarbitValue(Varbits.EXPLORER_RING_ALCHS);
+        return 30 - provider.client.getVarbitValue(VarbitID.LUMBRIDGE_FREE_ALCHS);
+    }
+
+    @Override
+    public void onVarbitChanged(final VarbitChanged event) {
+        switch (event.getVarbitId()) {
+            case VarbitID.LUMBRIDGE_DIARY_EASY_COMPLETE:
+            case VarbitID.LUMBRIDGE_DIARY_MEDIUM_COMPLETE:
+            case VarbitID.LUMBRIDGE_DIARY_HARD_COMPLETE:
+            case VarbitID.LUMBRIDGE_DIARY_ELITE_COMPLETE:
+                setImage(provider.itemManager.getImage(getExplorerRingId()));
+                provider.infoBoxManager.updateInfoBoxImage(this);
+        }
+    }
+
+    private int getExplorerRingId() {
+        final boolean easy   = provider.client.getVarbitValue(VarbitID.LUMBRIDGE_DIARY_EASY_COMPLETE) == 1;
+        final boolean medium = provider.client.getVarbitValue(VarbitID.LUMBRIDGE_DIARY_MEDIUM_COMPLETE) == 1;
+        final boolean hard   = provider.client.getVarbitValue(VarbitID.LUMBRIDGE_DIARY_HARD_COMPLETE) == 1;
+        final boolean elite  = provider.client.getVarbitValue(VarbitID.LUMBRIDGE_DIARY_ELITE_COMPLETE) == 1;
+
+        if (easy && medium && hard && elite) return ItemID.LUMBRIDGE_RING_ELITE;
+        if (easy && medium && hard) return ItemID.LUMBRIDGE_RING_HARD;
+        if (easy && medium) return ItemID.LUMBRIDGE_RING_MEDIUM;
+        return ItemID.LUMBRIDGE_RING_EASY;
     }
 }
