@@ -1,12 +1,12 @@
 package tictac7x.daily.dailies;
 
 import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
 
 public class ImplingJars extends DailyInfobox {
-    private final int VARBIT_IMPLING_JARS_BOUGHT = 11769;
     private final String tooltip = "Buy %d impling jars from Elnock Inquisitor at Puro-Puro";
 
     public ImplingJars(final Provider provider) {
@@ -17,7 +17,7 @@ public class ImplingJars extends DailyInfobox {
     public boolean isShowing() {
         return (
             provider.config.showImplingJars() &&
-            provider.client.getVarbitValue(VARBIT_IMPLING_JARS_BOUGHT) < 10
+            provider.client.getVarbitValue(VarbitID.II_DAILY_JARS_PURCHASED) < 10
         );
     }
 
@@ -32,6 +32,6 @@ public class ImplingJars extends DailyInfobox {
     }
 
     private int getRemainingImplingJarsAmount() {
-        return 10 - provider.client.getVarbitValue(VARBIT_IMPLING_JARS_BOUGHT);
+        return 10 - provider.client.getVarbitValue(VarbitID.II_DAILY_JARS_PURCHASED);
     }
 }
