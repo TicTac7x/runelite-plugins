@@ -150,6 +150,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Beehive event support for log basket and forestry basket.<br>" +
+		"<colHIGHLIGHT>* STASH units support for plank sack.<br>" +
 		"<colHIGHLIGHT>* Royal seed pod added.<br>" +
 		"<colHIGHLIGHT>* Ectophial added."
 	;

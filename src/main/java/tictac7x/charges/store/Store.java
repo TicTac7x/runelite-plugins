@@ -307,9 +307,8 @@ public class Store {
     public boolean inMenuTargets(final String ...targets) {
         for (final String target : targets) {
             for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
-                if (customMenuOptionClicked.target.contains(target)) {
-                    return true;
-                }
+                final boolean found = Pattern.compile(target).matcher(customMenuOptionClicked.target).find();
+                if (found) return true;
             }
         }
 

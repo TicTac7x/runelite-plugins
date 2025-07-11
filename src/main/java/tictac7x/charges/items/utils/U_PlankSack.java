@@ -64,6 +64,20 @@ public class U_PlankSack extends ChargedItemWithStorage {
             new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
             new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
+            // STASH units
+            new OnXpDrop(Skill.CONSTRUCTION).onMenuOption("Build").onMenuTarget("Inconspicuous (bush|crate|hole|rocks) \\((beginner|easy)\\)").consumer(() -> {
+                storage.removeAndPrioritizeInventory(ItemId.PLANK, 2);
+            }),
+            new OnXpDrop(Skill.CONSTRUCTION).onMenuOption("Build").onMenuTarget("Inconspicuous (bush|crate|hole|rocks) \\(medium\\)").consumer(() -> {
+                storage.removeAndPrioritizeInventory(ItemId.OAK_PLANK, 2);
+            }),
+            new OnXpDrop(Skill.CONSTRUCTION).onMenuOption("Build").onMenuTarget("Inconspicuous (bush|crate|hole|rocks) \\(hard\\)").consumer(() -> {
+                storage.removeAndPrioritizeInventory(ItemId.TEAK_PLANK, 2);
+            }),
+            new OnXpDrop(Skill.CONSTRUCTION).onMenuOption("Build").onMenuTarget("Inconspicuous (bush|crate|hole|rocks) \\((elite|master)\\)").consumer(() -> {
+                storage.removeAndPrioritizeInventory(ItemId.MAHOGANY_PLANK, 2);
+            }),
+
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
                 storage.removeAndPrioritizeInventory(ItemId.MAHOGANY_PLANK, 2);
