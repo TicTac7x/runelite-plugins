@@ -20,10 +20,10 @@ public class J_RingOfSuffering extends ChargedItemWithStatus {
             new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED_IMBUED_NMZ).fixedCharges(0),
             new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED_IMBUED_SW).fixedCharges(0),
             new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED_IMBUED_PVP).fixedCharges(0),
-            new TriggerItem(ItemId.RING_OF_SUFFERING),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_NMZ),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_SW),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_PVP),
+            new TriggerItem(ItemId.RING_OF_SUFFERING).needsToBeEquipped(),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_NMZ).needsToBeEquipped(),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_SW).needsToBeEquipped(),
+            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_PVP).needsToBeEquipped(),
         };
 
         this.triggers = new TriggerBase[]{

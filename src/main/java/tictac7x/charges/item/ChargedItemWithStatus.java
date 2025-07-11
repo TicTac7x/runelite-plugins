@@ -49,15 +49,32 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     @Override
-    public Color getTotalTextColor() {
+    public Color getTextColor(final int itemId) {
+        final Color defaultColor = super.getTextColor(itemId);
+
+        if (defaultColor == provider.config.getColorEmpty() || isDeactivated()) {
+            return provider.config.getColorEmpty();
+        }
+
         if (isActivated()) {
             return provider.config.getColorActivated();
         }
 
-        if (isDeactivated()) {
+        return defaultColor;
+    }
+
+    @Override
+    public Color getTotalTextColor() {
+        final Color defaultColor = super.getTotalTextColor();
+
+        if (defaultColor == provider.config.getColorEmpty() || isDeactivated()) {
             return provider.config.getColorEmpty();
         }
 
-        return super.getTotalTextColor();
+        if (isActivated()) {
+            return provider.config.getColorActivated();
+        }
+
+        return defaultColor;
     }
 }
