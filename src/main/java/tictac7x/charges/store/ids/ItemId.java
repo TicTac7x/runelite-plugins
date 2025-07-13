@@ -1124,6 +1124,7 @@ public final class ItemId {
     public static final int WILLOW_LOGS = ItemID.WILLOW_LOGS;
     public static final int TEAK_LOGS = ItemID.TEAK_LOGS;
     public static final int JUNIPER_LOGS = ItemID.JUNIPER_LOGS;
+    public static final int BARK = ItemID.HOLLOW_BARK;
     public static final int MAPLE_LOGS = ItemID.MAPLE_LOGS;
     public static final int MAHOGANY_LOGS = ItemID.MAHOGANY_LOGS;
     public static final int ARCTIC_PINE_LOGS = ItemID.ARCTIC_PINE_LOG;

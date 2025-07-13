@@ -34,18 +34,19 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
         this.storage = storage.storableItems(
             // Log basket.
             new StorableItem(ItemId.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
-            new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
             new StorableItem(ItemId.OAK_LOGS).checkName("Oak logs"),
             new StorableItem(ItemId.WILLOW_LOGS).checkName("Willow logs"),
-            new StorableItem(ItemId.TEAK_LOGS).checkName("Teak logs"),
-            new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
             new StorableItem(ItemId.MAPLE_LOGS).checkName("Maple logs"),
-            new StorableItem(ItemId.MAHOGANY_LOGS).checkName("Mahogany logs"),
-            new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
             new StorableItem(ItemId.YEW_LOGS).checkName("Yew logs"),
-            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
             new StorableItem(ItemId.MAGIC_LOGS).checkName("Magic logs"),
             new StorableItem(ItemId.REDWOOD_LOGS).checkName("Redwood logs"),
+            new StorableItem(ItemId.TEAK_LOGS).checkName("Teak logs"),
+            new StorableItem(ItemId.MAHOGANY_LOGS).checkName("Mahogany logs"),
+            new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
+            new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
+            new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
+            new StorableItem(ItemId.BARK).checkName("Bark"),
+            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
 
             // Forestry kit.
             new StorableItem(ItemId.ANIMAINFUSED_BARK),
@@ -358,18 +359,19 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
     private void emptyLogBasket() {
         storage.put(ItemId.LOGS, 0);
-        storage.put(ItemId.ACHEY_TREE_LOGS, 0);
         storage.put(ItemId.OAK_LOGS, 0);
         storage.put(ItemId.WILLOW_LOGS, 0);
-        storage.put(ItemId.TEAK_LOGS, 0);
-        storage.put(ItemId.JUNIPER_LOGS, 0);
         storage.put(ItemId.MAPLE_LOGS, 0);
-        storage.put(ItemId.MAHOGANY_LOGS, 0);
-        storage.put(ItemId.ARCTIC_PINE_LOGS, 0);
         storage.put(ItemId.YEW_LOGS, 0);
-        storage.put(ItemId.BLISTERWOOD_LOGS, 0);
         storage.put(ItemId.MAGIC_LOGS, 0);
         storage.put(ItemId.REDWOOD_LOGS, 0);
+        storage.put(ItemId.TEAK_LOGS, 0);
+        storage.put(ItemId.MAHOGANY_LOGS, 0);
+        storage.put(ItemId.ACHEY_TREE_LOGS, 0);
+        storage.put(ItemId.ARCTIC_PINE_LOGS, 0);
+        storage.put(ItemId.JUNIPER_LOGS, 0);
+        storage.put(ItemId.BARK, 0);
+        storage.put(ItemId.BLISTERWOOD_LOGS, 0);
     }
 
     private int getLogsInBasket() {
@@ -380,18 +382,19 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             switch (storageItem.getId()) {
                 case ItemId.LOGS:
-                case ItemId.ACHEY_TREE_LOGS:
                 case ItemId.OAK_LOGS:
                 case ItemId.WILLOW_LOGS:
-                case ItemId.TEAK_LOGS:
-                case ItemId.JUNIPER_LOGS:
                 case ItemId.MAPLE_LOGS:
-                case ItemId.MAHOGANY_LOGS:
-                case ItemId.ARCTIC_PINE_LOGS:
                 case ItemId.YEW_LOGS:
-                case ItemId.BLISTERWOOD_LOGS:
                 case ItemId.MAGIC_LOGS:
                 case ItemId.REDWOOD_LOGS:
+                case ItemId.TEAK_LOGS:
+                case ItemId.MAHOGANY_LOGS:
+                case ItemId.ACHEY_TREE_LOGS:
+                case ItemId.ARCTIC_PINE_LOGS:
+                case ItemId.JUNIPER_LOGS:
+                case ItemId.BARK:
+                case ItemId.BLISTERWOOD_LOGS:
                     logs += storageItem.getQuantity();
                     break;
             }

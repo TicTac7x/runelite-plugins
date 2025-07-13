@@ -28,18 +28,19 @@ public class U_LogBasket extends ChargedItemWithStorage {
         super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, provider);
         storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemId.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
-            new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
             new StorableItem(ItemId.OAK_LOGS).checkName("Oak logs"),
             new StorableItem(ItemId.WILLOW_LOGS).checkName("Willow logs"),
-            new StorableItem(ItemId.TEAK_LOGS).checkName("Teak logs"),
-            new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
             new StorableItem(ItemId.MAPLE_LOGS).checkName("Maple logs"),
-            new StorableItem(ItemId.MAHOGANY_LOGS).checkName("Mahogany logs"),
-            new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
             new StorableItem(ItemId.YEW_LOGS).checkName("Yew logs"),
-            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
             new StorableItem(ItemId.MAGIC_LOGS).checkName("Magic logs"),
-            new StorableItem(ItemId.REDWOOD_LOGS).checkName("Redwood logs")
+            new StorableItem(ItemId.REDWOOD_LOGS).checkName("Redwood logs"),
+            new StorableItem(ItemId.TEAK_LOGS).checkName("Teak logs"),
+            new StorableItem(ItemId.MAHOGANY_LOGS).checkName("Mahogany logs"),
+            new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
+            new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
+            new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
+            new StorableItem(ItemId.BARK).checkName("Bark"),
+            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs")
         );
 
         this.items = new TriggerItem[]{
