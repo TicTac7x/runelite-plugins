@@ -27,6 +27,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
     private final String menuOptionFillLeavesFromBank = "Fill leaves from bank";
     private final String menuOptionEmptyLeavesToBank = "Empty leaves to bank";
     private Optional<Integer> lastLogUsedFromBasketForBeehive = Optional.empty();
+    private Optional<StorageItem> lastLeaves = Optional.empty();
 
     public C_ForestryBasket(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, provider);
@@ -117,7 +118,14 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             // Get leaves while chopping wood.
             new OnChatMessage("Some (?<leaves>.+) leaves fall to the ground and you place them into your Forestry kit.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("leaves"), 1));
+                lastLeaves = getStorageItemFromName(m.group("leaves"), 1);
+                storage.add(lastLeaves);
+            }),
+
+            // Secateurs attachment.
+            new OnChatMessage("Your secateurs attachment enabled you to gather extra leaves.").runConsumerOnNextGameTick(() -> {
+                storage.add(lastLeaves);
+                storage.removeAndPrioritizeInventory(ItemId.SECATEURS_ATTACHMENT, 1);
             }),
 
             // Get leaves from event.
@@ -195,6 +203,13 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
             // Miscellania support.
             new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.FORESTRY_BASKET_OPEN).addToStorage(ItemId.MAPLE_LOGS, 0),
+
+            // Achey tree.
+            new OnChatMessage("You get some logs.").onMenuTarget("Achey Tree").consumer(() -> {
+                lastLogs = Optional.of(new StorageItem(ItemId.ACHEY_TREE_LOGS, 1));
+                storage.add(lastLogs);
+                infernalQuantityTracker++;
+            }).requiredItem(ItemId.LOG_BASKET_OPEN),
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {

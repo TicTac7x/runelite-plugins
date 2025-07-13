@@ -1,4 +1,4 @@
-package tictac7x.charges.items.utils;
+package tictac7x.charges.items.capes;
 
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.Skill;
@@ -19,12 +19,12 @@ import java.util.regex.Pattern;
 import static tictac7x.charges.store.ids.ItemContainerId.BANK;
 import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
-public class U_LogBasket extends ChargedItemWithStorage {
+public class C_LogBasket extends ChargedItemWithStorage {
     private Optional<StorageItem> lastLogs = Optional.empty();
     private int infernalQuantityTracker = 0;
     private Optional<Integer> lastLogUsedFromBasketForBeehive = Optional.empty();
 
-    public U_LogBasket(final Provider provider) {
+    public C_LogBasket(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, provider);
         storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemId.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
@@ -78,7 +78,7 @@ public class U_LogBasket extends ChargedItemWithStorage {
             new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.MAPLE_LOGS, 0),
 
             // Achey tree.
-            new OnChatMessage("You get some logs").onMenuTarget("Achey Tree").consumer(() -> {
+            new OnChatMessage("You get some logs.").onMenuTarget("Achey Tree").consumer(() -> {
                 lastLogs = Optional.of(new StorageItem(ItemId.ACHEY_TREE_LOGS, 1));
                 storage.add(lastLogs);
                 infernalQuantityTracker++;

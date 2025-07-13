@@ -149,13 +149,12 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.6.7";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Beehive event support for log basket and forestry basket.<br>" +
+		"<colHIGHLIGHT>* Beehive event, secateurs attachment, hallowed tree bark  support for log basket, forestry kit/basket.<br>" +
 		"<colHIGHLIGHT>* STASH units support for plank sack.<br>" +
 		"<colHIGHLIGHT>* Seed box updating when pickpocketing..<br>" +
 		"<colHIGHLIGHT>* Royal seed pod added.<br>" +
 		"<colHIGHLIGHT>* Ectophial added.<br>" +
-		"<colHIGHLIGHT>* Surge potion added.<br>" +
-		"<colHIGHLIGHT>* Hollowed tree bark support for log basket and forestry basket."
+		"<colHIGHLIGHT>* Surge potion added."
 	;
 
 	@Inject
@@ -442,7 +441,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_HuntsmansKit(provider),
 			new U_ImpInABox(provider),
 			new U_JarGenerator(provider),
-			new U_LogBasket(provider),
+			new C_LogBasket(provider),
 			new U_MasterScrollBook(provider),
 			new U_MeatPouch(provider),
 			new U_OgreBellows(provider),

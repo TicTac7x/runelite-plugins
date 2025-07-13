@@ -1,5 +1,6 @@
 package tictac7x.charges.items.capes;
 
+import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.widgets.Widget;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
@@ -15,6 +16,8 @@ import java.util.Optional;
 import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class C_ForestryKit extends ChargedItemWithStorage {
+    private Optional<StorageItem> lastLeaves = Optional.empty();
+
     public C_ForestryKit(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.forestry_kit, ItemId.FORESTRY_KIT, provider);
 
@@ -51,7 +54,14 @@ public class C_ForestryKit extends ChargedItemWithStorage {
 
             // Get leaves while chopping wood.
             new OnChatMessage("Some (?<leaves>.+) leaves fall to the ground and you place them into your Forestry kit.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("leaves"), 1));
+                lastLeaves = getStorageItemFromName(m.group("leaves"), 1);
+                storage.add(lastLeaves);
+            }),
+
+            // Secateurs attachment.
+            new OnChatMessage("Your secateurs attachment enabled you to gather extra leaves.").runConsumerOnNextGameTick(() -> {
+                storage.add(lastLeaves);
+                storage.removeAndPrioritizeInventory(ItemId.SECATEURS_ATTACHMENT, 1);
             }),
 
             // Get leaves from event.

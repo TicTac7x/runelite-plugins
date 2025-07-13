@@ -105,16 +105,24 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             }).requiredItem(ItemId.REAGENT_POUCH_OPEN),
 
             // Harvesting
-            new OnChatMessage("You pick some whiteberries").requiredItem(ItemId.REAGENT_POUCH_OPEN).consumer(() -> {
-                storage.add(ItemId.WHITE_BERRIES, 1);
-            }),
-            new OnChatMessage("You carefully pick a spine from the cactus").consumer(() -> {
-                storage.add(ItemId.CACTUS_SPINE, 1);
-            }),
+            // TODO - Limpwurt
             new OnXpDrop(Skill.FARMING).onMenuOption("Harvest").onMenuTarget("Snape grass plant").addToStorage(ItemId.SNAPE_GRASS, 1),
             new OnChatMessage("You pick (?<quantity>.+) mushrooms? from the log.").matcherConsumer(m -> {
                 storage.add(ItemId.MORT_MYRE_FUNGUS, getNumberFromWordRepresentation(m.group("quantity")));
             }),
+            new OnChatMessage("You pick some whiteberries.").requiredItem(ItemId.REAGENT_POUCH_OPEN).consumer(() -> {
+                storage.add(ItemId.WHITE_BERRIES, 1);
+            }),
+            // TODO - jangerberries
+                // TODO - poison ivy
+            new OnChatMessage("You carefully pick a potato cactus.").requiredItem(ItemId.REAGENT_POUCH_OPEN).consumer(() -> {
+                storage.add(ItemId.POTATO_CACTUS, 1);
+            }),
+
+            new OnChatMessage("You carefully pick a spine from the cactus.").consumer(() -> {
+                storage.add(ItemId.CACTUS_SPINE, 1);
+            }),
+
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide(),

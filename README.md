@@ -24,7 +24,9 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 ### Capes
 - Ardougle cloak
 - Coffin
-- Forestry kit / Forestry basket
+- Forestry basket
+- Forestry kit
+- Log basket
 - Magic cape
 
 ### Foods
@@ -98,7 +100,6 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Huntsman's kit
 - Imp in a box
 - Jar generator
-- Log basket
 - Master scroll book
 - Meat pouches
 - Ogre bellows
