@@ -153,7 +153,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* STASH units support for plank sack.<br>" +
 		"<colHIGHLIGHT>* Seed box updating when pickpocketing..<br>" +
 		"<colHIGHLIGHT>* Royal seed pod added.<br>" +
-		"<colHIGHLIGHT>* Ectophial added."
+		"<colHIGHLIGHT>* Ectophial added.<br>" +
+		"<colHIGHLIGHT>* Surge potion added.<br>"
 	;
 
 	@Inject
@@ -377,6 +378,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new P_SuperRestoreMix(provider),
 			new P_SuperStrength(provider),
 			new P_SuperStrengthMix(provider),
+			new P_Surge(provider),
 			new P_ZamorakBrew(provider),
 			new P_ZamorakMix(provider),
 			// COX potions

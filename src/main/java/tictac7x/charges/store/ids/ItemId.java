@@ -787,6 +787,10 @@ public final class ItemId {
     public static final int BATTLEMAGE_POTION_3 = ItemID._3DOSEBATTLEMAGE;
     public static final int BATTLEMAGE_POTION_4 = ItemID._4DOSEBATTLEMAGE;
     public static final int SARADOMIN_BREW_1 = ItemID._1DOSEPOTIONOFSARADOMIN;
+    public static final int SURGE_POTION_1 = ItemID._1DOSESURGE;
+    public static final int SURGE_POTION_2 = ItemID._2DOSESURGE;
+    public static final int SURGE_POTION_3 = ItemID._3DOSESURGE;
+    public static final int SURGE_POTION_4 = ItemID._4DOSESURGE;
     public static final int SARADOMIN_BREW_2 = ItemID._2DOSEPOTIONOFSARADOMIN;
     public static final int SARADOMIN_BREW_3 = ItemID._3DOSEPOTIONOFSARADOMIN;
     public static final int SARADOMIN_BREW_4 = ItemID._4DOSEPOTIONOFSARADOMIN;

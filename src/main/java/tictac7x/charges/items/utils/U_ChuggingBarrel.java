@@ -53,6 +53,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.BASTION_POTION_1),
             new StorableItem(ItemId.BATTLEMAGE_POTION_1),
             new StorableItem(ItemId.SARADOMIN_BREW_1),
+            new StorableItem(ItemId.SURGE_POTION_1),
             new StorableItem(ItemId.EXTENDED_ANTIFIRE_1),
             new StorableItem(ItemId.ANCIENT_BREW_1),
             new StorableItem(ItemId.DIVINE_BASTION_POTION_1),
