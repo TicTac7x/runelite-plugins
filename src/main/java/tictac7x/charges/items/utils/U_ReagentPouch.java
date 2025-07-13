@@ -105,7 +105,6 @@ public class U_ReagentPouch extends ChargedItemWithStorage {
             }).requiredItem(ItemId.REAGENT_POUCH_OPEN),
 
             // Harvesting
-            // TODO - Limpwurt
             new OnXpDrop(Skill.FARMING).onMenuOption("Harvest").onMenuTarget("Snape grass plant").addToStorage(ItemId.SNAPE_GRASS, 1),
             new OnChatMessage("You pick (?<quantity>.+) mushrooms? from the log.").matcherConsumer(m -> {
                 storage.add(ItemId.MORT_MYRE_FUNGUS, getNumberFromWordRepresentation(m.group("quantity")));

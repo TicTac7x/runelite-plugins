@@ -1,5 +1,6 @@
 package tictac7x.charges.items.utils;
 
+import tictac7x.charges.item.triggers.OnWidgetLoaded;
 import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.client.ui.JagexColors;
@@ -70,6 +71,29 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
             // Replace default teleport option.
             new OnMenuEntryAdded("Teleport").replaceTargetDynamically("Master scroll book", this::getDefaultTeleportLocation),
+
+            // Widget
+            new OnWidgetLoaded(597, 2).consumer(() -> {
+                storage.put(ItemId.TELEPORTSCROLL_NARDAH, Integer.parseInt(provider.client.getWidget(597, 7).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_DIGSITE, Integer.parseInt(provider.client.getWidget(597, 11).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_FELDIP_HILLS, Integer.parseInt(provider.client.getWidget(597, 15).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_LUNAR_ISLE, Integer.parseInt(provider.client.getWidget(597, 19).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_MORTTON, Integer.parseInt(provider.client.getWidget(597, 23).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_PEST_CONTROL, Integer.parseInt(provider.client.getWidget(597, 27).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_PISCATORIS, Integer.parseInt(provider.client.getWidget(597, 31).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_TAI_BWO_WANNAI, Integer.parseInt(provider.client.getWidget(597, 35).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_IORWERTH_CAMP, Integer.parseInt(provider.client.getWidget(597, 39).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_MOS_LEHARMLESS, Integer.parseInt(provider.client.getWidget(597, 43).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_LUMBERYARD, Integer.parseInt(provider.client.getWidget(597, 47).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_ZULANDRA, Integer.parseInt(provider.client.getWidget(597, 51).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_KEY_MASTER, Integer.parseInt(provider.client.getWidget(597, 54).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_REVENANTS_CAVE, Integer.parseInt(provider.client.getWidget(597, 60).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_WATSON, Integer.parseInt(provider.client.getWidget(597, 65).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_GUTHIXIAN_TEMPLE, Integer.parseInt(provider.client.getWidget(597, 68).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_SPIDER_CAVE, Integer.parseInt(provider.client.getWidget(597, 71).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_COLOSSAL_WYRM, Integer.parseInt(provider.client.getWidget(597, 76).getText()));
+                storage.put(ItemId.TELEPORTSCROLL_CHASM_OF_FIRE, Integer.parseInt(provider.client.getWidget(597, 79).getText()));
+            }),
         };
     }
 

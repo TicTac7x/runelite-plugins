@@ -2087,6 +2087,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getBottomlessCompostBucketStorage() { return ""; }
 
         @ConfigItem(
+            keyName = master_scroll_book + _storage,
+            name = master_scroll_book + _storage,
+            description = master_scroll_book + _storage,
+            section = debug
+        ) default String masterScrollBookStorage() { return ""; }
+
+        @ConfigItem(
             keyName = bracelet_of_slaughter,
             name = bracelet_of_slaughter,
             description = bracelet_of_slaughter,
