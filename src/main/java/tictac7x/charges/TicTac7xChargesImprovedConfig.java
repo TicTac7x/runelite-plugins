@@ -61,9 +61,6 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String forestry_kit = "forestry_kit";
     String magic_cape = "magic_cape";
 
-    // Potions
-    String potion_ = "potion_";
-
     // Jewelery
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
@@ -267,19 +264,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             position = 10
         ) default boolean showDailyReset() { return false; }
 
-    @ConfigSection(
-        name = "Colors",
-        description = "Colors of item overlays",
-        position = 2
-    ) String colors = "colors";
-
         @Alpha
         @ConfigItem(
             keyName = "colors_default",
             name = "Default",
             description = "Color of default charges",
-            position = 1,
-            section = colors
+            position = 11,
+            section = general
         ) default Color getColorDefault() { return Color.white; }
 
         @Alpha
@@ -287,8 +278,8 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             keyName = "colors_unknown",
             name = "Unknown",
             description = "Color of unknown charges",
-            position = 2,
-            section = colors
+            position = 12,
+            section = general
         ) default Color getColorUnknown() { return Color.gray; }
 
         @Alpha
@@ -296,8 +287,8 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             keyName = "colors_empty",
             name = "Empty",
             description = "Color of empty charges",
-            position = 3,
-            section = colors
+            position = 13,
+            section = general
         ) default Color getColorEmpty() { return Color.red; }
 
         @Alpha
@@ -305,9 +296,67 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             keyName = "colors_activated",
             name = "Activated",
             description = "Color of activated charges",
-            position = 4,
-            section = colors
+            position = 14,
+            section = general
         ) default Color getColorActivated() { return Color.green; }
+
+    @ConfigSection(
+        name = "Potions",
+        description = "Potions",
+        position = 2,
+        closedByDefault = true
+    ) String potions = "potion";
+
+        @ConfigItem(
+            keyName = potions + _infobox,
+            name = "Infoboxes",
+            description = "Show potions infoboxes",
+            section = potions
+        ) default boolean potionsInfoboxes() { return false; }
+
+        @ConfigItem(
+            keyName = potions + _overlay,
+            name = "Overlays",
+            description = "Show potions overlays",
+            section = potions
+        ) default boolean potionsOverlays() { return true; }
+
+        @Alpha
+        @ConfigItem(
+            keyName = "dose_4",
+            name = "4 doses",
+            description = "Color of 4 doses overlay",
+            position = 1,
+            section = potions
+        ) default Color get4DoseColor() { return Color.white; }
+
+        @Alpha
+        @ConfigItem(
+            keyName = "dose_3",
+            name = "3 doses",
+            description = "Color of 3 doses overlay",
+            position = 2,
+            section = potions
+        ) default Color get3DoseColor() { return Color.yellow; }
+
+        @Alpha
+        @ConfigItem(
+            keyName = "dose_2",
+            name = "2 doses",
+            description = "Color of 2 doses overlay",
+            position = 3,
+            section = potions
+        ) default Color get2DoseColor() { return new Color(230, 120, 0); }
+
+        @Alpha
+        @ConfigItem(
+            keyName = "dose_1",
+            name = "1 dose",
+            description = "Color of 1 dose overlay",
+            position = 4,
+            section = potions
+        ) default Color get1DoseColor() { return Color.red; }
+
 
     @ConfigSection(
         name = "Escape Crystal",
@@ -373,13 +422,6 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean masterScrollBookInfobox() { return true; }
-
-        @ConfigItem(
-            keyName = "potion" + _infobox,
-            name = "Potions",
-            description = "",
-            section = infoboxes
-        ) default boolean potionsInfobox() { return false; }
 
         @ConfigItem(
             keyName = reagent_pouch + _infobox,
@@ -1154,7 +1196,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     @ConfigSection(
         name = "Overlays",
         description = "Choose for which charged items number is shown next to it",
-        position = 4,
+        position = 5,
         closedByDefault = true
     ) String overlays = "overlays";
 
@@ -1192,13 +1234,6 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean masterScrollBookOverlay() { return true; }
-
-        @ConfigItem(
-            keyName = "potion" + _overlay,
-            name = "Potions",
-            description = "",
-            section = overlays
-        ) default boolean potionsOverlay() { return true; }
 
         @ConfigItem(
             keyName = reagent_pouch + _overlay,

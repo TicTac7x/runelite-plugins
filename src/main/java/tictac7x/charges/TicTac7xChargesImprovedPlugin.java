@@ -154,7 +154,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Seed box updating when pickpocketing..<br>" +
 		"<colHIGHLIGHT>* Royal seed pod added.<br>" +
 		"<colHIGHLIGHT>* Ectophial added.<br>" +
-		"<colHIGHLIGHT>* Surge potion added."
+		"<colHIGHLIGHT>* Surge potion added.<br>" +
+		"<colHIGHLIGHT>* Ability to change potions doses overlay colors."
 	;
 
 	@Inject
