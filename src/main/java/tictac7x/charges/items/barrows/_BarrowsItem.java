@@ -60,4 +60,9 @@ public class _BarrowsItem extends ChargedItem {
     public String getTotalChargesString() {
         return getChargesString(itemId);
     }
+
+    @Override
+    public String getConfigKey() {
+        return TicTac7xChargesImprovedConfig.barrows_gear;
+    }
 }

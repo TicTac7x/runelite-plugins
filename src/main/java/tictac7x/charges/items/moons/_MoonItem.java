@@ -29,4 +29,9 @@ public class _MoonItem extends ChargedItem {
     public String getTotalChargesString() {
         return getChargesString(itemId);
     }
+
+    @Override
+    public String getConfigKey() {
+        return TicTac7xChargesImprovedConfig.moons_gear;
+    }
 }

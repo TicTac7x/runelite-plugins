@@ -91,11 +91,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getConfigKey() {
-        return (
-            configKey.startsWith(TicTac7xChargesImprovedConfig.barrows_gear) ? TicTac7xChargesImprovedConfig.barrows_gear :
-            configKey.startsWith(TicTac7xChargesImprovedConfig.moons_gear) ? TicTac7xChargesImprovedConfig.moons_gear :
-            configKey
-        ).replaceAll("_$", "");
+        return configKey;
     }
 
     public boolean inInventory() {
