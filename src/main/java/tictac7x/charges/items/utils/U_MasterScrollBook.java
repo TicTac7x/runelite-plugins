@@ -141,7 +141,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
     @Override
     public Color getTotalTextColor() {
-        return getTotalCharges() == 0 ? Color.red : super.getTotalTextColor();
+        return getTotalCharges() == 0 ? provider.config.getColorEmpty() : super.getTotalTextColor();
     }
 
     @Override

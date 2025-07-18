@@ -100,14 +100,24 @@ public class Storage {
         add(item.get().getId(), item.get().getQuantity());
     }
 
+    public void put(final StorageItem item) {
+        put(item.getId(), item.getQuantity());
+    }
+
     public void put(final Optional<StorageItem> item) {
-        if (!item.isPresent()) return;
-        put(item.get().getId(), item.get().getQuantity());
+        if (item.isPresent()) {
+            put(item.get());
+        }
+    }
+
+    public void clearAndPut(final StorageItem item) {
+        clearAndPut(item.getId(), item.getQuantity());
     }
 
     public void clearAndPut(final Optional<StorageItem> item) {
-        if (!item.isPresent()) return;
-        clearAndPut(item.get().getId(), item.get().getQuantity());
+        if (item.isPresent()) {
+            clearAndPut(item.get());
+        }
     }
 
     public void clearAndPut(final int itemId, final int quantity) {

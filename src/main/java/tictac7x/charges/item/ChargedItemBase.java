@@ -144,7 +144,15 @@ public abstract class ChargedItemBase {
             return provider.config.getColorUnknown();
         }
 
-        if (charges == 0 || needsToBeEquipped() && !inEquipment()) {
+        if (charges == 0) {
+            return provider.config.getColorEmpty();
+        }
+
+        if (needsToBeEquipped() && inEquipment()) {
+            return provider.config.getColorActivated();
+        }
+
+        if (needsToBeEquipped() && !inEquipment()) {
             return provider.config.getColorEmpty();
         }
 

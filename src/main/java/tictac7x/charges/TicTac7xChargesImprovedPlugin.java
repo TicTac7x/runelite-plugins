@@ -146,16 +146,11 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.6.7";
+	private final String pluginVersion = "v0.6.8";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Beehive event, secateurs attachment, hallowed tree bark  support for log basket, forestry kit/basket.<br>" +
-		"<colHIGHLIGHT>* STASH units support for plank sack.<br>" +
-		"<colHIGHLIGHT>* Seed box updating when pickpocketing..<br>" +
-		"<colHIGHLIGHT>* Royal seed pod added.<br>" +
-		"<colHIGHLIGHT>* Ectophial added.<br>" +
-		"<colHIGHLIGHT>* Surge potion added.<br>" +
-		"<colHIGHLIGHT>* Ability to change potions doses overlay colors."
+		"<colHIGHLIGHT>* Blowpipe added.<br>" +
+		"<colHIGHLIGHT>* Forestry shop fixes."
 	;
 
 	@Inject
@@ -471,6 +466,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_ScytheOfVitur(provider),
 			new W_SkullSceptre(provider),
 			new W_SlayerStaffE(provider),
+			new W_ToxicBlowpipe(provider),
 			new W_TridentOfTheSeas(provider),
 			new W_TridentOfTheSeasE(provider),
 			new W_TridentOfTheSwamp(provider),
@@ -619,7 +615,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			// Not menu.
 			customMenuOptionClicked.target.isEmpty() && (
 				!customMenuOptionClicked.option.contains("Buy-") &&
-				!customMenuOptionClicked.option.equals("Continue")
+				!customMenuOptionClicked.option.equals("Continue") &&
+				!customMenuOptionClicked.option.equals("Yes")
 			) ||
 			// Start use by clicking on item.
 			customMenuOptionClicked.option.equals("Use") && customMenuOptionClicked.action.equals("WIDGET_TARGET") ||

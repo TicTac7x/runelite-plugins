@@ -132,48 +132,51 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             case 2: // Ritual mulch
                 animaBarkPerItem = 150;
                 break;
-            case 6: // Log brace
+            case 4: // Log brace
                 animaBarkPerItem = 3_000;
                 break;
-            case 7: // Clothes pouch blueprint
+            case 5: // Clothes pouch blueprint
                 animaBarkPerItem = 10_000;
                 break;
-            case 8: // Cape pouch
+            case 6: // Cape pouch
                 animaBarkPerItem = 2_500;
                 break;
-            case 9: // Log basket
+            case 7: // Log basket
                 animaBarkPerItem = 5_000;
                 break;
-            case 10: // Felling axe handle
+            case 8: // Felling axe handle
                 animaBarkPerItem = 10_000;
                 break;
-            case 11: // Twitcher's gloves
+            case 9: // Twitcher's gloves
                 animaBarkPerItem = 5_000;
                 break;
-            case 12: // Funky shaped log
+            case 10: // Funky shaped log
                 animaBarkPerItem = 15_000;
                 break;
-            case 13: // Sawmill voucher (x10)
+            case 11: // Sawmill voucher (x10)
                 animaBarkPerItem = 150;
                 break;
-            case 14: // Lumberjack boots
+            case 12: // Lumberjack boots
                 animaBarkPerItem = 1_000;
                 break;
-            case 15: // Lumberjack hat
+            case 13: // Lumberjack hat
                 animaBarkPerItem = 1_200;
                 break;
-            case 16: // Lumberjack legs
+            case 14: // Lumberjack legs
                 animaBarkPerItem = 1_300;
                 break;
-            case 17: // Lumberjack top
+            case 15: // Lumberjack top
                 animaBarkPerItem = 1_500;
                 break;
-            case 18: // Forestry boots
-            case 19: // Forestry hat
-            case 20: // Forestry legs
-            case 21: // Forestry top
+            case 16: // Forestry boots
+            case 17: // Forestry hat
+            case 18: // Forestry legs
+            case 19: // Forestry top
                 animaBarkPerItem = 1_250;
                 break;
+            case 21: // Golden pheasant egg
+            case 22: // Fox whistle
+                animaBarkPerItem = 75_000;
         }
 
         storage.removeAndPrioritizeInventory(ItemId.ANIMAINFUSED_BARK, animaBarkPerItem * amountToBuy);
