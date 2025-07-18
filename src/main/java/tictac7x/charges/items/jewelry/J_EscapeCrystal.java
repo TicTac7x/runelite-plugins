@@ -73,7 +73,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
 
     @Override
     public Color getTotalTextColor() {
-        return isAboutToActivate() ? Color.YELLOW : super.getTotalTextColor();
+        return isAboutToActivate() ? Color.YELLOW : isActivated() ? provider.config.getColorActivated() : provider.config.getColorEmpty();
     }
 
     @Override
