@@ -23,8 +23,8 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'tictac7x-charges'
-version = 'v0.5.21'
+group = 'tictac7x-camera-pitch-limiter'
+version = 'v0.1'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
