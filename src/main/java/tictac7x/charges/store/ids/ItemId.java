@@ -1630,6 +1630,6 @@ public final class ItemId {
     public static final int AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI = ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI;
     public static final int AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI_TROUVER = ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI_TROUVER;
 
-    // Bow string pool
+    // Bow string spool
     public static final int BOW_STRING_SPOOL = ItemID.BOWSTRING_SPOOL;
 }
