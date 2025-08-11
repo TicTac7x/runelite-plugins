@@ -13,6 +13,11 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     @Override
+    public boolean inInventoryOrEquipment() {
+        return super.inInventoryOrEquipment();
+    }
+
+    @Override
     public int getCharges(final int itemId) {
         for (final TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {

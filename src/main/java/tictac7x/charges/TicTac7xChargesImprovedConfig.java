@@ -369,18 +369,18 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         @ConfigItem(
             keyName = escape_crystal_time_remaining_warning,
             name = "Time remaining alert",
-            description = "How many time before you are warned before Escape crystal activates",
+            description = "Time before you are warned about Escape crystal activating",
             position = 4,
             section = escape_crystal_section
-        ) default int getEscapeCrystalTimeRemainingWarning() { return 5; }
+        ) default int getEscapeCrystalTimeRemainingWarning() { return 2; }
 
         @ConfigItem(
             keyName = escape_crystal_time_remaining_unit,
             name = "Time remaining unit",
-            description = "What unit to use for escape crystal activation (ticks is more precise)",
+            description = "Unit to use for Escape crystal activation warning",
             position = 5,
             section = escape_crystal_section
-        ) default EscapeCrystalTimeRemainingUnit getEscapeCrystalTimeRemainingUnit() { return EscapeCrystalTimeRemainingUnit.TICKS; }
+        ) default EscapeCrystalTimeRemainingUnit getEscapeCrystalTimeRemainingUnit() { return EscapeCrystalTimeRemainingUnit.SECONDS; }
 
     @ConfigSection(
         name = "Infoboxes",

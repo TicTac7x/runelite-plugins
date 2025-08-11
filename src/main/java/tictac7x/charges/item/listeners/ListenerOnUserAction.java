@@ -5,6 +5,8 @@ import tictac7x.charges.item.triggers.OnUserAction;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
+import java.util.Arrays;
+
 public class ListenerOnUserAction extends ListenerBase {
     public ListenerOnUserAction(final Provider provider, final ChargedItemBase chargedItem) {
         super(provider, chargedItem);
@@ -27,7 +29,6 @@ public class ListenerOnUserAction extends ListenerBase {
 
     public boolean isValidTrigger(final TriggerBase triggerBase) {
         if (!(triggerBase instanceof OnUserAction)) return false;
-
         final OnUserAction trigger = (OnUserAction) triggerBase;
         return super.isValidTrigger(trigger);
     }

@@ -17,31 +17,26 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.input.*;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.util.OSType;
-import tictac7x.charges.events.CustomChatMessage;
-import tictac7x.charges.events.CustomHitsplatApplied;
+import tictac7x.charges.events.*;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
-import tictac7x.charges.events.CustomItemContainerChanged;
 import tictac7x.charges.items.barrows.*;
-import tictac7x.charges.events.CustomMenuOptionClicked;
-import tictac7x.charges.items.boots.B_FremennikSeaBoots;
+import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
-import tictac7x.charges.items.crystal.A_CrystalBody;
-import tictac7x.charges.items.crystal.A_CrystalHelm;
-import tictac7x.charges.items.crystal.A_CrystalLegs;
-import tictac7x.charges.items.helms.H_CircletOfWater;
-import tictac7x.charges.items.helms.H_KandarinHeadgear;
+import tictac7x.charges.items.crystal.*;
+import tictac7x.charges.items.helms.*;
 import tictac7x.charges.items.jewelry.*;
 import tictac7x.charges.items.moons.*;
 import tictac7x.charges.items.potions.*;
-import tictac7x.charges.items.potions.P_Overload;
 import tictac7x.charges.items.potions.cox.*;
+import tictac7x.charges.items.potions.cox.P_Overload;
 import tictac7x.charges.items.potions.toa.*;
 import tictac7x.charges.items.shields.*;
 import tictac7x.charges.items.utils.*;
@@ -163,6 +158,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private ItemManager itemManager;
 
 	@Inject
+	private PluginManager pluginManager;
+
+	@Inject
 	private ConfigManager configManager;
 
 	@Inject
@@ -216,7 +214,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		mouseManager.registerMouseWheelListener(this);
 
 		store = new Store(client, itemManager, configManager);
-		provider = new Provider(client, clientThread, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, this, config, store, gson);
+		provider = new Provider(client, clientThread, pluginManager, configManager, itemManager, infoBoxManager, chatMessageManager, notifier, this, config, store, gson);
 
 		chargedItems = new ChargedItemBase[]{
 			// Crystal armor set
@@ -243,7 +241,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_AmuletOfBloodFury(provider),
 			new J_AmuletOfChemistry(provider),
 			new J_AmuletOfGlory(provider),
-			new U_BloodEssence(provider),
 			new J_BindingNecklace(provider),
 			new J_BraceletOfClay(provider),
 			new J_BraceletOfSlaughter(provider),
@@ -384,7 +381,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new P_Kodai(provider),
 			new P_KodaiMinus(provider),
 			new P_KodaiPlus(provider),
-			new tictac7x.charges.items.potions.cox.P_Overload(provider),
+			new P_Overload(provider),
 			new P_OverloadMinus(provider),
 			new P_OverloadPlus(provider),
 			new P_PrayerEnhance(provider),
@@ -420,6 +417,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 			// Utilities
 			new U_AshSanctifier(provider),
+			new U_BloodEssence(provider),
 			new U_BoneCrusher(provider),
 			new U_BottomlessCompostBucket(provider),
 			new U_ChuggingBarrel(provider),
@@ -757,7 +755,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	private void onUserAction() {
-		Arrays.stream(chargedItems).forEach(ChargedItemBase::onUserAction);
+		Arrays.stream(chargedItems).forEach(chargedItem -> {
+			chargedItem.onUserAction();
+		});
 	}
 
 	private void checkForChargesReset() {
@@ -798,10 +798,12 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	@Override
-	public void keyTyped(final KeyEvent keyEvent) {}
+	public void keyTyped(final KeyEvent keyEvent) {
+	}
 
 	@Override
-	public void keyReleased(final KeyEvent keyEvent) {}
+	public void keyReleased(final KeyEvent keyEvent) {
+	}
 
 	@Override
 	public MouseEvent mousePressed(final MouseEvent mouseEvent) {

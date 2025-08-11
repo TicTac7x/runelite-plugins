@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.util.Optional;
 
 public class ChargedItemWithStatus extends ChargedItem {
-
     public ChargedItemWithStatus(String configKey, int itemId, final Provider provider) {
         super(configKey, itemId, provider);
     }
@@ -46,6 +45,11 @@ public class ChargedItemWithStatus extends ChargedItem {
 
     private void setActivity(final TicTac7xChargesImprovedConfig.ItemActivity status) {
         provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey(), status);
+    }
+
+    @Override
+    public boolean inInventoryOrEquipment() {
+        return super.inInventoryOrEquipment();
     }
 
     @Override
