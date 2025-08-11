@@ -145,6 +145,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Blowpipe added.<br>" +
+		"<colHIGHLIGHT>* Bow string spool added.<br>" +
 		"<colHIGHLIGHT>* Forestry shop fixes.<br>" +
 		"<colHIGHLIGHT>* Escape crystal support for Gauntlet."
 	;
@@ -421,6 +422,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_BloodEssence(provider),
 			new U_BoneCrusher(provider),
 			new U_BottomlessCompostBucket(provider),
+			new U_BowStringSpool(provider),
 			new U_ChuggingBarrel(provider),
 			new U_CoalBag(provider),
 			new U_CrystalSaw(provider),
