@@ -71,10 +71,10 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
                 final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
                 if (
-                        widget.isPresent() &&
-                                (widget.get().getItemId() == ItemId.TOXIC_BLOWPIPE) &&
-                                script.getScriptEvent().getArguments().length >= 5 &&
-                                script.getScriptEvent().getArguments()[4].toString().equals("Yes")
+                    widget.isPresent() &&
+                    widget.get().getItemId() == ItemId.TOXIC_BLOWPIPE &&
+                    script.getScriptEvent().getArguments().length >= 5 &&
+                    script.getScriptEvent().getArguments()[4].toString().equals("Yes")
                 ) {
                     provider.store.addConsumerToNextTickQueue(() -> storage.clear());
                 }

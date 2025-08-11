@@ -1190,7 +1190,7 @@ public final class ItemId {
     public static final int QUETZAL_WHISTLE_BASIC = ItemID.HG_QUETZALWHISTLE_BASIC;
     public static final int QUETZAL_WHISTLE_ENHANCED = ItemID.HG_QUETZALWHISTLE_ENHANCED;
     public static final int QUETZAL_WHISTLE_PERFECTED = ItemID.HG_QUETZALWHISTLE_PERFECTED;
-    public static final int QUETZAL_FEED = ItemID.VMQ2_QUETZAL_FEED;
+    public static final int QUETZAL_FEED = ItemID.HG_SEEDSACK;
 
     // Reagent pouch
     public static final int REAGENT_POUCH = ItemID.MM_SECONDARY_POUCH;

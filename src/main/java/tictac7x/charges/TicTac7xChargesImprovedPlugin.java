@@ -35,8 +35,8 @@ import tictac7x.charges.items.helms.*;
 import tictac7x.charges.items.jewelry.*;
 import tictac7x.charges.items.moons.*;
 import tictac7x.charges.items.potions.*;
+import tictac7x.charges.items.potions.P_Overload;
 import tictac7x.charges.items.potions.cox.*;
-import tictac7x.charges.items.potions.cox.P_Overload;
 import tictac7x.charges.items.potions.toa.*;
 import tictac7x.charges.items.shields.*;
 import tictac7x.charges.items.utils.*;
@@ -145,7 +145,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Blowpipe added.<br>" +
-		"<colHIGHLIGHT>* Forestry shop fixes."
+		"<colHIGHLIGHT>* Forestry shop fixes.<br>" +
+		"<colHIGHLIGHT>* Escape crystal support for Gauntlet."
 	;
 
 	@Inject
@@ -381,7 +382,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new P_Kodai(provider),
 			new P_KodaiMinus(provider),
 			new P_KodaiPlus(provider),
-			new P_Overload(provider),
+			new tictac7x.charges.items.potions.cox.P_Overload(provider),
 			new P_OverloadMinus(provider),
 			new P_OverloadPlus(provider),
 			new P_PrayerEnhance(provider),
