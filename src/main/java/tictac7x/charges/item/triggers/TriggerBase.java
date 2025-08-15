@@ -36,6 +36,8 @@ public abstract class TriggerBase {
     // Storage.
     public Optional<Boolean> emptyStorage = Optional.empty();
     public Optional<Boolean> emptyStorageToInventory = Optional.empty();
+    public Optional<Boolean> fillStorageFromInventory = Optional.empty();
+    public Optional<Boolean> emptyStorageToBank = Optional.empty();
     public Optional<Boolean> pickUpToStorage = Optional.empty();
     public Optional<int[]> addToStorage = Optional.empty();
 
@@ -69,6 +71,16 @@ public abstract class TriggerBase {
 
     public TriggerBase emptyStorageToInventory() {
         this.emptyStorageToInventory = Optional.of(true);
+        return this;
+    }
+
+    public TriggerBase emptyStorageToBank() {
+        this.emptyStorageToBank = Optional.of(true);
+        return this;
+    }
+
+    public TriggerBase fillStorageFromInventory() {
+        this.fillStorageFromInventory = Optional.of(true);
         return this;
     }
 

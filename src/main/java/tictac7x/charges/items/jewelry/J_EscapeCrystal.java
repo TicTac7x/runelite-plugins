@@ -87,8 +87,8 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     @Override
-    public boolean inInventoryOrEquipment() {
-        return super.inInventoryOrEquipment() || inGauntletWithEscapeCrystal;
+    public boolean inInventory() {
+        return super.inInventory() || inGauntletWithEscapeCrystal;
     }
 
     @Override

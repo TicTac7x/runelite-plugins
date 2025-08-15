@@ -49,6 +49,18 @@ public abstract class ListenerBase {
             triggerUsed = true;
         }
 
+        // Empty storage to bank.
+        if (trigger.emptyStorageToBank.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
+            ((ChargedItemWithStorage) chargedItem).storage.emptyToBank();
+            triggerUsed = true;
+        }
+
+        // Fill storage from inventory.
+        if (trigger.fillStorageFromInventory.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
+            ((ChargedItemWithStorage) chargedItem).storage.fillFromInventory();
+            triggerUsed = true;
+        }
+
         // Empty storage to inventory.
         if (trigger.emptyStorageToInventory.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
             ((ChargedItemWithStorage) chargedItem).storage.emptyToInventory();
@@ -228,7 +240,18 @@ public abstract class ListenerBase {
             }
         }
 
+        // Empty storage to inventory check.
         if (trigger.emptyStorageToInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
+            return false;
+        }
+
+        // Empty storage to bank check.
+        if (trigger.emptyStorageToBank.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
+            return false;
+        }
+
+        // Fill storage from inventory check.
+        if (trigger.fillStorageFromInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
             return false;
         }
 

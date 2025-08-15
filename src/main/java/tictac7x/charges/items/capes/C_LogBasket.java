@@ -101,12 +101,15 @@ public class C_LogBasket extends ChargedItemWithStorage {
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.LOG_BASKET_OPEN).pickUpToStorage(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Fill").onItemClick().fillStorageFromInventory(),
 
             // Fully empty to inventory.
             new OnChatMessage("You empty your basket.").emptyStorage(),
 
             // Partially empty to inventory.
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Empty").onItemClick().emptyStorageToInventory(),
+
+            // Partially empty to inventory from check dialog.
             new OnItemContainerChanged(INVENTORY).onMenuOption("Continue").hasChatMessage("You empty as many logs as you can carry.").emptyStorageToInventory(),
 
             // Use log on basket.

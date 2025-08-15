@@ -183,7 +183,7 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             }),
 
             // Empty to bank.
-            new OnChatMessage("You empty your basket( into the bank)?.").onItemClick().consumer(() -> {
+            new OnChatMessage("You empty your basket( into the bank)?.").consumer(() -> {
                 emptyLogBasket();
                 infernalQuantityTracker = 0;
                 lastLogs = Optional.empty();
@@ -226,6 +226,15 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             }),
 
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.FORESTRY_BASKET_OPEN).pickUpToStorage(),
+
+            // Fill log basket from inventory.
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Log basket").onItemClick().fillStorageFromInventory(),
+
+            // Fill forestry kit from inventory.
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Forestry kit").onItemClick().fillStorageFromInventory(),
+
+            // Empty to inventory.
+            new OnItemContainerChanged(INVENTORY).onMenuOption("Empty basket").onItemClick().emptyStorageToInventory(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),

@@ -34,24 +34,6 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
             boolean triggerUsed = false;
             final OnItemContainerChanged trigger = (OnItemContainerChanged) triggerBase;
 
-            // Fill storage from inventory all items.
-            if (trigger.fillStorageFromInventory.isPresent()) {
-                ((ChargedItemWithStorage) chargedItem).storage.fillFromInventory();
-                triggerUsed = true;
-            }
-
-            // Empty storage to bank.
-            if (trigger.emptyStorageToBank.isPresent()) {
-                ((ChargedItemWithStorage) chargedItem).storage.emptyToBank();
-                triggerUsed = true;
-            }
-
-            // Empty storage to inventory.
-            if (trigger.emptyStorageToInventory.isPresent()) {
-                ((ChargedItemWithStorage) chargedItem).storage.emptyToInventory();
-                triggerUsed = true;
-            }
-
             // Update storage directly from item container.
             if (trigger.updateStorage.isPresent()) {
                 ((ChargedItemWithStorage) chargedItem).storage.updateFromItemContainer(itemContainerChanged);
@@ -88,11 +70,6 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         // Item container type check.
         if (
             itemContainerChanged.getContainerId() != trigger.itemContainerId) {
-            return false;
-        }
-
-        // Fill storage from inventory check.
-        if (trigger.fillStorageFromInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
             return false;
         }
 

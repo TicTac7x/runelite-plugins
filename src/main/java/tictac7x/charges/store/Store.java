@@ -295,13 +295,14 @@ public class Store {
     }
 
     public boolean inMenuTargets(final int ...itemIds) {
-        final String[] targets = new String[itemIds.length];
-
-        for (int i = 0; i < itemIds.length; i++) {
-            targets[i] = itemManager.getItemComposition(itemIds[i]).getName();
+        for (final int itemId : itemIds) {
+            for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+                final boolean found = itemId == customMenuOptionClicked.itemId;
+                if (found) return true;
+            }
         }
 
-        return inMenuTargets(targets);
+        return false;
     }
 
     public boolean inMenuTargets(final String ...targets) {

@@ -232,6 +232,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new C_Coffin(provider),
 			new C_ForestryBasket(provider),
 			new C_ForestryKit(provider),
+			new C_LogBasket(provider),
 			new C_MagicCape(provider),
 
 			// Helms
@@ -438,7 +439,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_HuntsmansKit(provider),
 			new U_ImpInABox(provider),
 			new U_JarGenerator(provider),
-			new C_LogBasket(provider),
 			new U_MasterScrollBook(provider),
 			new U_MeatPouch(provider),
 			new U_OgreBellows(provider),
@@ -617,7 +617,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			customMenuOptionClicked.target.isEmpty() && (
 				!customMenuOptionClicked.option.contains("Buy-") &&
 				!customMenuOptionClicked.option.equals("Continue") &&
-				!customMenuOptionClicked.option.equals("Yes")
+				!customMenuOptionClicked.option.equals("Yes") &&
+				customMenuOptionClicked.eventId != 65540 && // Special event check for log basket
+				customMenuOptionClicked.eventId != 65538 && // Special event check for forestry basket
+				customMenuOptionClicked.eventId != 131074 && // Special event check for forestry basket
+				customMenuOptionClicked.eventId != 131076 // Special event check for forestry basket
 			) ||
 			// Start use by clicking on item.
 			customMenuOptionClicked.option.equals("Use") && customMenuOptionClicked.action.equals("WIDGET_TARGET") ||
