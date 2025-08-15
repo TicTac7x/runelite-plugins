@@ -90,6 +90,10 @@ public abstract class ChargedItemBase {
         return configKey;
     }
 
+    public String getInfoboxName() {
+        return configKey;
+    }
+
     public boolean inInventory() {
         return inInventory;
     }

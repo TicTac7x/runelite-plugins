@@ -28,7 +28,7 @@ public class ChargedItemInfobox extends InfoBox {
 
     @Override
     public String getName() {
-        return super.getName() + "_" + chargedItem.itemId;
+        return super.getName() + "_" + chargedItem.getInfoboxName();
     }
 
     @Override

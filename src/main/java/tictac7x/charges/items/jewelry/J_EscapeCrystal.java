@@ -58,7 +58,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
             }),
 
             // Leave Gauntlet detection.
-            new OnChatMessage("You leave the Gauntlet.").consumer(() -> {
+            new OnChatMessage("(You leave the Gauntlet.|Your reward awaits you in the nearby chest.)").consumer(() -> {
                 inGauntletWithEscapeCrystal = false;
             }),
         };
