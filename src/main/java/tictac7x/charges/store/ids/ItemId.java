@@ -1366,6 +1366,8 @@ public final class ItemId {
     public static final int FISH_CHUNKS = ItemID.FISH_CHUNKS;
     public static final int MOLCH_PEARL = ItemID.AERIAL_FISHING_PEARL;
     public static final int STRIPY_FEATHER = ItemID.HUNTING_STRIPY_BIRD_FEATHER;
+    public static final int DIABOLIC_WORMS = ItemID.DIABOLIC_WORMS;
+    public static final int SHARK_LURE = ItemID.SHARK_LURE;
 
     // Teleport crystal
     public static final int TELEPORT_CRYSTAL_0 = ItemID.GAUNTLET_TELEPORT_CRYSTAL;

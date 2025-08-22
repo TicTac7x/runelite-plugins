@@ -76,7 +76,9 @@ public class U_TackleBox extends ChargedItemWithStorage {
             new StorableItem(ItemId.FISHING_POTION_3),
             new StorableItem(ItemId.FISHING_POTION_4),
             new StorableItem(ItemId.MOLCH_PEARL),
-            new StorableItem(ItemId.STRIPY_FEATHER)
+            new StorableItem(ItemId.STRIPY_FEATHER),
+            new StorableItem(ItemId.DIABOLIC_WORMS),
+            new StorableItem(ItemId.SHARK_LURE)
         );
 
         this.items = new TriggerItem[]{

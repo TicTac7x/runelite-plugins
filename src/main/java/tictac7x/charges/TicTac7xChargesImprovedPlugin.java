@@ -147,7 +147,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Blowpipe added.<br>" +
 		"<colHIGHLIGHT>* Bow string spool added.<br>" +
 		"<colHIGHLIGHT>* Forestry shop fixes.<br>" +
-		"<colHIGHLIGHT>* Escape crystal support for Gauntlet."
+		"<colHIGHLIGHT>* Escape crystal support for Gauntlet.<br>" +
+		"<colHIGHLIGHT>* Diabolic worms and shark lure support for tackle box."
 	;
 
 	@Inject
