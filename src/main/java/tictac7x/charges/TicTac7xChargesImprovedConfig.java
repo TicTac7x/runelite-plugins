@@ -235,12 +235,12 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean showStorageTooltips() { return true; }
 
         @ConfigItem(
-            keyName = "hide_destroy",
+            keyName = "hide_destroy_menu_entries",
             name = "Hide destroy menu entries",
             description = "Hide destroy menu entry from items that make no sense to destroy",
             section = general,
             position = 7
-        ) default boolean hideDestroy() { return true; }
+        ) default boolean hideDestroyMenuEntries() { return false; }
 
         @ConfigItem(
             keyName = "show_unlimited_charges",

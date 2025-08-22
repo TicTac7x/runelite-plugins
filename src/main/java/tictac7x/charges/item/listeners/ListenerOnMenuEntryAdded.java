@@ -109,7 +109,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
         }
 
         // Hide config check.
-        if (trigger.hide.isPresent() && !provider.config.hideDestroy()) {
+        if (trigger.hide.isPresent() && !provider.config.hideDestroyMenuEntries()) {
             return false;
         }
 

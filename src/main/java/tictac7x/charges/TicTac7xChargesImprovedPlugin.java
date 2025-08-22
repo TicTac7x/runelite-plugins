@@ -148,7 +148,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Bow string spool added.<br>" +
 		"<colHIGHLIGHT>* Forestry shop fixes.<br>" +
 		"<colHIGHLIGHT>* Escape crystal support for Gauntlet.<br>" +
-		"<colHIGHLIGHT>* Diabolic worms and shark lure support for tackle box."
+		"<colHIGHLIGHT>* Diabolic worms and shark lure support for tackle box.<br>" +
+		"<colHIGHLIGHT>* Items no longer have Destroy options hidden by default."
 	;
 
 	@Inject
@@ -797,6 +798,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		if (necklaceOfPassageInfobox.isPresent()) {
 			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig._infobox, necklaceOfPassageInfobox.get().equals("true"));
 			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_infobox");
+		}
+
+		// v0.6.8 - remove outdated destroy entries config
+		if (Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, "hide_destroy")).isPresent()) {
+			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "hide_destroy");
 		}
 	}
 
