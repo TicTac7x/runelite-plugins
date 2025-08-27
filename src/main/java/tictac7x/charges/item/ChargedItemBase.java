@@ -107,7 +107,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getTooltip() {
-        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(String.valueOf(getChargesString(itemId)), JagexColors.MENU_TARGET);
+        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(getChargesString(itemId), JagexColors.MENU_TARGET);
     }
 
     @Nonnull

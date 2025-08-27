@@ -159,11 +159,14 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
     // Weapons
     String arclight = "arclight";
+    String blazing_blowpipe = "blazing_blowpipe";
     String bow_of_faerdhinen = "bow_of_faerdhinen";
     String bryophytas_staff = "bryophytas_staff";
+    String craws_bow = "craws_bow";
     String crystal_bow = "crystal_bow";
     String crystal_halberd = "crystal_halberd";
     String ibans_staff = "ibans_staff";
+    String infernal_axe = "infernal_axe";
     String pharaohs_sceptre = "pharaohs_sceptre";
     String sanguinesti_staff = "sanguinesti_staff";
     String scythe_of_vitur = "scythe_of_vitur";
@@ -178,6 +181,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String tumekens_shadow = "tumekens_shadow";
     String venator_bow = "venator_bow";
     String warped_sceptre = "warped_sceptre";
+    String webweaver_bow = "webweaver_bow";
     String western_banner = "western_banner";
 
     @ConfigSection(
@@ -1049,11 +1053,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean arclightInfobox() { return true; }
 
         @ConfigItem(
+            keyName = blazing_blowpipe + _infobox,
+            name = "Blazing blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean blazingBlowpipeInfobox() { return true; }
+
+        @ConfigItem(
             keyName = bryophytas_staff + _infobox,
             name = "Bryophyta's staff",
             description = "",
             section = infoboxes
         ) default boolean bryophytasStaffInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = craws_bow + _infobox,
+            name = "Craw's bow",
+            description = "",
+            section = infoboxes
+        ) default boolean crawsBowInfobox() { return true; }
 
         @ConfigItem(
             keyName = burning_amulet + _infobox,
@@ -1096,6 +1114,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean ibansStaffInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = infernal_axe + _infobox,
+            name = "Infernal axe",
+            description = "",
+            section = infoboxes
+        ) default boolean infernalAxeInfobox() { return true; }
 
         @ConfigItem(
             keyName = pharaohs_sceptre + _infobox,
@@ -1180,6 +1205,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean warpedSceptreInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = webweaver_bow + _infobox,
+            name = "Webweaver bow",
+            description = "",
+            section = infoboxes
+        ) default boolean webweaverBowInfobox() { return true; }
 
         @ConfigItem(
             keyName = alchemists_amulet + _infobox,
@@ -1306,6 +1338,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean arclightOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = blazing_blowpipe + _overlay,
+            name = "Blazing blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean blazingBlowpipeOverlay() { return true; }
 
         @ConfigItem(
             keyName = ardougne_cloak + _overlay,
@@ -1868,6 +1907,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bryophytasStaffOverlay() { return true; }
 
         @ConfigItem(
+            keyName = craws_bow + _overlay,
+            name = "Craw's bow",
+            description = "",
+            section = overlays
+        ) default boolean crawsBowOverlay() { return true; }
+
+        @ConfigItem(
             keyName = burning_amulet + _overlay,
             name = "Burning amulet",
             description = "",
@@ -1908,6 +1954,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean ibansStaffOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = infernal_axe + _overlay,
+            name = "Infernal axe",
+            description = "",
+            section = overlays
+        ) default boolean infernalAxeOverlay() { return true; }
 
         @ConfigItem(
             keyName = pharaohs_sceptre + _overlay,
@@ -1999,6 +2052,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean warpedSceptreOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = webweaver_bow + _overlay,
+            name = "Webweaver bow",
+            description = "",
+            section = overlays
+        ) default boolean webweaverBowOverlay() { return true; }
 
         @ConfigItem(
             keyName = xerics_talisman + _overlay,

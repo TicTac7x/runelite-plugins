@@ -3,19 +3,16 @@ package tictac7x.charges.items.weapons;
 import net.runelite.api.widgets.Widget;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.OnAnimationChanged;
 import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
 import tictac7x.charges.item.triggers.OnMenuOptionClicked;
 import tictac7x.charges.item.triggers.OnScriptPreFired;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.ids.ItemId;
 
 import java.awt.Color;
@@ -24,7 +21,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     public W_ToxicBlowpipe(final Provider provider) {
-        super(TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, provider);
+        this(TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, provider);
+
+        this.items = new TriggerItem[]{
+                new TriggerItem(ItemId.TOXIC_BLOWPIPE_UNCHARGED),
+                new TriggerItem(ItemId.TOXIC_BLOWPIPE),
+        };
+    }
+    public W_ToxicBlowpipe(final String configKey, final int itemId, final Provider provider) {
+        super(configKey, itemId, provider);
 
         this.storage.storableItems(
             new StorableItem(ItemId.ZULRAH_SCALES),
@@ -37,11 +42,6 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new StorableItem(ItemId.AMETHYST_DART).checkName("Amethyst dart"),
             new StorableItem(ItemId.DRAGON_DART).checkName("Dragon dart")
         );
-
-        this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOXIC_BLOWPIPE_EMPTY),
-            new TriggerItem(ItemId.TOXIC_BLOWPIPE),
-        };
 
         this.triggers = new TriggerBase[] {
             // Check without darts.

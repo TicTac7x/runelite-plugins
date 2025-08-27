@@ -1,18 +1,15 @@
 package tictac7x.charges.item.overlays;
 
-import net.runelite.api.Client;
 import net.runelite.api.widgets.WidgetItem;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.WidgetItemOverlay;
 import net.runelite.client.ui.overlay.components.TextComponent;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
-import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ChargeId;
 
 import java.awt.*;
@@ -21,24 +18,14 @@ import java.util.Optional;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public class ChargedItemOverlay extends WidgetItemOverlay {
-    private final Client client;
-    private final TooltipManager tooltipManager;
-    private final ConfigManager configManager;
-    private final TicTac7xChargesImprovedConfig config;
+    private final Provider provider;
     private final ChargedItemBase[] chargedItems;
 
     public ChargedItemOverlay(
-        final Client client,
-        final TooltipManager tooltipManager,
-        final ItemManager itemManager,
-        final ConfigManager configManager,
-        final TicTac7xChargesImprovedConfig config,
+        final Provider provider,
         final ChargedItemBase[] chargedItems
     ) {
-        this.client = client;
-        this.tooltipManager = tooltipManager;
-        this.configManager = configManager;
-        this.config = config;
+        this.provider = provider;
         this.chargedItems = chargedItems;
         showOnInventory();
         showOnEquipment();
@@ -58,7 +45,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
 
     @Override
     public void renderItemOverlay(final Graphics2D graphics, final int itemId, final WidgetItem widgetItem) {
-        if (!config.showOverlays()) return;
+        if (!provider.config.showOverlays()) return;
 
         Optional<ChargedItemBase> chargedItem = Optional.empty();
         Optional<TriggerItem> triggerItem = Optional.empty();
@@ -76,26 +63,26 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
 
 
         // Invalid item.
-        if (!chargedItem.isPresent() || !triggerItem.isPresent()) return;
+        if (!chargedItem.isPresent()) return;
 
         if (
             // Item overlay disabled.
             !isChargedItemOverlayEnabled(chargedItem.get()) ||
 
             // Infinity charges hidden.
-            !config.showUnlimited() && chargedItem.get().getChargesString(itemId).equals(INFINITE_SYMBOL) ||
-            !config.showUnlimited() && triggerItem.get().fixedCharges.isPresent() && triggerItem.get().fixedCharges.get().equals(ChargeId.UNLIMITED) ||
+            !provider.config.showUnlimited() && chargedItem.get().getChargesString(itemId).equals(INFINITE_SYMBOL) ||
+            !provider.config.showUnlimited() && triggerItem.get().fixedCharges.isPresent() && triggerItem.get().fixedCharges.get().equals(ChargeId.UNLIMITED) ||
 
             // Hide overlays in bank.
-            !config.showBankOverlays() && isBankWidget(widgetItem) ||
+            !provider.config.showBankOverlays() && isBankWidget(widgetItem) ||
 
             // Show overlays only in bank.
-            config.showOverlaysOnlyInBank() && client.getWidget(12, 1) == null
+            provider.config.showOverlaysOnlyInBank() && provider.client.getWidget(12, 1) == null
         ) return;
 
         // Get default charges from charged item.
-        String charges = chargedItem.get().getChargesString(itemId);
-        Color color = chargedItem.get().getTextColor(itemId);
+        final String charges = chargedItem.get().getChargesString(itemId);
+        final Color color = chargedItem.get().getTextColor(itemId);
 
         graphics.setFont(FontManager.getRunescapeSmallFont());
 
@@ -105,16 +92,16 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         final Dimension textDimension = charges_component.render(graphics);
 
         final int itemOverlayX = (int) ((
-            config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.BOTTOM_LEFT ||
-            config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_LEFT
+            provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.BOTTOM_LEFT ||
+            provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_LEFT
         )
             ? bounds.getMinX()
             : bounds.getMaxX() - textDimension.getWidth() - 5
         );
 
         final int itemOverlayY = (int) ((
-            config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_LEFT ||
-            config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_RIGHT
+            provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_LEFT ||
+            provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_RIGHT
         )
             ? bounds.getMinY() + textDimension.getHeight() - 2
             : bounds.getMaxY()
@@ -127,7 +114,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
 
         // Override for bank items.
         if (isBankWidget(widgetItem) && !chargedItem.get().getChargesString(itemId).equals("?")) {
-            charges_component.setColor(config.getColorDefault());
+            charges_component.setColor(provider.config.getColorDefault());
         }
 
         charges_component.render(graphics);
@@ -139,24 +126,24 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
     private void renderTooltip(final ChargedItemBase chargedItem, final WidgetItem widgetItem) {
         // Config, not storage item, empty storage checks.
         if (
-            !config.showStorageTooltips() ||
+            !provider.config.showStorageTooltips() ||
             !(chargedItem instanceof ChargedItemWithStorage)
         ) return;
 
         // Mouse position check.
-        final net.runelite.api.Point mousePosition = client.getMouseCanvasPosition();
+        final net.runelite.api.Point mousePosition = provider.client.getMouseCanvasPosition();
         if (!widgetItem.getCanvasBounds().contains(mousePosition.getX(), mousePosition.getY())) return;
 
 
         final String tooltip = chargedItem.getTooltip();
         if (!tooltip.isEmpty()) {
-            tooltipManager.addFront(new Tooltip(tooltip));
+            provider.tooltipManager.addFront(new Tooltip(tooltip));
         }
     }
 
     private boolean isChargedItemOverlayEnabled(final ChargedItemBase chargedItem) {
         final String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._overlay;
-        final Optional<String> visible = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        final Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
         return visible.isPresent() && visible.get().equals("true");
     }
 }

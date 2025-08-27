@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.6.8
+# Item Charges Improved - v0.6.9
 
 Show charges of various items that are in inventory or equipped
 
@@ -115,8 +115,10 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 
 ### Weapons
 - Arclight
+- Blazing blowpipe
 - Bow of faerdhinen
 - Bryophyta's staff
+- Craw's bow
 - Crystal bow
 - Crystal halberd
 - Enchanted lyre
@@ -130,5 +132,6 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Tumeken's shadow
 - Venator bow
 - Warped sceptre
+- Webweaver bow
 - Western banner
 

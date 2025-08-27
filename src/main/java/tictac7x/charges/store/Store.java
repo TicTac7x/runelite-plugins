@@ -297,8 +297,12 @@ public class Store {
     public boolean inMenuTargets(final int ...itemIds) {
         for (final int itemId : itemIds) {
             for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
-                final boolean found = itemId == customMenuOptionClicked.itemId;
-                if (found) return true;
+                if (
+                    customMenuOptionClicked.itemId == itemId ||
+                    // Additional target name check, because itemId can be -1 when the clicked item was not in inventory.
+                    // Target can be also in format of item -> something else, which is why we are checking for partial match
+                    customMenuOptionClicked.target.contains(itemManager.getItemComposition(itemId).getName())
+                ) return true;
             }
         }
 

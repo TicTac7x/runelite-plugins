@@ -80,7 +80,20 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
             // Hallowed Sepulchre
             new OnXpDrop(Skill.CONSTRUCTION).xpAmountConsumer((xp) -> {
-                storage.removeAndPrioritizeInventory(ItemId.MAHOGANY_PLANK, 2);
+                switch (xp) {
+                    case 150:
+                        storage.removeAndPrioritizeInventory(ItemId.PLANK, 2);
+                        break;
+                    case 300:
+                        storage.removeAndPrioritizeInventory(ItemId.OAK_PLANK, 2);
+                        break;
+                    case 450:
+                        storage.removeAndPrioritizeInventory(ItemId.TEAK_PLANK, 2);
+                        break;
+                    case 700:
+                        storage.removeAndPrioritizeInventory(ItemId.MAHOGANY_PLANK, 2);
+                        break;
+                }
             }).onMenuOptionId(
                 39527, 39528
             ),

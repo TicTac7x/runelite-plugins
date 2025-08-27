@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = 'tictac7x-charges'
-version = 'v0.6.8'
+version = 'v0.6.9'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {

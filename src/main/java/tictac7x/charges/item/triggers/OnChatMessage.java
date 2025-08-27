@@ -48,4 +48,9 @@ public class OnChatMessage extends TriggerBase {
         this.decreaseDynamically = Optional.of(true);
         return this;
     }
+
+    public OnChatMessage onItemClick() {
+        super.onItemClick();
+        return this;
+    }
 }

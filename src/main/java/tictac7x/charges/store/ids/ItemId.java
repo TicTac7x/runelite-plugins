@@ -1607,11 +1607,13 @@ public final class ItemId {
 
     // Ectophial
     public static final int ECTOPHIAL = ItemID.ECTOPHIAL;
-    public static final int ECTOPHIAL_EMPTY = ItemID.ECTOPHIAL_EMPTY;
+    public static final int ECTOPHIAL_UNCHARGED = ItemID.ECTOPHIAL_EMPTY;
 
     // Toxic blowpipe.
+    public static final int TOXIC_BLOWPIPE_UNCHARGED = ItemID.TOXIC_BLOWPIPE;
     public static final int TOXIC_BLOWPIPE = ItemID.TOXIC_BLOWPIPE_LOADED;
-    public static final int TOXIC_BLOWPIPE_EMPTY = ItemID.TOXIC_BLOWPIPE;
+    public static final int BLAZING_BLOWPIPE_UNCHARGED = ItemID.TOXIC_BLOWPIPE_ORNAMENT;
+    public static final int BLAZING_BLOWPIPE = ItemID.TOXIC_BLOWPIPE_LOADED_ORNAMENT;
     public static final int ZULRAH_SCALES = ItemID.SNAKEBOSS_SCALE;
     public static final int BRONZE_DART = ItemID.BRONZE_DART;
     public static final int IRON_DART = ItemID.IRON_DART;
@@ -1634,4 +1636,16 @@ public final class ItemId {
 
     // Bow string spool
     public static final int BOW_STRING_SPOOL = ItemID.BOWSTRING_SPOOL;
+
+    // Craw's bow
+    public static final int CRAWS_BOW_UNCHARGED = ItemID.WILD_CAVE_BOW_UNCHARGED;
+    public static final int CRAWS_BOW = ItemID.WILD_CAVE_BOW_CHARGED;
+
+    // Webweaver bow
+    public static final int WEBWEAVER_BOW_UNCHARGED = ItemID.WILD_CAVE_WEBWEAVER_UNCHARGED;
+    public static final int WEBWEAVER_BOW = ItemID.WILD_CAVE_WEBWEAVER_CHARGED;
+
+    // Infernal axe
+    public static final int INFERNAL_AXE_UNCHARGED = ItemID.INFERNAL_AXE_EMPTY;
+    public static final int INFERNAL_AXE = ItemID.INFERNAL_AXE_EMPTY;
 }
