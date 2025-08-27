@@ -123,6 +123,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Crystal halberd
 - Enchanted lyre
 - Iban's staff
+- Infernal axe
 - Pharaoh's sceptre
 - Sanguinesti staff
 - Scythe of Vitur
