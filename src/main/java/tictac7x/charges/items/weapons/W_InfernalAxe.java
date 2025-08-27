@@ -1,6 +1,7 @@
 package tictac7x.charges.items.weapons;
 
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
@@ -18,6 +19,12 @@ public class W_InfernalAxe extends ChargedItem {
         };
 
         this.triggers = new TriggerBase[] {
+            // Check.
+            new OnChatMessage("Infernal axe: (?<percentage>.+)% remaining.").matcherConsumer(m -> {
+                final double percentage = Double.parseDouble(m.group("percentage"));
+                setCharges((int) (percentage * 5000 / 100));
+            }),
+
             // Charge used.
             new OnGraphicChanged(GraphicId.INFERNAL_AXE_SMOKE).isEquipped().decreaseCharges(1),
         };

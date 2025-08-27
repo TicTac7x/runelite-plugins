@@ -146,6 +146,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Craw's bow and webweaver bow added.<br>" +
 		"<colHIGHLIGHT>* Blazing blowpipe added.<br>" +
+		"<colHIGHLIGHT>* Infernal axe added.<br>" +
 		"<colHIGHLIGHT>* Fixes for skull sceptre, fish barrel, plank sack."
 	;
 
@@ -462,6 +463,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_CrystalBow(provider),
 			new W_CrystalHalberd(provider),
 			new W_EnchantedLyre(provider),
+			new W_InfernalAxe(provider),
 			new W_IbansStaff(provider),
 			new W_PharaohsSceptre(provider),
 			new W_SanguinestiStaff(provider),
