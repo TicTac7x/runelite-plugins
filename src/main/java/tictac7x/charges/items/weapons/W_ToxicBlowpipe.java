@@ -24,8 +24,8 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         this(TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, provider);
 
         this.items = new TriggerItem[]{
-                new TriggerItem(ItemId.TOXIC_BLOWPIPE_UNCHARGED),
-                new TriggerItem(ItemId.TOXIC_BLOWPIPE),
+            new TriggerItem(ItemId.TOXIC_BLOWPIPE_UNCHARGED),
+            new TriggerItem(ItemId.TOXIC_BLOWPIPE),
         };
     }
     public W_ToxicBlowpipe(final String configKey, final int itemId, final Provider provider) {
