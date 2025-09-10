@@ -30,6 +30,9 @@ public class W_CrystalHalberd extends ChargedItem {
 
             // Attack with slash.
             new OnAnimationChanged(AnimationId.HUMAN_SCYTHE_SWEEP).isEquipped().decreaseCharges(1),
+
+            // Attack with special.
+            new OnAnimationChanged(AnimationId.HUMAN_HALBERD_SPECIAL).isEquipped().decreaseCharges(1),
         };
     }
 }
