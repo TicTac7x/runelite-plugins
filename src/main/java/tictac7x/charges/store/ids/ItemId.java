@@ -1648,4 +1648,8 @@ public final class ItemId {
     // Infernal axe
     public static final int INFERNAL_AXE_UNCHARGED = ItemID.INFERNAL_AXE_EMPTY;
     public static final int INFERNAL_AXE = ItemID.INFERNAL_AXE_EMPTY;
+
+    //Eye of Ayak
+    public static final int EYE_OF_AYAK_UNCHARGED = ItemID.EYE_OF_AYAK_UNCHARGED;
+    public static final int EYE_OF_AYAK = ItemID.EYE_OF_AYAK;
 }

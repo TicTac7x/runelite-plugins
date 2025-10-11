@@ -463,6 +463,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_CrystalBow(provider),
 			new W_CrystalHalberd(provider),
 			new W_EnchantedLyre(provider),
+			new W_EyeOfAyak(provider),
 			new W_InfernalAxe(provider),
 			new W_IbansStaff(provider),
 			new W_PharaohsSceptre(provider),

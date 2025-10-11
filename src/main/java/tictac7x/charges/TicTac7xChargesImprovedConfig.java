@@ -165,6 +165,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String craws_bow = "craws_bow";
     String crystal_bow = "crystal_bow";
     String crystal_halberd = "crystal_halberd";
+    String eye_of_ayak = "eye_of_ayak";
     String ibans_staff = "ibans_staff";
     String infernal_axe = "infernal_axe";
     String pharaohs_sceptre = "pharaohs_sceptre";
@@ -1241,6 +1242,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = infoboxes
         ) default boolean amuletOfGloryInfobox() { return true; }
 
+        @ConfigItem(
+                keyName = eye_of_ayak + _infobox,
+                name = "Eye of Ayak",
+                description = "",
+                section = infoboxes
+        ) default boolean eyeOfAyakInfobox() { return true; }
+
     @ConfigSection(
         name = "Overlays",
         description = "Choose for which charged items number is shown next to it",
@@ -2094,6 +2102,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean amuletOfGloryOverlay() { return true; }
+
+        @ConfigItem(
+                keyName = eye_of_ayak + _overlay,
+                name = "Eye of Ayak",
+                description = "",
+                section = overlays
+        ) default boolean eyeOfAyakOverlay() { return true; }
 
     @ConfigSection(
         name = "Debug",
