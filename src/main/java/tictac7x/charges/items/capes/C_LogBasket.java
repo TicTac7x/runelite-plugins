@@ -76,6 +76,9 @@ public class C_LogBasket extends ChargedItemWithStorage {
 
             // Miscellania support.
             new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some teak logs and give them to Carpenter Kjallak.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.TEAK_LOGS, 0),
+            new OnChatMessage("You get some mahogany logs and give them to Carpenter Kjallak.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.MAHOGANY_LOGS, 0),
+            
 
             // Achey tree.
             new OnChatMessage("You get some logs.").onMenuTarget("Achey Tree").consumer(() -> {
