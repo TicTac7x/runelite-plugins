@@ -40,7 +40,10 @@ public class C_LogBasket extends ChargedItemWithStorage {
             new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
             new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
             new StorableItem(ItemId.BARK).checkName("Bark"),
-            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs")
+            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
+            new StorableItem(ItemId.CAMPHOR_LOGS).checkName("Camphor logs"),
+            new StorableItem(ItemId.IRONWOOD_LOGS).checkName("Ironwood logs"),
+            new StorableItem(ItemId.ROSEWOOD_LOGS).checkName("Rosewood logs")
         );
 
         this.items = new TriggerItem[]{
@@ -141,7 +144,10 @@ public class C_LogBasket extends ChargedItemWithStorage {
                 "Arctic pine logs",
                 "Yew logs",
                 "Magic logs",
-                "Redwood logs"
+                "Redwood logs",
+                "Camphor logs",
+                "Ironwood logs",
+                "Rosewood logs"
             ).consumer(this::buildBeehive),
             new OnChatMessage("Well done, you've completed a beehive. The bees can now be safely rehomed.").consumer(() -> {
                if (lastLogUsedFromBasketForBeehive.isPresent()) {
@@ -170,7 +176,8 @@ public class C_LogBasket extends ChargedItemWithStorage {
         final int[] logsInOrderToUse = new int[]{
             ItemId.LOGS, ItemId.ACHEY_TREE_LOGS, ItemId.OAK_LOGS, ItemId.WILLOW_LOGS,
             ItemId.TEAK_LOGS, ItemId.MAPLE_LOGS, ItemId.MAHOGANY_LOGS, ItemId.ARCTIC_PINE_LOGS,
-            ItemId.YEW_LOGS, ItemId.MAGIC_LOGS, ItemId.REDWOOD_LOGS
+            ItemId.YEW_LOGS, ItemId.CAMPHOR_LOGS, ItemId.IRONWOOD_LOGS, ItemId.MAGIC_LOGS,
+            ItemId.REDWOOD_LOGS, ItemId.ROSEWOOD_LOGS
         };
 
         for (final int logsId : logsInOrderToUse) {

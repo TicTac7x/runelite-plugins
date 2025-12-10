@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
 
 public class U_PlankSack extends ChargedItemWithStorage {
-    private final Pattern homeBuildingPlanksPattern = Pattern.compile("(?<type>Plank|Oak plank|Teak plank|Mahogany plank): (?<amount>[0-9]+)");
+    private final Pattern homeBuildingPlanksPattern = Pattern.compile("(?<type>Plank|Oak plank|Teak plank|Mahogany plank|Camphor plank|Ironwood plank|Rosewood plank): (?<amount>[0-9]+)");
     private final Map<Integer, Integer> homeBuildingWidgetMaterialsUsed = new HashMap<>();
     private Optional<Integer> sawmillLogId = Optional.empty();
     private Optional<Integer> sawmillPlankId = Optional.empty();
@@ -31,7 +31,10 @@ public class U_PlankSack extends ChargedItemWithStorage {
             new StorableItem(ItemId.PLANK).checkName("Regular plank"),
             new StorableItem(ItemId.OAK_PLANK).checkName("Oak plank"),
             new StorableItem(ItemId.TEAK_PLANK).checkName("Teak plank"),
-            new StorableItem(ItemId.MAHOGANY_PLANK).checkName("Mahogany plank")
+            new StorableItem(ItemId.MAHOGANY_PLANK).checkName("Mahogany plank"),
+            new StorableItem(ItemId.CAMPHOR_PLANK).checkName("Camphor plank"),
+            new StorableItem(ItemId.IRONWOOD_PLANK).checkName("Ironwood plank"),
+            new StorableItem(ItemId.ROSEWOOD_PLANK).checkName("Rosewood plank")
         );
 
         this.items = new TriggerItem[]{
@@ -40,15 +43,18 @@ public class U_PlankSack extends ChargedItemWithStorage {
 
         this.triggers = new TriggerBase[]{
             // Empty.
-            new OnChatMessage("Your sack is empty.").emptyStorage(),
+            new OnChatMessage("Your sack is currently empty.").emptyStorage(),
 
             // Check.
-            new OnChatMessage("Basic planks: (?<regular>.+), Oak planks: (?<oak>.+), Teak planks: (?<teak>.+), Mahogany planks: (?<mahogany>.+)").matcherConsumer(m -> {
+            new OnChatMessage("Basic planks: (?<regular>.+), Oak planks: (?<oak>.+), Teak planks: (?<teak>.+), Mahogany planks: (?<mahogany>.+), Camphor planks: (?<camphor>.+), Ironwood planks: (?<ironwood>.+), Rosewood planks: (?<rosewood>.+)").matcherConsumer(m -> {
                 storage.clear();
                 storage.put(ItemId.PLANK, Integer.parseInt(m.group("regular")));
                 storage.put(ItemId.OAK_PLANK, Integer.parseInt(m.group("oak")));
                 storage.put(ItemId.TEAK_PLANK, Integer.parseInt(m.group("teak")));
                 storage.put(ItemId.MAHOGANY_PLANK, Integer.parseInt(m.group("mahogany")));
+                storage.put(ItemId.CAMPHOR_PLANK, Integer.parseInt(m.group("camphor")));
+                storage.put(ItemId.IRONWOOD_PLANK, Integer.parseInt(m.group("ironwood")));
+                storage.put(ItemId.ROSEWOOD_PLANK, Integer.parseInt(m.group("rosewood")));
             }),
 
             // Empty to inventory.
@@ -267,6 +273,18 @@ public class U_PlankSack extends ChargedItemWithStorage {
                     case ItemId.MAHOGANY_LOGS:
                         this.sawmillLogId = Optional.of(ItemId.MAHOGANY_LOGS);
                         this.sawmillPlankId = Optional.of(ItemId.MAHOGANY_PLANK);
+                        break;
+                    case ItemId.CAMPHOR_LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.CAMPHOR_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.CAMPHOR_PLANK);
+                        break;
+                    case ItemId.IRONWOOD_LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.IRONWOOD_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.IRONWOOD_PLANK);
+                        break;
+                    case ItemId.ROSEWOOD_LOGS:
+                        this.sawmillLogId = Optional.of(ItemId.ROSEWOOD_LOGS);
+                        this.sawmillPlankId = Optional.of(ItemId.ROSEWOOD_PLANK);
                         break;
                 }
             }),
