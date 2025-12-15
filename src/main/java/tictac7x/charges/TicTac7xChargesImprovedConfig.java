@@ -2,7 +2,8 @@ package tictac7x.charges;
 
 import net.runelite.client.config.*;
 import tictac7x.charges.store.ids.ChargeId;
-import java.awt.Color;
+
+import java.awt.*;
 
 import static tictac7x.charges.TicTac7xChargesImprovedConfig.group;
 
@@ -105,6 +106,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String skills_necklace = "skills_necklace";
     String slayer_ring = "slayer_ring";
     String xerics_talisman = "xerics_talisman";
+    String sailors_amulet = "sailors_amulet";
 
     // Shields
     String chronicle = "chronicle";
@@ -779,6 +781,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean xericsTalismanInfobox() { return true; }
+
+        @ConfigItem(
+            keyName =  sailors_amulet + _infobox,
+            name = "Sailors' Amulet",
+            description = "",
+            section = infoboxes
+        ) default boolean sailorsAmuletInfobox() { return true; }
 
         @ConfigItem(
             keyName = chronicle + _infobox,
@@ -2076,6 +2085,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean xericsTalismanOverlay() { return true; }
 
         @ConfigItem(
+            keyName =  sailors_amulet + _overlay,
+            name = "Sailors' Amulet",
+            description = "",
+            section = overlays
+        ) default boolean sailorsAmuletOverlay() { return true; }
+
+        @ConfigItem(
             keyName = alchemists_amulet + _overlay,
             name = "Alchemist's amulet",
             description = "",
@@ -2400,6 +2416,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = xerics_talisman,
             section = debug
         ) default int getXericsTalismanCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = sailors_amulet,
+            name = sailors_amulet,
+            description = sailors_amulet,
+            section = debug
+        ) default int getSailorsAmuletCharges() { return ChargeId.UNKNOWN; }
 
         @ConfigItem(
             keyName = dragonfire_shield,

@@ -3,7 +3,10 @@ package tictac7x.charges;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.inject.Provides;
-import net.runelite.api.*;
+import net.runelite.api.ActorSpotAnim;
+import net.runelite.api.ChatMessageType;
+import net.runelite.api.Client;
+import net.runelite.api.GameState;
 import net.runelite.api.events.*;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.Notifier;
@@ -23,19 +26,25 @@ import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.util.OSType;
-import tictac7x.charges.events.*;
+import tictac7x.charges.events.CustomChatMessage;
+import tictac7x.charges.events.CustomHitsplatApplied;
+import tictac7x.charges.events.CustomItemContainerChanged;
+import tictac7x.charges.events.CustomMenuOptionClicked;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
 import tictac7x.charges.items.barrows.*;
-import tictac7x.charges.items.boots.*;
+import tictac7x.charges.items.boots.B_FremennikSeaBoots;
 import tictac7x.charges.items.capes.*;
-import tictac7x.charges.items.crystal.*;
-import tictac7x.charges.items.helms.*;
+import tictac7x.charges.items.crystal.A_CrystalBody;
+import tictac7x.charges.items.crystal.A_CrystalHelm;
+import tictac7x.charges.items.crystal.A_CrystalLegs;
+import tictac7x.charges.items.helms.H_CircletOfWater;
+import tictac7x.charges.items.helms.H_KandarinHeadgear;
 import tictac7x.charges.items.jewelry.*;
 import tictac7x.charges.items.moons.*;
-import tictac7x.charges.items.potions.*;
 import tictac7x.charges.items.potions.P_Overload;
+import tictac7x.charges.items.potions.*;
 import tictac7x.charges.items.potions.cox.*;
 import tictac7x.charges.items.potions.toa.*;
 import tictac7x.charges.items.shields.*;
@@ -53,7 +62,10 @@ import java.awt.event.MouseWheelEvent;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @PluginDescriptor(
 	name = "Item Charges Improved",
@@ -278,7 +290,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_RingOfSuffering(provider),
 			new J_SkillsNecklace(provider),
 			new J_XericsTalisman(provider),
-
+			new J_SailorsAmulet(provider),
 			// Potions
 			new P_Absorption(provider),
 			new P_Agility(provider),
@@ -626,7 +638,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 				customMenuOptionClicked.eventId != 65540 && // Special event check for log basket
 				customMenuOptionClicked.eventId != 65538 && // Special event check for forestry basket
 				customMenuOptionClicked.eventId != 131074 && // Special event check for forestry basket
-				customMenuOptionClicked.eventId != 131076 // Special event check for forestry basket
+				customMenuOptionClicked.eventId != 131076 && // Special event check for forestry basket
+					customMenuOptionClicked.eventId != 327684 // Sailor's amulet - Deepfin Point
 			) ||
 			// Start use by clicking on item.
 			customMenuOptionClicked.option.equals("Use") && customMenuOptionClicked.action.equals("WIDGET_TARGET") ||

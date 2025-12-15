@@ -1130,11 +1130,8 @@ public final class ItemId {
     public static final int ARCTIC_PINE_LOGS = ItemID.ARCTIC_PINE_LOG;
     public static final int YEW_LOGS = ItemID.YEW_LOGS;
     public static final int BLISTERWOOD_LOGS = ItemID.BLISTERWOOD_LOGS;
-    public static final int CAMPHOR_LOGS = ItemID.CAMPHOR_LOGS;
     public static final int MAGIC_LOGS = ItemID.MAGIC_LOGS;
-    public static final int IRONWOOD_LOGS = ItemID.IRONWOOD_LOGS;
     public static final int REDWOOD_LOGS = ItemID.REDWOOD_LOGS;
-    public static final int ROSEWOOD_LOGS = ItemID.ROSEWOOD_LOGS;
 
     // Master scroll book
     public static final int MASTER_SCROLL_BOOK = ItemID.BOOKOFSCROLLS_CHARGED;
@@ -1187,9 +1184,6 @@ public final class ItemId {
     public static final int OAK_PLANK = ItemID.PLANK_OAK;
     public static final int TEAK_PLANK = ItemID.PLANK_TEAK;
     public static final int MAHOGANY_PLANK = ItemID.PLANK_MAHOGANY;
-    public static final int CAMPHOR_PLANK = ItemID.CAMPHOR_PLANK;
-	public static final int IRONWOOD_PLANK = ItemID.IRONWOOD_PLANK;
-	public static final int ROSEWOOD_PLANK = ItemID.ROSEWOOD_PLANK;
     public static final int SAWMILL_VOUCHER = ItemID.FORESTRY_SAWMILL_VOUCHER;
 
     // Quetzal whistle
@@ -1658,4 +1652,8 @@ public final class ItemId {
     //Eye of Ayak
     public static final int EYE_OF_AYAK_UNCHARGED = ItemID.EYE_OF_AYAK_UNCHARGED;
     public static final int EYE_OF_AYAK = ItemID.EYE_OF_AYAK;
+
+    //Sailors' Amulet
+    public static final int SAILORS_AMULET_UNCHARGED = ItemID.SAILORS_AMULET_EMPTY;
+    public static final int SAILORS_AMULET = ItemID.SAILORS_AMULET;
 }
