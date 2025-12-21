@@ -3,7 +3,7 @@ package tictac7x.charges;
 import net.runelite.client.config.*;
 import tictac7x.charges.store.ids.ChargeId;
 
-import java.awt.*;
+import java.awt.Color;
 
 import static tictac7x.charges.TicTac7xChargesImprovedConfig.group;
 
