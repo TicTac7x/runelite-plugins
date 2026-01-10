@@ -3,6 +3,7 @@ plugins {
 }
 
 repositories {
+	mavenLocal()
 	maven {
 		url = 'https://repo.runelite.net'
 	}
@@ -10,7 +11,7 @@ repositories {
 
 }
 
-def runeLiteVersion = '1.12.11'
+def runeLiteVersion = 'latest.release'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -25,10 +26,7 @@ dependencies {
 
 group = 'tictac7x-charges'
 version = 'v0.6.9'
-java {
-	sourceCompatibility = JavaVersion.VERSION_11
-	targetCompatibility = JavaVersion.VERSION_11
-}
+sourceCompatibility = '1.8'
 
 
 tasks.withType(JavaCompile) {
