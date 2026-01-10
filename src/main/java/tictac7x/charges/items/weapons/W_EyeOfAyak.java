@@ -14,8 +14,8 @@ public class W_EyeOfAyak  extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.eye_of_ayak, ItemId.EYE_OF_AYAK, provider);
 
         this.items = new TriggerItem[]{
-                new TriggerItem(ItemId.EYE_OF_AYAK_UNCHARGED).fixedCharges(0),
-                new TriggerItem(ItemId.EYE_OF_AYAK),
+            new TriggerItem(ItemId.EYE_OF_AYAK_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemId.EYE_OF_AYAK),
         };
 
         /*
@@ -28,27 +28,27 @@ public class W_EyeOfAyak  extends ChargedItem {
          */
 
         this.triggers = new TriggerBase[] {
-                // Check.
-                // Charge.
-                new OnChatMessage("The Eye of Ayak had been charged with (runes|demon tears). It currently has (?<charges>.+) charges?").setDynamicallyCharges(),
+            // Check.
+            // Charge.
+            new OnChatMessage("The Eye of Ayak has been charged with (runes|demon tears). It currently has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
-                // Uncharge.
-                new OnChatMessage("You uncharge the Eye of Ayak").setFixedCharges(0),
+            // Uncharge.
+            new OnChatMessage("You uncharge the Eye of Ayak.").setFixedCharges(0),
 
-                // Attack.
-                new OnGraphicChanged(12397).decreaseCharges(1),
+            // Attack.
+            new OnGraphicChanged(12397).decreaseCharges(1),
 
-                //Special attack
-                new OnGraphicChanged(12394).decreaseCharges(1),
+            //Special attack
+            new OnGraphicChanged(12394).decreaseCharges(1),
 
-                // Auto-charge
-                new OnChatMessage("The banker charges your Eye of Ayak using (?<deathrune>.+)x Death rune").matcherConsumer(m -> {
-                    final int deathRunes = Integer.parseInt(m.group("deathrune"));
-                    increaseCharges(deathRunes / 2);
-                }),
+            // Auto-charge
+            new OnChatMessage("The banker charges your Eye of Ayak using (?<deathrune>.+)x Death rune.").matcherConsumer(m -> {
+                final int deathRunes = Integer.parseInt(m.group("deathrune"));
+                increaseCharges(deathRunes / 2);
+            }),
 
-                // Auto-charge
-                new OnChatMessage("The banker charges your Eye of Ayak using (?<charges>.+)x Demon tear").increaseDynamically(),
+            // Auto-charge
+            new OnChatMessage("The banker charges your Eye of Ayak using (?<charges>.+)x Demon tear.").increaseDynamically(),
         };
     }
 }

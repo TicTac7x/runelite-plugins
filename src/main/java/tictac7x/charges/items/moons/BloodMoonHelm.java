@@ -21,7 +21,7 @@ public class BloodMoonHelm extends _MoonItem {
 
         this.triggers = new TriggerBase[]{
             // Check.
-            new OnChatMessage("Your Blood moon helm has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
+            new OnChatMessage("Your Blood moon helm( only)? has (?<charges>.+) charges? (remaining|left).").setDynamicallyCharges(),
 
             // In combat.
             new OnCombat(90).isEquipped().decreaseCharges(1),

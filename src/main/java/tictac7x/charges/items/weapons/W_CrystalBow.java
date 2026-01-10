@@ -26,6 +26,12 @@ public class W_CrystalBow extends ChargedItem {
 
             // Attack.
             new OnAnimationChanged(AnimationId.HUMAN_BOW).isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Crystal bow using (?<crystalshard>.+)x Crystal shard.").matcherConsumer(m -> {
+                final int crystalShards = Integer.parseInt(m.group("crystalshard"));
+                increaseCharges(crystalShards * 100);
+            }),
         };
     }
 }
