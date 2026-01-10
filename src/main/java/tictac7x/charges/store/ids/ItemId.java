@@ -932,6 +932,31 @@ public final class ItemId {
     public static final int SUPER_ANTIFIRE_MIX_2 = ItemID.BRUTAL_2DOSE3ANTIDRAGON;
     public static final int EXTENDED_SUPER_ANTIFIRE_MIX_1 = ItemID.BRUTAL_1DOSE4ANTIDRAGON;
     public static final int EXTENDED_SUPER_ANTIFIRE_MIX_2 = ItemID.BRUTAL_2DOSE4ANTIDRAGON;
+    public static final int HAEMOSTATIC_DRESSING_1 = ItemID._1DOSEHAEMOSTATICDRESSING;
+    public static final int HAEMOSTATIC_DRESSING_2 = ItemID._2DOSEHAEMOSTATICDRESSING;
+    public static final int HAEMOSTATIC_DRESSING_3 = ItemID._3DOSEHAEMOSTATICDRESSING;
+    public static final int HAEMOSTATIC_DRESSING_4 = ItemID._4DOSEHAEMOSTATICDRESSING;
+    public static final int EXTREME_ENERGY_POTION_1 = ItemID._1DOSE3ENERGY;
+    public static final int EXTREME_ENERGY_POTION_2 = ItemID._2DOSE3ENERGY;
+    public static final int EXTREME_ENERGY_POTION_3 = ItemID._3DOSE3ENERGY;
+    public static final int EXTREME_ENERGY_POTION_4 = ItemID._4DOSE3ENERGY;
+    public static final int SUPER_HUNTING_POTION_1 = ItemID._1DOSE2HUNTING;
+    public static final int SUPER_HUNTING_POTION_2 = ItemID._2DOSE2HUNTING;
+    public static final int SUPER_HUNTING_POTION_3 = ItemID._3DOSE2HUNTING;
+    public static final int SUPER_HUNTING_POTION_4 = ItemID._4DOSE2HUNTING;
+    public static final int EXTENDED_STAMINA_POTION_1 = ItemID._1DOSE2STAMINA;
+    public static final int EXTENDED_STAMINA_POTION_2 = ItemID._2DOSE2STAMINA;
+    public static final int EXTENDED_STAMINA_POTION_3 = ItemID._3DOSE2STAMINA;
+    public static final int EXTENDED_STAMINA_POTION_4 = ItemID._4DOSE2STAMINA;
+    public static final int SUPER_FISHING_POTION_1 = ItemID._1DOSE2FISHERSPOTION;
+    public static final int SUPER_FISHING_POTION_2 = ItemID._2DOSE2FISHERSPOTION;
+    public static final int SUPER_FISHING_POTION_3 = ItemID._3DOSE2FISHERSPOTION;
+    public static final int SUPER_FISHING_POTION_4 = ItemID._4DOSE2FISHERSPOTION;
+    public static final int ARMADYL_BREW_1 = ItemID._1DOSEARMADYLBREW;
+    public static final int ARMADYL_BREW_2 = ItemID._2DOSEARMADYLBREW;
+    public static final int ARMADYL_BREW_3 = ItemID._3DOSEARMADYLBREW;
+    public static final int ARMADYL_BREW_4 = ItemID._4DOSEARMADYLBREW;
+
 
     // Coal bag
     public static final int COAL_BAG = ItemID.COAL_BAG;
@@ -1188,9 +1213,9 @@ public final class ItemId {
     public static final int OAK_PLANK = ItemID.PLANK_OAK;
     public static final int TEAK_PLANK = ItemID.PLANK_TEAK;
     public static final int MAHOGANY_PLANK = ItemID.PLANK_MAHOGANY;
-    public static final int CAMPHOR_PLANK = ItemID.CAMPHOR_PLANK;
-	public static final int IRONWOOD_PLANK = ItemID.IRONWOOD_PLANK;
-	public static final int ROSEWOOD_PLANK = ItemID.ROSEWOOD_PLANK;
+    public static final int CAMPHOR_PLANK = ItemID.PLANK_CAMPHOR;
+	public static final int IRONWOOD_PLANK = ItemID.PLANK_IRONWOOD;
+	public static final int ROSEWOOD_PLANK = ItemID.PLANK_ROSEWOOD;
     public static final int SAWMILL_VOUCHER = ItemID.FORESTRY_SAWMILL_VOUCHER;
 
     // Quetzal whistle
