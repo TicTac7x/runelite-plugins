@@ -68,6 +68,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Ring of suffering
 - Ring of the elements
 - Ring of wealth
+- Sailors' Amulet
 - Skills necklace
 - Slayer ring
 - Xeric's talisman
