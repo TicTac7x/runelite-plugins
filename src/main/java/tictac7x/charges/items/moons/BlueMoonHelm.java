@@ -21,7 +21,7 @@ public class BlueMoonHelm extends _MoonItem {
 
         this.triggers = new TriggerBase[]{
             // Check.
-            new OnChatMessage("Your Blue moon helm has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
+            new OnChatMessage("Your Blue moon helm( only)? has (?<charges>.+) charges? (remaining|left).").setDynamicallyCharges(),
 
             // In combat.
             new OnCombat(90).isEquipped().decreaseCharges(1),

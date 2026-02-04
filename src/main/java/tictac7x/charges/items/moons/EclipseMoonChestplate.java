@@ -21,7 +21,7 @@ public class EclipseMoonChestplate extends _MoonItem {
 
         this.triggers = new TriggerBase[]{
             // Check.
-            new OnChatMessage("Your Eclipse moon chestplate has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
+            new OnChatMessage("Your Eclipse moon chestplate( only)? has (?<charges>.+) charges? (remaining|left).").setDynamicallyCharges(),
 
             // In combat.
             new OnCombat(90).isEquipped().decreaseCharges(1),

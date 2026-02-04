@@ -23,6 +23,10 @@ public class J_Camulet extends ChargedItem {
             new OnChatMessage("Your Camulet has one charge left.").setFixedCharges(1),
             new OnChatMessage("Your Camulet has (?<charges>.+) charges left.").setDynamicallyCharges(),
 
+            // Empty.
+            new OnChatMessage("Your Camulet has run out of charges.").setFixedCharges(0),
+            new OnChatMessage("Your Camulet has no charges left.").setFixedCharges(0),
+
             // Recharge.
             new OnChatMessage("You recharge the Camulet using camel dung. Yuck!").setFixedCharges(4),
 

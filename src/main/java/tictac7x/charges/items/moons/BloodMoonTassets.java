@@ -21,7 +21,7 @@ public class BloodMoonTassets extends _MoonItem {
 
         this.triggers = new TriggerBase[]{
             // Check.
-            new OnChatMessage("Your Blood moon tassets has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
+            new OnChatMessage("Your Blood moon tassets( only)? has (?<charges>.+) charges? (remaining|left).").setDynamicallyCharges(),
 
             // In combat.
             new OnCombat(90).isEquipped().decreaseCharges(1),

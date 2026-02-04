@@ -1,4 +1,4 @@
-# Item Charges Improved - v0.6.9
+# Item Charges Improved - v0.6.9.2
 
 Show charges of various items that are in inventory or equipped
 
@@ -68,7 +68,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Ring of suffering
 - Ring of the elements
 - Ring of wealth
-- Sailors' Amulet
+- Sailors' amulet
 - Skills necklace
 - Slayer ring
 - Xeric's talisman
@@ -123,6 +123,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Crystal bow
 - Crystal halberd
 - Enchanted lyre
+- Eye of Ayak
 - Iban's staff
 - Infernal axe
 - Pharaoh's sceptre

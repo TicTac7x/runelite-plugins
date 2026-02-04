@@ -37,7 +37,13 @@ public class A_CrystalBody extends ChargedItem {
 
         this.triggers = new TriggerBase[] {
             new OnChatMessage("Your crystal body has (?<charges>.+) charges? remaining").setDynamicallyCharges().onItemClick(),
-            new OnHitsplatApplied(SELF, HitsplatGroup.SUCCESSFUL).isEquipped().decreaseCharges(1)
+            new OnHitsplatApplied(SELF, HitsplatGroup.SUCCESSFUL).isEquipped().decreaseCharges(1),
+
+            // Auto-charge.
+            new OnChatMessage("The banker charges your Crystal body using (?<crystalshard>.+)x Crystal shard.").matcherConsumer(m -> {
+                final int crystalShards = Integer.parseInt(m.group("crystalshard"));
+                increaseCharges(crystalShards * 100);
+            }),
         };
     }
 }

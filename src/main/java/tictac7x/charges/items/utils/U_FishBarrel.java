@@ -78,6 +78,16 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.LEAPING_SALMON).checkName("Leaping salmon"),
             new StorableItem(ItemId.LEAPING_STURGEON).checkName("Leaping sturgeon"),
 
+            // Sailing
+            new StorableItem(ItemId.RAW_SWORDTIP_SQUID).checkName("Swordtip squid"),
+            new StorableItem(ItemId.RAW_JUMBO_SQUID).checkName("Jumbo squid"),
+            new StorableItem(ItemId.RAW_GIANT_KRILL).checkName("Giant krill"),
+            new StorableItem(ItemId.RAW_HADDOCK).checkName("Haddock"),
+            new StorableItem(ItemId.RAW_YELLOWFIN).checkName("Yellowfin"),
+            new StorableItem(ItemId.RAW_HALIBUT).checkName("Halibut"),
+            new StorableItem(ItemId.RAW_BLUEFIN).checkName("Bluefin"),
+            new StorableItem(ItemId.RAW_MARLIN).checkName("Marlin"),
+
             // Other
             new StorableItem(ItemId.RAW_KARAMBWAN).checkName("Karambwan"),
             new StorableItem(ItemId.RAW_SEA_TURTLE).checkName("Sea turtle"),
