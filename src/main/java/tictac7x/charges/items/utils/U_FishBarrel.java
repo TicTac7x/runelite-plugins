@@ -44,6 +44,11 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             new StorableItem(ItemId.RAW_COD).checkName("Cod"),
             new StorableItem(ItemId.RAW_BASS).checkName("Bass"),
 
+            // Barbarian
+            new StorableItem(ItemId.LEAPING_TROUT).checkName("Leaping trout"),
+            new StorableItem(ItemId.LEAPING_SALMON).checkName("Leaping salmon"),
+            new StorableItem(ItemId.LEAPING_STURGEON).checkName("Leaping sturgeon"),
+
             // Rod
             new StorableItem(ItemId.RAW_SARDINE).checkName("Sardine"),
             new StorableItem(ItemId.RAW_HERRING).checkName("Herring"),
@@ -72,11 +77,6 @@ public class U_FishBarrel extends ChargedItemWithStorage {
             // Cage
             new StorableItem(ItemId.RAW_LOBSTER).checkName("Lobster"),
             new StorableItem(ItemId.RAW_DARK_CRAB).checkName("Dark crab"),
-
-            // Barbarian
-            new StorableItem(ItemId.LEAPING_TROUT).checkName("Leaping trout"),
-            new StorableItem(ItemId.LEAPING_SALMON).checkName("Leaping salmon"),
-            new StorableItem(ItemId.LEAPING_STURGEON).checkName("Leaping sturgeon"),
 
             // Sailing
             new StorableItem(ItemId.RAW_SWORDTIP_SQUID).checkName("Swordtip squid"),
