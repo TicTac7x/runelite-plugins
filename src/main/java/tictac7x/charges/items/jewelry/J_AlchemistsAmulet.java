@@ -19,7 +19,7 @@ public class J_AlchemistsAmulet extends ChargedItem {
 
         this.triggers.addAll(List.of(
             // Check
-            new OnChatMessage("Your Alchemist's amulet has (?<charges>.+) charges left.").setDynamicallyCharges(),
+            new OnChatMessage("Your Alchemist's amulet has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Charge
             new OnChatMessage("You apply an additional .+ charges to your Alchemist's amulet. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
@@ -30,6 +30,7 @@ public class J_AlchemistsAmulet extends ChargedItem {
 
             // Use charge
             new OnChatMessage("Your Alchemist's amulet helps you create a .-dose potion. It no longer has any charges.").setFixedCharges(0),
+            new OnChatMessage("Your Alchemist's amulet helps you create a .-dose potion. It has one charge left.").setFixedCharges(1),
             new OnChatMessage("Your Alchemist's amulet helps you create a .-dose potion. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Auto-charge
