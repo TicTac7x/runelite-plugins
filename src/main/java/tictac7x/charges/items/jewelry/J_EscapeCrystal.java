@@ -104,6 +104,11 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
 
     @Override
     public String getChargesString(final int itemId) {
+        return getLongChargesString(itemId);
+    }
+
+    @Override
+    public String getLongChargesString(final int itemId) {
         return getTotalChargesString();
     }
 

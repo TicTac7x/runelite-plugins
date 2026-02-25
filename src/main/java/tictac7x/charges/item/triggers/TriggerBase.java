@@ -12,7 +12,7 @@ public abstract class TriggerBase {
     public Optional<int[]> requiredItem = Optional.empty();
     public Optional<int[]> unallowedItem = Optional.empty();
     public Optional<String[]> onMenuOption = Optional.empty();
-    public Optional<int[]> onMenuOptionId = Optional.empty();
+    public Optional<int[]> onMenuOptionEventId = Optional.empty();
     public Optional<String[]> onMenuTarget = Optional.empty();
     public Optional<int[]> onMenuImpostor = Optional.empty();
     public Optional<Boolean> onItemClick = Optional.empty();
@@ -99,8 +99,8 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase onMenuOptionId(final int ...menuOptionIds) {
-        this.onMenuOptionId = Optional.of(menuOptionIds);
+    public TriggerBase onMenuOptionEventId(final int ...menuOptionEventIds) {
+        this.onMenuOptionEventId = Optional.of(menuOptionEventIds);
         return this;
     }
 

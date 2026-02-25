@@ -65,6 +65,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     // Jewelery
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
+    String amulet_of_bounty = "amulet_of_bounty";
     String amulet_of_chemistry = "amulet_of_chemistry";
     String amulet_of_glory = "amulet_of_glory";
     String binding_necklace = "binding_necklace";
@@ -1238,6 +1239,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean amuletOfBloodFuryInfobox() { return true; }
 
         @ConfigItem(
+            keyName = amulet_of_bounty + _infobox,
+            name = "Amulet of bounty",
+            description = "",
+            section = infoboxes
+        ) default boolean amuletOfBountyInfobox() { return true; }
+
+        @ConfigItem(
             keyName = amulet_of_chemistry + _infobox,
             name = "Amulet of chemistry",
             description = "",
@@ -2104,6 +2112,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean amuletOfBloodFuryOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = amulet_of_bounty + _overlay,
+            name = "Amulet of bounty",
+            description = "",
+            section = overlays
+        ) default boolean amuletOfBountyOverlay() { return true; }
 
         @ConfigItem(
             keyName = amulet_of_chemistry + _overlay,

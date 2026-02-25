@@ -145,7 +145,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginVersion = "v0.6.11";
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* New seeds and corals support for seed box."
+		"<colHIGHLIGHT>* New seeds and corals support for seed box.<br>" +
+		"<colHIGHLIGHT>* Amulet of bounty added."
 	;
 
 	@Inject
@@ -240,6 +241,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			// Jewelery
 			new J_AlchemistsAmulet(provider),
 			new J_AmuletOfBloodFury(provider),
+			new J_AmuletOfBounty(provider),
 			new J_AmuletOfChemistry(provider),
 			new J_AmuletOfGlory(provider),
 			new J_BindingNecklace(provider),

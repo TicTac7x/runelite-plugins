@@ -1709,4 +1709,7 @@ public final class ItemId {
     //Sailors' Amulet
     public static final int SAILORS_AMULET_UNCHARGED = ItemID.SAILORS_AMULET_EMPTY;
     public static final int SAILORS_AMULET = ItemID.SAILORS_AMULET;
+
+    // Amulet of bounty
+    public static final int AMULET_OF_BOUNTY = ItemID.AMULET_OF_BOUNTY;
 }

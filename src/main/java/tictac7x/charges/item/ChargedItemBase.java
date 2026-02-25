@@ -86,6 +86,18 @@ public abstract class ChargedItemBase {
         return TicTac7xChargesImprovedPlugin.getChargesMinified(getCharges(itemId));
     }
 
+    public String getLongChargesString(final int itemId) {
+        final int charges = getCharges(itemId);
+
+        // Unlimited.
+        if (charges == ChargeId.UNLIMITED) return TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
+
+        // Unknown.
+        if (charges == ChargeId.UNKNOWN) return "?";
+
+        return String.valueOf(charges);
+    }
+
     public String getTotalChargesString() {
         return TicTac7xChargesImprovedPlugin.getChargesMinified(getTotalCharges());
     }
@@ -111,7 +123,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getTooltip() {
-        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(getChargesString(itemId), JagexColors.MENU_TARGET);
+        return getItemName() + (needsToBeEquipped() && !inEquipment() ? " (needs to be equipped)" : "") + ": " + ColorUtil.wrapWithColorTag(getLongChargesString(itemId), JagexColors.MENU_TARGET);
     }
 
     @Nonnull

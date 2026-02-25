@@ -24,6 +24,11 @@ public class _MoonItem extends ChargedItem {
 
     @Override
     public String getChargesString(final int itemId) {
+        return getLongChargesString(itemId);
+    }
+
+    @Override
+    public String getLongChargesString(final int itemId) {
         final int charges = getCharges(itemId);
 
         switch (provider.config.combatTimeDegradableStyle()) {

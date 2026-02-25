@@ -129,7 +129,7 @@ public abstract class ListenerBase {
         }
 
         // Menu option ids check.
-        if (trigger.onMenuOptionId.isPresent() && chargedItem.provider.store.notInMenuOptionIds(trigger.onMenuOptionId.get())) {
+        if (trigger.onMenuOptionEventId.isPresent() && chargedItem.provider.store.notInMenuOptionIds(trigger.onMenuOptionEventId.get())) {
             return false;
         }
 
