@@ -32,6 +32,7 @@ public class J_PendantOfAtes extends ChargedItem {
 
             // Teleport.
             new OnGraphicChanged(2754).decreaseCharges(1),
+            new OnChatMessage("Your pendant has (?<charges>.+) charges left.").setDynamicallyCharges(),
 
             // Auto-charge.
             new OnChatMessage("The banker charges your Pendant of ates using (?<frozentear>.+)x Frozen tear.").matcherConsumer(m -> {
