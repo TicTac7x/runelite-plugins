@@ -1,5 +1,6 @@
 package tictac7x.charges.items.utils;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -37,11 +38,8 @@ public class U_SoulBearer extends ChargedItem {
             // Last charge used.
             new OnChatMessage("Your soul bearer carries the ensouled heads to your bank. It has run out of charges.").setFixedCharges(0),
 
-            // Auto-charge.
-            new OnChatMessage("The banker charges your Soul bearer using (?<bloodrune>.+)x Blood rune.*").matcherConsumer(m -> {
-                final int bloodRunes = Integer.parseInt(m.group("bloodrune"));
-                increaseCharges(bloodRunes);
-            })
+            // Auto-charge
+            new OnAutoChargeMessage("Soul bearer", "Blood rune", 1, this)
         ));
     }
 }

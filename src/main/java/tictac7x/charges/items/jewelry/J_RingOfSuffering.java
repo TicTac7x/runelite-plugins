@@ -1,5 +1,6 @@
 package tictac7x.charges.items.jewelry;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -45,10 +46,7 @@ public class J_RingOfSuffering extends ChargedItemWithStatus {
             new OnChatMessage("You enable the recoil effect of your ring.").activate(),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Ring of suffering.* using (?<ringofrecoil>.+)x Ring of recoil.").matcherConsumer(m -> {
-                final int ringOfRecoils = Integer.parseInt(m.group("ringofrecoil"));
-                increaseCharges(ringOfRecoils * 40);
-            })
+            new OnAutoChargeMessage("Ring of suffering.*", "Ring of recoil", 40, this)
         ));
     }
 }

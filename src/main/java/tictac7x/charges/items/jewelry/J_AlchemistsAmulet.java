@@ -34,10 +34,7 @@ public class J_AlchemistsAmulet extends ChargedItem {
             new OnChatMessage("Your Alchemist's amulet helps you create a .-dose potion. It has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Auto-charge
-            new OnChatMessage("The banker charges your Alchemist's amulet using (?<amulets>.+)x Amulet of chemistry.*").matcherConsumer(m -> {
-                final int amuletsOfChemistry = Integer.parseInt(m.group("amulets"));
-                increaseCharges(amuletsOfChemistry * 10);
-            })
+            new OnAutoChargeMessage("Alchemist's amulet", "Amulet of chemistry", 10, this)
         ));
     }
 }

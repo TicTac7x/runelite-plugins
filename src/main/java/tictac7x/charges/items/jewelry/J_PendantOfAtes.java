@@ -34,10 +34,7 @@ public class J_PendantOfAtes extends ChargedItem {
             new OnGraphicChanged(2754).decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Pendant of ates using (?<frozentear>.+)x Frozen tear.").matcherConsumer(m -> {
-                final int frozenTear = Integer.parseInt(m.group("frozentear"));
-                increaseCharges(frozenTear);
-            }),
+            new OnAutoChargeMessage("Pendant of ates", "Frozen tear", 1, this),
 
             // Unified menu entry.
             new OnMenuEntryAdded("Rub").replaceOption("Teleport")

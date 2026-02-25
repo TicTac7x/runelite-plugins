@@ -1,6 +1,7 @@
 package tictac7x.charges.items.jewelry;
 
 import tictac7x.charges.item.triggers.OnAnimationChanged;
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.AnimationId;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -34,10 +35,7 @@ public class J_RingOfShadows extends ChargedItem {
             new OnAnimationChanged(AnimationId.RING_OF_SHADOWS_TELEPORT).decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Ring of shadows using (?<bloodrune>.+)x Blood rune.*").matcherConsumer(m -> {
-                final int bloodRunes = Integer.parseInt(m.group("ringofrecoil"));
-                increaseCharges(bloodRunes);
-            })
+            new OnAutoChargeMessage("Ring of shadows", "Blood rune", 1, this)
         ));
     }
 }

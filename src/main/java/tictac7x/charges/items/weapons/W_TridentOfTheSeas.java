@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -37,10 +38,7 @@ public class W_TridentOfTheSeas extends ChargedItem {
             new OnGraphicChanged(1251).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Trident of the seas using (?<deathrune>.+)x Death rune.*").matcherConsumer(m -> {
-                final int deathRunes = Integer.parseInt(m.group("deathrune"));
-                increaseCharges(deathRunes);
-            })
+            new OnAutoChargeMessage("Trident of the seas", "Death rune", 1, this)
         ));
     }
 }

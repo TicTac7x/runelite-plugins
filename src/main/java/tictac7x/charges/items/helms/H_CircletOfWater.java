@@ -1,5 +1,6 @@
 package tictac7x.charges.items.helms;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -32,10 +33,7 @@ public class H_CircletOfWater extends ChargedItem {
             new OnChatMessage("You add .+ charges? to your circlet. It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Circlet of water using (?<waterrune>.+)x Water rune.").matcherConsumer(m -> {
-                final int waterRunes = Integer.parseInt(m.group("waterrune"));
-                increaseCharges(waterRunes / 5);
-            })
+            new OnAutoChargeMessage("Circlet of water", "Water rune", 0.2, this)
         ));
     }
 }

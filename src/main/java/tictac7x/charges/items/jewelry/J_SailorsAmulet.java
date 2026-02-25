@@ -2,7 +2,7 @@ package tictac7x.charges.items.jewelry;
 
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.ChargedItemWithAutocharge;
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnMenuOptionClicked;
 import tictac7x.charges.item.triggers.TriggerItem;
@@ -11,7 +11,7 @@ import tictac7x.charges.store.ids.ItemId;
 
 import java.util.List;
 
-public class J_SailorsAmulet extends ChargedItem implements ChargedItemWithAutocharge {
+public class J_SailorsAmulet extends ChargedItem {
     public J_SailorsAmulet(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.sailors_amulet, ItemId.SAILORS_AMULET, provider);
 
@@ -46,16 +46,8 @@ public class J_SailorsAmulet extends ChargedItem implements ChargedItemWithAutoc
             new OnChatMessage("You must find a sailors' marker at that location before teleporting there.")
                 .increaseCharges(1),
 
-            // Auto-charge.
-            new OnChatMessage("The banker charges your Sailors' amulet using (?<lawrune>.+)x Law rune, and (?<waterrune>.+)x Water rune.").matcherConsumer(m -> {
-                final int lawRunes = Integer.parseInt(m.group("lawrune"));
-                increaseCharges(lawRunes * 10);
-            })
+            // Auto-charge
+            new OnAutoChargeMessage("Sailors' amulet", "Law rune", 10, this)
         ));
-    }
-
-    @Override
-    public void test() {
-
     }
 }

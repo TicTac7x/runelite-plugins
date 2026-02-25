@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.Skill;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -31,10 +32,7 @@ public class W_BryophytasStaff extends ChargedItem {
             new OnChatMessage("Your Bryophyta's staff now has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Bryophyta's staff using (?<naturerune>.+)x Nature rune.").matcherConsumer(m -> {
-                final int natureRunes = Integer.parseInt(m.group("naturerune"));
-                increaseCharges(natureRunes);
-            }),
+            new OnAutoChargeMessage("Bryophyta's staff", "Nature rune", 1, this),
 
             // Regular spellbook.
             new OnXpDrop(Skill.MAGIC).isEquipped().onMenuOption("Cast").onMenuTarget(

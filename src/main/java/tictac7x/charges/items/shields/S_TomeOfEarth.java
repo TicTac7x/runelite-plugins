@@ -1,5 +1,6 @@
 package tictac7x.charges.items.shields;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -27,10 +28,7 @@ public class S_TomeOfEarth extends ChargedItem {
             new OnGraphicChanged(96, 123, 138, 164, 1461).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Tome of earth using (?<soiledpage>.+)x Soiled page.").matcherConsumer(m -> {
-                final int soiledPages = Integer.parseInt(m.group("soiledpage"));
-                increaseCharges(soiledPages * 20);
-            })
+            new OnAutoChargeMessage("Tome of earth", "Soiled page", 20, this)
         ));
     }
 }

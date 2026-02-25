@@ -1,5 +1,6 @@
 package tictac7x.charges.items.shields;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -27,10 +28,7 @@ public class S_TomeOfWater extends ChargedItem {
             new OnGraphicChanged(93, 120, 135, 161, 1458).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Tome of fire using (?<soakedpage>.+)x Soaked page.").matcherConsumer(m -> {
-                final int soakedPages = Integer.parseInt(m.group("soakedpage"));
-                increaseCharges(soakedPages * 20);
-            })
+            new OnAutoChargeMessage("Tome of water", "Soaked page", 20, this)
         ));
     }
 }

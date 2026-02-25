@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -31,10 +32,7 @@ public class W_SanguinestiStaff extends ChargedItem {
             new OnChatMessage("You apply (?<charges>.+) charges to your Sanguinesti staff.").setDynamicallyCharges(),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your (Holy s|S)anguinesti staff using (?<bloodrune>.+)x Blood rune.").matcherConsumer(m -> {
-                final int bloodRunes = Integer.parseInt(m.group("bloodrune"));
-                increaseCharges(bloodRunes / 3);
-            })
+            new OnAutoChargeMessage("(Holy s|S)anguinesti staff", "Blood rune", 0.33, this)
         ));
     }
 }

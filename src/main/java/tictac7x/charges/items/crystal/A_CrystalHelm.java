@@ -1,5 +1,6 @@
 package tictac7x.charges.items.crystal;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.enums.HitsplatGroup;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -41,10 +42,7 @@ public class A_CrystalHelm extends ChargedItem {
             new OnHitsplatApplied(SELF, HitsplatGroup.SUCCESSFUL).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Crystal helm using (?<crystalshard>.+)x Crystal shard.").matcherConsumer(m -> {
-                final int crystalShards = Integer.parseInt(m.group("crystalshard"));
-                increaseCharges(crystalShards * 100);
-            })
+            new OnAutoChargeMessage("Crystal helm", "Crystal shard", 100, this)
         ));
     }
 }

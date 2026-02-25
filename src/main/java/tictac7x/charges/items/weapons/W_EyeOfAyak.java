@@ -2,6 +2,7 @@ package tictac7x.charges.items.weapons;
 
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnGraphicChanged;
 import tictac7x.charges.item.triggers.TriggerItem;
@@ -43,13 +44,8 @@ public class W_EyeOfAyak  extends ChargedItem {
             new OnGraphicChanged(12394).decreaseCharges(1),
 
             // Auto-charge
-            new OnChatMessage("The banker charges your Eye of Ayak using (?<deathrune>.+)x Death rune.").matcherConsumer(m -> {
-                final int deathRunes = Integer.parseInt(m.group("deathrune"));
-                increaseCharges(deathRunes / 2);
-            }),
-
-            // Auto-charge
-            new OnChatMessage("The banker charges your Eye of Ayak using (?<charges>.+)x Demon tear.").increaseDynamically()
+            new OnAutoChargeMessage("Eye of Ayak", "Death rune", 0.5, this),
+            new OnAutoChargeMessage("Eye of Ayak", "Demon tear", 1, this)
         ));
     }
 }

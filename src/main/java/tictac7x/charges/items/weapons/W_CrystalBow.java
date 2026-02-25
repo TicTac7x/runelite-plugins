@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.AnimationId;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -29,10 +30,7 @@ public class W_CrystalBow extends ChargedItem {
             new OnAnimationChanged(AnimationId.HUMAN_BOW).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Crystal bow using (?<crystalshard>.+)x Crystal shard.").matcherConsumer(m -> {
-                final int crystalShards = Integer.parseInt(m.group("crystalshard"));
-                increaseCharges(crystalShards * 100);
-            })
+            new OnAutoChargeMessage("Crystal bow", "Crystal shard", 100, this)
         ));
     }
 }

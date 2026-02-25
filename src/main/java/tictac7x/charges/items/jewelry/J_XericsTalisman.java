@@ -32,10 +32,7 @@ public class J_XericsTalisman extends ChargedItem {
             new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Xeric's talisman using (?<lizardmanfang>.+)x Lizardman fang.").matcherConsumer(m -> {
-                final int lizardmanFangs = Integer.parseInt(m.group("lizardmanfang"));
-                increaseCharges(lizardmanFangs);
-            })
+            new OnAutoChargeMessage("Xeric's talisman", "Lizardman fang", 1, this)
         ));
     }
 }

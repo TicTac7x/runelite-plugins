@@ -146,7 +146,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* New seeds and corals support for seed box.<br>" +
-		"<colHIGHLIGHT>* Amulet of bounty added."
+		"<colHIGHLIGHT>* Amulet of bounty added.<br>" +
+		"<colHIGHLIGHT>* Tome of water auto-charge fixed."
 	;
 
 	@Inject

@@ -34,10 +34,7 @@ public class W_BowOfFaerdhinen extends ChargedItem {
             new OnGraphicChanged(1888).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Bow of faerdhinen using (?<crystalshard>.+)x Crystal shard.").matcherConsumer(m -> {
-                final int crystalShards = Integer.parseInt(m.group("crystalshard"));
-                increaseCharges(crystalShards * 100);
-            })
+            new OnAutoChargeMessage("Bow of faerdhinen", "Crystal shard", 100, this)
         ));
     }
 }

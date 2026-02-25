@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import tictac7x.charges.item.triggers.OnAutoChargeMessage;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
@@ -36,10 +37,7 @@ public class W_TumekensShadow extends ChargedItem {
             new OnGraphicChanged(2125).decreaseCharges(1),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Tumeken's shadow using (?<soulrune>.+)x Soul rune").matcherConsumer(m -> {
-                final int soulRunes = Integer.parseInt(m.group("soulrune"));
-                increaseCharges(soulRunes / 2);
-            })
+            new OnAutoChargeMessage("Tumeken's shadow", "Soul rune", 0.5, this)
         ));
     }
 }

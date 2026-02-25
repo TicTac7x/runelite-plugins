@@ -1,13 +1,10 @@
 package tictac7x.charges.items.utils;
 
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.Skill;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStatus;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.OnXpDrop;
-import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
 import java.util.List;
@@ -15,9 +12,11 @@ import java.util.List;
 public class U_AshSanctifier extends ChargedItemWithStatus {
     public U_AshSanctifier(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.ash_sanctifier, ItemId.ASH_SANCTIFIER, provider);
+
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.ASH_SANCTIFIER),
         };
+
         this.triggers.addAll(List.of(
             // Check.
             new OnChatMessage("(The|Your) ash sanctifier has (?<charges>.+) charges?( left)?. It has been deactivated").setDynamicallyCharges().deactivate(),
@@ -37,10 +36,7 @@ public class U_AshSanctifier extends ChargedItemWithStatus {
             new OnMenuEntryAdded("Destroy").hide(),
 
             // Auto-charge.
-            new OnChatMessage("The banker charges your Ash sanctifier using (?<deathrune>.+)x Death rune.").matcherConsumer(m -> {
-                final int deathRunes = Integer.parseInt(m.group("deathrune"));
-                increaseCharges(deathRunes * 10);
-            })
+            new OnAutoChargeMessage("Ash sanctifier", "Death rune", 10, this)
         ));
     }
 }
