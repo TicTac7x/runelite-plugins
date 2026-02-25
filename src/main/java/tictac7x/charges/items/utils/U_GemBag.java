@@ -32,6 +32,9 @@ public class U_GemBag extends ChargedItemWithStorageEmptyable {
         );
 
         this.triggers.addAll(List.of(
+            // Empty to bank.
+            new OnChatMessage("You empty your gem bag into the bank").emptyStorage(),
+
             // Empty to bank or inventory.
             new OnChatMessage("The gem bag is( now)? empty.").emptyStorage(),
 

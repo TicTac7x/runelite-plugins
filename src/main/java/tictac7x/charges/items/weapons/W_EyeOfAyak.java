@@ -30,17 +30,19 @@ public class W_EyeOfAyak  extends ChargedItem {
          */
 
         this.triggers.addAll(List.of(
-            // Check.
-            // Charge.
+            // Check
+            new OnChatMessage("The Eye of Ayak has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
+
+            // Charge
             new OnChatMessage("The Eye of Ayak has been charged with (runes|demon tears). It currently has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
-            // Uncharge.
+            // Uncharge
             new OnChatMessage("You uncharge the Eye of Ayak.").setFixedCharges(0),
 
-            // Attack.
+            // Attack
             new OnGraphicChanged(12397).decreaseCharges(1),
 
-            //Special attack
+            // Special attack
             new OnGraphicChanged(12394).decreaseCharges(1),
 
             // Auto-charge
