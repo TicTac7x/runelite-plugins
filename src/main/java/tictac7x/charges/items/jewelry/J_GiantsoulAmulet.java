@@ -6,7 +6,6 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class J_GiantsoulAmulet extends ChargedItem {

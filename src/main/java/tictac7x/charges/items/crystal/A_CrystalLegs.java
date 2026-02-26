@@ -10,7 +10,6 @@ import tictac7x.charges.item.triggers.OnHitsplatApplied;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 import static tictac7x.charges.store.enums.HitsplatTarget.SELF;
