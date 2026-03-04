@@ -63,7 +63,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             }),
 
             // Unload (empty only darts)
-            new OnMenuOptionClicked("Unload").onItemClick().consumer(() -> {
+            new OnMenuOptionClicked("Unload").onItemClick().runConsumerOnNextGameTick(() -> {
                 storage.clearAndPut(storage.getStorage().getItem(ItemId.ZULRAH_SCALES));
             }),
 

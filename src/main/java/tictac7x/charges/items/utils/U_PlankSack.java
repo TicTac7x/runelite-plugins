@@ -14,7 +14,7 @@ import java.util.Map;
 public class U_PlankSack extends ChargedItemWithStorageEmptyable {
     public U_PlankSack(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.plank_sack, ItemId.PLANK_SACK, provider);
-        storage.setMaximumTotalQuantity(28).emptyIsNegative().storableItems(
+        storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemId.PLANK).checkName("Regular plank"),
             new StorableItem(ItemId.OAK_PLANK).checkName("Oak plank"),
             new StorableItem(ItemId.TEAK_PLANK).checkName("Teak plank"),
@@ -29,8 +29,20 @@ public class U_PlankSack extends ChargedItemWithStorageEmptyable {
         };
 
         this.triggers.addAll(List.of(
+            // Empty
             new OnChatMessage("Your sack is currently empty.").onItemClick().emptyStorage(),
 
+            // Check
+            new OnMenuOptionClicked("Check").consumer(() -> storage.clear()),
+            new OnChatMessage("Regular planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.PLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Oak planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.OAK_PLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Teak planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.TEAK_PLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Mahogany planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.MAHOGANY_PLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Camphor planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.CAMPHOR_PLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Ironwood planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.IRONWOOD_PLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Rosewood planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemId.ROSEWOOD_PLANK, Integer.parseInt(m.group("charges")))),
+
+            // Contents changed
             new OnVarbitsMapChanged(
                 Map.of(
                     VarbitID.PLANK_SACK_PLAIN, ItemId.PLANK,

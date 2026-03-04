@@ -122,64 +122,66 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         final Optional<Widget> forestryShopWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 819, 3);
         if (!forestryShopWidget.isPresent()) return;
 
-        int animaBarkPerItem = 0;
-        final int selectedShopItem = provider.client.getVarpValue(3869);
-        switch (selectedShopItem) {
-            case 0: // Forestry kit
-                break;
-            case 1: // Secateurs blade
-                animaBarkPerItem = 20;
-                break;
-            case 2: // Ritual mulch
-                animaBarkPerItem = 150;
-                break;
-            case 4: // Log brace
-                animaBarkPerItem = 3_000;
-                break;
-            case 5: // Clothes pouch blueprint
-                animaBarkPerItem = 10_000;
-                break;
-            case 6: // Cape pouch
-                animaBarkPerItem = 2_500;
-                break;
-            case 7: // Log basket
-                animaBarkPerItem = 5_000;
-                break;
-            case 8: // Felling axe handle
-                animaBarkPerItem = 10_000;
-                break;
-            case 9: // Twitcher's gloves
-                animaBarkPerItem = 5_000;
-                break;
-            case 10: // Funky shaped log
-                animaBarkPerItem = 15_000;
-                break;
-            case 11: // Sawmill voucher (x10)
-                animaBarkPerItem = 150;
-                break;
-            case 12: // Lumberjack boots
-                animaBarkPerItem = 1_000;
-                break;
-            case 13: // Lumberjack hat
-                animaBarkPerItem = 1_200;
-                break;
-            case 14: // Lumberjack legs
-                animaBarkPerItem = 1_300;
-                break;
-            case 15: // Lumberjack top
-                animaBarkPerItem = 1_500;
-                break;
-            case 16: // Forestry boots
-            case 17: // Forestry hat
-            case 18: // Forestry legs
-            case 19: // Forestry top
-                animaBarkPerItem = 1_250;
-                break;
-            case 21: // Golden pheasant egg
-            case 22: // Fox whistle
-                animaBarkPerItem = 75_000;
-        }
+        provider.store.addConsumerToNextTickQueue(() -> {
+            int animaBarkPerItem = 0;
+            final int selectedShopItem = provider.client.getVarpValue(3869);
+            switch (selectedShopItem) {
+                case 0: // Forestry kit
+                    break;
+                case 1: // Secateurs blade
+                    animaBarkPerItem = 20;
+                    break;
+                case 2: // Ritual mulch
+                    animaBarkPerItem = 150;
+                    break;
+                case 4: // Log brace
+                    animaBarkPerItem = 3_000;
+                    break;
+                case 5: // Clothes pouch blueprint
+                    animaBarkPerItem = 10_000;
+                    break;
+                case 6: // Cape pouch
+                    animaBarkPerItem = 2_500;
+                    break;
+                case 7: // Log basket
+                    animaBarkPerItem = 5_000;
+                    break;
+                case 8: // Felling axe handle
+                    animaBarkPerItem = 10_000;
+                    break;
+                case 9: // Twitcher's gloves
+                    animaBarkPerItem = 5_000;
+                    break;
+                case 10: // Funky shaped log
+                    animaBarkPerItem = 15_000;
+                    break;
+                case 11: // Sawmill voucher (x10)
+                    animaBarkPerItem = 150;
+                    break;
+                case 12: // Lumberjack boots
+                    animaBarkPerItem = 1_000;
+                    break;
+                case 13: // Lumberjack hat
+                    animaBarkPerItem = 1_200;
+                    break;
+                case 14: // Lumberjack legs
+                    animaBarkPerItem = 1_300;
+                    break;
+                case 15: // Lumberjack top
+                    animaBarkPerItem = 1_500;
+                    break;
+                case 16: // Forestry boots
+                case 17: // Forestry hat
+                case 18: // Forestry legs
+                case 19: // Forestry top
+                    animaBarkPerItem = 1_250;
+                    break;
+                case 21: // Golden pheasant egg
+                case 22: // Fox whistle
+                    animaBarkPerItem = 75_000;
+            }
 
-        storage.removeAndPrioritizeInventory(ItemId.ANIMAINFUSED_BARK, animaBarkPerItem * amountToBuy);
+            storage.removeAndPrioritizeInventory(ItemId.ANIMAINFUSED_BARK, animaBarkPerItem * amountToBuy);
+        });
     }
 }

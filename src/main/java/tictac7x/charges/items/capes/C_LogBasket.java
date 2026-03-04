@@ -130,7 +130,7 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
             new OnMenuOptionClicked("Continue").consumer(() -> {
                 final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 219, 1, 2);
                 if (bankWoodcuttingResourcesWidget.isPresent() && bankWoodcuttingResourcesWidget.get().getText().equals("Only bank woodcutting resources")) {
-                    storage.clear();
+                    provider.store.addConsumerToNextTickQueue(() -> storage.clear());
                 }
             }),
 

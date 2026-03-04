@@ -41,7 +41,7 @@ public class J_ExplorersRing extends ChargedItemWithStorageMultipleCharges {
             new OnVarbitChanged(VarbitId.EXPLORER_RING_TELEPORTS).consumer(() -> updateStorage()),
 
             // Check.
-            new OnMenuOptionClicked("Check").onItemClick().consumer(() -> updateStorage()),
+            new OnMenuOptionClicked("Check").onItemClick().runConsumerOnNextGameTick(() -> updateStorage()),
 
             new OnResetDaily().specificItem(ItemId.EXPLORERS_RING_1).consumer(() -> {
                 storage.clear();

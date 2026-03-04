@@ -575,6 +575,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
 		final CustomChatMessage chatMessage = new CustomChatMessage(event);
+		System.out.println(chatMessage);
 		store.onChatMessage(chatMessage);
 		Arrays.stream(chargedItems).forEach(infobox -> infobox.onChatMessage(chatMessage));
 	}
@@ -661,11 +662,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		) return;
 
 		store.onMenuOptionClicked(customMenuOptionClicked);
-		store.addConsumerToNextTickQueue(() -> {
-			for (final ChargedItemBase chargedItem : chargedItems) {
-				chargedItem.onMenuOptionClicked(customMenuOptionClicked);
-			}
-		});
+		for (final ChargedItemBase chargedItem : chargedItems) {
+			chargedItem.onMenuOptionClicked(customMenuOptionClicked);
+		}
 	}
 
 	final List<Integer> scriptIdsToIgnore = Arrays.asList(
