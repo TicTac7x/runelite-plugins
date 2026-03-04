@@ -42,7 +42,7 @@ tasks.register('run', JavaExec) {
 	mainClass = pluginMainClass
 
 	jvmArgs "-ea"
-	args "--developer-mode", "--debug"
+	args "--developer-mode"
 }
 
 tasks.register('shadowJar', Jar) {

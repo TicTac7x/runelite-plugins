@@ -31,6 +31,7 @@ import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
 import tictac7x.charges.items.crystal.*;
+import tictac7x.charges.items.foods.*;
 import tictac7x.charges.items.helms.*;
 import tictac7x.charges.items.jewelry.*;
 import tictac7x.charges.items.moons.*;
@@ -147,6 +148,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* New seeds and corals support for seed box.<br>" +
 		"<colHIGHLIGHT>* Amulet of bounty added.<br>" +
+		"<colHIGHLIGHT>* Cowbell amulet added.<br>" +
+		"<colHIGHLIGHT>* Watering cans, filled baskets and sacks added.<br>" +
 		"<colHIGHLIGHT>* Tome of water auto-charge fixed."
 	;
 
@@ -235,6 +238,16 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new C_LogBasket(provider),
 			new C_MagicCape(provider),
 
+			// Foods
+			new F_Apples(provider),
+			new F_Bananas(provider),
+			new F_Cabbages(provider),
+			new F_Onions(provider),
+			new F_Oranges(provider),
+			new F_Potatoes(provider),
+			new F_Strawberries(provider),
+			new F_Tomatoes(provider),
+
 			// Helms
 			new H_CircletOfWater(provider),
 			new H_KandarinHeadgear(provider),
@@ -264,6 +277,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_DodgyNecklace(provider),
 			new J_PendantOfAtes(provider),
 			new J_CombatBracelet(provider),
+			new J_CowbellAmulet(provider),
 			new J_CelestialRing(provider),
 			new J_RingOfDueling(provider),
 			new J_RingOfForging(provider),
@@ -329,6 +343,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new P_ForgottenBrew(provider),
 			new P_Goading(provider),
 			new P_GuthixBalance(provider),
+			new P_GuthixRest(provider),
 			new P_HaemostaticDressing(provider),
 			new P_Hunter(provider),
 			new P_HuntingMix(provider),
@@ -459,6 +474,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_TackleBox(provider),
 			new U_TeleportCrystal(provider),
 			new U_EternalTeleportCrystal(provider),
+			new U_WateringCan(provider),
 			new U_Waterskin(provider),
 
 			// Weapons

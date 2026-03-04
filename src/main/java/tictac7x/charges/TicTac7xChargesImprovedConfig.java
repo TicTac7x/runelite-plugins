@@ -77,6 +77,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String castle_wars_bracelet = "castle_wars_bracelet";
     String celestial_ring = "celestial_ring";
     String combat_bracelet = "combat_bracelet";
+    String cowbell_amulet = "cowbell_amulet";
     String desert_amulet = "desert_amulet";
     String digsite_pendant = "digsite_pendant";
     String dodgy_necklace = "dodgy_necklace";
@@ -108,6 +109,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String slayer_ring = "slayer_ring";
     String xerics_talisman = "xerics_talisman";
     String sailors_amulet = "sailors_amulet";
+
+    String baskets = "baskets";
+    String sacks = "sacks";
 
     // Shields
     String chronicle = "chronicle";
@@ -158,6 +162,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String tackle_box = "tackle_box";
     String teleport_crystal = "teleport_crystal";
     String eternal_teleport_crystal = "teleport_crystal";
+    String watering_can = "watering_can";
     String waterskin = "waterskin";
 
     // Weapons
@@ -714,6 +719,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean combatBraceletInfobox() { return true; }
 
         @ConfigItem(
+            keyName = cowbell_amulet + _infobox,
+            name = "Cowbell amulet",
+            description = "",
+            section = infoboxes
+        ) default boolean cowbellAmuletInfobox() { return true; }
+
+        @ConfigItem(
             keyName = ring_of_the_elements + _infobox,
             name = "Ring of the elements",
             description = "",
@@ -789,6 +801,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean sailorsAmuletInfobox() { return true; }
+
+        @ConfigItem(
+            keyName =  baskets + _infobox,
+            name = "Baskets",
+            description = "",
+            section = infoboxes
+        ) default boolean basketsInfobox() { return true; }
+
+        @ConfigItem(
+            keyName =  sacks + _infobox,
+            name = "Sacks",
+            description = "",
+            section = infoboxes
+        ) default boolean sacksInfobox() { return true; }
 
         @ConfigItem(
             keyName = chronicle + _infobox,
@@ -1048,6 +1074,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean eternalTeleportCrystalInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = watering_can + _infobox,
+            name = "Watering can",
+            description = "",
+            section = infoboxes
+        ) default boolean wateringCanInfobox() { return true; }
 
         @ConfigItem(
             keyName = waterskin + _infobox,
@@ -1498,6 +1531,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean combatBraceletOverlay() { return true; }
 
         @ConfigItem(
+            keyName = cowbell_amulet + _overlay,
+            name = "Cowbell amulet",
+            description = "",
+            section = overlays
+        ) default boolean cowbellAmuletOverlay() { return true; }
+
+        @ConfigItem(
             keyName = chronicle + _overlay,
             name = "Chronicle",
             description = "",
@@ -1911,6 +1951,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean venatorBowOverlay() { return true; }
 
         @ConfigItem(
+            keyName = watering_can + _overlay,
+            name = "Watering can",
+            description = "",
+            section = overlays
+        ) default boolean wateringCanOverlay() { return true; }
+
+        @ConfigItem(
             keyName = waterskin + _overlay,
             name = "Waterskin",
             description = "",
@@ -2098,6 +2145,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean sailorsAmuletOverlay() { return true; }
+
+        @ConfigItem(
+            keyName =  baskets + _overlay,
+            name = "Baskets",
+            description = "",
+            section = overlays
+        ) default boolean basketsOverlay() { return true; }
+
+        @ConfigItem(
+            keyName =  sacks + _overlay,
+            name = "Sacks",
+            description = "",
+            section = overlays
+        ) default boolean sacksOverlay() { return true; }
 
         @ConfigItem(
             keyName = alchemists_amulet + _overlay,

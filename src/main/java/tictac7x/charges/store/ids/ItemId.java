@@ -658,6 +658,10 @@ public final class ItemId {
     public static final int GUTHIX_BALANCE_2 = ItemID.BURGH_GUTHIX_BALANCE_2;
     public static final int GUTHIX_BALANCE_3 = ItemID.BURGH_GUTHIX_BALANCE_3;
     public static final int GUTHIX_BALANCE_4 = ItemID.BURGH_GUTHIX_BALANCE_4;
+    public static final int GUTHIX_REST_1 = ItemID.CUP_GUTHIX_REST_1;
+    public static final int GUTHIX_REST_2 = ItemID.CUP_GUTHIX_REST_2;
+    public static final int GUTHIX_REST_3 = ItemID.CUP_GUTHIX_REST_3;
+    public static final int GUTHIX_REST_4 = ItemID.CUP_GUTHIX_REST_4;
     public static final int ENERGY_POTION_1 = ItemID._1DOSE1ENERGY;
     public static final int ENERGY_POTION_2 = ItemID._2DOSE1ENERGY;
     public static final int ENERGY_POTION_3 = ItemID._3DOSE1ENERGY;
@@ -1712,4 +1716,76 @@ public final class ItemId {
 
     // Amulet of bounty
     public static final int AMULET_OF_BOUNTY = ItemID.AMULET_OF_BOUNTY;
+
+    // Cowbell amulet
+    public static final int COWBELL_AMULET_UNCHARGED = ItemID.COWBELL_AMULET_EMPTY;
+    public static final int COWBELL_AMULET = ItemID.COWBELL_AMULET;
+
+    // Watering can
+    public static final int WATERING_CAN_0 = ItemID.WATERING_CAN_0;
+    public static final int WATERING_CAN_1 = ItemID.WATERING_CAN_1;
+    public static final int WATERING_CAN_2 = ItemID.WATERING_CAN_2;
+    public static final int WATERING_CAN_3 = ItemID.WATERING_CAN_3;
+    public static final int WATERING_CAN_4 = ItemID.WATERING_CAN_4;
+    public static final int WATERING_CAN_5 = ItemID.WATERING_CAN_5;
+    public static final int WATERING_CAN_6 = ItemID.WATERING_CAN_6;
+    public static final int WATERING_CAN_7 = ItemID.WATERING_CAN_7;
+    public static final int WATERING_CAN_8 = ItemID.WATERING_CAN_8;
+
+    // Baskets
+    public static final int APPLES_1 = ItemID.BASKET_APPLE_1;
+    public static final int APPLES_2 = ItemID.BASKET_APPLE_2;
+    public static final int APPLES_3 = ItemID.BASKET_APPLE_3;
+    public static final int APPLES_4 = ItemID.BASKET_APPLE_4;
+    public static final int APPLES_5 = ItemID.BASKET_APPLE_5;
+    public static final int BANANAS_1 = ItemID.BASKET_BANANA_1;
+    public static final int BANANAS_2 = ItemID.BASKET_BANANA_2;
+    public static final int BANANAS_3 = ItemID.BASKET_BANANA_3;
+    public static final int BANANAS_4 = ItemID.BASKET_BANANA_4;
+    public static final int BANANAS_5 = ItemID.BASKET_BANANA_5;
+    public static final int ORANGES_1 = ItemID.BASKET_ORANGE_1;
+    public static final int ORANGES_2 = ItemID.BASKET_ORANGE_2;
+    public static final int ORANGES_3 = ItemID.BASKET_ORANGE_3;
+    public static final int ORANGES_4 = ItemID.BASKET_ORANGE_4;
+    public static final int ORANGES_5 = ItemID.BASKET_ORANGE_5;
+    public static final int STRAWBERRIES_1 = ItemID.BASKET_STRAWBERRY_1;
+    public static final int STRAWBERRIES_2 = ItemID.BASKET_STRAWBERRY_2;
+    public static final int STRAWBERRIES_3 = ItemID.BASKET_STRAWBERRY_3;
+    public static final int STRAWBERRIES_4 = ItemID.BASKET_STRAWBERRY_4;
+    public static final int STRAWBERRIES_5 = ItemID.BASKET_STRAWBERRY_5;
+    public static final int TOMATOES_1 = ItemID.BASKET_TOMATO_1;
+    public static final int TOMATOES_2 = ItemID.BASKET_TOMATO_2;
+    public static final int TOMATOES_3 = ItemID.BASKET_TOMATO_3;
+    public static final int TOMATOES_4 = ItemID.BASKET_TOMATO_4;
+    public static final int TOMATOES_5 = ItemID.BASKET_TOMATO_5;
+    public static final int CABBAGES_1 = ItemID.SACK_CABBAGE_1;
+    public static final int CABBAGES_2 = ItemID.SACK_CABBAGE_2;
+    public static final int CABBAGES_3 = ItemID.SACK_CABBAGE_3;
+    public static final int CABBAGES_4 = ItemID.SACK_CABBAGE_4;
+    public static final int CABBAGES_5 = ItemID.SACK_CABBAGE_5;
+    public static final int CABBAGES_6 = ItemID.SACK_CABBAGE_6;
+    public static final int CABBAGES_7 = ItemID.SACK_CABBAGE_7;
+    public static final int CABBAGES_8 = ItemID.SACK_CABBAGE_8;
+    public static final int CABBAGES_9 = ItemID.SACK_CABBAGE_9;
+    public static final int CABBAGES_10 = ItemID.SACK_CABBAGE_10;
+    public static final int ONIONS_1 = ItemID.SACK_ONION_1;
+    public static final int ONIONS_2 = ItemID.SACK_ONION_2;
+    public static final int ONIONS_3 = ItemID.SACK_ONION_3;
+    public static final int ONIONS_4 = ItemID.SACK_ONION_4;
+    public static final int ONIONS_5 = ItemID.SACK_ONION_5;
+    public static final int ONIONS_6 = ItemID.SACK_ONION_6;
+    public static final int ONIONS_7 = ItemID.SACK_ONION_7;
+    public static final int ONIONS_8 = ItemID.SACK_ONION_8;
+    public static final int ONIONS_9 = ItemID.SACK_ONION_9;
+    public static final int ONIONS_10 = ItemID.SACK_ONION_10;
+    public static final int POTATOES_1 = ItemID.SACK_POTATO_1;
+    public static final int POTATOES_2 = ItemID.SACK_POTATO_2;
+    public static final int POTATOES_3 = ItemID.SACK_POTATO_3;
+    public static final int POTATOES_4 = ItemID.SACK_POTATO_4;
+    public static final int POTATOES_5 = ItemID.SACK_POTATO_5;
+    public static final int POTATOES_6 = ItemID.SACK_POTATO_6;
+    public static final int POTATOES_7 = ItemID.SACK_POTATO_7;
+    public static final int POTATOES_8 = ItemID.SACK_POTATO_8;
+    public static final int POTATOES_9 = ItemID.SACK_POTATO_9;
+    public static final int POTATOES_10 = ItemID.SACK_POTATO_10;
 }

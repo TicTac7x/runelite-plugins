@@ -30,7 +30,8 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Magic cape
 
 ### Foods
-- Hunter mixes
+- Baskets
+- Sacks
 
 ### Jewelery
 - Alchemists amulet
@@ -45,6 +46,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Castle wars bracelet
 - Celestial ring
 - Combat bracelet
+- Cowbell amulet
 - Desert amulet
 - Digsite pendant
 - Dodgy necklace
@@ -72,6 +74,9 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Skills necklace
 - Slayer ring
 - Xeric's talisman
+
+### Potions
+- All
 
 ### Shields
 - Chronicle
@@ -112,6 +117,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Strange old lockpick
 - Tackle box
 - Teleport crystal
+- Watering can
 - Waterskins
 
 ### Weapons
