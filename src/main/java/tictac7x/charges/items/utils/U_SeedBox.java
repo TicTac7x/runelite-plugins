@@ -136,25 +136,25 @@ public class U_SeedBox extends ChargedItemWithStorageEmptyable {
             new OnChatMessage("(The|Your) seed box is( now| already)? empty.").emptyStorage(),
 
             // Empty into inventory.
-            new OnChatMessage("Emptied (?<quantity>.+) x (?<seed>.+)( seed)? to your inventory.").matcherConsumer(m -> {
+            new OnChatMessage("Emptied (?<quantity>.+) x (?<seed>.+)( seed| frag)? to your inventory.").matcherConsumer(m -> {
                 storage.remove(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
             }),
 
             // Store.
-            new OnChatMessage("Stored (?<quantity>.+) x (?<seed>.+)( seed)? in your seed box.").matcherConsumer(m -> {
+            new OnChatMessage("Stored (?<quantity>.+) x (?<seed>.+)( seed| frag)? in your seed box.").matcherConsumer(m -> {
                 storage.add(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
             }),
 
             // Pickup.
-            new OnChatMessage("You put (?<quantity>.+) x (?<seed>.+)( seed)? straight into your open seed box.").matcherConsumer(m -> {
+            new OnChatMessage("You put (?<quantity>.+) x (?<seed>.+)( seed| frag)? straight into your open seed box.").matcherConsumer(m -> {
                 storage.add(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
             }),
 
             // Pickpocketing.
-            new OnChatMessage("You put the stolen (?<seed>.+)( seed)? into your seed box.").matcherConsumer(m -> {
+            new OnChatMessage("You put the stolen (?<seed>.+)( seed| frag)? into your seed box.").matcherConsumer(m -> {
                 storage.add(getStorageItemFromName(m.group("seed"), 1));
             }),
-            new OnChatMessage("The following stolen loot gets added to your seed box: (?<seed>.+)( seed)? x (?<quantity>.+).").matcherConsumer(m -> {
+            new OnChatMessage("The following stolen loot gets added to your seed box: (?<seed>.+)( seed| frag)? x (?<quantity>.+).").matcherConsumer(m -> {
                 storage.add(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
             }),
 
