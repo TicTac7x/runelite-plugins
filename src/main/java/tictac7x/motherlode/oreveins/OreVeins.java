@@ -1,7 +1,6 @@
 package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.Actor;
-import net.runelite.api.AnimationID;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.WallObject;
@@ -9,6 +8,7 @@ import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.WallObjectDespawned;
 import net.runelite.api.events.WallObjectSpawned;
+import net.runelite.api.gameval.AnimationID;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -156,22 +156,25 @@ public class OreVeins extends Overlay {
 
     private boolean isMiningAnimation(final int animationId) {
         switch (animationId) {
-            case AnimationID.MINING_MOTHERLODE_BRONZE:
-            case AnimationID.MINING_MOTHERLODE_IRON:
-            case AnimationID.MINING_MOTHERLODE_STEEL:
-            case AnimationID.MINING_MOTHERLODE_BLACK:
-            case AnimationID.MINING_MOTHERLODE_MITHRIL:
-            case AnimationID.MINING_MOTHERLODE_ADAMANT:
-            case AnimationID.MINING_MOTHERLODE_RUNE:
-            case AnimationID.MINING_MOTHERLODE_DRAGON:
-            case AnimationID.MINING_MOTHERLODE_DRAGON_OR:
-            case AnimationID.MINING_MOTHERLODE_DRAGON_UPGRADED:
-            case AnimationID.MINING_MOTHERLODE_DRAGON_OR_TRAILBLAZER:
-            case AnimationID.MINING_MOTHERLODE_3A:
-            case AnimationID.MINING_MOTHERLODE_CRYSTAL:
-            case AnimationID.MINING_MOTHERLODE_INFERNAL:
-            case AnimationID.MINING_MOTHERLODE_GILDED:
-            case AnimationID.MINING_MOTHERLODE_TRAILBLAZER:
+            case AnimationID.HUMAN_MINING_BRONZE_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_IRON_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_STEEL_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_BLACK_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_MITHRIL_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_ADAMANT_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_RUNE_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_DRAGON_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_ZALCANO_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_DRAGON_PICKAXE_PRETTY_WALL:
+            case AnimationID.HUMAN_MINING_TRAILBLAZER_PICKAXE_NO_INFERNAL_WALL:
+            case AnimationID.HUMAN_MINING_3A_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_CRYSTAL_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_INFERNAL_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_GILDED_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_LEAGUE_TRAILBLAZER_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_TRAILBLAZER_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_TRAILBLAZER_RELOADED_PICKAXE_WALL:
+            case AnimationID.HUMAN_MINING_TRAILBLAZER_RELOADED_PICKAXE_NO_INFERNAL_WALL:
                 return true;
             default:
                 return false;
