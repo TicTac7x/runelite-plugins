@@ -78,7 +78,7 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             }),
 
             // Empty to bank.
-            new OnChatMessage("You empty your pouch into the bank").onItemClick().emptyStorage(),
+            new OnChatMessage("You empty your Reagent pouch into the bank.").onItemClick().emptyStorage(),
 
             // Empty to inventory.
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
@@ -128,7 +128,6 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             new OnChatMessage("You carefully pick a spine from the cactus.").consumer(() -> {
                 storage.add(ItemId.CACTUS_SPINE, 1);
             }),
-
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide()
