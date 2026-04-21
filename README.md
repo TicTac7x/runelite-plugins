@@ -17,6 +17,9 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 ### Helms
 - Circlet of water
 - Kandarin headgear
+- Serpentine helm
+  - Magma helm
+  - Tanzanite helm
 
 ### Boots
 - Fremennik sea boots
@@ -141,6 +144,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 - Trident of the seas / swamp
 - Tumeken's shadow
 - Venator bow
+  - Echo venator bow
 - Warped sceptre
 - Webweaver bow
 - Western banner

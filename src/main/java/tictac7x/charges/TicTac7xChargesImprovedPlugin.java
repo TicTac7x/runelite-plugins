@@ -148,7 +148,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Reagent pouch fixes.<br>" +
 		"<colHIGHLIGHT>* Abyssal tentacle added.<br>" +
-		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support."
+		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support.<br>" +
+		"<colHIGHLIGHT>* Serpentine helm and its variants support added."
 	;
 
 	@Inject

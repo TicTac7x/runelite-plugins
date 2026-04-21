@@ -8,22 +8,19 @@ import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnCombat;
-import tictac7x.charges.item.triggers.OnScriptPreFired;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ItemId;
 
 public class H_SerpentineHelm extends ChargedItemWithStorage {
     public H_SerpentineHelm(final Provider provider) {
-        this(TicTac7xChargesImprovedConfig.serpentine_helm, ItemId.SERPENTINE_HELM, new TriggerItem[]{
+        this(TicTac7xChargesImprovedConfig.serpentine_helm, "Serpentine helm", ItemId.SERPENTINE_HELM, new TriggerItem[]{
             new TriggerItem(ItemId.SERPENTINE_HELM_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.SERPENTINE_HELM)
         }, provider);
     }
 
-    public H_SerpentineHelm(final String configKey, final int itemId, final TriggerItem[] items, final Provider provider) {
+    public H_SerpentineHelm(final String configKey, final String itemName, final int itemId, final TriggerItem[] items, final Provider provider) {
         super(configKey, itemId, provider);
 
         this.items = items;
@@ -35,8 +32,7 @@ public class H_SerpentineHelm extends ChargedItemWithStorage {
         this.triggers.addAll(List.of(
             // Check
             new OnChatMessage("Scales: (?<scales>.+) \\(.*\\)").onItemClick().matcherConsumer(m -> {
-                final StorageItem scales = new StorageItem(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
-                storage.clearAndPut(scales);
+                storage.clearAndPut(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
             }),
 
             // Uncharge
@@ -56,8 +52,11 @@ public class H_SerpentineHelm extends ChargedItemWithStorage {
             // But the exact timing is not known for the "grace" period on the initial consumption. Therefore, I won't account for that initial consumption
             new OnCombat(90).isEquipped().consumer(() -> storage.remove(ItemId.ZULRAH_SCALES, 10)),
 
+            // Auto-charge.
+            new OnAutoChargeMessage(itemName, "Zulrah scales", 1, this, ItemId.ZULRAH_SCALES),
+
             // Ran out of charges upon degrading in combat
-            new OnChatMessage("Your serpentine helm has run out of Zulrah's scales.").consumer(() -> storage.clear())
+            new OnChatMessage("Your " + itemName.toLowerCase() + " has run out of Zulrah's scales.").consumer(() -> storage.clear())
         ));
     }
 }
