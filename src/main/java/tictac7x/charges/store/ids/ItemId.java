@@ -1697,7 +1697,15 @@ public final class ItemId {
     public static final int AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI = ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI;
     public static final int AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI_TROUVER = ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI_TROUVER;
 
-    // Bow string spool
+    // Serpentine helm
+	public static final int SERPENTINE_HELM_UNCHARGED = ItemID.SERPENTINE_HELM;
+	public static final int SERPENTINE_HELM = ItemID.SERPENTINE_HELM_CHARGED;
+	public static final int SERPENTINE_MAGMA_HELM_UNCHARGED = ItemID.SERPENTINE_HELM_RED;
+	public static final int SERPENTINE_MAGMA_HELM = ItemID.SERPENTINE_HELM_CHARGED_RED;
+	public static final int SERPENTINE_TANZANITE_HELM_UNCHARGED = ItemID.SERPENTINE_HELM_CYAN;
+	public static final int SERPENTINE_TANZANITE_HELM = ItemID.SERPENTINE_HELM_CHARGED_CYAN;
+
+	// Bow string spool
     public static final int BOW_STRING_SPOOL = ItemID.BOWSTRING_SPOOL;
 
     // Craw's bow

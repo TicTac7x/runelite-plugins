@@ -249,6 +249,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			// Helms
 			new H_CircletOfWater(provider),
 			new H_KandarinHeadgear(provider),
+            new H_SerpentineHelm(provider),
+            new H_MagmaHelm(provider),
+            new H_TanzaniteHelm(provider),
 
 			// Jewelery
 			new J_AlchemistsAmulet(provider),

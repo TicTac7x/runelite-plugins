@@ -51,6 +51,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     // Helms
     String circlet_of_water = "circlet_of_water";
     String kandarin_headgear = "kandarin_headgear";
+    String serpentine_helm = "serpentine_helm";
+    String magma_helm = "magma_helm";
+    String tanzanite_helm = "tanzanite_helm";
 
     // Boots
     String fremennik_sea_boots = "fremennik_sea_boots";
@@ -1302,12 +1305,33 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean eyeOfAyakInfobox() { return true; }
 
         @ConfigItem(
+            keyName = serpentine_helm + _infobox,
+            name = "Serpentine helm",
+            description = "",
+            section = infoboxes
+        ) default boolean serpentineHelmInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = magma_helm + _infobox,
+            name = "Magma helm",
+            description = "",
+            section = infoboxes
+        ) default boolean magmaHelmInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = tanzanite_helm + _infobox,
+            name = "Tanzanite helm",
+            description = "",
+            section = infoboxes
+        ) default boolean tanzaniteHelmInfobox() { return true; }
+
+        @ConfigItem(
             keyName = echo_venator_bow + _infobox,
             name = "Echo venator bow",
             description = "",
             section = infoboxes
         ) default boolean echoVenatorBowInfobox() { return true; }
-  
+
         @ConfigItem(
             keyName = abyssal_tentacle + _infobox,
             name = "Abyssal tentacle",
@@ -2219,6 +2243,27 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean eyeOfAyakOverlay() { return true; }
 
         @ConfigItem(
+            keyName = serpentine_helm + _overlay,
+            name = "Serpentine helm",
+            description = "",
+            section = overlays
+        ) default boolean serpentineHelmOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = magma_helm + _overlay,
+            name = "Magma helm",
+            description = "",
+            section = overlays
+        ) default boolean magmaHelmOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = tanzanite_helm + _overlay,
+            name = "Tanzanite helm",
+            description = "",
+            section = overlays
+        ) default boolean tanzaniteHelmOverlay() { return true; }
+  
+        @ConfigItem(
             keyName = echo_venator_bow + _overlay,
             name = "Echo Venator Bow",
             description = "",
@@ -2859,6 +2904,27 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = debug
         ) default int getAmuletOfChemistryCharges() { return ChargeId.UNKNOWN; }
 
+        @ConfigItem(
+            keyName = serpentine_helm,
+            name = serpentine_helm,
+            description = serpentine_helm,
+            section = debug
+        ) default int getSerpentineHelmCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = magma_helm,
+            name = magma_helm,
+            description = magma_helm,
+            section = debug
+        ) default int getMagmaHelmCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = tanzanite_helm,
+            name = tanzanite_helm,
+            description = tanzanite_helm,
+            section = debug
+        ) default int getTanzaniteHelmCharges() { return ChargeId.UNKNOWN; }
+  
         @ConfigItem(
             keyName = venator_bow,
             name = venator_bow,
