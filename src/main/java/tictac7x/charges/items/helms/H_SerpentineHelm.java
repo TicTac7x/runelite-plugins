@@ -7,7 +7,6 @@ import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.TicTac7xChargesImprovedPlugin;
 import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ItemId;
@@ -56,7 +55,7 @@ public class H_SerpentineHelm extends ChargedItemWithStorage {
             new OnAutoChargeMessage(itemName, "Zulrah scales", 1, this, ItemId.ZULRAH_SCALES),
 
             // Ran out of charges upon degrading in combat
-            new OnChatMessage("Your " + itemName.toLowerCase() + " has run out of Zulrah's scales.").consumer(() -> storage.clear())
+            new OnChatMessage("Your serpentine helm has run out of Zulrah's scales.").consumer(() -> storage.clear())
         ));
     }
 }
