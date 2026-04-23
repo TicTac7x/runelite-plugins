@@ -147,7 +147,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Reagent pouch fixes.<br>" +
+		"<colHIGHLIGHT>* Toxic and blazing blowpipe fixes.<br>" +
 		"<colHIGHLIGHT>* Abyssal tentacle added.<br>" +
+		"<colHIGHLIGHT>* Abyssal bracelet added.<br>" +
 		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support.<br>" +
 		"<colHIGHLIGHT>* Serpentine helm and its variants support added."
 	;
@@ -255,6 +257,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
             new H_TanzaniteHelm(provider),
 
 			// Jewelery
+			new J_AbyssalBracelet(provider),
 			new J_AlchemistsAmulet(provider),
 			new J_AmuletOfBloodFury(provider),
 			new J_AmuletOfBounty(provider),

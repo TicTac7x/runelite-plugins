@@ -27,6 +27,7 @@ public class A_CrystalHelm extends ChargedItem {
             new TriggerItem(ItemId.CRYSTAL_HELM_CADARN),
             new TriggerItem(ItemId.CRYSTAL_HELM_CRWYS),
             new TriggerItem(ItemId.CRYSTAL_HELM_AMLODD),
+            new TriggerItem(ItemId.CRYSTAL_HELM_ANNIHILATION),
             new TriggerItem(ItemId.CRYSTAL_HELM_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_HELM_HEFIN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_HELM_ITHELL_INACTIVE).fixedCharges(0),
@@ -35,6 +36,7 @@ public class A_CrystalHelm extends ChargedItem {
             new TriggerItem(ItemId.CRYSTAL_HELM_CADARN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_HELM_CRWYS_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_HELM_AMLODD_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_HELM_ANNIHILATION_INACTIVE).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

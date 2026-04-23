@@ -66,6 +66,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String magic_cape = "magic_cape";
 
     // Jewelery
+    String abyssal_bracelet = "abyssal_bracelet";
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
     String amulet_of_bounty = "amulet_of_bounty";
@@ -1263,6 +1264,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean webweaverBowInfobox() { return true; }
 
         @ConfigItem(
+            keyName = abyssal_bracelet + _infobox,
+            name = "Abyssal bracelet",
+            description = "",
+            section = infoboxes
+        ) default boolean abyssalBraceletInfobox() { return true; }
+
+        @ConfigItem(
             keyName = alchemists_amulet + _infobox,
             name = "Alchemist's amulet",
             description = "",
@@ -2199,6 +2207,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean sacksOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = abyssal_bracelet + _overlay,
+            name = "Abyssal bracelet",
+            description = "",
+            section = overlays
+        ) default boolean abyssalBraceletOverlay() { return true; }
 
         @ConfigItem(
             keyName = alchemists_amulet + _overlay,

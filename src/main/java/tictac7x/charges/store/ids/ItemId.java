@@ -221,6 +221,8 @@ public final class ItemId {
     public static final int CRYSTAL_HELM_CRWYS_INACTIVE = ItemID.CRYSTAL_HELMET_INACTIVE_CRWYS;
     public static final int CRYSTAL_HELM_AMLODD = ItemID.CRYSTAL_HELMET_AMLODD;
     public static final int CRYSTAL_HELM_AMLODD_INACTIVE = ItemID.CRYSTAL_HELMET_INACTIVE_AMLODD;
+    public static final int CRYSTAL_HELM_ANNIHILATION = ItemID.CRYSTAL_HELMET_DEADMAN;
+    public static final int CRYSTAL_HELM_ANNIHILATION_INACTIVE = ItemID.CRYSTAL_HELMET_INACTIVE_DEADMAN;
 
     // Crystal body
     public static final int CRYSTAL_BODY = ItemID.CRYSTAL_CHESTPLATE;
@@ -239,6 +241,8 @@ public final class ItemId {
     public static final int CRYSTAL_BODY_CRWYS_INACTIVE = ItemID.CRYSTAL_CHESTPLATE_INACTIVE_CRWYS;
     public static final int CRYSTAL_BODY_AMLODD = ItemID.CRYSTAL_CHESTPLATE_AMLODD;
     public static final int CRYSTAL_BODY_AMLODD_INACTIVE = ItemID.CRYSTAL_CHESTPLATE_INACTIVE_AMLODD;
+    public static final int CRYSTAL_BODY_ANNIHILATION = ItemID.CRYSTAL_CHESTPLATE_DEADMAN;
+    public static final int CRYSTAL_BODY_ANNIHILATION_INACTIVE = ItemID.CRYSTAL_CHESTPLATE_INACTIVE_DEADMAN;
 
     // Crystal legs
     public static final int CRYSTAL_LEGS = ItemID.CRYSTAL_PLATELEGS;
@@ -257,6 +261,8 @@ public final class ItemId {
     public static final int CRYSTAL_LEGS_CRWYS_INACTIVE = ItemID.CRYSTAL_PLATELEGS_INACTIVE_CRWYS;
     public static final int CRYSTAL_LEGS_AMLODD = ItemID.CRYSTAL_PLATELEGS_AMLODD;
     public static final int CRYSTAL_LEGS_AMLODD_INACTIVE = ItemID.CRYSTAL_PLATELEGS_INACTIVE_AMLODD;
+    public static final int CRYSTAL_LEGS_ANNIHILATION = ItemID.CRYSTAL_PLATELEGS_DEADMAN;
+    public static final int CRYSTAL_LEGS_ANNIHILATION_INACTIVE = ItemID.CRYSTAL_PLATELEGS_INACTIVE_DEADMAN;
 
     // Coffin
     public static final int LOAR_REMAINS = ItemID.SHADE_BONES1;
@@ -1459,6 +1465,7 @@ public final class ItemId {
     public static final int BOW_OF_FAERDHINEN_CORRUPTED_CRWYS = ItemID.BOW_OF_FAERDHINEN_INFINITE_CRWYS;
     public static final int BOW_OF_FAERDHINEN_CORRUPTED_MEILYR = ItemID.BOW_OF_FAERDHINEN_INFINITE_MEILYR;
     public static final int BOW_OF_FAERDHINEN_CORRUPTED_AMLODD = ItemID.BOW_OF_FAERDHINEN_INFINITE_AMLODD;
+    public static final int BOW_OF_FAERDHINEN_CORRUPTED_ANNIHILATION = ItemID.BOW_OF_FAERDHINEN_INFINITE_DEADMAN;
 
     // Crystal bow
     public static final int CRYSTAL_BOW = ItemID.CRYSTAL_BOW;
@@ -1802,4 +1809,11 @@ public final class ItemId {
     public static final int POTATOES_8 = ItemID.SACK_POTATO_8;
     public static final int POTATOES_9 = ItemID.SACK_POTATO_9;
     public static final int POTATOES_10 = ItemID.SACK_POTATO_10;
+
+    // Abyssal bracelet
+    public static final int ABYSSAL_BRACELET_1 = ItemID.JEWL_RUNERUNNING_BRACELET_1;
+    public static final int ABYSSAL_BRACELET_2 = ItemID.JEWL_RUNERUNNING_BRACELET_2;
+    public static final int ABYSSAL_BRACELET_3 = ItemID.JEWL_RUNERUNNING_BRACELET_3;
+    public static final int ABYSSAL_BRACELET_4 = ItemID.JEWL_RUNERUNNING_BRACELET_4;
+    public static final int ABYSSAL_BRACELET_5 = ItemID.JEWL_RUNERUNNING_BRACELET_5;
 }

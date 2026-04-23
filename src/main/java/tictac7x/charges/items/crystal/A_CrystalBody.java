@@ -27,6 +27,7 @@ public class A_CrystalBody extends ChargedItem {
             new TriggerItem(ItemId.CRYSTAL_BODY_CADARN),
             new TriggerItem(ItemId.CRYSTAL_BODY_CRWYS),
             new TriggerItem(ItemId.CRYSTAL_BODY_AMLODD),
+            new TriggerItem(ItemId.CRYSTAL_BODY_ANNIHILATION),
             new TriggerItem(ItemId.CRYSTAL_BODY_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_BODY_HEFIN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_BODY_ITHELL_INACTIVE).fixedCharges(0),
@@ -35,6 +36,7 @@ public class A_CrystalBody extends ChargedItem {
             new TriggerItem(ItemId.CRYSTAL_BODY_CADARN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_BODY_CRWYS_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_BODY_AMLODD_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_BODY_ANNIHILATION_INACTIVE).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(
