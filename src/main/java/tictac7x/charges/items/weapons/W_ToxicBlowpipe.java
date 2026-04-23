@@ -15,21 +15,22 @@ import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ItemId;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     public W_ToxicBlowpipe(final Provider provider) {
-        this(TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, provider);
-
-        this.items = new TriggerItem[]{
+        this(provider, TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, new TriggerItem[]{
             new TriggerItem(ItemId.TOXIC_BLOWPIPE_UNCHARGED),
             new TriggerItem(ItemId.TOXIC_BLOWPIPE),
-        };
+        });
     }
-    public W_ToxicBlowpipe(final String configKey, final int itemId, final Provider provider) {
+    public W_ToxicBlowpipe(final Provider provider, final String configKey, final int itemId, final TriggerItem[] items) {
         super(configKey, itemId, provider);
+
+        this.items = items;
 
         this.storage.storableItems(
             new StorableItem(ItemId.ZULRAH_SCALES),
@@ -71,8 +72,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
                 final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
                 if (
-                    widget.isPresent() &&
-                    widget.get().getItemId() == ItemId.TOXIC_BLOWPIPE &&
+                    widget.isPresent() && Arrays.stream(items).anyMatch(item -> item.itemId == widget.get().getItemId()) &&
                     script.getScriptEvent().getArguments().length >= 5 &&
                     script.getScriptEvent().getArguments()[4].toString().equals("Yes")
                 ) {
