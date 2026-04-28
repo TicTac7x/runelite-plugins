@@ -1821,6 +1821,9 @@ public final class ItemId {
     public static final int BOTTOMLESS_MILK_BUCKET = ItemID.BOTTOMLESS_MILK_BUCKET_FILLED;
     public static final int BOTTOMLESS_MILK_BUCKET_UNCHARGED = ItemID.BOTTOMLESS_MILK_BUCKET;
     public static final int BUCKET_OF_MILK = ItemID.BUCKET_MILK;
+    public static final int BUCKET_OF_CHOCOLATEY_MILK = ItemID.CHOCOLATY_MILK;
+    public static final int BUCKET_OF_MILKY_MIXTURE = ItemID.CHICKENQUEST_MILKY_MIXTURE;
+    public static final int BUCKET_OF_HANGOVER_CURE = ItemID.HANGOVER_CURE;
     public static final int CUP_OF_NETTLE_TEA = ItemID.CUP_OF_NETTLETEA;
     public static final int BOWL_OF_NETTLE_TEA = ItemID.BOWL_NETTLETEA;
     public static final int CUP_OF_DAMIANA_TEA = ItemID.CUP_DAMIANA_TEA;
