@@ -43,6 +43,7 @@ public class Store {
 
 
     public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
+    public Optional<CustomMenuOptionClicked> previousMenuOptionClicked = Optional.empty();
     public final List<CustomMenuOptionClicked> menuOptionsClicked = new ArrayList<>();
     private final Map<Skill, Integer> skillsXp = new HashMap<>();
 
@@ -210,6 +211,17 @@ public class Store {
 
         // Save menu option and target for other triggers to use.
         menuOptionsClicked.add(customMenuOptionClicked);
+
+        if (
+            previousMenuOptionClicked.isPresent() &&
+            previousMenuOptionClicked.get().option.equals("Use") &&
+            customMenuOptionClicked.option.equals("Use") &&
+            customMenuOptionClicked.target.contains("->")
+        ) {
+            customMenuOptionClicked.assignUsedItemId(previousMenuOptionClicked.get().itemId);
+        }
+
+        this.previousMenuOptionClicked = Optional.of(customMenuOptionClicked);
     }
 
     private void checkBankWithdraw(final CustomMenuOptionClicked customMenuOptionClicked) {

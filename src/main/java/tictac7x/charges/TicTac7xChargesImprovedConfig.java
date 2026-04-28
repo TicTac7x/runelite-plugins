@@ -134,6 +134,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String bonecrusher = "bonecrusher";
     String bonecrusher_status = "bonecrusher_status";
     String bottomless_compost_bucket = "bottomless_compost_bucket";
+    String bottomless_milk_bucket = "bottomless_milk_bucket";
     String bow_string_spool = "bow_string_spool";
     String chugging_barrel = "chugging_barrel";
     String coal_bag = "coal_bag";
@@ -914,6 +915,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bottomlessCompostBucketInfobox() { return true; }
 
         @ConfigItem(
+            keyName = bottomless_milk_bucket + _infobox,
+            name = "Bottomless milk bucket",
+            description = "",
+            section = infoboxes
+        ) default boolean bottomlessMilkBucketInfobox() { return true; }
+
+        @ConfigItem(
             keyName = bow_string_spool + _infobox,
             name = "Bow string spool",
             description = "",
@@ -1500,6 +1508,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean bottomlessCompostBucketOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = bottomless_milk_bucket + _overlay,
+            name = "Bottomless milk bucket",
+            description = "",
+            section = overlays
+        ) default boolean bottomlessMilkBucketOverlay() { return true; }
 
         @ConfigItem(
             keyName = bow_string_spool + _overlay,

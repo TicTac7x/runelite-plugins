@@ -41,6 +41,7 @@ public abstract class ChargedItemBase {
     private final ListenerOnVarbitsMapChanged listenerOnVarbitsMapChanged;
     private final ListenerOnUserAction listenerOnUserAction;
     private final ListenerOnMenuOptionClicked listenerOnMenuOptionClicked;
+    private final ListenerOnItemUsed listenerOnItemUsed;
     private final ListenerOnScriptPreFired listenerOnScriptPreFired;
     private final ListenerOnCombat listenerOnCombat;
     private final ListenerOnGameTick listenerOnGameTick;
@@ -73,6 +74,7 @@ public abstract class ChargedItemBase {
         listenerOnVarbitsMapChanged = new ListenerOnVarbitsMapChanged(provider, this);
         listenerOnUserAction = new ListenerOnUserAction(provider, this);
         listenerOnMenuOptionClicked = new ListenerOnMenuOptionClicked(provider, this);
+        listenerOnItemUsed = new ListenerOnItemUsed(provider, this);
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(provider, this);
         listenerOnCombat = new ListenerOnCombat(provider, this);
         listenerOnGameTick = new ListenerOnGameTick(provider, this);
@@ -250,6 +252,7 @@ public abstract class ChargedItemBase {
     public void onMenuOptionClicked(final CustomMenuOptionClicked event) {
         if (!inInventoryOrEquipment()) return;
         listenerOnMenuOptionClicked.trigger(event);
+        listenerOnItemUsed.trigger(event);
     }
 
     public void onScriptPreFired(final ScriptPreFired event) {

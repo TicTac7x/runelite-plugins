@@ -150,6 +150,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Toxic and blazing blowpipe fixes.<br>" +
 		"<colHIGHLIGHT>* Abyssal tentacle added.<br>" +
 		"<colHIGHLIGHT>* Abyssal bracelet added.<br>" +
+		"<colHIGHLIGHT>* Bottomless milk bucket added.<br>" +
 		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support.<br>" +
 		"<colHIGHLIGHT>* Serpentine helm and its variants support added."
 	;
@@ -450,6 +451,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_BloodEssence(provider),
 			new U_BoneCrusher(provider),
 			new U_BottomlessCompostBucket(provider),
+			new U_BottomlessMilkBucket(provider),
 			new U_BowStringSpool(provider),
 			new U_ChuggingBarrel(provider),
 			new U_CoalBag(provider),
@@ -659,15 +661,15 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 				customMenuOptionClicked.eventId != 131076 && // Special event check for forestry basket
 				customMenuOptionClicked.eventId != 327684 // Sailor's amulet - Deepfin Point
 			) ||
-			// Start use by clicking on item.
-			customMenuOptionClicked.option.equals("Use") && customMenuOptionClicked.action.equals("WIDGET_TARGET") ||
 			// Cancel option.
 			customMenuOptionClicked.action.equals("CANCEL") ||
 			// RuneLite specific action.
 			customMenuOptionClicked.action.equals("RUNELITE")
 		) return;
 
+		// Store the clicked menu option and assign additional ids.
 		store.onMenuOptionClicked(customMenuOptionClicked);
+
 		for (final ChargedItemBase chargedItem : chargedItems) {
 			chargedItem.onMenuOptionClicked(customMenuOptionClicked);
 		}
@@ -907,7 +909,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String menuOptionFillFromInventory = "Fill-from-inventory";
 
 	public static int getNumberFromCommaString(final String charges) {
-		return Integer.parseInt(charges.replaceAll(",", "").replaceAll("\\.", ""));
+		try {
+			return Integer.parseInt(charges.replaceAll(",", "").replaceAll("\\.", ""));
+		} catch (final Exception ignored) {
+			return getNumberFromWordRepresentation(charges);
+		}
 	}
 
 	public static Optional<Widget> getWidget(final Client client, final int parent, final int child) {

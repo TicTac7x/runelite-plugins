@@ -97,6 +97,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Blood essence
 * Bonecrusher
 * Bottomless compost bucket
+* Bottomless milk bucket
 * Chugging barrel
 * Coal bag
 * Colossal Pouch

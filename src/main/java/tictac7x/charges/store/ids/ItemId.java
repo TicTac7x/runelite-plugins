@@ -1816,4 +1816,13 @@ public final class ItemId {
     public static final int ABYSSAL_BRACELET_3 = ItemID.JEWL_RUNERUNNING_BRACELET_3;
     public static final int ABYSSAL_BRACELET_4 = ItemID.JEWL_RUNERUNNING_BRACELET_4;
     public static final int ABYSSAL_BRACELET_5 = ItemID.JEWL_RUNERUNNING_BRACELET_5;
+
+    // Bottomless milk bucket
+    public static final int BOTTOMLESS_MILK_BUCKET = ItemID.BOTTOMLESS_MILK_BUCKET_FILLED;
+    public static final int BOTTOMLESS_MILK_BUCKET_UNCHARGED = ItemID.BOTTOMLESS_MILK_BUCKET;
+    public static final int BUCKET_OF_MILK = ItemID.BUCKET_MILK;
+    public static final int CUP_OF_NETTLE_TEA = ItemID.CUP_OF_NETTLETEA;
+    public static final int BOWL_OF_NETTLE_TEA = ItemID.BOWL_NETTLETEA;
+    public static final int CUP_OF_DAMIANA_TEA = ItemID.CUP_DAMIANA_TEA;
+    public static final int BOWL_OF_DAMIANA_TEA = ItemID.BOWL_DAMIANA_TEA;
 }
