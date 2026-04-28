@@ -1,5 +1,5 @@
 # RuneLite Plugins
-A collection of quality-of-life RuneLite plugins focused on efficiency and improved in-game visibility.
+Collection of quality-of-life RuneLite plugins focused on efficiency and improved in-game visibility.
 
 As a sponsor, your feedback, new feature requests, and bug reports are given higher priority.
 
