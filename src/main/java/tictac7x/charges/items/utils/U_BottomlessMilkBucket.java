@@ -37,6 +37,12 @@ public class U_BottomlessMilkBucket extends ChargedItemWithStorage {
                 storage.clearAndPut(storageItem);
             }),
 
+            // Auto uses left message
+            new OnChatMessage("Your bottomless milk bucket has (?<charges>.+) uses? of (?<type>.+) remaining.").matcherConsumer(m -> {
+                final Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+                storage.clearAndPut(storageItem);
+            }),
+
             // Fill
             new OnChatMessage("You fill your bottomless milk bucket with .+ buckets? of (?<type>.+). Your bottomless milk bucket now contains a total of (?<charges>.+) uses?.").matcherConsumer(m -> {
                 final Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
@@ -100,6 +106,13 @@ public class U_BottomlessMilkBucket extends ChargedItemWithStorage {
             new OnChatMessage("You mix the snape grass into the bucket.").unallowedItem(ItemId.BUCKET_OF_CHOCOLATEY_MILK).consumer(() -> {
                 if (storage.hasItem(ItemId.BUCKET_OF_CHOCOLATEY_MILK)) {
                     storage.remove(ItemId.BUCKET_OF_CHOCOLATEY_MILK, 1);
+                }
+            }),
+
+            // Feed milk to cat
+            new OnChatMessage(".+ laps up the milk").unallowedItem(ItemId.BUCKET_OF_MILK).consumer(() -> {
+                if (storage.hasItem(ItemId.BUCKET_OF_MILK)) {
+                    storage.remove(ItemId.BUCKET_OF_MILK, 1);
                 }
             })
         ));

@@ -936,7 +936,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 	
 	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()
-		.put("zero", 0).put("one", 1).put("two", 2).put("three", 3).put("four", 4).put("five", 5)
+		.put("zero", 0).put("one", 1).put("single", 1).put("two", 2).put("three", 3).put("four", 4).put("five", 5)
 		.put("six", 6).put("seven", 7).put("eight", 8).put("nine", 9).put("ten", 10)
 		.put("eleven", 11).put("twelve", 12).put("thirteen", 13).put("fourteen", 14).put("fifteen", 15)
 		.put("sixteen", 16).put("seventeen", 17).put("eighteen", 18).put("nineteen", 19).put("twenty", 20)
