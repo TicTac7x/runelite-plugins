@@ -80,3 +80,4 @@ Limit camera vertical movement.
 ### [CAPS LOCK](../../tree/plugin-caps-lock)  
 [![Active Installs](http://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/tictac7x-capslock)](https://runelite.net/plugin-hub/show/tictac7x-capslock)
 [![Plugin Rank](http://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/rank/plugin/tictac7x-capslock)](https://runelite.net/plugin-hub/show/tictac7x-capslock)  
+ALLOW CAPS LOCK MESSAGES
