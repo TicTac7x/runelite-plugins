@@ -12,13 +12,13 @@ import java.util.regex.Matcher;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
 
 public class ListenerOnChatMessage extends ListenerBase {
-    public ListenerOnChatMessage(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnChatMessage(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final CustomChatMessage event) {
+    public void trigger(final CustomChatMessage event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             boolean triggerUsed = false;
             final OnChatMessage trigger = (OnChatMessage) triggerBase;
 
@@ -55,7 +55,7 @@ public class ListenerOnChatMessage extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -63,7 +63,7 @@ public class ListenerOnChatMessage extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomChatMessage event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomChatMessage event) {
         if (!(triggerBase instanceof OnChatMessage)) return false;
         final OnChatMessage trigger = (OnChatMessage) triggerBase;
 
@@ -73,6 +73,6 @@ public class ListenerOnChatMessage extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

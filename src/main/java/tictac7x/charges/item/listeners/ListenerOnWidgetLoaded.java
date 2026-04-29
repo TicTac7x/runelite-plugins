@@ -15,13 +15,13 @@ import java.util.regex.Matcher;
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
 
 public class ListenerOnWidgetLoaded extends ListenerBase {
-    public ListenerOnWidgetLoaded(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnWidgetLoaded(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final WidgetLoaded event) {
+    public void trigger(final WidgetLoaded event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
 
             boolean triggerUsed = false;
             final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
@@ -49,7 +49,7 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -57,7 +57,7 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final WidgetLoaded event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final WidgetLoaded event) {
         if (!(triggerBase instanceof OnWidgetLoaded)) return false;
         final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
 
@@ -80,6 +80,6 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
             }
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

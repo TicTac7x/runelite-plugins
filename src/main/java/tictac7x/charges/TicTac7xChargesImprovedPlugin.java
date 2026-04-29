@@ -143,8 +143,8 @@ import java.util.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	private final String pluginVersion = "v0.6.12";
-	private final String pluginMessage =
+	public static final String pluginVersion = "v0.6.12";
+	public static final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Reagent pouch fixes.<br>" +
 		"<colHIGHLIGHT>* Toxic and blazing blowpipe fixes.<br>" +
@@ -210,7 +210,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private ChargedItemBase[] chargedItems;
 	private final List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
 
-	private final ZoneId timezone = ZoneId.of("Europe/London");
+
 	public static final String INFINITE_SYMBOL = OSType.getOSType() == OSType.MacOS ? "inf" : "∞";
 
 	@Override
@@ -222,6 +222,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 		store = new Store(client, itemManager, configManager);
 		provider = new Provider(client, clientThread, pluginManager, configManager, itemManager, infoBoxManager, chatMessageManager, tooltipManager, notifier, this, config, store, gson);
+		store.addProvider(provider);
 
 		chargedItems = new ChargedItemBase[]{
 			// Crystal armor set
@@ -583,240 +584,77 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
-		final CustomChatMessage chatMessage = new CustomChatMessage(event);
-		store.onChatMessage(chatMessage);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onChatMessage(chatMessage));
+		store.onChatMessage(event);
 	}
 
 	@Subscribe
 	public void onItemContainerChanged(final ItemContainerChanged event) {
-		final CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(event, itemManager);
-		store.onItemContainerChanged(itemContainerChanged);
+		store.onItemContainerChanged(event);
 	}
 
 	@Subscribe
 	public void onGraphicChanged(final GraphicChanged event) {
-		if (event.getActor() != client.getLocalPlayer()) return;
 		store.onGraphicChanged(event);
-
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onGraphicChanged(event));
-
-		if (config.showDebugIds()) {
-			for (final ActorSpotAnim graphic : event.getActor().getSpotAnims()) {
-				chatMessageManager.queue(QueuedMessage.builder()
-					.type(ChatMessageType.CONSOLE)
-					.runeLiteFormattedMessage("[Item Charges Improved] Graphic ID: " + graphic.getId())
-					.build()
-				);
-			}
-		}
 	}
 
 	@Subscribe
 	public void onHitsplatApplied(final HitsplatApplied event) {
-		final CustomHitsplatApplied hitsplatApplied = new CustomHitsplatApplied(event, client);
-		store.onHitSplatApplied(hitsplatApplied);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onHitsplatApplied(hitsplatApplied));
+		store.onHitSplatApplied(event);
 	}
 
 	@Subscribe
 	public void onAnimationChanged(final AnimationChanged event) {
-		if (event.getActor().getAnimation() == -1) return;
-
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onAnimationChanged(event));
-
-		if (config.showDebugIds()) {
-			chatMessageManager.queue(QueuedMessage.builder()
-				.type(ChatMessageType.CONSOLE)
-				.runeLiteFormattedMessage("[Item Charges Improved] Animation ID: " + event.getActor().getAnimation())
-				.build()
-			);
-		}
+		store.onAnimationChanged(event);
 	}
 
 	@Subscribe
 	public void onWidgetLoaded(final WidgetLoaded event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onWidgetLoaded(event));
-
-//		System.out.println("WIDGET | " +
-//			"group: " + event.getGroupId()
-//		);
+		store.onWidgetLoaded(event);
 	}
 
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(event, client);
-
-		if (
-			// Menu option not found.
-			customMenuOptionClicked.option.isEmpty() ||
-			// Not menu.
-			customMenuOptionClicked.target.isEmpty() && (
-				!customMenuOptionClicked.option.contains("Buy-") &&
-				!customMenuOptionClicked.option.equals("Continue") &&
-				!customMenuOptionClicked.option.equals("Yes") &&
-				customMenuOptionClicked.eventId != 65540 && // Special event check for log basket
-				customMenuOptionClicked.eventId != 65538 && // Special event check for forestry basket
-				customMenuOptionClicked.eventId != 131074 && // Special event check for forestry basket
-				customMenuOptionClicked.eventId != 131076 && // Special event check for forestry basket
-				customMenuOptionClicked.eventId != 327684 // Sailor's amulet - Deepfin Point
-			) ||
-			// Cancel option.
-			customMenuOptionClicked.action.equals("CANCEL") ||
-			// RuneLite specific action.
-			customMenuOptionClicked.action.equals("RUNELITE")
-		) return;
-
-		// Store the clicked menu option and assign additional ids.
-		store.onMenuOptionClicked(customMenuOptionClicked);
-
-		for (final ChargedItemBase chargedItem : chargedItems) {
-			chargedItem.onMenuOptionClicked(customMenuOptionClicked);
-		}
+		store.onMenuOptionClicked(event);
 	}
-
-	final List<Integer> scriptIdsToIgnore = Arrays.asList(
-		44, 85, 100, 839, 900, 1004, 1005, 1045, 1445, 1972, 2100, 2101,
-		2165, 2250, 2372, 2476, 2512, 2513, 3174, 3277, 3350, 3351, 4024,
-		4029, 4482, 4517, 4518, 4666, 4667, 4668, 4669, 4671, 4672, 4716,
-		4721, 4729, 4730, 4731, 4734, 5343, 5923, 5933, 5935, 5936, 5939,
-		5943, 5944, 6015, 6016, 6063, 6152
-	);
 
 	@Subscribe
 	public void onScriptPreFired(final ScriptPreFired event) {
-		if (scriptIdsToIgnore.contains(event.getScriptId())) return;
-
-//		String scriptDebug = "script id: " + event.getScriptId();
-//		try {
-//			final Optional<Widget> widget = Optional.ofNullable(event.getScriptEvent().getSource());
-//			if (widget.isPresent()) {
-//				scriptDebug += ", widget id: " + widget.get().getId();
-//			}
-//		} catch (final Exception ignored) {}
-//		try {
-//			String arguments = ", arguments: [";
-//			for (final Object argument : event.getScriptEvent().getArguments()) {
-//				arguments += argument + ", ";
-//			}
-//			arguments += "]";
-//			scriptDebug += arguments.replaceAll(", ]", "]");
-//		} catch (final Exception ignored) {}
-//		System.out.println("SCRIPT FIRED | " + scriptDebug);
-
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onScriptPreFired(event));
+		store.onScriptPreFired(event);
 	}
 
 	@Subscribe
 	public void onGameStateChanged(final GameStateChanged event) {
-		if (event.getGameState() == GameState.LOGGING_IN) {
-			checkForChargesReset();
-		}
-
-		if (event.getGameState() != GameState.LOGGED_IN) return;
-
-		// Send message about plugin updates for once.
-		if (!config.getVersion().equals(pluginVersion)) {
-			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.version, pluginVersion);
-			chatMessageManager.queue(QueuedMessage.builder()
-				.type(ChatMessageType.CONSOLE)
-				.runeLiteFormattedMessage(pluginMessage)
-				.build()
-			);
-		}
+		store.onGameStateChanged(event);
 	}
 
 	@Subscribe
 	public void onStatChanged(final StatChanged event) {
-//		String statChanged =
-//			event.getSkill().getName() +
-//			", level: " + event.getLevel() +
-//			", total xp: " + event.getXp();
-//
-//		if (store.getSkillXp(event.getSkill()).isPresent()) {
-//			statChanged += ", xp drop: " + (event.getXp() - store.getSkillXp(event.getSkill()).get());
-//		}
-//		System.out.println("STAT CHANGED | " +
-//			statChanged
-//		);
-
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onStatChanged(event));
 		store.onStatChanged(event);
 	}
 
 	@Subscribe
 	public void onItemDespawned(final ItemDespawned event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onItemDespawned(event));
+		store.onItemDespawned(event);
 	}
 
 	@Subscribe
 	public void onVarbitChanged(final VarbitChanged event) {
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onVarbitChanged(event));
-
-		// If server minutes are 0, it's a new day!
-		if (event.getVarbitId() == VarbitId.MINUTES && client.getGameState() == GameState.LOGGED_IN && event.getValue() == 0) {
-			checkForChargesReset();
-		}
-
-//		System.out.println("VARBIT CHANGED | " +
-//			"id: " + event.getVarbitId() +
-//			", value: " + event.getValue()
-//		);
+		store.onVarbitChanged(event);
 	}
 
 	@Subscribe
 	public void onMenuEntryAdded(final MenuEntryAdded event) {
-		if (event.getOption().equals("Cancel")) return;
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onMenuEntryAdded(event));
-
-//		if (event.getMenuEntry().getItemId() != -1) {
-//			System.out.println("MENU ENTRY ADDED | " +
-//				"item id: " + event.getMenuEntry().getItemId() +
-//				", option: " + event.getOption() +
-//				", target: " + event.getTarget()
-//			);
-//		}
+		store.onMenuEntryAdded(event);
 	}
 
 	@Subscribe
 	public void onGameTick(final GameTick event) {
 		store.onGameTick(event);
-		Arrays.stream(chargedItems).forEach(infobox -> infobox.onGameTick(event));
 	}
 
 	@Subscribe
 	public void onConfigChanged(final ConfigChanged event) {
-		if (event.getGroup().equals(TicTac7xChargesImprovedConfig.group) && event.getKey().equals(TicTac7xChargesImprovedConfig.debug_ids)) {
-			chatMessageManager.queue(QueuedMessage.builder()
-				.type(ChatMessageType.CONSOLE)
-				.runeLiteFormattedMessage(config.showDebugIds()
-					? "<colHIGHLIGHT>[Item Charges Improved] Debug information is now enabled."
-					: "<colHIGHLIGHT>[Item Charges Improved] Debug information is now disabled."
-				).build()
-			);
-		}
-	}
-
-	private void onUserAction() {
-		Arrays.stream(chargedItems).forEach(chargedItem -> {
-			chargedItem.onUserAction();
-		});
-	}
-
-	private void checkForChargesReset() {
-		final String date = LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE);
-		if (date.equals(config.getResetDate())) return;
-
-		configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.date, date);
-		Arrays.stream(chargedItems).forEach(ChargedItemBase::onResetDaily);
-
-		if (config.showDailyReset()) {
-			chatMessageManager.queue(QueuedMessage.builder()
-				.type(ChatMessageType.CONSOLE)
-				.runeLiteFormattedMessage("<colHIGHLIGHT>Daily item charges have been reset.")
-				.build()
-			);
-		}
+		store.onConfigChanged(event);
 	}
 
 	private void configMigration() {
@@ -840,7 +678,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Override
 	public void keyPressed(final KeyEvent keyEvent) {
-		onUserAction();
+		store.onUserAction();
 	}
 
 	@Override
@@ -853,25 +691,25 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Override
 	public MouseEvent mousePressed(final MouseEvent mouseEvent) {
-		onUserAction();
+		store.onUserAction();
 		return mouseEvent;
 	}
 
 	@Override
 	public MouseEvent mouseDragged(final MouseEvent mouseEvent) {
-		onUserAction();
+		store.onUserAction();
 		return mouseEvent;
 	}
 
 	@Override
 	public MouseEvent mouseMoved(final MouseEvent mouseEvent) {
-		onUserAction();
+		store.onUserAction();
 		return mouseEvent;
 	}
 
 	@Override
 	public MouseWheelEvent mouseWheelMoved(final MouseWheelEvent mouseWheelEvent) {
-		onUserAction();
+		store.onUserAction();
 		return mouseWheelEvent;
 	}
 
@@ -897,10 +735,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	public static String getCleanText(final String text) {
 		return text.replaceAll("</?col.*?>", "").replaceAll("<br>", " ").replaceAll("\u00A0"," ");
-	}
-
-	public static String getCleanChatMessage(final ChatMessage event) {
-		return getCleanText(event.getMessage());
 	}
 
 	public static String menuOptionEmptyToBank = "Empty-to-bank";

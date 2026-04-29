@@ -40,8 +40,8 @@ public class H_SerpentineHelm extends ChargedItemWithStorage {
                 if (
                     widget.isPresent() &&
                         widget.get().getItemId() == this.itemId &&
-                        script.getScriptEvent().getArguments().length >= 5 &&
-                        script.getScriptEvent().getArguments()[4].toString().equals("Yes")
+                        script.arguments.length >= 5 &&
+                        script.arguments[4].toString().equals("Yes")
                 ) {
                     provider.store.addConsumerToNextTickQueue(() -> storage.clear());
                 }

@@ -12,11 +12,11 @@ import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnItemContainerChanged extends ListenerBase {
-    public ListenerOnItemContainerChanged(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnItemContainerChanged(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final CustomItemContainerChanged itemContainerChanged) {
+    public void trigger(final CustomItemContainerChanged itemContainerChanged, final ChargedItemBase chargedItem) {
         // Get quantity from amount in item container.
         for (final TriggerItem triggerItem : chargedItem.items) {
             if (triggerItem.quantityCharges.isPresent()) {
@@ -30,7 +30,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         }
 
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, itemContainerChanged)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, itemContainerChanged)) continue;
             boolean triggerUsed = false;
             final OnItemContainerChanged trigger = (OnItemContainerChanged) triggerBase;
 
@@ -55,7 +55,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -63,7 +63,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomItemContainerChanged itemContainerChanged) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomItemContainerChanged itemContainerChanged) {
         if (!(triggerBase instanceof OnItemContainerChanged)) return false;
         final OnItemContainerChanged trigger = (OnItemContainerChanged) triggerBase;
 
@@ -73,6 +73,6 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

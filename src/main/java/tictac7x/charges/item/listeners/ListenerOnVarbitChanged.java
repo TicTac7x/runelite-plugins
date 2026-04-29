@@ -8,13 +8,13 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnVarbitChanged extends ListenerBase {
-    public ListenerOnVarbitChanged(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnVarbitChanged(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final VarbitChanged event) {
+    public void trigger(final VarbitChanged event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             final OnVarbitChanged trigger = (OnVarbitChanged) triggerBase;
             boolean triggerUsed = false;
 
@@ -29,7 +29,7 @@ public class ListenerOnVarbitChanged extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -37,7 +37,7 @@ public class ListenerOnVarbitChanged extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final VarbitChanged event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final VarbitChanged event) {
         if (!(triggerBase instanceof OnVarbitChanged)) return false;
         final OnVarbitChanged trigger = (OnVarbitChanged) triggerBase;
 
@@ -51,6 +51,6 @@ public class ListenerOnVarbitChanged extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

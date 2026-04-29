@@ -7,18 +7,18 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnItemUsed extends ListenerBase {
-    public ListenerOnItemUsed(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnItemUsed(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final CustomMenuOptionClicked event) {
+    public void trigger(final CustomMenuOptionClicked event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
 
             final OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
             boolean triggerUsed = false;
 
-            if (super.trigger(triggerOnItemUsed)) {
+            if (super.trigger(triggerOnItemUsed, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -26,14 +26,18 @@ public class ListenerOnItemUsed extends ListenerBase {
         }
     }
 
-    private boolean isValidTrigger(final TriggerBase triggerBase, final CustomMenuOptionClicked event) {
+    private boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomMenuOptionClicked event) {
         if (!(triggerBase instanceof OnItemUsed)) return false;
         if (event.usedItemId.isEmpty()) return false;
         final OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
 
-        return (
-            event.itemId == triggerOnItemUsed.targetItemId && event.usedItemId.get() == triggerOnItemUsed.usedItemId ||
-            triggerOnItemUsed.isBothWays && event.itemId == event.usedItemId.get() && event.usedItemId.get() == triggerOnItemUsed.targetItemId
-        );
+        if (!(
+            (event.itemId == triggerOnItemUsed.targetItemId && event.usedItemId.get() == triggerOnItemUsed.usedItemId) ||
+            (triggerOnItemUsed.isBothWays && event.itemId == event.usedItemId.get() && event.usedItemId.get() == triggerOnItemUsed.targetItemId)
+        )) {
+            return false;
+        }
+
+        return super.isValidTrigger(triggerBase, chargedItem);
     }
 }
