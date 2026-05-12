@@ -145,6 +145,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String gem_bag = "gem_bag";
     String gricollers_can = "gricollers_can";
     String herb_sack = "herb_sack";
+    String silklined_herb_sack = "silklined_herb_sack";
     String jar_generator = "jar_generator";
     String log_basket = "log_basket";
     String master_scroll_book = "master_scroll_book";
@@ -992,6 +993,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean herbSackInfobox() { return true; }
 
         @ConfigItem(
+            keyName = silklined_herb_sack + _infobox,
+            name = "Silklined herb sack",
+            description = "",
+            section = infoboxes
+        ) default boolean silklinedHerbSackInfobox() { return true; }
+
+        @ConfigItem(
             keyName = jar_generator + _infobox,
             name = "Jar generator",
             description = "",
@@ -1739,6 +1747,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean herbSackOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = silklined_herb_sack + _overlay,
+            name = "Silklined herb sack",
+            description = "",
+            section = overlays
+        ) default boolean silklinedHerbSackOverlay() { return true; }
 
         @ConfigItem(
             keyName = jar_generator + _overlay,
@@ -2681,6 +2696,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = herb_sack + _storage,
             section = debug
         ) default String getHerbSackStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = silklined_herb_sack + _storage,
+            name = silklined_herb_sack + _storage,
+            description = silklined_herb_sack + _storage,
+            section = debug
+        ) default String getSilklinedHerbSackStorage() { return ""; }
 
         @ConfigItem(
             keyName = escape_crystal_status,

@@ -458,6 +458,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_GemBag(provider),
 			new U_GricollersCan(provider),
 			new U_HerbSack(provider),
+			new U_SilklinedHerbSack(provider),
 			new U_HuntsmansKit(provider),
 			new U_ImpInABox(provider),
 			new U_JarGenerator(provider),
