@@ -262,8 +262,7 @@ public class Store {
                 customMenuOptionClicked.eventId != 65540 && // Special event check for log basket
                 customMenuOptionClicked.eventId != 65538 && // Special event check for forestry basket
                 customMenuOptionClicked.eventId != 131074 && // Special event check for forestry basket
-                customMenuOptionClicked.eventId != 131076 && // Special event check for forestry basket
-                customMenuOptionClicked.eventId != 327684 // Sailor's amulet - Deepfin Point
+                customMenuOptionClicked.eventId != 131076 // Special event check for forestry basket
             ) ||
             // Cancel option.
             customMenuOptionClicked.action.equals("CANCEL") ||

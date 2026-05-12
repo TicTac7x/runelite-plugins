@@ -1,4 +1,4 @@
-package tictac7x.charges.items.weapons;
+package tictac7x.charges.items.weapons.blowpipes;
 
 import net.runelite.api.widgets.Widget;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;

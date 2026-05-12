@@ -27,11 +27,11 @@ public class W_TumekensShadow extends ChargedItem {
             // Uncharge.
             new OnChatMessage("You uncharge your Tumeken's shadow").setFixedCharges(0),
 
-            // Charge.
-            new OnChatMessage("You apply (?<charges>.+) to your Tumeken's shadow.").setDynamicallyCharges(),
-
             // Charge additionally.
             new OnChatMessage("You apply an additional .* charges to your Tumeken's shadow. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
+
+            // Charge.
+            new OnChatMessage("You apply (?<charges>.+) charges to your Tumeken's shadow.").setDynamicallyCharges(),
 
             // Attack.
             new OnGraphicChanged(2125).decreaseCharges(1),
