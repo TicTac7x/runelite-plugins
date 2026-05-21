@@ -27,6 +27,7 @@ public class A_CrystalLegs extends ChargedItem {
             new TriggerItem(ItemId.CRYSTAL_LEGS_CADARN),
             new TriggerItem(ItemId.CRYSTAL_LEGS_CRWYS),
             new TriggerItem(ItemId.CRYSTAL_LEGS_AMLODD),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_ANNIHILATION),
             new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_LEGS_HEFIN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_LEGS_ITHELL_INACTIVE).fixedCharges(0),
@@ -35,6 +36,7 @@ public class A_CrystalLegs extends ChargedItem {
             new TriggerItem(ItemId.CRYSTAL_LEGS_CADARN_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_LEGS_CRWYS_INACTIVE).fixedCharges(0),
             new TriggerItem(ItemId.CRYSTAL_LEGS_AMLODD_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemId.CRYSTAL_LEGS_ANNIHILATION_INACTIVE).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

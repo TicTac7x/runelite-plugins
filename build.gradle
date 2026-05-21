@@ -29,7 +29,7 @@ dependencies {
 }
 
 group = 'tictac7x-charges'
-version = 'v0.6.11'
+version = 'v0.6.12'
 
 
 tasks.withType(JavaCompile).configureEach {

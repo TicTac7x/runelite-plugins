@@ -3,6 +3,8 @@ package tictac7x.charges.events;
 import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
 
+import java.util.Optional;
+
 public class CustomMenuOptionClicked {
     public final int eventId;
     public final String target;
@@ -10,6 +12,7 @@ public class CustomMenuOptionClicked {
     public final int actionId;
     public final String action;
     public final int itemId;
+    public Optional<Integer> usedItemId = Optional.empty();
     public final int impostorId;
 
     public CustomMenuOptionClicked(final MenuOptionClicked event, final Client client) {
@@ -27,6 +30,10 @@ public class CustomMenuOptionClicked {
         this.impostorId = impostorId;
     }
 
+    public void assignUsedItemId(final int usedItemId) {
+        this.usedItemId = Optional.of(usedItemId);
+    }
+
     @Override
     public String toString() {
         return ("MENU OPTION CLICKED | " +
@@ -36,6 +43,7 @@ public class CustomMenuOptionClicked {
             ", action id: " + actionId +
             ", action name: \"" + action + "\"" +
             ", item id: " + itemId +
+            ", used item id: " + usedItemId +
             ", impostor id: " + impostorId
         );
     }

@@ -6,18 +6,18 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnUserAction extends ListenerBase {
-    public ListenerOnUserAction(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnUserAction(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger() {
+    public void trigger(final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase)) continue;
 
             final OnUserAction trigger = (OnUserAction) triggerBase;
             boolean triggerUsed = false;
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -25,9 +25,9 @@ public class ListenerOnUserAction extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase) {
         if (!(triggerBase instanceof OnUserAction)) return false;
         final OnUserAction trigger = (OnUserAction) triggerBase;
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

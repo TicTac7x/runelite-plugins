@@ -15,14 +15,12 @@ import java.util.Optional;
 
 public abstract class ListenerBase {
     protected final Provider provider;
-    protected final ChargedItemBase chargedItem;
 
-    public ListenerBase(final Provider provider, final ChargedItemBase chargedItem) {
+    public ListenerBase(final Provider provider) {
         this.provider = provider;
-        this.chargedItem = chargedItem;
     }
 
-    boolean trigger(final TriggerBase trigger) {
+    boolean trigger(final TriggerBase trigger, final ChargedItemBase chargedItem) {
         boolean triggerUsed = false;
 
         // Fixed charges.
@@ -98,7 +96,7 @@ public abstract class ListenerBase {
         return triggerUsed;
     }
 
-    boolean isValidTrigger(final TriggerBase trigger) {
+    boolean isValidTrigger(final TriggerBase trigger, final ChargedItemBase chargedItem) {
         // Specific item check.
         specificItemCheck: if (trigger.requiredItem.isPresent()) {
             for (final int itemId : trigger.requiredItem.get()) {
@@ -258,6 +256,21 @@ public abstract class ListenerBase {
         // Specific item equipped check.
         if (trigger.itemEquipped.isPresent() && !chargedItem.provider.store.equipmentContainsItem(trigger.itemEquipped.get())) {
             return false;
+        }
+
+        // Animation id check.
+        if (trigger.hasAnimationId.isPresent()) {
+            boolean valid = false;
+
+            for (final int animationId : trigger.hasAnimationId.get()) {
+                if (animationId == provider.client.getLocalPlayer().getAnimation()) {
+                    valid = true;
+                }
+            }
+
+            if (!valid) {
+                return false;
+            }
         }
 
         return true;

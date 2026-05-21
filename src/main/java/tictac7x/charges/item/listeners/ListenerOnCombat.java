@@ -8,13 +8,13 @@ import tictac7x.charges.store.Provider;
 public class ListenerOnCombat extends ListenerBase {
     private int ticksInCombat = 0;
 
-    public ListenerOnCombat(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnCombat(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger() {
+    public void trigger(final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase)) continue;
             final OnCombat trigger = (OnCombat) triggerBase;
             boolean triggerUsed = false;
 
@@ -23,7 +23,7 @@ public class ListenerOnCombat extends ListenerBase {
                 ticksInCombat = 0;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -31,7 +31,7 @@ public class ListenerOnCombat extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase) {
         if (!(triggerBase instanceof OnCombat)) return false;
 
         // Ticks check.
@@ -39,6 +39,6 @@ public class ListenerOnCombat extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(triggerBase);
+        return super.isValidTrigger(triggerBase, chargedItem);
     }
 }

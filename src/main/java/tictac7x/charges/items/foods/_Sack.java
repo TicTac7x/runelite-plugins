@@ -17,6 +17,6 @@ public class _Sack extends ChargedItem {
 
     @Override
     public String getConfigKey() {
-        return TicTac7xChargesImprovedConfig.baskets;
+        return TicTac7xChargesImprovedConfig.sacks;
     }
 }

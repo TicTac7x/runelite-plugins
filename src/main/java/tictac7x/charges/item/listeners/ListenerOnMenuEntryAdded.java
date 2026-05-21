@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListenerOnMenuEntryAdded extends ListenerBase {
-    public ListenerOnMenuEntryAdded(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnMenuEntryAdded(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final MenuEntryAdded event) {
+    public void trigger(final MenuEntryAdded event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) {
+            if (!isValidTrigger(chargedItem, triggerBase, event)) {
                 continue;
             };
             final OnMenuEntryAdded trigger = (OnMenuEntryAdded) triggerBase;
@@ -67,7 +67,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -75,7 +75,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final MenuEntryAdded event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final MenuEntryAdded event) {
         if (!(triggerBase instanceof OnMenuEntryAdded)) return false;
         final OnMenuEntryAdded trigger = (OnMenuEntryAdded) triggerBase;
 
@@ -87,7 +87,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
                 }
             }
 
-            if (!super.isValidTrigger(trigger)) {
+            if (!super.isValidTrigger(trigger, chargedItem)) {
                 return false;
             }
         }
@@ -142,6 +142,6 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

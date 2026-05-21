@@ -25,6 +25,7 @@ public abstract class TriggerBase {
     public Optional<int[]> varbitCheck = Optional.empty();
     public Optional<int[][]> isWidgetVisible = Optional.empty();
     public Optional<int[]> itemEquipped = Optional.empty();
+    public Optional<int[]> hasAnimationId = Optional.empty();
     public boolean multiTrigger = false;
 
     // Actions.
@@ -151,6 +152,11 @@ public abstract class TriggerBase {
 
     public TriggerBase isEquipped() {
         this.isEquipped = Optional.of(true);
+        return this;
+    }
+
+    public TriggerBase hasAnimationId(final int ...animationId) {
+        this.hasAnimationId = Optional.of(animationId);
         return this;
     }
 

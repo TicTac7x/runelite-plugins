@@ -1,24 +1,23 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Skill;
-import net.runelite.api.events.StatChanged;
+import tictac7x.charges.events.CustomStatChanged;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnStatChanged;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnStatChanged extends ListenerBase {
-    public ListenerOnStatChanged(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnStatChanged(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final StatChanged event) {
+    public void trigger(final CustomStatChanged event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             final OnStatChanged trigger = (OnStatChanged) triggerBase;
             boolean triggerUsed = false;
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -26,16 +25,15 @@ public class ListenerOnStatChanged extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final StatChanged event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomStatChanged event) {
         if (!(triggerBase instanceof OnStatChanged)) return false;
         final OnStatChanged trigger = (OnStatChanged) triggerBase;
-        final Skill skill = event.getSkill();
 
         // Skill check.
-        if (trigger.skill != skill) {
+        if (trigger.skill != event.skill) {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

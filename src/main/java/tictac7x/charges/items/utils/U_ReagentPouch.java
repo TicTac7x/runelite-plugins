@@ -78,7 +78,7 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             }),
 
             // Empty to bank.
-            new OnChatMessage("You empty your pouch into the bank").onItemClick().emptyStorage(),
+            new OnChatMessage("You empty your Reagent pouch into the bank.").onItemClick().emptyStorage(),
 
             // Empty to inventory.
             new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
@@ -98,9 +98,6 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
                     provider.store.addConsumerToNextTickQueue(() -> storage.add(item));
                 }
             }),
-
-            // Replace "Use" with proper Fill/Empty option.
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(this::getMenuOptionForUse).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Mix potions.
             new OnChatMessage("You mix the (?<item>.+) into (your|the unfinished)( antifire)? (potion|antidote\\+\\+).*").matcherConsumer((m) -> {
@@ -129,15 +126,11 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
                 storage.add(ItemId.CACTUS_SPINE, 1);
             }),
 
+            // Replace "Empty" with proper "Empty to bank".
+            new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide()
         ));
-    }
-
-    private String getMenuOptionForUse() {
-        return storage.isStorableItemInInventory()
-            ? TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory
-            : TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank;
     }
 }

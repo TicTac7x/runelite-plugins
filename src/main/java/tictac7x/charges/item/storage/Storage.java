@@ -115,9 +115,8 @@ public class Storage {
     }
 
     public void clearAndPut(final Optional<StorageItem> item) {
-        if (item.isPresent()) {
-            clearAndPut(item.get());
-        }
+        clear();
+        put(item);
     }
 
     public void clearAndPut(final int itemId, final int quantity) {

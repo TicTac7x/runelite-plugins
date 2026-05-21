@@ -7,17 +7,17 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnGameTick extends ListenerBase {
-    public ListenerOnGameTick(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnGameTick(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final GameTick gameTick) {
+    public void trigger(final GameTick gameTick, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, gameTick)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, gameTick)) continue;
             final OnGameTick trigger = (OnGameTick) triggerBase;
             boolean triggerUsed = false;
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -25,10 +25,10 @@ public class ListenerOnGameTick extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final GameTick event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final GameTick event) {
         if (!(triggerBase instanceof OnGameTick)) return false;
         final OnGameTick trigger = (OnGameTick) triggerBase;
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

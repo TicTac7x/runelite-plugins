@@ -6,6 +6,7 @@ import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.storage.StorageItems;
+import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
 import java.awt.Color;
@@ -24,6 +25,10 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
     @Override
     public String getTooltip() {
+        if (getQuantities() == 0) {
+            return "";
+        }
+
         String tooltip = "";
 
         for (final StorableItem storableItem : storage.getStorableItems()) {
@@ -48,6 +53,12 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     private int getQuantities() {
+        for (final TriggerItem item : items) {
+            if (item.itemId == itemId && item.fixedCharges.isPresent()) {
+                return item.fixedCharges.get();
+            }
+        }
+
         int quantity = 0;
 
         for (final StorageItem storageItem : getStorage().getItems()) {

@@ -13,19 +13,19 @@ import tictac7x.charges.store.enums.HitsplatTarget;
 public class ListenerOnHitsplatApplied extends ListenerBase {
     private final WeaponAttackStyle weaponAttackStyle;
 
-    public ListenerOnHitsplatApplied(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnHitsplatApplied(final Provider provider) {
+        super(provider);
 
         this.weaponAttackStyle = new WeaponAttackStyle(provider.client);
     }
 
-    public void trigger(final CustomHitsplatApplied event) {
+    public void trigger(final CustomHitsplatApplied event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             final OnHitsplatApplied trigger = (OnHitsplatApplied) triggerBase;
             boolean triggerUsed = false;
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -40,7 +40,7 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomHitsplatApplied event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomHitsplatApplied event) {
         if (!(triggerBase instanceof OnHitsplatApplied)) return false;
         final OnHitsplatApplied trigger = (OnHitsplatApplied) triggerBase;
 
@@ -119,6 +119,6 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

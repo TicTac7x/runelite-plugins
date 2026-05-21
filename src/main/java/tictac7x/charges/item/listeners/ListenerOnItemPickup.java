@@ -9,13 +9,13 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnItemPickup extends ListenerBase {
-    public ListenerOnItemPickup(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnItemPickup(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final ItemDespawned event) {
+    public void trigger(final ItemDespawned event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
 
             final OnItemPickup trigger = (OnItemPickup) triggerBase;
             boolean triggerUsed = false;
@@ -25,7 +25,7 @@ public class ListenerOnItemPickup extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -33,11 +33,11 @@ public class ListenerOnItemPickup extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final ItemDespawned event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItemBase, final TriggerBase triggerBase, final ItemDespawned event) {
         if (!(triggerBase instanceof OnItemPickup)) return false;
-        if (!(chargedItem instanceof ChargedItemWithStorage)) return false;
+        if (!(chargedItemBase instanceof ChargedItemWithStorage)) return false;
         final OnItemPickup trigger = (OnItemPickup) triggerBase;
-        final ChargedItemWithStorage chargedItem = (ChargedItemWithStorage) this.chargedItem;
+        final ChargedItemWithStorage chargedItem = (ChargedItemWithStorage) chargedItemBase;
 
         // Correct item check.
         boolean correctItem = false;
@@ -71,6 +71,6 @@ public class ListenerOnItemPickup extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItemBase);
     }
 }
