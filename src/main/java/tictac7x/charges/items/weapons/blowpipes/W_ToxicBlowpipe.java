@@ -86,28 +86,9 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                     storage.remove(ItemId.ZULRAH_SCALES, 1);
                 }
 
-                // Determine the dart recovery rate based on the equipped item.
-                int recoveryRate = 0;
-                if (provider.store.equipmentContainsItem(ItemId.AVAS_ATTRACTOR)) {
-                    recoveryRate = 60;
-                } else if (provider.store.equipmentContainsItem(ItemId.AVAS_ACCUMULATOR)) {
-                    recoveryRate = 72;
-                } else if (provider.store.equipmentContainsItem(
-                    ItemId.AVAS_ASSEMBLER,
-                    ItemId.AVAS_ASSEMBLER_TROUVER,
-                    ItemId.AVAS_ASSEMBLER_MASORI,
-                    ItemId.AVAS_ASSEMBLER_MASORI_TROUVER,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_TROUVER,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI_TROUVER
-                )) {
-                    recoveryRate = 80;
-                }
-
                 // Calculate if dart could have been used.
                 for (final StorageItem item : storage.getStorage().getItems()) {
-                    if (item.getId() != ItemId.ZULRAH_SCALES && ThreadLocalRandom.current().nextInt(1, 101) > recoveryRate) {
+                    if (item.getId() != ItemId.ZULRAH_SCALES && TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
                         storage.remove(item.getId(), 1);
                     }
                 }

@@ -176,6 +176,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String blazing_blowpipe = "blazing_blowpipe";
     String bow_of_faerdhinen = "bow_of_faerdhinen";
     String bryophytas_staff = "bryophytas_staff";
+    String camphor_blowpipe = "camphor_blowpipe";
     String craws_bow = "craws_bow";
     String crystal_bow = "crystal_bow";
     String crystal_halberd = "crystal_halberd";
@@ -183,7 +184,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String eye_of_ayak = "eye_of_ayak";
     String ibans_staff = "ibans_staff";
     String infernal_axe = "infernal_axe";
+    String ironwood_blowpipe = "ironwood_blowpipe";
     String pharaohs_sceptre = "pharaohs_sceptre";
+    String rosewood_blowpipe = "rosewood_blowpipe";
     String sanguinesti_staff = "sanguinesti_staff";
     String scythe_of_vitur = "scythe_of_vitur";
     String skull_sceptre = "skull_sceptre";
@@ -1125,6 +1128,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bryophytasStaffInfobox() { return true; }
 
         @ConfigItem(
+            keyName = camphor_blowpipe + _infobox,
+            name = "Camphor blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean camphorBlowpipeInfobox() { return true; }
+
+        @ConfigItem(
             keyName = craws_bow + _infobox,
             name = "Craw's bow",
             description = "",
@@ -1181,11 +1191,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean infernalAxeInfobox() { return true; }
 
         @ConfigItem(
+            keyName = ironwood_blowpipe + _infobox,
+            name = "Ironwood blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean ironwoodBlowpipeInfobox() { return true; }
+
+        @ConfigItem(
             keyName = pharaohs_sceptre + _infobox,
             name = "Pharaoh's sceptre",
             description = "",
             section = infoboxes
         ) default boolean pharaohsSceptreInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = rosewood_blowpipe + _infobox,
+            name = "Rosewood blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean rosewoodBlowpipeInfobox() { return true; }
 
         @ConfigItem(
             keyName = sanguinesti_staff + _infobox,
@@ -2042,6 +2066,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bryophytasStaffOverlay() { return true; }
 
         @ConfigItem(
+            keyName = camphor_blowpipe + _overlay,
+            name = "Camphor blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean camphorBlowpipeOverlay() { return true; }
+
+        @ConfigItem(
             keyName = craws_bow + _overlay,
             name = "Craw's bow",
             description = "",
@@ -2098,11 +2129,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean infernalAxeOverlay() { return true; }
 
         @ConfigItem(
+            keyName = ironwood_blowpipe + _overlay,
+            name = "Ironwood blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean ironwoodBlowpipeOverlay() { return true; }
+
+        @ConfigItem(
             keyName = pharaohs_sceptre + _overlay,
             name = "Pharaoh's sceptre",
             description = "",
             section = overlays
         ) default boolean pharaohsSceptreOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = rosewood_blowpipe + _overlay,
+            name = "Rosewood blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean rosewoodBlowpipeOverlay() { return true; }
 
         @ConfigItem(
             keyName = quetzal_whistle + _overlay,

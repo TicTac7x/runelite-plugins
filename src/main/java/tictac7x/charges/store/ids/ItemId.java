@@ -1828,4 +1828,12 @@ public final class ItemId {
     public static final int BOWL_OF_NETTLE_TEA = ItemID.BOWL_NETTLETEA;
     public static final int CUP_OF_DAMIANA_TEA = ItemID.CUP_DAMIANA_TEA;
     public static final int BOWL_OF_DAMIANA_TEA = ItemID.BOWL_DAMIANA_TEA;
+
+    // Blowpipes
+    public static final int CAMPHOR_BLOWPIPE = ItemID.CAMPHOR_BLOWPIPE;
+    public static final int CAMPHOR_BLOWPIPE_UNCHARGED = ItemID.CAMPHOR_BLOWPIPE_EMPTY;
+    public static final int IRONWOOD_BLOWPIPE = ItemID.IRONWOOD_BLOWPIPE;
+    public static final int IRONWOOD_BLOWPIPE_UNCHARGED = ItemID.IRONWOOD_BLOWPIPE_EMPTY;
+    public static final int ROSEWOOD_BLOWPIPE = ItemID.ROSEWOOD_BLOWPIPE;
+    public static final int ROSEWOOD_BLOWPIPE_UNCHARGED = ItemID.ROSEWOOD_BLOWPIPE_EMPTY;
 }

@@ -258,6 +258,21 @@ public abstract class ListenerBase {
             return false;
         }
 
+        // Animation id check.
+        if (trigger.hasAnimationId.isPresent()) {
+            boolean valid = false;
+
+            for (final int animationId : trigger.hasAnimationId.get()) {
+                if (animationId == provider.client.getLocalPlayer().getAnimation()) {
+                    valid = true;
+                }
+            }
+
+            if (!valid) {
+                return false;
+            }
+        }
+
         return true;
     }
 }

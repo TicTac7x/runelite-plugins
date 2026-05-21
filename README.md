@@ -131,6 +131,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Blazing blowpipe
 * Bow of faerdhinen
 * Bryophyta's staff
+* Camphor blowpipe
 * Craw's bow
 * Crystal bow
 * Crystal halberd
@@ -138,7 +139,9 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Eye of Ayak
 * Iban's staff
 * Infernal axe
+* Ironwood blowpipe
 * Pharaoh's sceptre
+* Rosewood blowpipe
 * Sanguinesti staff
 * Scythe of Vitur
 * Skull sceptre

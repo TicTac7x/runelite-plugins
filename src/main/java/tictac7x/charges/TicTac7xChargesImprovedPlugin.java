@@ -40,17 +40,18 @@ import tictac7x.charges.items.potions.toa.*;
 import tictac7x.charges.items.shields.*;
 import tictac7x.charges.items.utils.*;
 import tictac7x.charges.items.weapons.*;
-import tictac7x.charges.items.weapons.blowpipes.W_BlazingBlowpipe;
-import tictac7x.charges.items.weapons.blowpipes.W_ToxicBlowpipe;
+import tictac7x.charges.items.weapons.blowpipes.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.Store;
 import tictac7x.charges.store.ids.ChargeId;
+import tictac7x.charges.store.ids.ItemId;
 
 import javax.inject.Inject;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @PluginDescriptor(
 	name = "Item Charges Improved",
@@ -147,7 +148,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>* Abyssal bracelet added.<br>" +
 		"<colHIGHLIGHT>* Bottomless milk bucket added.<br>" +
 		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support.<br>" +
-		"<colHIGHLIGHT>* Serpentine helm and its variants support added."
+		"<colHIGHLIGHT>* Serpentine helm and its variants support added.<br>" +
+		"<colHIGHLIGHT>* Camphor/Ironwood/Rosewood blowpipes added."
 	;
 
 	@Inject
@@ -486,6 +488,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_BlazingBlowpipe(provider),
 			new W_BowOfFaerdhinen(provider),
 			new W_BryophytasStaff(provider),
+			new W_CamphorBlowpipe(provider),
 			new W_CrawsBow(provider),
 			new W_CrystalBow(provider),
 			new W_CrystalHalberd(provider),
@@ -493,8 +496,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_EnchantedLyre(provider),
 			new W_EyeOfAyak(provider),
 			new W_InfernalAxe(provider),
+			new W_IronwoodBlowpipe(provider),
 			new W_IbansStaff(provider),
 			new W_PharaohsSceptre(provider),
+			new W_RosewoodBlowpipe(provider),
 			new W_SanguinestiStaff(provider),
 			new W_ScytheOfVitur(provider),
 			new W_SkullSceptre(provider),
@@ -814,6 +819,31 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 		// As is.
 		return String.valueOf(charges);
+	}
+
+	public static boolean guessIfRangedAmmoRetrievalWasSuccessful(final Provider provider) {
+		final int recoveryRate;
+
+		if (provider.store.equipmentContainsItem(ItemId.AVAS_ATTRACTOR)) {
+			recoveryRate = 60;
+		} else if (provider.store.equipmentContainsItem(ItemId.AVAS_ACCUMULATOR)) {
+			recoveryRate = 72;
+		} else if (provider.store.equipmentContainsItem(
+			ItemId.AVAS_ASSEMBLER,
+			ItemId.AVAS_ASSEMBLER_TROUVER,
+			ItemId.AVAS_ASSEMBLER_MASORI,
+			ItemId.AVAS_ASSEMBLER_MASORI_TROUVER,
+			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE,
+			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_TROUVER,
+			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI,
+			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI_TROUVER
+		)) {
+			recoveryRate = 80;
+		} else {
+			recoveryRate = 0;
+		}
+
+		return ThreadLocalRandom.current().nextInt(1, 101) > recoveryRate;
 	}
 }
 
