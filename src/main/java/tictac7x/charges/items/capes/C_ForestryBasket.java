@@ -76,18 +76,22 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
             new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED)
         ).setMaximumComboQuantity(new int[]{
             ItemId.LOGS,
-            ItemId.ACHEY_TREE_LOGS,
             ItemId.OAK_LOGS,
             ItemId.WILLOW_LOGS,
-            ItemId.TEAK_LOGS,
-            ItemId.JUNIPER_LOGS,
             ItemId.MAPLE_LOGS,
-            ItemId.MAHOGANY_LOGS,
-            ItemId.ARCTIC_PINE_LOGS,
             ItemId.YEW_LOGS,
-            ItemId.BLISTERWOOD_LOGS,
             ItemId.MAGIC_LOGS,
             ItemId.REDWOOD_LOGS,
+            ItemId.TEAK_LOGS,
+            ItemId.MAHOGANY_LOGS,
+            ItemId.ACHEY_TREE_LOGS,
+            ItemId.ARCTIC_PINE_LOGS,
+            ItemId.JUNIPER_LOGS,
+            ItemId.BARK,
+            ItemId.BLISTERWOOD_LOGS,
+            ItemId.CAMPHOR_LOGS,
+            ItemId.IRONWOOD_LOGS,
+            ItemId.ROSEWOOD_LOGS,
         }, 28);
 
         this.items = new TriggerItem[]{
@@ -410,6 +414,9 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
         storage.put(ItemId.JUNIPER_LOGS, 0);
         storage.put(ItemId.BARK, 0);
         storage.put(ItemId.BLISTERWOOD_LOGS, 0);
+        storage.put(ItemId.CAMPHOR_LOGS, 0);
+        storage.put(ItemId.IRONWOOD_LOGS, 0);
+        storage.put(ItemId.ROSEWOOD_LOGS, 0);
     }
 
     private int getLogsInBasket() {
@@ -433,6 +440,9 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
                 case ItemId.JUNIPER_LOGS:
                 case ItemId.BARK:
                 case ItemId.BLISTERWOOD_LOGS:
+                case ItemId.CAMPHOR_LOGS:
+                case ItemId.IRONWOOD_LOGS:
+                case ItemId.ROSEWOOD_LOGS:
                     logs += storageItem.getQuantity();
                     break;
             }
