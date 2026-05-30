@@ -30,6 +30,7 @@ public class W_BryophytasStaff extends ChargedItem {
 
             // Charge.
             new OnChatMessage("Your Bryophyta's staff now has (?<charges>.+) charges?.").setDynamicallyCharges(),
+            new OnChatMessage("Your Bryophyta's staff now has one charge.").setFixedCharges(1),
 
             // Auto-charge.
             new OnAutoChargeMessage("Bryophyta's staff", "Nature rune", 1, this),
@@ -55,8 +56,7 @@ public class W_BryophytasStaff extends ChargedItem {
                 "Entangle"
             ).decreaseCharges(4),
 
-
-            // Arcuus spellbook.
+            // Arceuus spellbook.
             new OnXpDrop(Skill.MAGIC).isEquipped().onMenuOption("Cast").onMenuTarget(
                 "Dark Lure",
                 "Harmony Island Teleport"
