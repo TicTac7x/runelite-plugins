@@ -148,6 +148,10 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String fungicide_spray = "fungicide_spray";
     String fur_pouch = "fur_pouch";
     String gem_bag = "gem_bag";
+    String gem_pouch = "gem_pouch";
+    String gem_sack = "gem_sack";
+    String gem_satchel = "gem_satchel";
+    String gem_tote = "gem_tote";
     String gricollers_can = "gricollers_can";
     String herb_sack = "herb_sack";
     String jar_generator = "jar_generator";
@@ -988,6 +992,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean gemBagInfobox() { return true; }
 
         @ConfigItem(
+            keyName = gem_pouch + _infobox,
+            name = "Gem pouch",
+            description = "",
+            section = infoboxes
+        ) default boolean gemPouchInfobox() { return true; }
+
+        @ConfigItem(
+                keyName = gem_sack + _infobox,
+                name = "Gem sack",
+                description = "",
+                section = infoboxes
+        ) default boolean gemSackInfobox() { return true; }
+
+        @ConfigItem(
+			keyName = gem_satchel + _infobox,
+			name = "Gem satchel",
+			description = "",
+			section = infoboxes
+        ) default boolean gemSatchelInfobox() { return true; }
+
+        @ConfigItem(
+			keyName = gem_tote + _infobox,
+			name = "Gem tote",
+			description = "",
+			section = infoboxes
+        ) default boolean gemToteInfobox() { return true; }
+
+        @ConfigItem(
             keyName = giantsoul_amulet + _infobox,
             name = "Giantsoul amulet",
             description = "",
@@ -1805,6 +1837,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean gemBagOverlay() { return true; }
+
+		@ConfigItem(
+			keyName = gem_pouch + _overlay,
+			name = "Gem pouch",
+			description = "",
+			section = overlays
+		) default boolean gemPouchOverlay() { return true; }
+
+		@ConfigItem(
+			keyName = gem_sack + _overlay,
+			name = "Gem sack",
+			description = "",
+			section = overlays
+		) default boolean gemSackOverlay() { return true; }
+
+		@ConfigItem(
+			keyName = gem_satchel + _overlay,
+			name = "Gem satchel",
+			description = "",
+			section = overlays
+		) default boolean gemSatchelOverlay() { return true; }
+
+		@ConfigItem(
+			keyName = gem_tote + _overlay,
+			name = "Gem tote",
+			description = "",
+			section = overlays
+		) default boolean gemToteOverlay() { return true; }
 
         @ConfigItem(
             keyName = giantsoul_amulet + _overlay,
@@ -2754,6 +2814,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = gem_bag + _storage,
             section = debug
         ) default String getGemBagStorageCharges() { return ""; }
+
+		@ConfigItem(
+			keyName = gem_pouch + _storage,
+			name = gem_pouch + _storage,
+			description = gem_pouch + _storage,
+			section = debug
+		) default String getGemPouchStorageCharges() { return ""; }
+
+		@ConfigItem(
+			keyName = gem_sack + _storage,
+			name = gem_sack + _storage,
+			description = gem_sack + _storage,
+			section = debug
+		) default String getGemSackStorageCharges() { return ""; }
+
+		@ConfigItem(
+			keyName = gem_satchel + _storage,
+			name = gem_satchel + _storage,
+			description = gem_satchel + _storage,
+			section = debug
+		) default String getGemSatchelStorageCharges() { return ""; }
+
+		@ConfigItem(
+			keyName = gem_tote + _storage,
+			name = gem_tote + _storage,
+			description = gem_tote + _storage,
+			section = debug
+		) default String getGemToteStorageCharges() { return ""; }
 
         @ConfigItem(
             keyName = seed_box,

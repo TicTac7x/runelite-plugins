@@ -1082,11 +1082,24 @@ public final class ItemId {
     // Gem bag
     public static final int GEM_BAG = ItemID.GEM_BAG;
     public static final int GEM_BAG_OPEN = ItemID.GEM_BAG_OPEN;
+    public static final int GEM_POUCH = ItemID.GEM_POUCH;
+    public static final int GEM_POUCH_OPEN = ItemID.GEM_POUCH_OPEN;
+    public static final int GEM_SATCHEL = ItemID.GEM_SATCHEL;
+    public static final int GEM_SATCHEL_OPEN = ItemID.GEM_SATCHEL_OPEN;
+    public static final int GEM_TOTE = ItemID.GEM_TOTE;
+    public static final int GEM_TOTE_OPEN = ItemID.GEM_TOTE_OPEN;
+    public static final int GEM_SACK = ItemID.GEM_SACK;
+    public static final int GEM_SACK_OPEN = ItemID.GEM_SACK_OPEN;
+
+    // Uncut gems
     public static final int UNCUT_SAPPHIRE = ItemID.UNCUT_SAPPHIRE;
     public static final int UNCUT_EMERALD = ItemID.UNCUT_EMERALD;
     public static final int UNCUT_RUBY = ItemID.UNCUT_RUBY;
     public static final int UNCUT_DIAMOND = ItemID.UNCUT_DIAMOND;
     public static final int UNCUT_DRAGONSTONE = ItemID.UNCUT_DRAGONSTONE;
+    public static final int UNCUT_OPAL = ItemID.UNCUT_OPAL;
+    public static final int UNCUT_JADE = ItemID.UNCUT_JADE;
+    public static final int UNCUT_RED_TOPAZ = ItemID.UNCUT_RED_TOPAZ;
 
     // Gricollers can
     public static final int GRICOLLERS_CAN = ItemID.ZEAH_WATERINGCAN;
