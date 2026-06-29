@@ -999,24 +999,24 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean gemPouchInfobox() { return true; }
 
         @ConfigItem(
-                keyName = gem_sack + _infobox,
-                name = "Gem sack",
-                description = "",
-                section = infoboxes
+            keyName = gem_sack + _infobox,
+            name = "Gem sack",
+            description = "",
+            section = infoboxes
         ) default boolean gemSackInfobox() { return true; }
 
         @ConfigItem(
-			keyName = gem_satchel + _infobox,
-			name = "Gem satchel",
-			description = "",
-			section = infoboxes
+            keyName = gem_satchel + _infobox,
+            name = "Gem satchel",
+            description = "",
+            section = infoboxes
         ) default boolean gemSatchelInfobox() { return true; }
 
         @ConfigItem(
-			keyName = gem_tote + _infobox,
-			name = "Gem tote",
-			description = "",
-			section = infoboxes
+            keyName = gem_tote + _infobox,
+            name = "Gem tote",
+            description = "",
+            section = infoboxes
         ) default boolean gemToteInfobox() { return true; }
 
         @ConfigItem(
@@ -1838,33 +1838,33 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = overlays
         ) default boolean gemBagOverlay() { return true; }
 
-		@ConfigItem(
-			keyName = gem_pouch + _overlay,
-			name = "Gem pouch",
-			description = "",
-			section = overlays
-		) default boolean gemPouchOverlay() { return true; }
+        @ConfigItem(
+            keyName = gem_pouch + _overlay,
+            name = "Gem pouch",
+            description = "",
+            section = overlays
+        ) default boolean gemPouchOverlay() { return true; }
 
-		@ConfigItem(
-			keyName = gem_sack + _overlay,
-			name = "Gem sack",
-			description = "",
-			section = overlays
-		) default boolean gemSackOverlay() { return true; }
+        @ConfigItem(
+            keyName = gem_sack + _overlay,
+            name = "Gem sack",
+            description = "",
+            section = overlays
+        ) default boolean gemSackOverlay() { return true; }
 
-		@ConfigItem(
-			keyName = gem_satchel + _overlay,
-			name = "Gem satchel",
-			description = "",
-			section = overlays
-		) default boolean gemSatchelOverlay() { return true; }
+        @ConfigItem(
+            keyName = gem_satchel + _overlay,
+            name = "Gem satchel",
+            description = "",
+            section = overlays
+        ) default boolean gemSatchelOverlay() { return true; }
 
-		@ConfigItem(
-			keyName = gem_tote + _overlay,
-			name = "Gem tote",
-			description = "",
-			section = overlays
-		) default boolean gemToteOverlay() { return true; }
+        @ConfigItem(
+            keyName = gem_tote + _overlay,
+            name = "Gem tote",
+            description = "",
+            section = overlays
+        ) default boolean gemToteOverlay() { return true; }
 
         @ConfigItem(
             keyName = giantsoul_amulet + _overlay,
@@ -2815,33 +2815,33 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = debug
         ) default String getGemBagStorageCharges() { return ""; }
 
-		@ConfigItem(
-			keyName = gem_pouch + _storage,
-			name = gem_pouch + _storage,
-			description = gem_pouch + _storage,
-			section = debug
-		) default String getGemPouchStorageCharges() { return ""; }
+        @ConfigItem(
+            keyName = gem_pouch + _storage,
+            name = gem_pouch + _storage,
+            description = gem_pouch + _storage,
+            section = debug
+        ) default String getGemPouchStorageCharges() { return ""; }
 
-		@ConfigItem(
-			keyName = gem_sack + _storage,
-			name = gem_sack + _storage,
-			description = gem_sack + _storage,
-			section = debug
-		) default String getGemSackStorageCharges() { return ""; }
+        @ConfigItem(
+            keyName = gem_sack + _storage,
+            name = gem_sack + _storage,
+            description = gem_sack + _storage,
+            section = debug
+        ) default String getGemSackStorageCharges() { return ""; }
 
-		@ConfigItem(
-			keyName = gem_satchel + _storage,
-			name = gem_satchel + _storage,
-			description = gem_satchel + _storage,
-			section = debug
-		) default String getGemSatchelStorageCharges() { return ""; }
+        @ConfigItem(
+            keyName = gem_satchel + _storage,
+            name = gem_satchel + _storage,
+            description = gem_satchel + _storage,
+            section = debug
+        ) default String getGemSatchelStorageCharges() { return ""; }
 
-		@ConfigItem(
-			keyName = gem_tote + _storage,
-			name = gem_tote + _storage,
-			description = gem_tote + _storage,
-			section = debug
-		) default String getGemToteStorageCharges() { return ""; }
+        @ConfigItem(
+            keyName = gem_tote + _storage,
+            name = gem_tote + _storage,
+            description = gem_tote + _storage,
+            section = debug
+        ) default String getGemToteStorageCharges() { return ""; }
 
         @ConfigItem(
             keyName = seed_box,

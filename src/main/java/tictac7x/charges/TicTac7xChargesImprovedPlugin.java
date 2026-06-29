@@ -464,7 +464,6 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_GemPouch(provider),
 			new U_GemSack(provider),
 			new U_GemSatchel(provider),
-			new U_GemSack(provider),
 			new U_GemTote(provider),
 			new U_GricollersCan(provider),
 			new U_HerbSack(provider),

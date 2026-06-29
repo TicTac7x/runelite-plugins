@@ -5,7 +5,7 @@ import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ItemId;
 
-public class U_GemTote extends U_AbstractGemContainer{
+public class U_GemTote extends U_AbstractGemContainer {
     public U_GemTote(final Provider provider) {
         super(
                 TicTac7xChargesImprovedConfig.gem_tote,

@@ -1,4 +1,4 @@
-    package tictac7x.charges.items.utils;
+package tictac7x.charges.items.utils;
 
 import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
 import tictac7x.charges.item.storage.StorableItem;
