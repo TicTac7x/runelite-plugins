@@ -12,6 +12,7 @@ public class U_GemTote extends U_AbstractGemContainer {
                 ItemId.GEM_TOTE,
                 ItemId.GEM_TOTE_OPEN,
                 20,
+                "gem tote",
                 new StorableItem[]{
                         new StorableItem(ItemId.UNCUT_OPAL).checkName("Opal"),
                         new StorableItem(ItemId.UNCUT_JADE).checkName("Jade"),

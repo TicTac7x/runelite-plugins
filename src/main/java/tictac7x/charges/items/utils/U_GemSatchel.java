@@ -12,6 +12,7 @@ public class U_GemSatchel extends U_AbstractGemContainer {
                 ItemId.GEM_SATCHEL,
                 ItemId.GEM_SATCHEL_OPEN,
                 10,
+                "gem satchel",
                 new StorableItem[]{
                         new StorableItem(ItemId.UNCUT_OPAL).checkName("Opal"),
                         new StorableItem(ItemId.UNCUT_JADE).checkName("Jade"),

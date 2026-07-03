@@ -12,6 +12,7 @@ public class U_GemBag extends U_AbstractGemContainer {
                 ItemId.GEM_BAG,
                 ItemId.GEM_BAG_OPEN,
                 60,
+                "gem bag",
                 new StorableItem[]{
                         new StorableItem(ItemId.UNCUT_SAPPHIRE).checkName("Sapphire"),
                         new StorableItem(ItemId.UNCUT_EMERALD).checkName("Emerald"),

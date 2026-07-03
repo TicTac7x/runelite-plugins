@@ -35,7 +35,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         gemMap.put(ItemId.UNCUT_RED_TOPAZ, new GemInfo("redtopazes", "Red Topaz", "Uncut red topaz"));
     }
 
-    protected U_AbstractGemContainer(final String configKey, final int itemId, int openItemId, int maxQuantity, final StorableItem[] gems, final Provider provider) {
+    protected U_AbstractGemContainer(final String configKey, final int itemId, int openItemId, int maxQuantity, final String containerName, final StorableItem[] gems, final Provider provider) {
         super(configKey, itemId, provider);
 
         this.items = new TriggerItem[]{
@@ -62,10 +62,10 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
 
         this.triggers.addAll(List.of(
                 // Empty to bank.
-                new OnChatMessage("You empty your gem bag into the bank").emptyStorage(),
+                new OnChatMessage("You empty the (gem bag|" + containerName + ") into the bank").emptyStorage(),
 
-                // Empty to bank or inventory.
-                new OnChatMessage("The gem bag is( now)? empty.").emptyStorage(),
+                // Empty to inventory.
+                new OnChatMessage("The (gem bag|" + containerName + ") is( now)? empty.").emptyStorage(),
 
                 // Check container
                 new OnChatMessage(checkGemsInContainerRegex).matcherConsumer(m -> {
@@ -80,11 +80,15 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
                         .requiredItem(openItemId),
 
                 // Pickpocketing.
-                new OnChatMessage("The following stolen loot gets added to your gem bag: Uncut (?<gem>.+) x (?<quantity>.+).")
+                new OnChatMessage("The following stolen loot gets added to your (gem bag|" + containerName + "): Uncut (?<gem>.+) x (?<quantity>.+).")
                         .matcherConsumer(m -> storage.add(getStorageItemFromName(m.group("gem"), Integer.parseInt(m.group("quantity"))))),
 
+                // Pickpocketing alternative message
+                new OnChatMessage("You put the stolen Uncut (?<gem>.+) into your (gem bag|" + containerName + ").")
+                        .matcherConsumer(m -> storage.add(getStorageItemFromName(m.group("gem"), 1))),
+
                 // Stealing from stalls.
-                new OnChatMessage("You steal an uncut (?<gem>.+) and add it to your gem bag.")
+                new OnChatMessage("You steal an uncut (?<gem>.+) and add it to your (gem bag|" + containerName + ").")
                         .matcherConsumer(m -> storage.add(getStorageItemFromName(m.group("gem"), 1))),
 
                 // Fill from inventory.
