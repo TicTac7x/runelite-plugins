@@ -139,17 +139,11 @@ import java.util.concurrent.ThreadLocalRandom;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static final String pluginVersion = "v0.6.12";
+	public static final String pluginVersion = "v0.6.13";
 	public static final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Reagent pouch fixes.<br>" +
-		"<colHIGHLIGHT>* Toxic and blazing blowpipe fixes.<br>" +
-		"<colHIGHLIGHT>* Abyssal tentacle added.<br>" +
-		"<colHIGHLIGHT>* Abyssal bracelet added.<br>" +
-		"<colHIGHLIGHT>* Bottomless milk bucket added.<br>" +
-		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support.<br>" +
-		"<colHIGHLIGHT>* Serpentine helm and its variants support added.<br>" +
-		"<colHIGHLIGHT>* Camphor/Ironwood/Rosewood blowpipes added."
+		"<colHIGHLIGHT>* Add gem pouch, sack, satchel and tote.<br>" +
+		"<colHIGHLIGHT>* Fix herb sack."
 	;
 
 	@Inject

@@ -1,4 +1,4 @@
-# Item Charges Improved v0.6.12
+# Item Charges Improved v0.6.13
 
 Show charges of various items that are in inventory or equipped
 
@@ -106,6 +106,10 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Fungicide spray
 * Fur pouches
 * Gem bag
+* Gem pouch
+* Gem sack
+* Gem satchel
+* Gem tote
 * Gricoller's can
 * Herb sack
 * Huntsman's kit
