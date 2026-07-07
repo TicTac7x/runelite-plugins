@@ -33,7 +33,7 @@ public class ListenerOnGraphicChanged extends ListenerBase {
         // Graphic id check.
         graphicIdCheck: if (trigger.graphicId != null) {
             for (final int graphicId : trigger.graphicId) {
-                if (event.actor.hasSpotAnim(graphicId)) {
+                if (event.hasGraphicId(graphicId)) {
                     break graphicIdCheck;
                 }
             }

@@ -11,28 +11,28 @@ public class EmptyToInventoryTest extends GemContainerTestBase {
     @Test
     public void testEmptyToInventoryWithGemsGemBag() {
         gemBag.storage.put(ItemId.UNCUT_SAPPHIRE, 10);
-        fire("The gem bag is now empty", gemBag, gemPouch);
+        fire("The gem bag is now empty.", gemBag, gemPouch);
         assertEquals(0, count(gemBag, ItemId.UNCUT_SAPPHIRE));
     }
 
     @Test
     public void testEmptyToInventoryAlreadyEmptyGemBag() {
         gemBag.storage.put(ItemId.UNCUT_SAPPHIRE, 10);
-        fire("The gem bag is empty", gemBag, gemPouch);
+        fire("The gem bag is empty.", gemBag, gemPouch);
         assertEquals(0, count(gemBag, ItemId.UNCUT_SAPPHIRE));
     }
 
     @Test
     public void testEmptyToInventoryWithGemsGemPouch() {
         gemPouch.storage.put(ItemId.UNCUT_OPAL, 5);
-        fire("The gem pouch is now empty", gemBag, gemPouch);
+        fire("The gem pouch is now empty.", gemBag, gemPouch);
         assertEquals(0, count(gemPouch, ItemId.UNCUT_OPAL));
     }
 
     @Test
     public void testEmptyToInventoryAlreadyEmptyGemPouch() {
         gemPouch.storage.put(ItemId.UNCUT_OPAL, 5);
-        fire("The gem pouch is empty", gemBag, gemPouch);
+        fire("The gem pouch is empty.", gemBag, gemPouch);
         assertEquals(0, count(gemPouch, ItemId.UNCUT_OPAL));
     }
 
@@ -61,7 +61,7 @@ public class EmptyToInventoryTest extends GemContainerTestBase {
     public void testEmptyToInventoryGemBagMessageDoesNotClearGemPouch() {
         gemBag.storage.put(ItemId.UNCUT_SAPPHIRE, 10);
         gemPouch.storage.put(ItemId.UNCUT_OPAL, 5);
-        fire("The gem bag is now empty", gemBag, gemPouch);
+        fire("The gem bag is now empty.", gemBag, gemPouch);
         assertEquals(0, count(gemBag, ItemId.UNCUT_SAPPHIRE));
         assertEquals(5, count(gemPouch, ItemId.UNCUT_OPAL));
     }

@@ -93,7 +93,7 @@ public class U_HerbSack extends ChargedItemWithStorageEmptyable {
             .addToStorage(ItemId.GRIMY_HARRALANDER),
 
             // Pick ranarr.
-            new OnXpDrop(Skill.FARMING).requiredItem(ItemId.HERB_SACK_OPEN).onMenuOption("Pick").onMenuTarget("Ranarr")
+            new OnXpDrop(Skill.FARMING).requiredItem(ItemId.HERB_SACK_OPEN).onMenuOption("Pick").onMenuTarget("Ranarr weed")
             .addToStorage(ItemId.GRIMY_RANARR_WEED),
 
             // Pick irit leaf.

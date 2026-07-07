@@ -9,14 +9,18 @@ import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
 
 public class CustomGraphicChanged {
-    public final Actor actor;
+    private final Actor actor;
 
     public CustomGraphicChanged(final GraphicChanged event) {
         this.actor = event.getActor();
     }
 
     public boolean isLocalPlayer(final Client client) {
-        return actor != client.getLocalPlayer();
+        return actor == client.getLocalPlayer();
+    }
+
+    public boolean hasGraphicId(final int graphicId) {
+        return actor.hasSpotAnim(graphicId);
     }
 
     public void showDebugIds(final ChatMessageManager chatMessageManager) {
@@ -27,5 +31,16 @@ public class CustomGraphicChanged {
                 .build()
             );
         }
+    }
+
+    @Override
+    public String toString() {
+        String string = "GRAPHIC CHANGED | actor: " + actor.getName();
+
+        for (final ActorSpotAnim graphic : actor.getSpotAnims()) {
+            string += ", graphic id: " + graphic.getId();
+        }
+
+        return string;
     }
 }

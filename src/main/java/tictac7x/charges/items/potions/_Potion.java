@@ -32,7 +32,7 @@ public class _Potion extends ChargedItem {
                     case 3:
                         return provider.config.get3DoseColor();
                     case 2:
-                        return provider.config.get2DoseColor();
+                        return items.length == 2 ? provider.config.get4DoseColor() : provider.config.get2DoseColor();
                     case 1:
                         return provider.config.get1DoseColor();
                 }

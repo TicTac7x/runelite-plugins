@@ -641,7 +641,7 @@ public class Store {
         final CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
         if (!graphicChanged.isLocalPlayer(client)) return;
 
-        if (graphicChanged.actor.hasSpotAnim(GraphicId.SPLASH)) {
+        if (graphicChanged.hasGraphicId(GraphicId.SPLASH)) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
         }
 

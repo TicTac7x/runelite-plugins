@@ -354,7 +354,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         @ConfigItem(
             keyName = "dose_4",
             name = "4 doses",
-            description = "Color of 4 doses overlay",
+            description = "Color of 4 doses or potions with max 2 doses overlay",
             position = 1,
             section = potions
         ) default Color get4DoseColor() { return Color.white; }
