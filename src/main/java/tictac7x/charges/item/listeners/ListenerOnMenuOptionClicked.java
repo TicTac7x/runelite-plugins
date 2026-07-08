@@ -7,13 +7,13 @@ import tictac7x.charges.events.CustomMenuOptionClicked;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnMenuOptionClicked extends ListenerBase {
-    public ListenerOnMenuOptionClicked(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnMenuOptionClicked(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final CustomMenuOptionClicked event) {
+    public void trigger(final CustomMenuOptionClicked event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
             boolean triggerUsed = false;
 
@@ -22,7 +22,7 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -30,7 +30,7 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final CustomMenuOptionClicked event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomMenuOptionClicked event) {
         if (!(triggerBase instanceof OnMenuOptionClicked)) return false;
         final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
 
@@ -49,6 +49,6 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

@@ -6,17 +6,17 @@ import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnResetDaily extends ListenerBase {
-    public ListenerOnResetDaily(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnResetDaily(final Provider provider) {
+        super(provider);
     }
 
-    public boolean trigger() {
+    public boolean trigger(final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase)) continue;
             final OnResetDaily trigger = (OnResetDaily) triggerBase;
             boolean triggerUsed = false;
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -26,7 +26,7 @@ public class ListenerOnResetDaily extends ListenerBase {
         return false;
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase) {
         if (!(triggerBase instanceof OnResetDaily)) return false;
         final OnResetDaily trigger = (OnResetDaily) triggerBase;
 
@@ -34,6 +34,6 @@ public class ListenerOnResetDaily extends ListenerBase {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

@@ -3,28 +3,39 @@ package tictac7x.charges.events;
 import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
 
+import java.util.Optional;
+
 public class CustomMenuOptionClicked {
     public final int eventId;
     public final String target;
     public final String option;
     public final int actionId;
-    public final String action;
+    public final String actionName;
     public final int itemId;
     public final int impostorId;
 
-    public CustomMenuOptionClicked(final MenuOptionClicked event, final Client client) {
-        this.eventId = event.getId();
-        this.target = event.getMenuTarget().replaceAll("</?col.*?>", "");
-        this.option = event.getMenuOption().replaceAll("</?col.*?>", "");
-        this.actionId = event.getMenuAction().getId();
-        this.action = event.getMenuAction().name();
-        this.itemId = event.getItemId();
+    public Optional<Integer> usedItemId = Optional.empty();
 
-        int impostorId = -1;
-        try {
-            impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
-        } catch (final Exception ignored) {}
+    public CustomMenuOptionClicked(
+        final int eventId,
+        final String target,
+        final String option,
+        final int actionId,
+        final String actionName,
+        final int itemId,
+        final int impostorId
+    ) {
+        this.eventId = eventId;
+        this.target = target;
+        this.option = option;
+        this.actionId = actionId;
+        this.actionName = actionName;
+        this.itemId = itemId;
         this.impostorId = impostorId;
+    }
+
+    public void assignUsedItemId(final int usedItemId) {
+        this.usedItemId = Optional.of(usedItemId);
     }
 
     @Override
@@ -34,8 +45,9 @@ public class CustomMenuOptionClicked {
             ", option: \"" + option + "\"" +
             ", target: \"" + target + "\"" +
             ", action id: " + actionId +
-            ", action name: \"" + action + "\"" +
+            ", action name: \"" + actionName + "\"" +
             ", item id: " + itemId +
+            ", used item id: " + usedItemId +
             ", impostor id: " + impostorId
         );
     }

@@ -1,4 +1,4 @@
-package tictac7x.charges.items.weapons;
+package tictac7x.charges.items.weapons.blowpipes;
 
 import net.runelite.api.widgets.Widget;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
@@ -15,21 +15,22 @@ import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ItemId;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     public W_ToxicBlowpipe(final Provider provider) {
-        this(TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, provider);
-
-        this.items = new TriggerItem[]{
+        this(provider, TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, new TriggerItem[]{
             new TriggerItem(ItemId.TOXIC_BLOWPIPE_UNCHARGED),
             new TriggerItem(ItemId.TOXIC_BLOWPIPE),
-        };
+        });
     }
-    public W_ToxicBlowpipe(final String configKey, final int itemId, final Provider provider) {
+    public W_ToxicBlowpipe(final Provider provider, final String configKey, final int itemId, final TriggerItem[] items) {
         super(configKey, itemId, provider);
+
+        this.items = items;
 
         this.storage.storableItems(
             new StorableItem(ItemId.ZULRAH_SCALES),
@@ -53,14 +54,13 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
             // Check with darts.
             new OnChatMessage("Darts: (?<dartstype>.+) x (?<dartsamount>.+)\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
-                final StorageItem scales = new StorageItem(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
-                storage.put(scales);
+                storage.clearAndPut(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
 
                 final Optional<StorageItem> darts = getStorageItemFromName(m.group("dartstype"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("dartsamount")));
                 if (darts.isPresent()) {
                     storage.put(darts);
                 }
-            }),
+            }).onItemClick(),
 
             // Unload (empty only darts)
             new OnMenuOptionClicked("Unload").onItemClick().runConsumerOnNextGameTick(() -> {
@@ -71,10 +71,9 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
                 final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
                 if (
-                    widget.isPresent() &&
-                    widget.get().getItemId() == ItemId.TOXIC_BLOWPIPE &&
-                    script.getScriptEvent().getArguments().length >= 5 &&
-                    script.getScriptEvent().getArguments()[4].toString().equals("Yes")
+                    widget.isPresent() && Arrays.stream(items).anyMatch(item -> item.itemId == widget.get().getItemId()) &&
+                    script.arguments.length >= 5 &&
+                    script.arguments[4].toString().equals("Yes")
                 ) {
                     provider.store.addConsumerToNextTickQueue(() -> storage.clear());
                 }
@@ -87,29 +86,10 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                     storage.remove(ItemId.ZULRAH_SCALES, 1);
                 }
 
-                // Determine the dart recovery rate based on the equipped item.
-                int recoveryRate = 0;
-                if (provider.store.equipmentContainsItem(ItemId.AVAS_ATTRACTOR)) {
-                    recoveryRate = 60;
-                } else if (provider.store.equipmentContainsItem(ItemId.AVAS_ACCUMULATOR)) {
-                    recoveryRate = 72;
-                } else if (provider.store.equipmentContainsItem(
-                    ItemId.AVAS_ASSEMBLER,
-                    ItemId.AVAS_ASSEMBLER_TROUVER,
-                    ItemId.AVAS_ASSEMBLER_MASORI,
-                    ItemId.AVAS_ASSEMBLER_MASORI_TROUVER,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_TROUVER,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI,
-                    ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI_TROUVER
-                )) {
-                    recoveryRate = 80;
-                }
-
                 // Calculate if dart could have been used.
                 for (final StorageItem item : storage.getStorage().getItems()) {
-                    if (item.getId() != ItemId.ZULRAH_SCALES && ThreadLocalRandom.current().nextInt(1, 101) > recoveryRate) {
-                        storage.remove(item.getId(), 1);
+                    if (item.itemId != ItemId.ZULRAH_SCALES && TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
+                        storage.remove(item.itemId, 1);
                     }
                 }
             })

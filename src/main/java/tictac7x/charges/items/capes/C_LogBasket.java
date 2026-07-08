@@ -1,6 +1,7 @@
 package tictac7x.charges.items.capes;
 
 import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
+import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.store.ids.ItemId;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
@@ -11,11 +12,13 @@ import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.utils.WidgetMenuAction;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static tictac7x.charges.store.ids.ItemContainerId.BANK;
 import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
@@ -25,49 +28,57 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
     private int infernalQuantityTracker = 0;
     private Optional<Integer> lastLogUsedFromBasketForBeehive = Optional.empty();
 
+    private final List<StorableLog> storableLogs = List.of(
+        new StorableLog(ItemId.LOGS, "Logs", true).displayName("Regular logs").checkName("some logs", "x Logs"),
+        new StorableLog(ItemId.ACHEY_TREE_LOGS, "Achey tree logs", true).checkName("Achey tree logs"),
+        new StorableLog(ItemId.OAK_LOGS, "Oak logs", true).checkName("Oak logs"),
+        new StorableLog(ItemId.WILLOW_LOGS, "Willow logs", true).checkName("Willow logs"),
+        new StorableLog(ItemId.TEAK_LOGS, "Teak logs", true).checkName("Teak logs"),
+        new StorableLog(ItemId.JATOBA_LOGS, "Jatoba logs", true).checkName("Jatoba logs"),
+        new StorableLog(ItemId.JUNIPER_LOGS, "Juniper logs", true).checkName("Juniper logs"),
+        new StorableLog(ItemId.MAPLE_LOGS, "Maple logs", true).checkName("Maple logs"),
+        new StorableLog(ItemId.BARK, "Bark", true).checkName("Bark"),
+        new StorableLog(ItemId.MAHOGANY_LOGS, "Mahogany logs", true).checkName("Mahogany logs"),
+        new StorableLog(ItemId.ARCTIC_PINE_LOGS, "Arctic pine logs", true).checkName("Arctic pine logs"),
+        new StorableLog(ItemId.YEW_LOGS, "Yew logs", true).checkName("Yew logs"),
+        new StorableLog(ItemId.BLISTERWOOD_LOGS, "Blisterwood logs", true).checkName("Blisterwood logs"),
+        new StorableLog(ItemId.CAMPHOR_LOGS, "Camphor logs", true).checkName("Camphor logs"),
+        new StorableLog(ItemId.MAGIC_LOGS, "Magic logs", true).checkName("Magic logs"),
+        new StorableLog(ItemId.IRONWOOD_LOGS, "Ironwood logs", true).checkName("Ironwood logs"),
+        new StorableLog(ItemId.REDWOOD_LOGS, "Redwood logs", true).checkName("Redwood logs"),
+        new StorableLog(ItemId.ROSEWOOD_LOGS, "Rosewood logs", true).checkName("Rosewood logs")
+    );
+
+    public C_LogBasket(final String configKey, final int itemId, final int openItemId, final Storage storage, final Provider provider) {
+        super(configKey, itemId, provider);
+        this.storage = storage;
+        setup(itemId, openItemId);
+    }
+
     public C_LogBasket(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, provider);
-        storage.setMaximumTotalQuantity(28).storableItems(
-            new StorableItem(ItemId.LOGS).displayName("Regular logs").checkName("some logs", "x Logs"),
-            new StorableItem(ItemId.OAK_LOGS).checkName("Oak logs"),
-            new StorableItem(ItemId.WILLOW_LOGS).checkName("Willow logs"),
-            new StorableItem(ItemId.MAPLE_LOGS).checkName("Maple logs"),
-            new StorableItem(ItemId.YEW_LOGS).checkName("Yew logs"),
-            new StorableItem(ItemId.MAGIC_LOGS).checkName("Magic logs"),
-            new StorableItem(ItemId.REDWOOD_LOGS).checkName("Redwood logs"),
-            new StorableItem(ItemId.TEAK_LOGS).checkName("Teak logs"),
-            new StorableItem(ItemId.MAHOGANY_LOGS).checkName("Mahogany logs"),
-            new StorableItem(ItemId.ACHEY_TREE_LOGS).checkName("Achey tree logs"),
-            new StorableItem(ItemId.ARCTIC_PINE_LOGS).checkName("Arctic pine logs"),
-            new StorableItem(ItemId.JUNIPER_LOGS).checkName("Juniper logs"),
-            new StorableItem(ItemId.BARK).checkName("Bark"),
-            new StorableItem(ItemId.BLISTERWOOD_LOGS).checkName("Blisterwood logs"),
-            new StorableItem(ItemId.CAMPHOR_LOGS).checkName("Camphor logs"),
-            new StorableItem(ItemId.IRONWOOD_LOGS).checkName("Ironwood logs"),
-            new StorableItem(ItemId.ROSEWOOD_LOGS).checkName("Rosewood logs")
-        );
+        setup(ItemId.LOG_BASKET, ItemId.LOG_BASKET_OPEN);
+    }
 
+    public void setup(final int itemId, final int openItemId) {
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.LOG_BASKET),
-            new TriggerItem(ItemId.LOG_BASKET_OPEN),
+            new TriggerItem(itemId),
+            new TriggerItem(openItemId),
         };
 
-        this.triggers.addAll(List.of(
-            // Check while empty.
-            new OnChatMessage("(Your|The) basket is empty.").onItemClick().emptyStorage().consumer(() -> {
-                infernalQuantityTracker = 0;
-                lastLogs = Optional.empty();
-            }),
+        storage
+            .addStorableItems(storableLogs.stream().map(storableLog -> new StorableItem(storableLog.itemId).checkName(storableLog.checkName).displayName(storableLog.displayName)).collect(Collectors.toList()))
+            .setMaximumComboQuantity(storableLogs.stream().map(storableLog -> storableLog.itemId).collect(Collectors.toList()), 28);
 
-            // Empty to bank.
-            new OnChatMessage("You empty your basket( into the bank)?.").onItemClick().emptyStorage().consumer(() -> {
-                infernalQuantityTracker = 0;
-                lastLogs = Optional.empty();
+        this.triggers.addAll(List.of(
+            // Check while empty or empty to inventory or bank.
+            new OnChatMessage("(Your basket is empty.|The basket is empty.|You empty your basket.|You empty your basket into the bank.)").onItemClick().consumer(() -> {
+                emptyStorage();
             }),
 
             // Check.
             new OnChatMessage("The basket contains:").stringConsumer(s -> {
-                storage.clear();
+                emptyStorage();
 
                 final Pattern pattern = Pattern.compile("(?<quantity>\\d+).x.(?<logs>.*?)(,|$)");
                 final Matcher matcher = pattern.matcher(s);
@@ -80,42 +91,42 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
             }).onItemClick(),
 
             // Miscellania support.
-            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.MAPLE_LOGS, 0),
-            new OnChatMessage("You get some teak logs and give them to Carpenter Kjallak.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.TEAK_LOGS, 0),
-            new OnChatMessage("You get some mahogany logs and give them to Carpenter Kjallak.").requiredItem(ItemId.LOG_BASKET_OPEN).addToStorage(ItemId.MAHOGANY_LOGS, 0),
-            
+            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(openItemId).addToStorage(ItemId.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some teak logs and give them to Carpenter Kjallak.").requiredItem(openItemId).addToStorage(ItemId.TEAK_LOGS, 0),
+            new OnChatMessage("You get some mahogany logs and give them to Carpenter Kjallak.").requiredItem(openItemId).addToStorage(ItemId.MAHOGANY_LOGS, 0),
+
 
             // Achey tree.
             new OnChatMessage("You get some logs.").onMenuTarget("Achey Tree").consumer(() -> {
                 lastLogs = Optional.of(new StorageItem(ItemId.ACHEY_TREE_LOGS, 1));
                 storage.add(lastLogs);
                 infernalQuantityTracker++;
-            }).requiredItem(ItemId.LOG_BASKET_OPEN),
+            }).requiredItem(openItemId),
 
             // Chop.
             new OnChatMessage("You get (?<logs>some .+).").matcherConsumer(m -> {
                 lastLogs = getStorageItemFromName(m.group("logs"), 1);
                 storage.add(lastLogs);
                 infernalQuantityTracker++;
-            }).requiredItem(ItemId.LOG_BASKET_OPEN),
+            }).requiredItem(openItemId),
 
             // Extra logs from nature offerings.
-            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(ItemId.LOG_BASKET_OPEN).runConsumerOnNextGameTick(() -> {
+            new OnChatMessage("The nature offerings enabled you to chop an extra log.").requiredItem(openItemId).runConsumerOnNextGameTick(() -> {
                 if (lastLogs.isPresent()) {
-                    storage.add(lastLogs.get().getId(), 1);
+                    storage.add(lastLogs.get().itemId, 1);
                 }
             }),
 
-            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemId.LOG_BASKET_OPEN).pickUpToStorage(),
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(openItemId).pickUpToStorage(),
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).onMenuOption("Fill").onItemClick().fillStorageFromInventory(),
 
-            // Fully empty to inventory.
-            new OnChatMessage("You empty your basket.").emptyStorage(),
-
             // Partially empty to inventory.
             new OnItemContainerChanged(INVENTORY).onMenuOption("Empty").onItemClick().emptyStorageToInventory(),
+
+            // Empty from check dialog.
+            new OnItemContainerChanged(INVENTORY).onWidgetMenuAction(new WidgetMenuAction("Yes", 0, "Empty the log basket into your inventory?")).emptyStorageToInventory(),
 
             // Partially empty to inventory from check dialog.
             new OnItemContainerChanged(INVENTORY).onMenuOption("Continue").hasChatMessage("You empty as many logs as you can carry.").emptyStorageToInventory(),
@@ -130,32 +141,17 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
             new OnMenuOptionClicked("Continue").consumer(() -> {
                 final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 219, 1, 2);
                 if (bankWoodcuttingResourcesWidget.isPresent() && bankWoodcuttingResourcesWidget.get().getText().equals("Only bank woodcutting resources")) {
-                    provider.store.addConsumerToNextTickQueue(() -> storage.clear());
+                    provider.store.addConsumerToNextTickQueue(() -> emptyStorage());
                 }
             }),
 
             // Beehives.
-            new OnXpDrop(Skill.WOODCUTTING).onMenuOption("Use").onMenuTarget(
-                "Logs",
-                "Achey tree logs",
-                "Oak logs",
-                "Willow logs",
-                "Teak logs",
-                "Maple logs",
-                "Mahogany logs",
-                "Arctic pine logs",
-                "Yew logs",
-                "Magic logs",
-                "Redwood logs",
-                "Camphor logs",
-                "Ironwood logs",
-                "Rosewood logs"
-            ).consumer(this::buildBeehive),
+            new OnXpDrop(Skill.WOODCUTTING).onMenuOption("Use").onMenuTarget(storableLogs.stream().map(storableLog -> storableLog.itemName).collect(Collectors.toList())).consumer(this::buildBeehive),
             new OnChatMessage("Well done, you've completed a beehive. The bees can now be safely rehomed.").consumer(() -> {
-               if (lastLogUsedFromBasketForBeehive.isPresent()) {
-                   storage.add(lastLogUsedFromBasketForBeehive.get(), 1);
-                   lastLogUsedFromBasketForBeehive = Optional.empty();
-               }
+                if (lastLogUsedFromBasketForBeehive.isPresent()) {
+                    storage.add(lastLogUsedFromBasketForBeehive.get(), 1);
+                    lastLogUsedFromBasketForBeehive = Optional.empty();
+                }
             }),
 
             // Replace "Empty" with proper Empty to bank option.
@@ -167,22 +163,33 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
             // Infernal axe support.
             new OnXpDrop(Skill.FIREMAKING).onMenuOption("Chop down", "Cut").consumer(() -> {
                 if (infernalQuantityTracker < 29 && lastLogs.isPresent()) {
-                    storage.remove(lastLogs.get().getId(), 1);
+                    storage.remove(lastLogs.get().itemId, 1);
                     infernalQuantityTracker--;
                 }
-            }).requiredItem(ItemId.LOG_BASKET_OPEN)
+            }).requiredItem(openItemId)
         ));
     }
 
-    private void buildBeehive() {
-        final int[] logsInOrderToUse = new int[]{
-            ItemId.LOGS, ItemId.ACHEY_TREE_LOGS, ItemId.OAK_LOGS, ItemId.WILLOW_LOGS,
-            ItemId.TEAK_LOGS, ItemId.MAPLE_LOGS, ItemId.MAHOGANY_LOGS, ItemId.ARCTIC_PINE_LOGS,
-            ItemId.YEW_LOGS, ItemId.CAMPHOR_LOGS, ItemId.IRONWOOD_LOGS, ItemId.MAGIC_LOGS,
-            ItemId.REDWOOD_LOGS, ItemId.ROSEWOOD_LOGS
-        };
+    public void emptyStorage() {
+        infernalQuantityTracker = 0;
+        lastLogs = Optional.empty();
+        storableLogs.forEach(storableLog -> {
+            storage.remove(storableLog.itemId);
+        });
+    }
 
-        for (final int logsId : logsInOrderToUse) {
+    public boolean hasLogsInStorage() {
+        for (final StorableLog storableLog : storableLogs) {
+            if (storage.hasItem(storableLog.itemId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void buildBeehive() {
+        for (final int logsId : storableLogs.stream().filter(storableLog -> storableLog.beehiveBuildable).map(storableLog -> storableLog.itemId).collect(Collectors.toList())) {
             if (provider.store.inventoryContainsItem(logsId)) {
                 lastLogUsedFromBasketForBeehive = Optional.empty();
                 return;
@@ -192,5 +199,28 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
                 return;
             }
         }
+    }
+}
+
+class StorableLog extends StorableItem {
+    public final String itemName;
+    public final boolean beehiveBuildable;
+
+    StorableLog(final int itemId, final String itemName, final boolean beehiveBuildable) {
+        super(itemId);
+        this.itemName = itemName;
+        this.beehiveBuildable = beehiveBuildable;
+    }
+
+    @Override
+    public StorableLog displayName(String displayName) {
+        super.displayName(displayName);
+        return this;
+    }
+
+    @Override
+    public StorableLog checkName(String... checkName) {
+        super.checkName(checkName);
+        return this;
     }
 }

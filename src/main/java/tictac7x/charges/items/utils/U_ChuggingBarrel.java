@@ -116,7 +116,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
             // Drink.
             new OnAnimationChanged(AnimationId.CHUGGING_BARREL_DRINK).consumer(() -> {
                 for (final StorageItem storageItem : storage.getStorage().getItems()) {
-                    storage.put(storageItem.getId(), storageItem.getQuantity() - 1);
+                    storage.put(storageItem.itemId, storageItem.getQuantity() - 1);
                 }
             }),
 

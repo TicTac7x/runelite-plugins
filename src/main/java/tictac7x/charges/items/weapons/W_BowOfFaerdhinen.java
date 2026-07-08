@@ -24,6 +24,7 @@ public class W_BowOfFaerdhinen extends ChargedItem {
             new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_CRWYS).fixedCharges(ChargeId.UNLIMITED),
             new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_MEILYR).fixedCharges(ChargeId.UNLIMITED),
             new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_AMLODD).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.BOW_OF_FAERDHINEN_CORRUPTED_ANNIHILATION).fixedCharges(ChargeId.UNLIMITED),
         };
 
         this.triggers.addAll(List.of(

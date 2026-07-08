@@ -49,8 +49,8 @@ public class U_BloodEssence extends ChargedItemWithStatus {
                 if (
                     destroyWidgetItem.isPresent() &&
                     (destroyWidgetItem.get().getItemId() == ItemId.BLOOD_ESSENCE_ACTIVE || destroyWidgetItem.get().getItemId() == ItemId.BLOOD_ESSENCE_INACTIVE) &&
-                    script.getScriptEvent().getArguments().length >= 5 &&
-                    script.getScriptEvent().getArguments()[4].toString().equals("Yes")
+                    script.arguments.length >= 5 &&
+                    script.arguments[4].toString().equals("Yes")
                 ) {
                     provider.store.addConsumerToNextTickQueue(() -> setCharges(1000));
 

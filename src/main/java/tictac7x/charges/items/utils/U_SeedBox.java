@@ -1,6 +1,6 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
+import tictac7x.charges.item.ChargedItemWithStorage;
 import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
@@ -12,7 +12,7 @@ import tictac7x.charges.store.ids.WidgetId;
 
 import java.util.List;
 
-public class U_SeedBox extends ChargedItemWithStorageEmptyable {
+public class U_SeedBox extends ChargedItemWithStorage {
     public U_SeedBox(final Provider provider) {
         super(TicTac7xChargesImprovedConfig.seed_box, ItemId.SEED_BOX, provider);
 
@@ -160,6 +160,11 @@ public class U_SeedBox extends ChargedItemWithStorageEmptyable {
 
             // Check.
             new OnItemContainerChanged(ItemContainerId.SEED_BOX).updateStorage(),
+
+            // Planting.
+            new OnChatMessage("An? (?<seed>.*) seed was taken from your seed box.").matcherConsumer(m -> {
+                storage.remove(getStorageItemFromName(m.group("seed"), 1));
+            }),
 
             // Replace "Empty" with proper "Empty to bank".
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),

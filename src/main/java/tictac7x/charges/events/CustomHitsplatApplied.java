@@ -2,8 +2,6 @@ package tictac7x.charges.events;
 
 import net.runelite.api.Actor;
 import net.runelite.api.Client;
-import net.runelite.api.HitsplatID;
-import net.runelite.api.annotations.HitsplatType;
 import net.runelite.api.events.HitsplatApplied;
 
 public class CustomHitsplatApplied {

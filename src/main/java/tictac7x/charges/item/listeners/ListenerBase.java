@@ -15,14 +15,12 @@ import java.util.Optional;
 
 public abstract class ListenerBase {
     protected final Provider provider;
-    protected final ChargedItemBase chargedItem;
 
-    public ListenerBase(final Provider provider, final ChargedItemBase chargedItem) {
+    public ListenerBase(final Provider provider) {
         this.provider = provider;
-        this.chargedItem = chargedItem;
     }
 
-    boolean trigger(final TriggerBase trigger) {
+    boolean trigger(final TriggerBase trigger, final ChargedItemBase chargedItem) {
         boolean triggerUsed = false;
 
         // Fixed charges.
@@ -52,6 +50,12 @@ public abstract class ListenerBase {
         // Empty storage to bank.
         if (trigger.emptyStorageToBank.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
             ((ChargedItemWithStorage) chargedItem).storage.emptyToBank();
+            triggerUsed = true;
+        }
+
+        // Fill storage from bank.
+        if (trigger.fillStorageFromBank.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
+            ((ChargedItemWithStorage) chargedItem).storage.fillFromBank();
             triggerUsed = true;
         }
 
@@ -98,7 +102,7 @@ public abstract class ListenerBase {
         return triggerUsed;
     }
 
-    boolean isValidTrigger(final TriggerBase trigger) {
+    boolean isValidTrigger(final TriggerBase trigger, final ChargedItemBase chargedItem) {
         // Specific item check.
         specificItemCheck: if (trigger.requiredItem.isPresent()) {
             for (final int itemId : trigger.requiredItem.get()) {
@@ -138,6 +142,11 @@ public abstract class ListenerBase {
             return false;
         }
 
+        // Widget menu action check.
+        if (trigger.onWidgetMenuAction.isPresent() && chargedItem.provider.store.notInWidgetMenuActions(trigger.onWidgetMenuAction.get())) {
+            return false;
+        }
+
         // Menu impostor id check.
         if (trigger.onMenuImpostor.isPresent() && chargedItem.provider.store.notInMenuImpostors(trigger.onMenuImpostor.get())) {
             return false;
@@ -164,8 +173,8 @@ public abstract class ListenerBase {
                 }
                 for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
-                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.getId()).getName()) ||
-                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.getId()).getName())
+                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName()) ||
+                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName())
                     ) {
                         isValid = true;
                         break loopChecker;
@@ -185,7 +194,7 @@ public abstract class ListenerBase {
                 if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(provider.itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
                 for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
-                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.getId()).getName())) {
+                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.itemId).getName())) {
                         useCheck = true;
                         break useCheckLooper;
                     }
@@ -250,6 +259,11 @@ public abstract class ListenerBase {
             return false;
         }
 
+        // Fill storage from bank check.
+        if (trigger.fillStorageFromBank.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
+            return false;
+        }
+
         // Fill storage from inventory check.
         if (trigger.fillStorageFromInventory.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
             return false;
@@ -258,6 +272,21 @@ public abstract class ListenerBase {
         // Specific item equipped check.
         if (trigger.itemEquipped.isPresent() && !chargedItem.provider.store.equipmentContainsItem(trigger.itemEquipped.get())) {
             return false;
+        }
+
+        // Animation id check.
+        if (trigger.hasAnimationId.isPresent()) {
+            boolean valid = false;
+
+            for (final int animationId : trigger.hasAnimationId.get()) {
+                if (animationId == provider.client.getLocalPlayer().getAnimation()) {
+                    valid = true;
+                }
+            }
+
+            if (!valid) {
+                return false;
+            }
         }
 
         return true;

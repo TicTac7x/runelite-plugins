@@ -51,6 +51,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     // Helms
     String circlet_of_water = "circlet_of_water";
     String kandarin_headgear = "kandarin_headgear";
+    String serpentine_helm = "serpentine_helm";
+    String magma_helm = "magma_helm";
+    String tanzanite_helm = "tanzanite_helm";
 
     // Boots
     String fremennik_sea_boots = "fremennik_sea_boots";
@@ -63,6 +66,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String magic_cape = "magic_cape";
 
     // Jewelery
+    String abyssal_bracelet = "abyssal_bracelet";
     String alchemists_amulet = "alchemists_amulet";
     String amulet_of_blood_fury = "amulet_of_blood_fury";
     String amulet_of_bounty = "amulet_of_bounty";
@@ -130,6 +134,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String bonecrusher = "bonecrusher";
     String bonecrusher_status = "bonecrusher_status";
     String bottomless_compost_bucket = "bottomless_compost_bucket";
+    String bottomless_milk_bucket = "bottomless_milk_bucket";
     String bow_string_spool = "bow_string_spool";
     String chugging_barrel = "chugging_barrel";
     String coal_bag = "coal_bag";
@@ -143,6 +148,10 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String fungicide_spray = "fungicide_spray";
     String fur_pouch = "fur_pouch";
     String gem_bag = "gem_bag";
+    String gem_pouch = "gem_pouch";
+    String gem_sack = "gem_sack";
+    String gem_satchel = "gem_satchel";
+    String gem_tote = "gem_tote";
     String gricollers_can = "gricollers_can";
     String herb_sack = "herb_sack";
     String silklined_herb_sack = "silklined_herb_sack";
@@ -167,17 +176,22 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String waterskin = "waterskin";
 
     // Weapons
+    String abyssal_tentacle = "abyssal_tentacle";
     String arclight = "arclight";
     String blazing_blowpipe = "blazing_blowpipe";
     String bow_of_faerdhinen = "bow_of_faerdhinen";
     String bryophytas_staff = "bryophytas_staff";
+    String camphor_blowpipe = "camphor_blowpipe";
     String craws_bow = "craws_bow";
     String crystal_bow = "crystal_bow";
     String crystal_halberd = "crystal_halberd";
+    String echo_venator_bow = "echo_venator_bow";
     String eye_of_ayak = "eye_of_ayak";
     String ibans_staff = "ibans_staff";
     String infernal_axe = "infernal_axe";
+    String ironwood_blowpipe = "ironwood_blowpipe";
     String pharaohs_sceptre = "pharaohs_sceptre";
+    String rosewood_blowpipe = "rosewood_blowpipe";
     String sanguinesti_staff = "sanguinesti_staff";
     String scythe_of_vitur = "scythe_of_vitur";
     String skull_sceptre = "skull_sceptre";
@@ -341,7 +355,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         @ConfigItem(
             keyName = "dose_4",
             name = "4 doses",
-            description = "Color of 4 doses overlay",
+            description = "Color of 4 doses or potions with max 2 doses overlay",
             position = 1,
             section = potions
         ) default Color get4DoseColor() { return Color.white; }
@@ -909,6 +923,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bottomlessCompostBucketInfobox() { return true; }
 
         @ConfigItem(
+            keyName = bottomless_milk_bucket + _infobox,
+            name = "Bottomless milk bucket",
+            description = "",
+            section = infoboxes
+        ) default boolean bottomlessMilkBucketInfobox() { return true; }
+
+        @ConfigItem(
             keyName = bow_string_spool + _infobox,
             name = "Bow string spool",
             description = "",
@@ -970,6 +991,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean gemBagInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_pouch + _infobox,
+            name = "Gem pouch",
+            description = "",
+            section = infoboxes
+        ) default boolean gemPouchInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_sack + _infobox,
+            name = "Gem sack",
+            description = "",
+            section = infoboxes
+        ) default boolean gemSackInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_satchel + _infobox,
+            name = "Gem satchel",
+            description = "",
+            section = infoboxes
+        ) default boolean gemSatchelInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_tote + _infobox,
+            name = "Gem tote",
+            description = "",
+            section = infoboxes
+        ) default boolean gemToteInfobox() { return true; }
 
         @ConfigItem(
             keyName = giantsoul_amulet + _infobox,
@@ -1119,6 +1168,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bryophytasStaffInfobox() { return true; }
 
         @ConfigItem(
+            keyName = camphor_blowpipe + _infobox,
+            name = "Camphor blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean camphorBlowpipeInfobox() { return true; }
+
+        @ConfigItem(
             keyName = craws_bow + _infobox,
             name = "Craw's bow",
             description = "",
@@ -1175,11 +1231,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean infernalAxeInfobox() { return true; }
 
         @ConfigItem(
+            keyName = ironwood_blowpipe + _infobox,
+            name = "Ironwood blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean ironwoodBlowpipeInfobox() { return true; }
+
+        @ConfigItem(
             keyName = pharaohs_sceptre + _infobox,
             name = "Pharaoh's sceptre",
             description = "",
             section = infoboxes
         ) default boolean pharaohsSceptreInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = rosewood_blowpipe + _infobox,
+            name = "Rosewood blowpipe",
+            description = "",
+            section = infoboxes
+        ) default boolean rosewoodBlowpipeInfobox() { return true; }
 
         @ConfigItem(
             keyName = sanguinesti_staff + _infobox,
@@ -1266,6 +1336,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean webweaverBowInfobox() { return true; }
 
         @ConfigItem(
+            keyName = abyssal_bracelet + _infobox,
+            name = "Abyssal bracelet",
+            description = "",
+            section = infoboxes
+        ) default boolean abyssalBraceletInfobox() { return true; }
+
+        @ConfigItem(
             keyName = alchemists_amulet + _infobox,
             name = "Alchemist's amulet",
             description = "",
@@ -1306,6 +1383,41 @@ public interface TicTac7xChargesImprovedConfig extends Config {
                 description = "",
                 section = infoboxes
         ) default boolean eyeOfAyakInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = serpentine_helm + _infobox,
+            name = "Serpentine helm",
+            description = "",
+            section = infoboxes
+        ) default boolean serpentineHelmInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = magma_helm + _infobox,
+            name = "Magma helm",
+            description = "",
+            section = infoboxes
+        ) default boolean magmaHelmInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = tanzanite_helm + _infobox,
+            name = "Tanzanite helm",
+            description = "",
+            section = infoboxes
+        ) default boolean tanzaniteHelmInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = echo_venator_bow + _infobox,
+            name = "Echo venator bow",
+            description = "",
+            section = infoboxes
+        ) default boolean echoVenatorBowInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = abyssal_tentacle + _infobox,
+            name = "Abyssal tentacle",
+            description = "",
+            section = infoboxes
+        ) default boolean abyssalTentacleInfobox() { return true; }
 
     @ConfigSection(
         name = "Overlays",
@@ -1460,6 +1572,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean bottomlessCompostBucketOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = bottomless_milk_bucket + _overlay,
+            name = "Bottomless milk bucket",
+            description = "",
+            section = overlays
+        ) default boolean bottomlessMilkBucketOverlay() { return true; }
 
         @ConfigItem(
             keyName = bow_string_spool + _overlay,
@@ -1728,6 +1847,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean gemBagOverlay() { return true; }
 
         @ConfigItem(
+            keyName = gem_pouch + _overlay,
+            name = "Gem pouch",
+            description = "",
+            section = overlays
+        ) default boolean gemPouchOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = gem_sack + _overlay,
+            name = "Gem sack",
+            description = "",
+            section = overlays
+        ) default boolean gemSackOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = gem_satchel + _overlay,
+            name = "Gem satchel",
+            description = "",
+            section = overlays
+        ) default boolean gemSatchelOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = gem_tote + _overlay,
+            name = "Gem tote",
+            description = "",
+            section = overlays
+        ) default boolean gemToteOverlay() { return true; }
+
+        @ConfigItem(
             keyName = giantsoul_amulet + _overlay,
             name = "Giantsoul amulet",
             description = "",
@@ -1994,6 +2141,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean bryophytasStaffOverlay() { return true; }
 
         @ConfigItem(
+            keyName = camphor_blowpipe + _overlay,
+            name = "Camphor blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean camphorBlowpipeOverlay() { return true; }
+
+        @ConfigItem(
             keyName = craws_bow + _overlay,
             name = "Craw's bow",
             description = "",
@@ -2050,11 +2204,25 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean infernalAxeOverlay() { return true; }
 
         @ConfigItem(
+            keyName = ironwood_blowpipe + _overlay,
+            name = "Ironwood blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean ironwoodBlowpipeOverlay() { return true; }
+
+        @ConfigItem(
             keyName = pharaohs_sceptre + _overlay,
             name = "Pharaoh's sceptre",
             description = "",
             section = overlays
         ) default boolean pharaohsSceptreOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = rosewood_blowpipe + _overlay,
+            name = "Rosewood blowpipe",
+            description = "",
+            section = overlays
+        ) default boolean rosewoodBlowpipeOverlay() { return true; }
 
         @ConfigItem(
             keyName = quetzal_whistle + _overlay,
@@ -2176,6 +2344,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean sacksOverlay() { return true; }
 
         @ConfigItem(
+            keyName = abyssal_bracelet + _overlay,
+            name = "Abyssal bracelet",
+            description = "",
+            section = overlays
+        ) default boolean abyssalBraceletOverlay() { return true; }
+
+        @ConfigItem(
             keyName = alchemists_amulet + _overlay,
             name = "Alchemist's amulet",
             description = "",
@@ -2216,6 +2391,41 @@ public interface TicTac7xChargesImprovedConfig extends Config {
                 description = "",
                 section = overlays
         ) default boolean eyeOfAyakOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = serpentine_helm + _overlay,
+            name = "Serpentine helm",
+            description = "",
+            section = overlays
+        ) default boolean serpentineHelmOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = magma_helm + _overlay,
+            name = "Magma helm",
+            description = "",
+            section = overlays
+        ) default boolean magmaHelmOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = tanzanite_helm + _overlay,
+            name = "Tanzanite helm",
+            description = "",
+            section = overlays
+        ) default boolean tanzaniteHelmOverlay() { return true; }
+  
+        @ConfigItem(
+            keyName = echo_venator_bow + _overlay,
+            name = "Echo Venator Bow",
+            description = "",
+            section = overlays
+        ) default boolean echoVenatorBowOverlay() { return true; }
+  
+        @ConfigItem(
+            keyName = abyssal_tentacle + _overlay,
+            name = "Abyssal tentacle",
+            description = "",
+            section = overlays
+        ) default boolean abyssalTentacleOverlay() { return true; }
 
     @ConfigSection(
         name = "Debug",
@@ -2621,6 +2831,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getGemBagStorageCharges() { return ""; }
 
         @ConfigItem(
+            keyName = gem_pouch + _storage,
+            name = gem_pouch + _storage,
+            description = gem_pouch + _storage,
+            section = debug
+        ) default String getGemPouchStorageCharges() { return ""; }
+
+        @ConfigItem(
+            keyName = gem_sack + _storage,
+            name = gem_sack + _storage,
+            description = gem_sack + _storage,
+            section = debug
+        ) default String getGemSackStorageCharges() { return ""; }
+
+        @ConfigItem(
+            keyName = gem_satchel + _storage,
+            name = gem_satchel + _storage,
+            description = gem_satchel + _storage,
+            section = debug
+        ) default String getGemSatchelStorageCharges() { return ""; }
+
+        @ConfigItem(
+            keyName = gem_tote + _storage,
+            name = gem_tote + _storage,
+            description = gem_tote + _storage,
+            section = debug
+        ) default String getGemToteStorageCharges() { return ""; }
+
+        @ConfigItem(
             keyName = seed_box,
             name = seed_box,
             description = seed_box,
@@ -2850,4 +3088,46 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = amulet_of_chemistry,
             section = debug
         ) default int getAmuletOfChemistryCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = serpentine_helm,
+            name = serpentine_helm,
+            description = serpentine_helm,
+            section = debug
+        ) default int getSerpentineHelmCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = magma_helm,
+            name = magma_helm,
+            description = magma_helm,
+            section = debug
+        ) default int getMagmaHelmCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = tanzanite_helm,
+            name = tanzanite_helm,
+            description = tanzanite_helm,
+            section = debug
+        ) default int getTanzaniteHelmCharges() { return ChargeId.UNKNOWN; }
+  
+        @ConfigItem(
+            keyName = venator_bow,
+            name = venator_bow,
+            description = venator_bow,
+            section = debug
+        ) default int getVenatorBowCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = echo_venator_bow,
+            name = echo_venator_bow,
+            description = echo_venator_bow,
+            section = debug
+        ) default int getEchoVenatorBowCharges() { return ChargeId.UNKNOWN; }
+  
+        @ConfigItem(
+            keyName = abyssal_tentacle,
+            name = abyssal_tentacle,
+            description = abyssal_tentacle,
+            section = debug
+        ) default int getAbyssalTentacleCharges() { return ChargeId.UNKNOWN; }
 }

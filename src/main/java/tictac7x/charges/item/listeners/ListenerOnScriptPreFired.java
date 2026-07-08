@@ -1,19 +1,20 @@
 package tictac7x.charges.item.listeners;
 
 import net.runelite.api.events.ScriptPreFired;
+import tictac7x.charges.events.CustomScriptPreFired;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnScriptPreFired;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnScriptPreFired extends ListenerBase {
-    public ListenerOnScriptPreFired(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnScriptPreFired(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final ScriptPreFired event) {
+    public void trigger(final CustomScriptPreFired event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             final OnScriptPreFired trigger = (OnScriptPreFired) triggerBase;
             boolean triggerUsed = false;
 
@@ -22,7 +23,7 @@ public class ListenerOnScriptPreFired extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -30,15 +31,15 @@ public class ListenerOnScriptPreFired extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final ScriptPreFired event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomScriptPreFired event) {
         if (!(triggerBase instanceof OnScriptPreFired)) return false;
         final OnScriptPreFired trigger = (OnScriptPreFired) triggerBase;
 
         // Id check.
-        if (trigger.scriptId != event.getScriptId()) {
+        if (trigger.scriptId != event.scriptId) {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

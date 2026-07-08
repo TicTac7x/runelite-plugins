@@ -37,8 +37,8 @@ public class J_BindingNecklace extends ChargedItem {
                 final Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
                 if (
                     destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?") &&
-                    script.getScriptEvent().getArguments().length >= 5 &&
-                    script.getScriptEvent().getArguments()[4].toString().equals("Yes")
+                    script.arguments.length >= 5 &&
+                    script.arguments[4].toString().equals("Yes")
                 ) {
                     provider.store.addConsumerToNextTickQueue(() -> setCharges(16));
                 }

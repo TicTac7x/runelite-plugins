@@ -38,7 +38,7 @@ public class CustomItemContainerChanged {
         this.items = new ArrayList<>();
 
         for (final StorageItem item : previousItemContainerChanged.getItems()) {
-            items.add(new StorageItem(item.getId(), item.getQuantity()));
+            items.add(new StorageItem(item.itemId, item.getQuantity()));
         }
     }
 
@@ -58,7 +58,7 @@ public class CustomItemContainerChanged {
         int count = 0;
 
         for (final StorageItem item : items) {
-            if (item.getId() == itemId) {
+            if (item.itemId == itemId) {
                 count += item.getQuantity();
             }
         }
@@ -68,7 +68,7 @@ public class CustomItemContainerChanged {
 
     public boolean hasItem(final int itemId) {
         for (final StorageItem item : items) {
-            if (item.getId() == itemId) {
+            if (item.itemId == itemId) {
                 return true;
             }
         }
@@ -78,7 +78,7 @@ public class CustomItemContainerChanged {
 
     public void addStackableItem(final StorageItem itemToAdd) {
         for (final StorageItem item : items) {
-            if (item.getId() == itemToAdd.getId()) {
+            if (item.itemId == itemToAdd.itemId) {
                 item.increaseQuantity(itemToAdd.getQuantity());
                 return;
             }
@@ -87,7 +87,7 @@ public class CustomItemContainerChanged {
 
     public void addNonStackableItem(final StorageItem itemToAdd) {
         for (int i = 0; i < itemToAdd.getQuantity(); i++) {
-            items.add(new StorageItem(itemToAdd.getId(), 1));
+            items.add(new StorageItem(itemToAdd.itemId, 1));
         }
     }
 
@@ -96,7 +96,7 @@ public class CustomItemContainerChanged {
         String string = "ITEM CONTAINER CHANGED: | item container id: " + itemContainerId + "\r\n";
 
         for (final StorageItem item : items) {
-            string += item.getId() + ", quantity: " + item.getQuantity() + "\r\n";
+            string += item.itemId + ", quantity: " + item.getQuantity() + "\r\n";
         }
 
         return string;

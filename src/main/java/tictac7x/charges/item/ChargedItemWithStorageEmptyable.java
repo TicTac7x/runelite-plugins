@@ -8,7 +8,7 @@ public class ChargedItemWithStorageEmptyable extends ChargedItemWithStorage {
         super(configKey, itemId, provider);
 
         this.triggers.add(
-            new OnChatMessage("You empty all of your containers into the bank").emptyStorage()
+            new OnChatMessage("You empty all of your containers into the bank.").emptyStorage()
         );
     }
 }

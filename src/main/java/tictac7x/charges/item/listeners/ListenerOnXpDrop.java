@@ -2,28 +2,29 @@ package tictac7x.charges.item.listeners;
 
 import net.runelite.api.Skill;
 import net.runelite.api.events.StatChanged;
+import tictac7x.charges.events.CustomStatChanged;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.triggers.OnXpDrop;
 import tictac7x.charges.item.triggers.TriggerBase;
 import tictac7x.charges.store.Provider;
 
 public class ListenerOnXpDrop extends ListenerBase {
-    public ListenerOnXpDrop(final Provider provider, final ChargedItemBase chargedItem) {
-        super(provider, chargedItem);
+    public ListenerOnXpDrop(final Provider provider) {
+        super(provider);
     }
 
-    public void trigger(final StatChanged event) {
+    public void trigger(final CustomStatChanged event, final ChargedItemBase chargedItem) {
         for (final TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(triggerBase, event)) continue;
+            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             final OnXpDrop trigger = (OnXpDrop) triggerBase;
             boolean triggerUsed = false;
 
             if (trigger.xpAmountConsumer.isPresent()) {
-                trigger.xpAmountConsumer.get().accept(event.getXp() - provider.store.getSkillXp(trigger.skill).get());
+                trigger.xpAmountConsumer.get().accept(event.xpDrop);
                 triggerUsed = true;
             }
 
-            if (super.trigger(trigger)) {
+            if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
 
@@ -31,32 +32,26 @@ public class ListenerOnXpDrop extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final TriggerBase triggerBase, final StatChanged event) {
+    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomStatChanged event) {
         if (!(triggerBase instanceof OnXpDrop)) return false;
         final OnXpDrop trigger = (OnXpDrop) triggerBase;
-        final Skill skill = event.getSkill();
 
         // Skill check.
-        if (trigger.skill != skill) {
+        if (trigger.skill != event.skill) {
             return false;
         }
 
         // XP drop check.
-        if (
-            !provider.store.getSkillXp(skill).isPresent() ||
-            provider.store.getSkillXp(skill).get() == event.getXp()
-        ) {
+        if (event.xpDrop == 0) {
             return false;
         }
 
         // Amount check.
-        if (trigger.amount.isPresent() && (
-            !provider.store.getSkillXp(trigger.skill).isPresent() ||
-            trigger.amount.get() != (event.getXp() - provider.store.getSkillXp(trigger.skill).get()))
+        if (trigger.amount.isPresent() && trigger.amount.get() != event.xpDrop
         ) {
             return false;
         }
 
-        return super.isValidTrigger(trigger);
+        return super.isValidTrigger(trigger, chargedItem);
     }
 }

@@ -6,12 +6,11 @@ import tictac7x.charges.item.storage.StorableItem;
 import tictac7x.charges.item.storage.Storage;
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.storage.StorageItems;
+import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
 import java.awt.Color;
-import java.util.Comparator;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ChargedItemWithStorage extends ChargedItemBase {
     public Storage storage;
@@ -24,13 +23,17 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
     @Override
     public String getTooltip() {
+        if (getQuantities() == 0) {
+            return "";
+        }
+
         String tooltip = "";
 
         for (final StorableItem storableItem : storage.getStorableItems()) {
-            final Optional<StorageItem> storageItem = storage.getStorage().getItem(storableItem.getId());
+            final Optional<StorageItem> storageItem = storage.getStorage().getItem(storableItem.itemId);
             if (storageItem.isPresent() && storageItem.get().getQuantity() > 0) {
                 // Name
-                tooltip += (storableItem.displayName.isPresent() ? storableItem.displayName.get() : provider.itemManager.getItemComposition(storageItem.get().getId()).getName()) + ": ";
+                tooltip += (storableItem.displayName.isPresent() ? storableItem.displayName.get() : provider.itemManager.getItemComposition(storageItem.get().itemId).getName()) + ": ";
                 // Quantity
                 tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.get().getQuantity()), JagexColors.MENU_TARGET) + "</br>";
             }
@@ -48,6 +51,12 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     private int getQuantities() {
+        for (final TriggerItem item : items) {
+            if (item.itemId == itemId && item.fixedCharges.isPresent()) {
+                return item.fixedCharges.get();
+            }
+        }
+
         int quantity = 0;
 
         for (final StorageItem storageItem : getStorage().getItems()) {
