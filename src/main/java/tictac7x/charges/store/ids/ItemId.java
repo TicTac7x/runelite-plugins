@@ -1107,6 +1107,10 @@ public final class ItemId {
     // Herb sack
     public static final int HERB_SACK = ItemID.SLAYER_HERB_SACK;
     public static final int HERB_SACK_OPEN = ItemID.SLAYER_HERB_SACK_OPEN;
+
+    // Silklined herb sack
+    public static final int SILKLINED_HERB_SACK = ItemID.SLAYER_HERB_SACK_SILK;
+    public static final int SILKLINED_HERB_SACK_OPEN = ItemID.SLAYER_HERB_SACK_SILK_OPEN;
     public static final int GRIMY_GUAM_LEAF = ItemID.UNIDENTIFIED_GUAM;
     public static final int GRIMY_MARRENTILL = ItemID.UNIDENTIFIED_MARENTILL;
     public static final int GRIMY_TARROMIN = ItemID.UNIDENTIFIED_TARROMIN;
