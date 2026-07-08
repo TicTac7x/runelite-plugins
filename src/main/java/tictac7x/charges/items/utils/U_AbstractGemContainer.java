@@ -41,6 +41,13 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         storage.setMaximumIndividualQuantity(maxQuantity);
 
         final List<StorableItem> storableGems = new ArrayList<>();
+        if (semiPreciousGems) {
+            storableGems.addAll(List.of(
+                    new StorableItem(ItemId.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
+                    new StorableItem(ItemId.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
+                    new StorableItem(ItemId.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
+            ));
+        }
         if (preciousGems) {
             storableGems.addAll(List.of(
                 new StorableItem(ItemId.UNCUT_SAPPHIRE).checkName("Sapphires", "Sapphire").displayName("Uncut sapphire"),
@@ -48,13 +55,6 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
                 new StorableItem(ItemId.UNCUT_RUBY).checkName("Rubies", "Ruby").displayName("Uncut ruby"),
                 new StorableItem(ItemId.UNCUT_DIAMOND).checkName("Diamonds", "Diamond").displayName("Uncut diamond"),
                 new StorableItem(ItemId.UNCUT_DRAGONSTONE).checkName("Dragonstones", "Dragonstone").displayName("Uncut dragonstone")
-            ));
-        }
-        if (semiPreciousGems) {
-            storableGems.addAll(List.of(
-                new StorableItem(ItemId.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
-                new StorableItem(ItemId.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
-                new StorableItem(ItemId.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
             ));
         }
         storage.storableItems(storableGems.toArray(StorableItem[]::new));
@@ -79,7 +79,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
             // Check or empty partially to inventory.
             new OnChatMessage(checkRegex).matcherConsumer(m -> {
                 for (final StorableItem storableGem : storableGems) {
-                    storage.put(storableGem.getId(), Integer.parseInt(m.group(getStorableGemGroupName(storableGem))));
+                    storage.put(storableGem.itemId, Integer.parseInt(m.group(getStorableGemGroupName(storableGem))));
                 }
             }),
 
@@ -129,7 +129,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
                     .requiredItem(openItemId)
                     .onMenuOption("Cast")
                     .onMenuTarget(storableGem.displayName.get())
-                    .addToStorage(storableGem.getId(), 1))
+                    .addToStorage(storableGem.itemId, 1))
                 .collect(Collectors.toList())
         );
     }

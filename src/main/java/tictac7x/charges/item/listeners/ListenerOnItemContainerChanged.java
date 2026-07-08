@@ -21,7 +21,7 @@ public class ListenerOnItemContainerChanged extends ListenerBase {
         for (final TriggerItem triggerItem : chargedItem.items) {
             if (triggerItem.quantityCharges.isPresent()) {
                for (final StorageItem item : itemContainerChanged.getItems()) {
-                    if (item.getId() == triggerItem.itemId) {
+                    if (item.itemId == triggerItem.itemId) {
                         ((ChargedItem) chargedItem).setCharges(item.getQuantity());
                         break;
                     }

@@ -11,8 +11,8 @@ public class StorageItems {
 
     public StorageItems(final CustomItemContainerChanged itemContainerChanged) {
         for (final StorageItem item : itemContainerChanged.getItems()) {
-            if (items.containsKey(item.getId())) continue;
-            items.put(item.getId(), new StorageItem(item.getId(), itemContainerChanged.count(item.getId())));
+            if (items.containsKey(item.itemId)) continue;
+            items.put(item.itemId, new StorageItem(item.itemId, itemContainerChanged.count(item.itemId)));
         }
     }
 
@@ -23,21 +23,21 @@ public class StorageItems {
     }
 
     public void put(final StorageItem storageItem) {
-        items.put(storageItem.getId(), storageItem);
+        items.put(storageItem.itemId, storageItem);
     }
 
     public List<StorageItem> getItems() {
         final List<StorageItem> items = new ArrayList<>();
 
         for (final StorageItem item : this.items.values()) {
-            items.add(new StorageItem(item.getId(), item.getQuantity()));
+            items.add(new StorageItem(item.itemId, item.getQuantity()));
         }
 
         return items;
     }
 
     public boolean hasItem(final int itemId) {
-        return items.containsKey(itemId);
+        return count(itemId) > 0;
     }
 
     public void clear() {

@@ -1,21 +1,17 @@
 package tictac7x.charges.item.storage;
 
 public class StorageItem {
-    private final int id;
+    public final int itemId;
     private int quantity;
 
-    public StorageItem(final int id) {
-        this.id = id;
+    public StorageItem(final int itemId) {
+        this.itemId = itemId;
         this.quantity = 0;
     }
 
-    public StorageItem(final int id, final int quantity) {
-        this.id = id;
+    public StorageItem(final int itemId, final int quantity) {
+        this.itemId = itemId;
         this.quantity = quantity;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setQuantity(final int quantity) {

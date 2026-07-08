@@ -87,8 +87,8 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             new OnItemContainerChanged(INVENTORY).onInventoryDifference(inventoryDifference -> {
                 for (final StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
                     // Item was put into the reagent pouch, but there is more in inventory, meaning that item is filled to maximum.
-                    if (provider.store.inventory.hasItem(inventoryDifferenceItem.getId())) {
-                        storage.put(inventoryDifferenceItem.getId(), 26);
+                    if (provider.store.inventory.hasItem(inventoryDifferenceItem.itemId)) {
+                        storage.put(inventoryDifferenceItem.itemId, 26);
                     }
                 }
             }).onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),

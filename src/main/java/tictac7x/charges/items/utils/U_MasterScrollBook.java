@@ -115,7 +115,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
             return ChargeId.UNKNOWN;
         }
 
-        final Optional<StorageItem> selectedScroll = storage.getStorage().getItem(storage.getStorableItems()[selectedScrollIndex].getId());
+        final Optional<StorageItem> selectedScroll = storage.getStorage().getItem(storage.getStorableItems()[selectedScrollIndex].itemId);
 
         if (!selectedScroll.isPresent()) {
             return 0;
@@ -162,12 +162,12 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
         }
 
         // Default teleport set, but no teleports.
-        if (!storage.getStorage().hasItem(storage.getStorableItems()[selectedScrollIndex].getId())) {
+        if (!storage.getStorage().hasItem(storage.getStorableItems()[selectedScrollIndex].itemId)) {
             return super.getTooltip().replaceAll(getDefaultTeleportLocation() + ": <col=" + JagexColors.MENU_TARGET + ">.+?</col>", getDefaultTeleportLocation() + ": " + ColorUtil.wrapWithColorTag("0", provider.config.getColorEmpty()));
         }
 
         final StorageItem defaultTeleportScrollStoreableItem = storage.getStorableItems()[selectedScrollIndex];
-        final Optional<StorageItem> defaultTeleportScrollStorageItem = storage.getStorage().getItem(defaultTeleportScrollStoreableItem.getId());
+        final Optional<StorageItem> defaultTeleportScrollStorageItem = storage.getStorage().getItem(defaultTeleportScrollStoreableItem.itemId);
 
         if (!defaultTeleportScrollStorageItem.isPresent()) {
             return "?";

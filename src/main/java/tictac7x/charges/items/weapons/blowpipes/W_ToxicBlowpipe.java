@@ -88,8 +88,8 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
                 // Calculate if dart could have been used.
                 for (final StorageItem item : storage.getStorage().getItems()) {
-                    if (item.getId() != ItemId.ZULRAH_SCALES && TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
-                        storage.remove(item.getId(), 1);
+                    if (item.itemId != ItemId.ZULRAH_SCALES && TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
+                        storage.remove(item.itemId, 1);
                     }
                 }
             })

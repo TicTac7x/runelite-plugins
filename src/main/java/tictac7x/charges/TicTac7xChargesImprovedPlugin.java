@@ -22,6 +22,8 @@ import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.util.OSType;
+import tictac7x.charges.events.CustomMenuOptionClicked;
+import tictac7x.charges.events.CustomWidgetMenuOptionClicked;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
@@ -612,7 +614,49 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		store.onMenuOptionClicked(event);
+		// Widget menu option
+		if (event.getMenuAction() == MenuAction.WIDGET_CONTINUE) {
+			final Optional<Widget> selectedWidget = Optional.ofNullable(event.getWidget());
+			if (selectedWidget.isEmpty()) return;
+
+			final Optional<Widget> parentWidget = Optional.ofNullable(selectedWidget.get().getParent());
+			if (parentWidget.isEmpty()) return;
+
+			final List<String> options = new ArrayList<>();
+			for (final Widget subWidget : parentWidget.get().getDynamicChildren()) {
+				if (subWidget.getText().isBlank()) continue;
+				options.add(subWidget.getText());
+			}
+
+			final CustomWidgetMenuOptionClicked widgetMenuOptionClicked = new CustomWidgetMenuOptionClicked(
+				selectedWidget.get().getId(),
+				options,
+				selectedWidget.get().getText()
+			);
+
+			store.onWidgetMenuOptionClicked(widgetMenuOptionClicked);
+
+		// Regular menu option
+		} else {
+			int impostorId;
+			try {
+				impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
+			} catch (final Exception ignored) {
+				impostorId = -1;
+			}
+
+			final CustomMenuOptionClicked menuOptionClicked = new CustomMenuOptionClicked(
+				event.getId(),
+				event.getMenuTarget().replaceAll("</?col.*?>", ""),
+				event.getMenuOption().replaceAll("</?col.*?>", ""),
+				event.getMenuAction().getId(),
+				event.getMenuAction().name(),
+				event.getItemId(),
+				impostorId
+			);
+
+			store.onMenuOptionClicked(menuOptionClicked);
+		}
 	}
 
 	@Subscribe
