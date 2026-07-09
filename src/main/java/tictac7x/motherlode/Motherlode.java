@@ -1,9 +1,6 @@
 package tictac7x.motherlode;
 
-import net.runelite.api.ChatMessageType;
-import net.runelite.api.Client;
-import net.runelite.api.Item;
-import net.runelite.api.ItemContainer;
+import net.runelite.api.*;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.VarbitChanged;
@@ -131,5 +128,9 @@ public class Motherlode {
                 }
             }
         });
+    }
+
+    public IndexedObjectSet<? extends Player> getPlayers() {
+        return client.getTopLevelWorldView().players();
     }
 }

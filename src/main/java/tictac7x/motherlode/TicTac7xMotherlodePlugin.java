@@ -43,7 +43,8 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private final String pluginVersion = "v0.4.4";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Additional pickaxes animations support."
+		"<colHIGHLIGHT>* Additional pickaxes animations support.<br>" +
+		"<colHIGHLIGHT>* Ore veins regeneration support."
 	;
 
 	@Inject
@@ -67,6 +68,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	@Inject
 	private ChatMessageManager chatMessageManager;
 
+	private Provider provider;
 	private Character character;
 	private Bank bank;
 	private Inventory inventory;
@@ -84,6 +86,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
+		provider = new Provider(client);
 		character = new Character(client);
 		bank = new Bank(configManager, config);
 		inventory = new Inventory();
@@ -91,7 +94,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 		sack = new Sack(client);
 		motherlode = new Motherlode(client, clientThread, notifier, config, bank, inventory, sack, hopper);
 		widget = new Widget(client, config, motherlode, character);
-		oreVeins = new OreVeins(config, character, motherlode);
+		oreVeins = new OreVeins(config, character, motherlode, provider);
 		rockfalls = new Rockfalls(config, character);
 
 		overlayManager.add(oreVeins);
@@ -143,7 +146,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	@Subscribe
 	public void onAnimationChanged(final AnimationChanged event) {
 		if (!character.isInMotherlode()) return;
-		oreVeins.onAnimationChanged(event);
 		hopper.onAnimationChanged(event);
 	}
 

@@ -2,20 +2,20 @@ package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.Actor;
 import net.runelite.api.GameState;
+import net.runelite.api.Player;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.WallObjectDespawned;
 import net.runelite.api.events.WallObjectSpawned;
-import net.runelite.api.gameval.AnimationID;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.ProgressPieComponent;
 import tictac7x.motherlode.Motherlode;
 import tictac7x.motherlode.Character;
+import tictac7x.motherlode.Provider;
 import tictac7x.motherlode.TicTac7xMotherlodeConfig;
-import tictac7x.motherlode.ids.AnimationId;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,14 +28,16 @@ public class OreVeins extends Overlay {
     private final TicTac7xMotherlodeConfig config;
     private final Character character;
     private final Motherlode motherlode;
+    private final Provider provider;
 
     public final Map<String, OreVein> oreVeins = new HashMap<>();
     public final Set<WallObject> oreVeinsWallObjects = new HashSet<>();
 
-    public OreVeins(final TicTac7xMotherlodeConfig config, final Character character, final Motherlode motherlode) {
+    public OreVeins(final TicTac7xMotherlodeConfig config, final Character character, final Motherlode motherlode, final Provider provider) {
         this.config = config;
         this.character = character;
         this.motherlode = motherlode;
+        this.provider = provider;
 
         setPosition(OverlayPosition.DYNAMIC);
         setLayer(OverlayLayer.ABOVE_SCENE);
@@ -67,10 +69,6 @@ public class OreVeins extends Overlay {
         }
     }
 
-    public void onAnimationChanged(final AnimationChanged event) {
-        setOreVeinMinedFromAnimation(event);
-    }
-
     public void onGameTick() {
         for (final OreVein oreVein : oreVeins.values()) {
             oreVein.onGameTick();
@@ -86,33 +84,9 @@ public class OreVeins extends Overlay {
             oreVeins.put(key, new OreVein(
                 wallObject.getWorldLocation().getX(),
                 wallObject.getWorldLocation().getY(),
-                isDepleted
+                isDepleted,
+                provider
             ));
-        }
-    }
-
-    private void setOreVeinMinedFromAnimation(final AnimationChanged event) {
-        final Actor player = event.getActor();
-        if (!isMiningAnimation(event.getActor().getAnimation())) return;
-
-        final int playerX = player.getWorldLocation().getX();
-        final int playerY = player.getWorldLocation().getY();
-        final int playerOrientation = player.getOrientation();
-
-        // Find correct ore vein based on actor orientation when mining.
-        for (final OreVein oreVein : oreVeins.values()) {
-            if (
-                // Facing south.
-                playerOrientation == 0 && playerX == oreVein.x && playerY == oreVein.y + 1 ||
-                // Facing west.
-                playerOrientation == 512 && playerX == oreVein.x + 1 && playerY == oreVein.y ||
-                // Facing north.
-                playerOrientation == 1024 && playerX == oreVein.x && playerY == oreVein.y - 1 ||
-                // Facing east.
-                playerOrientation == 1536 && playerX == oreVein.x - 1 && playerY == oreVein.y
-            ) {
-                oreVein.startDepleting();
-            }
         }
     }
 
@@ -147,38 +121,5 @@ public class OreVeins extends Overlay {
             progressPieComponentTimer.setFill(new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.max(color.getAlpha() - 20, 0)));
             progressPieComponentTimer.render(graphics);
         } catch (final Exception ignored) {}
-    }
-
-    private boolean isMiningAnimation(final int animationId) {
-        switch (animationId) {
-            // Regular
-            case AnimationId.BRONZE_PICKAXE:
-            case AnimationId.IRON_PICKAXE:
-            case AnimationId.STEEL_PICKAXE:
-            case AnimationId.BLACK_PICKAXE:
-            case AnimationId.MITHRIL_PICKAXE:
-            case AnimationId.ADAMANT_PICKAXE:
-            case AnimationId.RUNE_PICKAXE:
-            case AnimationId.GILDED_PICKAXE:
-            case AnimationId.DRAGON_PICKAXE:
-            case AnimationId.THIRDAGE_PICKAXE:
-            case AnimationId.CRYSTAL_PICKAXE:
-
-            // Alternative variants
-            case AnimationId.DRAGON_PICKAXE_UPGRADED:
-            case AnimationId.DRAGON_PICKAXE_ZALCANO:
-            case AnimationId.DRAGON_PICKAXE_TRAILBLAZER:
-            case AnimationId.DRAGON_PICKAXE_TRAILBLAZER_RELOADED:
-            case AnimationId.DRAGON_PICKAXE_INFERNAL:
-            case AnimationId.DRAGON_PICKAXE_INFERNAL_TRAILBLAZER:
-            case AnimationId.DRAGON_PICKAXE_INFERNAL_TRAILBLAZER_RELOADED:
-
-            // League
-            case AnimationId.LEAGUE_TRAILBLAZER_INFERNAL_PICKAXE:
-                return true;
-
-            default:
-                return false;
-        }
     }
 }
