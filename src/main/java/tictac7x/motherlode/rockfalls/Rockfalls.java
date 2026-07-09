@@ -28,8 +28,8 @@ public class Rockfalls extends Overlay {
     private final TicTac7xMotherlodeConfig config;
     private final Character character;
 
-    private Map<String, Rockfall> rockfalls = new HashMap<>();
-    private Set<GameObject> rockfallsGameObjects = new HashSet<>();
+    private final Map<String, Rockfall> rockfalls = new HashMap<>();
+    private final Set<GameObject> rockfallsGameObjects = new HashSet<>();
 
     public Rockfalls(final TicTac7xMotherlodeConfig config, final Character character) {
         this.config = config;

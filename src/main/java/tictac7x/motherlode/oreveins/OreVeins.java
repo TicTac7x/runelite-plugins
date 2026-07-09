@@ -1,7 +1,6 @@
 package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.Actor;
-import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.AnimationChanged;

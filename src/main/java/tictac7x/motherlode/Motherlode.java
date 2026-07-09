@@ -2,14 +2,14 @@ package tictac7x.motherlode;
 
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.api.gameval.InventoryID;
+import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 
@@ -89,14 +89,14 @@ public class Motherlode {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (!notifiedToStopMining && event.getContainerId() == InventoryID.INVENTORY.getId() && shouldStopMining() && config.notifyToStopMining()) {
+        if (!notifiedToStopMining && event.getContainerId() == InventoryID.INV && shouldStopMining() && config.notifyToStopMining()) {
             notifier.notify("Stop mining! Sack will be too full.");
             notifiedToStopMining = true;
         }
     }
 
     public void onVarbitChanged(final VarbitChanged event) {
-        if (event.getVarbitId() == Varbits.SACK_NUMBER) {
+        if (event.getVarbitId() == VarbitID.MOTHERLODE_SACK_TRANSMIT) {
             notifiedToStopMining = false;
         }
     }
@@ -108,22 +108,22 @@ public class Motherlode {
     }
 
     private void depositFoundGoldenNuggetsToBank() {
-        final ItemContainer inventory = client.getItemContainer(InventoryID.INVENTORY);
+        final ItemContainer inventory = client.getItemContainer(InventoryID.INV);
         if (inventory == null) return;
 
         for (final Item item : inventory.getItems()) {
-            if (item.getId() == ItemID.GOLDEN_NUGGET) {
+            if (item.getId() == ItemID.MOTHERLODE_NUGGET) {
                 goldenNuggetsBefore = item.getQuantity();
                 break;
             }
         }
 
         clientThread.invokeLater(() -> {
-            final ItemContainer inventoryNextTick = client.getItemContainer(InventoryID.INVENTORY);
+            final ItemContainer inventoryNextTick = client.getItemContainer(InventoryID.INV);
             if (inventoryNextTick == null) return;
 
             for (final Item item : inventoryNextTick.getItems()) {
-                if (item.getId() == ItemID.GOLDEN_NUGGET) {
+                if (item.getId() == ItemID.MOTHERLODE_NUGGET) {
                     final int quantity = item.getQuantity() - goldenNuggetsBefore;
                     bank.depositGoldenNuggets(quantity);
                     goldenNuggetsSession += quantity;

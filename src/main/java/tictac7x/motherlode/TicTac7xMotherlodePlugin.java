@@ -40,10 +40,10 @@ import javax.inject.Inject;
 	conflicts = {"Motherlode Mine", "MLM Mining Markers"}
 )
 public class TicTac7xMotherlodePlugin extends Plugin {
-	private final String pluginVersion = "v0.4.3";
+	private final String pluginVersion = "v0.4.4";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Needed paydirt improvements."
+		"<colHIGHLIGHT>* Additional pickaxes animations support."
 	;
 
 	@Inject
