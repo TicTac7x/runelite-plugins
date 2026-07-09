@@ -2,6 +2,7 @@ package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.WallObject;
 import tictac7x.motherlode.Motherlode;
+import tictac7x.motherlode.ids.WallObjectId;
 import tictac7x.motherlode.sectors.Sectors;
 import tictac7x.motherlode.Character;
 import tictac7x.motherlode.sectors.Sector;
@@ -20,8 +21,8 @@ public class OreVein {
     private final int RESPAWN_TIME_GAMETICKS = 100;
     private final int DESPAWN_TIME_DOWNSTAIRS_GAMETICKS = 45;
     private final int DESPAWN_TIME_UPPERFLOOR_GAMETICKS = 67;
-    private static final int[] ORE_VEINS_IDS = new int[]{ 26661, 26662, 26663, 26664};
-    private static final int[] DEPLETED_ORE_VEINS_IDS = new int[]{ 26665, 26666, 26667, 26668 };
+    private static final int[] ORE_VEINS_IDS = new int[]{WallObjectId.ORE_VEIN_ONE, WallObjectId.ORE_VEIN_TWO, WallObjectId.ORE_VEIN_THREE, WallObjectId.ORE_VEIN_FOUR};
+    private static final int[] DEPLETED_ORE_VEINS_IDS = new int[]{ WallObjectId.ORE_VEIN_ONE_DEPLETED, WallObjectId.ORE_VEIN_TWO_DEPLETED, WallObjectId.ORE_VEIN_THREE_DEPLETED, WallObjectId.ORE_VEIN_FOUR_DEPLETED };
 
     public OreVein(final int x, final int y, final boolean isDepleted) {
         this.x = x;

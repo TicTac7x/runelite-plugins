@@ -2,9 +2,9 @@ package tictac7x.motherlode;
 
 import net.runelite.api.Item;
 import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.gameval.InventoryID;
-import net.runelite.api.gameval.ItemID;
 import net.runelite.client.config.ConfigManager;
+import tictac7x.motherlode.ids.ItemContainerId;
+import tictac7x.motherlode.ids.ItemId;
 
 public class Bank {
     private final ConfigManager configManager;
@@ -20,10 +20,10 @@ public class Bank {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (event.getContainerId() != InventoryID.BANK) return;
+        if (event.getContainerId() != ItemContainerId.BANK) return;
 
         for (final Item item : event.getItemContainer().getItems()) {
-            if (item.getId() == ItemID.MOTHERLODE_NUGGET) {
+            if (item.getId() == ItemId.GOLDEN_NUGGET) {
                 setGoldenNuggets(item.getQuantity());
                 return;
             }

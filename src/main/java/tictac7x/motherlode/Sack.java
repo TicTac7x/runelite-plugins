@@ -1,7 +1,7 @@
 package tictac7x.motherlode;
 
 import net.runelite.api.Client;
-import net.runelite.api.gameval.VarbitID;
+import tictac7x.motherlode.ids.VarbitId;
 
 public class Sack {
     private final Client client;
@@ -14,11 +14,11 @@ public class Sack {
     }
 
     public int getPaydirt() {
-        return client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT);
+        return client.getVarbitValue(VarbitId.MOTHERLODE_SACK_PAYDIRT);
     }
 
     private boolean isSackUpgraded() {
-        return client.getVarbitValue(VarbitID.MOTHERLODE_BIGGERSACK) == 1;
+        return client.getVarbitValue(VarbitId.MOTHERLODE_SACK_UPGRADED) == 1;
     }
 
     public int getSize() {

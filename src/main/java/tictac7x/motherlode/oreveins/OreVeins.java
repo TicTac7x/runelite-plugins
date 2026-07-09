@@ -15,15 +15,12 @@ import net.runelite.client.ui.overlay.components.ProgressPieComponent;
 import tictac7x.motherlode.Motherlode;
 import tictac7x.motherlode.Character;
 import tictac7x.motherlode.TicTac7xMotherlodeConfig;
+import tictac7x.motherlode.ids.AnimationId;
 
-import javax.annotation.Nullable;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static tictac7x.motherlode.TicTac7xMotherlodePlugin.getWorldObjectKey;
 
@@ -31,6 +28,9 @@ public class OreVeins extends Overlay {
     private final TicTac7xMotherlodeConfig config;
     private final Character character;
     private final Motherlode motherlode;
+
+    public final Map<String, OreVein> oreVeins = new HashMap<>();
+    public final Set<WallObject> oreVeinsWallObjects = new HashSet<>();
 
     public OreVeins(final TicTac7xMotherlodeConfig config, final Character character, final Motherlode motherlode) {
         this.config = config;
@@ -40,9 +40,6 @@ public class OreVeins extends Overlay {
         setPosition(OverlayPosition.DYNAMIC);
         setLayer(OverlayLayer.ABOVE_SCENE);
     }
-
-    public Map<String, OreVein> oreVeins = new HashMap<>();
-    public Set<WallObject> oreVeinsWallObjects = new HashSet<>();
 
     public void onWallObjectSpawned(final WallObjectSpawned event) {
         final WallObject wallObject = event.getWallObject();
@@ -119,18 +116,17 @@ public class OreVeins extends Overlay {
         }
     }
 
-    @Nullable
-    private OreVein getOreVeinFromWallObject(final WallObject wallObject) {
-        return oreVeins.getOrDefault(getWorldObjectKey(wallObject), null);
+    private Optional<OreVein> getOreVeinFromWallObject(final WallObject wallObject) {
+        return Optional.ofNullable(oreVeins.get(getWorldObjectKey(wallObject)));
     }
 
     @Override
     public Dimension render(final Graphics2D graphics2D) {
         for (final WallObject wallObject : oreVeinsWallObjects) {
-            final OreVein oreVein = getOreVeinFromWallObject(wallObject);
-            if (oreVein == null || !oreVein.isRendering(config, character)) continue;
+            final Optional<OreVein> oreVein = getOreVeinFromWallObject(wallObject);
+            if (oreVein.isEmpty() || !oreVein.get().isRendering(config, character)) continue;
 
-            renderPie(graphics2D, wallObject, oreVein.getPieColor(config, motherlode), oreVein.getPieProgress());
+            renderPie(graphics2D, wallObject, oreVein.get().getPieColor(config, motherlode), oreVein.get().getPieProgress());
         }
 
         return null;
@@ -155,26 +151,32 @@ public class OreVeins extends Overlay {
 
     private boolean isMiningAnimation(final int animationId) {
         switch (animationId) {
-            case AnimationID.HUMAN_MINING_BRONZE_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_IRON_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_STEEL_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_BLACK_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_MITHRIL_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_ADAMANT_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_RUNE_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_DRAGON_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_ZALCANO_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_DRAGON_PICKAXE_PRETTY_WALL:
-            case AnimationID.HUMAN_MINING_TRAILBLAZER_PICKAXE_NO_INFERNAL_WALL:
-            case AnimationID.HUMAN_MINING_3A_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_CRYSTAL_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_INFERNAL_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_GILDED_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_LEAGUE_TRAILBLAZER_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_TRAILBLAZER_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_TRAILBLAZER_RELOADED_PICKAXE_WALL:
-            case AnimationID.HUMAN_MINING_TRAILBLAZER_RELOADED_PICKAXE_NO_INFERNAL_WALL:
+            // Regular
+            case AnimationId.BRONZE_PICKAXE:
+            case AnimationId.IRON_PICKAXE:
+            case AnimationId.STEEL_PICKAXE:
+            case AnimationId.BLACK_PICKAXE:
+            case AnimationId.MITHRIL_PICKAXE:
+            case AnimationId.ADAMANT_PICKAXE:
+            case AnimationId.RUNE_PICKAXE:
+            case AnimationId.GILDED_PICKAXE:
+            case AnimationId.DRAGON_PICKAXE:
+            case AnimationId.THIRDAGE_PICKAXE:
+            case AnimationId.CRYSTAL_PICKAXE:
+
+            // Alternative variants
+            case AnimationId.DRAGON_PICKAXE_UPGRADED:
+            case AnimationId.DRAGON_PICKAXE_ZALCANO:
+            case AnimationId.DRAGON_PICKAXE_TRAILBLAZER:
+            case AnimationId.DRAGON_PICKAXE_TRAILBLAZER_RELOADED:
+            case AnimationId.DRAGON_PICKAXE_INFERNAL:
+            case AnimationId.DRAGON_PICKAXE_INFERNAL_TRAILBLAZER:
+            case AnimationId.DRAGON_PICKAXE_INFERNAL_TRAILBLAZER_RELOADED:
+
+            // League
+            case AnimationId.LEAGUE_TRAILBLAZER_INFERNAL_PICKAXE:
                 return true;
+
             default:
                 return false;
         }

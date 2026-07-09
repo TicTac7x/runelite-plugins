@@ -3,8 +3,8 @@ package tictac7x.motherlode;
 import net.runelite.api.Client;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.VarbitChanged;
-import net.runelite.api.gameval.AnimationID;
-import net.runelite.api.gameval.VarbitID;
+import tictac7x.motherlode.ids.AnimationId;
+import tictac7x.motherlode.ids.VarbitId;
 
 public class Hopper {
     private final Client client;
@@ -21,13 +21,13 @@ public class Hopper {
     }
 
     public void onAnimationChanged(final AnimationChanged event) {
-        if (event.getActor() == client.getLocalPlayer() && event.getActor().getAnimation() == AnimationID.HUMAN_PICKUPTABLE) {
+        if (event.getActor() == client.getLocalPlayer() && event.getActor().getAnimation() == AnimationId.DEPOSIT_PAYDIRT) {
             paydirt = inventory.getPaydirt();
         }
     }
 
     public void onVarbitChanged(final VarbitChanged event) {
-        if (event.getVarbitId() == VarbitID.MOTHERLODE_SACK_TRANSMIT) {
+        if (event.getVarbitId() == VarbitId.MOTHERLODE_SACK_PAYDIRT) {
             paydirt = 0;
         }
     }
