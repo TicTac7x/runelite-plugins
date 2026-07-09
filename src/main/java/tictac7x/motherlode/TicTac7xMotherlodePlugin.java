@@ -24,6 +24,7 @@ import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
@@ -44,7 +45,8 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Additional pickaxes animations support.<br>" +
-		"<colHIGHLIGHT>* Ore veins regeneration support."
+		"<colHIGHLIGHT>* Ore veins regeneration support.<br>" +
+		"<colHIGHLIGHT>* Option to disable deposits optimization."
 	;
 
 	@Inject
@@ -61,6 +63,9 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Inject
 	private OverlayManager overlayManager;
+
+	@Inject
+	private ItemManager itemManager;
 
 	@Inject
 	private Notifier notifier;
@@ -88,7 +93,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	protected void startUp() {
 		provider = new Provider(client);
 		character = new Character(client);
-		bank = new Bank(configManager, config);
+		bank = new Bank(configManager, config, itemManager);
 		inventory = new Inventory();
 		hopper = new Hopper(client, inventory);
 		sack = new Sack(client);
@@ -119,7 +124,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Subscribe
 	public void onItemContainerChanged(final ItemContainerChanged event) {
-		if (!character.isInMotherlode()) return;
 		inventory.onItemContainerChanged(event);
 		bank.onItemContainerChanged(event);
 		motherlode.onItemContainerChanged(event);

@@ -43,8 +43,13 @@ public class Motherlode {
     }
 
     public int getNeededPaydirt() {
+        final int spaceRemaining = sack.getSize() - getDepositedPaydirt();
+        if (!config.optimizeDeposits() && spaceRemaining < inventory.getMaximumAvailablePayDirt()) {
+            return 0;
+        }
+
         return Math.min(
-            sack.getSize() - getDepositedPaydirt(),
+            spaceRemaining,
             inventory.getMaximumAvailablePayDirt()
         ) - inventory.getPaydirt();
     }
@@ -62,10 +67,16 @@ public class Motherlode {
     }
 
     public int getGoldenNuggetsTotal() {
-        return bank.getGoldenNuggets();
+        return bank.getGoldenNuggets() + inventory.getGoldenNuggets();
     }
 
     public int getDepositsLeft() {
+        final int spaceRemaining = sack.getSize() - getDepositedPaydirt();
+
+        if (!config.optimizeDeposits() && spaceRemaining < inventory.getMaximumAvailablePayDirt()) {
+            return 0;
+        }
+
         return inventory.getMaximumAvailablePayDirt() == 0 ? 0 : (int) Math.ceil((double) getSpaceLeftToDeposit() / inventory.getMaximumAvailablePayDirt());
     }
 

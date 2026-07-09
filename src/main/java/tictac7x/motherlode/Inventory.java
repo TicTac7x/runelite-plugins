@@ -8,6 +8,7 @@ import tictac7x.motherlode.ids.ItemId;
 public class Inventory {
     private int paydirt = 0;
     private int otherItems = 0;
+    private int goldenNuggets = 0;
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
         if (event.getContainerId() != ItemContainerId.INVENTORY) return;
@@ -24,6 +25,7 @@ public class Inventory {
 
         this.paydirt = paydirt;
         this.otherItems = otherItems;
+        this.goldenNuggets = event.getItemContainer().count(ItemId.GOLDEN_NUGGET);
     }
 
     public int getPaydirt() {
@@ -32,5 +34,9 @@ public class Inventory {
 
     public int getMaximumAvailablePayDirt() {
         return 28 - otherItems;
+    }
+
+    public int getGoldenNuggets() {
+        return goldenNuggets;
     }
 }

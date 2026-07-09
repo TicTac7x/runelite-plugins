@@ -10,20 +10,6 @@ public interface TicTac7xMotherlodeConfig extends Config {
 	String bank_golden_nuggets = "bank_golden_nuggets";
 	String version = "version";
 
-	@ConfigItem(
-		keyName = bank_golden_nuggets,
-		name = bank_golden_nuggets,
-		description = bank_golden_nuggets,
-		hidden = true
-	) default int getBankGoldenNuggets() { return 0; }
-
-	@ConfigItem(
-		keyName = version,
-		name = version,
-		description = version,
-		hidden = true
-	) default String getVersion() { return "0"; }
-
 	@ConfigSection(
 		name = "General",
 		description = "General options to improve overall experience.",
@@ -46,11 +32,11 @@ public interface TicTac7xMotherlodeConfig extends Config {
 			section = general
 		) default boolean notifyToStopMining() { return true; }
 
-		@ConfigSection(
-			name = "Ore veins and rockfalls",
-			description = "Highlight ore veins and rockfalls based on their states.",
-			position = 2
-		) String ore_veins_and_rockfalls = "ore_veins_and_rockfalls";
+	@ConfigSection(
+		name = "Ore veins and rockfalls",
+		description = "Highlight ore veins and rockfalls based on their states.",
+		position = 2
+	) String ore_veins_and_rockfalls = "ore_veins_and_rockfalls";
 
 		@Alpha
 		@ConfigItem(
@@ -158,5 +144,32 @@ public interface TicTac7xMotherlodeConfig extends Config {
 			section = custom_sack_widget
 		) default boolean showSackNeeded() { return true; }
 
+		@ConfigItem(
+			keyName = "optimize_deposits",
+			name = "Optimize deposits",
+			description = "Optimize needed deposits to get full sack of pay-dirt.",
+			position = 9,
+			section = custom_sack_widget
+		) default boolean optimizeDeposits() { return true; }
 
+	@ConfigSection(
+		name = "Debug",
+		description = "Debug",
+		position = 4,
+		closedByDefault = true
+	) String debug = "debug";
+
+		@ConfigItem(
+			keyName = bank_golden_nuggets,
+			name = bank_golden_nuggets,
+			description = bank_golden_nuggets,
+			section = debug
+		) default int getBankGoldenNuggets() { return 0; }
+
+		@ConfigItem(
+			keyName = version,
+			name = version,
+			description = version,
+			section = debug
+		) default String getVersion() { return "0"; }
 }
