@@ -28,6 +28,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
+import tictac7x.motherlode.ids.VarbitId;
 import tictac7x.motherlode.oreveins.OreVeins;
 import tictac7x.motherlode.rockfalls.Rockfalls;
 
@@ -96,7 +97,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 		bank = new Bank(configManager, config, itemManager);
 		inventory = new Inventory();
 		hopper = new Hopper(client, inventory);
-		sack = new Sack(client);
+		sack = new Sack();
 		motherlode = new Motherlode(client, clientThread, notifier, config, bank, inventory, sack, hopper);
 		widget = new Widget(client, config, motherlode, character);
 		oreVeins = new OreVeins(config, character, motherlode, provider);
@@ -188,6 +189,18 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Subscribe
 	public void onVarbitChanged(final VarbitChanged event) {
+		final int varbitId = event.getVarbitId();
+		final int varbitValue = event.getValue();
+
+		switch (varbitId) {
+			case VarbitId.MOTHERLODE_SACK_PAYDIRT:
+				sack.setPaydirt(varbitValue);
+				break;
+			case VarbitId.MOTHERLODE_SACK_UPGRADED:
+				sack.setIsSackUpgraded(varbitValue == 1);
+				break;
+		}
+
 		if (!character.isInMotherlode()) return;
 		hopper.onVarbitChanged(event);
 		motherlode.onVarbitChanged(event);

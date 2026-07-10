@@ -2,7 +2,6 @@ package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.Player;
 import net.runelite.api.WallObject;
-import net.runelite.api.coords.WorldPoint;
 import tictac7x.motherlode.Motherlode;
 import tictac7x.motherlode.Provider;
 import tictac7x.motherlode.ids.AnimationId;
@@ -11,7 +10,6 @@ import tictac7x.motherlode.sectors.Sectors;
 import tictac7x.motherlode.Character;
 import tictac7x.motherlode.sectors.Sector;
 import tictac7x.motherlode.TicTac7xMotherlodeConfig;
-
 import java.awt.Color;
 
 public class OreVein {
@@ -57,7 +55,7 @@ public class OreVein {
     public void startRegenerating() {
         regenerationTicks++;
 
-        if (regenerationTicks > 1) {
+        if (regenerationTicks > 2) {
             isDepleting = false;
         }
     }
@@ -69,7 +67,7 @@ public class OreVein {
             health += (getMaxHealth()) / RESPAWN_TIME_GAMETICKS;
         } else if (isDepleting) {
             health = Math.max(health - 1, 0);
-        } else if (regenerationTicks > 1) {
+        } else if (regenerationTicks > 2) {
             health = Math.min(health + 1, getMaxHealth());
         }
 
