@@ -59,6 +59,4 @@ public class VarbitId {
     public static final int WILDERNESS_DIARY_HARD_COMPLETE = VarbitID.WILDERNESS_DIARY_HARD_COMPLETE;
     public static final int WILDERNESS_DIARY_ELITE_COMPLETE = VarbitID.WILDERNESS_DIARY_ELITE_COMPLETE;
     public static final int WILDERNESS_LUNDAIL_RUNES_COLLECTED = VarbitID.LUNDAIL_LAST_CLAIMED;
-
-
 }

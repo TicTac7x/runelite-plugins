@@ -24,10 +24,4 @@ public class ItemId {
     public static final int LAW_RUNE = ItemID.LAWRUNE;
     public static final int CHAOS_RUNE = ItemID.CHAOSRUNE;
     public static final int DEATH_RUNE = ItemID.DEATHRUNE;
-
-
-
-
-
-
 }
