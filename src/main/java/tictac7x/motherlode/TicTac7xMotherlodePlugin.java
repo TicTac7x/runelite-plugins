@@ -201,7 +201,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 				break;
 		}
 
-		if (!character.isInMotherlode()) return;
 		hopper.onVarbitChanged(event);
 		motherlode.onVarbitChanged(event);
 	}

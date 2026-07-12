@@ -1,10 +1,18 @@
 package tictac7x.motherlode;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SackTest extends TicTac7xMotherlodePluginTest {
+public class SackTest {
+    Sack sack;
+
+    @Before
+    public void setup() {
+        sack = new Sack();
+    }
+
     @Test
     public void PaydirtAmount() {
         assertEquals(0, sack.getPaydirt());
