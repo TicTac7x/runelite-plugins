@@ -25,6 +25,7 @@ public class J_BraceletOfClay extends ChargedItem {
 
             // Mine clay.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Clay rocks").consumer(() -> {
+                if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
                 final int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
                 final int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
                 decreaseCharges(clayAfter - clayBefore);
@@ -32,6 +33,7 @@ public class J_BraceletOfClay extends ChargedItem {
 
             // Mine soft clay.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Soft clay rocks").consumer(() -> {
+                if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
                 final int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
                 final int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
 
@@ -42,7 +44,9 @@ public class J_BraceletOfClay extends ChargedItem {
             }),
 
             // Crumbles.
-            new OnChatMessage("Your bracelet of clay crumbles to dust.").setFixedCharges(28)
+            new OnChatMessage("Your bracelet of clay crumbles to dust.").runConsumerOnNextGameTick(() -> {
+                setCharges(28);
+            })
         ));
     }
 }

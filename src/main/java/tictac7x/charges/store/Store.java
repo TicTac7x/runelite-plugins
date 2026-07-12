@@ -814,4 +814,14 @@ public class Store {
             );
         }
     }
+
+    public boolean hasChatMessage(final String message) {
+        for (final String lastChatMessage : lastChatMessages) {
+            if (lastChatMessage.equals(message)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
