@@ -7,17 +7,17 @@ import net.runelite.client.config.Range;
 
 @ConfigGroup("tictac7x-pitch-limiter")
 public interface TicTac7xCameraPitchLimiterConfig extends Config {
-	@Range(min = 0, max = 512)
+	@Range(min = 0, max = 4160)
 	@ConfigItem(
 		keyName = "maximumPitch",
 		name = "Maximum Pitch",
-		description = "Highest camera point (0 - 512)"
-	) default int getMaximumPitch() { return 383; }
+		description = "Highest camera point (0 - 4160)"
+	) default int getMaximumPitch() { return 3064; }
 
-	@Range(min = 0, max = 512)
+	@Range(min = 0, max = 4160)
 	@ConfigItem(
 		keyName = "minimumPitch",
 		name = "Minimum Pitch",
-		description = "Lowest camera point (0 - 512)"
-	) default int getMinimumPitch() { return 128; }
+		description = "Lowest camera point (0 - 4160)"
+	) default int getMinimumPitch() { return 1024; }
 }
