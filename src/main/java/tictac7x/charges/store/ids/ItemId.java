@@ -1854,4 +1854,12 @@ public final class ItemId {
     public static final int IRONWOOD_BLOWPIPE_UNCHARGED = ItemID.IRONWOOD_BLOWPIPE_EMPTY;
     public static final int ROSEWOOD_BLOWPIPE = ItemID.ROSEWOOD_BLOWPIPE;
     public static final int ROSEWOOD_BLOWPIPE_UNCHARGED = ItemID.ROSEWOOD_BLOWPIPE_EMPTY;
+
+    // Ghommal's hilt
+    public static final int GHOMMALS_HILT_1 = ItemID.CA_OFFHAND_EASY;
+    public static final int GHOMMALS_HILT_2 = ItemID.CA_OFFHAND_MEDIUM;
+    public static final int GHOMMALS_HILT_3 = ItemID.CA_OFFHAND_HARD;
+    public static final int GHOMMALS_HILT_4 = ItemID.CA_OFFHAND_ELITE;
+    public static final int GHOMMALS_HILT_5 = ItemID.CA_OFFHAND_MASTER;
+    public static final int GHOMMALS_HILT_6 = ItemID.CA_OFFHAND_GRANDMASTER;
 }

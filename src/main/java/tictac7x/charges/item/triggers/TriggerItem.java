@@ -1,5 +1,7 @@
 package tictac7x.charges.item.triggers;
 
+import tictac7x.charges.store.ids.ChargeId;
+
 import java.util.Optional;
 
 public class TriggerItem {
@@ -17,6 +19,11 @@ public class TriggerItem {
 
     public TriggerItem fixedCharges(final int charges) {
         this.fixedCharges = Optional.of(charges);
+        return this;
+    }
+
+    public TriggerItem unlimitedCharges() {
+        this.fixedCharges = Optional.of(ChargeId.UNLIMITED);
         return this;
     }
 

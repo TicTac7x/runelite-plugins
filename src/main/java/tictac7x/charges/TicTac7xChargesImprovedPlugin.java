@@ -144,8 +144,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static final String pluginVersion = "v0.6.13";
 	public static final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Add gem pouch, sack, satchel and tote.<br>" +
-		"<colHIGHLIGHT>* Fix herb sack."
+		"<colHIGHLIGHT>* Gem pouch, sack, satchel and tote added.<br>" +
+		"<colHIGHLIGHT>* Ghommal's hilt added.<br>" +
+		"<colHIGHLIGHT>* Silkliend herb sack added and herb sack fixes."
 	;
 
 	@Inject
@@ -435,6 +436,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new S_CrystalShield(provider),
 			new S_DragonfireShield(provider),
 			new S_FaladorShield(provider),
+			new S_GhommalsHilt(provider),
 			new S_KharedstMemoirs(provider),
 			new S_TomeOfEarth(provider),
 			new S_TomeOfFire(provider),

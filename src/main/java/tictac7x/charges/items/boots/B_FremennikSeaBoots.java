@@ -7,7 +7,6 @@ import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnGraphicChanged;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class B_FremennikSeaBoots extends ChargedItem {
             new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_1),
             new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_2),
             new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_3),
-            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_4).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_4).unlimitedCharges(),
         };
 
         this.triggers.addAll(List.of(

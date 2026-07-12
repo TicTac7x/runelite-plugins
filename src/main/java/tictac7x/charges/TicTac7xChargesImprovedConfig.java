@@ -122,6 +122,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String crystal_shield = "crystal_shield";
     String dragonfire_shield = "dragonfire_shield";
     String falador_shield = "falador_shield";
+    String ghommals_hilt = "ghommals_hilt";
     String kharedsts_memoirs = "kharedsts_memoirs";
     String tome_of_earth = "tome_of_earth";
     String tome_of_fire = "tome_of_fire";
@@ -858,6 +859,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean faladorShieldInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = ghommals_hilt + _infobox,
+            name = "Ghommal's hilt",
+            description = "",
+            section = infoboxes
+        ) default boolean ghommalsHiltInfobox() { return true; }
 
         @ConfigItem(
             keyName = kharedsts_memoirs + _infobox,
@@ -1768,6 +1776,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean faladorShieldOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = ghommals_hilt + _overlay,
+            name = "Ghommal's hilt",
+            description = "",
+            section = overlays
+        ) default boolean ghommalsHiltOverlay() { return true; }
 
         @ConfigItem(
             keyName = fur_pouch + _overlay,

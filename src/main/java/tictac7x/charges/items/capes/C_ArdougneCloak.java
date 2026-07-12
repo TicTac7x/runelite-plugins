@@ -6,7 +6,6 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
 
 import java.util.List;
@@ -16,10 +15,10 @@ public class C_ArdougneCloak extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.ardougne_cloak, ItemId.ARDOUGNE_CLOAK_1, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.ARDOUGNE_CLOAK_1).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.ARDOUGNE_CLOAK_1).unlimitedCharges(),
             new TriggerItem(ItemId.ARDOUGNE_CLOAK_2),
             new TriggerItem(ItemId.ARDOUGNE_CLOAK_3),
-            new TriggerItem(ItemId.ARDOUGNE_CLOAK_4).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.ARDOUGNE_CLOAK_4).unlimitedCharges(),
         };
 
         this.triggers.addAll(List.of(

@@ -87,6 +87,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Crystal shield
 * Dragonfire shield / ward
 * Falador shield
+* Ghommal's hilt
 * Kharedst's memoirs / Book of the dead
 * Tome of earth
 * Tome of fire
