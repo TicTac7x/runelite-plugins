@@ -1,14 +1,13 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.Player;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.events.VarbitChanged;
-import net.runelite.api.gameval.ItemID;
-import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
+import tictac7x.daily.ids.ItemId;
+import tictac7x.daily.ids.VarbitId;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -26,7 +25,7 @@ public class KingdomOfMiscellania extends DailyInfobox {
     private final int[] MISCELLANIA_REGIONS = new int[]{10044, 10300};
 
     public KingdomOfMiscellania(final Provider provider) {
-        super(TicTac7xDailyTasksConfig.kingdom_of_miscellania_percentage, provider.itemManager.getImage(ItemID.CASKET), provider);
+        super(TicTac7xDailyTasksConfig.kingdom_of_miscellania_percentage, ItemId.CASKET, provider);
     }
 
     @Override
@@ -50,11 +49,10 @@ public class KingdomOfMiscellania extends DailyInfobox {
 
     @Override
     public void onVarbitChanged(final VarbitChanged event) {
-        if (event.getVarbitId() != VarbitID.MISC_APPROVAL) return;
+        if (event.getVarbitId() != VarbitId.KINGDOM_OF_MISCELLANIA_FAVOR) return;
+        if (provider.client.getLocalPlayer() == null) return;
 
-        final Player player = provider.client.getLocalPlayer();
-        if (player == null) return;
-        if (Arrays.stream(MISCELLANIA_REGIONS).noneMatch(region -> region == player.getWorldLocation().getRegionID())) return;
+        if (Arrays.stream(MISCELLANIA_REGIONS).noneMatch(region -> region == provider.client.getLocalPlayer().getWorldLocation().getRegionID())) return;
 
         provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor_date, LocalDate.now(timezone).toString());
         provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor, event.getValue());
