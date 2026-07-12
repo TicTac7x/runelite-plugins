@@ -89,10 +89,10 @@ public class TicTac7xDailyTasksPlugin extends Plugin {
         return configManager.getConfig(TicTac7xDailyTasksConfig.class);
     }
 
-    private final String plugin_version = "v0.3.1";
+    private final String plugin_version = "v0.3.2";
     private final String plugin_message = "" +
         "<colHIGHLIGHT>Daily Tasks " + plugin_version + ":<br>" +
-        "<colHIGHLIGHT>* Duplicate infoboxes fixed."
+        "<colHIGHLIGHT>* Small kingdom infobox logic improvements."
     ;
     private Provider provider;
     private DailyInfobox[] dailyInfoboxes = new DailyInfobox[]{};
