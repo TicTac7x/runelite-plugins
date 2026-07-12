@@ -1,6 +1,7 @@
 package tictac7x.motherlode.rockfalls;
 
 import net.runelite.api.GameObject;
+import tictac7x.motherlode.ids.GameObjectId;
 import tictac7x.motherlode.sectors.Sectors;
 import tictac7x.motherlode.Character;
 import tictac7x.motherlode.sectors.Sector;
@@ -39,8 +40,8 @@ public class Rockfall {
 
     public static boolean isRockfall(final GameObject gameObject) {
         switch (gameObject.getId()) {
-            case 26679:
-            case 26680:
+            case GameObjectId.ROCKFALL_ONE:
+            case GameObjectId.ROCKFALL_TWO:
                 return true;
             default:
                 return false;

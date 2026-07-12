@@ -1,18 +1,22 @@
 package tictac7x.motherlode;
 
-import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
-import net.runelite.api.ItemID;
+import net.runelite.api.ItemComposition;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.game.ItemManager;
+import tictac7x.motherlode.ids.ItemContainerId;
+import tictac7x.motherlode.ids.ItemId;
 
 public class Bank {
     private final ConfigManager configManager;
     private final TicTac7xMotherlodeConfig config;
+    private final ItemManager itemManager;
 
-    public Bank(final ConfigManager configManager, final TicTac7xMotherlodeConfig config) {
+    public Bank(final ConfigManager configManager, final TicTac7xMotherlodeConfig config, final ItemManager itemManager) {
         this.configManager = configManager;
         this.config = config;
+        this.itemManager = itemManager;
     }
 
     public int getGoldenNuggets() {
@@ -20,11 +24,12 @@ public class Bank {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (event.getContainerId() != InventoryID.BANK.getId()) return;
+        if (event.getContainerId() != ItemContainerId.BANK) return;
 
         for (final Item item : event.getItemContainer().getItems()) {
-            if (item.getId() == ItemID.GOLDEN_NUGGET) {
-                setGoldenNuggets(item.getQuantity());
+            if (itemManager.canonicalize(item.getId()) == ItemId.GOLDEN_NUGGET) {
+                final ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
+                setGoldenNuggets(itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity());
                 return;
             }
         }

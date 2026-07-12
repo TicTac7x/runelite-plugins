@@ -1,17 +1,14 @@
 package tictac7x.motherlode;
 
-import net.runelite.api.ChatMessageType;
-import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
-import net.runelite.api.Item;
-import net.runelite.api.ItemContainer;
-import net.runelite.api.ItemID;
-import net.runelite.api.Varbits;
+import net.runelite.api.*;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
+import tictac7x.motherlode.ids.ItemContainerId;
+import tictac7x.motherlode.ids.ItemId;
+import tictac7x.motherlode.ids.VarbitId;
 
 public class Motherlode {
     private final Client client;
@@ -46,8 +43,13 @@ public class Motherlode {
     }
 
     public int getNeededPaydirt() {
+        final int spaceRemaining = sack.getSize() - getDepositedPaydirt();
+        if (!config.optimizeDeposits() && spaceRemaining < inventory.getMaximumAvailablePayDirt()) {
+            return 0;
+        }
+
         return Math.min(
-            sack.getSize() - getDepositedPaydirt(),
+            spaceRemaining,
             inventory.getMaximumAvailablePayDirt()
         ) - inventory.getPaydirt();
     }
@@ -65,10 +67,16 @@ public class Motherlode {
     }
 
     public int getGoldenNuggetsTotal() {
-        return bank.getGoldenNuggets();
+        return bank.getGoldenNuggets() + inventory.getGoldenNuggets();
     }
 
     public int getDepositsLeft() {
+        final int spaceRemaining = sack.getSize() - getDepositedPaydirt();
+
+        if (!config.optimizeDeposits() && spaceRemaining < inventory.getMaximumAvailablePayDirt()) {
+            return 0;
+        }
+
         return inventory.getMaximumAvailablePayDirt() == 0 ? 0 : (int) Math.ceil((double) getSpaceLeftToDeposit() / inventory.getMaximumAvailablePayDirt());
     }
 
@@ -89,14 +97,14 @@ public class Motherlode {
     }
 
     public void onItemContainerChanged(final ItemContainerChanged event) {
-        if (!notifiedToStopMining && event.getContainerId() == InventoryID.INVENTORY.getId() && shouldStopMining() && config.notifyToStopMining()) {
+        if (!notifiedToStopMining && event.getContainerId() == ItemContainerId.INVENTORY && shouldStopMining() && config.notifyToStopMining()) {
             notifier.notify("Stop mining! Sack will be too full.");
             notifiedToStopMining = true;
         }
     }
 
     public void onVarbitChanged(final VarbitChanged event) {
-        if (event.getVarbitId() == Varbits.SACK_NUMBER) {
+        if (event.getVarbitId() == VarbitId.MOTHERLODE_SACK_PAYDIRT) {
             notifiedToStopMining = false;
         }
     }
@@ -108,22 +116,22 @@ public class Motherlode {
     }
 
     private void depositFoundGoldenNuggetsToBank() {
-        final ItemContainer inventory = client.getItemContainer(InventoryID.INVENTORY);
+        final ItemContainer inventory = client.getItemContainer(ItemContainerId.INVENTORY);
         if (inventory == null) return;
 
         for (final Item item : inventory.getItems()) {
-            if (item.getId() == ItemID.GOLDEN_NUGGET) {
+            if (item.getId() == ItemId.GOLDEN_NUGGET) {
                 goldenNuggetsBefore = item.getQuantity();
                 break;
             }
         }
 
         clientThread.invokeLater(() -> {
-            final ItemContainer inventoryNextTick = client.getItemContainer(InventoryID.INVENTORY);
+            final ItemContainer inventoryNextTick = client.getItemContainer(ItemContainerId.INVENTORY);
             if (inventoryNextTick == null) return;
 
             for (final Item item : inventoryNextTick.getItems()) {
-                if (item.getId() == ItemID.GOLDEN_NUGGET) {
+                if (item.getId() == ItemId.GOLDEN_NUGGET) {
                     final int quantity = item.getQuantity() - goldenNuggetsBefore;
                     bank.depositGoldenNuggets(quantity);
                     goldenNuggetsSession += quantity;
@@ -131,5 +139,9 @@ public class Motherlode {
                 }
             }
         });
+    }
+
+    public IndexedObjectSet<? extends Player> getPlayers() {
+        return client.getTopLevelWorldView().players();
     }
 }

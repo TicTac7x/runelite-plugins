@@ -24,9 +24,11 @@ import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
+import tictac7x.motherlode.ids.VarbitId;
 import tictac7x.motherlode.oreveins.OreVeins;
 import tictac7x.motherlode.rockfalls.Rockfalls;
 
@@ -40,10 +42,12 @@ import javax.inject.Inject;
 	conflicts = {"Motherlode Mine", "MLM Mining Markers"}
 )
 public class TicTac7xMotherlodePlugin extends Plugin {
-	private final String pluginVersion = "v0.4.3";
+	private final String pluginVersion = "v0.4.4";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Needed paydirt improvements."
+		"<colHIGHLIGHT>* Additional pickaxes animations support.<br>" +
+		"<colHIGHLIGHT>* Ore veins regeneration support.<br>" +
+		"<colHIGHLIGHT>* Option to disable deposits optimization."
 	;
 
 	@Inject
@@ -62,11 +66,15 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private OverlayManager overlayManager;
 
 	@Inject
+	private ItemManager itemManager;
+
+	@Inject
 	private Notifier notifier;
 
 	@Inject
 	private ChatMessageManager chatMessageManager;
 
+	private Provider provider;
 	private Character character;
 	private Bank bank;
 	private Inventory inventory;
@@ -84,14 +92,15 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
+		provider = new Provider(client);
 		character = new Character(client);
-		bank = new Bank(configManager, config);
+		bank = new Bank(configManager, config, itemManager);
 		inventory = new Inventory();
 		hopper = new Hopper(client, inventory);
-		sack = new Sack(client);
+		sack = new Sack();
 		motherlode = new Motherlode(client, clientThread, notifier, config, bank, inventory, sack, hopper);
 		widget = new Widget(client, config, motherlode, character);
-		oreVeins = new OreVeins(config, character, motherlode);
+		oreVeins = new OreVeins(config, character, motherlode, provider);
 		rockfalls = new Rockfalls(config, character);
 
 		overlayManager.add(oreVeins);
@@ -116,7 +125,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Subscribe
 	public void onItemContainerChanged(final ItemContainerChanged event) {
-		if (!character.isInMotherlode()) return;
 		inventory.onItemContainerChanged(event);
 		bank.onItemContainerChanged(event);
 		motherlode.onItemContainerChanged(event);
@@ -143,7 +151,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	@Subscribe
 	public void onAnimationChanged(final AnimationChanged event) {
 		if (!character.isInMotherlode()) return;
-		oreVeins.onAnimationChanged(event);
 		hopper.onAnimationChanged(event);
 	}
 
@@ -182,7 +189,18 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Subscribe
 	public void onVarbitChanged(final VarbitChanged event) {
-		if (!character.isInMotherlode()) return;
+		final int varbitId = event.getVarbitId();
+		final int varbitValue = event.getValue();
+
+		switch (varbitId) {
+			case VarbitId.MOTHERLODE_SACK_PAYDIRT:
+				sack.setPaydirt(varbitValue);
+				break;
+			case VarbitId.MOTHERLODE_SACK_UPGRADED:
+				sack.setIsSackUpgraded(varbitValue == 1);
+				break;
+		}
+
 		hopper.onVarbitChanged(event);
 		motherlode.onVarbitChanged(event);
 	}

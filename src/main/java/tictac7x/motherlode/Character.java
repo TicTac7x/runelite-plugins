@@ -34,7 +34,7 @@ public class Character {
     }
 
     public void checkIsInMotherlode() {
-        for (final int playerRegion : client.getMapRegions()) {
+        for (final int playerRegion : client.getLocalPlayer().getWorldView().getMapRegions()) {
             for (final int motherlodeRegion : MOTHERLODE_REGIONS) {
                 if (motherlodeRegion == playerRegion) {
                     inMotherlode = true;

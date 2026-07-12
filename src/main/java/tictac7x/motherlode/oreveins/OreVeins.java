@@ -1,9 +1,8 @@
 package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.Actor;
-import net.runelite.api.AnimationID;
-import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.Player;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameStateChanged;
@@ -15,16 +14,13 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.ProgressPieComponent;
 import tictac7x.motherlode.Motherlode;
 import tictac7x.motherlode.Character;
+import tictac7x.motherlode.Provider;
 import tictac7x.motherlode.TicTac7xMotherlodeConfig;
 
-import javax.annotation.Nullable;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static tictac7x.motherlode.TicTac7xMotherlodePlugin.getWorldObjectKey;
 
@@ -32,18 +28,20 @@ public class OreVeins extends Overlay {
     private final TicTac7xMotherlodeConfig config;
     private final Character character;
     private final Motherlode motherlode;
+    private final Provider provider;
 
-    public OreVeins(final TicTac7xMotherlodeConfig config, final Character character, final Motherlode motherlode) {
+    public final Map<String, OreVein> oreVeins = new HashMap<>();
+    public final Set<WallObject> oreVeinsWallObjects = new HashSet<>();
+
+    public OreVeins(final TicTac7xMotherlodeConfig config, final Character character, final Motherlode motherlode, final Provider provider) {
         this.config = config;
         this.character = character;
         this.motherlode = motherlode;
+        this.provider = provider;
 
         setPosition(OverlayPosition.DYNAMIC);
         setLayer(OverlayLayer.ABOVE_SCENE);
     }
-
-    public Map<String, OreVein> oreVeins = new HashMap<>();
-    public Set<WallObject> oreVeinsWallObjects = new HashSet<>();
 
     public void onWallObjectSpawned(final WallObjectSpawned event) {
         final WallObject wallObject = event.getWallObject();
@@ -71,10 +69,6 @@ public class OreVeins extends Overlay {
         }
     }
 
-    public void onAnimationChanged(final AnimationChanged event) {
-        setOreVeinMinedFromAnimation(event);
-    }
-
     public void onGameTick() {
         for (final OreVein oreVein : oreVeins.values()) {
             oreVein.onGameTick();
@@ -90,48 +84,23 @@ public class OreVeins extends Overlay {
             oreVeins.put(key, new OreVein(
                 wallObject.getWorldLocation().getX(),
                 wallObject.getWorldLocation().getY(),
-                isDepleted
+                isDepleted,
+                provider
             ));
         }
     }
 
-    private void setOreVeinMinedFromAnimation(final AnimationChanged event) {
-        final Actor player = event.getActor();
-        if (!isMiningAnimation(event.getActor().getAnimation())) return;
-
-        final int playerX = player.getWorldLocation().getX();
-        final int playerY = player.getWorldLocation().getY();
-        final int playerOrientation = player.getOrientation();
-
-        // Find correct ore vein based on actor orientation when mining.
-        for (final OreVein oreVein : oreVeins.values()) {
-            if (
-                // Facing south.
-                playerOrientation == 0 && playerX == oreVein.x && playerY == oreVein.y + 1 ||
-                // Facing west.
-                playerOrientation == 512 && playerX == oreVein.x + 1 && playerY == oreVein.y ||
-                // Facing north.
-                playerOrientation == 1024 && playerX == oreVein.x && playerY == oreVein.y - 1 ||
-                // Facing east.
-                playerOrientation == 1536 && playerX == oreVein.x - 1 && playerY == oreVein.y
-            ) {
-                oreVein.startDepleting();
-            }
-        }
-    }
-
-    @Nullable
-    private OreVein getOreVeinFromWallObject(final WallObject wallObject) {
-        return oreVeins.getOrDefault(getWorldObjectKey(wallObject), null);
+    private Optional<OreVein> getOreVeinFromWallObject(final WallObject wallObject) {
+        return Optional.ofNullable(oreVeins.get(getWorldObjectKey(wallObject)));
     }
 
     @Override
     public Dimension render(final Graphics2D graphics2D) {
         for (final WallObject wallObject : oreVeinsWallObjects) {
-            final OreVein oreVein = getOreVeinFromWallObject(wallObject);
-            if (oreVein == null || !oreVein.isRendering(config, character)) continue;
+            final Optional<OreVein> oreVein = getOreVeinFromWallObject(wallObject);
+            if (oreVein.isEmpty() || !oreVein.get().isRendering(config, character)) continue;
 
-            renderPie(graphics2D, wallObject, oreVein.getPieColor(config, motherlode), oreVein.getPieProgress());
+            renderPie(graphics2D, wallObject, oreVein.get().getPieColor(config, motherlode), oreVein.get().getPieProgress());
         }
 
         return null;
@@ -152,29 +121,5 @@ public class OreVeins extends Overlay {
             progressPieComponentTimer.setFill(new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.max(color.getAlpha() - 20, 0)));
             progressPieComponentTimer.render(graphics);
         } catch (final Exception ignored) {}
-    }
-
-    private boolean isMiningAnimation(final int animationId) {
-        switch (animationId) {
-            case AnimationID.MINING_MOTHERLODE_BRONZE:
-            case AnimationID.MINING_MOTHERLODE_IRON:
-            case AnimationID.MINING_MOTHERLODE_STEEL:
-            case AnimationID.MINING_MOTHERLODE_BLACK:
-            case AnimationID.MINING_MOTHERLODE_MITHRIL:
-            case AnimationID.MINING_MOTHERLODE_ADAMANT:
-            case AnimationID.MINING_MOTHERLODE_RUNE:
-            case AnimationID.MINING_MOTHERLODE_DRAGON:
-            case AnimationID.MINING_MOTHERLODE_DRAGON_OR:
-            case AnimationID.MINING_MOTHERLODE_DRAGON_UPGRADED:
-            case AnimationID.MINING_MOTHERLODE_DRAGON_OR_TRAILBLAZER:
-            case AnimationID.MINING_MOTHERLODE_3A:
-            case AnimationID.MINING_MOTHERLODE_CRYSTAL:
-            case AnimationID.MINING_MOTHERLODE_INFERNAL:
-            case AnimationID.MINING_MOTHERLODE_GILDED:
-            case AnimationID.MINING_MOTHERLODE_TRAILBLAZER:
-                return true;
-            default:
-                return false;
-        }
     }
 }
