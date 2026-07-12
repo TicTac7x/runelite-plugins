@@ -129,6 +129,8 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             // Replace "Empty" with proper "Empty to bank".
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
+            new OnMenuEntryAdded("Fill").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide()
         ));

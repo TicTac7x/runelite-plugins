@@ -123,6 +123,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Reagent pouch
 * Royal seed pod
 * Seed box
+* Silklined herbsack
 * Soul bearer
 * Strange old lockpick
 * Tackle box
