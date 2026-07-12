@@ -24,8 +24,7 @@ dependencies {
 }
 
 group = 'tictac7x-storage'
-version = 'v0.6.2'
-sourceCompatibility = '1.8'
+version = 'v0.6.3'
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'

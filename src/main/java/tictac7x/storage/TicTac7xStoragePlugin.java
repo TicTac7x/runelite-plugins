@@ -55,10 +55,10 @@ import java.util.Optional;
 	tags = { "storage", "bank", "inventory", "item", "poh" }
 )
 public class TicTac7xStoragePlugin extends Plugin {
-	private String pluginVersion = "v0.6.2";
+	private String pluginVersion = "v0.6.3";
 	private String pluginMessage = "" +
 		"<colHIGHLIGHT>Storage " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Setting to hide bank overlay items with 0 quantity, enabled by default."
+		"<colHIGHLIGHT>* Fix deposit box banking bug."
 	;
 
 	@Inject

@@ -45,7 +45,7 @@ public class DepositBox {
 
             if (itemAfter.isPresent() && itemBefore.getQuantity() - itemAfter.get().getQuantity() != 0) {
                 items.add(new StorageItem(itemBefore.id, itemBefore.getQuantity() - itemAfter.get().getQuantity(), itemBefore.name));
-            } else {
+            } else if (itemAfter.isEmpty()) {
                 items.add(new StorageItem(itemBefore.id, itemBefore.getQuantity(), itemBefore.name));
             }
         }

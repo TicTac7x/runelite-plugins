@@ -1,6 +1,5 @@
 package tictac7x.storage.storageManagers;
 
-import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.WidgetClosed;
 import net.runelite.api.events.WidgetLoaded;
