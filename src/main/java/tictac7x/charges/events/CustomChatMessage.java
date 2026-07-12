@@ -14,6 +14,13 @@ public class CustomChatMessage {
         this.sender = event.getSender();
     }
 
+    // Used for Tests
+    public CustomChatMessage(final ChatMessageType type, final String message) {
+        this.type = type;
+        this.message = message;
+        this.sender = "";
+    }
+
     @Override
     public String toString() {
         return ("MESSAGE | " +

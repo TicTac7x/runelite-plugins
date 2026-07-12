@@ -122,6 +122,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String crystal_shield = "crystal_shield";
     String dragonfire_shield = "dragonfire_shield";
     String falador_shield = "falador_shield";
+    String ghommals_hilt = "ghommals_hilt";
     String kharedsts_memoirs = "kharedsts_memoirs";
     String tome_of_earth = "tome_of_earth";
     String tome_of_fire = "tome_of_fire";
@@ -148,8 +149,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String fungicide_spray = "fungicide_spray";
     String fur_pouch = "fur_pouch";
     String gem_bag = "gem_bag";
+    String gem_pouch = "gem_pouch";
+    String gem_sack = "gem_sack";
+    String gem_satchel = "gem_satchel";
+    String gem_tote = "gem_tote";
     String gricollers_can = "gricollers_can";
     String herb_sack = "herb_sack";
+    String silklined_herb_sack = "silklined_herb_sack";
     String jar_generator = "jar_generator";
     String log_basket = "log_basket";
     String master_scroll_book = "master_scroll_book";
@@ -350,7 +356,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         @ConfigItem(
             keyName = "dose_4",
             name = "4 doses",
-            description = "Color of 4 doses overlay",
+            description = "Color of 4 doses or potions with max 2 doses overlay",
             position = 1,
             section = potions
         ) default Color get4DoseColor() { return Color.white; }
@@ -855,6 +861,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean faladorShieldInfobox() { return true; }
 
         @ConfigItem(
+            keyName = ghommals_hilt + _infobox,
+            name = "Ghommal's hilt",
+            description = "",
+            section = infoboxes
+        ) default boolean ghommalsHiltInfobox() { return true; }
+
+        @ConfigItem(
             keyName = kharedsts_memoirs + _infobox,
             name = "Kharedst's memoirs",
             description = "",
@@ -988,6 +1001,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean gemBagInfobox() { return true; }
 
         @ConfigItem(
+            keyName = gem_pouch + _infobox,
+            name = "Gem pouch",
+            description = "",
+            section = infoboxes
+        ) default boolean gemPouchInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_sack + _infobox,
+            name = "Gem sack",
+            description = "",
+            section = infoboxes
+        ) default boolean gemSackInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_satchel + _infobox,
+            name = "Gem satchel",
+            description = "",
+            section = infoboxes
+        ) default boolean gemSatchelInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = gem_tote + _infobox,
+            name = "Gem tote",
+            description = "",
+            section = infoboxes
+        ) default boolean gemToteInfobox() { return true; }
+
+        @ConfigItem(
             keyName = giantsoul_amulet + _infobox,
             name = "Giantsoul amulet",
             description = "",
@@ -1007,6 +1048,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean herbSackInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = silklined_herb_sack + _infobox,
+            name = "Silklined herb sack",
+            description = "",
+            section = infoboxes
+        ) default boolean silklinedHerbSackInfobox() { return true; }
 
         @ConfigItem(
             keyName = jar_generator + _infobox,
@@ -1730,6 +1778,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean faladorShieldOverlay() { return true; }
 
         @ConfigItem(
+            keyName = ghommals_hilt + _overlay,
+            name = "Ghommal's hilt",
+            description = "",
+            section = overlays
+        ) default boolean ghommalsHiltOverlay() { return true; }
+
+        @ConfigItem(
             keyName = fur_pouch + _overlay,
             name = "Fur pouch",
             description = "",
@@ -1807,6 +1862,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean gemBagOverlay() { return true; }
 
         @ConfigItem(
+            keyName = gem_pouch + _overlay,
+            name = "Gem pouch",
+            description = "",
+            section = overlays
+        ) default boolean gemPouchOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = gem_sack + _overlay,
+            name = "Gem sack",
+            description = "",
+            section = overlays
+        ) default boolean gemSackOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = gem_satchel + _overlay,
+            name = "Gem satchel",
+            description = "",
+            section = overlays
+        ) default boolean gemSatchelOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = gem_tote + _overlay,
+            name = "Gem tote",
+            description = "",
+            section = overlays
+        ) default boolean gemToteOverlay() { return true; }
+
+        @ConfigItem(
             keyName = giantsoul_amulet + _overlay,
             name = "Giantsoul amulet",
             description = "",
@@ -1826,6 +1909,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean herbSackOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = silklined_herb_sack + _overlay,
+            name = "Silklined herb sack",
+            description = "",
+            section = overlays
+        ) default boolean silklinedHerbSackOverlay() { return true; }
 
         @ConfigItem(
             keyName = jar_generator + _overlay,
@@ -2756,6 +2846,34 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default String getGemBagStorageCharges() { return ""; }
 
         @ConfigItem(
+            keyName = gem_pouch + _storage,
+            name = gem_pouch + _storage,
+            description = gem_pouch + _storage,
+            section = debug
+        ) default String getGemPouchStorageCharges() { return ""; }
+
+        @ConfigItem(
+            keyName = gem_sack + _storage,
+            name = gem_sack + _storage,
+            description = gem_sack + _storage,
+            section = debug
+        ) default String getGemSackStorageCharges() { return ""; }
+
+        @ConfigItem(
+            keyName = gem_satchel + _storage,
+            name = gem_satchel + _storage,
+            description = gem_satchel + _storage,
+            section = debug
+        ) default String getGemSatchelStorageCharges() { return ""; }
+
+        @ConfigItem(
+            keyName = gem_tote + _storage,
+            name = gem_tote + _storage,
+            description = gem_tote + _storage,
+            section = debug
+        ) default String getGemToteStorageCharges() { return ""; }
+
+        @ConfigItem(
             keyName = seed_box,
             name = seed_box,
             description = seed_box,
@@ -2831,6 +2949,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = herb_sack + _storage,
             section = debug
         ) default String getHerbSackStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = silklined_herb_sack + _storage,
+            name = silklined_herb_sack + _storage,
+            description = silklined_herb_sack + _storage,
+            section = debug
+        ) default String getSilklinedHerbSackStorage() { return ""; }
 
         @ConfigItem(
             keyName = escape_crystal_status,

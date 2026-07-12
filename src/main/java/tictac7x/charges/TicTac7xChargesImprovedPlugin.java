@@ -22,6 +22,8 @@ import net.runelite.client.ui.overlay.infobox.InfoBox;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.util.OSType;
+import tictac7x.charges.events.CustomMenuOptionClicked;
+import tictac7x.charges.events.CustomWidgetMenuOptionClicked;
 import tictac7x.charges.item.ChargedItemBase;
 import tictac7x.charges.item.overlays.ChargedItemInfobox;
 import tictac7x.charges.item.overlays.ChargedItemOverlay;
@@ -139,17 +141,12 @@ import java.util.concurrent.ThreadLocalRandom;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static final String pluginVersion = "v0.6.12";
+	public static final String pluginVersion = "v0.6.13";
 	public static final String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Reagent pouch fixes.<br>" +
-		"<colHIGHLIGHT>* Toxic and blazing blowpipe fixes.<br>" +
-		"<colHIGHLIGHT>* Abyssal tentacle added.<br>" +
-		"<colHIGHLIGHT>* Abyssal bracelet added.<br>" +
-		"<colHIGHLIGHT>* Bottomless milk bucket added.<br>" +
-		"<colHIGHLIGHT>* Venator bow improvements and echo venator bow support.<br>" +
-		"<colHIGHLIGHT>* Serpentine helm and its variants support added.<br>" +
-		"<colHIGHLIGHT>* Camphor/Ironwood/Rosewood blowpipes added."
+		"<colHIGHLIGHT>* Gem pouch, sack, satchel and tote added.<br>" +
+		"<colHIGHLIGHT>* Ghommal's hilt added.<br>" +
+		"<colHIGHLIGHT>* Silkliend herb sack added and herb sack fixes."
 	;
 
 	@Inject
@@ -439,6 +436,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new S_CrystalShield(provider),
 			new S_DragonfireShield(provider),
 			new S_FaladorShield(provider),
+			new S_GhommalsHilt(provider),
 			new S_KharedstMemoirs(provider),
 			new S_TomeOfEarth(provider),
 			new S_TomeOfFire(provider),
@@ -461,8 +459,13 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_FungicideSpray(provider),
 			new U_FurPouch(provider),
 			new U_GemBag(provider),
+			new U_GemPouch(provider),
+			new U_GemSack(provider),
+			new U_GemSatchel(provider),
+			new U_GemTote(provider),
 			new U_GricollersCan(provider),
 			new U_HerbSack(provider),
+			new U_SilklinedHerbSack(provider),
 			new U_HuntsmansKit(provider),
 			new U_ImpInABox(provider),
 			new U_JarGenerator(provider),
@@ -614,7 +617,49 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onMenuOptionClicked(final MenuOptionClicked event) {
-		store.onMenuOptionClicked(event);
+		// Widget menu option
+		if (event.getMenuAction() == MenuAction.WIDGET_CONTINUE) {
+			final Optional<Widget> selectedWidget = Optional.ofNullable(event.getWidget());
+			if (selectedWidget.isEmpty()) return;
+
+			final Optional<Widget> parentWidget = Optional.ofNullable(selectedWidget.get().getParent());
+			if (parentWidget.isEmpty()) return;
+
+			final List<String> options = new ArrayList<>();
+			for (final Widget subWidget : parentWidget.get().getDynamicChildren()) {
+				if (subWidget.getText().isBlank()) continue;
+				options.add(subWidget.getText());
+			}
+
+			final CustomWidgetMenuOptionClicked widgetMenuOptionClicked = new CustomWidgetMenuOptionClicked(
+				selectedWidget.get().getId(),
+				options,
+				selectedWidget.get().getText()
+			);
+
+			store.onWidgetMenuOptionClicked(widgetMenuOptionClicked);
+
+		// Regular menu option
+		} else {
+			int impostorId;
+			try {
+				impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
+			} catch (final Exception ignored) {
+				impostorId = -1;
+			}
+
+			final CustomMenuOptionClicked menuOptionClicked = new CustomMenuOptionClicked(
+				event.getId(),
+				event.getMenuTarget().replaceAll("</?col.*?>", ""),
+				event.getMenuOption().replaceAll("</?col.*?>", ""),
+				event.getMenuAction().getId(),
+				event.getMenuAction().name(),
+				event.getItemId(),
+				impostorId
+			);
+
+			store.onMenuOptionClicked(menuOptionClicked);
+		}
 	}
 
 	@Subscribe

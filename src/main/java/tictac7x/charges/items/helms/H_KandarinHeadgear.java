@@ -7,7 +7,6 @@ import tictac7x.charges.item.triggers.OnChatMessage;
 import tictac7x.charges.item.triggers.OnGraphicChanged;
 import tictac7x.charges.item.triggers.OnResetDaily;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class H_KandarinHeadgear extends ChargedItem {
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.KANDARIN_HEADGEAR_3),
-            new TriggerItem(ItemId.KANDARIN_HEADGEAR_4).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.KANDARIN_HEADGEAR_4).unlimitedCharges(),
         };
 
         this.triggers.addAll(List.of(

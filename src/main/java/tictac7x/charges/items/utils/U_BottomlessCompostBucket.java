@@ -76,28 +76,28 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
             // Almost full.
             new OnChatMessage("Your bottomless compost bucket is just about full. You won't be able to squeeze any more compost in there.").consumer(() -> {
                 if (getCompostType().isPresent()) {
-                    storage.clearAndPut(getCompostType().get().getId(), 9999);
+                    storage.clearAndPut(getCompostType().get().itemId, 9999);
                 }
             }),
 
             // Full.
             new OnChatMessage("Your bottomless compost bucket is now full!").consumer(() -> {
                 if (getCompostType().isPresent()) {
-                    storage.clearAndPut(getCompostType().get().getId(), 10_000);
+                    storage.clearAndPut(getCompostType().get().itemId, 10_000);
                 }
             }),
 
             // Fill compost from bin.
             new OnXpDrop(Skill.FARMING).unallowedItem(ItemId.BUCKET).onMenuOption("Take").onMenuTarget("Compost Bin", "Big Compost Bin").consumer(() -> {
                 if (getCompostType().isPresent()) {
-                    storage.add(getCompostType().get().getId(), 2);
+                    storage.add(getCompostType().get().itemId, 2);
                 }
             }),
 
             // Use on compost bin.
             new OnXpDrop(Skill.FARMING).onMenuOption("Use").onMenuTarget("Bottomless compost bucket -> Compost Bin", "Bottomless compost bucket -> Big Compost Bin").consumer(() -> {
                 if (getCompostType().isPresent()) {
-                    storage.add(getCompostType().get().getId(), 2);
+                    storage.add(getCompostType().get().itemId, 2);
                 }
             })
         ));

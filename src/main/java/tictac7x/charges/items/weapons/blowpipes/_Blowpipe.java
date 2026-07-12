@@ -53,7 +53,7 @@ public class _Blowpipe extends ChargedItemWithStorage {
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).isEquipped().hasAnimationId(attackAnimationId).consumer(() -> {
                 for (final StorageItem item : storage.getStorage().getItems()) {
                     if (TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
-                        storage.remove(item.getId(), 1);
+                        storage.remove(item.itemId, 1);
                     }
                 }
             })

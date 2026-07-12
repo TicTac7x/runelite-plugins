@@ -17,6 +17,7 @@ import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.ids.GraphicId;
 import tictac7x.charges.store.ids.ItemContainerId;
 import tictac7x.charges.store.ids.VarbitId;
+import tictac7x.charges.store.utils.WidgetMenuAction;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -54,6 +55,7 @@ public class Store {
     public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
     public Optional<CustomMenuOptionClicked> previousMenuOptionClicked = Optional.empty();
     public final List<CustomMenuOptionClicked> menuOptionsClicked = new ArrayList<>();
+    private final List<CustomWidgetMenuOptionClicked> widgetMenuActionsClicked = new ArrayList<>();
     private final Map<Skill, Integer> skillsXp = new HashMap<>();
 
     final Pattern withdrawPattern = Pattern.compile("Withdraw-(?<amount>.+)");
@@ -163,7 +165,7 @@ public class Store {
 
                 final StringBuilder storageStringBuilder = new StringBuilder();
                 for (final StorageItem item : event.getItems()) {
-                    storageStringBuilder.append(item.getId()).append(",");
+                    storageStringBuilder.append(item.itemId).append(",");
                 }
                 final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
                 configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
@@ -195,9 +197,9 @@ public class Store {
             if (checkBank) {
                 for (final StorageItem item : bank.getItems()) {
                     for (final TriggerItem triggerItem : chargedItem.items) {
-                        if (item.getId() == triggerItem.itemId) {
+                        if (item.itemId == triggerItem.itemId) {
                             if (!bankItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !bankItemDynamic || !triggerItem.fixedCharges.isPresent()) {
-                                bankItemId = Optional.of(item.getId());
+                                bankItemId = Optional.of(item.itemId);
 
                                 if (!triggerItem.fixedCharges.isPresent()) {
                                     bankItemDynamic = true;
@@ -211,9 +213,9 @@ public class Store {
             // Inventory is more important than bank.
             for (final StorageItem item : inventory.getItems()) {
                 for (final TriggerItem triggerItem : chargedItem.items) {
-                    if (item.getId() == triggerItem.itemId) {
+                    if (item.itemId == triggerItem.itemId) {
                         if (!inventoryItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !inventoryItemDynamic || !triggerItem.fixedCharges.isPresent()) {
-                            inventoryItemId = Optional.of(item.getId());
+                            inventoryItemId = Optional.of(item.itemId);
 
                             if (!triggerItem.fixedCharges.isPresent()) {
                                 inventoryItemDynamic = true;
@@ -226,9 +228,9 @@ public class Store {
             // Equipment has most priority.
             for (final StorageItem item : equipment.getItems()) {
                 for (final TriggerItem triggerItem : chargedItem.items) {
-                    if (item.getId() == triggerItem.itemId) {
+                    if (item.itemId == triggerItem.itemId) {
                         if (!equipmentItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !equipmentItemDynamic || !triggerItem.fixedCharges.isPresent()) {
-                            equipmentItemId = Optional.of(item.getId());
+                            equipmentItemId = Optional.of(item.itemId);
 
                             if (!triggerItem.fixedCharges.isPresent()) {
                                 equipmentItemDynamic = true;
@@ -248,9 +250,7 @@ public class Store {
         }
     }
 
-    public void onMenuOptionClicked(final MenuOptionClicked eventOriginal) {
-        final CustomMenuOptionClicked customMenuOptionClicked = new CustomMenuOptionClicked(eventOriginal, client);
-
+    public void onMenuOptionClicked(final CustomMenuOptionClicked customMenuOptionClicked) {
         if (
             // Menu option not found.
             customMenuOptionClicked.option.isEmpty() ||
@@ -265,9 +265,9 @@ public class Store {
                 customMenuOptionClicked.eventId != 131076 // Special event check for forestry basket
             ) ||
             // Cancel option.
-            customMenuOptionClicked.action.equals("CANCEL") ||
+            customMenuOptionClicked.actionName.equals("CANCEL") ||
             // RuneLite specific action.
-            customMenuOptionClicked.action.equals("RUNELITE")
+            customMenuOptionClicked.actionName.equals("RUNELITE")
         ) return;
 
         checkBankWithdraw(customMenuOptionClicked);
@@ -296,6 +296,16 @@ public class Store {
             listenerOnMenuOptionClicked.trigger(customMenuOptionClicked, chargedItem);
             listenerOnItemUsed.trigger(customMenuOptionClicked, chargedItem);
         });
+    }
+
+    public void onWidgetMenuOptionClicked(final CustomWidgetMenuOptionClicked customWidgetMenuOptionClicked) {
+        // Gametick changed, clear previous widget menu entries since they are no longer valid.
+        if (gametick >= gametick_before + 2) {
+            gametick = 0; gametick_before = 0;
+            widgetMenuActionsClicked.clear();
+        }
+
+        widgetMenuActionsClicked.add(customWidgetMenuOptionClicked);
     }
 
     private void checkBankWithdraw(final CustomMenuOptionClicked customMenuOptionClicked) {
@@ -385,7 +395,7 @@ public class Store {
         final int[] storeableItemIds = new int[storageItems.length];
 
         for (int i = 0; i < storageItems.length; i ++) {
-            storeableItemIds[i] = storageItems[i].getId();
+            storeableItemIds[i] = storageItems[i].itemId;
         }
 
         return notInMenuTargets(storeableItemIds);
@@ -427,6 +437,20 @@ public class Store {
         return !inMenuOptionIds(menuOptionsIds);
     }
 
+    public boolean notInWidgetMenuActions(final WidgetMenuAction widgetMenuAction) {
+        for (final CustomWidgetMenuOptionClicked widgetMenuOptionClicked : widgetMenuActionsClicked) {
+            if (
+                widgetMenuOptionClicked.selectedOption.equals(widgetMenuAction.selectedOption) &&
+                widgetMenuOptionClicked.options.size() > widgetMenuAction.childIndex &&
+                widgetMenuOptionClicked.options.get(widgetMenuAction.childIndex).equals(widgetMenuAction.childString)
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public boolean inMenuImpostors(final int ...impostorIds) {
         for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
             for (final int impostorId : impostorIds) {
@@ -447,7 +471,7 @@ public class Store {
         int quantity = 0;
 
         for (final StorageItem storageItem : inventory.getItems()) {
-            if (storageItem.getId() == itemId) {
+            if (storageItem.itemId == itemId) {
                 quantity += storageItem.getQuantity();
             }
         }
@@ -459,7 +483,7 @@ public class Store {
         int quantity = 0;
 
         for (final StorageItem item : equipment.getItems()) {
-            if (item.getId() == itemId) {
+            if (item.itemId == itemId) {
                 quantity += item.getQuantity();
             }
         }
@@ -471,7 +495,7 @@ public class Store {
         int quantity = 0;
 
         for (final StorageItem storageItem : previousInventory.getItems()) {
-            if (storageItem.getId() == itemId) {
+            if (storageItem.itemId == itemId) {
                 quantity += storageItem.getQuantity();
             }
         }
@@ -481,7 +505,7 @@ public class Store {
 
     public boolean inventoryContainsItem(final int itemId) {
         for (final StorageItem storageItem : inventory.getItems()) {
-            if (storageItem.getId() == itemId) {
+            if (storageItem.itemId == itemId) {
                 return true;
             }
         }
@@ -492,7 +516,7 @@ public class Store {
     public boolean equipmentContainsItem(final int ...itemIds) {
         for (final StorageItem equipmentItem : equipment.getItems()) {
             for (final int itemId : itemIds) {
-                if (equipmentItem.getId() == itemId) {
+                if (equipmentItem.itemId == itemId) {
                     return true;
                 }
             }
@@ -511,7 +535,7 @@ public class Store {
 
     public boolean itemInPossession(final int itemId) {
         for (final StorageItem item : getAllItems()) {
-            if (item.getId() == itemId) {
+            if (item.itemId == itemId) {
                 return true;
             }
         }
@@ -526,15 +550,15 @@ public class Store {
         final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
 
         for (final StorageItem itemNew : inventory.getItems()) {
-            if (quantitiesNew.containsKey(itemNew.getId())) continue;
-            quantitiesNew.put(itemNew.getId(), inventory.count(itemNew.getId()));
+            if (quantitiesNew.containsKey(itemNew.itemId)) continue;
+            quantitiesNew.put(itemNew.itemId, inventory.count(itemNew.itemId));
         }
 
         for (final StorageItem itemOld : previousInventory.getItems()) {
-            if (quantitiesBefore.containsKey(itemOld.getId())) {
-                quantitiesBefore.put(itemOld.getId(), quantitiesBefore.get(itemOld.getId()) + itemOld.getQuantity());
+            if (quantitiesBefore.containsKey(itemOld.itemId)) {
+                quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
             } else {
-                quantitiesBefore.put(itemOld.getId(), itemOld.getQuantity());
+                quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
             }
         }
 
@@ -561,15 +585,15 @@ public class Store {
         final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
 
         for (final StorageItem itemNew : bank.getItems()) {
-            if (quantitiesNew.containsKey(itemNew.getId())) continue;
-            quantitiesNew.put(itemNew.getId(), bank.count(itemNew.getId()));
+            if (quantitiesNew.containsKey(itemNew.itemId)) continue;
+            quantitiesNew.put(itemNew.itemId, bank.count(itemNew.itemId));
         }
 
         for (final StorageItem itemOld : previousBank.getItems()) {
-            if (quantitiesBefore.containsKey(itemOld.getId())) {
-                quantitiesBefore.put(itemOld.getId(), quantitiesBefore.get(itemOld.getId()) + itemOld.getQuantity());
+            if (quantitiesBefore.containsKey(itemOld.itemId)) {
+                quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
             } else {
-                quantitiesBefore.put(itemOld.getId(), itemOld.getQuantity());
+                quantitiesBefore.put(itemOld.itemId, itemOld.getQuantity());
             }
         }
 
@@ -641,7 +665,7 @@ public class Store {
         final CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
         if (!graphicChanged.isLocalPlayer(client)) return;
 
-        if (graphicChanged.actor.hasSpotAnim(GraphicId.SPLASH)) {
+        if (graphicChanged.hasGraphicId(GraphicId.SPLASH)) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
         }
 
@@ -734,7 +758,7 @@ public class Store {
         2165, 2250, 2372, 2476, 2512, 2513, 3174, 3277, 3350, 3351, 4024,
         4029, 4482, 4517, 4518, 4666, 4667, 4668, 4669, 4671, 4672, 4716,
         4721, 4729, 4730, 4731, 4734, 5343, 5923, 5933, 5935, 5936, 5939,
-        5943, 5944, 6015, 6016, 6063, 6152
+        5943, 5944, 6015, 6016, 6063, 6152, 9625, 664
     );
 
     public void onScriptPreFired(final ScriptPreFired eventOriginal) {
@@ -789,5 +813,15 @@ public class Store {
                 ).build()
             );
         }
+    }
+
+    public boolean hasChatMessage(final String message) {
+        for (final String lastChatMessage : lastChatMessages) {
+            if (lastChatMessage.equals(message)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

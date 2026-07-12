@@ -2,7 +2,9 @@ package tictac7x.charges.item.triggers;
 
 import tictac7x.charges.item.storage.StorageItem;
 import tictac7x.charges.item.storage.StorageItems;
+import tictac7x.charges.store.utils.WidgetMenuAction;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -16,6 +18,7 @@ public abstract class TriggerBase {
     public Optional<String[]> onMenuTarget = Optional.empty();
     public Optional<int[]> onMenuImpostor = Optional.empty();
     public Optional<Boolean> onItemClick = Optional.empty();
+    public Optional<WidgetMenuAction> onWidgetMenuAction = Optional.empty();
     public boolean onHover = false;
     public Optional<StorageItem[]> onUseStorageItemOnChargedItem = Optional.empty();
     public Optional<StorageItem[]> onUseChargedItemOnStorageItem = Optional.empty();
@@ -39,6 +42,7 @@ public abstract class TriggerBase {
     public Optional<Boolean> emptyStorageToInventory = Optional.empty();
     public Optional<Boolean> fillStorageFromInventory = Optional.empty();
     public Optional<Boolean> emptyStorageToBank = Optional.empty();
+    public Optional<Boolean> fillStorageFromBank = Optional.empty();
     public Optional<Boolean> pickUpToStorage = Optional.empty();
     public Optional<int[]> addToStorage = Optional.empty();
 
@@ -80,6 +84,11 @@ public abstract class TriggerBase {
         return this;
     }
 
+    public TriggerBase fillStorageFromBank() {
+        this.fillStorageFromBank = Optional.of(true);
+        return this;
+    }
+
     public TriggerBase fillStorageFromInventory() {
         this.fillStorageFromInventory = Optional.of(true);
         return this;
@@ -110,6 +119,11 @@ public abstract class TriggerBase {
         return this;
     }
 
+    public TriggerBase onMenuTarget(final List<String> targets) {
+        this.onMenuTarget = Optional.of(targets.toArray(String[]::new));
+        return this;
+    }
+
     public TriggerBase onMenuImpostor(final int ...impostorIds) {
         this.onMenuImpostor = Optional.of(impostorIds);
         return this;
@@ -117,6 +131,11 @@ public abstract class TriggerBase {
 
     public TriggerBase onItemClick() {
         this.onItemClick = Optional.of(true);
+        return this;
+    }
+    
+    public TriggerBase onWidgetMenuAction(final WidgetMenuAction widgetMenuAction) {
+        this.onWidgetMenuAction = Optional.of(widgetMenuAction);
         return this;
     }
 

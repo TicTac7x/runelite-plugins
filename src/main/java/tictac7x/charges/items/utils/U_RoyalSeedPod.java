@@ -5,7 +5,6 @@ import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.OnMenuEntryAdded;
 import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.ids.ItemId;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class U_RoyalSeedPod extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.royal_seed_pod, ItemId.ROYAL_SEED_POD, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.ROYAL_SEED_POD).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.ROYAL_SEED_POD).unlimitedCharges(),
         };
 
         this.triggers.addAll(List.of(

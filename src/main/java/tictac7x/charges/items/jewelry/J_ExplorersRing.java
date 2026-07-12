@@ -1,7 +1,6 @@
 package tictac7x.charges.items.jewelry;
 
 import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Varbits;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItemWithStorageMultipleCharges;
 import tictac7x.charges.item.storage.StorableItem;

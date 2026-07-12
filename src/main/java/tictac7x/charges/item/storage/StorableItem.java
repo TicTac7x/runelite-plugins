@@ -19,8 +19,18 @@ public class StorableItem extends StorageItem {
         return this;
     }
 
+    public StorableItem checkName(final Optional<String[]> checkName) {
+        this.checkName = checkName;
+        return this;
+    }
+
     public StorableItem displayName(final String displayName) {
         this.displayName = Optional.of(displayName);
+        return this;
+    }
+
+    public StorableItem displayName(final Optional<String> displayName) {
+        this.displayName = displayName;
         return this;
     }
 }

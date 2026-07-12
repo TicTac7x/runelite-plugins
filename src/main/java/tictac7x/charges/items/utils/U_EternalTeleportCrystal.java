@@ -4,7 +4,6 @@ import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.Provider;
 
 public class U_EternalTeleportCrystal extends ChargedItem {
@@ -12,7 +11,7 @@ public class U_EternalTeleportCrystal extends ChargedItem {
         super(TicTac7xChargesImprovedConfig.eternal_teleport_crystal, ItemId.ETERNAL_TELEPORT_CRYSTAL, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.ETERNAL_TELEPORT_CRYSTAL).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.ETERNAL_TELEPORT_CRYSTAL).unlimitedCharges(),
         };
     }
 }

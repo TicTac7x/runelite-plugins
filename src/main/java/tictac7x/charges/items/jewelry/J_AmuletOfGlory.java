@@ -3,7 +3,6 @@ package tictac7x.charges.items.jewelry;
 import tictac7x.charges.TicTac7xChargesImprovedConfig;
 import tictac7x.charges.item.ChargedItem;
 import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ChargeId;
 import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
@@ -19,7 +18,7 @@ public class J_AmuletOfGlory extends ChargedItem {
             new TriggerItem(ItemId.AMULET_OF_GLORY_4).fixedCharges(4),
             new TriggerItem(ItemId.AMULET_OF_GLORY_5).fixedCharges(5),
             new TriggerItem(ItemId.AMULET_OF_GLORY_6).fixedCharges(6),
-            new TriggerItem(ItemId.AMULET_OF_GLORY_ETERNAL).fixedCharges(ChargeId.UNLIMITED),
+            new TriggerItem(ItemId.AMULET_OF_GLORY_ETERNAL).unlimitedCharges(),
             new TriggerItem(ItemId.AMULET_OF_GLORY_TRIMMED).fixedCharges(0),
             new TriggerItem(ItemId.AMULET_OF_GLORY_TRIMMED_1).fixedCharges(1),
             new TriggerItem(ItemId.AMULET_OF_GLORY_TRIMMED_2).fixedCharges(2),

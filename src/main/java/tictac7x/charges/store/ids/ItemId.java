@@ -1082,11 +1082,24 @@ public final class ItemId {
     // Gem bag
     public static final int GEM_BAG = ItemID.GEM_BAG;
     public static final int GEM_BAG_OPEN = ItemID.GEM_BAG_OPEN;
+    public static final int GEM_POUCH = ItemID.GEM_POUCH;
+    public static final int GEM_POUCH_OPEN = ItemID.GEM_POUCH_OPEN;
+    public static final int GEM_SATCHEL = ItemID.GEM_SATCHEL;
+    public static final int GEM_SATCHEL_OPEN = ItemID.GEM_SATCHEL_OPEN;
+    public static final int GEM_TOTE = ItemID.GEM_TOTE;
+    public static final int GEM_TOTE_OPEN = ItemID.GEM_TOTE_OPEN;
+    public static final int GEM_SACK = ItemID.GEM_SACK;
+    public static final int GEM_SACK_OPEN = ItemID.GEM_SACK_OPEN;
+
+    // Uncut gems
     public static final int UNCUT_SAPPHIRE = ItemID.UNCUT_SAPPHIRE;
     public static final int UNCUT_EMERALD = ItemID.UNCUT_EMERALD;
     public static final int UNCUT_RUBY = ItemID.UNCUT_RUBY;
     public static final int UNCUT_DIAMOND = ItemID.UNCUT_DIAMOND;
     public static final int UNCUT_DRAGONSTONE = ItemID.UNCUT_DRAGONSTONE;
+    public static final int UNCUT_OPAL = ItemID.UNCUT_OPAL;
+    public static final int UNCUT_JADE = ItemID.UNCUT_JADE;
+    public static final int UNCUT_RED_TOPAZ = ItemID.UNCUT_RED_TOPAZ;
 
     // Gricollers can
     public static final int GRICOLLERS_CAN = ItemID.ZEAH_WATERINGCAN;
@@ -1094,6 +1107,10 @@ public final class ItemId {
     // Herb sack
     public static final int HERB_SACK = ItemID.SLAYER_HERB_SACK;
     public static final int HERB_SACK_OPEN = ItemID.SLAYER_HERB_SACK_OPEN;
+
+    // Silklined herb sack
+    public static final int SILKLINED_HERB_SACK = ItemID.SLAYER_HERB_SACK_SILK;
+    public static final int SILKLINED_HERB_SACK_OPEN = ItemID.SLAYER_HERB_SACK_SILK_OPEN;
     public static final int GRIMY_GUAM_LEAF = ItemID.UNIDENTIFIED_GUAM;
     public static final int GRIMY_MARRENTILL = ItemID.UNIDENTIFIED_MARENTILL;
     public static final int GRIMY_TARROMIN = ItemID.UNIDENTIFIED_TARROMIN;
@@ -1166,6 +1183,7 @@ public final class ItemId {
     public static final int OAK_LOGS = ItemID.OAK_LOGS;
     public static final int WILLOW_LOGS = ItemID.WILLOW_LOGS;
     public static final int TEAK_LOGS = ItemID.TEAK_LOGS;
+    public static final int JATOBA_LOGS = ItemID.JATOBA_LOGS;
     public static final int JUNIPER_LOGS = ItemID.JUNIPER_LOGS;
     public static final int BARK = ItemID.HOLLOW_BARK;
     public static final int MAPLE_LOGS = ItemID.MAPLE_LOGS;
@@ -1836,4 +1854,12 @@ public final class ItemId {
     public static final int IRONWOOD_BLOWPIPE_UNCHARGED = ItemID.IRONWOOD_BLOWPIPE_EMPTY;
     public static final int ROSEWOOD_BLOWPIPE = ItemID.ROSEWOOD_BLOWPIPE;
     public static final int ROSEWOOD_BLOWPIPE_UNCHARGED = ItemID.ROSEWOOD_BLOWPIPE_EMPTY;
+
+    // Ghommal's hilt
+    public static final int GHOMMALS_HILT_1 = ItemID.CA_OFFHAND_EASY;
+    public static final int GHOMMALS_HILT_2 = ItemID.CA_OFFHAND_MEDIUM;
+    public static final int GHOMMALS_HILT_3 = ItemID.CA_OFFHAND_HARD;
+    public static final int GHOMMALS_HILT_4 = ItemID.CA_OFFHAND_ELITE;
+    public static final int GHOMMALS_HILT_5 = ItemID.CA_OFFHAND_MASTER;
+    public static final int GHOMMALS_HILT_6 = ItemID.CA_OFFHAND_GRANDMASTER;
 }

@@ -53,6 +53,12 @@ public abstract class ListenerBase {
             triggerUsed = true;
         }
 
+        // Fill storage from bank.
+        if (trigger.fillStorageFromBank.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
+            ((ChargedItemWithStorage) chargedItem).storage.fillFromBank();
+            triggerUsed = true;
+        }
+
         // Fill storage from inventory.
         if (trigger.fillStorageFromInventory.isPresent() && (chargedItem instanceof ChargedItemWithStorage)) {
             ((ChargedItemWithStorage) chargedItem).storage.fillFromInventory();
@@ -136,6 +142,11 @@ public abstract class ListenerBase {
             return false;
         }
 
+        // Widget menu action check.
+        if (trigger.onWidgetMenuAction.isPresent() && chargedItem.provider.store.notInWidgetMenuActions(trigger.onWidgetMenuAction.get())) {
+            return false;
+        }
+
         // Menu impostor id check.
         if (trigger.onMenuImpostor.isPresent() && chargedItem.provider.store.notInMenuImpostors(trigger.onMenuImpostor.get())) {
             return false;
@@ -162,8 +173,8 @@ public abstract class ListenerBase {
                 }
                 for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
-                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.getId()).getName()) ||
-                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.getId()).getName())
+                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName()) ||
+                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName())
                     ) {
                         isValid = true;
                         break loopChecker;
@@ -183,7 +194,7 @@ public abstract class ListenerBase {
                 if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(provider.itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
                 for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
-                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.getId()).getName())) {
+                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.itemId).getName())) {
                         useCheck = true;
                         break useCheckLooper;
                     }
@@ -245,6 +256,11 @@ public abstract class ListenerBase {
 
         // Empty storage to bank check.
         if (trigger.emptyStorageToBank.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
+            return false;
+        }
+
+        // Fill storage from bank check.
+        if (trigger.fillStorageFromBank.isPresent() && !(chargedItem instanceof ChargedItemWithStorage)) {
             return false;
         }
 
