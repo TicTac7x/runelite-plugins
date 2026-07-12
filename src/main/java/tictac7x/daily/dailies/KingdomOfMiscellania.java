@@ -1,5 +1,6 @@
 package tictac7x.daily.dailies;
 
+import net.runelite.api.Player;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.events.VarbitChanged;
@@ -50,7 +51,10 @@ public class KingdomOfMiscellania extends DailyInfobox {
     @Override
     public void onVarbitChanged(final VarbitChanged event) {
         if (event.getVarbitId() != VarbitID.MISC_APPROVAL) return;
-        if (Arrays.stream(MISCELLANIA_REGIONS).noneMatch(region -> region == provider.client.getLocalPlayer().getWorldLocation().getRegionID())) return;
+
+        final Player player = provider.client.getLocalPlayer();
+        if (player == null) return;
+        if (Arrays.stream(MISCELLANIA_REGIONS).noneMatch(region -> region == player.getWorldLocation().getRegionID())) return;
 
         provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor_date, LocalDate.now(timezone).toString());
         provider.configManager.setConfiguration(TicTac7xDailyTasksConfig.group, TicTac7xDailyTasksConfig.kingdom_of_miscellania_favor, event.getValue());
