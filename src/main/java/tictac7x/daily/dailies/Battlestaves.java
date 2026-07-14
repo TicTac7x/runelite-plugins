@@ -1,23 +1,22 @@
 package tictac7x.daily.dailies;
 
+import net.runelite.api.gameval.*;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
-import tictac7x.daily.ids.ItemId;
-import tictac7x.daily.ids.VarbitId;
 
 public class Battlestaves extends DailyInfobox {
     private final String tooltip = "Buy %d battlestaves from Zaff at Varrock for %d,000 coins";
 
     public Battlestaves(final Provider provider) {
-        super(TicTac7xDailyTasksConfig.battlestaves, ItemId.BATTLESTAFF, provider);
+        super(TicTac7xDailyTasksConfig.battlestaves, ItemID.BATTLESTAFF, provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
             provider.config.showBattlestaves() &&
-            !varbitEqualsOne(VarbitId.VARROCK_ZAFF_BATTLESTAVES_COLLECTED)
+            !varbitEqualsOne(VarbitID.ZAFF_LAST_CLAIMED)
         );
     }
 
@@ -32,10 +31,10 @@ public class Battlestaves extends DailyInfobox {
     }
 
     private int getRemainingBattlestavesAmount() {
-        final boolean easy   = varbitEqualsOne(VarbitId.VARROCK_DIARY_EASY_COMPLETE);
-        final boolean medium = varbitEqualsOne(VarbitId.VARROCK_DIARY_MEDIUM_COMPLETE);
-        final boolean hard   = varbitEqualsOne(VarbitId.VARROCK_DIARY_HARD_COMPLETE);
-        final boolean elite  = varbitEqualsOne(VarbitId.VARROCK_DIARY_ELITE_COMPLETE);
+        final boolean easy   = varbitEqualsOne(VarbitID.VARROCK_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitID.VARROCK_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitID.VARROCK_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitID.VARROCK_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 120;
         if (easy && medium && hard) return 60;

@@ -1,4 +1,4 @@
-# Daily Tasks - v0.3.2
+# Daily Tasks - v0.3.3
 Daily infoboxes to annoy you to do your tasks.
 
 ![](img/infoboxes.png)
