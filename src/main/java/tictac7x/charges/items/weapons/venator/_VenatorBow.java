@@ -1,8 +1,5 @@
-package tictac7x.charges.items.weapons;
+package tictac7x.charges.items.weapons.venator;
 
-import java.awt.Color;
-
-import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
@@ -11,49 +8,41 @@ import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.ids.*;
 
-import java.util.*;
+import java.awt.*;
+import java.util.List;
+import java.util.regex.*;
 
-public class W_VenatorBow extends ChargedItemWithStorage {
-    public W_VenatorBow(Provider provider) {
-        this(TicTac7xChargesImprovedConfig.venator_bow, ItemId.VENATOR_BOW, provider, new TriggerItem[]{
-            new TriggerItem(ItemId.VENATOR_BOW_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.VENATOR_BOW)
-        });
-    }
-
-    public W_VenatorBow(String configKey, int itemId, Provider provider, TriggerItem[] items) {
+public abstract class _VenatorBow extends ChargedItemWithStorage {
+    public _VenatorBow(String configKey, int itemId, int itemIdUncharged, String itemName, Provider provider) {
         super(configKey, itemId, provider);
 
-        this.items = items;
+        this.items = new TriggerItem[]{
+            new TriggerItem(itemIdUncharged).fixedCharges(0),
+            new TriggerItem(itemId),
+        };
 
         this.storage.storableItems(
             new StorableItem(ItemId.ANCIENT_ESSENCE)
         );
 
+        String itemNameRegex = Pattern.quote(itemName);
+
         this.triggers.addAll(List.of(
             // Charging the bow with essence - Check to see if the bow is already fully charged.
-            new OnChatMessage("venator bow is already fully charged.$").onItemClick().consumer(() -> {
+            new OnChatMessage(itemNameRegex + " is already fully charged.").onItemClick().consumer(() -> {
                 storage.clearAndPut(ItemId.ANCIENT_ESSENCE, 50000);
             }),
 
             // Charging the bow with essence - For charging your echo venator bow, as of March 2026, the game doesn't explicitly say "echo venator bow", but I'll include it just in case
-            new OnChatMessage("You use (?<addedCharges>.+) ancient essence to charge your (echo )?venator bow. It now has (?<charges>.+) charges.").onItemClick().matcherConsumer(m -> {
+            new OnChatMessage("You use .+ ancient essence to charge your " + itemNameRegex + ". It now has (?<charges>.+) charges.").onItemClick().matcherConsumer(m -> {
                 storage.clearAndPut(ItemId.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 
             // Uncharge (you can only uncharge ALL charges at once)
-            new OnChatMessage("You fully uncharge your (echo )?venator bow, regaining (?<charges>.+) ancient essence in the process.").consumer(() -> {
-                provider.clientThread.invokeLater(() -> {
-                    Widget objectboxItemWidget = provider.client.getWidget(InterfaceID.Objectbox.ITEM);
-                    // Check against the uncharged item since the item displayed on the widget will be the uncharged version
-                    if (objectboxItemWidget != null && objectboxItemWidget.getItemId() == this.itemId) {
-                        storage.clear();
-                    }
-                });
-            }),
+            new OnChatMessage("You fully uncharge your " + itemNameRegex + ", regaining (?<charges>.+) ancient essence in the process.").consumer(() -> storage.clear()),
 
             // Check.
-            new OnChatMessage("Your (echo )?venator bow has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
+            new OnChatMessage("Your " + itemNameRegex + "  has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
                 storage.clearAndPut(ItemId.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 

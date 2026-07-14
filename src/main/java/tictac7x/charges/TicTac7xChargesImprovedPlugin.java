@@ -41,11 +41,12 @@ import tictac7x.charges.items.shields.*;
 import tictac7x.charges.items.utils.*;
 import tictac7x.charges.items.weapons.*;
 import tictac7x.charges.items.weapons.blowpipes.*;
+import tictac7x.charges.items.weapons.tridents.*;
+import tictac7x.charges.items.weapons.venator.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.*;
 
-import javax.inject.*;
 import javax.inject.Inject;
 import java.awt.event.*;
 import java.util.*;
