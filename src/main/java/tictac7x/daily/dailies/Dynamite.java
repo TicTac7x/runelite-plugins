@@ -1,25 +1,25 @@
 package tictac7x.daily.dailies;
 
-import net.runelite.api.gameval.ItemID;
-import net.runelite.api.gameval.VarbitID;
 import tictac7x.daily.TicTac7xDailyTasksConfig;
 import tictac7x.daily.common.DailyInfobox;
 import tictac7x.daily.common.Provider;
+import tictac7x.daily.ids.ItemId;
+import tictac7x.daily.ids.VarbitId;
 
 public class Dynamite extends DailyInfobox {
     private final String tooltip = "Claim %d dynamite from Thirus at Lovakengj";
 
     public Dynamite(final Provider provider) {
-        super(TicTac7xDailyTasksConfig.dynamite, provider.itemManager.getImage(ItemID.LOVAKENGJ_DYNAMITE_FUSED), provider);
+        super(TicTac7xDailyTasksConfig.dynamite, ItemId.DYNAMITE, provider);
     }
 
     @Override
     public boolean isShowing() {
         return (
             provider.config.showDynamite() &&
-            varbitEqualsOne(VarbitID.KOUREND_DIARY_EASY_COMPLETE) &&
-            varbitEqualsOne(VarbitID.KOUREND_DIARY_MEDIUM_COMPLETE) &&
-            !varbitEqualsOne(VarbitID.KOUREND_FREE_DYNAMITE)
+            varbitEqualsOne(VarbitId.KOUREND_DIARY_EASY_COMPLETE) &&
+            varbitEqualsOne(VarbitId.KOUREND_DIARY_MEDIUM_COMPLETE) &&
+            !varbitEqualsOne(VarbitId.KOUREND_DYNAMITE_COLLECTED)
         );
     }
 
@@ -34,10 +34,10 @@ public class Dynamite extends DailyInfobox {
     }
 
     private int getDynamiteAmount() {
-        final boolean easy   = varbitEqualsOne(VarbitID.KOUREND_DIARY_EASY_COMPLETE);
-        final boolean medium = varbitEqualsOne(VarbitID.KOUREND_DIARY_MEDIUM_COMPLETE);
-        final boolean hard   = varbitEqualsOne(VarbitID.KOUREND_DIARY_HARD_COMPLETE);
-        final boolean elite  = varbitEqualsOne(VarbitID.KOUREND_DIARY_ELITE_COMPLETE);
+        final boolean easy   = varbitEqualsOne(VarbitId.KOUREND_DIARY_EASY_COMPLETE);
+        final boolean medium = varbitEqualsOne(VarbitId.KOUREND_DIARY_MEDIUM_COMPLETE);
+        final boolean hard   = varbitEqualsOne(VarbitId.KOUREND_DIARY_HARD_COMPLETE);
+        final boolean elite  = varbitEqualsOne(VarbitId.KOUREND_DIARY_ELITE_COMPLETE);
 
         if (easy && medium && hard && elite) return 80;
         if (easy && medium && hard) return 40;
