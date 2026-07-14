@@ -1,19 +1,19 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.*;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.AnimationId;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import java.util.*;
 
 public class U_ChuggingBarrel extends ChargedItemWithStorage {
-    public U_ChuggingBarrel(final Provider provider) {
+    public U_ChuggingBarrel(Provider provider) {
         super(TicTac7xChargesImprovedConfig.chugging_barrel, ItemId.CHUGGING_BARREL, provider);
         this.storage.storableItems(
             // Regular potions.
@@ -115,7 +115,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
 
             // Drink.
             new OnAnimationChanged(AnimationId.CHUGGING_BARREL_DRINK).consumer(() -> {
-                for (final StorageItem storageItem : storage.getStorage().getItems()) {
+                for (StorageItem storageItem : storage.getStorage().getItems()) {
                     storage.put(storageItem.itemId, storageItem.getQuantity() - 1);
                 }
             }),
@@ -134,7 +134,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
     private int getMinimumSips() {
         int sipsMinimum = 0;
 
-        for (final StorageItem storageItem : storage.getStorage().getItems()) {
+        for (StorageItem storageItem : storage.getStorage().getItems()) {
             if (sipsMinimum == 0 || storageItem.getQuantity() < sipsMinimum) {
                 sipsMinimum = storageItem.getQuantity();
             }
@@ -144,7 +144,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
     }
 
     @Override
-    public int getCharges(final int itemId) {
+    public int getCharges(int itemId) {
         return getMinimumSips();
     }
 
@@ -155,7 +155,7 @@ public class U_ChuggingBarrel extends ChargedItemWithStorage {
 
     @Override
     public String getTooltip() {
-        final String tooltip = super.getTooltip();
+        String tooltip = super.getTooltip();
         return tooltip.replaceAll("\\(1\\)", "");
     }
 }

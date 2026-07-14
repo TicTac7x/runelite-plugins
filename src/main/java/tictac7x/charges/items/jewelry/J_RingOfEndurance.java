@@ -1,18 +1,17 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItem;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class J_RingOfEndurance extends ChargedItem {
-    public J_RingOfEndurance(final Provider provider) {
+    public J_RingOfEndurance(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ring_of_endurance, ItemId.RING_OF_ENDURANCE, provider);
 
         this.items = new TriggerItem[]{
@@ -33,7 +32,7 @@ public class J_RingOfEndurance extends ChargedItem {
 
             // Uncharge.
             new OnMenuOptionClicked("Yes").runConsumerOnNextGameTick(() -> {
-                final Optional<Widget> unchargeWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
+                Optional<Widget> unchargeWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
                 if (unchargeWidget.isPresent() && unchargeWidget.get().getText().equals("Are you sure you want to uncharge your Ring of endurance?")) {
                     setCharges(0);
                 }

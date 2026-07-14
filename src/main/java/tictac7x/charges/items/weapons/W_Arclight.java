@@ -1,24 +1,20 @@
 package tictac7x.charges.items.weapons;
 
-import tictac7x.charges.item.triggers.OnAnimationChanged;
-import tictac7x.charges.store.enums.HitsplatGroup;
-import tictac7x.charges.store.ids.AnimationId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnHitsplatApplied;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
-import static tictac7x.charges.store.enums.HitsplatTarget.ENEMY;
+import static tictac7x.charges.store.enums.HitsplatTarget.*;
 
 public class W_Arclight extends ChargedItem {
     private boolean attacked = false;
 
-    public W_Arclight(final Provider provider) {
+    public W_Arclight(Provider provider) {
         super(TicTac7xChargesImprovedConfig.arclight, ItemId.ARCLIGHT, provider);
 
         this.items = new TriggerItem[]{

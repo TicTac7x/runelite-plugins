@@ -1,8 +1,8 @@
 package tictac7x.charges.items.potions;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class P_ExtremeEnergy extends _Potion {
     public P_ExtremeEnergy(Provider provider) {

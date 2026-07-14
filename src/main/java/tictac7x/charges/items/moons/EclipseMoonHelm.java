@@ -1,12 +1,12 @@
 package tictac7x.charges.items.moons;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class EclipseMoonHelm extends _MoonItem {
     public EclipseMoonHelm(
-        final Provider provider
+        Provider provider
     ) {
         super("Eclipse moon helm", ItemId.ECLIPSE_MOON_HELM, provider);
 

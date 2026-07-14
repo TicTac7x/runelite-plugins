@@ -1,21 +1,18 @@
 package tictac7x.charges.item;
 
-import net.runelite.client.ui.JagexColors;
-import net.runelite.client.util.ColorUtil;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.Storage;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.storage.StorageItems;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import net.runelite.client.ui.*;
+import net.runelite.client.util.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
-import java.awt.Color;
-import java.util.Optional;
+import java.awt.*;
+import java.util.*;
 
 public class ChargedItemWithStorage extends ChargedItemBase {
     public Storage storage;
 
-    public ChargedItemWithStorage(final String configKey, final int itemId, final Provider provider) {
+    public ChargedItemWithStorage(String configKey, int itemId, Provider provider) {
         super(configKey, itemId, provider);
         this.storage = new Storage(this, configKey, provider);
         provider.clientThread.invokeLater(this::loadCharges);
@@ -29,8 +26,8 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
         String tooltip = "";
 
-        for (final StorableItem storableItem : storage.getStorableItems()) {
-            final Optional<StorageItem> storageItem = storage.getStorage().getItem(storableItem.itemId);
+        for (StorableItem storableItem : storage.getStorableItems()) {
+            Optional<StorageItem> storageItem = storage.getStorage().getItem(storableItem.itemId);
             if (storageItem.isPresent() && storageItem.get().getQuantity() > 0) {
                 // Name
                 tooltip += (storableItem.displayName.isPresent() ? storableItem.displayName.get() : provider.itemManager.getItemComposition(storageItem.get().itemId).getName()) + ": ";
@@ -46,12 +43,12 @@ public class ChargedItemWithStorage extends ChargedItemBase {
         return this.storage.getStorage();
     }
 
-    public Optional<StorageItem> getStorageItemFromName(final String name, final int quantity) {
+    public Optional<StorageItem> getStorageItemFromName(String name, int quantity) {
         return storage.getStorageItemFromName(name, quantity);
     }
 
     private int getQuantities() {
-        for (final TriggerItem item : items) {
+        for (TriggerItem item : items) {
             if (item.itemId == itemId && item.fixedCharges.isPresent()) {
                 return item.fixedCharges.get();
             }
@@ -59,7 +56,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
 
         int quantity = 0;
 
-        for (final StorageItem storageItem : getStorage().getItems()) {
+        for (StorageItem storageItem : getStorage().getItems()) {
             if (storageItem.getQuantity() > 0) {
                 quantity += storageItem.getQuantity();
             }
@@ -106,7 +103,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     }
 
     @Override
-    public Color getTextColor(final int itemId) {
+    public Color getTextColor(int itemId) {
         return getStorageTextColor();
     }
 

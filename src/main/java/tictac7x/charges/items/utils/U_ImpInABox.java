@@ -1,13 +1,13 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStatus;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
 
 public class U_ImpInABox extends ChargedItemWithStatus {
-    public U_ImpInABox(final Provider provider) {
+    public U_ImpInABox(Provider provider) {
         super(TicTac7xChargesImprovedConfig.imp_in_a_box, ItemId.IMP_IN_A_BOX_1, provider);
 
         this.items = new TriggerItem[]{

@@ -3,26 +3,25 @@ package tictac7x.charges.items.weapons;
 import java.awt.Color;
 
 import net.runelite.api.gameval.InterfaceID;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class W_VenatorBow extends ChargedItemWithStorage {
-    public W_VenatorBow(final Provider provider) {
+    public W_VenatorBow(Provider provider) {
         this(TicTac7xChargesImprovedConfig.venator_bow, ItemId.VENATOR_BOW, provider, new TriggerItem[]{
             new TriggerItem(ItemId.VENATOR_BOW_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.VENATOR_BOW)
         });
     }
 
-    public W_VenatorBow(final String configKey, final int itemId, final Provider provider, final TriggerItem[] items) {
+    public W_VenatorBow(String configKey, int itemId, Provider provider, TriggerItem[] items) {
         super(configKey, itemId, provider);
 
         this.items = items;
@@ -66,7 +65,7 @@ public class W_VenatorBow extends ChargedItemWithStorage {
     }
 
     @Override
-    public Color getTextColor(final int itemId) {
+    public Color getTextColor(int itemId) {
         return this.getTotalTextColor();
     }
 

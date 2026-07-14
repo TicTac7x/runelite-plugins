@@ -1,25 +1,24 @@
 package tictac7x.charges.items.helms;
 
-import java.util.List;
-import java.util.Optional;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
+
+import java.util.*;
 
 public class H_SerpentineHelm extends ChargedItemWithStorage {
-    public H_SerpentineHelm(final Provider provider) {
+    public H_SerpentineHelm(Provider provider) {
         this(TicTac7xChargesImprovedConfig.serpentine_helm, "Serpentine helm", ItemId.SERPENTINE_HELM, new TriggerItem[]{
             new TriggerItem(ItemId.SERPENTINE_HELM_UNCHARGED).fixedCharges(0),
             new TriggerItem(ItemId.SERPENTINE_HELM)
         }, provider);
     }
 
-    public H_SerpentineHelm(final String configKey, final String itemName, final int itemId, final TriggerItem[] items, final Provider provider) {
+    public H_SerpentineHelm(String configKey, String itemName, int itemId, TriggerItem[] items, Provider provider) {
         super(configKey, itemId, provider);
 
         this.items = items;
@@ -36,7 +35,7 @@ public class H_SerpentineHelm extends ChargedItemWithStorage {
 
             // Uncharge
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
-                final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
+                Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
                 if (
                     widget.isPresent() &&
                         widget.get().getItemId() == this.itemId &&

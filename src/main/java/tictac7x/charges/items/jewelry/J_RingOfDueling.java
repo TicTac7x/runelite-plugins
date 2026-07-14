@@ -1,13 +1,13 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class J_RingOfDueling extends ChargedItem {
-    public J_RingOfDueling(final Provider provider) {
+    public J_RingOfDueling(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ring_of_dueling, ItemId.RING_OF_DUELING_1, provider);
 
         this.items = new TriggerItem[]{

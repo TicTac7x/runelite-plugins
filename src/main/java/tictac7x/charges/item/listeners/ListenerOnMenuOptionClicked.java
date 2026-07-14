@@ -1,20 +1,19 @@
 package tictac7x.charges.item.listeners;
 
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnMenuOptionClicked;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.events.CustomMenuOptionClicked;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnMenuOptionClicked extends ListenerBase {
-    public ListenerOnMenuOptionClicked(final Provider provider) {
+    public ListenerOnMenuOptionClicked(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final CustomMenuOptionClicked event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(CustomMenuOptionClicked event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
-            final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
+            OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
             boolean triggerUsed = false;
 
             if (trigger.menuOptionConsumer.isPresent()) {
@@ -30,13 +29,13 @@ public class ListenerOnMenuOptionClicked extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomMenuOptionClicked event) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase, CustomMenuOptionClicked event) {
         if (!(triggerBase instanceof OnMenuOptionClicked)) return false;
-        final OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
+        OnMenuOptionClicked trigger = (OnMenuOptionClicked) triggerBase;
 
         // Option check.
         boolean optionCheck = false;
-        for (final String option : trigger.options) {
+        for (String option : trigger.options) {
             if (event.option.equals(option)) {
                 optionCheck = true;
                 break;

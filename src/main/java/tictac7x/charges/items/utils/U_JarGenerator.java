@@ -1,16 +1,15 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
 
 import java.util.List;
 
 public class U_JarGenerator extends ChargedItem {
-    public U_JarGenerator(final Provider provider) {
+    public U_JarGenerator(Provider provider) {
         super(TicTac7xChargesImprovedConfig.jar_generator, ItemId.JAR_GENERATOR, provider);
 
         this.items = new TriggerItem[]{

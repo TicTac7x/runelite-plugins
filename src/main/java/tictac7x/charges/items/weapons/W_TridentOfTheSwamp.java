@@ -1,18 +1,15 @@
 package tictac7x.charges.items.weapons;
 
-import tictac7x.charges.item.triggers.OnAutoChargeMessage;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class W_TridentOfTheSwamp extends ChargedItem {
-    public W_TridentOfTheSwamp(final Provider provider) {
+    public W_TridentOfTheSwamp(Provider provider) {
         super(TicTac7xChargesImprovedConfig.trident_of_the_swamp, ItemId.TRIDENT_OF_THE_SWAMP, provider);
 
         this.items = new TriggerItem[]{

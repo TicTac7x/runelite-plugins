@@ -1,28 +1,26 @@
 package tictac7x.charges.item.listeners;
 
-import tictac7x.charges.events.CustomChatMessage;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
-import java.util.regex.Matcher;
+import java.util.regex.*;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
 
 public class ListenerOnChatMessage extends ListenerBase {
-    public ListenerOnChatMessage(final Provider provider) {
+    public ListenerOnChatMessage(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final CustomChatMessage event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(CustomChatMessage event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
             boolean triggerUsed = false;
-            final OnChatMessage trigger = (OnChatMessage) triggerBase;
+            OnChatMessage trigger = (OnChatMessage) triggerBase;
 
-            final Matcher matcher = trigger.message.matcher(event.message);
+            Matcher matcher = trigger.message.matcher(event.message);
             matcher.find();
 
             if (trigger.setDynamically.isPresent() && (chargedItem instanceof ChargedItem)) {
@@ -63,12 +61,12 @@ public class ListenerOnChatMessage extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomChatMessage event) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase, CustomChatMessage event) {
         if (!(triggerBase instanceof OnChatMessage)) return false;
-        final OnChatMessage trigger = (OnChatMessage) triggerBase;
+        OnChatMessage trigger = (OnChatMessage) triggerBase;
 
         // Message check.
-        final Matcher matcher = trigger.message.matcher(event.message);
+        Matcher matcher = trigger.message.matcher(event.message);
         if (!matcher.find()) {
             return false;
         }

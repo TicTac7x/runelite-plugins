@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class AhrimsHood extends _BarrowsItem {
-    public AhrimsHood(final Provider provider) {
+    public AhrimsHood(Provider provider) {
         super("Ahrim's hood", ItemId.AHRIMS_HOOD, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.AHRIMS_HOOD).fixedCharges(1000),

@@ -1,28 +1,22 @@
 package tictac7x.charges.items.capes;
 
-import tictac7x.charges.item.storage.Storage;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class C_ForestryKit extends ChargedItemWithStorage {
-    public final String menuOptionFillLeavesFromBank = "Fill-leaves-from-bank";
-    public final String menuOptionEmptyLeavesToBank = "Empty-leaves-to-bank";
+    public String menuOptionFillLeavesFromBank = "Fill-leaves-from-bank";
+    public String menuOptionEmptyLeavesToBank = "Empty-leaves-to-bank";
     private Optional<StorageItem> lastLeaves = Optional.empty();
-    private final StorableItem[] storableKitItems = new StorableItem[]{
+    private StorableItem[] storableKitItems = new StorableItem[]{
         new StorableItem(ItemId.ANIMAINFUSED_BARK),
         new StorableItem(ItemId.FORESTERS_RATION),
         new StorableItem(ItemId.NATURE_OFFERINGS),
@@ -45,7 +39,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED)
     };
 
-    public C_ForestryKit(final String configKey, final int itemId, final int openItemId, final Storage storage, final Provider provider) {
+    public C_ForestryKit(String configKey, int itemId, int openItemId, Storage storage, Provider provider) {
         super(configKey, itemId, provider);
 
         this.storage = storage;
@@ -55,12 +49,12 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         });
     }
 
-    public C_ForestryKit(final Provider provider) {
+    public C_ForestryKit(Provider provider) {
         super(TicTac7xChargesImprovedConfig.forestry_kit, ItemId.FORESTRY_KIT, provider);
         setup(new TriggerItem[]{new TriggerItem(ItemId.FORESTRY_KIT)});
     }
 
-    private void setup(final TriggerItem[] items) {
+    private void setup(TriggerItem[] items) {
         this.items = items;
 
         storage.addStorableItems(storableKitItems);
@@ -68,7 +62,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         this.triggers.addAll(List.of(
             // View contents.
             new OnItemContainerChanged(ItemContainerId.FORESTRY_KIT).itemsConsumer(kitItems -> {
-                for (final StorableItem storableKitItem : storableKitItems) {
+                for (StorableItem storableKitItem : storableKitItems) {
                     storage.put(storableKitItem.itemId, kitItems.count(storableKitItem.itemId));
                 }
             }),
@@ -154,7 +148,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
     }
 
     public boolean hasLeavesInForestryKit() {
-        for (final StorageItem storageItem : storage.getStorage().getItems()) {
+        for (StorageItem storageItem : storage.getStorage().getItems()) {
             if (storageItem.getQuantity() == 0) continue;
 
             switch (storageItem.itemId) {
@@ -171,13 +165,13 @@ public class C_ForestryKit extends ChargedItemWithStorage {
         return false;
     }
 
-    private void purchaseFromFriendlyForesterShop(final int amountToBuy) {
-        final Optional<Widget> forestryShopWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 819, 3);
+    private void purchaseFromFriendlyForesterShop(int amountToBuy) {
+        Optional<Widget> forestryShopWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 819, 3);
         if (!forestryShopWidget.isPresent()) return;
 
         provider.store.addConsumerToNextTickQueue(() -> {
             int animaBarkPerItem = 0;
-            final int selectedShopItem = provider.client.getVarpValue(3869);
+            int selectedShopItem = provider.client.getVarpValue(3869);
             switch (selectedShopItem) {
                 case 0: // Forestry kit
                     break;

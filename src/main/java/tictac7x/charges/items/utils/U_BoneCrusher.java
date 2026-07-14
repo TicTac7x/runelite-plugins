@@ -1,16 +1,16 @@
 package tictac7x.charges.items.utils;
 
+import net.runelite.api.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStatus;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import java.util.*;
 
 public class U_BoneCrusher extends ChargedItemWithStatus {
-    public U_BoneCrusher(final Provider provider) {
+    public U_BoneCrusher(Provider provider) {
         super(TicTac7xChargesImprovedConfig.bonecrusher, ItemId.BONECRUSHER, provider);
 
         this.items = new TriggerItem[]{

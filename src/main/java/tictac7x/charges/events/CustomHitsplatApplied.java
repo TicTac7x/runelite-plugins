@@ -1,18 +1,17 @@
 package tictac7x.charges.events;
 
-import net.runelite.api.Actor;
-import net.runelite.api.Client;
-import net.runelite.api.events.HitsplatApplied;
+import net.runelite.api.*;
+import net.runelite.api.events.*;
 
 public class CustomHitsplatApplied {
-    public final Actor actor;
-    public final int type;
-    public final int amount;
-    public final boolean toMe;
-    public final boolean byMe;
-    public final boolean byOthers;
+    public Actor actor;
+    public int type;
+    public int amount;
+    public boolean toMe;
+    public boolean byMe;
+    public boolean byOthers;
 
-    public CustomHitsplatApplied(final HitsplatApplied event, final Client client) {
+    public CustomHitsplatApplied(HitsplatApplied event, Client client) {
         this.actor = event.getActor();
         this.type = event.getHitsplat().getHitsplatType();
         this.amount = event.getHitsplat().getAmount();

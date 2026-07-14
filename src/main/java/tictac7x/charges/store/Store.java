@@ -2,39 +2,33 @@ package tictac7x.charges.store;
 
 import net.runelite.api.*;
 import net.runelite.api.events.*;
-import net.runelite.client.chat.QueuedMessage;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.game.ItemManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
+import net.runelite.client.chat.*;
+import net.runelite.client.config.*;
+import net.runelite.client.events.*;
+import net.runelite.client.game.*;
+import tictac7x.charges.*;
 import tictac7x.charges.events.*;
-import tictac7x.charges.item.ChargedItemBase;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.listeners.*;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.storage.StorageItems;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.GraphicId;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.VarbitId;
-import tictac7x.charges.store.utils.WidgetMenuAction;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.utils.*;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
+import java.util.regex.*;
+import java.util.stream.*;
 
 public class Store {
-    private final Client client;
-    private final ItemManager itemManager;
-    private final ConfigManager configManager;
+    private Client client;
+    private ItemManager itemManager;
+    private ConfigManager configManager;
     private Provider provider;
-    private final ZoneId timezone = ZoneId.of("Europe/London");
+    private ZoneId timezone = ZoneId.of("Europe/London");
 
-    private final int HIGHEST_MONSTER_ATTACK_SPEED = 8;
+    private int HIGHEST_MONSTER_ATTACK_SPEED = 8;
 
     private int gametick = 0;
     private int gametick_before = 0;
@@ -52,13 +46,13 @@ public class Store {
     public CustomItemContainerChanged previousBank = new CustomItemContainerChanged(ItemContainerId.BANK, new ArrayList<>());
 
 
-    public final Queue<Runnable> nextTickQueue = new ArrayDeque<>();
+    public Queue<Runnable> nextTickQueue = new ArrayDeque<>();
     public Optional<CustomMenuOptionClicked> previousMenuOptionClicked = Optional.empty();
-    public final List<CustomMenuOptionClicked> menuOptionsClicked = new ArrayList<>();
-    private final List<CustomWidgetMenuOptionClicked> widgetMenuActionsClicked = new ArrayList<>();
-    private final Map<Skill, Integer> skillsXp = new HashMap<>();
+    public List<CustomMenuOptionClicked> menuOptionsClicked = new ArrayList<>();
+    private List<CustomWidgetMenuOptionClicked> widgetMenuActionsClicked = new ArrayList<>();
+    private Map<Skill, Integer> skillsXp = new HashMap<>();
 
-    final Pattern withdrawPattern = Pattern.compile("Withdraw-(?<amount>.+)");
+    Pattern withdrawPattern = Pattern.compile("Withdraw-(?<amount>.+)");
 
     private ListenerOnChatMessage listenerOnChatMessage;
     private ListenerOnItemContainerChanged listenerOnItemContainerChanged;
@@ -80,13 +74,13 @@ public class Store {
     private ListenerOnCombat listenerOnCombat;
     private ListenerOnGameTick listenerOnGameTick;
 
-    public Store(final Client client, final ItemManager itemManager, final ConfigManager configManager) {
+    public Store(Client client, ItemManager itemManager, ConfigManager configManager) {
         this.client = client;
         this.itemManager = itemManager;
         this.configManager = configManager;
     }
 
-    public Store addProvider(final Provider provider) {
+    public Store addProvider(Provider provider) {
         this.provider = provider;
         listenerOnChatMessage = new ListenerOnChatMessage(provider);
         listenerOnItemContainerChanged = new ListenerOnItemContainerChanged(provider);
@@ -115,11 +109,11 @@ public class Store {
         return lastChatMessages;
     }
 
-    public void setChargedItems(final ChargedItemBase[] chargedItems) {
+    public void setChargedItems(ChargedItemBase[] chargedItems) {
         this.chargedItems = chargedItems;
     }
 
-    public Optional<Integer> getSkillXp(final Skill skill) {
+    public Optional<Integer> getSkillXp(Skill skill) {
         if (skillsXp.containsKey(skill)) {
             return Optional.of(skillsXp.get(skill));
         }
@@ -135,8 +129,8 @@ public class Store {
         return Arrays.stream(chargedItems).filter(ChargedItemBase::inInventoryOrEquipment);
     }
 
-    public void onStatChanged(final StatChanged eventOriginal) {
-        final CustomStatChanged event = new CustomStatChanged(eventOriginal, this);
+    public void onStatChanged(StatChanged eventOriginal) {
+        CustomStatChanged event = new CustomStatChanged(eventOriginal, this);
         skillsXp.put(event.skill, event.xp);
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
@@ -145,7 +139,7 @@ public class Store {
         });
     }
 
-    private void onItemContainerChanged(final CustomItemContainerChanged event) {
+    private void onItemContainerChanged(CustomItemContainerChanged event) {
         runNextGameTickQueue();
 
         if (
@@ -163,11 +157,11 @@ public class Store {
                 previousBank = bank;
                 bank = event;
 
-                final StringBuilder storageStringBuilder = new StringBuilder();
-                for (final StorageItem item : event.getItems()) {
+                StringBuilder storageStringBuilder = new StringBuilder();
+                for (StorageItem item : event.getItems()) {
                     storageStringBuilder.append(item.itemId).append(",");
                 }
-                final String storageString = storageStringBuilder.toString().replaceAll(",$", "");
+                String storageString = storageStringBuilder.toString().replaceAll(",$", "");
                 configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
             }
 
@@ -177,13 +171,13 @@ public class Store {
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> listenerOnItemContainerChanged.trigger(event, chargedItem));
     }
 
-    public void onItemContainerChanged(final ItemContainerChanged eventOriginal) {
-        final CustomItemContainerChanged event = new CustomItemContainerChanged(eventOriginal, itemManager);
+    public void onItemContainerChanged(ItemContainerChanged eventOriginal) {
+        CustomItemContainerChanged event = new CustomItemContainerChanged(eventOriginal, itemManager);
         onItemContainerChanged(event);
     }
 
-    private void updateChargedItemsPrimaryId(final boolean checkBank) {
-        for (final ChargedItemBase chargedItem : chargedItems) {
+    private void updateChargedItemsPrimaryId(boolean checkBank) {
+        for (ChargedItemBase chargedItem : chargedItems) {
             Optional<Integer> bankItemId = Optional.empty();
             boolean bankItemDynamic = false;
 
@@ -195,8 +189,8 @@ public class Store {
 
             // Bank has the least priority.
             if (checkBank) {
-                for (final StorageItem item : bank.getItems()) {
-                    for (final TriggerItem triggerItem : chargedItem.items) {
+                for (StorageItem item : bank.getItems()) {
+                    for (TriggerItem triggerItem : chargedItem.items) {
                         if (item.itemId == triggerItem.itemId) {
                             if (!bankItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !bankItemDynamic || !triggerItem.fixedCharges.isPresent()) {
                                 bankItemId = Optional.of(item.itemId);
@@ -211,8 +205,8 @@ public class Store {
             }
 
             // Inventory is more important than bank.
-            for (final StorageItem item : inventory.getItems()) {
-                for (final TriggerItem triggerItem : chargedItem.items) {
+            for (StorageItem item : inventory.getItems()) {
+                for (TriggerItem triggerItem : chargedItem.items) {
                     if (item.itemId == triggerItem.itemId) {
                         if (!inventoryItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !inventoryItemDynamic || !triggerItem.fixedCharges.isPresent()) {
                             inventoryItemId = Optional.of(item.itemId);
@@ -226,8 +220,8 @@ public class Store {
             }
 
             // Equipment has most priority.
-            for (final StorageItem item : equipment.getItems()) {
-                for (final TriggerItem triggerItem : chargedItem.items) {
+            for (StorageItem item : equipment.getItems()) {
+                for (TriggerItem triggerItem : chargedItem.items) {
                     if (item.itemId == triggerItem.itemId) {
                         if (!equipmentItemId.isPresent() || triggerItem.fixedCharges.isPresent() && !equipmentItemDynamic || !triggerItem.fixedCharges.isPresent()) {
                             equipmentItemId = Optional.of(item.itemId);
@@ -250,7 +244,7 @@ public class Store {
         }
     }
 
-    public void onMenuOptionClicked(final CustomMenuOptionClicked customMenuOptionClicked) {
+    public void onMenuOptionClicked(CustomMenuOptionClicked customMenuOptionClicked) {
         if (
             // Menu option not found.
             customMenuOptionClicked.option.isEmpty() ||
@@ -298,7 +292,7 @@ public class Store {
         });
     }
 
-    public void onWidgetMenuOptionClicked(final CustomWidgetMenuOptionClicked customWidgetMenuOptionClicked) {
+    public void onWidgetMenuOptionClicked(CustomWidgetMenuOptionClicked customWidgetMenuOptionClicked) {
         // Gametick changed, clear previous widget menu entries since they are no longer valid.
         if (gametick >= gametick_before + 2) {
             gametick = 0; gametick_before = 0;
@@ -308,22 +302,22 @@ public class Store {
         widgetMenuActionsClicked.add(customWidgetMenuOptionClicked);
     }
 
-    private void checkBankWithdraw(final CustomMenuOptionClicked customMenuOptionClicked) {
-        final Matcher matcher = withdrawPattern.matcher(customMenuOptionClicked.option);
+    private void checkBankWithdraw(CustomMenuOptionClicked customMenuOptionClicked) {
+        Matcher matcher = withdrawPattern.matcher(customMenuOptionClicked.option);
         if (!matcher.find()) return;
 
-        final String amountString = matcher.group("amount");
+        String amountString = matcher.group("amount");
         if (amountString.equals("X")) return;
 
-        final int amount =
+        int amount =
             amountString.equals("All") ? bank.count(customMenuOptionClicked.itemId) :
             amountString.equals("All-but-1") ? bank.count(customMenuOptionClicked.itemId) - 1 :
             Integer.parseInt(amountString);
 
-        final ItemComposition itemComposition = itemManager.getItemComposition(customMenuOptionClicked.itemId);
+        ItemComposition itemComposition = itemManager.getItemComposition(customMenuOptionClicked.itemId);
 
         // Copy of current inventory.
-        final CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(inventory);
+        CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(inventory);
 
         // Add new items.
         if (itemComposition.isStackable() || client.getVarbitValue(3958) == 1) {
@@ -337,18 +331,18 @@ public class Store {
 
     private void runNextGameTickQueue() {
         while (!nextTickQueue.isEmpty()) {
-            final Runnable consumer = nextTickQueue.poll();
+            Runnable consumer = nextTickQueue.poll();
             consumer.run();
         }
     }
 
-    public void onGameTick(final GameTick ignored) {
+    public void onGameTick(GameTick ignored) {
         runNextGameTickQueue();
         gametick++;
 
         // Keep only last menu entry.
         if (menuOptionsClicked.size() > 1) {
-            final CustomMenuOptionClicked lastMenuEntry = menuOptionsClicked.get(menuOptionsClicked.size() - 1);
+            CustomMenuOptionClicked lastMenuEntry = menuOptionsClicked.get(menuOptionsClicked.size() - 1);
             menuOptionsClicked.clear();
             menuOptionsClicked.add(lastMenuEntry);
         }
@@ -361,9 +355,9 @@ public class Store {
         inCombatTicksRemainingDamageDoneToMe = Math.max(0, inCombatTicksRemainingDamageDoneToMe - 1);
     }
 
-    public boolean inMenuTargets(final int ...itemIds) {
-        for (final int itemId : itemIds) {
-            for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+    public boolean inMenuTargets(int ...itemIds) {
+        for (int itemId : itemIds) {
+            for (CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
                 if (
                     customMenuOptionClicked.itemId == itemId ||
                     // Additional target name check, because itemId can be -1 when the clicked item was not in inventory.
@@ -376,10 +370,10 @@ public class Store {
         return false;
     }
 
-    public boolean inMenuTargets(final String ...targets) {
-        for (final String target : targets) {
-            for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
-                final boolean found = Pattern.compile(target).matcher(customMenuOptionClicked.target).find();
+    public boolean inMenuTargets(String ...targets) {
+        for (String target : targets) {
+            for (CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+                boolean found = Pattern.compile(target).matcher(customMenuOptionClicked.target).find();
                 if (found) return true;
             }
         }
@@ -387,12 +381,12 @@ public class Store {
         return false;
     }
 
-    public boolean notInMenuTargets(final String ...targets) {
+    public boolean notInMenuTargets(String ...targets) {
         return !inMenuTargets(targets);
     }
 
-    public boolean notInMenuTargets(final StorageItem... storageItems) {
-        final int[] storeableItemIds = new int[storageItems.length];
+    public boolean notInMenuTargets(StorageItem... storageItems) {
+        int[] storeableItemIds = new int[storageItems.length];
 
         for (int i = 0; i < storageItems.length; i ++) {
             storeableItemIds[i] = storageItems[i].itemId;
@@ -401,13 +395,13 @@ public class Store {
         return notInMenuTargets(storeableItemIds);
     }
 
-    public boolean notInMenuTargets(final int ...itemIds) {
+    public boolean notInMenuTargets(int ...itemIds) {
         return !inMenuTargets(itemIds);
     }
 
-    public boolean inMenuOptions(final String ...options) {
-        for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
-            for (final String option : options) {
+    public boolean inMenuOptions(String ...options) {
+        for (CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+            for (String option : options) {
                 if (customMenuOptionClicked.option.equals(option)) {
                     return true;
                 }
@@ -417,13 +411,13 @@ public class Store {
         return false;
     }
 
-    public boolean notInMenuOptions(final String ...options) {
+    public boolean notInMenuOptions(String ...options) {
         return !inMenuOptions(options);
     }
 
-    public boolean inMenuOptionIds(final int ...menuOptionIds) {
-        for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
-            for (final int menuOptionId : menuOptionIds) {
+    public boolean inMenuOptionIds(int ...menuOptionIds) {
+        for (CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+            for (int menuOptionId : menuOptionIds) {
                 if (customMenuOptionClicked.eventId == menuOptionId) {
                     return true;
                 }
@@ -433,12 +427,12 @@ public class Store {
         return false;
     }
 
-    public boolean notInMenuOptionIds(final int ...menuOptionsIds) {
+    public boolean notInMenuOptionIds(int ...menuOptionsIds) {
         return !inMenuOptionIds(menuOptionsIds);
     }
 
-    public boolean notInWidgetMenuActions(final WidgetMenuAction widgetMenuAction) {
-        for (final CustomWidgetMenuOptionClicked widgetMenuOptionClicked : widgetMenuActionsClicked) {
+    public boolean notInWidgetMenuActions(WidgetMenuAction widgetMenuAction) {
+        for (CustomWidgetMenuOptionClicked widgetMenuOptionClicked : widgetMenuActionsClicked) {
             if (
                 widgetMenuOptionClicked.selectedOption.equals(widgetMenuAction.selectedOption) &&
                 widgetMenuOptionClicked.options.size() > widgetMenuAction.childIndex &&
@@ -451,9 +445,9 @@ public class Store {
         return true;
     }
 
-    public boolean inMenuImpostors(final int ...impostorIds) {
-        for (final CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
-            for (final int impostorId : impostorIds) {
+    public boolean inMenuImpostors(int ...impostorIds) {
+        for (CustomMenuOptionClicked customMenuOptionClicked : menuOptionsClicked) {
+            for (int impostorId : impostorIds) {
                 if (customMenuOptionClicked.impostorId == impostorId) {
                     return true;
                 }
@@ -463,14 +457,14 @@ public class Store {
         return false;
     }
 
-    public boolean notInMenuImpostors(final int ...impostorIds) {
+    public boolean notInMenuImpostors(int ...impostorIds) {
         return !inMenuImpostors(impostorIds);
     }
 
-    public int getInventoryItemQuantity(final int itemId) {
+    public int getInventoryItemQuantity(int itemId) {
         int quantity = 0;
 
-        for (final StorageItem storageItem : inventory.getItems()) {
+        for (StorageItem storageItem : inventory.getItems()) {
             if (storageItem.itemId == itemId) {
                 quantity += storageItem.getQuantity();
             }
@@ -479,10 +473,10 @@ public class Store {
         return quantity;
     }
 
-    public int getEquipmentItemQuantity(final int itemId) {
+    public int getEquipmentItemQuantity(int itemId) {
         int quantity = 0;
 
-        for (final StorageItem item : equipment.getItems()) {
+        for (StorageItem item : equipment.getItems()) {
             if (item.itemId == itemId) {
                 quantity += item.getQuantity();
             }
@@ -491,10 +485,10 @@ public class Store {
         return quantity;
     }
 
-    public int getPreviousInventoryItemQuantity(final int itemId) {
+    public int getPreviousInventoryItemQuantity(int itemId) {
         int quantity = 0;
 
-        for (final StorageItem storageItem : previousInventory.getItems()) {
+        for (StorageItem storageItem : previousInventory.getItems()) {
             if (storageItem.itemId == itemId) {
                 quantity += storageItem.getQuantity();
             }
@@ -503,8 +497,8 @@ public class Store {
         return quantity;
     }
 
-    public boolean inventoryContainsItem(final int itemId) {
-        for (final StorageItem storageItem : inventory.getItems()) {
+    public boolean inventoryContainsItem(int itemId) {
+        for (StorageItem storageItem : inventory.getItems()) {
             if (storageItem.itemId == itemId) {
                 return true;
             }
@@ -513,9 +507,9 @@ public class Store {
         return false;
     }
 
-    public boolean equipmentContainsItem(final int ...itemIds) {
-        for (final StorageItem equipmentItem : equipment.getItems()) {
-            for (final int itemId : itemIds) {
+    public boolean equipmentContainsItem(int ...itemIds) {
+        for (StorageItem equipmentItem : equipment.getItems()) {
+            for (int itemId : itemIds) {
                 if (equipmentItem.itemId == itemId) {
                     return true;
                 }
@@ -526,15 +520,15 @@ public class Store {
     }
 
     private List<StorageItem> getAllItems() {
-        final List<StorageItem> allItems = new ArrayList<>();
+        List<StorageItem> allItems = new ArrayList<>();
         allItems.addAll(inventory.getItems());
         allItems.addAll(equipment.getItems());
         allItems.addAll(bank.getItems());
         return allItems;
     }
 
-    public boolean itemInPossession(final int itemId) {
-        for (final StorageItem item : getAllItems()) {
+    public boolean itemInPossession(int itemId) {
+        for (StorageItem item : getAllItems()) {
             if (item.itemId == itemId) {
                 return true;
             }
@@ -544,17 +538,17 @@ public class Store {
     }
 
     public StorageItems getInventoryItemsDifference() {
-        final StorageItems itemsDifference = new StorageItems();
+        StorageItems itemsDifference = new StorageItems();
 
-        final Map<Integer, Integer> quantitiesNew = new HashMap<>();
-        final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
+        Map<Integer, Integer> quantitiesNew = new HashMap<>();
+        Map<Integer, Integer> quantitiesBefore = new HashMap<>();
 
-        for (final StorageItem itemNew : inventory.getItems()) {
+        for (StorageItem itemNew : inventory.getItems()) {
             if (quantitiesNew.containsKey(itemNew.itemId)) continue;
             quantitiesNew.put(itemNew.itemId, inventory.count(itemNew.itemId));
         }
 
-        for (final StorageItem itemOld : previousInventory.getItems()) {
+        for (StorageItem itemOld : previousInventory.getItems()) {
             if (quantitiesBefore.containsKey(itemOld.itemId)) {
                 quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
             } else {
@@ -562,14 +556,14 @@ public class Store {
             }
         }
 
-        for (final int itemId : quantitiesNew.keySet()) {
-            final int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
+        for (int itemId : quantitiesNew.keySet()) {
+            int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
             if (quantity != 0) {
                 itemsDifference.put(new StorageItem(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
             }
         }
 
-        for (final int itemId : quantitiesBefore.keySet()) {
+        for (int itemId : quantitiesBefore.keySet()) {
             if (!quantitiesNew.containsKey(itemId)) {
                 itemsDifference.put(new StorageItem(itemId, -quantitiesBefore.get(itemId)));
             }
@@ -579,17 +573,17 @@ public class Store {
     }
 
     public StorageItems getBankItemsDifference() {
-        final StorageItems itemsDifference = new StorageItems();
+        StorageItems itemsDifference = new StorageItems();
 
-        final Map<Integer, Integer> quantitiesNew = new HashMap<>();
-        final Map<Integer, Integer> quantitiesBefore = new HashMap<>();
+        Map<Integer, Integer> quantitiesNew = new HashMap<>();
+        Map<Integer, Integer> quantitiesBefore = new HashMap<>();
 
-        for (final StorageItem itemNew : bank.getItems()) {
+        for (StorageItem itemNew : bank.getItems()) {
             if (quantitiesNew.containsKey(itemNew.itemId)) continue;
             quantitiesNew.put(itemNew.itemId, bank.count(itemNew.itemId));
         }
 
-        for (final StorageItem itemOld : previousBank.getItems()) {
+        for (StorageItem itemOld : previousBank.getItems()) {
             if (quantitiesBefore.containsKey(itemOld.itemId)) {
                 quantitiesBefore.put(itemOld.itemId, quantitiesBefore.get(itemOld.itemId) + itemOld.getQuantity());
             } else {
@@ -597,14 +591,14 @@ public class Store {
             }
         }
 
-        for (final int itemId : quantitiesNew.keySet()) {
-            final int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
+        for (int itemId : quantitiesNew.keySet()) {
+            int quantity = quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0);
             if (quantity != 0) {
                 itemsDifference.put(new StorageItem(itemId, quantitiesNew.get(itemId) - quantitiesBefore.getOrDefault(itemId, 0)));
             }
         }
 
-        for (final int itemId : quantitiesBefore.keySet()) {
+        for (int itemId : quantitiesBefore.keySet()) {
             if (!quantitiesNew.containsKey(itemId)) {
                 itemsDifference.put(new StorageItem(itemId, -quantitiesBefore.get(itemId)));
             }
@@ -613,14 +607,11 @@ public class Store {
         return itemsDifference;
     }
 
-    public void addConsumerToNextTickQueue(final Runnable consumer) {
+    public void addConsumerToNextTickQueue(Runnable consumer) {
         nextTickQueue.add(consumer);
     }
 
-    public void onChatMessage(final ChatMessage eventOriginal) {
-        final CustomChatMessage event = new CustomChatMessage(eventOriginal);
-
-        switch (event.type) {
+    public void onChatMessage(CustomChatMessage event) {switch (event.type) {
             case GAMEMESSAGE:
             case DIALOG:
             case SPAM:
@@ -630,7 +621,7 @@ public class Store {
                 return;
         }
 
-        final int tick = client.getTickCount();
+        int tick = client.getTickCount();
         if (tick != lastChatMessagesTick) {
             lastChatMessages = new ArrayList<>();
             lastChatMessagesTick = tick;
@@ -645,8 +636,8 @@ public class Store {
         }
     }
 
-    public void onHitSplatApplied(final HitsplatApplied eventOriginal) {
-        final CustomHitsplatApplied event = new CustomHitsplatApplied(eventOriginal, client);
+    public void onHitSplatApplied(HitsplatApplied eventOriginal) {
+        CustomHitsplatApplied event = new CustomHitsplatApplied(eventOriginal, client);
 
         if (event.byMe) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
@@ -661,8 +652,8 @@ public class Store {
         });
     }
 
-    public void onGraphicChanged(final GraphicChanged event) {
-        final CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
+    public void onGraphicChanged(GraphicChanged event) {
+        CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
         if (!graphicChanged.isLocalPlayer(client)) return;
 
         if (graphicChanged.hasGraphicId(GraphicId.SPLASH)) {
@@ -686,13 +677,13 @@ public class Store {
         return inCombatTicksRemainingDamageDoneToMe > 0;
     }
 
-    public void onWidgetLoaded(final WidgetLoaded event) {
+    public void onWidgetLoaded(WidgetLoaded event) {
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
             listenerOnWidgetLoaded.trigger(event, chargedItem);
         });
     }
 
-    public void onVarbitChanged(final VarbitChanged event) {
+    public void onVarbitChanged(VarbitChanged event) {
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
             listenerOnVarbitChanged.trigger(event, chargedItem);
             listenerOnVarbitsMapChanged.trigger(event, chargedItem);
@@ -704,9 +695,9 @@ public class Store {
         }
     }
 
-    public void onAnimationChanged(final AnimationChanged eventOriginal) {
+    public void onAnimationChanged(AnimationChanged eventOriginal) {
         if (eventOriginal.getActor().getAnimation() == -1) return;
-        final CustomAnimationChanged event = new CustomAnimationChanged(eventOriginal);
+        CustomAnimationChanged event = new CustomAnimationChanged(eventOriginal);
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
             listenerOnAnimationChanged.trigger(event, chargedItem);
@@ -717,7 +708,7 @@ public class Store {
         }
     }
 
-    public void onMenuEntryAdded(final MenuEntryAdded event) {
+    public void onMenuEntryAdded(MenuEntryAdded event) {
         if (event.getOption().equals("Cancel")) return;
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
@@ -725,13 +716,13 @@ public class Store {
         });
     }
 
-    public void onItemDespawned(final ItemDespawned event) {
+    public void onItemDespawned(ItemDespawned event) {
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
             listenerOnItemPickup.trigger(event, chargedItem);
         });
     }
 
-    public void onResetDaily(final String date) {
+    public void onResetDaily(String date) {
         configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.date, date);
 
         if (provider.config.showDailyReset()) {
@@ -753,7 +744,7 @@ public class Store {
         });
     }
 
-    private final List<Integer> scriptIdsToIgnore = Arrays.asList(
+    private List<Integer> scriptIdsToIgnore = Arrays.asList(
         44, 85, 100, 839, 900, 1004, 1005, 1045, 1445, 1972, 2100, 2101,
         2165, 2250, 2372, 2476, 2512, 2513, 3174, 3277, 3350, 3351, 4024,
         4029, 4482, 4517, 4518, 4666, 4667, 4668, 4669, 4671, 4672, 4716,
@@ -761,11 +752,11 @@ public class Store {
         5943, 5944, 6015, 6016, 6063, 6152, 9625, 664
     );
 
-    public void onScriptPreFired(final ScriptPreFired eventOriginal) {
+    public void onScriptPreFired(ScriptPreFired eventOriginal) {
         if (scriptIdsToIgnore.contains(eventOriginal.getScriptId())) return;
         if (eventOriginal.getScriptEvent() == null) return;
 
-        final CustomScriptPreFired event = new CustomScriptPreFired(eventOriginal);
+        CustomScriptPreFired event = new CustomScriptPreFired(eventOriginal);
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
             listenerOnScriptPreFired.trigger(event, chargedItem);
         });
@@ -777,7 +768,7 @@ public class Store {
         });
     }
 
-    public void onGameStateChanged(final GameStateChanged event) {
+    public void onGameStateChanged(GameStateChanged event) {
         if (event.getGameState() == GameState.LOGGING_IN) {
             checkForChargesReset();
         }
@@ -796,14 +787,14 @@ public class Store {
     }
 
     private void checkForChargesReset() {
-        final String date = LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String date = LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         if (!date.equals(provider.config.getResetDate())) {
             onResetDaily(date);
         }
     }
 
-    public void onConfigChanged(final ConfigChanged event) {
+    public void onConfigChanged(ConfigChanged event) {
         if (event.getGroup().equals(TicTac7xChargesImprovedConfig.group) && event.getKey().equals(TicTac7xChargesImprovedConfig.debug_ids)) {
             provider.chatMessageManager.queue(QueuedMessage.builder()
                 .type(ChatMessageType.CONSOLE)
@@ -815,8 +806,8 @@ public class Store {
         }
     }
 
-    public boolean hasChatMessage(final String message) {
-        for (final String lastChatMessage : lastChatMessages) {
+    public boolean hasChatMessage(String message) {
+        for (String lastChatMessage : lastChatMessages) {
             if (lastChatMessage.equals(message)) {
                 return true;
             }

@@ -1,32 +1,30 @@
 package tictac7x.charges;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.google.inject.Provides;
+import com.google.common.collect.*;
+import com.google.gson.*;
+import com.google.inject.*;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
-import net.runelite.api.widgets.Widget;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.game.ItemManager;
+import net.runelite.api.widgets.*;
+import net.runelite.client.*;
+import net.runelite.client.callback.*;
+import net.runelite.client.chat.*;
+import net.runelite.client.config.*;
+import net.runelite.client.eventbus.*;
+import net.runelite.client.events.*;
+import net.runelite.client.game.*;
 import net.runelite.client.input.*;
-import net.runelite.client.plugins.Plugin;
-import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginManager;
-import net.runelite.client.ui.overlay.OverlayManager;
-import net.runelite.client.ui.overlay.infobox.InfoBox;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import net.runelite.client.ui.overlay.tooltip.TooltipManager;
-import net.runelite.client.util.OSType;
-import tictac7x.charges.events.CustomMenuOptionClicked;
-import tictac7x.charges.events.CustomWidgetMenuOptionClicked;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.overlays.ChargedItemInfobox;
-import tictac7x.charges.item.overlays.ChargedItemOverlay;
+import net.runelite.client.input.KeyListener;
+import net.runelite.client.input.MouseListener;
+import net.runelite.client.input.MouseWheelListener;
+import net.runelite.client.plugins.*;
+import net.runelite.client.ui.overlay.*;
+import net.runelite.client.ui.overlay.infobox.*;
+import net.runelite.client.ui.overlay.tooltip.*;
+import net.runelite.client.util.*;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.overlays.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
@@ -35,114 +33,33 @@ import tictac7x.charges.items.foods.*;
 import tictac7x.charges.items.helms.*;
 import tictac7x.charges.items.jewelry.*;
 import tictac7x.charges.items.moons.*;
-import tictac7x.charges.items.potions.P_Overload;
 import tictac7x.charges.items.potions.*;
+import tictac7x.charges.items.potions.P_Overload;
 import tictac7x.charges.items.potions.cox.*;
 import tictac7x.charges.items.potions.toa.*;
 import tictac7x.charges.items.shields.*;
 import tictac7x.charges.items.utils.*;
 import tictac7x.charges.items.weapons.*;
 import tictac7x.charges.items.weapons.blowpipes.*;
+import tictac7x.charges.store.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.Store;
-import tictac7x.charges.store.ids.ChargeId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.*;
 
+import javax.inject.*;
 import javax.inject.Inject;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
+import java.awt.event.*;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
 
 @PluginDescriptor(
 	name = "Item Charges Improved",
 	description = "Show charges of various items",
-	tags = {
-		"charges",
-		"barrows",
-		"crystal",
-		"ardougne",
-		"coffing",
-		"magic",
-		"cape",
-		"circlet",
-		"bracelet",
-		"clay",
-		"expeditious",
-		"flamtaer",
-		"slaughter",
-		"camulet",
-		"celestial",
-		"ring",
-		"escape",
-		"recoil",
-		"shadow",
-		"suffering",
-		"slayer",
-		"xeric",
-		"talisman",
-		"chronicle",
-		"dragonfire",
-		"falador",
-		"kharedst",
-		"memoirs",
-		"ash",
-		"sanctifier",
-		"bone",
-		"crusher",
-		"bottomless",
-		"compost",
-		"bucket",
-		"coal",
-		"bag",
-		"fish",
-		"barrel",
-		"fungicide",
-		"spray",
-		"gem",
-		"gricoller",
-		"can",
-		"herb",
-		"sack",
-		"log",
-		"basket",
-		"ogre",
-		"bellows",
-		"seed",
-		"box",
-		"soul",
-		"bearer",
-		"teleport",
-		"waterskin",
-		"arclight",
-		"bryophyta",
-		"staff",
-		"bow",
-		"halberd",
-		"iban",
-		"pharaoh",
-		"sceptre",
-		"sanguinesti",
-		"skull",
-		"trident",
-		"sea",
-		"toxic",
-		"jar",
-		"tome",
-		"fur",
-		"meat",
-		"pouch",
-		"pursuit",
-		"book",
-		"scroll",
-		"potion"
-	}
+	tags = {" charges "}
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static final String pluginVersion = "v0.6.13";
-	public static final String pluginMessage =
+	public static String pluginVersion = "v0.6.13";
+	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Gem pouch, sack, satchel and tote added.<br>" +
 		"<colHIGHLIGHT>* Ghommal's hilt added.<br>" +
@@ -192,7 +109,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private TicTac7xChargesImprovedConfig config;
 
 	@Provides
-	TicTac7xChargesImprovedConfig provideConfig(final ConfigManager configManager) {
+	TicTac7xChargesImprovedConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(TicTac7xChargesImprovedConfig.class);
 	}
 
@@ -202,14 +119,13 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private ChargedItemOverlay overlayChargedItems;
 
 	private ChargedItemBase[] chargedItems;
-	private final List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
+	private List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
 
 
-	public static final String INFINITE_SYMBOL = OSType.getOSType() == OSType.MacOS ? "inf" : "∞";
+	public static String INFINITE_SYMBOL = OSType.getOSType() == OSType.MacOS ? "inf" : "∞";
 
 	@Override
 	protected void startUp() {
-		configMigration();
 		keyManager.registerKeyListener(this);
 		mouseManager.registerMouseListener(this);
 		mouseManager.registerMouseWheelListener(this);
@@ -568,8 +484,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		overlayManager.add(overlayChargedItems);
 
 		// Items infoboxes.
-		for (final ChargedItemBase chargedItem : chargedItems) {
-			final ChargedItemInfobox chargedItemInfobox = new ChargedItemInfobox(provider, chargedItem);
+		for (ChargedItemBase chargedItem : chargedItems) {
+			ChargedItemInfobox chargedItemInfobox = new ChargedItemInfobox(provider, chargedItem);
 			chargedItemsInfoboxes.add(chargedItemInfobox);
 			infoBoxManager.addInfoBox(chargedItemInfobox);
 		}
@@ -586,52 +502,56 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	@Subscribe
-	public void onChatMessage(final ChatMessage event) {
-		store.onChatMessage(event);
+	public void onChatMessage(ChatMessage event) {
+		store.onChatMessage(new CustomChatMessage(
+			event.getType(),
+			getCleanText(event.getMessage()),
+			event.getSender()
+		));
 	}
 
 	@Subscribe
-	public void onItemContainerChanged(final ItemContainerChanged event) {
+	public void onItemContainerChanged(ItemContainerChanged event) {
 		store.onItemContainerChanged(event);
 	}
 
 	@Subscribe
-	public void onGraphicChanged(final GraphicChanged event) {
+	public void onGraphicChanged(GraphicChanged event) {
 		store.onGraphicChanged(event);
 	}
 
 	@Subscribe
-	public void onHitsplatApplied(final HitsplatApplied event) {
+	public void onHitsplatApplied(HitsplatApplied event) {
 		store.onHitSplatApplied(event);
 	}
 
 	@Subscribe
-	public void onAnimationChanged(final AnimationChanged event) {
+	public void onAnimationChanged(AnimationChanged event) {
 		store.onAnimationChanged(event);
 	}
 
 	@Subscribe
-	public void onWidgetLoaded(final WidgetLoaded event) {
+	public void onWidgetLoaded(WidgetLoaded event) {
 		store.onWidgetLoaded(event);
 	}
 
 	@Subscribe
-	public void onMenuOptionClicked(final MenuOptionClicked event) {
+	public void onMenuOptionClicked(MenuOptionClicked event) {
 		// Widget menu option
 		if (event.getMenuAction() == MenuAction.WIDGET_CONTINUE) {
-			final Optional<Widget> selectedWidget = Optional.ofNullable(event.getWidget());
+			Optional<Widget> selectedWidget = Optional.ofNullable(event.getWidget());
 			if (selectedWidget.isEmpty()) return;
 
-			final Optional<Widget> parentWidget = Optional.ofNullable(selectedWidget.get().getParent());
+			Optional<Widget> parentWidget = Optional.ofNullable(selectedWidget.get().getParent());
 			if (parentWidget.isEmpty()) return;
 
-			final List<String> options = new ArrayList<>();
-			for (final Widget subWidget : parentWidget.get().getDynamicChildren()) {
+			List<String> options = new ArrayList<>();
+			for (Widget subWidget : parentWidget.get().getDynamicChildren()) {
 				if (subWidget.getText().isBlank()) continue;
 				options.add(subWidget.getText());
 			}
 
-			final CustomWidgetMenuOptionClicked widgetMenuOptionClicked = new CustomWidgetMenuOptionClicked(
+			CustomWidgetMenuOptionClicked widgetMenuOptionClicked = new CustomWidgetMenuOptionClicked(
 				selectedWidget.get().getId(),
 				options,
 				selectedWidget.get().getText()
@@ -644,11 +564,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			int impostorId;
 			try {
 				impostorId = client.getObjectDefinition(event.getMenuEntry().getIdentifier()).getImpostor().getId();
-			} catch (final Exception ignored) {
+			} catch (Exception ignored) {
 				impostorId = -1;
 			}
 
-			final CustomMenuOptionClicked menuOptionClicked = new CustomMenuOptionClicked(
+			CustomMenuOptionClicked menuOptionClicked = new CustomMenuOptionClicked(
 				event.getId(),
 				event.getMenuTarget().replaceAll("</?col.*?>", ""),
 				event.getMenuOption().replaceAll("</?col.*?>", ""),
@@ -663,123 +583,104 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	@Subscribe
-	public void onScriptPreFired(final ScriptPreFired event) {
+	public void onScriptPreFired(ScriptPreFired event) {
 		store.onScriptPreFired(event);
 	}
 
 	@Subscribe
-	public void onGameStateChanged(final GameStateChanged event) {
+	public void onGameStateChanged(GameStateChanged event) {
 		store.onGameStateChanged(event);
 	}
 
 	@Subscribe
-	public void onStatChanged(final StatChanged event) {
+	public void onStatChanged(StatChanged event) {
 		store.onStatChanged(event);
 	}
 
 	@Subscribe
-	public void onItemDespawned(final ItemDespawned event) {
+	public void onItemDespawned(ItemDespawned event) {
 		store.onItemDespawned(event);
 	}
 
 	@Subscribe
-	public void onVarbitChanged(final VarbitChanged event) {
+	public void onVarbitChanged(VarbitChanged event) {
 		store.onVarbitChanged(event);
 	}
 
 	@Subscribe
-	public void onMenuEntryAdded(final MenuEntryAdded event) {
+	public void onMenuEntryAdded(MenuEntryAdded event) {
 		store.onMenuEntryAdded(event);
 	}
 
 	@Subscribe
-	public void onGameTick(final GameTick event) {
+	public void onGameTick(GameTick event) {
 		store.onGameTick(event);
 	}
 
 	@Subscribe
-	public void onConfigChanged(final ConfigChanged event) {
+	public void onConfigChanged(ConfigChanged event) {
 		store.onConfigChanged(event);
 	}
 
-	private void configMigration() {
-		// v0.5.5 - Migrate old hidden infoboxes multi-select to checkboxes.
-		final Optional<String> necklaceOfPassageOverlay = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_overlay"));
-		final Optional<String> necklaceOfPassageInfobox = Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_infobox"));
-		if (necklaceOfPassageOverlay.isPresent()) {
-			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig._overlay, necklaceOfPassageOverlay.get().equals("true"));
-			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_overlay");
-		}
-		if (necklaceOfPassageInfobox.isPresent()) {
-			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.necklace_of_passage + TicTac7xChargesImprovedConfig._infobox, necklaceOfPassageInfobox.get().equals("true"));
-			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "necklage_of_passage_infobox");
-		}
-
-		// v0.6.8 - remove outdated destroy entries config
-		if (Optional.ofNullable(configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, "hide_destroy")).isPresent()) {
-			configManager.unsetConfiguration(TicTac7xChargesImprovedConfig.group, "hide_destroy");
-		}
-	}
-
 	@Override
-	public void keyPressed(final KeyEvent keyEvent) {
+	public void keyPressed(KeyEvent keyEvent) {
 		store.onUserAction();
 	}
 
 	@Override
-	public void keyTyped(final KeyEvent keyEvent) {
+	public void keyTyped(KeyEvent keyEvent) {
 	}
 
 	@Override
-	public void keyReleased(final KeyEvent keyEvent) {
+	public void keyReleased(KeyEvent keyEvent) {
 	}
 
 	@Override
-	public MouseEvent mousePressed(final MouseEvent mouseEvent) {
+	public MouseEvent mousePressed(MouseEvent mouseEvent) {
 		store.onUserAction();
 		return mouseEvent;
 	}
 
 	@Override
-	public MouseEvent mouseDragged(final MouseEvent mouseEvent) {
+	public MouseEvent mouseDragged(MouseEvent mouseEvent) {
 		store.onUserAction();
 		return mouseEvent;
 	}
 
 	@Override
-	public MouseEvent mouseMoved(final MouseEvent mouseEvent) {
+	public MouseEvent mouseMoved(MouseEvent mouseEvent) {
 		store.onUserAction();
 		return mouseEvent;
 	}
 
 	@Override
-	public MouseWheelEvent mouseWheelMoved(final MouseWheelEvent mouseWheelEvent) {
+	public MouseWheelEvent mouseWheelMoved(MouseWheelEvent mouseWheelEvent) {
 		store.onUserAction();
 		return mouseWheelEvent;
 	}
 
 	@Override
-	public MouseEvent mouseClicked(final MouseEvent mouseEvent) {
+	public MouseEvent mouseClicked(MouseEvent mouseEvent) {
 		return mouseEvent;
 	}
 
 	@Override
-	public MouseEvent mouseReleased(final MouseEvent mouseEvent) {
+	public MouseEvent mouseReleased(MouseEvent mouseEvent) {
 		return mouseEvent;
 	}
 
 	@Override
-	public MouseEvent mouseEntered(final MouseEvent mouseEvent) {
+	public MouseEvent mouseEntered(MouseEvent mouseEvent) {
 		return mouseEvent;
 	}
 
 	@Override
-	public MouseEvent mouseExited(final MouseEvent mouseEvent) {
+	public MouseEvent mouseExited(MouseEvent mouseEvent) {
 		return mouseEvent;
 	}
 
-	public static String getCleanText(final String text) {
-		return text.replaceAll("</?col.*?>", "").replaceAll("<br>", " ").replaceAll("\u00A0"," ");
+	public static String getCleanText(String text) {
+		return text.replaceAll("</?col.*?>", "").replace("<br>", " ").replace("\u00A0"," ");
 	}
 
 	public static String menuOptionEmptyToBank = "Empty-to-bank";
@@ -787,24 +688,24 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String menuOptionEmptyToInventory = "Empty-to-inventory";
 	public static String menuOptionFillFromInventory = "Fill-from-inventory";
 
-	public static int getNumberFromCommaString(final String charges) {
+	public static int getNumberFromCommaString(String charges) {
 		try {
 			return Integer.parseInt(charges.replaceAll(",", "").replaceAll("\\.", ""));
-		} catch (final Exception ignored) {
+		} catch (Exception ignored) {
 			return getNumberFromWordRepresentation(charges);
 		}
 	}
 
-	public static Optional<Widget> getWidget(final Client client, final int parent, final int child) {
+	public static Optional<Widget> getWidget(Client client, int parent, int child) {
 		return Optional.ofNullable(client.getWidget(parent, child));
 	}
 
-	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final int subChild) {
+	public static Optional<Widget> getWidget(Client client, int parent, int child, int subChild) {
 		return getWidget(client, parent, child, Optional.of(subChild));
 	}
 
-	public static Optional<Widget> getWidget(final Client client, final int parent, final int child, final Optional<Integer> subChild) {
-		final Optional<Widget> widget = getWidget(client, parent, child);
+	public static Optional<Widget> getWidget(Client client, int parent, int child, Optional<Integer> subChild) {
+		Optional<Widget> widget = getWidget(client, parent, child);
 		if (!widget.isPresent()) return Optional.empty();
 
 		if (subChild.isPresent()) {
@@ -814,7 +715,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		}
 	}
 	
-	private static final ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()
+	private static ImmutableMap<String, Integer> TEXT_TO_NUMBER_MAP = ImmutableMap.<String, Integer>builder()
 		.put("zero", 0).put("one", 1).put("single", 1).put("two", 2).put("three", 3).put("four", 4).put("five", 5)
 		.put("six", 6).put("seven", 7).put("eight", 8).put("nine", 9).put("ten", 10)
 		.put("eleven", 11).put("twelve", 12).put("thirteen", 13).put("fourteen", 14).put("fifteen", 15)
@@ -822,13 +723,13 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		.put("thirty", 30).put("forty", 40).put("fifty", 50).put("sixty", 60).put("seventy", 70)
 		.put("eighty", 80).put("ninety", 90).put("hundred", 100).build();
 
-	public static int getNumberFromWordRepresentation(final String charges) {
+	public static int getNumberFromWordRepresentation(String charges) {
 		// Support strings like "twenty two" and "twenty-two"
-		final String[] words = charges.toLowerCase().split("[ -]");
+		String[] words = charges.toLowerCase().split("[ -]");
 		int result = 0;
 		int current = 0;
 
-		for (final String word : words) {
+		for (String word : words) {
 			if (TEXT_TO_NUMBER_MAP.containsKey(word)) {
 				current += TEXT_TO_NUMBER_MAP.get(word);
 			} else if (word.equals("hundred")) {
@@ -842,7 +743,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		return result + current;
 	}
 
-	public static String getChargesMinified(final int charges) {
+	public static String getChargesMinified(int charges) {
 		// Unlimited.
 		if (charges == ChargeId.UNLIMITED) return INFINITE_SYMBOL;
 
@@ -857,8 +758,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 		// Minify to use thousands with hundreds (_._K)
 		if (charges >= 1000) {
-			final int thousands = charges / 1000;
-			final int hundreds = Math.min((charges % 1000 + 50) / 100, 9);
+			int thousands = charges / 1000;
+			int hundreds = Math.min((charges % 1000 + 50) / 100, 9);
 			return thousands + (hundreds > 0 ? "." + hundreds : "") + "K";
 		}
 
@@ -866,8 +767,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		return String.valueOf(charges);
 	}
 
-	public static boolean guessIfRangedAmmoRetrievalWasSuccessful(final Provider provider) {
-		final int recoveryRate;
+	public static boolean guessIfRangedAmmoRetrievalWasSuccessful(Provider provider) {
+		int recoveryRate;
 
 		if (provider.store.equipmentContainsItem(ItemId.AVAS_ATTRACTOR)) {
 			recoveryRate = 60;

@@ -1,19 +1,17 @@
 package tictac7x.charges.items.utils;
 
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStatus;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class U_BloodEssence extends ChargedItemWithStatus {
-    public U_BloodEssence(final Provider provider) {
+    public U_BloodEssence(Provider provider) {
         super(TicTac7xChargesImprovedConfig.blood_essence, ItemId.BLOOD_ESSENCE_INACTIVE, provider);
 
         this.items = new TriggerItem[]{
@@ -45,7 +43,7 @@ public class U_BloodEssence extends ChargedItemWithStatus {
 
             // Destroy.
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
-                final Optional<Widget> destroyWidgetItem = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
+                Optional<Widget> destroyWidgetItem = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
                 if (
                     destroyWidgetItem.isPresent() &&
                     (destroyWidgetItem.get().getItemId() == ItemId.BLOOD_ESSENCE_ACTIVE || destroyWidgetItem.get().getItemId() == ItemId.BLOOD_ESSENCE_INACTIVE) &&

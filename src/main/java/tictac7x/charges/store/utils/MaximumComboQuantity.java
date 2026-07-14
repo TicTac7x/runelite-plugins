@@ -1,12 +1,12 @@
 package tictac7x.charges.store.utils;
 
-import java.util.List;
+import java.util.*;
 
 public class MaximumComboQuantity {
-    public final List<Integer> itemIds;
-    public final int quantity;
+    public List<Integer> itemIds;
+    public int quantity;
 
-    public MaximumComboQuantity(final List<Integer> itemIds, final int quantity) {
+    public MaximumComboQuantity(List<Integer> itemIds, int quantity) {
         this.itemIds = itemIds;
         this.quantity = quantity;
     }

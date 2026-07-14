@@ -1,12 +1,12 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class W_IronwoodBlowpipe extends _Blowpipe {
-    public W_IronwoodBlowpipe(final Provider provider) {
+    public W_IronwoodBlowpipe(Provider provider) {
         super(
             TicTac7xChargesImprovedConfig.ironwood_blowpipe,
             ItemId.IRONWOOD_BLOWPIPE,

@@ -1,22 +1,26 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
 
+import java.awt.*;
+import java.util.*;
 import java.util.List;
+import java.util.regex.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_FlamtaerBag extends ChargedItemWithStorageEmptyable {
 //    private boolean flamtaerBagEmptyDialogVisible = false;
 
-    public U_FlamtaerBag(final Provider provider) {
+    public U_FlamtaerBag(Provider provider) {
         super(TicTac7xChargesImprovedConfig.flamtaer_bag, ItemId.FLAMTAER_BAG, provider);
         storage.storableItems(
             new StorableItem(ItemId.TIMBER_BEAM),
@@ -61,8 +65,8 @@ public class U_FlamtaerBag extends ChargedItemWithStorageEmptyable {
 
 //            // Flamtaer empty widget appeared.
 //            new OnWidgetLoaded(219, 1).widgetConsumer(widget -> {
-//                final Optional<Widget> emptyEverything = Optional.ofNullable(widget.getChild(1));
-//                final Optional<Widget> emptyFirstOption = Optional.ofNullable(widget.getChild(2));
+//                Optional<Widget> emptyEverything = Optional.ofNullable(widget.getChild(1));
+//                Optional<Widget> emptyFirstOption = Optional.ofNullable(widget.getChild(2));
 //
 //                flamtaerBagEmptyDialogVisible = (
 //                    emptyEverything.isPresent() && emptyEverything.get().getText().equals("Everything") &&

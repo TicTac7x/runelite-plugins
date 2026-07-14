@@ -1,15 +1,15 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_AlchemistsAmulet extends ChargedItem {
-    public J_AlchemistsAmulet(final Provider provider) {
+    public J_AlchemistsAmulet(Provider provider) {
         super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemId.ALCHEMISTS_AMULET, provider);
 
         this.items = new TriggerItem[]{

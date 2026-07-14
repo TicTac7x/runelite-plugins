@@ -1,12 +1,11 @@
 package tictac7x.charges.item.triggers;
 
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.function.*;
+import java.util.regex.*;
 
 public class OnChatMessage extends TriggerBase {
-    public final Pattern message;
+    public Pattern message;
 
     public Optional<Boolean> setDynamically = Optional.empty();
     public Optional<Boolean> increaseDynamically = Optional.empty();
@@ -15,7 +14,7 @@ public class OnChatMessage extends TriggerBase {
     public Optional<Consumer<Matcher>> matcherConsumer = Optional.empty();
     public Optional<Consumer<String>> stringConsumer = Optional.empty();
 
-    public OnChatMessage(final String message) {
+    public OnChatMessage(String message) {
         this.message = Pattern.compile(message);
     }
 
@@ -24,7 +23,7 @@ public class OnChatMessage extends TriggerBase {
         return this;
     }
 
-    public OnChatMessage matcherConsumer(final Consumer<Matcher> consumer) {
+    public OnChatMessage matcherConsumer(Consumer<Matcher> consumer) {
         this.matcherConsumer = Optional.of(consumer);
         return this;
     }
@@ -39,7 +38,7 @@ public class OnChatMessage extends TriggerBase {
         return this;
     }
 
-    public OnChatMessage stringConsumer(final Consumer<String> consumer) {
+    public OnChatMessage stringConsumer(Consumer<String> consumer) {
         this.stringConsumer = Optional.of(consumer);
         return this;
     }

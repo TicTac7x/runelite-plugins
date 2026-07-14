@@ -1,11 +1,11 @@
 package tictac7x.charges.item.triggers;
 
-import net.runelite.api.Skill;
+import net.runelite.api.*;
 
 public class OnStatChanged extends TriggerBase {
-    public final Skill skill;
+    public Skill skill;
 
-    public OnStatChanged(final Skill skill) {
+    public OnStatChanged(Skill skill) {
         this.skill = skill;
     }
 }

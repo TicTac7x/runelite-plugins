@@ -1,17 +1,17 @@
 package tictac7x.charges.items.jewelry;
 
-import net.runelite.api.gameval.VarbitID;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStatus;
+import net.runelite.api.gameval.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.ChargeId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.*;
 
 import java.awt.*;
-import java.time.Duration;
-import java.time.Instant;
+import java.time.*;
+import java.util.*;
 import java.util.List;
 
 public class J_EscapeCrystal extends ChargedItemWithStatus {
@@ -19,7 +19,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     private boolean alertedAboutActivation = false;
     private boolean inGauntletWithEscapeCrystal = false;
 
-    public J_EscapeCrystal(final Provider provider) {
+    public J_EscapeCrystal(Provider provider) {
         super(TicTac7xChargesImprovedConfig.escape_crystal, ItemId.ESCAPE_CRYSTAL, provider);
 
         this.items = new TriggerItem[]{
@@ -103,12 +103,12 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     @Override
-    public String getChargesString(final int itemId) {
+    public String getChargesString(int itemId) {
         return getLongChargesString(itemId);
     }
 
     @Override
-    public String getLongChargesString(final int itemId) {
+    public String getLongChargesString(int itemId) {
         return getTotalChargesString();
     }
 
@@ -125,7 +125,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
             return TicTac7xChargesImprovedPlugin.getChargesMinified(ChargeId.UNKNOWN);
         }
 
-        final long timeRemainingUntilActivation = getTimeRemainingUntilActivation();
+        long timeRemainingUntilActivation = getTimeRemainingUntilActivation();
         if (!alertedAboutActivation && isAboutToActivate()) {
             alertedAboutActivation = true;
             provider.notifier.notify("Escape crystal is activating in " + timeRemainingUntilActivation + (provider.config.getEscapeCrystalTimeRemainingUnit() == TicTac7xChargesImprovedConfig.EscapeCrystalTimeRemainingUnit.SECONDS ? " seconds." : " ticks."));

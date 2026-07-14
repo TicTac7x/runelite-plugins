@@ -1,14 +1,14 @@
 package tictac7x.charges.item;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ChargeId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 import java.util.Optional;
 
 public class ChargedItem extends ChargedItemBase {
-    public ChargedItem(final String configKey, final int itemId, final Provider provider) {
+    public ChargedItem(String configKey, int itemId, Provider provider) {
         super(configKey, itemId, provider);
     }
 
@@ -18,8 +18,8 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     @Override
-    public int getCharges(final int itemId) {
-        for (final TriggerItem triggerItem : items) {
+    public int getCharges(int itemId) {
+        for (TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
                 return triggerItem.fixedCharges.get();
             }
@@ -34,7 +34,7 @@ public class ChargedItem extends ChargedItemBase {
         int equipmentFixedCharges = 0;
         boolean fixedItemsFound = false;
 
-        for (final TriggerItem triggerItem : items) {
+        for (TriggerItem triggerItem : items) {
             if (triggerItem.fixedCharges.isPresent()) {
                 totalFixedCharges += provider.store.getInventoryItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
                 equipmentFixedCharges += provider.store.getEquipmentItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
@@ -48,7 +48,7 @@ public class ChargedItem extends ChargedItemBase {
                     equipmentFixedCharges :
                     totalFixedCharges;
             }
-        } catch (final Exception ignored) {}
+        } catch (Exception ignored) {}
 
         return getCharges(itemId);
     }
@@ -69,16 +69,16 @@ public class ChargedItem extends ChargedItemBase {
         }
     }
 
-    public void decreaseCharges(final int charges) {
+    public void decreaseCharges(int charges) {
         setCharges(this.getChargesFromConfig() - charges);
     }
 
-    public void increaseCharges(final int charges) {
+    public void increaseCharges(int charges) {
         setCharges(this.getChargesFromConfig() + charges);
     }
 
     protected int getChargesFromConfig() {
-        final Optional<String> charges = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        Optional<String> charges = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
 
         if (!charges.isPresent()) {
             return ChargeId.UNKNOWN;
@@ -86,7 +86,7 @@ public class ChargedItem extends ChargedItemBase {
 
         try {
             return Integer.parseInt(charges.get());
-        } catch (final Exception ignored) {
+        } catch (Exception ignored) {
             return ChargeId.UNKNOWN;
         }
     }

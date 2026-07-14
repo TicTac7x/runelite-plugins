@@ -1,12 +1,12 @@
 package tictac7x.charges.items.moons;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class BlueMoonHelm extends _MoonItem {
     public BlueMoonHelm(
-        final Provider provider
+        Provider provider
     ) {
         super("Blue moon helm", ItemId.BLUE_MOON_HELM, provider);
 

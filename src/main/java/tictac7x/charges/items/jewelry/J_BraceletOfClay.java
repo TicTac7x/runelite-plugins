@@ -1,18 +1,17 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_BraceletOfClay extends ChargedItem {
-    public J_BraceletOfClay(final Provider provider) {
+    public J_BraceletOfClay(Provider provider) {
         super(TicTac7xChargesImprovedConfig.bracelet_of_clay, ItemId.BRACELET_OF_CLAY, provider);
 
         this.items = new TriggerItem[]{
@@ -26,16 +25,16 @@ public class J_BraceletOfClay extends ChargedItem {
             // Mine clay.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Clay rocks").consumer(() -> {
                 if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
-                final int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
-                final int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
+                int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
+                int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
                 decreaseCharges(clayAfter - clayBefore);
             }),
 
             // Mine soft clay.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Soft clay rocks").consumer(() -> {
                 if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
-                final int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
-                final int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
+                int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
+                int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
 
                 // At least 2 soft clay was mined.
                 if (clayAfter - clayBefore >= 2) {

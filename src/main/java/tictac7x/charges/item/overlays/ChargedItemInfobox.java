@@ -1,24 +1,24 @@
 package tictac7x.charges.item.overlays;
 
-import net.runelite.client.ui.overlay.infobox.InfoBox;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.store.Provider;
+import net.runelite.client.ui.overlay.infobox.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.store.*;
 
-import java.awt.Color;
-import java.util.Optional;
+import java.awt.*;
+import java.util.*;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public class ChargedItemInfobox extends InfoBox {
-    private final Provider provider;
-    private final ChargedItemBase chargedItem;
+    private Provider provider;
+    private ChargedItemBase chargedItem;
 
     private int itemId;
 
     public ChargedItemInfobox(
-        final Provider provider,
-        final ChargedItemBase chargedItem
+        Provider provider,
+        ChargedItemBase chargedItem
     ) {
         super(provider.itemManager.getImage(chargedItem.itemId), provider.plugin);
         this.provider = provider;
@@ -74,8 +74,8 @@ public class ChargedItemInfobox extends InfoBox {
     }
 
     private boolean isChargedItemInfoboxEnabled() {
-        final String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._infobox;
-        final Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._infobox;
+        Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
         return visible.isPresent() && visible.get().equals("true");
     }
 }

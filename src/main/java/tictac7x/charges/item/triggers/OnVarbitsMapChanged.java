@@ -1,11 +1,11 @@
 package tictac7x.charges.item.triggers;
 
-import java.util.Map;
+import java.util.*;
 
 public class OnVarbitsMapChanged extends TriggerBase {
-    public final Map<Integer, Integer> varbitsMap;
+    public Map<Integer, Integer> varbitsMap;
 
-    public OnVarbitsMapChanged(final Map<Integer, Integer> varbitsMap) {
+    public OnVarbitsMapChanged(Map<Integer, Integer> varbitsMap) {
         this.varbitsMap = varbitsMap;
     }
 }

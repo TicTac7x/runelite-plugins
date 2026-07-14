@@ -1,11 +1,11 @@
 package tictac7x.charges.items.potions;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class P_PrayerRegeneration extends _Potion {
-    public P_PrayerRegeneration(final Provider provider) {
+    public P_PrayerRegeneration(Provider provider) {
         super("prayer_regeneration", new TriggerItem[]{
             new TriggerItem(ItemId.PRAYER_REGENERATION_POTION_1).fixedCharges(1),
             new TriggerItem(ItemId.PRAYER_REGENERATION_POTION_2).fixedCharges(2),

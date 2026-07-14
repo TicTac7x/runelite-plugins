@@ -1,14 +1,14 @@
 package tictac7x.charges.item.triggers;
 
-import tictac7x.charges.item.storage.StorageItem;
+import tictac7x.charges.item.storage.*;
 
-import java.util.Optional;
+import java.util.*;
 
 public class OnItemPickup extends TriggerBase {
-    public final StorageItem[] items;
+    public StorageItem[] items;
     public Optional<Boolean> isByOne = Optional.empty();
 
-    public OnItemPickup(final StorageItem[] items) {
+    public OnItemPickup(StorageItem[] items) {
         this.items = items;
     }
 

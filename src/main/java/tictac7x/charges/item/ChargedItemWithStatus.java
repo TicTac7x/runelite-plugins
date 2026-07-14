@@ -1,18 +1,18 @@
 package tictac7x.charges.item;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.store.*;
 
-import java.awt.Color;
-import java.util.Optional;
+import java.awt.*;
+import java.util.*;
 
 public class ChargedItemWithStatus extends ChargedItem {
-    public ChargedItemWithStatus(String configKey, int itemId, final Provider provider) {
+    public ChargedItemWithStatus(String configKey, int itemId, Provider provider) {
         super(configKey, itemId, provider);
     }
 
     public boolean isDeactivated() {
-        final Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
+        Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
 
         if (!status.isPresent()) {
             return false;
@@ -22,7 +22,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     public boolean isActivated() {
-        final Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
+        Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
 
         if (!status.isPresent()) {
             return false;
@@ -43,7 +43,7 @@ public class ChargedItemWithStatus extends ChargedItem {
         setActivity(TicTac7xChargesImprovedConfig.ItemActivity.ACTIVATED);
     }
 
-    private void setActivity(final TicTac7xChargesImprovedConfig.ItemActivity status) {
+    private void setActivity(TicTac7xChargesImprovedConfig.ItemActivity status) {
         provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey(), status);
     }
 
@@ -53,8 +53,8 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     @Override
-    public Color getTextColor(final int itemId) {
-        final Color defaultColor = super.getTextColor(itemId);
+    public Color getTextColor(int itemId) {
+        Color defaultColor = super.getTextColor(itemId);
 
         if (defaultColor == provider.config.getColorEmpty() || isDeactivated()) {
             return provider.config.getColorEmpty();
@@ -69,7 +69,7 @@ public class ChargedItemWithStatus extends ChargedItem {
 
     @Override
     public Color getTotalTextColor() {
-        final Color defaultColor = super.getTotalTextColor();
+        Color defaultColor = super.getTotalTextColor();
 
         if (defaultColor == provider.config.getColorEmpty() || isDeactivated()) {
             return provider.config.getColorEmpty();

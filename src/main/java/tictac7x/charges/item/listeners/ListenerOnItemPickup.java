@@ -1,23 +1,21 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.events.ItemDespawned;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnItemPickup;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnItemPickup extends ListenerBase {
-    public ListenerOnItemPickup(final Provider provider) {
+    public ListenerOnItemPickup(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final ItemDespawned event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(ItemDespawned event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
 
-            final OnItemPickup trigger = (OnItemPickup) triggerBase;
+            OnItemPickup trigger = (OnItemPickup) triggerBase;
             boolean triggerUsed = false;
 
             if (trigger.pickUpToStorage.isPresent()) {
@@ -33,15 +31,15 @@ public class ListenerOnItemPickup extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItemBase, final TriggerBase triggerBase, final ItemDespawned event) {
+    public boolean isValidTrigger(ChargedItemBase chargedItemBase, TriggerBase triggerBase, ItemDespawned event) {
         if (!(triggerBase instanceof OnItemPickup)) return false;
         if (!(chargedItemBase instanceof ChargedItemWithStorage)) return false;
-        final OnItemPickup trigger = (OnItemPickup) triggerBase;
-        final ChargedItemWithStorage chargedItem = (ChargedItemWithStorage) chargedItemBase;
+        OnItemPickup trigger = (OnItemPickup) triggerBase;
+        ChargedItemWithStorage chargedItem = (ChargedItemWithStorage) chargedItemBase;
 
         // Correct item check.
         boolean correctItem = false;
-        for (final StorageItem storageItem : chargedItem.storage.getStorableItems()) {
+        for (StorageItem storageItem : chargedItem.storage.getStorableItems()) {
             if (event.getItem().getId() == storageItem.itemId) {
                 correctItem = true;
                 break;

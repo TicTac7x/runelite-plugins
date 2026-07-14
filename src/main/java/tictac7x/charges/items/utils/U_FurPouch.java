@@ -1,23 +1,24 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.*;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.Provider;
 
+import java.awt.*;
+import java.util.*;
 import java.util.List;
+import java.util.regex.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.BANK;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_FurPouch extends ChargedItemWithStorageEmptyable {
-    public U_FurPouch(final Provider provider) {
+    public U_FurPouch(Provider provider) {
         super(TicTac7xChargesImprovedConfig.fur_pouch, ItemId.FUR_POUCH_SMALL, provider);
         this.storage = storage.storableItems(
             // Tracking.

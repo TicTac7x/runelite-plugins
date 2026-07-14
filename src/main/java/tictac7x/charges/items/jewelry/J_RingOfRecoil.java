@@ -1,17 +1,16 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.enums.HitsplatGroup;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.enums.HitsplatTarget;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_RingOfRecoil extends ChargedItem {
-    public J_RingOfRecoil(final Provider provider) {
+    public J_RingOfRecoil(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ring_of_recoil, ItemId.RING_OF_RECOIL, provider);
 
         this.items = new TriggerItem[]{

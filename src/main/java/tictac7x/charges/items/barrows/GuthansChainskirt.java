@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class GuthansChainskirt extends _BarrowsItem {
-    public GuthansChainskirt(final Provider provider) {
+    public GuthansChainskirt(Provider provider) {
         super("Guthan's skirt", ItemId.GUTHANS_CHAINSKIRT, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.GUTHANS_CHAINSKIRT).fixedCharges(1000),

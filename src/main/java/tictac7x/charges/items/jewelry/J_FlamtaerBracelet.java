@@ -1,16 +1,15 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_FlamtaerBracelet extends ChargedItem {
-    public J_FlamtaerBracelet(final Provider provider) {
+    public J_FlamtaerBracelet(Provider provider) {
         super(TicTac7xChargesImprovedConfig.flamtaer_bracelet, ItemId.FLAMTAER_BRACELET, provider);
 
         this.items = new TriggerItem[]{

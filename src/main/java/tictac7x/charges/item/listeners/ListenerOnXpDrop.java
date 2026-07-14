@@ -1,22 +1,19 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.Skill;
-import net.runelite.api.events.StatChanged;
-import tictac7x.charges.events.CustomStatChanged;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnXpDrop;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnXpDrop extends ListenerBase {
-    public ListenerOnXpDrop(final Provider provider) {
+    public ListenerOnXpDrop(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final CustomStatChanged event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(CustomStatChanged event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
-            final OnXpDrop trigger = (OnXpDrop) triggerBase;
+            OnXpDrop trigger = (OnXpDrop) triggerBase;
             boolean triggerUsed = false;
 
             if (trigger.xpAmountConsumer.isPresent()) {
@@ -32,9 +29,9 @@ public class ListenerOnXpDrop extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomStatChanged event) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase, CustomStatChanged event) {
         if (!(triggerBase instanceof OnXpDrop)) return false;
-        final OnXpDrop trigger = (OnXpDrop) triggerBase;
+        OnXpDrop trigger = (OnXpDrop) triggerBase;
 
         // Skill check.
         if (trigger.skill != event.skill) {

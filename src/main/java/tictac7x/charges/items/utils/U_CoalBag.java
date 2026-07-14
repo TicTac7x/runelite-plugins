@@ -1,19 +1,19 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
 
-import java.util.List;
+import java.util.*;
 
 public class U_CoalBag extends ChargedItemWithStorageEmptyable {
-    public U_CoalBag(final Provider provider) {
+    public U_CoalBag(Provider provider) {
         super(TicTac7xChargesImprovedConfig.coal_bag, ItemId.COAL_BAG, provider);
         this.storage = storage
             .storableItems(new StorableItem(ItemId.COAL).checkName("Coal"))

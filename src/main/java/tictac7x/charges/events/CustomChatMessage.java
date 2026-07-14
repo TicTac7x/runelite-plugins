@@ -1,24 +1,16 @@
 package tictac7x.charges.events;
 
-import net.runelite.api.ChatMessageType;
-import net.runelite.api.events.ChatMessage;
+import net.runelite.api.*;
 
 public class CustomChatMessage {
-    public final ChatMessageType type;
-    public final String message;
-    private final String sender;
+    public ChatMessageType type;
+    public String message;
+    private String sender;
 
-    public CustomChatMessage(final ChatMessage event) {
-        this.type = event.getType();
-        this.message = event.getMessage().replaceAll("</?col.*?>", "").replaceAll("<br>", " ").replaceAll("\u00A0"," ");
-        this.sender = event.getSender();
-    }
-
-    // Used for Tests
-    public CustomChatMessage(final ChatMessageType type, final String message) {
+    public CustomChatMessage(ChatMessageType type, String message, String sender) {
         this.type = type;
         this.message = message;
-        this.sender = "";
+        this.sender = sender;
     }
 
     @Override

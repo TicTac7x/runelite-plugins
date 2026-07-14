@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class VeracsFlail extends _BarrowsItem {
-    public VeracsFlail(final Provider provider) {
+    public VeracsFlail(Provider provider) {
         super("Verac's weapon", ItemId.VERACS_FLAIL, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.VERACS_FLAIL).fixedCharges(1000),

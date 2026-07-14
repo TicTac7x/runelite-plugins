@@ -1,18 +1,17 @@
 package tictac7x.charges.items.utils;
 
-import net.runelite.api.gameval.VarbitID;
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.gameval.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class U_PlankSack extends ChargedItemWithStorageEmptyable {
-    public U_PlankSack(final Provider provider) {
+    public U_PlankSack(Provider provider) {
         super(TicTac7xChargesImprovedConfig.plank_sack, ItemId.PLANK_SACK, provider);
         storage.setMaximumTotalQuantity(28).storableItems(
             new StorableItem(ItemId.PLANK).checkName("Regular plank"),

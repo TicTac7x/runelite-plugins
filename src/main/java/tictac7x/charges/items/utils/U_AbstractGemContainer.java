@@ -1,34 +1,31 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
+import net.runelite.api.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.Provider;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
-import net.runelite.api.Skill;
-
-
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
-import static tictac7x.charges.store.ids.ItemContainerId.BANK;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmptyable {
-    private final String containerNameRegex;
+    private String containerNameRegex;
 
     protected U_AbstractGemContainer(
-        final String configKey,
-        final int itemId,
-        final int openItemId,
-        final int maxQuantity,
-        final String containerName,
-        final boolean preciousGems,
-        final boolean semiPreciousGems,
-        final Provider provider
+        String configKey,
+        int itemId,
+        int openItemId,
+        int maxQuantity,
+        String containerName,
+        boolean preciousGems,
+        boolean semiPreciousGems,
+        Provider provider
     ) {
         super(configKey, itemId, provider);
         this.containerNameRegex = "(gem bag|" + containerName + ")";
@@ -40,7 +37,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
 
         storage.setMaximumIndividualQuantity(maxQuantity);
 
-        final List<StorableItem> storableGems = new ArrayList<>();
+        List<StorableItem> storableGems = new ArrayList<>();
         if (semiPreciousGems) {
             storableGems.addAll(List.of(
                     new StorableItem(ItemId.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
@@ -61,7 +58,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
 
         // Builds a lookahead-based regex that matches any order of gem counts, e.g.:
         // (?s)(?=.*Sapphires:\s*(?<sapphires>\d+))(?=.*Emeralds:\s*(?<emeralds>\d+)).*
-        final String checkRegex = "(Left in bag: )?" +
+        String checkRegex = "(Left in bag: )?" +
             storableGems.stream()
                 .filter(storableGem -> storableGem.checkName.isPresent() && storableGem.checkName.get().length > 0)
                 .map(
@@ -78,7 +75,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
 
             // Check or empty partially to inventory.
             new OnChatMessage(checkRegex).matcherConsumer(m -> {
-                for (final StorableItem storableGem : storableGems) {
+                for (StorableItem storableGem : storableGems) {
                     storage.put(storableGem.itemId, Integer.parseInt(m.group(getStorableGemGroupName(storableGem))));
                 }
             }),
@@ -134,7 +131,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         );
     }
 
-    private String getStorableGemGroupName(final StorableItem storableGem) {
+    private String getStorableGemGroupName(StorableItem storableGem) {
         if (storableGem.checkName.isEmpty() || storableGem.checkName.get().length == 0) {
             return "";
         }

@@ -1,12 +1,12 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class W_CamphorBlowpipe extends _Blowpipe {
-    public W_CamphorBlowpipe(final Provider provider) {
+    public W_CamphorBlowpipe(Provider provider) {
         super(
             TicTac7xChargesImprovedConfig.camphor_blowpipe,
             ItemId.CAMPHOR_BLOWPIPE,

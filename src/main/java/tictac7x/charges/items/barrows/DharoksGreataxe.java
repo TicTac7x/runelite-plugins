@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class DharoksGreataxe extends _BarrowsItem {
-    public DharoksGreataxe(final Provider provider) {
+    public DharoksGreataxe(Provider provider) {
         super("Dharok's weapon", ItemId.DHAROKS_GREATAXE, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.DHAROKS_GREATAXE).fixedCharges(1000),

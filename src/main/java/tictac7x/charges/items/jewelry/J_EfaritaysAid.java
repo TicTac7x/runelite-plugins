@@ -1,20 +1,18 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.*;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.enums.HitsplatGroup;
-import tictac7x.charges.store.enums.HitsplatTarget;
-import tictac7x.charges.store.ids.AnimationId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_EfaritaysAid extends ChargedItem {
     private boolean attackedVampyre = false;
 
-    public J_EfaritaysAid(final Provider provider) {
+    public J_EfaritaysAid(Provider provider) {
         super(TicTac7xChargesImprovedConfig.efaritays_aid, ItemId.EFARITAYS_AID, provider);
 
         this.items = new TriggerItem[]{

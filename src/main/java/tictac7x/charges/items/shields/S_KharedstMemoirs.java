@@ -1,17 +1,15 @@
 package tictac7x.charges.items.shields;
 
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import java.util.*;
 
 public class S_KharedstMemoirs extends ChargedItem {
-    public S_KharedstMemoirs(final Provider provider) {
+    public S_KharedstMemoirs(Provider provider) {
         super(TicTac7xChargesImprovedConfig.kharedsts_memoirs, ItemId.KHAREDSTS_MEMOIRS, provider);
 
         this.items = new TriggerItem[]{

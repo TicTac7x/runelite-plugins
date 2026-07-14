@@ -1,16 +1,15 @@
 package tictac7x.charges.items.weapons;
 
-import tictac7x.charges.store.ids.AnimationId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class W_SlayerStaffE extends ChargedItem {
-    public W_SlayerStaffE(final Provider provider) {
+    public W_SlayerStaffE(Provider provider) {
         super(TicTac7xChargesImprovedConfig.slayer_staff_e, ItemId.SLAYER_STAFF_ENCHANTED, provider);
 
         this.items = new TriggerItem[]{

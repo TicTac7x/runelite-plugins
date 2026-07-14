@@ -1,17 +1,17 @@
 package tictac7x.charges.events;
 
-import net.runelite.api.ScriptEvent;
-import net.runelite.api.events.ScriptPreFired;
-import net.runelite.api.widgets.Widget;
+import net.runelite.api.*;
+import net.runelite.api.events.*;
+import net.runelite.api.widgets.*;
 
 import java.util.Optional;
 
 public class CustomScriptPreFired {
-    public final int scriptId;
-    public final Object[] arguments;
-    final ScriptEvent scriptEvent;
+    public int scriptId;
+    public Object[] arguments;
+    ScriptEvent scriptEvent;
 
-    public CustomScriptPreFired(final ScriptPreFired event) {
+    public CustomScriptPreFired(ScriptPreFired event) {
         this.scriptId = event.getScriptId();
         this.arguments = event.getScriptEvent().getArguments();
         this.scriptEvent = event.getScriptEvent();
@@ -21,20 +21,20 @@ public class CustomScriptPreFired {
     public String toString() {
         String scriptDebug = "SCRIPT FIRED | script id: " + scriptId;
 		try {
-			final Optional<Widget> widget = Optional.ofNullable(scriptEvent.getSource());
+			Optional<Widget> widget = Optional.ofNullable(scriptEvent.getSource());
 			if (widget.isPresent()) {
 				scriptDebug += ", widget id: " + widget.get().getId();
 			}
-		} catch (final Exception ignored) {}
+		} catch (Exception ignored) {}
 
         try {
 			String arguments = ", arguments: [";
-			for (final Object argument : scriptEvent.getArguments()) {
+			for (Object argument : scriptEvent.getArguments()) {
 				arguments += argument + ", ";
 			}
 			arguments += "]";
 			scriptDebug += arguments.replaceAll(", ]", "]");
-		} catch (final Exception ignored) {}
+		} catch (Exception ignored) {}
 
         return scriptDebug;
     }

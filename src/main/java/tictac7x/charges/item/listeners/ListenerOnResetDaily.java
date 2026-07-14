@@ -1,19 +1,18 @@
 package tictac7x.charges.item.listeners;
 
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnResetDaily;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnResetDaily extends ListenerBase {
-    public ListenerOnResetDaily(final Provider provider) {
+    public ListenerOnResetDaily(Provider provider) {
         super(provider);
     }
 
-    public boolean trigger(final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public boolean trigger(ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase)) continue;
-            final OnResetDaily trigger = (OnResetDaily) triggerBase;
+            OnResetDaily trigger = (OnResetDaily) triggerBase;
             boolean triggerUsed = false;
 
             if (super.trigger(trigger, chargedItem)) {
@@ -26,9 +25,9 @@ public class ListenerOnResetDaily extends ListenerBase {
         return false;
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase) {
         if (!(triggerBase instanceof OnResetDaily)) return false;
-        final OnResetDaily trigger = (OnResetDaily) triggerBase;
+        OnResetDaily trigger = (OnResetDaily) triggerBase;
 
         if (trigger.resetSpecificItem.isPresent() && !provider.store.itemInPossession(trigger.resetSpecificItem.get())) {
             return false;

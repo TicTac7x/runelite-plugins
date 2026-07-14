@@ -1,15 +1,16 @@
 package tictac7x.charges.items.weapons;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
+
+import java.util.*;
 
 public class W_WesternBanner extends ChargedItem {
-    public W_WesternBanner(final Provider provider) {
+    public W_WesternBanner(Provider provider) {
         super(TicTac7xChargesImprovedConfig.western_banner, ItemId.WESTERN_BANNER_3, provider);
 
         this.items = new TriggerItem[]{

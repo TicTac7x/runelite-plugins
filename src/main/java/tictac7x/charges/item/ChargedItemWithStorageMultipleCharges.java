@@ -1,15 +1,15 @@
 package tictac7x.charges.item;
 
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.store.*;
 
 public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorage {
-    public ChargedItemWithStorageMultipleCharges(final String configKey, final int itemId, final Provider provider) {
+    public ChargedItemWithStorageMultipleCharges(String configKey, int itemId, Provider provider) {
         super(configKey, itemId, provider);
     }
 
     @Override
-    public String getChargesString(final int itemId) {
+    public String getChargesString(int itemId) {
         return getTotalChargesString();
     }
 
@@ -18,7 +18,7 @@ public class ChargedItemWithStorageMultipleCharges extends ChargedItemWithStorag
         String individualCharges = "";
 
         int validItems = 0;
-        for (final StorageItem storageItem : getStorage().getItems()) {
+        for (StorageItem storageItem : getStorage().getItems()) {
             if (storageItem.getQuantity() >= 0) {
                 individualCharges += storageItem.getQuantity() + "/";
                 validItems++;

@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class VeracsPlateskirt extends _BarrowsItem {
-    public VeracsPlateskirt(final Provider provider) {
+    public VeracsPlateskirt(Provider provider) {
         super("Verac's skirt", ItemId.VERACS_PLATESKIRT, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.VERACS_PLATESKIRT).fixedCharges(1000),

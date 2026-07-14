@@ -1,22 +1,16 @@
 package tictac7x.charges.items.utils;
 
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnAnimationChanged;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.AnimationId;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class U_QuetzalWhistle extends ChargedItem {
-    public U_QuetzalWhistle(final Provider provider) {
+    public U_QuetzalWhistle(Provider provider) {
         super(TicTac7xChargesImprovedConfig.quetzal_whistle, ItemId.QUETZAL_WHISTLE_BASIC, provider);
 
         this.items = new TriggerItem[]{
@@ -45,7 +39,7 @@ public class U_QuetzalWhistle extends ChargedItem {
 
             // Partially charged.
             new OnItemContainerChanged(ItemContainerId.INVENTORY).onMenuOption("Recharge-whistle").hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {
-                for (final StorageItem item : itemsDifference.getItems()) {
+                for (StorageItem item : itemsDifference.getItems()) {
                     switch (item.itemId) {
                         case ItemId.QUETZAL_FEED:
                         case ItemId.RAW_WILD_KEBBIT:

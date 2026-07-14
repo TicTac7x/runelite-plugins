@@ -1,17 +1,18 @@
 package tictac7x.charges.items.potions;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class _Potion extends ChargedItem {
     public _Potion(
-        final String configKey,
-        final TriggerItem[] items,
-        final Provider provider
+        String configKey,
+        TriggerItem[] items,
+        Provider provider
     ) {
         super(TicTac7xChargesImprovedConfig.potions + "_" + configKey, items[0].itemId, provider);
         this.items = items;
@@ -23,8 +24,8 @@ public class _Potion extends ChargedItem {
     }
 
     @Override
-    public Color getTextColor(final int itemId) {
-        for (final TriggerItem triggerItem : items) {
+    public Color getTextColor(int itemId) {
+        for (TriggerItem triggerItem : items) {
             if (triggerItem.itemId == itemId && triggerItem.fixedCharges.isPresent()) {
                 switch (triggerItem.fixedCharges.get()) {
                     case 4:

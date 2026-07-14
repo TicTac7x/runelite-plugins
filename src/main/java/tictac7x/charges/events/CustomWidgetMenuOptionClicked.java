@@ -1,16 +1,16 @@
 package tictac7x.charges.events;
 
-import java.util.List;
+import java.util.*;
 
 public class CustomWidgetMenuOptionClicked {
-    public final int widgetId;
-    public final List<String> options;
-    public final String selectedOption;
+    public int widgetId;
+    public List<String> options;
+    public String selectedOption;
 
     public CustomWidgetMenuOptionClicked(
-        final int widgetId,
-        final List<String> options,
-        final String selectedOption
+        int widgetId,
+        List<String> options,
+        String selectedOption
     ) {
         this.widgetId = widgetId;
         this.options = options;

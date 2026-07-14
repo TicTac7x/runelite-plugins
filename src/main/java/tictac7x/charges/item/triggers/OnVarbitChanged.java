@@ -1,25 +1,25 @@
 package tictac7x.charges.item.triggers;
 
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class OnVarbitChanged extends TriggerBase {
-    public final int varbitId;
+    public int varbitId;
 
     public Optional<Integer> varbitValue = Optional.empty();
     public Optional<Consumer<Integer>> varbitValueConsumer = Optional.empty();
     public Optional<Boolean> setDynamically = Optional.empty();
 
-    public OnVarbitChanged(final int varbitId) {
+    public OnVarbitChanged(int varbitId) {
         this.varbitId = varbitId;
     }
 
-    public OnVarbitChanged(final int varbitId, final int varbitValue) {
+    public OnVarbitChanged(int varbitId, int varbitValue) {
         this.varbitId = varbitId;
         this.varbitValue = Optional.of(varbitValue);
     }
 
-    public OnVarbitChanged varbitValueConsumer(final Consumer<Integer> consumer) {
+    public OnVarbitChanged varbitValueConsumer(Consumer<Integer> consumer) {
         this.varbitValueConsumer = Optional.of(consumer);
         return this;
     }

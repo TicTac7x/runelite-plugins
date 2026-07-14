@@ -1,10 +1,10 @@
 package tictac7x.charges.item;
 
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ChargedItemWithStorageEmptyable extends ChargedItemWithStorage {
-    public ChargedItemWithStorageEmptyable(final String configKey, final int itemId, final Provider provider) {
+    public ChargedItemWithStorageEmptyable(String configKey, int itemId, Provider provider) {
         super(configKey, itemId, provider);
 
         this.triggers.add(

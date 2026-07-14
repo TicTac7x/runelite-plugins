@@ -1,16 +1,15 @@
 package tictac7x.charges.items.weapons;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.GraphicId;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class W_InfernalAxe extends ChargedItem {
-    public W_InfernalAxe(final Provider provider) {
+    public W_InfernalAxe(Provider provider) {
         super(TicTac7xChargesImprovedConfig.infernal_axe, ItemId.INFERNAL_AXE_UNCHARGED, provider);
 
         this.items = new TriggerItem[]{
@@ -21,7 +20,7 @@ public class W_InfernalAxe extends ChargedItem {
         this.triggers.addAll(List.of(
             // Check.
             new OnChatMessage("Infernal axe: (?<percentage>.+)% remaining.").matcherConsumer(m -> {
-                final double percentage = Double.parseDouble(m.group("percentage"));
+                double percentage = Double.parseDouble(m.group("percentage"));
                 setCharges((int) (percentage * 5000 / 100));
             }),
 

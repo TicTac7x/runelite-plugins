@@ -1,21 +1,18 @@
 package tictac7x.charges.items.crystal;
 
-import tictac7x.charges.item.triggers.OnAutoChargeMessage;
-import tictac7x.charges.store.enums.HitsplatGroup;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnHitsplatApplied;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
-import static tictac7x.charges.store.enums.HitsplatTarget.SELF;
+import static tictac7x.charges.store.enums.HitsplatTarget.*;
 
 public class A_CrystalHelm extends ChargedItem {
-    public A_CrystalHelm(final Provider provider) {
+    public A_CrystalHelm(Provider provider) {
         super(TicTac7xChargesImprovedConfig.crystal_helm, ItemId.CRYSTAL_HELM, provider);
 
         this.items = new TriggerItem[]{

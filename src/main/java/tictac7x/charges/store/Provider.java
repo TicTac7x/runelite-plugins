@@ -1,47 +1,46 @@
 package tictac7x.charges.store;
 
-import com.google.gson.Gson;
-import net.runelite.api.Client;
-import net.runelite.client.Notifier;
-import net.runelite.client.callback.ClientThread;
-import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.plugins.PluginManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import net.runelite.client.ui.overlay.tooltip.TooltipManager;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
+import com.google.gson.*;
+import net.runelite.api.*;
+import net.runelite.client.*;
+import net.runelite.client.callback.*;
+import net.runelite.client.chat.*;
+import net.runelite.client.config.*;
+import net.runelite.client.game.*;
+import net.runelite.client.plugins.*;
+import net.runelite.client.ui.overlay.infobox.*;
+import net.runelite.client.ui.overlay.tooltip.*;
+import tictac7x.charges.*;
 
 public class Provider {
-    public final Client client;
-    public final ClientThread clientThread;
-    public final PluginManager pluginManager;
-    public final ConfigManager configManager;
-    public final ItemManager itemManager;
-    public final InfoBoxManager infoBoxManager;
-    public final ChatMessageManager chatMessageManager;
-    public final TooltipManager tooltipManager;
-    public final Notifier notifier;
-    public final TicTac7xChargesImprovedPlugin plugin;
-    public final TicTac7xChargesImprovedConfig config;
-    public final Store store;
-    public final Gson gson;
+    public Client client;
+    public ClientThread clientThread;
+    public PluginManager pluginManager;
+    public ConfigManager configManager;
+    public ItemManager itemManager;
+    public InfoBoxManager infoBoxManager;
+    public ChatMessageManager chatMessageManager;
+    public TooltipManager tooltipManager;
+    public Notifier notifier;
+    public TicTac7xChargesImprovedPlugin plugin;
+    public TicTac7xChargesImprovedConfig config;
+    public Store store;
+    public Gson gson;
 
     public Provider(
-        final Client client,
-        final ClientThread clientThread,
-        final PluginManager pluginManager,
-        final ConfigManager configManager,
-        final ItemManager itemManager,
-        final InfoBoxManager infoBoxManager,
-        final ChatMessageManager chatMessageManager,
-        final TooltipManager tooltipManager,
-        final Notifier notifier,
-        final TicTac7xChargesImprovedPlugin plugin,
-        final TicTac7xChargesImprovedConfig config,
-        final Store store,
-        final Gson gson
+        Client client,
+        ClientThread clientThread,
+        PluginManager pluginManager,
+        ConfigManager configManager,
+        ItemManager itemManager,
+        InfoBoxManager infoBoxManager,
+        ChatMessageManager chatMessageManager,
+        TooltipManager tooltipManager,
+        Notifier notifier,
+        TicTac7xChargesImprovedPlugin plugin,
+        TicTac7xChargesImprovedConfig config,
+        Store store,
+        Gson gson
     ) {
         this.client = client;
         this.clientThread = clientThread;

@@ -1,13 +1,13 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class J_CastleWarsBracelet extends ChargedItem {
-    public J_CastleWarsBracelet(final Provider provider) {
+    public J_CastleWarsBracelet(Provider provider) {
         super(TicTac7xChargesImprovedConfig.castle_wars_bracelet, ItemId.CASTLE_WARS_BRACELET_1, provider);
 
         this.items = new TriggerItem[]{

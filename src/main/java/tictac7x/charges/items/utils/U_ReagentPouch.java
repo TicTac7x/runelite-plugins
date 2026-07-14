@@ -1,24 +1,20 @@
 package tictac7x.charges.items.utils;
 
-import net.runelite.api.Skill;
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
+import net.runelite.api.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRepresentation;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.*;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
-    public U_ReagentPouch(final Provider provider) {
+    public U_ReagentPouch(Provider provider) {
         super(TicTac7xChargesImprovedConfig.reagent_pouch, ItemId.REAGENT_POUCH, provider);
         storage.emptyIsNegative().setMaximumIndividualQuantity(26).storableItems(
             new StorableItem(ItemId.EYE_OF_NEWT).checkName("Eye of newt"),
@@ -67,13 +63,13 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             // Check.
             new OnChatMessage("You look in your Reagent pouch and see:").emptyStorage(),
             new OnChatMessage("(?<amount>.+) x (?<item>.+)").matcherConsumer(m -> {
-                final Optional<StorageItem> item = getStorageItemFromName(m.group("item"), Integer.parseInt(m.group("amount")));
+                Optional<StorageItem> item = getStorageItemFromName(m.group("item"), Integer.parseInt(m.group("amount")));
                 storage.put(item);
             }).hasChatMessage("You look in your Reagent pouch and see:"),
 
             // Pick up.
             new OnChatMessage("You put the (?<item>.+) into your Reagent pouch.").matcherConsumer(m -> {
-                final Optional<StorageItem> item = getStorageItemFromName(m.group("item"), 1);
+                Optional<StorageItem> item = getStorageItemFromName(m.group("item"), 1);
                 storage.add(item);
             }),
 
@@ -85,7 +81,7 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
 
             // Fill from inventory.
             new OnItemContainerChanged(INVENTORY).onInventoryDifference(inventoryDifference -> {
-                for (final StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
+                for (StorageItem inventoryDifferenceItem : inventoryDifference.getItems()) {
                     // Item was put into the reagent pouch, but there is more in inventory, meaning that item is filled to maximum.
                     if (provider.store.inventory.hasItem(inventoryDifferenceItem.itemId)) {
                         storage.put(inventoryDifferenceItem.itemId, 26);
@@ -94,14 +90,14 @@ public class U_ReagentPouch extends ChargedItemWithStorageEmptyable {
             }).onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             new OnMenuOptionClicked("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory).consumer(() -> {
-                for (final StorageItem item : provider.store.inventory.getItems()) {
+                for (StorageItem item : provider.store.inventory.getItems()) {
                     provider.store.addConsumerToNextTickQueue(() -> storage.add(item));
                 }
             }),
 
             // Mix potions.
             new OnChatMessage("You mix the (?<item>.+) into (your|the unfinished)( antifire)? (potion|antidote\\+\\+).*").matcherConsumer((m) -> {
-                final Optional<StorageItem> item = getStorageItemFromName(m.group("item"), 1);
+                Optional<StorageItem> item = getStorageItemFromName(m.group("item"), 1);
                 storage.remove(item);
             }).requiredItem(ItemId.REAGENT_POUCH_OPEN),
 

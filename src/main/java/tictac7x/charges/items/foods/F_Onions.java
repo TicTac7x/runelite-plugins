@@ -1,11 +1,11 @@
 package tictac7x.charges.items.foods;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class F_Onions extends _Sack {
-    public F_Onions(final Provider provider) {
+    public F_Onions(Provider provider) {
         super("onions", new TriggerItem[]{
             new TriggerItem(ItemId.ONIONS_1).fixedCharges(1),
             new TriggerItem(ItemId.ONIONS_2).fixedCharges(2),

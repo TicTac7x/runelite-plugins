@@ -1,21 +1,20 @@
 package tictac7x.charges.item.listeners;
 
-import tictac7x.charges.events.CustomMenuOptionClicked;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnItemUsed;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnItemUsed extends ListenerBase {
-    public ListenerOnItemUsed(final Provider provider) {
+    public ListenerOnItemUsed(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final CustomMenuOptionClicked event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(CustomMenuOptionClicked event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
 
-            final OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
+            OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
             boolean triggerUsed = false;
 
             if (super.trigger(triggerOnItemUsed, chargedItem)) {
@@ -26,10 +25,10 @@ public class ListenerOnItemUsed extends ListenerBase {
         }
     }
 
-    private boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomMenuOptionClicked event) {
+    private boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase, CustomMenuOptionClicked event) {
         if (!(triggerBase instanceof OnItemUsed)) return false;
         if (event.usedItemId.isEmpty()) return false;
-        final OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
+        OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
 
         if (!(
             (event.itemId == triggerOnItemUsed.targetItemId && event.usedItemId.get() == triggerOnItemUsed.usedItemId) ||

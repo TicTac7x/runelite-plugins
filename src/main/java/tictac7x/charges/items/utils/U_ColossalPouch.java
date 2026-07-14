@@ -1,26 +1,24 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.*;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.Provider;
 
 import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
-import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromWordRepresentation;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.*;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
-    public U_ColossalPouch(final Provider provider) {
+    public U_ColossalPouch(Provider provider) {
         super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemId.COLOSSAL_POUCH, provider);
         this.storage = storage.storableItems(
             new StorableItem(ItemId.RUNE_ESSENCE),
@@ -48,7 +46,7 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Check.
             new OnChatMessage("There (is|are) (?<quantity>.+?) (?<essence>normal|pure|daeyalt|guardian|normal) essences? in this pouch.").matcherConsumer((m) -> {
-                final int quantity = getNumberFromWordRepresentation(m.group("quantity"));
+                int quantity = getNumberFromWordRepresentation(m.group("quantity"));
 
                 int essenceId;
                 switch (m.group("essence")) {
@@ -98,7 +96,7 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Use essence on pouch.
             new OnMenuOptionClicked("Use").menuOptionConsumer(advancedMenuEntry -> {
-                final Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target, 0);
+                Optional<StorageItem> essence = getStorageItemFromName(advancedMenuEntry.target, 0);
                 if (essence.isPresent()) {
                     essence.get().setQuantity(provider.store.getInventoryItemQuantity(essence.get().itemId));
                     provider.store.nextTickQueue.add(() -> storage.add(essence));
@@ -111,7 +109,7 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
             }),
 
             // Empty to inventory at bank.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).emptyStorageToInventory(),
+            new OnItemContainerChanged(INVENTORY).onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).emptyStorageToInventory(),
 
             // Fill from inventory at bank.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
@@ -134,7 +132,7 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
     }
 
     @Override
-    public Color getTextColor(final int itemId) {
+    public Color getTextColor(int itemId) {
         return getTotalTextColor();
     }
 
@@ -151,14 +149,14 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
         return super.getTotalTextColor();
     }
 
-    private final int[] CAPACITY_85 = {40, 35, 30, 25, 20, 15, 10, 5};
-    private final int[] CAPACITY_75 = {27, 23, 20, 16, 13, 10, 6, 3};
-    private final int[] CAPACITY_50 = {16, 14, 12, 10, 8, 6, 4, 2};
-    private final int[] CAPACITY_25 = {8, 5, 2}; // TODO: verify these
+    private int[] CAPACITY_85 = {40, 35, 30, 25, 20, 15, 10, 5};
+    private int[] CAPACITY_75 = {27, 23, 20, 16, 13, 10, 6, 3};
+    private int[] CAPACITY_50 = {16, 14, 12, 10, 8, 6, 4, 2};
+    private int[] CAPACITY_25 = {8, 5, 2}; // TODO: verify these
 
     public int getPouchCapacity() {
-        final int decayCount = provider.config.getColossalPouchDecayCount();
-        final int runecraftLevel = provider.client.getRealSkillLevel(Skill.RUNECRAFT);
+        int decayCount = provider.config.getColossalPouchDecayCount();
+        int runecraftLevel = provider.client.getRealSkillLevel(Skill.RUNECRAFT);
 
         if (runecraftLevel >= 85) {
             return CAPACITY_85[Math.min(CAPACITY_85.length - 1, decayCount)];

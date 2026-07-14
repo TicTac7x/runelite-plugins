@@ -1,16 +1,17 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_CelestialRing extends ChargedItem {
-    public J_CelestialRing(final Provider provider) {
+    public J_CelestialRing(Provider provider) {
         super(TicTac7xChargesImprovedConfig.celestial_ring, ItemId.CELESTIAL_RING, provider);
 
         this.items = new TriggerItem[]{
@@ -36,7 +37,7 @@ public class J_CelestialRing extends ChargedItem {
 
             // Auto-charge.
             new OnChatMessage("The banker charges your Celestial (ring|signet) using (?<stardust>.+)x Stardust.").matcherConsumer(m -> {
-                final int stardust = Integer.parseInt(m.group("stardust"));
+                int stardust = Integer.parseInt(m.group("stardust"));
                 increaseCharges(stardust);
             })
         ));

@@ -1,33 +1,26 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnAnimationChanged;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnMenuOptionClicked;
-import tictac7x.charges.item.triggers.OnScriptPreFired;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.awt.Color;
-import java.util.Arrays;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
 
 public class W_ToxicBlowpipe extends ChargedItemWithStorage {
-    public W_ToxicBlowpipe(final Provider provider) {
+    public W_ToxicBlowpipe(Provider provider) {
         this(provider, TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemId.TOXIC_BLOWPIPE, new TriggerItem[]{
             new TriggerItem(ItemId.TOXIC_BLOWPIPE_UNCHARGED),
             new TriggerItem(ItemId.TOXIC_BLOWPIPE),
         });
     }
-    public W_ToxicBlowpipe(final Provider provider, final String configKey, final int itemId, final TriggerItem[] items) {
+    public W_ToxicBlowpipe(Provider provider, String configKey, int itemId, TriggerItem[] items) {
         super(configKey, itemId, provider);
 
         this.items = items;
@@ -47,7 +40,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         this.triggers.addAll(List.of(
             // Check without darts.
             new OnChatMessage("Darts: None\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
-                final StorageItem scales = new StorageItem(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
+                StorageItem scales = new StorageItem(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
                 storage.clearAndPut(scales);
 
             }),
@@ -56,7 +49,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnChatMessage("Darts: (?<dartstype>.+) x (?<dartsamount>.+)\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
                 storage.clearAndPut(ItemId.ZULRAH_SCALES, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
 
-                final Optional<StorageItem> darts = getStorageItemFromName(m.group("dartstype"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("dartsamount")));
+                Optional<StorageItem> darts = getStorageItemFromName(m.group("dartstype"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("dartsamount")));
                 if (darts.isPresent()) {
                     storage.put(darts);
                 }
@@ -69,7 +62,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
             // Uncharge (empty darts and scales)
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
-                final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
+                Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 5);
                 if (
                     widget.isPresent() && Arrays.stream(items).anyMatch(item -> item.itemId == widget.get().getItemId()) &&
                     script.arguments.length >= 5 &&
@@ -87,7 +80,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 }
 
                 // Calculate if dart could have been used.
-                for (final StorageItem item : storage.getStorage().getItems()) {
+                for (StorageItem item : storage.getStorage().getItems()) {
                     if (item.itemId != ItemId.ZULRAH_SCALES && TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
                         storage.remove(item.itemId, 1);
                     }
@@ -97,7 +90,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     }
 
     @Override
-    public String getChargesString(final int itemId) {
+    public String getChargesString(int itemId) {
         return this.getTotalChargesString();
     }
 
@@ -105,7 +98,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     public String getTotalChargesString() {
         Optional<Integer> charges = Optional.empty();
 
-        for (final StorageItem item : getStorage().getItems()) {
+        for (StorageItem item : getStorage().getItems()) {
             if (!charges.isPresent()) {
                 charges = Optional.of(item.getQuantity());
             } else if (item.getQuantity() < charges.get()) {
@@ -117,7 +110,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     }
 
     @Override
-    public Color getTextColor(final int itemId) {
+    public Color getTextColor(int itemId) {
         return this.getTotalTextColor();
     }
 

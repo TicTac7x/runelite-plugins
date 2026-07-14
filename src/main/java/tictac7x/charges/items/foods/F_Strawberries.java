@@ -1,11 +1,11 @@
 package tictac7x.charges.items.foods;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class F_Strawberries extends _Basket {
-    public F_Strawberries(final Provider provider) {
+    public F_Strawberries(Provider provider) {
         super("strawberries", new TriggerItem[]{
             new TriggerItem(ItemId.STRAWBERRIES_1).fixedCharges(1),
             new TriggerItem(ItemId.STRAWBERRIES_2).fixedCharges(2),

@@ -1,18 +1,15 @@
 package tictac7x.charges.items.boots;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.OnResetDaily;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 import java.util.List;
 
 public class B_FremennikSeaBoots extends ChargedItem {
-    public B_FremennikSeaBoots(final Provider provider) {
+    public B_FremennikSeaBoots(Provider provider) {
         super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, ItemId.FREMENNIK_SEA_BOOTS_1, provider);
 
         this.items = new TriggerItem[]{

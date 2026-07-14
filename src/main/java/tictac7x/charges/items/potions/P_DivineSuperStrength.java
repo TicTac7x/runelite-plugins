@@ -1,11 +1,11 @@
 package tictac7x.charges.items.potions;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class P_DivineSuperStrength extends _Potion {
-    public P_DivineSuperStrength(final Provider provider) {
+    public P_DivineSuperStrength(Provider provider) {
         super("divine_super_strength", new TriggerItem[]{
             new TriggerItem(ItemId.DIVINE_SUPER_STRENGTH_POTION_1).fixedCharges(1),
             new TriggerItem(ItemId.DIVINE_SUPER_STRENGTH_POTION_2).fixedCharges(2),

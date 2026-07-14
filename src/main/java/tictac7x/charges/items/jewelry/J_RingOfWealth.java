@@ -1,13 +1,13 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class J_RingOfWealth extends ChargedItem {
-    public J_RingOfWealth(final Provider provider) {
+    public J_RingOfWealth(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ring_of_wealth, ItemId.RING_OF_WEALTH_0, provider);
 
         this.items = new TriggerItem[]{

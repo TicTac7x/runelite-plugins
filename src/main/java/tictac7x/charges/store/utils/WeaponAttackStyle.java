@@ -1,14 +1,9 @@
 package tictac7x.charges.store.utils;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.EnumID;
-import net.runelite.api.ParamID;
-import net.runelite.api.StructComposition;
-import net.runelite.api.VarPlayer;
-import net.runelite.api.Varbits;
-import tictac7x.charges.store.enums.CombatStyle;
+import lombok.*;
+import lombok.extern.slf4j.*;
+import net.runelite.api.*;
+import tictac7x.charges.store.enums.*;
 
 /**
  * Get a generalised weapon style (melee/magic/ranged) from the current attack style.
@@ -16,23 +11,23 @@ import tictac7x.charges.store.enums.CombatStyle;
  */
 @Slf4j
 public class WeaponAttackStyle {
-    private final Client client;
+    private Client client;
 
-    public WeaponAttackStyle(final Client client) {
+    public WeaponAttackStyle(Client client) {
         this.client = client;
     }
 
     public CombatStyle getCombatStyle() {
-        final int currentAttackStyleVarbit = client.getVarpValue(VarPlayer.ATTACK_STYLE);
-        final int currentEquippedWeaponTypeVarbit = client.getVarbitValue(Varbits.EQUIPPED_WEAPON_TYPE);
-        final int weaponStyleEnum = client.getEnum(EnumID.WEAPON_STYLES).getIntValue(currentEquippedWeaponTypeVarbit);
-        final int[] weaponStyleStructs = client.getEnum(weaponStyleEnum).getIntVals();
+        int currentAttackStyleVarbit = client.getVarpValue(VarPlayer.ATTACK_STYLE);
+        int currentEquippedWeaponTypeVarbit = client.getVarbitValue(Varbits.EQUIPPED_WEAPON_TYPE);
+        int weaponStyleEnum = client.getEnum(EnumID.WEAPON_STYLES).getIntValue(currentEquippedWeaponTypeVarbit);
+        int[] weaponStyleStructs = client.getEnum(weaponStyleEnum).getIntVals();
 
-        final AttackStyle attackStyle = getAttackStyle(currentAttackStyleVarbit, weaponStyleStructs);
+        AttackStyle attackStyle = getAttackStyle(currentAttackStyleVarbit, weaponStyleStructs);
         return getWeaponFromAttackStyle(attackStyle, weaponStyleStructs);
     }
 
-    private AttackStyle getAttackStyle(int attackStyleVarbit, final int [] weaponStyleStructs) {
+    private AttackStyle getAttackStyle(int attackStyleVarbit, int [] weaponStyleStructs) {
         // Get selected weapon attack style
         StructComposition attackStyleStruct = client.getStructComposition(weaponStyleStructs[attackStyleVarbit]);
         String attackStyleName = attackStyleStruct.getStringValue(ParamID.ATTACK_STYLE_NAME);
@@ -41,7 +36,7 @@ public class WeaponAttackStyle {
         return AttackStyle.valueOf(attackStyleName.toUpperCase());
     }
 
-    private CombatStyle getWeaponFromAttackStyle(final AttackStyle attackStyle, final int[] weaponStyleStructs) {
+    private CombatStyle getWeaponFromAttackStyle(AttackStyle attackStyle, int[] weaponStyleStructs) {
         switch (attackStyle) {
             case ACCURATE:
             case AGGRESSIVE:
@@ -56,7 +51,7 @@ public class WeaponAttackStyle {
             // "Defensive" is shared between melee and magic
             // We can look at the first attack style to determine which one is in use
             case DEFENSIVE:
-                final AttackStyle firstAttackStyle = getAttackStyle(0, weaponStyleStructs);
+                AttackStyle firstAttackStyle = getAttackStyle(0, weaponStyleStructs);
 
                 return firstAttackStyle != AttackStyle.DEFENSIVE
                     ? getWeaponFromAttackStyle(firstAttackStyle, weaponStyleStructs)
@@ -78,7 +73,7 @@ public class WeaponAttackStyle {
         DEFENSIVE_CASTING("Defensive Casting"),
         OTHER("Other");
 
-        private final String name;
+        private String name;
 
         AttackStyle(String name) {
             this.name = name;

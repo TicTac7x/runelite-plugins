@@ -1,18 +1,16 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemUsed;
-import tictac7x.charges.item.triggers.TriggerItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class U_BottomlessMilkBucket extends ChargedItemWithStorage {
     public U_BottomlessMilkBucket(Provider provider) {
@@ -33,19 +31,19 @@ public class U_BottomlessMilkBucket extends ChargedItemWithStorage {
         this.triggers.addAll(List.of(
             // Check
             new OnChatMessage("Your bottomless milk bucket is currently holding (?<charges>.+) uses? of (?<type>.+).").matcherConsumer(m -> {
-                final Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+                Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
                 storage.clearAndPut(storageItem);
             }),
 
             // Auto uses left message
             new OnChatMessage("Your bottomless milk bucket has (?<charges>.+) uses? of (?<type>.+) remaining.").matcherConsumer(m -> {
-                final Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+                Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
                 storage.clearAndPut(storageItem);
             }),
 
             // Fill
             new OnChatMessage("You fill your bottomless milk bucket with .+ buckets? of (?<type>.+). Your bottomless milk bucket now contains a total of (?<charges>.+) uses?.").matcherConsumer(m -> {
-                final Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+                Optional<StorageItem> storageItem = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
                 storage.clearAndPut(storageItem);
             }),
 

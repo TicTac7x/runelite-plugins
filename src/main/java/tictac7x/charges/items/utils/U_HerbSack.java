@@ -1,27 +1,25 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.*;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.WidgetId;
-import tictac7x.charges.store.utils.ReplaceTarget;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import java.util.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.BANK;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_HerbSack extends ChargedItemWithStorageEmptyable {
-    public U_HerbSack(final Provider provider) {
+    public U_HerbSack(Provider provider) {
         this(TicTac7xChargesImprovedConfig.herb_sack, ItemId.HERB_SACK, ItemId.HERB_SACK_OPEN, 30, provider);
     }
 
-    protected U_HerbSack(final String configKey, final int itemId, final int openItemId, final int maxQuantity, final Provider provider) {
+    protected U_HerbSack(String configKey, int itemId, int openItemId, int maxQuantity, Provider provider) {
         super(configKey, itemId, provider);
 
         this.items = new TriggerItem[]{

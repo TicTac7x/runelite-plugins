@@ -1,15 +1,15 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_XericsTalisman extends ChargedItem {
-    public J_XericsTalisman(final Provider provider) {
+    public J_XericsTalisman(Provider provider) {
         super(TicTac7xChargesImprovedConfig.xerics_talisman, ItemId.XERICS_TALISMAN, provider);
 
         this.items = new TriggerItem[]{

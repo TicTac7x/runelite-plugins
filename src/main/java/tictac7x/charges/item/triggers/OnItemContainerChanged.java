@@ -1,17 +1,17 @@
 package tictac7x.charges.item.triggers;
 
-import tictac7x.charges.item.storage.StorageItems;
+import tictac7x.charges.item.storage.*;
 
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class OnItemContainerChanged extends TriggerBase {
-    public final int itemContainerId;
+    public int itemContainerId;
 
     public Optional<Boolean> updateStorage = Optional.empty();
     public Optional<Consumer<StorageItems>> itemsConsumer = Optional.empty();
 
-    public OnItemContainerChanged(final int itemContainerId) {
+    public OnItemContainerChanged(int itemContainerId) {
         this.itemContainerId = itemContainerId;
     }
 
@@ -20,7 +20,7 @@ public class OnItemContainerChanged extends TriggerBase {
         return this;
     }
 
-    public TriggerBase itemsConsumer(final Consumer<StorageItems> event) {
+    public TriggerBase itemsConsumer(Consumer<StorageItems> event) {
         this.itemsConsumer = Optional.of(event);
         return this;
     }

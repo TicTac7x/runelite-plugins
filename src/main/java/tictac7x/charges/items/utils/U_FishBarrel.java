@@ -1,29 +1,26 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.TriggerItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
 
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_FishBarrel extends ChargedItemWithStorageEmptyable {
     private Optional<StorageItem> lastCaughtFish = Optional.empty();
 
-    public U_FishBarrel(final Provider provider) {
+    public U_FishBarrel(Provider provider) {
         super(TicTac7xChargesImprovedConfig.fish_barrel, ItemId.FISH_BARREL, provider);
 
         this.items = new TriggerItem[]{
@@ -116,8 +113,8 @@ public class U_FishBarrel extends ChargedItemWithStorageEmptyable {
             new OnChatMessage("The barrel contains:").stringConsumer(s -> {
                 storage.clear();
 
-                final Pattern pattern = Pattern.compile("(?<quantity>\\d+).x.(?<fish>.*?)(,|$)");
-                final Matcher matcher = pattern.matcher(s);
+                Pattern pattern = Pattern.compile("(?<quantity>\\d+).x.(?<fish>.*?)(,|$)");
+                Matcher matcher = pattern.matcher(s);
 
                 while (matcher.find()) {
                     storage.put(getStorageItemFromName(matcher.group("fish"), Integer.parseInt(matcher.group("quantity"))));

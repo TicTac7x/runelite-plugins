@@ -1,16 +1,18 @@
 package tictac7x.charges.items.moons;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnCombat;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
 public class _MoonItem extends ChargedItem {
-    public _MoonItem(final String checkName, final int itemId, final Provider provider) {
+    public _MoonItem(String checkName, int itemId, Provider provider) {
         super(TicTac7xChargesImprovedConfig.moons_gear + "_" + checkName.toLowerCase().replaceAll("\\s", "_"), itemId, provider);
 
         this.triggers.addAll(List.of(
@@ -23,19 +25,19 @@ public class _MoonItem extends ChargedItem {
     }
 
     @Override
-    public String getChargesString(final int itemId) {
+    public String getChargesString(int itemId) {
         return getLongChargesString(itemId);
     }
 
     @Override
-    public String getLongChargesString(final int itemId) {
-        final int charges = getCharges(itemId);
+    public String getLongChargesString(int itemId) {
+        int charges = getCharges(itemId);
 
         switch (provider.config.combatTimeDegradableStyle()) {
             case PERCENTAGE:
                 return charges * 100 / 3000 + "%";
             case TIME:
-                final double hours = (double) (charges * 90 * 600) / 1000 / 3600;
+                double hours = (double) (charges * 90 * 600) / 1000 / 3600;
                 return String.format("%.1fh", hours).replaceAll("\\.0", "");
             case CHARGES:
             default:

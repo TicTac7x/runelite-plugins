@@ -1,15 +1,15 @@
 package tictac7x.charges.items.capes;
 
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class C_MagicCape extends ChargedItem {
-    public C_MagicCape(final Provider provider) {
+    public C_MagicCape(Provider provider) {
         super(TicTac7xChargesImprovedConfig.magic_cape, ItemId.MAGIC_CAPE, provider);
 
         this.items = new TriggerItem[]{

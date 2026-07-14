@@ -1,7 +1,7 @@
 package tictac7x.charges;
 
 import net.runelite.client.config.*;
-import tictac7x.charges.store.ids.ChargeId;
+import tictac7x.charges.store.ids.*;
 
 import java.awt.Color;
 

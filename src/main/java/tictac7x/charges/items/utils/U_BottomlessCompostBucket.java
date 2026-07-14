@@ -1,23 +1,21 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnXpDrop;
-import tictac7x.charges.item.triggers.TriggerItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.*;
 
 public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
-    public U_BottomlessCompostBucket(final Provider provider) {
+    public U_BottomlessCompostBucket(Provider provider) {
         super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemId.BOTTOMLESS_COMPOST_BUCKET, provider);
         storage = storage.setMaximumTotalQuantity(10_000).storableItems(
             new StorableItem(ItemId.ULTRACOMPOST).checkName("ultra"),
@@ -36,7 +34,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
                 storage.clearAndPut(getStorageItemFromName(m.group("type"), 1));
             }),
             new OnChatMessage("Your bottomless compost bucket is currently holding (?<quantity>.+) uses of (?<type>.+) ?compost.").matcherConsumer(m -> {
-                final int quantity = getNumberFromCommaString(m.group("quantity"));
+                int quantity = getNumberFromCommaString(m.group("quantity"));
                 storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
             }),
 
@@ -48,12 +46,12 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
             }),
             new OnChatMessage("Your bottomless compost bucket has (?<quantity>.+) uses of (?<type>.+) ?compost remaining.").matcherConsumer(m -> {
                 provider.store.addConsumerToNextTickQueue(() -> {
-                    final int quantity = getNumberFromCommaString(m.group("quantity"));
+                    int quantity = getNumberFromCommaString(m.group("quantity"));
                     storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
                 });
             }),
             new OnChatMessage("You treat the .* with (?<type>.*) ?compost.").matcherConsumer(m -> {
-                final String type = m.group("type");
+                String type = m.group("type");
                 storage.remove(getStorageItemFromName(type.isEmpty() ? "regular" : type, 1));
             }).onItemClick(),
 
@@ -65,11 +63,11 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
 
             // Fill.
             new OnChatMessage("You fill your bottomless compost bucket with a single bucket of (?<type>.+) ?compost. Your bottomless compost bucket now contains a total of (?<quantity>.+) uses.").matcherConsumer(m -> {
-                final int quantity = getNumberFromCommaString(m.group("quantity"));
+                int quantity = getNumberFromCommaString(m.group("quantity"));
                 storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
             }),
             new OnChatMessage("You fill your bottomless compost bucket with .* buckets of (?<type>.+) ?compost. Your bottomless compost bucket now contains a total of (?<quantity>.+) uses.").matcherConsumer(m -> {
-                final int quantity = getNumberFromCommaString(m.group("quantity"));
+                int quantity = getNumberFromCommaString(m.group("quantity"));
                 storage.clearAndPut(getStorageItemFromName(m.group("type"), quantity));
             }),
 
@@ -104,7 +102,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
     }
 
     private Optional<StorageItem> getCompostType() {
-        for (final StorageItem storageItem : getStorage().getItems()) {
+        for (StorageItem storageItem : getStorage().getItems()) {
             if (storageItem.getQuantity() > 0) {
                 return Optional.of(storageItem);
             }

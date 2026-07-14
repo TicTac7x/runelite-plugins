@@ -1,19 +1,16 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class U_SeedBox extends ChargedItemWithStorage {
-    public U_SeedBox(final Provider provider) {
+    public U_SeedBox(Provider provider) {
         super(TicTac7xChargesImprovedConfig.seed_box, ItemId.SEED_BOX, provider);
 
         this.items = new TriggerItem[]{

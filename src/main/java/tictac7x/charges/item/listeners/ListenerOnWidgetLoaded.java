@@ -1,36 +1,34 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.events.WidgetLoaded;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnWidgetLoaded;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.events.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
+import java.util.*;
+import java.util.regex.*;
 
-import static tictac7x.charges.TicTac7xChargesImprovedPlugin.getNumberFromCommaString;
+import static tictac7x.charges.TicTac7xChargesImprovedPlugin.*;
 
 public class ListenerOnWidgetLoaded extends ListenerBase {
-    public ListenerOnWidgetLoaded(final Provider provider) {
+    public ListenerOnWidgetLoaded(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final WidgetLoaded event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(WidgetLoaded event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
 
             boolean triggerUsed = false;
-            final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
-            final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, trigger.groupId, trigger.childId, trigger.subChildId);
+            OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
+            Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, trigger.groupId, trigger.childId, trigger.subChildId);
             if (!widget.isPresent()) continue;
 
             if (trigger.text.isPresent()) {
-                final String text = TicTac7xChargesImprovedPlugin.getCleanText(widget.get().getText());
-                final Matcher matcher = trigger.text.get().matcher(text);
+                String text = TicTac7xChargesImprovedPlugin.getCleanText(widget.get().getText());
+                Matcher matcher = trigger.text.get().matcher(text);
                 matcher.find();
 
                 if (trigger.setDynamically.isPresent()) {
@@ -57,9 +55,9 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final WidgetLoaded event) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase, WidgetLoaded event) {
         if (!(triggerBase instanceof OnWidgetLoaded)) return false;
-        final OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
+        OnWidgetLoaded trigger = (OnWidgetLoaded) triggerBase;
 
         // Widget group check.
         if (event.getGroupId() != trigger.groupId) {
@@ -67,14 +65,14 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
         }
 
         // Widget existance check.
-        final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, trigger.groupId, trigger.childId, trigger.subChildId);
+        Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, trigger.groupId, trigger.childId, trigger.subChildId);
         if (!widget.isPresent()) {
             return false;
         }
 
         // Text check.
         if (trigger.text.isPresent()) {
-            final Matcher matcher = trigger.text.get().matcher(TicTac7xChargesImprovedPlugin.getCleanText(widget.get().getText()));
+            Matcher matcher = trigger.text.get().matcher(TicTac7xChargesImprovedPlugin.getCleanText(widget.get().getText()));
             if (!matcher.find()) {
                 return false;
             }

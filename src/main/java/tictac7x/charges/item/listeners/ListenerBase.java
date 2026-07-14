@@ -1,26 +1,23 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.ChargedItemWithStatus;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.events.CustomMenuOptionClicked;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
-import java.util.Optional;
+import java.util.*;
 
 public abstract class ListenerBase {
-    protected final Provider provider;
+    protected Provider provider;
 
-    public ListenerBase(final Provider provider) {
+    public ListenerBase(Provider provider) {
         this.provider = provider;
     }
 
-    boolean trigger(final TriggerBase trigger, final ChargedItemBase chargedItem) {
+    boolean trigger(TriggerBase trigger, ChargedItemBase chargedItem) {
         boolean triggerUsed = false;
 
         // Fixed charges.
@@ -102,10 +99,10 @@ public abstract class ListenerBase {
         return triggerUsed;
     }
 
-    boolean isValidTrigger(final TriggerBase trigger, final ChargedItemBase chargedItem) {
+    boolean isValidTrigger(TriggerBase trigger, ChargedItemBase chargedItem) {
         // Specific item check.
         specificItemCheck: if (trigger.requiredItem.isPresent()) {
-            for (final int itemId : trigger.requiredItem.get()) {
+            for (int itemId : trigger.requiredItem.get()) {
                 if (chargedItem.provider.store.inventoryContainsItem(itemId) || chargedItem.provider.store.equipmentContainsItem(itemId)) {
                     break specificItemCheck;
                 }
@@ -115,7 +112,7 @@ public abstract class ListenerBase {
 
         // Unallowed items check.
         if (trigger.unallowedItem.isPresent()) {
-            for (final int itemId : trigger.unallowedItem.get()) {
+            for (int itemId : trigger.unallowedItem.get()) {
                 if (chargedItem.provider.store.inventoryContainsItem(itemId) || chargedItem.provider.store.equipmentContainsItem(itemId)) {
                     return false;
                 }
@@ -160,18 +157,18 @@ public abstract class ListenerBase {
         // Use storage item on charged item check.
         if (trigger.onUseStorageItemOnChargedItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean isValid = false;
-            loopChecker: for (final CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
+            loopChecker: for (CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
                 if (!menuEntry.target.contains(" -> ")) {
                     continue;
                 };
 
-                final String itemOne = menuEntry.target.split(" -> ")[0];
-                final String itemTwo = menuEntry.target.split(" -> ")[1];
+                String itemOne = menuEntry.target.split(" -> ")[0];
+                String itemTwo = menuEntry.target.split(" -> ")[1];
 
                 if (!itemOne.equals(chargedItem.getItemName()) && !itemTwo.equals(chargedItem.getItemName())) {
                     continue;
                 }
-                for (final StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
+                for (StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
                         itemOne.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName()) ||
                         itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName())
@@ -190,10 +187,10 @@ public abstract class ListenerBase {
         // Use charged item on storage item check.
         if (trigger.onUseChargedItemOnStorageItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean useCheck = false;
-            useCheckLooper: for (final CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
+            useCheckLooper: for (CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
                 if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(provider.itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
 
-                for (final StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
+                for (StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
                     if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.itemId).getName())) {
                         useCheck = true;
                         break useCheckLooper;
@@ -214,7 +211,7 @@ public abstract class ListenerBase {
         if (trigger.hasChatMessage.isPresent()) {
             boolean matches = false;
 
-            for (final String message : chargedItem.provider.store.getLastChatMessages()) {
+            for (String message : chargedItem.provider.store.getLastChatMessages()) {
                 if (trigger.hasChatMessage.get().matcher(message).find()) {
                     matches = true;
                     break;
@@ -236,8 +233,8 @@ public abstract class ListenerBase {
         // Visible widget check.
         if (trigger.isWidgetVisible.isPresent()) {
             boolean widgetVisible = false;
-            for (final int[] widgetIds : trigger.isWidgetVisible.get()) {
-                final Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, widgetIds[0], widgetIds[1]);
+            for (int[] widgetIds : trigger.isWidgetVisible.get()) {
+                Optional<Widget> widget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, widgetIds[0], widgetIds[1]);
                 if (widget.isPresent() && !widget.get().isHidden()) {
                     widgetVisible = true;
                     break;
@@ -278,7 +275,7 @@ public abstract class ListenerBase {
         if (trigger.hasAnimationId.isPresent()) {
             boolean valid = false;
 
-            for (final int animationId : trigger.hasAnimationId.get()) {
+            for (int animationId : trigger.hasAnimationId.get()) {
                 if (animationId == provider.client.getLocalPlayer().getAnimation()) {
                     valid = true;
                 }

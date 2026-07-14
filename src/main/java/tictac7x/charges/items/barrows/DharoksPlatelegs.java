@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class DharoksPlatelegs extends _BarrowsItem {
-    public DharoksPlatelegs(final Provider provider) {
+    public DharoksPlatelegs(Provider provider) {
         super("Dharok's legs", ItemId.DHAROKS_PLATELEGS, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.DHAROKS_PLATELEGS).fixedCharges(1000),

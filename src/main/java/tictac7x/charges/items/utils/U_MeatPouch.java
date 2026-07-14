@@ -1,22 +1,19 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
+import net.runelite.api.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.BANK;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class U_MeatPouch extends ChargedItemWithStorageEmptyable {
-    public U_MeatPouch(final Provider provider) {
+    public U_MeatPouch(Provider provider) {
         super(TicTac7xChargesImprovedConfig.meat_pouch, ItemId.MEAT_POUCH_SMALL, provider);
         this.storage = storage.storableItems(
             // Tracking.

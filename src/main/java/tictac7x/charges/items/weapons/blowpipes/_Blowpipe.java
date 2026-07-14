@@ -1,34 +1,28 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnHitsplatApplied;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.enums.HitsplatGroup;
-import tictac7x.charges.store.enums.HitsplatTarget;
-import tictac7x.charges.store.ids.ItemId;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class _Blowpipe extends ChargedItemWithStorage {
     public _Blowpipe(
-        final String configKey,
-        final int itemId,
-        final Provider provider,
-        final TriggerItem[] items,
-        final boolean supportsAdamantiteDarts,
-        final int attackAnimationId
+        String configKey,
+        int itemId,
+        Provider provider,
+        TriggerItem[] items,
+        boolean supportsAdamantiteDarts,
+        int attackAnimationId
     ) {
         super(configKey, itemId, provider);
         this.items = items;
 
-        final List<StorableItem> storableItems = new ArrayList<>();
+        List<StorableItem> storableItems = new ArrayList<>();
         storableItems.add(new StorableItem(ItemId.BRONZE_DART).checkName("Bronze dart"));
         storableItems.add(new StorableItem(ItemId.IRON_DART).checkName("Iron dart"));
         storableItems.add(new StorableItem(ItemId.STEEL_DART).checkName("Steel dart"));
@@ -45,13 +39,13 @@ public class _Blowpipe extends ChargedItemWithStorage {
         triggers.addAll(List.of(
             // Check
             new OnChatMessage("Darts: (?<type>.+) x (?<amount>.+).").matcherConsumer(m -> {
-                final Optional<StorageItem> darts = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("amount")));
+                Optional<StorageItem> darts = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("amount")));
                 storage.clearAndPut(darts);
             }).onItemClick(),
 
             // Attack
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).isEquipped().hasAnimationId(attackAnimationId).consumer(() -> {
-                for (final StorageItem item : storage.getStorage().getItems()) {
+                for (StorageItem item : storage.getStorage().getItems()) {
                     if (TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
                         storage.remove(item.itemId, 1);
                     }

@@ -1,21 +1,16 @@
 package tictac7x.charges.items.utils;
 
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.OnMenuEntryAdded;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.WidgetId;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class U_TackleBox extends ChargedItemWithStorage {
-    public U_TackleBox(final Provider provider) {
+    public U_TackleBox(Provider provider) {
         super(TicTac7xChargesImprovedConfig.tackle_box, ItemId.TACKLE_BOX, provider);
 
         this.storage = storage.storableItems(
@@ -102,8 +97,8 @@ public class U_TackleBox extends ChargedItemWithStorage {
             new OnItemContainerChanged(ItemContainerId.TACKLE_BOX).updateStorage(),
 
             // Replace "Use" with proper Fill/Empty option.
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
-            new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(this::getMenuOptionForUse).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
+            new OnMenuEntryAdded("Use").replaceOptionConsumer(this::getMenuOptionForUse).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Hide destroy.
             new OnMenuEntryAdded("Destroy").hide()

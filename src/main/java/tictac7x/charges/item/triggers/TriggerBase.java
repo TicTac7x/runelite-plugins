@@ -1,13 +1,11 @@
 package tictac7x.charges.item.triggers;
 
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.item.storage.StorageItems;
-import tictac7x.charges.store.utils.WidgetMenuAction;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.store.utils.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.function.*;
+import java.util.regex.*;
 
 public abstract class TriggerBase {
     // Checks.
@@ -54,17 +52,17 @@ public abstract class TriggerBase {
     public Optional<Consumer<StorageItems>> onInventoryDifference = Optional.empty();
     public Optional<Consumer<StorageItems>> onBankDifference = Optional.empty();
 
-    public TriggerBase setFixedCharges(final int charges) {
+    public TriggerBase setFixedCharges(int charges) {
         this.fixedCharges = Optional.of(charges);
         return this;
     }
 
-    public TriggerBase increaseCharges(final int charges) {
+    public TriggerBase increaseCharges(int charges) {
         this.increaseCharges = Optional.of(charges);
         return this;
     }
 
-    public TriggerBase decreaseCharges(final int charges) {
+    public TriggerBase decreaseCharges(int charges) {
         this.decreaseCharges = Optional.of(charges);
         return this;
     }
@@ -94,37 +92,37 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase requiredItem(final int ...itemIds) {
+    public TriggerBase requiredItem(int ...itemIds) {
         this.requiredItem = Optional.of(itemIds);
         return this;
     }
 
-    public TriggerBase unallowedItem(final int ...itemIds) {
+    public TriggerBase unallowedItem(int ...itemIds) {
         this.unallowedItem = Optional.of(itemIds);
         return this;
     }
 
-    public TriggerBase onMenuOption(final String ...options) {
+    public TriggerBase onMenuOption(String ...options) {
         this.onMenuOption = Optional.of(options);
         return this;
     }
 
-    public TriggerBase onMenuOptionEventId(final int ...menuOptionEventIds) {
+    public TriggerBase onMenuOptionEventId(int ...menuOptionEventIds) {
         this.onMenuOptionEventId = Optional.of(menuOptionEventIds);
         return this;
     }
 
-    public TriggerBase onMenuTarget(final String ...targets) {
+    public TriggerBase onMenuTarget(String ...targets) {
         this.onMenuTarget = Optional.of(targets);
         return this;
     }
 
-    public TriggerBase onMenuTarget(final List<String> targets) {
+    public TriggerBase onMenuTarget(List<String> targets) {
         this.onMenuTarget = Optional.of(targets.toArray(String[]::new));
         return this;
     }
 
-    public TriggerBase onMenuImpostor(final int ...impostorIds) {
+    public TriggerBase onMenuImpostor(int ...impostorIds) {
         this.onMenuImpostor = Optional.of(impostorIds);
         return this;
     }
@@ -134,7 +132,7 @@ public abstract class TriggerBase {
         return this;
     }
     
-    public TriggerBase onWidgetMenuAction(final WidgetMenuAction widgetMenuAction) {
+    public TriggerBase onWidgetMenuAction(WidgetMenuAction widgetMenuAction) {
         this.onWidgetMenuAction = Optional.of(widgetMenuAction);
         return this;
     }
@@ -149,12 +147,12 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase onUseStorageItemOnChargedItem(final StorageItem[] storeableItems) {
+    public TriggerBase onUseStorageItemOnChargedItem(StorageItem[] storeableItems) {
         this.onUseStorageItemOnChargedItem = Optional.of(storeableItems);
         return this;
     }
 
-    public TriggerBase onUseChargedItemOnStorageItem(final StorageItem[] storeableItems) {
+    public TriggerBase onUseChargedItemOnStorageItem(StorageItem[] storeableItems) {
         this.onUseChargedItemOnStorageItem = Optional.of(storeableItems);
         return this;
     }
@@ -174,17 +172,17 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase hasAnimationId(final int ...animationId) {
+    public TriggerBase hasAnimationId(int ...animationId) {
         this.hasAnimationId = Optional.of(animationId);
         return this;
     }
 
-    public TriggerBase consumer(final Runnable consumer) {
+    public TriggerBase consumer(Runnable consumer) {
         this.consumer = Optional.of(consumer);
         return this;
     }
 
-    public TriggerBase runConsumerOnNextGameTick(final Runnable consumer) {
+    public TriggerBase runConsumerOnNextGameTick(Runnable consumer) {
         this.runConsumerOnNextGameTick = Optional.of(true);
         this.consumer = Optional.of(consumer);
         return this;
@@ -195,12 +193,12 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase addToStorage(final int itemId, final int quantity) {
+    public TriggerBase addToStorage(int itemId, int quantity) {
         this.addToStorage = Optional.of(new int[]{itemId, quantity});
         return this;
     }
 
-    public TriggerBase addToStorage(final int itemId) {
+    public TriggerBase addToStorage(int itemId) {
         this.addToStorage = Optional.of(new int[]{itemId, 1});
         return this;
     }
@@ -220,22 +218,22 @@ public abstract class TriggerBase {
         return this;
     }
 
-    public TriggerBase hasChatMessage(final String message) {
+    public TriggerBase hasChatMessage(String message) {
         this.hasChatMessage = Optional.of(Pattern.compile(message));
         return this;
     }
 
-    public TriggerBase varbitCheck(final int varbitId, final int varbitValue) {
+    public TriggerBase varbitCheck(int varbitId, int varbitValue) {
         this.varbitCheck = Optional.of(new int[]{varbitId, varbitValue});
         return this;
     }
 
-    public TriggerBase isWidgetVisible(final int[] ...widgetIds) {
+    public TriggerBase isWidgetVisible(int[] ...widgetIds) {
         this.isWidgetVisible = Optional.of(widgetIds);
         return this;
     }
 
-    public TriggerBase itemEquipped(final int ...itemId) {
+    public TriggerBase itemEquipped(int ...itemId) {
         this.itemEquipped = Optional.of(itemId);
         return this;
     }

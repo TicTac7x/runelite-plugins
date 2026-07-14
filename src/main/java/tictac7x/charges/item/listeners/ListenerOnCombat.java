@@ -1,21 +1,20 @@
 package tictac7x.charges.item.listeners;
 
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnCombat;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnCombat extends ListenerBase {
     private int ticksInCombat = 0;
 
-    public ListenerOnCombat(final Provider provider) {
+    public ListenerOnCombat(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase)) continue;
-            final OnCombat trigger = (OnCombat) triggerBase;
+            OnCombat trigger = (OnCombat) triggerBase;
             boolean triggerUsed = false;
 
             if (trigger.ticksInCombat == ticksInCombat) {
@@ -31,7 +30,7 @@ public class ListenerOnCombat extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase) {
         if (!(triggerBase instanceof OnCombat)) return false;
 
         // Ticks check.

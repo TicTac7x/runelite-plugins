@@ -1,20 +1,20 @@
 package tictac7x.charges.item.storage;
 
 public class StorageItem {
-    public final int itemId;
+    public int itemId;
     private int quantity;
 
-    public StorageItem(final int itemId) {
+    public StorageItem(int itemId) {
         this.itemId = itemId;
         this.quantity = 0;
     }
 
-    public StorageItem(final int itemId, final int quantity) {
+    public StorageItem(int itemId, int quantity) {
         this.itemId = itemId;
         this.quantity = quantity;
     }
 
-    public void setQuantity(final int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -22,11 +22,11 @@ public class StorageItem {
         return quantity;
     }
 
-    public void decreaseQuantity(final int quantity) {
+    public void decreaseQuantity(int quantity) {
         this.quantity = Math.max(this.quantity - quantity, 0);
     }
 
-    public void increaseQuantity(final int quantity) {
+    public void increaseQuantity(int quantity) {
         this.quantity += quantity;
     }
 }

@@ -1,15 +1,15 @@
 package tictac7x.charges.items.foods;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class _Basket extends ChargedItem {
     public _Basket(
-        final String configKey,
-        final TriggerItem[] items,
-        final Provider provider
+        String configKey,
+        TriggerItem[] items,
+        Provider provider
     ) {
         super(TicTac7xChargesImprovedConfig.baskets + "_" + configKey, items[0].itemId, provider);
         this.items = items;

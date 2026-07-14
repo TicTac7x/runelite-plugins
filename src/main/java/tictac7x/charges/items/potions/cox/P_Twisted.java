@@ -1,12 +1,12 @@
 package tictac7x.charges.items.potions.cox;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.items.potions._Potion;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.items.potions.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class P_Twisted extends _Potion {
-    public P_Twisted(final Provider provider) {
+    public P_Twisted(Provider provider) {
         super("cox_twisted", new TriggerItem[]{
             new TriggerItem(ItemId.COX_TWISTED_1).fixedCharges(1),
             new TriggerItem(ItemId.COX_TWISTED_2).fixedCharges(2),

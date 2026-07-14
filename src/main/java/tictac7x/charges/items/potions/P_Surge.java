@@ -5,7 +5,7 @@ import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.ItemId;
 
 public class P_Surge extends _Potion {
-    public P_Surge(final Provider provider) {
+    public P_Surge(Provider provider) {
         super("surge", new TriggerItem[]{
             new TriggerItem(ItemId.SURGE_POTION_1).fixedCharges(1),
             new TriggerItem(ItemId.SURGE_POTION_2).fixedCharges(2),

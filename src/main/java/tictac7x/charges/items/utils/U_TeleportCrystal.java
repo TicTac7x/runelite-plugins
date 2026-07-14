@@ -1,13 +1,13 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class U_TeleportCrystal extends ChargedItem {
-    public U_TeleportCrystal(final Provider provider) {
+    public U_TeleportCrystal(Provider provider) {
         super(TicTac7xChargesImprovedConfig.teleport_crystal, ItemId.TELEPORT_CRYSTAL_0, provider);
 
         this.items = new TriggerItem[]{

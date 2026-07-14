@@ -1,29 +1,26 @@
 package tictac7x.charges.events;
 
-import net.runelite.api.Client;
-import net.runelite.api.events.MenuOptionClicked;
-
-import java.util.Optional;
+import java.util.*;
 
 public class CustomMenuOptionClicked {
-    public final int eventId;
-    public final String target;
-    public final String option;
-    public final int actionId;
-    public final String actionName;
-    public final int itemId;
-    public final int impostorId;
+    public int eventId;
+    public String target;
+    public String option;
+    public int actionId;
+    public String actionName;
+    public int itemId;
+    public int impostorId;
 
     public Optional<Integer> usedItemId = Optional.empty();
 
     public CustomMenuOptionClicked(
-        final int eventId,
-        final String target,
-        final String option,
-        final int actionId,
-        final String actionName,
-        final int itemId,
-        final int impostorId
+        int eventId,
+        String target,
+        String option,
+        int actionId,
+        String actionName,
+        int itemId,
+        int impostorId
     ) {
         this.eventId = eventId;
         this.target = target;
@@ -34,7 +31,7 @@ public class CustomMenuOptionClicked {
         this.impostorId = impostorId;
     }
 
-    public void assignUsedItemId(final int usedItemId) {
+    public void assignUsedItemId(int usedItemId) {
         this.usedItemId = Optional.of(usedItemId);
     }
 

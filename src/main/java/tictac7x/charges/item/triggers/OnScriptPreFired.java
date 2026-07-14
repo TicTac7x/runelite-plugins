@@ -1,19 +1,19 @@
 package tictac7x.charges.item.triggers;
 
-import tictac7x.charges.events.CustomScriptPreFired;
+import tictac7x.charges.events.*;
 
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class OnScriptPreFired extends TriggerBase {
-    public final int scriptId;
+    public int scriptId;
     public Optional<Consumer<CustomScriptPreFired>> scriptConsumer = Optional.empty();
 
-    public OnScriptPreFired(final int scriptId) {
+    public OnScriptPreFired(int scriptId) {
         this.scriptId = scriptId;
     }
 
-    public OnScriptPreFired scriptConsumer(final Consumer<CustomScriptPreFired> consumer) {
+    public OnScriptPreFired scriptConsumer(Consumer<CustomScriptPreFired> consumer) {
         this.scriptConsumer = Optional.of(consumer);
         return this;
     }

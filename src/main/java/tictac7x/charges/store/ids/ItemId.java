@@ -2,7 +2,7 @@ package tictac7x.charges.store.ids;
 
 import net.runelite.api.gameval.ItemID;
 
-public final class ItemId {
+public class ItemId {
     // Ahrim set
     public static final int AHRIMS_HOOD = ItemID.BARROWS_AHRIM_HEAD;
     public static final int AHRIMS_HOOD_100 = ItemID.BARROWS_AHRIM_HEAD_100;

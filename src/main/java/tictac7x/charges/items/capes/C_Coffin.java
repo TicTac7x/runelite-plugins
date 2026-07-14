@@ -1,21 +1,18 @@
 package tictac7x.charges.items.capes;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnItemContainerChanged;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class C_Coffin extends ChargedItemWithStorageEmptyable {
-    public C_Coffin(final Provider provider) {
+    public C_Coffin(Provider provider) {
         super(TicTac7xChargesImprovedConfig.coffin, ItemId.GOLD_COFFIN, provider);
         this.storage = storage.storableItems(
             new StorableItem(ItemId.LOAR_REMAINS).checkName("Loar"),
@@ -61,7 +58,7 @@ public class C_Coffin extends ChargedItemWithStorageEmptyable {
             new OnChatMessage("Your coffin is empty.").onItemClick().emptyStorage(),
 
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Use shades on coffin and vice versa.
             new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),

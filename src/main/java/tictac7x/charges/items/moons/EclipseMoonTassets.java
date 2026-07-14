@@ -1,12 +1,12 @@
 package tictac7x.charges.items.moons;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class EclipseMoonTassets extends _MoonItem {
     public EclipseMoonTassets(
-        final Provider provider
+        Provider provider
     ) {
         super("Eclipse moon tassets", ItemId.ECLIPSE_MOON_TASSETS, provider);
 

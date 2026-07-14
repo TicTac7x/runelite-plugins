@@ -1,29 +1,28 @@
 package tictac7x.charges.item.overlays;
 
-import net.runelite.api.widgets.WidgetItem;
-import net.runelite.client.ui.FontManager;
-import net.runelite.client.ui.overlay.WidgetItemOverlay;
+import net.runelite.api.widgets.*;
+import net.runelite.client.ui.*;
+import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.overlay.components.TextComponent;
-import net.runelite.client.ui.overlay.tooltip.Tooltip;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ChargeId;
+import net.runelite.client.ui.overlay.tooltip.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 import java.awt.*;
-import java.util.Optional;
+import java.util.*;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.INFINITE_SYMBOL;
 
 public class ChargedItemOverlay extends WidgetItemOverlay {
-    private final Provider provider;
-    private final ChargedItemBase[] chargedItems;
+    private Provider provider;
+    private ChargedItemBase[] chargedItems;
 
     public ChargedItemOverlay(
-        final Provider provider,
-        final ChargedItemBase[] chargedItems
+        Provider provider,
+        ChargedItemBase[] chargedItems
     ) {
         this.provider = provider;
         this.chargedItems = chargedItems;
@@ -33,7 +32,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         showOnBank();
     }
 
-    private boolean isBankWidget(final WidgetItem item_widget) {
+    private boolean isBankWidget(WidgetItem item_widget) {
         return
             item_widget.getWidget().getParentId() == 786442 ||
             item_widget.getWidget().getParentId() == 786443 ||
@@ -44,15 +43,15 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
 
 
     @Override
-    public void renderItemOverlay(final Graphics2D graphics, final int itemId, final WidgetItem widgetItem) {
+    public void renderItemOverlay(Graphics2D graphics, int itemId, WidgetItem widgetItem) {
         if (!provider.config.showOverlays()) return;
 
         Optional<ChargedItemBase> chargedItem = Optional.empty();
         Optional<TriggerItem> triggerItem = Optional.empty();
 
         // Find correct charged item.
-        chargedItemFinder: for (final ChargedItemBase chargedItemBase : chargedItems) {
-            for (final TriggerItem chargedItemTriggerItem : chargedItemBase.items) {
+        chargedItemFinder: for (ChargedItemBase chargedItemBase : chargedItems) {
+            for (TriggerItem chargedItemTriggerItem : chargedItemBase.items) {
                 if (chargedItemTriggerItem.itemId == itemId) {
                     chargedItem = Optional.of(chargedItemBase);
                     triggerItem = Optional.of(chargedItemTriggerItem);
@@ -81,17 +80,17 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         ) return;
 
         // Get default charges from charged item.
-        final String charges = chargedItem.get().getChargesString(itemId);
-        final Color color = chargedItem.get().getTextColor(itemId);
+        String charges = chargedItem.get().getChargesString(itemId);
+        Color color = chargedItem.get().getTextColor(itemId);
 
         graphics.setFont(FontManager.getRunescapeSmallFont());
 
-        final Rectangle bounds = widgetItem.getCanvasBounds();
-        final TextComponent charges_component = new TextComponent();
+        Rectangle bounds = widgetItem.getCanvasBounds();
+        net.runelite.client.ui.overlay.components.TextComponent charges_component = new TextComponent();
         charges_component.setText(charges);
-        final Dimension textDimension = charges_component.render(graphics);
+        Dimension textDimension = charges_component.render(graphics);
 
-        final int itemOverlayX = (int) ((
+        int itemOverlayX = (int) ((
             provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.BOTTOM_LEFT ||
             provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_LEFT
         )
@@ -99,7 +98,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
             : bounds.getMaxX() - textDimension.getWidth() - 5
         );
 
-        final int itemOverlayY = (int) ((
+        int itemOverlayY = (int) ((
             provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_LEFT ||
             provider.config.itemOverlayLocation() == TicTac7xChargesImprovedConfig.ItemOverlayLocation.TOP_RIGHT
         )
@@ -123,7 +122,7 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         renderTooltip(chargedItem.get(), widgetItem);
     }
 
-    private void renderTooltip(final ChargedItemBase chargedItem, final WidgetItem widgetItem) {
+    private void renderTooltip(ChargedItemBase chargedItem, WidgetItem widgetItem) {
         // Config, not storage item, empty storage checks.
         if (
             !provider.config.showStorageTooltips() ||
@@ -131,19 +130,19 @@ public class ChargedItemOverlay extends WidgetItemOverlay {
         ) return;
 
         // Mouse position check.
-        final net.runelite.api.Point mousePosition = provider.client.getMouseCanvasPosition();
+        net.runelite.api.Point mousePosition = provider.client.getMouseCanvasPosition();
         if (!widgetItem.getCanvasBounds().contains(mousePosition.getX(), mousePosition.getY())) return;
 
 
-        final String tooltip = chargedItem.getTooltip();
+        String tooltip = chargedItem.getTooltip();
         if (!tooltip.isEmpty()) {
             provider.tooltipManager.addFront(new Tooltip(tooltip));
         }
     }
 
-    private boolean isChargedItemOverlayEnabled(final ChargedItemBase chargedItem) {
-        final String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._overlay;
-        final Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+    private boolean isChargedItemOverlayEnabled(ChargedItemBase chargedItem) {
+        String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._overlay;
+        Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
         return visible.isPresent() && visible.get().equals("true");
     }
 }

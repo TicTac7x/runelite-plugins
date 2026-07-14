@@ -1,18 +1,17 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.ChargedItem;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class J_BindingNecklace extends ChargedItem {
-    public J_BindingNecklace(final Provider provider) {
+    public J_BindingNecklace(Provider provider) {
         super(TicTac7xChargesImprovedConfig.binding_necklace, ItemId.BINDING_NECKLACE, provider);
 
         this.items = new TriggerItem[]{
@@ -34,7 +33,7 @@ public class J_BindingNecklace extends ChargedItem {
 
             // Destroy.
             new OnScriptPreFired(1651).scriptConsumer((script) -> {
-                final Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
+                Optional<Widget> destroyWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 584, 0, 2);
                 if (
                     destroyWidget.isPresent() && destroyWidget.get().getText().equals("Destroy necklace of binding?") &&
                     script.arguments.length >= 5 &&

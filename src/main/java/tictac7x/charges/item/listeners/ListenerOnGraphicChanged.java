@@ -1,21 +1,19 @@
 package tictac7x.charges.item.listeners;
 
-import net.runelite.api.events.GraphicChanged;
-import tictac7x.charges.events.CustomGraphicChanged;
-import tictac7x.charges.item.ChargedItemBase;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.TriggerBase;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.events.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class ListenerOnGraphicChanged extends ListenerBase {
-    public ListenerOnGraphicChanged(final Provider provider) {
+    public ListenerOnGraphicChanged(Provider provider) {
         super(provider);
     }
 
-    public void trigger(final CustomGraphicChanged event, final ChargedItemBase chargedItem) {
-        for (final TriggerBase triggerBase : chargedItem.triggers) {
+    public void trigger(CustomGraphicChanged event, ChargedItemBase chargedItem) {
+        for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
-            final OnGraphicChanged trigger = (OnGraphicChanged) triggerBase;
+            OnGraphicChanged trigger = (OnGraphicChanged) triggerBase;
             boolean triggerUsed = false;
 
             if (super.trigger(trigger, chargedItem)) {
@@ -26,13 +24,13 @@ public class ListenerOnGraphicChanged extends ListenerBase {
         }
     }
 
-    public boolean isValidTrigger(final ChargedItemBase chargedItem, final TriggerBase triggerBase, final CustomGraphicChanged event) {
+    public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase, CustomGraphicChanged event) {
         if (!(triggerBase instanceof OnGraphicChanged)) return false;
-        final OnGraphicChanged trigger = (OnGraphicChanged) triggerBase;
+        OnGraphicChanged trigger = (OnGraphicChanged) triggerBase;
 
         // Graphic id check.
         graphicIdCheck: if (trigger.graphicId != null) {
-            for (final int graphicId : trigger.graphicId) {
+            for (int graphicId : trigger.graphicId) {
                 if (event.hasGraphicId(graphicId)) {
                     break graphicIdCheck;
                 }

@@ -1,17 +1,15 @@
 package tictac7x.charges.items.shields;
 
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnVarbitChanged;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.VarbitId;
 
-import java.util.List;
+import java.util.*;
 
 public class S_GhommalsHilt extends ChargedItem {
-    public S_GhommalsHilt(final Provider provider) {
+    public S_GhommalsHilt(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ghommals_hilt, ItemId.GHOMMALS_HILT_1, provider);
 
         this.items = new TriggerItem[]{

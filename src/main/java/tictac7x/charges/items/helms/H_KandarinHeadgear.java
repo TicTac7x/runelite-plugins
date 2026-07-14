@@ -1,18 +1,15 @@
 package tictac7x.charges.items.helms;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.OnResetDaily;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class H_KandarinHeadgear extends ChargedItem {
-    public H_KandarinHeadgear(final Provider provider) {
+    public H_KandarinHeadgear(Provider provider) {
         super(TicTac7xChargesImprovedConfig.kandarin_headgear, ItemId.KANDARIN_HEADGEAR_3, provider);
 
         this.items = new TriggerItem[]{

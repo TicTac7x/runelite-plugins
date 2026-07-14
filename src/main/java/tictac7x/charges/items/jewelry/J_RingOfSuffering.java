@@ -1,20 +1,16 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.item.triggers.OnAutoChargeMessage;
-import tictac7x.charges.store.enums.HitsplatGroup;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStatus;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnHitsplatApplied;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.enums.HitsplatTarget;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.enums.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class J_RingOfSuffering extends ChargedItemWithStatus {
-    public J_RingOfSuffering(final Provider provider) {
+    public J_RingOfSuffering(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ring_of_suffering, ItemId.RING_OF_SUFFERING_UNCHARGED, provider);
 
         this.items = new TriggerItem[]{

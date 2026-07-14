@@ -1,13 +1,13 @@
 package tictac7x.charges.items.utils;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.Provider;
 
 public class U_FungicideSpray extends ChargedItem {
-    public U_FungicideSpray(final Provider provider) {
+    public U_FungicideSpray(Provider provider) {
         super(TicTac7xChargesImprovedConfig.fungicide_spray, ItemId.FUNGICIDE_SPRAY_0, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.FUNGICIDE_SPRAY_0).fixedCharges(0),

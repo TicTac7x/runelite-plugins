@@ -1,16 +1,16 @@
 package tictac7x.charges.item.triggers;
 
-import java.util.Optional;
+import java.util.*;
 
 public class OnAnimationChanged extends TriggerBase {
-    public final int[] animationId;
+    public int[] animationId;
     public Optional<String> actorName = Optional.empty();
 
-    public OnAnimationChanged(final int ...animationId) {
+    public OnAnimationChanged(int ...animationId) {
         this.animationId = animationId;
     }
 
-    public OnAnimationChanged actorName(final String actorName) {
+    public OnAnimationChanged actorName(String actorName) {
         if (actorName == null) {
             this.actorName = Optional.of("null");
         } else {

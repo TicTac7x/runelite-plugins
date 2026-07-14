@@ -1,19 +1,16 @@
 package tictac7x.charges.items.weapons;
 
-import tictac7x.charges.item.triggers.OnAutoChargeMessage;
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnXpDrop;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import net.runelite.api.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class W_BryophytasStaff extends ChargedItem {
-    public W_BryophytasStaff(final Provider provider) {
+    public W_BryophytasStaff(Provider provider) {
         super(TicTac7xChargesImprovedConfig.bryophytas_staff, ItemId.BRYOPHYTAS_STAFF, provider);
 
         this.items = new TriggerItem[]{

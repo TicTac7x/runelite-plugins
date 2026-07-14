@@ -1,34 +1,27 @@
 package tictac7x.charges.items.capes;
 
-import tictac7x.charges.item.ChargedItemWithStorageEmptyable;
-import tictac7x.charges.item.storage.Storage;
-import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import net.runelite.api.widgets.Widget;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.StorableItem;
-import tictac7x.charges.item.storage.StorageItem;
+import net.runelite.api.*;
+import net.runelite.api.widgets.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.Provider;
-import tictac7x.charges.store.ids.WidgetId;
-import tictac7x.charges.store.utils.WidgetMenuAction;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.utils.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.regex.*;
+import java.util.stream.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.BANK;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class C_LogBasket extends ChargedItemWithStorageEmptyable {
     private Optional<StorageItem> lastLogs = Optional.empty();
     private int infernalQuantityTracker = 0;
     private Optional<Integer> lastLogUsedFromBasketForBeehive = Optional.empty();
 
-    private final List<StorableLog> storableLogs = List.of(
+    private List<StorableLog> storableLogs = List.of(
         new StorableLog(ItemId.LOGS, "Logs", true).displayName("Regular logs").checkName("some logs", "x Logs"),
         new StorableLog(ItemId.ACHEY_TREE_LOGS, "Achey tree logs", true).checkName("Achey tree logs"),
         new StorableLog(ItemId.OAK_LOGS, "Oak logs", true).checkName("Oak logs"),
@@ -49,18 +42,18 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
         new StorableLog(ItemId.ROSEWOOD_LOGS, "Rosewood logs", true).checkName("Rosewood logs")
     );
 
-    public C_LogBasket(final String configKey, final int itemId, final int openItemId, final Storage storage, final Provider provider) {
+    public C_LogBasket(String configKey, int itemId, int openItemId, Storage storage, Provider provider) {
         super(configKey, itemId, provider);
         this.storage = storage;
         setup(itemId, openItemId);
     }
 
-    public C_LogBasket(final Provider provider) {
+    public C_LogBasket(Provider provider) {
         super(TicTac7xChargesImprovedConfig.log_basket, ItemId.LOG_BASKET, provider);
         setup(ItemId.LOG_BASKET, ItemId.LOG_BASKET_OPEN);
     }
 
-    public void setup(final int itemId, final int openItemId) {
+    public void setup(int itemId, int openItemId) {
         this.items = new TriggerItem[]{
             new TriggerItem(itemId),
             new TriggerItem(openItemId),
@@ -80,8 +73,8 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
             new OnChatMessage("The basket contains:").stringConsumer(s -> {
                 emptyStorage();
 
-                final Pattern pattern = Pattern.compile("(?<quantity>\\d+).x.(?<logs>.*?)(,|$)");
-                final Matcher matcher = pattern.matcher(s);
+                Pattern pattern = Pattern.compile("(?<quantity>\\d+).x.(?<logs>.*?)(,|$)");
+                Matcher matcher = pattern.matcher(s);
 
                 while (matcher.find()) {
                     storage.put(getStorageItemFromName(matcher.group("logs"), Integer.parseInt(matcher.group("quantity"))));
@@ -139,7 +132,7 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
 
             // Leprechaun.
             new OnMenuOptionClicked("Continue").consumer(() -> {
-                final Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 219, 1, 2);
+                Optional<Widget> bankWoodcuttingResourcesWidget = TicTac7xChargesImprovedPlugin.getWidget(provider.client, 219, 1, 2);
                 if (bankWoodcuttingResourcesWidget.isPresent() && bankWoodcuttingResourcesWidget.get().getText().equals("Only bank woodcutting resources")) {
                     provider.store.addConsumerToNextTickQueue(() -> emptyStorage());
                 }
@@ -179,7 +172,7 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
     }
 
     public boolean hasLogsInStorage() {
-        for (final StorableLog storableLog : storableLogs) {
+        for (StorableLog storableLog : storableLogs) {
             if (storage.hasItem(storableLog.itemId)) {
                 return true;
             }
@@ -189,7 +182,7 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
     }
 
     private void buildBeehive() {
-        for (final int logsId : storableLogs.stream().filter(storableLog -> storableLog.beehiveBuildable).map(storableLog -> storableLog.itemId).collect(Collectors.toList())) {
+        for (int logsId : storableLogs.stream().filter(storableLog -> storableLog.beehiveBuildable).map(storableLog -> storableLog.itemId).collect(Collectors.toList())) {
             if (provider.store.inventoryContainsItem(logsId)) {
                 lastLogUsedFromBasketForBeehive = Optional.empty();
                 return;
@@ -203,10 +196,10 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
 }
 
 class StorableLog extends StorableItem {
-    public final String itemName;
-    public final boolean beehiveBuildable;
+    public String itemName;
+    public boolean beehiveBuildable;
 
-    StorableLog(final int itemId, final String itemName, final boolean beehiveBuildable) {
+    StorableLog(int itemId, String itemName, boolean beehiveBuildable) {
         super(itemId);
         this.itemName = itemName;
         this.beehiveBuildable = beehiveBuildable;

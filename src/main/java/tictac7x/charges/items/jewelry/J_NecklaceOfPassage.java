@@ -1,13 +1,13 @@
 package tictac7x.charges.items.jewelry;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class J_NecklaceOfPassage extends ChargedItem {
-    public J_NecklaceOfPassage(final Provider provider) {
+    public J_NecklaceOfPassage(Provider provider) {
         super(TicTac7xChargesImprovedConfig.necklace_of_passage, ItemId.NECKLACE_OF_PASSAGE_1, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.NECKLACE_OF_PASSAGE_1).fixedCharges(1),

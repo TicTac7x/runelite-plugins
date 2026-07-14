@@ -1,33 +1,23 @@
 package tictac7x.charges.items.capes;
 
-import tictac7x.charges.TicTac7xChargesImprovedPlugin;
-import tictac7x.charges.item.storage.Storage;
-import tictac7x.charges.item.storage.StorageItem;
-import tictac7x.charges.store.*;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStorage;
-import tictac7x.charges.item.storage.StorableItem;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemContainerId;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.ids.WidgetId;
-import tictac7x.charges.store.utils.WidgetMenuAction;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.store.utils.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.BANK;
-import static tictac7x.charges.store.ids.ItemContainerId.INVENTORY;
+import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class C_ForestryBasket extends ChargedItemWithStorage {
-    private final String menuOptionEmptyLogsToBank = "Empty-logs-to-bank";
+    private String menuOptionEmptyLogsToBank = "Empty-logs-to-bank";
 
-    private final C_ForestryKit forestryKit;
-    private final C_LogBasket logBasket;
+    private C_ForestryKit forestryKit;
+    private C_LogBasket logBasket;
 
-    public C_ForestryBasket(final Provider provider) {
+    public C_ForestryBasket(Provider provider) {
         super(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, provider);
 
         forestryKit = new C_ForestryKit(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, ItemId.FORESTRY_BASKET_OPEN, storage, provider);

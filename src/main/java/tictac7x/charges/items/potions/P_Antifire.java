@@ -1,11 +1,11 @@
 package tictac7x.charges.items.potions;
 
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class P_Antifire extends _Potion {
-    public P_Antifire(final Provider provider) {
+    public P_Antifire(Provider provider) {
         super("antifire", new TriggerItem[]{
             new TriggerItem(ItemId.ANTIFIRE_POTION_1).fixedCharges(1),
             new TriggerItem(ItemId.ANTIFIRE_POTION_2).fixedCharges(2),

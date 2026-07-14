@@ -1,18 +1,15 @@
 package tictac7x.charges.items.shields;
 
-import tictac7x.charges.item.triggers.OnAutoChargeMessage;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
+import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItem;
-import tictac7x.charges.item.triggers.OnChatMessage;
-import tictac7x.charges.item.triggers.OnGraphicChanged;
-import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import java.util.*;
 
 public class S_TomeOfWater extends ChargedItem {
-    public S_TomeOfWater(final Provider provider) {
+    public S_TomeOfWater(Provider provider) {
         super(TicTac7xChargesImprovedConfig.tome_of_water, ItemId.TOME_OF_WATER, provider);
 
         this.items = new TriggerItem[]{

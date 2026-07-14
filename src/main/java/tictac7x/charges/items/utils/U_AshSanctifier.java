@@ -1,16 +1,16 @@
 package tictac7x.charges.items.utils;
 
+import net.runelite.api.*;
+import tictac7x.charges.*;
+import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.ids.ItemId;
-import net.runelite.api.Skill;
-import tictac7x.charges.TicTac7xChargesImprovedConfig;
-import tictac7x.charges.item.ChargedItemWithStatus;
 import tictac7x.charges.store.Provider;
 
-import java.util.List;
+import java.util.*;
 
 public class U_AshSanctifier extends ChargedItemWithStatus {
-    public U_AshSanctifier(final Provider provider) {
+    public U_AshSanctifier(Provider provider) {
         super(TicTac7xChargesImprovedConfig.ash_sanctifier, ItemId.ASH_SANCTIFIER, provider);
 
         this.items = new TriggerItem[]{

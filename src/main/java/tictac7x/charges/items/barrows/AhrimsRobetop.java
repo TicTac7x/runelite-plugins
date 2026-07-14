@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
+import tictac7x.charges.store.ids.*;
 
 public class AhrimsRobetop extends _BarrowsItem {
-    public AhrimsRobetop(final Provider provider) {
+    public AhrimsRobetop(Provider provider) {
         super("Ahrim's body", ItemId.AHRIMS_ROBETOP, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.AHRIMS_ROBETOP).fixedCharges(1000),

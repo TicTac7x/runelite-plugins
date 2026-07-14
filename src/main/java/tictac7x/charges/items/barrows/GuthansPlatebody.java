@@ -1,11 +1,11 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.ItemId;
-import tictac7x.charges.item.triggers.TriggerItem;
-import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.ids.*;
+import tictac7x.charges.item.triggers.*;
+import tictac7x.charges.store.*;
 
 public class GuthansPlatebody extends _BarrowsItem {
-    public GuthansPlatebody(final Provider provider) {
+    public GuthansPlatebody(Provider provider) {
         super("Guthan's body", ItemId.GUTHANS_PLATEBODY, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemId.GUTHANS_PLATEBODY).fixedCharges(1000),
