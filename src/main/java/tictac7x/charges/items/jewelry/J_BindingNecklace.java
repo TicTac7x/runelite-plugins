@@ -1,21 +1,21 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import net.runelite.api.widgets.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
-import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 import java.util.*;
 
 public class J_BindingNecklace extends ChargedItem {
     public J_BindingNecklace(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.binding_necklace, ItemId.BINDING_NECKLACE, provider);
+        super(TicTac7xChargesImprovedConfig.binding_necklace, ItemID.MAGIC_EMERALD_NECKLACE, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BINDING_NECKLACE).needsToBeEquipped(),
+            new TriggerItem(ItemID.MAGIC_EMERALD_NECKLACE).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

@@ -1,19 +1,19 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_DodgyNecklace extends ChargedItem {
     public J_DodgyNecklace(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.dodgy_necklace, ItemId.DODGY_NECKLACE, provider);
+        super(TicTac7xChargesImprovedConfig.dodgy_necklace, ItemID.DODGY_NECKLACE, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.DODGY_NECKLACE).needsToBeEquipped(),
+            new TriggerItem(ItemID.DODGY_NECKLACE).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

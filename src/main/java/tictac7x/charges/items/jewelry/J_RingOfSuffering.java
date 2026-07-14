@@ -1,27 +1,27 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_RingOfSuffering extends ChargedItemWithStatus {
     public J_RingOfSuffering(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.ring_of_suffering, ItemId.RING_OF_SUFFERING_UNCHARGED, provider);
+        super(TicTac7xChargesImprovedConfig.ring_of_suffering, ItemID.ZENYTE_RING_ENCHANTED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED_IMBUED_NMZ).fixedCharges(0),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED_IMBUED_SW).fixedCharges(0),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_UNCHARGED_IMBUED_PVP).fixedCharges(0),
-            new TriggerItem(ItemId.RING_OF_SUFFERING).needsToBeEquipped(),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_NMZ).needsToBeEquipped(),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_SW).needsToBeEquipped(),
-            new TriggerItem(ItemId.RING_OF_SUFFERING_IMBUED_PVP).needsToBeEquipped(),
+            new TriggerItem(ItemID.ZENYTE_RING_ENCHANTED).fixedCharges(0),
+            new TriggerItem(ItemID.NZONE_ZENYTE_RING_ENCHANTED).fixedCharges(0),
+            new TriggerItem(ItemID.SW_ZENYTE_RING_ENCHANTED).fixedCharges(0),
+            new TriggerItem(ItemID.PVPA_ZENYTE_RING_ENCHANTED).fixedCharges(0),
+            new TriggerItem(ItemID.ZENYTE_RING_ENCHANTED_RECOIL).needsToBeEquipped(),
+            new TriggerItem(ItemID.NZONE_ZENYTE_RING_ENCHANTED_RECOIL).needsToBeEquipped(),
+            new TriggerItem(ItemID.SW_ZENYTE_RING_ENCHANTED_RECOIL).needsToBeEquipped(),
+            new TriggerItem(ItemID.PVPA_ZENYTE_RING_ENCHANTED_RECOIL).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

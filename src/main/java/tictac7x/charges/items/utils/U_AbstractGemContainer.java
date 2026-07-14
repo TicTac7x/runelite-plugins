@@ -1,6 +1,7 @@
 package tictac7x.charges.items.utils;
 
 import net.runelite.api.*;
+import net.runelite.api.gameval.InventoryID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
@@ -11,8 +12,6 @@ import tictac7x.charges.store.Provider;
 
 import java.util.*;
 import java.util.stream.*;
-
-import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmptyable {
     private String containerNameRegex;
@@ -40,18 +39,18 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         List<StorableItem> storableGems = new ArrayList<>();
         if (semiPreciousGems) {
             storableGems.addAll(List.of(
-                    new StorableItem(ItemId.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
-                    new StorableItem(ItemId.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
-                    new StorableItem(ItemId.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
+                    new StorableItem (ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
+                    new StorableItem (ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
+                    new StorableItem (ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
             ));
         }
         if (preciousGems) {
             storableGems.addAll(List.of(
-                new StorableItem(ItemId.UNCUT_SAPPHIRE).checkName("Sapphires", "Sapphire").displayName("Uncut sapphire"),
-                new StorableItem(ItemId.UNCUT_EMERALD).checkName("Emeralds", "Emerald").displayName("Uncut emerald"),
-                new StorableItem(ItemId.UNCUT_RUBY).checkName("Rubies", "Ruby").displayName("Uncut ruby"),
-                new StorableItem(ItemId.UNCUT_DIAMOND).checkName("Diamonds", "Diamond").displayName("Uncut diamond"),
-                new StorableItem(ItemId.UNCUT_DRAGONSTONE).checkName("Dragonstones", "Dragonstone").displayName("Uncut dragonstone")
+                new StorableItem (ItemID.UNCUT_SAPPHIRE).checkName("Sapphires", "Sapphire").displayName("Uncut sapphire"),
+                new StorableItem (ItemID.UNCUT_EMERALD).checkName("Emeralds", "Emerald").displayName("Uncut emerald"),
+                new StorableItem (ItemID.UNCUT_RUBY).checkName("Rubies", "Ruby").displayName("Uncut ruby"),
+                new StorableItem (ItemID.UNCUT_DIAMOND).checkName("Diamonds", "Diamond").displayName("Uncut diamond"),
+                new StorableItem (ItemID.UNCUT_DRAGONSTONE).checkName("Dragonstones", "Dragonstone").displayName("Uncut dragonstone")
             ));
         }
         storage.storableItems(storableGems.toArray(StorableItem[]::new));
@@ -98,15 +97,15 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
                 .matcherConsumer(m -> storage.add(getStorageItemFromName(m.group("gem"), 1))),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to bank.
-            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank),
+            new OnItemContainerChanged(InventoryID.BANK).emptyStorageToBank().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank),
 
             // Use gem on container.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),
             // Use container on gem
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Pick up.
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(openItemId).pickUpToStorage(),

@@ -1,19 +1,19 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 
 public class KarilsLeatherskirt extends _BarrowsItem {
     public KarilsLeatherskirt(Provider provider) {
-        super("Karil's skirt", ItemId.KARILS_LEATHERSKIRT, provider);
+        super("Karil's skirt", ItemID.BARROWS_KARIL_LEGS, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.KARILS_LEATHERSKIRT).fixedCharges(1000),
-            new TriggerItem(ItemId.KARILS_LEATHERSKIRT_100),
-            new TriggerItem(ItemId.KARILS_LEATHERSKIRT_75),
-            new TriggerItem(ItemId.KARILS_LEATHERSKIRT_50),
-            new TriggerItem(ItemId.KARILS_LEATHERSKIRT_25),
-            new TriggerItem(ItemId.KARILS_LEATHERSKIRT_0).fixedCharges(0)
+            new TriggerItem(ItemID.BARROWS_KARIL_LEGS).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_KARIL_LEGS_100),
+            new TriggerItem(ItemID.BARROWS_KARIL_LEGS_75),
+            new TriggerItem(ItemID.BARROWS_KARIL_LEGS_50),
+            new TriggerItem(ItemID.BARROWS_KARIL_LEGS_25),
+            new TriggerItem(ItemID.BARROWS_KARIL_LEGS_BROKEN).fixedCharges(0)
         };
     }
 }

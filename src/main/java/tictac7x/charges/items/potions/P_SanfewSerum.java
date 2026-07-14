@@ -2,15 +2,15 @@ package tictac7x.charges.items.potions;
 
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 public class P_SanfewSerum extends _Potion {
     public P_SanfewSerum(Provider provider) {
         super("sanfew_serum", new TriggerItem[]{
-            new TriggerItem(ItemId.SANFEW_SERUM_1).fixedCharges(1),
-            new TriggerItem(ItemId.SANFEW_SERUM_2).fixedCharges(2),
-            new TriggerItem(ItemId.SANFEW_SERUM_3).fixedCharges(3),
-            new TriggerItem(ItemId.SANFEW_SERUM_4).fixedCharges(4),
+            new TriggerItem(ItemID.SANFEW_SALVE_1_DOSE).fixedCharges(1),
+            new TriggerItem(ItemID.SANFEW_SALVE_2_DOSE).fixedCharges(2),
+            new TriggerItem(ItemID.SANFEW_SALVE_3_DOSE).fixedCharges(3),
+            new TriggerItem(ItemID.SANFEW_SALVE_4_DOSE).fixedCharges(4),
         }, provider);
     }
 }

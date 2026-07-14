@@ -1,19 +1,19 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_AmuletOfChemistry extends ChargedItem {
     public J_AmuletOfChemistry(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.amulet_of_chemistry, ItemId.AMULET_OF_CHEMISTRY, provider);
+        super(TicTac7xChargesImprovedConfig.amulet_of_chemistry, ItemID.AMULET_OF_CHEMISTRY, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.AMULET_OF_CHEMISTRY).needsToBeEquipped()
+            new TriggerItem(ItemID.AMULET_OF_CHEMISTRY).needsToBeEquipped()
         };
 
         this.triggers.addAll(List.of(

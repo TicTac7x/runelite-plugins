@@ -4,17 +4,17 @@ import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 public class U_Waterskin extends ChargedItem {
     public U_Waterskin(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.waterskin, ItemId.WATERSKIN_0, provider);
+        super(TicTac7xChargesImprovedConfig.waterskin, ItemID.WATER_SKIN0, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.WATERSKIN_0).fixedCharges(0),
-            new TriggerItem(ItemId.WATERSKIN_1).fixedCharges(1),
-            new TriggerItem(ItemId.WATERSKIN_2).fixedCharges(2),
-            new TriggerItem(ItemId.WATERSKIN_3).fixedCharges(3),
-            new TriggerItem(ItemId.WATERSKIN_4).fixedCharges(4),
+            new TriggerItem(ItemID.WATER_SKIN0).fixedCharges(0),
+            new TriggerItem(ItemID.WATER_SKIN1).fixedCharges(1),
+            new TriggerItem(ItemID.WATER_SKIN2).fixedCharges(2),
+            new TriggerItem(ItemID.WATER_SKIN3).fixedCharges(3),
+            new TriggerItem(ItemID.WATER_SKIN4).fixedCharges(4),
         };
     }
 }

@@ -1,19 +1,19 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 
 public class GuthansWarspear extends _BarrowsItem {
     public GuthansWarspear(Provider provider) {
-        super("Guthan's weapon", ItemId.GUTHANS_WARSPEAR, provider);
+        super("Guthan's weapon", ItemID.BARROWS_GUTHAN_WEAPON, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.GUTHANS_WARSPEAR).fixedCharges(1000),
-            new TriggerItem(ItemId.GUTHANS_WARSPEAR_100),
-            new TriggerItem(ItemId.GUTHANS_WARSPEAR_75),
-            new TriggerItem(ItemId.GUTHANS_WARSPEAR_50),
-            new TriggerItem(ItemId.GUTHANS_WARSPEAR_25),
-            new TriggerItem(ItemId.GUTHANS_WARSPEAR_0).fixedCharges(0),
+            new TriggerItem(ItemID.BARROWS_GUTHAN_WEAPON).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_GUTHAN_WEAPON_100),
+            new TriggerItem(ItemID.BARROWS_GUTHAN_WEAPON_75),
+            new TriggerItem(ItemID.BARROWS_GUTHAN_WEAPON_50),
+            new TriggerItem(ItemID.BARROWS_GUTHAN_WEAPON_25),
+            new TriggerItem(ItemID.BARROWS_GUTHAN_WEAPON_BROKEN).fixedCharges(0),
         };
     }
 }

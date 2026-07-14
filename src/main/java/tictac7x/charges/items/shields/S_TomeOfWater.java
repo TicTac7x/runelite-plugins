@@ -1,20 +1,20 @@
 package tictac7x.charges.items.shields;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 import java.util.*;
 
 public class S_TomeOfWater extends ChargedItem {
     public S_TomeOfWater(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.tome_of_water, ItemId.TOME_OF_WATER, provider);
+        super(TicTac7xChargesImprovedConfig.tome_of_water, ItemID.TOME_OF_WATER, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOME_OF_WATER_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.TOME_OF_WATER).needsToBeEquipped(),
+            new TriggerItem(ItemID.TOME_OF_WATER_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.TOME_OF_WATER).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

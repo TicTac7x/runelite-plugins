@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -10,12 +11,12 @@ import java.util.*;
 
 public class W_CrystalBow extends ChargedItem {
     public W_CrystalBow(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.crystal_bow, ItemId.CRYSTAL_BOW, provider);
+        super(TicTac7xChargesImprovedConfig.crystal_bow, ItemID.CRYSTAL_BOW, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.CRYSTAL_BOW_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_BOW),
-            new TriggerItem(ItemId.CRYSTAL_BOW_FULL).fixedCharges(2500),
+            new TriggerItem(ItemID.CRYSTAL_BOW_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_BOW),
+            new TriggerItem(ItemID.CRYSTAL_BOW_2500).fixedCharges(2500),
         };
 
         this.triggers.addAll(List.of(
@@ -23,7 +24,7 @@ public class W_CrystalBow extends ChargedItem {
             new OnChatMessage("Your crystal bow has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
             // Attack.
-            new OnAnimationChanged(AnimationId.HUMAN_BOW).isEquipped().decreaseCharges(1),
+            new OnAnimationChanged(AnimationID.HUMAN_BOW).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
             new OnAutoChargeMessage("Crystal bow", "Crystal shard", 100, this)

@@ -2,15 +2,15 @@ package tictac7x.charges.items.potions;
 
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 public class P_SuperAttack extends _Potion {
     public P_SuperAttack(Provider provider) {
         super("super_attack", new TriggerItem[]{
-            new TriggerItem(ItemId.SUPER_ATTACK_1).fixedCharges(1),
-            new TriggerItem(ItemId.SUPER_ATTACK_2).fixedCharges(2),
-            new TriggerItem(ItemId.SUPER_ATTACK_3).fixedCharges(3),
-            new TriggerItem(ItemId.SUPER_ATTACK_4).fixedCharges(4),
+            new TriggerItem(ItemID._1DOSE2ATTACK).fixedCharges(1),
+            new TriggerItem(ItemID._2DOSE2ATTACK).fixedCharges(2),
+            new TriggerItem(ItemID._3DOSE2ATTACK).fixedCharges(3),
+            new TriggerItem(ItemID._4DOSE2ATTACK).fixedCharges(4),
         }, provider);
     }
 }

@@ -1,20 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_GiantsoulAmulet extends ChargedItem {
     public J_GiantsoulAmulet(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.giantsoul_amulet, ItemId.GIANTSOUL_AMULET, provider);
+        super(TicTac7xChargesImprovedConfig.giantsoul_amulet, ItemID.GIANTSOUL_AMULET_CHARGED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.GIANTSOUL_AMULET_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.GIANTSOUL_AMULET),
+            new TriggerItem(ItemID.GIANTSOUL_AMULET_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.GIANTSOUL_AMULET_CHARGED),
         };
 
         this.triggers.addAll(List.of(

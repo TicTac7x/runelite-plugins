@@ -4,17 +4,17 @@ import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 import java.util.*;
 
 public class U_SoulBearer extends ChargedItem {
     public U_SoulBearer(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.soul_bearer, ItemId.SOUL_BEARER, provider);
+        super(TicTac7xChargesImprovedConfig.soul_bearer, ItemID.ARCEUUS_SOULBEARER, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SOUL_BEARER),
-            new TriggerItem(ItemId.SOUL_BEARER_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.ARCEUUS_SOULBEARER),
+            new TriggerItem(ItemID.ARCEUUS_SOULBEARER_DAMAGED).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

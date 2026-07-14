@@ -1,20 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_AlchemistsAmulet extends ChargedItem {
     public J_AlchemistsAmulet(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemId.ALCHEMISTS_AMULET, provider);
+        super(TicTac7xChargesImprovedConfig.alchemists_amulet, ItemID.AMULET_OF_CHEMISTRY_IMBUED_CHARGED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.ALCHEMISTS_AMULET).needsToBeEquipped(),
-            new TriggerItem(ItemId.ALCHEMISTS_AMULET_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.AMULET_OF_CHEMISTRY_IMBUED_CHARGED).needsToBeEquipped(),
+            new TriggerItem(ItemID.AMULET_OF_CHEMISTRY_IMBUED_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

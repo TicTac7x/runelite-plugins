@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -10,11 +11,11 @@ import java.util.*;
 
 public class W_CrawsBow extends ChargedItem {
     public W_CrawsBow(Provider provider) {
-        this(TicTac7xChargesImprovedConfig.craws_bow, ItemId.CRAWS_BOW_UNCHARGED, provider);
+        this(TicTac7xChargesImprovedConfig.craws_bow, ItemID.WILD_CAVE_BOW_UNCHARGED, provider);
 
         this.items = new TriggerItem[]{
-                new TriggerItem(ItemId.CRAWS_BOW_UNCHARGED).fixedCharges(0),
-                new TriggerItem(ItemId.CRAWS_BOW),
+                new TriggerItem(ItemID.WILD_CAVE_BOW_UNCHARGED).fixedCharges(0),
+                new TriggerItem(ItemID.WILD_CAVE_BOW_CHARGED),
         };
     }
 
@@ -32,7 +33,7 @@ public class W_CrawsBow extends ChargedItem {
             new OnChatMessage("You add( a further)? .* revenant ether to your weapon, giving it a total of (?<charges>.+) charges.").onItemClick().setDynamicallyCharges(),
 
             // Attack.
-            new OnAnimationChanged(AnimationId.HUMAN_BOW).isEquipped().decreaseCharges(1)
+            new OnAnimationChanged(AnimationID.HUMAN_BOW).isEquipped().decreaseCharges(1)
         ));
     }
 }

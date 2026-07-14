@@ -1,20 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_AmuletOfBloodFury extends ChargedItem {
     public J_AmuletOfBloodFury(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.amulet_of_blood_fury, ItemId.AMULET_OF_BLOOD_FURY, provider);
+        super(TicTac7xChargesImprovedConfig.amulet_of_blood_fury, ItemID.BLOOD_AMULET, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.AMULET_OF_BLOOD_FURY),
+            new TriggerItem(ItemID.BLOOD_AMULET),
         };
 
         this.triggers.addAll(List.of(

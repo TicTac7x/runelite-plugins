@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons.venator;
 
+import net.runelite.api.gameval.*;
 import net.runelite.api.widgets.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
@@ -22,7 +23,7 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
         };
 
         this.storage.storableItems(
-            new StorableItem(ItemId.ANCIENT_ESSENCE)
+            new StorableItem (ItemID.ANCIENT_ESSENCE)
         );
 
         String itemNameRegex = Pattern.quote(itemName);
@@ -30,12 +31,12 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
         this.triggers.addAll(List.of(
             // Charging the bow with essence - Check to see if the bow is already fully charged.
             new OnChatMessage(itemNameRegex + " is already fully charged.").onItemClick().consumer(() -> {
-                storage.clearAndPut(ItemId.ANCIENT_ESSENCE, 50000);
+                storage.clearAndPut (ItemID.ANCIENT_ESSENCE, 50000);
             }),
 
             // Charging the bow with essence - For charging your echo venator bow, as of March 2026, the game doesn't explicitly say "echo venator bow", but I'll include it just in case
             new OnChatMessage("You use .+ ancient essence to charge your " + itemNameRegex + ". It now has (?<charges>.+) charges.").onItemClick().matcherConsumer(m -> {
-                storage.clearAndPut(ItemId.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+                storage.clearAndPut (ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 
             // Uncharge (you can only uncharge ALL charges at once)
@@ -43,12 +44,12 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
 
             // Check.
             new OnChatMessage("Your " + itemNameRegex + "  has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
-                storage.clearAndPut(ItemId.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+                storage.clearAndPut (ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 
             // Attack.
             new OnGraphicChanged(2289).isEquipped().consumer(() -> {
-                storage.remove(ItemId.ANCIENT_ESSENCE, 1);
+                storage.remove (ItemID.ANCIENT_ESSENCE, 1);
             })
         ));
     }
@@ -60,7 +61,7 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
 
     @Override
     public Color getTotalTextColor() {
-        if (this.storage.getStorage().count(ItemId.ANCIENT_ESSENCE) == 0) {
+        if (this.storage.getStorage().count (ItemID.ANCIENT_ESSENCE) == 0) {
             return provider.config.getColorEmpty();
         }
 

@@ -1,20 +1,20 @@
 package tictac7x.charges.items.capes;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class C_MagicCape extends ChargedItem {
     public C_MagicCape(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.magic_cape, ItemId.MAGIC_CAPE, provider);
+        super(TicTac7xChargesImprovedConfig.magic_cape, ItemID.SKILLCAPE_MAGIC, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.MAGIC_CAPE),
-            new TriggerItem(ItemId.MAGIC_CAPE_TRIMMED)
+            new TriggerItem(ItemID.SKILLCAPE_MAGIC),
+            new TriggerItem(ItemID.SKILLCAPE_MAGIC_TRIMMED)
         };
 
         this.triggers.addAll(List.of(

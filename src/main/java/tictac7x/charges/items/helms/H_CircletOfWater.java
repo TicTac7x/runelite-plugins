@@ -1,20 +1,20 @@
 package tictac7x.charges.items.helms;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class H_CircletOfWater extends ChargedItem {
     public H_CircletOfWater(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.circlet_of_water, ItemId.CIRCLET_OF_WATER, provider);
+        super(TicTac7xChargesImprovedConfig.circlet_of_water, ItemID.WATER_CIRCLET_CHARGED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.CIRCLET_OF_WATER_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.CIRCLET_OF_WATER).needsToBeEquipped(),
+            new TriggerItem(ItemID.WATER_CIRCLET).fixedCharges(0),
+            new TriggerItem(ItemID.WATER_CIRCLET_CHARGED).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

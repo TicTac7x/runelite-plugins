@@ -1,20 +1,20 @@
 package tictac7x.charges.items.shields;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 import java.util.*;
 
 public class S_TomeOfEarth extends ChargedItem {
     public S_TomeOfEarth(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.tome_of_earth, ItemId.TOME_OF_EARTH, provider);
+        super(TicTac7xChargesImprovedConfig.tome_of_earth, ItemID.TOME_OF_EARTH, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOME_OF_EARTH_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.TOME_OF_EARTH).needsToBeEquipped(),
+            new TriggerItem(ItemID.TOME_OF_EARTH_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.TOME_OF_EARTH).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

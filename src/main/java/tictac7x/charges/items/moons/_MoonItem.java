@@ -6,7 +6,7 @@ import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 import java.util.*;
 import java.util.regex.*;

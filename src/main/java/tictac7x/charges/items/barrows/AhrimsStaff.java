@@ -1,19 +1,19 @@
 package tictac7x.charges.items.barrows;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 public class AhrimsStaff extends _BarrowsItem {
     public AhrimsStaff(Provider provider) {
-        super("Ahrim's weapon", ItemId.AHRIMS_STAFF, provider);
+        super("Ahrim's weapon", ItemID.BARROWS_AHRIM_WEAPON, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.AHRIMS_STAFF).fixedCharges(1000),
-            new TriggerItem(ItemId.AHRIMS_STAFF_100),
-            new TriggerItem(ItemId.AHRIMS_STAFF_75),
-            new TriggerItem(ItemId.AHRIMS_STAFF_50),
-            new TriggerItem(ItemId.AHRIMS_STAFF_25),
-            new TriggerItem(ItemId.AHRIMS_STAFF_0).fixedCharges(0),
+            new TriggerItem(ItemID.BARROWS_AHRIM_WEAPON).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_AHRIM_WEAPON_100),
+            new TriggerItem(ItemID.BARROWS_AHRIM_WEAPON_75),
+            new TriggerItem(ItemID.BARROWS_AHRIM_WEAPON_50),
+            new TriggerItem(ItemID.BARROWS_AHRIM_WEAPON_25),
+            new TriggerItem(ItemID.BARROWS_AHRIM_WEAPON_BROKEN).fixedCharges(0),
         };
     }
 }

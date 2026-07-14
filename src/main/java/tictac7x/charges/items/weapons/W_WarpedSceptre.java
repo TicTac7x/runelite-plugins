@@ -1,20 +1,20 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_WarpedSceptre extends ChargedItem {
     public W_WarpedSceptre(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.warped_sceptre, ItemId.WARPED_SCEPTRE, provider);
+        super(TicTac7xChargesImprovedConfig.warped_sceptre, ItemID.WARPED_SCEPTRE, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.WARPED_SCEPTRE_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.WARPED_SCEPTRE)
+            new TriggerItem(ItemID.WARPED_SCEPTRE_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.WARPED_SCEPTRE)
         };
 
         this.triggers.addAll(List.of(

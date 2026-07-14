@@ -1,20 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_XericsTalisman extends ChargedItem {
     public J_XericsTalisman(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.xerics_talisman, ItemId.XERICS_TALISMAN, provider);
+        super(TicTac7xChargesImprovedConfig.xerics_talisman, ItemID.XERIC_TALISMAN, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.XERICS_TALISMAN_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.XERICS_TALISMAN),
+            new TriggerItem(ItemID.XERIC_TALISMAN_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemID.XERIC_TALISMAN),
         };
 
         this.triggers.addAll(List.of(

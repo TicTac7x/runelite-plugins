@@ -1,22 +1,22 @@
 package tictac7x.charges.items.shields;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 import java.util.*;
 
 public class S_DragonfireShield extends ChargedItem {
     public S_DragonfireShield(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.dragonfire_shield, ItemId.DRAGONFIRE_SHIELD, provider);
+        super(TicTac7xChargesImprovedConfig.dragonfire_shield, ItemID.DRAGONFIRE_SHIELD, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.DRAGONFIRE_SHIELD_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.DRAGONFIRE_SHIELD),
-            new TriggerItem(ItemId.DRAGONFIRE_WARD_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.DRAGONFIRE_WARD)
+            new TriggerItem(ItemID.DRAGONFIRE_SHIELD_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.DRAGONFIRE_SHIELD),
+            new TriggerItem(ItemID.DRAGONFIRE_WARD_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.DRAGONFIRE_WARD)
         };
 
         this.triggers.addAll(List.of(

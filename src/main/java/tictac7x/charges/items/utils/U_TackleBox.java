@@ -1,5 +1,6 @@
 package tictac7x.charges.items.utils;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
@@ -11,90 +12,90 @@ import java.util.*;
 
 public class U_TackleBox extends ChargedItemWithStorage {
     public U_TackleBox(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.tackle_box, ItemId.TACKLE_BOX, provider);
+        super(TicTac7xChargesImprovedConfig.tackle_box, ItemID.TACKLE_BOX, provider);
 
         this.storage = storage.storableItems(
-            new StorableItem(ItemId.ANGLER_HAT),
-            new StorableItem(ItemId.ANGLER_TOP),
-            new StorableItem(ItemId.ANGLER_WADERS),
-            new StorableItem(ItemId.ANGLER_BOOTS),
-            new StorableItem(ItemId.SPIRIT_ANGLER_HEADBAND),
-            new StorableItem(ItemId.SPIRIT_ANGLER_TOP),
-            new StorableItem(ItemId.SPIRIT_ANGLER_WADERS),
-            new StorableItem(ItemId.SPIRIT_ANGLER_BOOTS),
-            new StorableItem(ItemId.SPIRIT_FLAKES),
-            new StorableItem(ItemId.FISHBOWL_HELMET),
-            new StorableItem(ItemId.FLIPPERS),
-            new StorableItem(ItemId.DARK_FLIPPERS),
-            new StorableItem(ItemId.DIVING_APPARATUS),
-            new StorableItem(ItemId.TINY_NET),
-            new StorableItem(ItemId.RADAS_BLESSING_1),
-            new StorableItem(ItemId.RADAS_BLESSING_2),
-            new StorableItem(ItemId.RADAS_BLESSING_3),
-            new StorableItem(ItemId.RADAS_BLESSING_4),
-            new StorableItem(ItemId.HARPOON),
-            new StorableItem(ItemId.BARBTAIL_HARPOON),
-            new StorableItem(ItemId.DRAGON_HARPOON),
-            new StorableItem(ItemId.DRAGON_HARPOON_OR),
-            new StorableItem(ItemId.DRAGON_HARPOON_OR_30349),
-            new StorableItem(ItemId.INFERNAL_HARPOON),
-            new StorableItem(ItemId.INFERNAL_HARPOON_UNCHARGED),
-            new StorableItem(ItemId.INFERNAL_HARPOON_UNCHARGED_25367),
-            new StorableItem(ItemId.INFERNAL_HARPOON_UNCHARGED_30343),
-            new StorableItem(ItemId.INFERNAL_HARPOON_OR),
-            new StorableItem(ItemId.INFERNAL_HARPOON_OR_30342),
-            new StorableItem(ItemId.CRYSTAL_HARPOON),
-            new StorableItem(ItemId.CRYSTAL_HARPOON_23864),
-            new StorableItem(ItemId.CRYSTAL_HARPOON_INACTIVE),
-            new StorableItem(ItemId.MERFOLK_TRIDENT),
-            new StorableItem(ItemId.FISHING_ROD),
-            new StorableItem(ItemId.PEARL_FISHING_ROD),
-            new StorableItem(ItemId.FLY_FISHING_ROD),
-            new StorableItem(ItemId.PEARL_FLY_FISHING_ROD),
-            new StorableItem(ItemId.OILY_FISHING_ROD),
-            new StorableItem(ItemId.OILY_PEARL_FISHING_ROD),
-            new StorableItem(ItemId.BARBARIAN_ROD),
-            new StorableItem(ItemId.PEARL_BARBARIAN_ROD),
-            new StorableItem(ItemId.SMALL_FISHING_NET),
-            new StorableItem(ItemId.BIG_FISHING_NET),
-            new StorableItem(ItemId.DRIFT_NET),
-            new StorableItem(ItemId.LOBSTER_POT),
-            new StorableItem(ItemId.KARAMBWAN_VESSEL),
-            new StorableItem(ItemId.KARAMBWAN_VESSEL_3159),
-            new StorableItem(ItemId.RAW_KARAMBWANJI),
-            new StorableItem(ItemId.FISHING_BAIT),
-            new StorableItem(ItemId.FEATHER),
-            new StorableItem(ItemId.DARK_FISHING_BAIT),
-            new StorableItem(ItemId.SANDWORMS),
-            new StorableItem(ItemId.FISH_OFFCUTS),
-            new StorableItem(ItemId.FISH_CHUNKS),
-            new StorableItem(ItemId.FISHING_POTION_1),
-            new StorableItem(ItemId.FISHING_POTION_2),
-            new StorableItem(ItemId.FISHING_POTION_3),
-            new StorableItem(ItemId.FISHING_POTION_4),
-            new StorableItem(ItemId.MOLCH_PEARL),
-            new StorableItem(ItemId.STRIPY_FEATHER),
-            new StorableItem(ItemId.DIABOLIC_WORMS),
-            new StorableItem(ItemId.SHARK_LURE)
+            new StorableItem (ItemID.TRAWLER_REWARD_HAT),
+            new StorableItem (ItemID.TRAWLER_REWARD_TOP),
+            new StorableItem (ItemID.TRAWLER_REWARD_LEGS),
+            new StorableItem (ItemID.TRAWLER_REWARD_BOOTS),
+            new StorableItem (ItemID.SPIRIT_ANGLER_HAT),
+            new StorableItem (ItemID.SPIRIT_ANGLER_TOP),
+            new StorableItem (ItemID.SPIRIT_ANGLER_LEGS),
+            new StorableItem (ItemID.SPIRIT_ANGLER_BOOTS),
+            new StorableItem (ItemID.SPIRIT_FLAKES),
+            new StorableItem (ItemID.HUNDRED_PIRATE_DIVING_HELMET),
+            new StorableItem (ItemID.MUDSKIPPER_FLIPPERS),
+            new StorableItem (ItemID.DARK_FLIPPERS),
+            new StorableItem (ItemID.HUNDRED_PIRATE_DIVING_BACKPACK),
+            new StorableItem (ItemID.TINY_NET),
+            new StorableItem (ItemID.ZEAH_BLESSING_EASY),
+            new StorableItem (ItemID.ZEAH_BLESSING_MEDIUM),
+            new StorableItem (ItemID.ZEAH_BLESSING_HARD),
+            new StorableItem (ItemID.ZEAH_BLESSING_ELITE),
+            new StorableItem (ItemID.HARPOON),
+            new StorableItem (ItemID.HUNTING_BARBED_HARPOON),
+            new StorableItem (ItemID.DRAGON_HARPOON),
+            new StorableItem (ItemID.TRAILBLAZER_HARPOON_NO_INFERNAL),
+            new StorableItem (ItemID.TRAILBLAZER_RELOADED_HARPOON_NO_INFERNAL),
+            new StorableItem (ItemID.INFERNAL_HARPOON),
+            new StorableItem (ItemID.INFERNAL_HARPOON_EMPTY),
+            new StorableItem (ItemID.TRAILBLAZER_HARPOON_EMPTY),
+            new StorableItem (ItemID.TRAILBLAZER_RELOADED_HARPOON_EMPTY),
+            new StorableItem (ItemID.TRAILBLAZER_HARPOON),
+            new StorableItem (ItemID.TRAILBLAZER_RELOADED_HARPOON),
+            new StorableItem (ItemID.CRYSTAL_HARPOON),
+            new StorableItem (ItemID.GAUNTLET_HARPOON),
+            new StorableItem (ItemID.CRYSTAL_HARPOON_INACTIVE),
+            new StorableItem (ItemID.MERFOLK_TRIDENT),
+            new StorableItem (ItemID.FISHING_ROD),
+            new StorableItem (ItemID.FISHINGROD_PEARL),
+            new StorableItem (ItemID.FLY_FISHING_ROD),
+            new StorableItem (ItemID.FISHINGROD_PEARL_FLY),
+            new StorableItem (ItemID.OILY_FISHING_ROD),
+            new StorableItem (ItemID.FISHINGROD_PEARL_OILY),
+            new StorableItem (ItemID.BRUT_FISHING_ROD),
+            new StorableItem (ItemID.FISHINGROD_PEARL_BRUT),
+            new StorableItem (ItemID.NET),
+            new StorableItem (ItemID.BIG_NET),
+            new StorableItem (ItemID.FOSSIL_DRIFT_NET),
+            new StorableItem (ItemID.LOBSTER_POT),
+            new StorableItem (ItemID.TBWT_KARAMBWAN_VESSEL),
+            new StorableItem (ItemID.TBWT_KARAMBWAN_VESSEL_LOADED_WITH_KARAMBWANJI),
+            new StorableItem (ItemID.TBWT_RAW_KARAMBWANJI),
+            new StorableItem (ItemID.FISHING_BAIT),
+            new StorableItem (ItemID.FEATHER),
+            new StorableItem (ItemID.WILDERNESS_FISHING_BAIT),
+            new StorableItem (ItemID.PISCARILIUS_SANDWORMS),
+            new StorableItem (ItemID.BRUT_FISH_CUTS),
+            new StorableItem (ItemID.FISH_CHUNKS),
+            new StorableItem (ItemID._1DOSEFISHERSPOTION),
+            new StorableItem (ItemID._2DOSEFISHERSPOTION),
+            new StorableItem (ItemID._3DOSEFISHERSPOTION),
+            new StorableItem (ItemID._4DOSEFISHERSPOTION),
+            new StorableItem (ItemID.AERIAL_FISHING_PEARL),
+            new StorableItem (ItemID.HUNTING_STRIPY_BIRD_FEATHER),
+            new StorableItem (ItemID.DIABOLIC_WORMS),
+            new StorableItem (ItemID.SHARK_LURE)
         );
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TACKLE_BOX),
+            new TriggerItem(ItemID.TACKLE_BOX),
         };
 
         this.triggers.addAll(List.of(
             // Fill from inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onMenuOption("Fill", TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             // Empty to inventory.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).emptyStorageToInventory().onMenuOption("Empty", TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory),
+            new OnItemContainerChanged(InventoryID.INV).emptyStorageToInventory().onMenuOption("Empty", TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory),
 
-            // Use storable item on kit.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
+            // Use storable item on tackle box.
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseChargedItemOnStorageItem(storage.getStorableItems()),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
-            // Update from item container when viewing huntsmans kit contents.
-            new OnItemContainerChanged(ItemContainerId.TACKLE_BOX).updateStorage(),
+            // Update from item container when viewing tackle box contents.
+            new OnItemContainerChanged(InventoryID.TACKLE_BOX).updateStorage(),
 
             // Replace "Use" with proper Fill/Empty option.
             new OnMenuEntryAdded("Use").replaceOptionConsumer(this::getMenuOptionForUse).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),

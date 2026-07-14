@@ -1,15 +1,15 @@
 package tictac7x.charges.items.capes;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.utils.*;
 
 import java.util.*;
-
-import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class C_ForestryBasket extends ChargedItemWithStorage {
     private String menuOptionEmptyLogsToBank = "Empty-logs-to-bank";
@@ -18,14 +18,14 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
     private C_LogBasket logBasket;
 
     public C_ForestryBasket(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, provider);
+        super(TicTac7xChargesImprovedConfig.forestry_basket, ItemID.FORESTRY_BASKET_CLOSED, provider);
 
-        forestryKit = new C_ForestryKit(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, ItemId.FORESTRY_BASKET_OPEN, storage, provider);
-        logBasket = new C_LogBasket(TicTac7xChargesImprovedConfig.forestry_basket, ItemId.FORESTRY_BASKET, ItemId.FORESTRY_BASKET_OPEN, storage, provider);
+        forestryKit = new C_ForestryKit(TicTac7xChargesImprovedConfig.forestry_basket, ItemID.FORESTRY_BASKET_CLOSED, ItemID.FORESTRY_BASKET_OPEN, storage, provider);
+        logBasket = new C_LogBasket(TicTac7xChargesImprovedConfig.forestry_basket, ItemID.FORESTRY_BASKET_CLOSED, ItemID.FORESTRY_BASKET_OPEN, storage, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.FORESTRY_BASKET),
-            new TriggerItem(ItemId.FORESTRY_BASKET_OPEN),
+            new TriggerItem(ItemID.FORESTRY_BASKET_CLOSED),
+            new TriggerItem(ItemID.FORESTRY_BASKET_OPEN),
         };
 
         this.triggers.addAll(List.of(
@@ -41,19 +41,19 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
 
         this.triggers.addAll(List.of(
             // Fill kit from inventory.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Forestry kit").onItemClick().fillStorageFromInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Forestry kit").onItemClick().fillStorageFromInventory(),
 
             // Fill logs from inventory.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Log basket").onItemClick().fillStorageFromInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Log basket").onItemClick().fillStorageFromInventory(),
 
             // Empty logs to inventory.
-            new OnItemContainerChanged(INVENTORY).onMenuOption("Empty basket").onItemClick().emptyStorageToInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Empty basket").onItemClick().emptyStorageToInventory(),
 
             // Empty logs from check dialog.
-            new OnItemContainerChanged(INVENTORY).onWidgetMenuAction(new WidgetMenuAction("Yes", 0, "Empty the logs from the forestry basket into your inventory?")).emptyStorageToInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onWidgetMenuAction(new WidgetMenuAction("Yes", 0, "Empty the logs from the forestry basket into your inventory?")).emptyStorageToInventory(),
 
             // Empty logs to bank.
-            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption(menuOptionEmptyLogsToBank)
+            new OnItemContainerChanged(InventoryID.BANK).emptyStorageToBank().onMenuOption(menuOptionEmptyLogsToBank)
         ));
     }
 

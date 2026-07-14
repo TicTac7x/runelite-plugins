@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -10,10 +11,10 @@ import java.util.*;
 
 public class W_SlayerStaffE extends ChargedItem {
     public W_SlayerStaffE(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.slayer_staff_e, ItemId.SLAYER_STAFF_ENCHANTED, provider);
+        super(TicTac7xChargesImprovedConfig.slayer_staff_e, ItemID.SLAYER_STAFF_ENCHANTED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SLAYER_STAFF_ENCHANTED)
+            new TriggerItem(ItemID.SLAYER_STAFF_ENCHANTED)
         };
 
         this.triggers.addAll(List.of(
@@ -24,7 +25,7 @@ public class W_SlayerStaffE extends ChargedItem {
             new OnChatMessage("Your staff has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
             // Attack.
-            new OnAnimationChanged(AnimationId.SLAYER_STAFF_CAST).isEquipped().decreaseCharges(1)
+            new OnAnimationChanged(AnimationID.SLAYER_MAGICDART_CAST).isEquipped().decreaseCharges(1)
         ));
     }
 }

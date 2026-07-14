@@ -1,20 +1,20 @@
 package tictac7x.charges.items.shields;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 import java.util.*;
 
 public class S_KharedstMemoirs extends ChargedItem {
     public S_KharedstMemoirs(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.kharedsts_memoirs, ItemId.KHAREDSTS_MEMOIRS, provider);
+        super(TicTac7xChargesImprovedConfig.kharedsts_memoirs, ItemID.VEOS_KHAREDSTS_MEMOIRS, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.KHAREDSTS_MEMOIRS),
-            new TriggerItem(ItemId.BOOK_OF_THE_DEAD)
+            new TriggerItem(ItemID.VEOS_KHAREDSTS_MEMOIRS),
+            new TriggerItem(ItemID.BOOK_OF_THE_DEAD)
         };
 
         this.triggers.addAll(List.of(

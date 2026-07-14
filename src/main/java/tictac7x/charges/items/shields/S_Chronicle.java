@@ -1,19 +1,19 @@
 package tictac7x.charges.items.shields;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 import java.util.*;
 
 public class S_Chronicle extends ChargedItem {
     public S_Chronicle(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.chronicle, ItemId.CHRONICLE, provider);
+        super(TicTac7xChargesImprovedConfig.chronicle, ItemID.CHRONICLE, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.CHRONICLE),
+            new TriggerItem(ItemID.CHRONICLE),
         };
 
         this.triggers.addAll(List.of(

@@ -1,35 +1,34 @@
 package tictac7x.charges.items.utils;
 
 import net.runelite.api.*;
-import net.runelite.api.widgets.*;
+import net.runelite.api.gameval.InventoryID;
+import net.runelite.api.gameval.ItemID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.ids.*;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 import static tictac7x.charges.TicTac7xChargesImprovedPlugin.*;
-import static tictac7x.charges.store.ids.ItemContainerId.*;
-
 public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
     public U_ColossalPouch(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemId.COLOSSAL_POUCH, provider);
+        super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemID.RCU_POUCH_COLOSSAL, provider);
         this.storage = storage.storableItems(
-            new StorableItem(ItemId.RUNE_ESSENCE),
-            new StorableItem(ItemId.PURE_ESSENCE),
-            new StorableItem(ItemId.DAEYALT_ESSENCE),
-            new StorableItem(ItemId.GUARDIAN_ESSENCE)
+            new StorableItem (ItemID.BLANKRUNE),
+            new StorableItem (ItemID.BLANKRUNE_HIGH),
+            new StorableItem (ItemID.BLANKRUNE_DAEYALT),
+            new StorableItem (ItemID.GOTR_GUARDIAN_ESSENCE)
         ).setMaximumTotalQuantity(40).setHoldsSingleType(true);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.COLOSSAL_POUCH),
-            new TriggerItem(ItemId.COLOSSAL_POUCH_DEGRADED),
+            new TriggerItem(ItemID.RCU_POUCH_COLOSSAL),
+            new TriggerItem(ItemID.RCU_POUCH_COLOSSAL_DEGRADE),
         };
 
         this.triggers.addAll(List.of(
@@ -38,10 +37,10 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Guardians of the rift.
             new OnChatMessage("The rift becomes active!").consumer(() -> {
-                storage.put(ItemId.GUARDIAN_ESSENCE, 0);
+                storage.put (ItemID.GOTR_GUARDIAN_ESSENCE, 0);
             }),
             new OnVarbitChanged(13691, 0).consumer(() -> {
-                storage.put(ItemId.GUARDIAN_ESSENCE, 0);
+                storage.put (ItemID.GOTR_GUARDIAN_ESSENCE, 0);
             }),
 
             // Check.
@@ -51,16 +50,16 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
                 int essenceId;
                 switch (m.group("essence")) {
                     case "normal":
-                        essenceId = ItemId.RUNE_ESSENCE;
+                        essenceId = ItemID.BLANKRUNE;
                         break;
                     case "pure":
-                        essenceId = ItemId.PURE_ESSENCE;
+                        essenceId = ItemID.BLANKRUNE_HIGH;
                         break;
                     case "daeyalt":
-                        essenceId = ItemId.DAEYALT_ESSENCE;
+                        essenceId = ItemID.BLANKRUNE_DAEYALT;
                         break;
                     case "guardian":
-                        essenceId = ItemId.GUARDIAN_ESSENCE;
+                        essenceId = ItemID.GOTR_GUARDIAN_ESSENCE;
                         break;
                     default:
                         return;
@@ -83,14 +82,14 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Fill from inventory.
             new OnMenuOptionClicked("Fill").runConsumerOnNextGameTick(() -> {
-                if (provider.store.inventoryContainsItem(ItemId.GUARDIAN_ESSENCE)) {
-                    storage.add(ItemId.GUARDIAN_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.GUARDIAN_ESSENCE));
-                } else if (provider.store.inventoryContainsItem(ItemId.DAEYALT_ESSENCE)) {
-                    storage.add(ItemId.DAEYALT_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.DAEYALT_ESSENCE));
-                } else if (provider.store.inventoryContainsItem(ItemId.PURE_ESSENCE)) {
-                    storage.add(ItemId.PURE_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.PURE_ESSENCE));
-                } else if (provider.store.inventoryContainsItem(ItemId.RUNE_ESSENCE)) {
-                    storage.add(ItemId.RUNE_ESSENCE, provider.store.getInventoryItemQuantity(ItemId.RUNE_ESSENCE));
+                if (provider.store.inventoryContainsItem (ItemID.GOTR_GUARDIAN_ESSENCE)) {
+                    storage.add(ItemID.GOTR_GUARDIAN_ESSENCE, provider.store.getInventoryItemQuantity(ItemID.GOTR_GUARDIAN_ESSENCE));
+                } else if (provider.store.inventoryContainsItem (ItemID.BLANKRUNE_DAEYALT)) {
+                    storage.add(ItemID.BLANKRUNE_DAEYALT, provider.store.getInventoryItemQuantity(ItemID.BLANKRUNE_DAEYALT));
+                } else if (provider.store.inventoryContainsItem (ItemID.BLANKRUNE_HIGH)) {
+                    storage.add(ItemID.BLANKRUNE_HIGH, provider.store.getInventoryItemQuantity(ItemID.BLANKRUNE_HIGH));
+                } else if (provider.store.inventoryContainsItem (ItemID.BLANKRUNE)) {
+                    storage.add(ItemID.BLANKRUNE, provider.store.getInventoryItemQuantity(ItemID.BLANKRUNE));
                 }
             }),
 
@@ -109,10 +108,10 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
             }),
 
             // Empty to inventory at bank.
-            new OnItemContainerChanged(INVENTORY).onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).emptyStorageToInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToInventory).emptyStorageToInventory(),
 
             // Fill from inventory at bank.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionFillFromInventory),
 
             // Replace "Fill" with proper Fill/Empty option.
             new OnMenuEntryAdded("Fill").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),

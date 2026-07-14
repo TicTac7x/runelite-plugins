@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -10,11 +11,11 @@ import java.util.*;
 
 public class W_InfernalAxe extends ChargedItem {
     public W_InfernalAxe(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.infernal_axe, ItemId.INFERNAL_AXE_UNCHARGED, provider);
+        super(TicTac7xChargesImprovedConfig.infernal_axe, ItemID.INFERNAL_AXE_EMPTY, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.INFERNAL_AXE_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.INFERNAL_AXE),
+            new TriggerItem(ItemID.INFERNAL_AXE_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemID.INFERNAL_AXE),
         };
 
         this.triggers.addAll(List.of(

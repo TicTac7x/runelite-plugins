@@ -1,19 +1,19 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_BraceletOfSlaughter extends ChargedItem {
     public J_BraceletOfSlaughter(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_slaughter, ItemId.BRACELET_OF_SLAUGHTER, provider);
+        super(TicTac7xChargesImprovedConfig.bracelet_of_slaughter, ItemID.BRACELET_OF_SLAUGHTER, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),
+            new TriggerItem(ItemID.BRACELET_OF_SLAUGHTER).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

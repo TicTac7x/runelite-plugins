@@ -1,19 +1,19 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 
 public class VeracsPlateskirt extends _BarrowsItem {
     public VeracsPlateskirt(Provider provider) {
-        super("Verac's skirt", ItemId.VERACS_PLATESKIRT, provider);
+        super("Verac's skirt", ItemID.BARROWS_VERAC_LEGS, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.VERACS_PLATESKIRT).fixedCharges(1000),
-            new TriggerItem(ItemId.VERACS_PLATESKIRT_100),
-            new TriggerItem(ItemId.VERACS_PLATESKIRT_75),
-            new TriggerItem(ItemId.VERACS_PLATESKIRT_50),
-            new TriggerItem(ItemId.VERACS_PLATESKIRT_25),
-            new TriggerItem(ItemId.VERACS_PLATESKIRT_0).fixedCharges(0)
+            new TriggerItem(ItemID.BARROWS_VERAC_LEGS).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_VERAC_LEGS_100),
+            new TriggerItem(ItemID.BARROWS_VERAC_LEGS_75),
+            new TriggerItem(ItemID.BARROWS_VERAC_LEGS_50),
+            new TriggerItem(ItemID.BARROWS_VERAC_LEGS_25),
+            new TriggerItem(ItemID.BARROWS_VERAC_LEGS_BROKEN).fixedCharges(0)
         };
     }
 }

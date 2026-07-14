@@ -1,11 +1,12 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 import java.util.*;
 
@@ -13,10 +14,10 @@ public class J_EfaritaysAid extends ChargedItem {
     private boolean attackedVampyre = false;
 
     public J_EfaritaysAid(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.efaritays_aid, ItemId.EFARITAYS_AID, provider);
+        super(TicTac7xChargesImprovedConfig.efaritays_aid, ItemID.VAMPYRE_RING, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.EFARITAYS_AID).needsToBeEquipped()
+            new TriggerItem(ItemID.VAMPYRE_RING).needsToBeEquipped()
         };
 
         this.triggers.addAll(List.of(
@@ -56,7 +57,7 @@ public class J_EfaritaysAid extends ChargedItem {
             ).isEquipped().decreaseCharges(1).consumer(() -> {
                 attackedVampyre = true;
             }),
-            new OnAnimationChanged(AnimationId.THRALL_SKELETON, AnimationId.THRALL_GHOST, AnimationId.THRALL_ZOMBIE).actorName("null").isEquipped().consumer(() -> {
+            new OnAnimationChanged(AnimationID.SKELETON_UPDATE_CHAMPION_ATTACK, AnimationID.GHOST_UPDATE_TENDRILL_ATTACK, AnimationID.ZOMBIE_UPDATE_ATTACK_NORMAL).actorName("null").isEquipped().consumer(() -> {
                 if (attackedVampyre) {
                     increaseCharges(1);
                     attackedVampyre = false;

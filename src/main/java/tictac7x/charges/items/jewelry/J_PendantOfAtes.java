@@ -1,20 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_PendantOfAtes extends ChargedItem {
     public J_PendantOfAtes(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.pendant_of_ates, ItemId.PENDANT_OF_ATES, provider);
+        super(TicTac7xChargesImprovedConfig.pendant_of_ates, ItemID.PENDANT_OF_ATES, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.PENDANT_OF_ATES_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.PENDANT_OF_ATES),
+            new TriggerItem(ItemID.PENDANT_OF_ATES_EMPTY).fixedCharges(0),
+            new TriggerItem(ItemID.PENDANT_OF_ATES),
         };
 
         this.triggers.addAll(List.of(

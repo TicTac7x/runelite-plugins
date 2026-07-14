@@ -1,16 +1,16 @@
 package tictac7x.charges.items.potions;
 
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.*;
 
 public class P_SuperStrength extends _Potion {
     public P_SuperStrength(Provider provider) {
         super("super_strength", new TriggerItem[]{
-            new TriggerItem(ItemId.SUPER_STRENGTH_1).fixedCharges(1),
-            new TriggerItem(ItemId.SUPER_STRENGTH_2).fixedCharges(2),
-            new TriggerItem(ItemId.SUPER_STRENGTH_3).fixedCharges(3),
-            new TriggerItem(ItemId.SUPER_STRENGTH_4).fixedCharges(4),
+            new TriggerItem(ItemID._1DOSE2STRENGTH).fixedCharges(1),
+            new TriggerItem(ItemID._2DOSE2STRENGTH).fixedCharges(2),
+            new TriggerItem(ItemID._3DOSE2STRENGTH).fixedCharges(3),
+            new TriggerItem(ItemID._4DOSE2STRENGTH).fixedCharges(4),
         }, provider);
     }
 }

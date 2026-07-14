@@ -1,11 +1,11 @@
 package tictac7x.charges.items.crystal;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
@@ -13,27 +13,27 @@ import static tictac7x.charges.store.enums.HitsplatTarget.*;
 
 public class A_CrystalLegs extends ChargedItem {
     public A_CrystalLegs(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.crystal_legs, ItemId.CRYSTAL_LEGS, provider);
+        super(TicTac7xChargesImprovedConfig.crystal_legs, ItemID.CRYSTAL_PLATELEGS, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.CRYSTAL_LEGS),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_HEFIN),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_ITHELL),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_IORWERTH),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_TRAHAEARN),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_CADARN),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_CRWYS),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_AMLODD),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_ANNIHILATION),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_HEFIN_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_ITHELL_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_IORWERTH_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_TRAHAEARN_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_CADARN_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_CRWYS_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_AMLODD_INACTIVE).fixedCharges(0),
-            new TriggerItem(ItemId.CRYSTAL_LEGS_ANNIHILATION_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_HEFIN),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_ITHELL),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_IORWERTH),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_TRAHAEARN),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_CADARN),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_CRWYS),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_AMLODD),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_DEADMAN),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_HEFIN).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_ITHELL).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_IORWERTH).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_TRAHAEARN).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_CADARN).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_CRWYS).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_AMLODD).fixedCharges(0),
+            new TriggerItem(ItemID.CRYSTAL_PLATELEGS_INACTIVE_DEADMAN).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

@@ -1,24 +1,23 @@
 package tictac7x.charges.items.jewelry;
 
-import net.runelite.api.widgets.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
-import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 import java.util.*;
 
 public class J_CelestialRing extends ChargedItem {
     public J_CelestialRing(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.celestial_ring, ItemId.CELESTIAL_RING, provider);
+        super(TicTac7xChargesImprovedConfig.celestial_ring, ItemID.CELESTIAL_RING_CHARGED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.CELESTIAL_RING_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.CELESTIAL_SIGNET_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.CELESTIAL_RING).needsToBeEquipped(),
-            new TriggerItem(ItemId.CELESTIAL_SIGNET).needsToBeEquipped()
+            new TriggerItem(ItemID.CELESTIAL_RING).fixedCharges(0),
+            new TriggerItem(ItemID.CELESTIAL_SIGNET).fixedCharges(0),
+            new TriggerItem(ItemID.CELESTIAL_RING_CHARGED).needsToBeEquipped(),
+            new TriggerItem(ItemID.CELESTIAL_SIGNET_CHARGED).needsToBeEquipped()
         };
 
         this.triggers.addAll(List.of(

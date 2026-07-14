@@ -5,6 +5,8 @@ import com.google.gson.*;
 import com.google.inject.*;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
+import net.runelite.api.gameval.*;
+import net.runelite.api.gameval.ItemID;
 import net.runelite.api.widgets.*;
 import net.runelite.client.*;
 import net.runelite.client.callback.*;
@@ -771,19 +773,19 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static boolean guessIfRangedAmmoRetrievalWasSuccessful(Provider provider) {
 		int recoveryRate;
 
-		if (provider.store.equipmentContainsItem(ItemId.AVAS_ATTRACTOR)) {
+		if (provider.store.equipmentContainsItem(ItemID.ANMA_30_REWARD)) {
 			recoveryRate = 60;
-		} else if (provider.store.equipmentContainsItem(ItemId.AVAS_ACCUMULATOR)) {
+		} else if (provider.store.equipmentContainsItem(ItemID.ANMA_50_REWARD)) {
 			recoveryRate = 72;
 		} else if (provider.store.equipmentContainsItem(
-			ItemId.AVAS_ASSEMBLER,
-			ItemId.AVAS_ASSEMBLER_TROUVER,
-			ItemId.AVAS_ASSEMBLER_MASORI,
-			ItemId.AVAS_ASSEMBLER_MASORI_TROUVER,
-			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE,
-			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_TROUVER,
-			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI,
-			ItemId.AVAS_ASSEMBLER_MAX_SKILLCAPE_MASORI_TROUVER
+			ItemID.AVAS_ASSEMBLER,
+			ItemID.AVAS_ASSEMBLER_TROUVER,
+			ItemID.AVAS_ASSEMBLER_MASORI,
+			ItemID.AVAS_ASSEMBLER_MASORI_TROUVER,
+			ItemID.SKILLCAPE_MAX_ASSEMBLER,
+			ItemID.SKILLCAPE_MAX_ASSEMBLER_TROUVER,
+			ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI,
+			ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI_TROUVER
 		)) {
 			recoveryRate = 80;
 		} else {

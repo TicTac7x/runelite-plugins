@@ -1,22 +1,22 @@
 package tictac7x.charges.items.boots;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.List;
 
 public class B_FremennikSeaBoots extends ChargedItem {
     public B_FremennikSeaBoots(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, ItemId.FREMENNIK_SEA_BOOTS_1, provider);
+        super(TicTac7xChargesImprovedConfig.fremennik_sea_boots, ItemID.FREMENNIK_BOOTS_EASY, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_1),
-            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_2),
-            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_3),
-            new TriggerItem(ItemId.FREMENNIK_SEA_BOOTS_4).unlimitedCharges(),
+            new TriggerItem(ItemID.FREMENNIK_BOOTS_EASY),
+            new TriggerItem(ItemID.FREMENNIK_BOOTS_MEDIUM),
+            new TriggerItem(ItemID.FREMENNIK_BOOTS_HARD),
+            new TriggerItem(ItemID.FREMENNIK_BOOTS_ELITE).unlimitedCharges(),
         };
 
         this.triggers.addAll(List.of(
@@ -27,9 +27,9 @@ public class B_FremennikSeaBoots extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem(ItemId.FREMENNIK_SEA_BOOTS_1).setFixedCharges(1),
-            new OnResetDaily().specificItem(ItemId.FREMENNIK_SEA_BOOTS_2).setFixedCharges(3),
-            new OnResetDaily().specificItem(ItemId.FREMENNIK_SEA_BOOTS_3).setFixedCharges(5)
+            new OnResetDaily().specificItem (ItemID.FREMENNIK_BOOTS_EASY).setFixedCharges(1),
+            new OnResetDaily().specificItem (ItemID.FREMENNIK_BOOTS_MEDIUM).setFixedCharges(3),
+            new OnResetDaily().specificItem (ItemID.FREMENNIK_BOOTS_HARD).setFixedCharges(5)
         ));
     }
 }

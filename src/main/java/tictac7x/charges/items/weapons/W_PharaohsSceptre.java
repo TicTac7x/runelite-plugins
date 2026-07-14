@@ -1,21 +1,21 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_PharaohsSceptre extends ChargedItem {
     public W_PharaohsSceptre(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.pharaohs_sceptre, ItemId.PHARAOHS_SCEPTRE, provider);
+        super(TicTac7xChargesImprovedConfig.pharaohs_sceptre, ItemID.PHARAOHS_SCEPTRE_CHARGED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE_INITIAL),
-            new TriggerItem(ItemId.PHARAOHS_SCEPTRE),
+            new TriggerItem(ItemID.PHARAOHS_SCEPTRE).fixedCharges(0),
+            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_CHARGED_INITIAL),
+            new TriggerItem(ItemID.PHARAOHS_SCEPTRE_CHARGED),
         };
 
         this.triggers.addAll(List.of(

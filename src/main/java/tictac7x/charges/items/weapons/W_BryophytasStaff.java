@@ -1,21 +1,21 @@
 package tictac7x.charges.items.weapons;
 
 import net.runelite.api.*;
+import net.runelite.api.gameval.ItemID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_BryophytasStaff extends ChargedItem {
     public W_BryophytasStaff(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.bryophytas_staff, ItemId.BRYOPHYTAS_STAFF, provider);
+        super(TicTac7xChargesImprovedConfig.bryophytas_staff, ItemID.NATURE_STAFF_CHARGED, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BRYOPHYTAS_STAFF_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.BRYOPHYTAS_STAFF)
+            new TriggerItem(ItemID.NATURE_STAFF_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.NATURE_STAFF_CHARGED)
         };
 
         this.triggers.addAll(List.of(

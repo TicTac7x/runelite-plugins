@@ -3,17 +3,17 @@ package tictac7x.charges.items.utils;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.Provider;
 
 import java.util.List;
 
 public class U_JarGenerator extends ChargedItem {
     public U_JarGenerator(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.jar_generator, ItemId.JAR_GENERATOR, provider);
+        super(TicTac7xChargesImprovedConfig.jar_generator, ItemID.II_JAR_GENERATOR, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.JAR_GENERATOR)
+            new TriggerItem(ItemID.II_JAR_GENERATOR)
         };
 
         this.triggers.addAll(List.of(

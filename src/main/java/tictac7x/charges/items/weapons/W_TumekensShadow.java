@@ -1,20 +1,20 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_TumekensShadow extends ChargedItem {
     public W_TumekensShadow(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.tumekens_shadow, ItemId.TUMEKENS_SHADOW, provider);
+        super(TicTac7xChargesImprovedConfig.tumekens_shadow, ItemID.TUMEKENS_SHADOW, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TUMEKENS_SHADOW_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.TUMEKENS_SHADOW),
+            new TriggerItem(ItemID.TUMEKENS_SHADOW_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.TUMEKENS_SHADOW),
         };
 
         this.triggers.addAll(List.of(

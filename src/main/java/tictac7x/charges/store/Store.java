@@ -2,6 +2,8 @@ package tictac7x.charges.store;
 
 import net.runelite.api.*;
 import net.runelite.api.events.*;
+import net.runelite.api.gameval.*;
+import net.runelite.api.gameval.InventoryID;
 import net.runelite.client.chat.*;
 import net.runelite.client.config.*;
 import net.runelite.client.events.*;
@@ -39,11 +41,11 @@ public class Store {
     private int lastChatMessagesTick = 0;
     private List<String> lastChatMessages = new ArrayList<>();
 
-    public CustomItemContainerChanged inventory = new CustomItemContainerChanged(ItemContainerId.INVENTORY, new ArrayList<>());
-    public CustomItemContainerChanged previousInventory = new CustomItemContainerChanged(ItemContainerId.INVENTORY, new ArrayList<>());
-    public CustomItemContainerChanged equipment = new CustomItemContainerChanged(ItemContainerId.EQUIPMENT, new ArrayList<>());
-    public CustomItemContainerChanged bank = new CustomItemContainerChanged(ItemContainerId.BANK, new ArrayList<>());
-    public CustomItemContainerChanged previousBank = new CustomItemContainerChanged(ItemContainerId.BANK, new ArrayList<>());
+    public CustomItemContainerChanged inventory = new CustomItemContainerChanged(InventoryID.INV, new ArrayList<>());
+    public CustomItemContainerChanged previousInventory = new CustomItemContainerChanged(InventoryID.INV, new ArrayList<>());
+    public CustomItemContainerChanged equipment = new CustomItemContainerChanged(InventoryID.WORN, new ArrayList<>());
+    public CustomItemContainerChanged bank = new CustomItemContainerChanged(InventoryID.BANK, new ArrayList<>());
+    public CustomItemContainerChanged previousBank = new CustomItemContainerChanged(InventoryID.BANK, new ArrayList<>());
 
 
     public Queue<Runnable> nextTickQueue = new ArrayDeque<>();
@@ -143,17 +145,17 @@ public class Store {
         runNextGameTickQueue();
 
         if (
-            event.getContainerId() == ItemContainerId.BANK ||
-            event.getContainerId() == ItemContainerId.INVENTORY ||
-            event.getContainerId() == ItemContainerId.EQUIPMENT
+            event.getContainerId() == InventoryID.BANK ||
+            event.getContainerId() == InventoryID.INV ||
+            event.getContainerId() == InventoryID.WORN
         ) {
             // Update inventory, save previous items.
-            if (event.getContainerId() == ItemContainerId.INVENTORY) {
+            if (event.getContainerId() == InventoryID.INV) {
                 previousInventory = inventory;
                 inventory = event;
-            } else if (event.getContainerId() == ItemContainerId.EQUIPMENT) {
+            } else if (event.getContainerId() == InventoryID.WORN) {
                 equipment = event;
-            } else if (event.getContainerId() == ItemContainerId.BANK) {
+            } else if (event.getContainerId() == InventoryID.BANK) {
                 previousBank = bank;
                 bank = event;
 
@@ -165,7 +167,7 @@ public class Store {
                 configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
             }
 
-            updateChargedItemsPrimaryId(event.getContainerId() == ItemContainerId.BANK);
+            updateChargedItemsPrimaryId(event.getContainerId() == InventoryID.BANK);
         }
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> listenerOnItemContainerChanged.trigger(event, chargedItem));
@@ -690,7 +692,7 @@ public class Store {
         });
 
         // If server minutes are 0, it's a new day!
-        if (event.getVarbitId() == VarbitId.MINUTES && client.getGameState() == GameState.LOGGED_IN && event.getValue() == 0) {
+        if (event.getVarbitId() == VarbitID.CLOCK && client.getGameState() == GameState.LOGGED_IN && event.getValue() == 0) {
             checkForChargesReset();
         }
     }

@@ -1,17 +1,15 @@
 package tictac7x.charges.items.jewelry;
 
 import net.runelite.api.gameval.*;
-import net.runelite.api.widgets.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
-import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.ids.*;
 
 import java.awt.*;
 import java.time.*;
-import java.util.*;
 import java.util.List;
 
 public class J_EscapeCrystal extends ChargedItemWithStatus {
@@ -20,10 +18,10 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     private boolean inGauntletWithEscapeCrystal = false;
 
     public J_EscapeCrystal(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemId.ESCAPE_CRYSTAL, provider);
+        super(TicTac7xChargesImprovedConfig.escape_crystal, ItemID.TOB_TELEPORT, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.ESCAPE_CRYSTAL).quantityCharges().hideOverlay(),
+            new TriggerItem(ItemID.TOB_TELEPORT).quantityCharges().hideOverlay(),
         };
 
         this.triggers.addAll(List.of(
@@ -48,9 +46,9 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
 
             // Enter Gauntlet detection.
             new OnMenuOptionClicked("Enter", "Enter-corrupted").onMenuTarget("The Gauntlet").consumer(() -> {
-                if (provider.store.inventoryContainsItem(ItemId.ESCAPE_CRYSTAL)) {
+                if (provider.store.inventoryContainsItem (ItemID.TOB_TELEPORT)) {
                     inGauntletWithEscapeCrystal = true;
-                } else if (provider.store.equipmentContainsItem(ItemId.ESCAPE_CRYSTAL)) {
+                } else if (provider.store.equipmentContainsItem (ItemID.TOB_TELEPORT)) {
                     provider.notifier.notify("Escape crystal disabled, because it was not in the inventory!");
                     inGauntletWithEscapeCrystal = false;
                 } else {

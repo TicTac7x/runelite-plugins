@@ -1,22 +1,21 @@
 package tictac7x.charges.items.utils;
 
 import net.runelite.api.*;
-import net.runelite.api.widgets.*;
+import net.runelite.api.gameval.InventoryID;
+import net.runelite.api.gameval.ItemID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.Provider;
+import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
-import static tictac7x.charges.store.ids.ItemContainerId.*;
-
 public class U_HerbSack extends ChargedItemWithStorageEmptyable {
     public U_HerbSack(Provider provider) {
-        this(TicTac7xChargesImprovedConfig.herb_sack, ItemId.HERB_SACK, ItemId.HERB_SACK_OPEN, 30, provider);
+        this(TicTac7xChargesImprovedConfig.herb_sack, ItemID.SLAYER_HERB_SACK, ItemID.SLAYER_HERB_SACK_OPEN, 30, provider);
     }
 
     protected U_HerbSack(String configKey, int itemId, int openItemId, int maxQuantity, Provider provider) {
@@ -28,21 +27,21 @@ public class U_HerbSack extends ChargedItemWithStorageEmptyable {
         };
 
         storage = storage.setMaximumIndividualQuantity(maxQuantity).storableItems(
-            new StorableItem(ItemId.GRIMY_GUAM_LEAF).checkName("Guam leaf"),
-            new StorableItem(ItemId.GRIMY_MARRENTILL).checkName("Marrentill"),
-            new StorableItem(ItemId.GRIMY_TARROMIN).checkName("Tarromin"),
-            new StorableItem(ItemId.GRIMY_HARRALANDER).checkName("Harralander"),
-            new StorableItem(ItemId.GRIMY_RANARR_WEED).checkName("Ranarr weed"),
-            new StorableItem(ItemId.GRIMY_TOADFLAX).checkName("Toadflax"),
-            new StorableItem(ItemId.GRIMY_IRIT_LEAF).checkName("Irit leaf"),
-            new StorableItem(ItemId.GRIMY_AVANTOE).checkName("Avantoe"),
-            new StorableItem(ItemId.GRIMY_KWUARM).checkName("Kwuarm"),
-            new StorableItem(ItemId.GRIMY_SNAPDRAGON).checkName("Snapdragon"),
-            new StorableItem(ItemId.GRIMY_HUASCA).checkName("Huasca"),
-            new StorableItem(ItemId.GRIMY_CADANTINE).checkName("Cadantine"),
-            new StorableItem(ItemId.GRIMY_LANTADYME).checkName("Lantadyme"),
-            new StorableItem(ItemId.GRIMY_DWARF_WEED).checkName("Dwarf weed"),
-            new StorableItem(ItemId.GRIMY_TORSTOL).checkName("Torstol")
+            new StorableItem (ItemID.UNIDENTIFIED_GUAM).checkName("Guam leaf"),
+            new StorableItem (ItemID.UNIDENTIFIED_MARENTILL).checkName("Marrentill"),
+            new StorableItem (ItemID.UNIDENTIFIED_TARROMIN).checkName("Tarromin"),
+            new StorableItem (ItemID.UNIDENTIFIED_HARRALANDER).checkName("Harralander"),
+            new StorableItem (ItemID.UNIDENTIFIED_RANARR).checkName("Ranarr weed"),
+            new StorableItem (ItemID.UNIDENTIFIED_TOADFLAX).checkName("Toadflax"),
+            new StorableItem (ItemID.UNIDENTIFIED_IRIT).checkName("Irit leaf"),
+            new StorableItem (ItemID.UNIDENTIFIED_AVANTOE).checkName("Avantoe"),
+            new StorableItem (ItemID.UNIDENTIFIED_KWUARM).checkName("Kwuarm"),
+            new StorableItem (ItemID.UNIDENTIFIED_SNAPDRAGON).checkName("Snapdragon"),
+            new StorableItem (ItemID.UNIDENTIFIED_HUASCA).checkName("Huasca"),
+            new StorableItem (ItemID.UNIDENTIFIED_CADANTINE).checkName("Cadantine"),
+            new StorableItem (ItemID.UNIDENTIFIED_LANTADYME).checkName("Lantadyme"),
+            new StorableItem (ItemID.UNIDENTIFIED_DWARF_WEED).checkName("Dwarf weed"),
+            new StorableItem (ItemID.UNIDENTIFIED_TORSTOL).checkName("Torstol")
         );
 
         this.triggers.addAll(List.of(
@@ -61,13 +60,13 @@ public class U_HerbSack extends ChargedItemWithStorageEmptyable {
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onMenuOption("Fill"),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onMenuOption("Fill"),
 
             // Empty to inventory.
-            new OnItemContainerChanged(INVENTORY).emptyStorageToInventory().onMenuOption("Empty"),
+            new OnItemContainerChanged(InventoryID.INV).emptyStorageToInventory().onMenuOption("Empty"),
 
             // Empty to bank.
-            new OnItemContainerChanged(BANK).emptyStorageToBank().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank),
+            new OnItemContainerChanged(InventoryID.BANK).emptyStorageToBank().onMenuOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank),
 
             // Empty from deposit box.
             new OnMenuOptionClicked(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).onItemClick().isWidgetVisible(WidgetId.DEPOSIT_BOX).emptyStorage(),
@@ -80,63 +79,63 @@ public class U_HerbSack extends ChargedItemWithStorageEmptyable {
 
             // Pick guam leaf.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Guam")
-            .addToStorage(ItemId.GRIMY_GUAM_LEAF),
+            .addToStorage (ItemID.UNIDENTIFIED_GUAM),
 
             // Pick marrentill.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Marrentill")
-            .addToStorage(ItemId.GRIMY_MARRENTILL),
+            .addToStorage (ItemID.UNIDENTIFIED_MARENTILL),
 
             // Pick tarromin.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Tarromin")
-            .addToStorage(ItemId.GRIMY_TARROMIN),
+            .addToStorage (ItemID.UNIDENTIFIED_TARROMIN),
 
             // Pick harralander.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Harralander")
-            .addToStorage(ItemId.GRIMY_HARRALANDER),
+            .addToStorage (ItemID.UNIDENTIFIED_HARRALANDER),
 
             // Pick ranarr.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Ranarr weed")
-            .addToStorage(ItemId.GRIMY_RANARR_WEED),
+            .addToStorage (ItemID.UNIDENTIFIED_RANARR),
 
             // Pick irit leaf.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Irit")
-            .addToStorage(ItemId.GRIMY_IRIT_LEAF),
+            .addToStorage (ItemID.UNIDENTIFIED_IRIT),
 
             // Pick avantoe.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Avantoe")
-            .addToStorage(ItemId.GRIMY_AVANTOE),
+            .addToStorage (ItemID.UNIDENTIFIED_AVANTOE),
 
             // Pick toadflax.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Toadflax")
-            .addToStorage(ItemId.GRIMY_TOADFLAX),
+            .addToStorage (ItemID.UNIDENTIFIED_TOADFLAX),
 
             // Pick kwuarm.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Kwuarm")
-            .addToStorage(ItemId.GRIMY_KWUARM),
+            .addToStorage (ItemID.UNIDENTIFIED_KWUARM),
 
             // Pick huasca.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Huasca")
-            .addToStorage(ItemId.GRIMY_HUASCA),
+            .addToStorage (ItemID.UNIDENTIFIED_HUASCA),
 
             // Pick cadantine.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Cadantine")
-            .addToStorage(ItemId.GRIMY_CADANTINE),
+            .addToStorage (ItemID.UNIDENTIFIED_CADANTINE),
 
             // Pick lantadyme.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Lantadyme")
-            .addToStorage(ItemId.GRIMY_LANTADYME),
+            .addToStorage (ItemID.UNIDENTIFIED_LANTADYME),
 
             // Pick dwarf weed.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Dwarf weed")
-            .addToStorage(ItemId.GRIMY_DWARF_WEED),
+            .addToStorage (ItemID.UNIDENTIFIED_DWARF_WEED),
 
             // Pick torstol.
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Torstol")
-            .addToStorage(ItemId.GRIMY_TORSTOL),
+            .addToStorage (ItemID.UNIDENTIFIED_TORSTOL),
 
             // Pick snapdragon
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Snapdragon")
-            .addToStorage(ItemId.GRIMY_SNAPDRAGON)
+            .addToStorage (ItemID.UNIDENTIFIED_SNAPDRAGON)
         ));
     }
 }

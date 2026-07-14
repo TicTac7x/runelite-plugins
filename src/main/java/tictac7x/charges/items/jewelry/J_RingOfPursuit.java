@@ -1,19 +1,19 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_RingOfPursuit extends ChargedItem {
     public J_RingOfPursuit(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.ring_of_pursuit, ItemId.RING_OF_PURSUIT, provider);
+        super(TicTac7xChargesImprovedConfig.ring_of_pursuit, ItemID.RING_OF_PURSUIT, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.RING_OF_PURSUIT).needsToBeEquipped(),
+            new TriggerItem(ItemID.RING_OF_PURSUIT).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

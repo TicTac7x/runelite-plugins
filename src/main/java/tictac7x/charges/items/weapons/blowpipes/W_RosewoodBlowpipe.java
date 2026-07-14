@@ -1,5 +1,6 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
@@ -9,11 +10,11 @@ public class W_RosewoodBlowpipe extends _Blowpipe {
     public W_RosewoodBlowpipe(Provider provider) {
         super(
             TicTac7xChargesImprovedConfig.rosewood_blowpipe,
-            ItemId.ROSEWOOD_BLOWPIPE,
+            ItemID.ROSEWOOD_BLOWPIPE,
             provider,
             new TriggerItem[]{
-                new TriggerItem(ItemId.ROSEWOOD_BLOWPIPE),
-                new TriggerItem(ItemId.ROSEWOOD_BLOWPIPE_UNCHARGED).fixedCharges(0)
+                new TriggerItem(ItemID.ROSEWOOD_BLOWPIPE),
+                new TriggerItem(ItemID.ROSEWOOD_BLOWPIPE_EMPTY).fixedCharges(0)
             },
             true,
             13144

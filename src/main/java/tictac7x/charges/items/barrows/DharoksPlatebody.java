@@ -1,19 +1,19 @@
 package tictac7x.charges.items.barrows;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 public class DharoksPlatebody extends _BarrowsItem {
     public DharoksPlatebody(Provider provider) {
-        super("Dharok's body", ItemId.DHAROKS_PLATEBODY, provider);
+        super("Dharok's body", ItemID.BARROWS_DHAROK_BODY, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.DHAROKS_PLATEBODY).fixedCharges(1000),
-            new TriggerItem(ItemId.DHAROKS_PLATEBODY_100),
-            new TriggerItem(ItemId.DHAROKS_PLATEBODY_75),
-            new TriggerItem(ItemId.DHAROKS_PLATEBODY_50),
-            new TriggerItem(ItemId.DHAROKS_PLATEBODY_25),
-            new TriggerItem(ItemId.DHAROKS_PLATEBODY_0).fixedCharges(0),
+            new TriggerItem(ItemID.BARROWS_DHAROK_BODY).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_DHAROK_BODY_100),
+            new TriggerItem(ItemID.BARROWS_DHAROK_BODY_75),
+            new TriggerItem(ItemID.BARROWS_DHAROK_BODY_50),
+            new TriggerItem(ItemID.BARROWS_DHAROK_BODY_25),
+            new TriggerItem(ItemID.BARROWS_DHAROK_BODY_BROKEN).fixedCharges(0),
         };
     }
 }

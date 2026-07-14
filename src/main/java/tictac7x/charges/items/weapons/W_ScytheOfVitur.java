@@ -1,25 +1,25 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_ScytheOfVitur extends ChargedItem {
     public W_ScytheOfVitur(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.scythe_of_vitur, ItemId.SCYTHE_OF_VITUR, provider);
+        super(TicTac7xChargesImprovedConfig.scythe_of_vitur, ItemID.SCYTHE_OF_VITUR, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SCYTHE_OF_VITUR),
-            new TriggerItem(ItemId.SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.HOLY_SCYTHE_OF_VITUR),
-            new TriggerItem(ItemId.HOLY_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.SANGUINE_SCYTHE_OF_VITUR),
-            new TriggerItem(ItemId.SANGUINE_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.SCYTHE_OF_VITUR),
+            new TriggerItem(ItemID.SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.SCYTHE_OF_VITUR_OR),
+            new TriggerItem(ItemID.SCYTHE_OF_VITUR_UNCHARGED_OR).fixedCharges(0),
+            new TriggerItem(ItemID.SCYTHE_OF_VITUR_BL),
+            new TriggerItem(ItemID.SCYTHE_OF_VITUR_UNCHARGED_BL).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

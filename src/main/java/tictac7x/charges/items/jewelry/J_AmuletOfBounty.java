@@ -1,19 +1,19 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_AmuletOfBounty extends ChargedItem {
     public J_AmuletOfBounty(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.amulet_of_bounty, ItemId.AMULET_OF_BOUNTY, provider);
+        super(TicTac7xChargesImprovedConfig.amulet_of_bounty, ItemID.AMULET_OF_BOUNTY, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.AMULET_OF_BOUNTY)
+            new TriggerItem(ItemID.AMULET_OF_BOUNTY)
         };
 
         this.triggers.addAll(List.of(

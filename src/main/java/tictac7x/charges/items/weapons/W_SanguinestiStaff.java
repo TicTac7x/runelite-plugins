@@ -1,22 +1,22 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_SanguinestiStaff extends ChargedItem {
     public W_SanguinestiStaff(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.sanguinesti_staff, ItemId.SANGUINESTI_STAFF, provider);
+        super(TicTac7xChargesImprovedConfig.sanguinesti_staff, ItemID.SANGUINESTI_STAFF, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SANGUINESTI_STAFF),
-            new TriggerItem(ItemId.SANGUINESTI_STAFF_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.SANGUINESTI_STAFF_HOLY),
-            new TriggerItem(ItemId.SANGUINESTI_STAFF_HOLY_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.SANGUINESTI_STAFF),
+            new TriggerItem(ItemID.SANGUINESTI_STAFF_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.SANGUINESTI_STAFF_OR),
+            new TriggerItem(ItemID.SANGUINESTI_STAFF_UNCHARGED_OR).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(

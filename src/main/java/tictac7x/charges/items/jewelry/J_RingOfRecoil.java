@@ -1,20 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.enums.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class J_RingOfRecoil extends ChargedItem {
     public J_RingOfRecoil(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.ring_of_recoil, ItemId.RING_OF_RECOIL, provider);
+        super(TicTac7xChargesImprovedConfig.ring_of_recoil, ItemID.RING_OF_RECOIL, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.RING_OF_RECOIL).needsToBeEquipped(),
+            new TriggerItem(ItemID.RING_OF_RECOIL).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

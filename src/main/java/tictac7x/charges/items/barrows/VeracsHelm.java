@@ -1,19 +1,19 @@
 package tictac7x.charges.items.barrows;
 
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 
 public class VeracsHelm extends _BarrowsItem {
     public VeracsHelm(Provider provider) {
-        super("Verac's helmet", ItemId.VERACS_HELM, provider);
+        super("Verac's helmet", ItemID.BARROWS_VERAC_HEAD, provider);
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.VERACS_HELM).fixedCharges(1000),
-            new TriggerItem(ItemId.VERACS_HELM_100),
-            new TriggerItem(ItemId.VERACS_HELM_75),
-            new TriggerItem(ItemId.VERACS_HELM_50),
-            new TriggerItem(ItemId.VERACS_HELM_25),
-            new TriggerItem(ItemId.VERACS_HELM_0).fixedCharges(0)
+            new TriggerItem(ItemID.BARROWS_VERAC_HEAD).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_VERAC_HEAD_100),
+            new TriggerItem(ItemID.BARROWS_VERAC_HEAD_75),
+            new TriggerItem(ItemID.BARROWS_VERAC_HEAD_50),
+            new TriggerItem(ItemID.BARROWS_VERAC_HEAD_25),
+            new TriggerItem(ItemID.BARROWS_VERAC_HEAD_BROKEN).fixedCharges(0)
         };
     }
 }

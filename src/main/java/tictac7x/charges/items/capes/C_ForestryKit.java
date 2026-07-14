@@ -1,42 +1,42 @@
 package tictac7x.charges.items.capes;
 
+import net.runelite.api.gameval.*;
 import net.runelite.api.widgets.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.store.ids.*;
 
 import java.util.*;
-
-import static tictac7x.charges.store.ids.ItemContainerId.*;
 
 public class C_ForestryKit extends ChargedItemWithStorage {
     public String menuOptionFillLeavesFromBank = "Fill-leaves-from-bank";
     public String menuOptionEmptyLeavesToBank = "Empty-leaves-to-bank";
     private Optional<StorageItem> lastLeaves = Optional.empty();
     private StorableItem[] storableKitItems = new StorableItem[]{
-        new StorableItem(ItemId.ANIMAINFUSED_BARK),
-        new StorableItem(ItemId.FORESTERS_RATION),
-        new StorableItem(ItemId.NATURE_OFFERINGS),
-        new StorableItem(ItemId.SECATEURS_ATTACHMENT),
-        new StorableItem(ItemId.LEAVES).displayName("Regular leaves").checkName("regular leaves"),
-        new StorableItem(ItemId.OAK_LEAVES).checkName("oak leaves"),
-        new StorableItem(ItemId.WILLOW_LEAVES).checkName("willow leaves"),
-        new StorableItem(ItemId.MAPLE_LEAVES).checkName("maple leaves"),
-        new StorableItem(ItemId.YEW_LEAVES).checkName("yew leaves"),
-        new StorableItem(ItemId.MAGIC_LEAVES).checkName("magic leaves"),
-        new StorableItem(ItemId.FORESTRY_HAT),
-        new StorableItem(ItemId.FORESTRY_TOP),
-        new StorableItem(ItemId.FORESTRY_LEGS),
-        new StorableItem(ItemId.FORESTRY_BOOTS),
-        new StorableItem(ItemId.LUMBERJACK_HAT),
-        new StorableItem(ItemId.LUMBERJACK_TOP),
-        new StorableItem(ItemId.LUMBERJACK_LEGS),
-        new StorableItem(ItemId.LUMBERJACK_BOOTS),
-        new StorableItem(ItemId.WOODCUTTING_CAPE),
-        new StorableItem(ItemId.WOODCUTTING_CAPE_TRIMMED)
+        new StorableItem (ItemID.FORESTRY_CURRENCY),
+        new StorableItem (ItemID.FORESTRY_RATION),
+        new StorableItem (ItemID.NATURE_OFFERINGS),
+        new StorableItem (ItemID.FORESTRY_SECATEURS_ATTACHMENT),
+        new StorableItem (ItemID.LEAVES).displayName("Regular leaves").checkName("regular leaves"),
+        new StorableItem (ItemID.LEAVES_OAK).checkName("oak leaves"),
+        new StorableItem (ItemID.LEAVES_WILLOW).checkName("willow leaves"),
+        new StorableItem (ItemID.LEAVES_MAPLE).checkName("maple leaves"),
+        new StorableItem (ItemID.LEAVES_YEW).checkName("yew leaves"),
+        new StorableItem (ItemID.LEAVES_MAGIC).checkName("magic leaves"),
+        new StorableItem (ItemID.FORESTRY_LUMBERJACK_HAT),
+        new StorableItem (ItemID.FORESTRY_LUMBERJACK_TOP),
+        new StorableItem (ItemID.FORESTRY_LUMBERJACK_LEGS),
+        new StorableItem (ItemID.FORESTRY_LUMBERJACK_BOOTS),
+        new StorableItem (ItemID.RAMBLE_LUMBERJACK_HAT),
+        new StorableItem (ItemID.RAMBLE_LUMBERJACK_TOP),
+        new StorableItem (ItemID.RAMBLE_LUMBERJACK_LEGS),
+        new StorableItem (ItemID.RAMBLE_LUMBERJACK_BOOTS),
+        new StorableItem (ItemID.SKILLCAPE_WOODCUTTING),
+        new StorableItem (ItemID.SKILLCAPE_WOODCUTTING_TRIMMED)
     };
 
     public C_ForestryKit(String configKey, int itemId, int openItemId, Storage storage, Provider provider) {
@@ -50,8 +50,8 @@ public class C_ForestryKit extends ChargedItemWithStorage {
     }
 
     public C_ForestryKit(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemId.FORESTRY_KIT, provider);
-        setup(new TriggerItem[]{new TriggerItem(ItemId.FORESTRY_KIT)});
+        super(TicTac7xChargesImprovedConfig.forestry_kit, ItemID.FORESTRY_KIT, provider);
+        setup(new TriggerItem[]{new TriggerItem(ItemID.FORESTRY_KIT)});
     }
 
     private void setup(TriggerItem[] items) {
@@ -61,7 +61,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
 
         this.triggers.addAll(List.of(
             // View contents.
-            new OnItemContainerChanged(ItemContainerId.FORESTRY_KIT).itemsConsumer(kitItems -> {
+            new OnItemContainerChanged(InventoryID.FORESTRY_KIT).itemsConsumer(kitItems -> {
                 for (StorableItem storableKitItem : storableKitItems) {
                     storage.put(storableKitItem.itemId, kitItems.count(storableKitItem.itemId));
                 }
@@ -76,7 +76,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             // Secateurs attachment.
             new OnChatMessage("Your secateurs attachment enabled you to gather extra leaves.").runConsumerOnNextGameTick(() -> {
                 storage.add(lastLeaves);
-                storage.removeAndPrioritizeInventory(ItemId.SECATEURS_ATTACHMENT, 1);
+                storage.removeAndPrioritizeInventory (ItemID.FORESTRY_SECATEURS_ATTACHMENT, 1);
             }),
 
             // Get leaves from event.
@@ -86,26 +86,26 @@ public class C_ForestryKit extends ChargedItemWithStorage {
 
             // Get bark from an event.
             new OnChatMessage("You've been awarded (?<bark>.+) Anima-infused bark.").matcherConsumer(m -> {
-                storage.add(ItemId.ANIMAINFUSED_BARK, Integer.parseInt(m.group("bark")));
+                storage.add(ItemID.FORESTRY_CURRENCY, Integer.parseInt(m.group("bark")));
             }),
 
             // Use ration when choping.
             new OnChatMessage("You consume a Forester's ration to fuel a mighty chop.").consumer(() -> {
-                storage.removeAndPrioritizeInventory(ItemId.FORESTERS_RATION, 1);
+                storage.removeAndPrioritizeInventory (ItemID.FORESTRY_RATION, 1);
             }),
 
             // Nature offering used.
             new OnChatMessage("The nature offerings enabled you to chop an extra log").consumer(() -> {
-                storage.removeAndPrioritizeInventory(ItemId.NATURE_OFFERINGS, 1);
+                storage.removeAndPrioritizeInventory (ItemID.NATURE_OFFERINGS, 1);
             }),
 
             // Out of rations.
             new OnChatMessage("You've eaten your last Forester's ration.").consumer(() -> {
-                storage.put(ItemId.FORESTERS_RATION, 0);
+                storage.put (ItemID.FORESTRY_RATION, 0);
             }),
 
             // Fill from inventory.
-            new OnItemContainerChanged(INVENTORY).fillStorageFromInventory().onItemClick().onMenuOption("Fill"),
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onItemClick().onMenuOption("Fill"),
 
             // Buy items from Friendly Forester by 1.
             new OnMenuOptionClicked("Buy-1").consumer(() -> {
@@ -128,10 +128,10 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             }),
 
             // Empty leaves to bank.
-            new OnItemContainerChanged(ItemContainerId.BANK).emptyStorageToBank().onMenuOption(menuOptionEmptyLeavesToBank).onItemClick(),
+            new OnItemContainerChanged(InventoryID.BANK).emptyStorageToBank().onMenuOption(menuOptionEmptyLeavesToBank).onItemClick(),
 
             // Fill leaves from bank.
-            new OnItemContainerChanged(ItemContainerId.BANK).fillStorageFromBank().onMenuOption(menuOptionFillLeavesFromBank).onItemClick(),
+            new OnItemContainerChanged(InventoryID.BANK).fillStorageFromBank().onMenuOption(menuOptionFillLeavesFromBank).onItemClick(),
 
             // Replace "Use" with proper "Empty/Fill".
             new OnMenuEntryAdded("Use").replaceOptionConsumer(() -> getMenuOptionForUse()).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
@@ -152,12 +152,12 @@ public class C_ForestryKit extends ChargedItemWithStorage {
             if (storageItem.getQuantity() == 0) continue;
 
             switch (storageItem.itemId) {
-                case ItemId.LEAVES:
-                case ItemId.OAK_LEAVES:
-                case ItemId.WILLOW_LEAVES:
-                case ItemId.MAPLE_LEAVES:
-                case ItemId.YEW_LEAVES:
-                case ItemId.MAGIC_LEAVES:
+                case ItemID.LEAVES:
+                case ItemID.LEAVES_OAK:
+                case ItemID.LEAVES_WILLOW:
+                case ItemID.LEAVES_MAPLE:
+                case ItemID.LEAVES_YEW:
+                case ItemID.LEAVES_MAGIC:
                     return true;
             }
         }
@@ -228,7 +228,7 @@ public class C_ForestryKit extends ChargedItemWithStorage {
                     animaBarkPerItem = 75_000;
             }
 
-            storage.removeAndPrioritizeInventory(ItemId.ANIMAINFUSED_BARK, animaBarkPerItem * amountToBuy);
+            storage.removeAndPrioritizeInventory (ItemID.FORESTRY_CURRENCY, animaBarkPerItem * amountToBuy);
         });
     }
 }

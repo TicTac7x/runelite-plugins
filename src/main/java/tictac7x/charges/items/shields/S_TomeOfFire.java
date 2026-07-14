@@ -1,20 +1,20 @@
 package tictac7x.charges.items.shields;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
-import tictac7x.charges.store.ids.ItemId;
 import tictac7x.charges.store.Provider;
 
 import java.util.*;
 
 public class S_TomeOfFire extends ChargedItem {
     public S_TomeOfFire(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.tome_of_fire, ItemId.TOME_OF_FIRE, provider);
+        super(TicTac7xChargesImprovedConfig.tome_of_fire, ItemID.TOME_OF_FIRE, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.TOME_OF_FIRE_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.TOME_OF_FIRE).needsToBeEquipped(),
+            new TriggerItem(ItemID.TOME_OF_FIRE_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.TOME_OF_FIRE).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(

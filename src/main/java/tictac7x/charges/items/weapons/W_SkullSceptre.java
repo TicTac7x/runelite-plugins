@@ -1,20 +1,20 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_SkullSceptre extends ChargedItem {
     public W_SkullSceptre(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.skull_sceptre, ItemId.SKULL_SCEPTRE, provider);
+        super(TicTac7xChargesImprovedConfig.skull_sceptre, ItemID.SOS_SKULL_SCEPTRE, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.SKULL_SCEPTRE),
-            new TriggerItem(ItemId.SKULL_SCEPTRE_IMBUED)
+            new TriggerItem(ItemID.SOS_SKULL_SCEPTRE),
+            new TriggerItem(ItemID.SOS_SKULL_SCEPTRE_IMBUED)
         };
 
         this.triggers.addAll(List.of(

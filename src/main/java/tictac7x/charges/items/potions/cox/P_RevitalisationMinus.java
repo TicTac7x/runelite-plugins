@@ -3,15 +3,15 @@ package tictac7x.charges.items.potions.cox;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.items.potions.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 public class P_RevitalisationMinus extends _Potion {
     public P_RevitalisationMinus(Provider provider) {
         super("cox_revitalisation_minus", new TriggerItem[]{
-            new TriggerItem(ItemId.COX_REVITALISATION_MINUS_1).fixedCharges(1),
-            new TriggerItem(ItemId.COX_REVITALISATION_MINUS_2).fixedCharges(2),
-            new TriggerItem(ItemId.COX_REVITALISATION_MINUS_3).fixedCharges(3),
-            new TriggerItem(ItemId.COX_REVITALISATION_MINUS_4).fixedCharges(4),
+            new TriggerItem(ItemID.RAIDS_VIAL_REVITALISATION_WEAK_1).fixedCharges(1),
+            new TriggerItem(ItemID.RAIDS_VIAL_REVITALISATION_WEAK_2).fixedCharges(2),
+            new TriggerItem(ItemID.RAIDS_VIAL_REVITALISATION_WEAK_3).fixedCharges(3),
+            new TriggerItem(ItemID.RAIDS_VIAL_REVITALISATION_WEAK_4).fixedCharges(4),
         }, provider);
     }
 }

@@ -2,13 +2,13 @@ package tictac7x.charges.items.potions;
 
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 public class P_StrengthMix extends _Potion {
     public P_StrengthMix(Provider provider) {
         super("strength_mix", new TriggerItem[]{
-            new TriggerItem(ItemId.STRENGTH_MIX_1).fixedCharges(1),
-            new TriggerItem(ItemId.STRENGTH_MIX_2).fixedCharges(2),
+            new TriggerItem(ItemID.BRUTAL_1DOSE1STRENGTH).fixedCharges(1),
+            new TriggerItem(ItemID.BRUTAL_2DOSE1STRENGTH).fixedCharges(2),
         }, provider);
     }
 }

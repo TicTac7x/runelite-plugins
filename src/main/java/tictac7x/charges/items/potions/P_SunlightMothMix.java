@@ -2,13 +2,13 @@ package tictac7x.charges.items.potions;
 
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 public class P_SunlightMothMix extends _Potion {
     public P_SunlightMothMix(Provider provider) {
         super("sunlight_moth_mix", new TriggerItem[]{
-            new TriggerItem(ItemId.SUNLIGHT_MOTH_MIX_1).fixedCharges(1),
-            new TriggerItem(ItemId.SUNLIGHT_MOTH_MIX_2).fixedCharges(2),
+            new TriggerItem(ItemID.HUNTER_MIX_SUNMOTH_1DOSE).fixedCharges(1),
+            new TriggerItem(ItemID.HUNTER_MIX_SUNMOTH_2DOSE).fixedCharges(2),
         }, provider);
     }
 

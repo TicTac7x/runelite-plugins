@@ -1,20 +1,20 @@
 package tictac7x.charges.items.weapons;
 
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
 
 import java.util.*;
 
 public class W_EyeOfAyak  extends ChargedItem {
     public W_EyeOfAyak(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.eye_of_ayak, ItemId.EYE_OF_AYAK, provider);
+        super(TicTac7xChargesImprovedConfig.eye_of_ayak, ItemID.EYE_OF_AYAK, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.EYE_OF_AYAK_UNCHARGED).fixedCharges(0),
-            new TriggerItem(ItemId.EYE_OF_AYAK),
+            new TriggerItem(ItemID.EYE_OF_AYAK_UNCHARGED).fixedCharges(0),
+            new TriggerItem(ItemID.EYE_OF_AYAK),
         };
 
         /*

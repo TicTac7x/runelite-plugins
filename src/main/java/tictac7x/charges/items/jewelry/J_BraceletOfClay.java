@@ -1,21 +1,20 @@
 package tictac7x.charges.items.jewelry;
 
-import net.runelite.api.widgets.*;
+import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
-import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
-import tictac7x.charges.store.ids.*;
+import net.runelite.api.gameval.*;
 
 import java.util.*;
 
 public class J_BraceletOfClay extends ChargedItem {
     public J_BraceletOfClay(Provider provider) {
-        super(TicTac7xChargesImprovedConfig.bracelet_of_clay, ItemId.BRACELET_OF_CLAY, provider);
+        super(TicTac7xChargesImprovedConfig.bracelet_of_clay, ItemID.JEWL_BRACELET_OF_CLAY, provider);
 
         this.items = new TriggerItem[]{
-            new TriggerItem(ItemId.BRACELET_OF_CLAY).needsToBeEquipped(),
+            new TriggerItem(ItemID.JEWL_BRACELET_OF_CLAY).needsToBeEquipped(),
         };
 
         this.triggers.addAll(List.of(
@@ -23,18 +22,18 @@ public class J_BraceletOfClay extends ChargedItem {
             new OnChatMessage("You can mine (?<charges>.+) more pieces? of soft clay before your bracelet crumbles to dust.").setDynamicallyCharges(),
 
             // Mine clay.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Clay rocks").consumer(() -> {
+            new OnItemContainerChanged(InventoryID.INV).isEquipped().onMenuOption("Mine").onMenuTarget("Clay rocks").consumer(() -> {
                 if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
-                int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
-                int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
+                int clayBefore = provider.store.getPreviousInventoryItemQuantity (ItemID.SOFTCLAY);
+                int clayAfter = provider.store.getInventoryItemQuantity(ItemID.SOFTCLAY);
                 decreaseCharges(clayAfter - clayBefore);
             }),
 
             // Mine soft clay.
-            new OnItemContainerChanged(ItemContainerId.INVENTORY).isEquipped().onMenuOption("Mine").onMenuTarget("Soft clay rocks").consumer(() -> {
+            new OnItemContainerChanged(InventoryID.INV).isEquipped().onMenuOption("Mine").onMenuTarget("Soft clay rocks").consumer(() -> {
                 if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
-                int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemId.SOFT_CLAY);
-                int clayAfter = provider.store.getInventoryItemQuantity(ItemId.SOFT_CLAY);
+                int clayBefore = provider.store.getPreviousInventoryItemQuantity (ItemID.SOFTCLAY);
+                int clayAfter = provider.store.getInventoryItemQuantity(ItemID.SOFTCLAY);
 
                 // At least 2 soft clay was mined.
                 if (clayAfter - clayBefore >= 2) {
