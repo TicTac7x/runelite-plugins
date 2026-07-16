@@ -24,7 +24,7 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
 
         this.storage.storableItems(
             new StorableItem(ItemID.ANCIENT_ESSENCE)
-        );
+        ).emptyIsNegative();
 
         this.triggers.addAll(List.of(
             // Charging the bow with essence - Check to see if the bow is already fully charged.
@@ -38,10 +38,10 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
             }),
 
             // Uncharge (you can only uncharge ALL charges at once)
-            new OnChatMessage("You fully uncharge your " + itemName.toLowerCase() + ", regaining (?<charges>.+) ancient essence in the process.").consumer(() -> storage.clear()),
+            new OnChatMessage("You fully uncharge your " + itemName.toLowerCase() + ", regaining .+ ancient essence in the process.").consumer(() -> storage.clear()),
 
             // Check.
-            new OnChatMessage("Your " + itemName.toLowerCase() + "  has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
+            new OnChatMessage("Your " + itemName.toLowerCase() + " has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
                 storage.clearAndPut(ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 
@@ -50,19 +50,5 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
                 storage.remove(ItemID.ANCIENT_ESSENCE, 1);
             })
         ));
-    }
-
-    @Override
-    public Color getTextColor(int itemId) {
-        return this.getTotalTextColor();
-    }
-
-    @Override
-    public Color getTotalTextColor() {
-        if (this.storage.getStorage().count(ItemID.ANCIENT_ESSENCE) == 0) {
-            return provider.config.getColorEmpty();
-        }
-
-        return super.getTotalTextColor();
     }
 }

@@ -36,7 +36,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
 
             // Inactivity timer.
             new OnVarbitChanged(VarbitID.TELEPORT_CRYSTAL_AFK_DELAY).varbitValueConsumer((value) -> {
-                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.escape_crystal_inactivity_period, value);
+                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.escape_crystal_inactivity_period, value);
             }),
 
             // Keyboard or mouse actions.

@@ -97,7 +97,7 @@ public abstract class ChargedItemBase {
     }
 
     public String getItemName() {
-        return provider.itemManager.getItemComposition(itemId).getName();
+        return provider.itemManager.getItemComposition(itemId).name;
     }
 
     public boolean needsToBeEquipped() {

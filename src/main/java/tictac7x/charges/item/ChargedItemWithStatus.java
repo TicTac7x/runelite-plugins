@@ -12,7 +12,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     public boolean isDeactivated() {
-        Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
+        Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(getConfigStatusKey()));
 
         if (!status.isPresent()) {
             return false;
@@ -22,7 +22,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     public boolean isActivated() {
-        Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey()));
+        Optional<String> status = Optional.ofNullable(provider.configManager.getConfiguration(getConfigStatusKey()));
 
         if (!status.isPresent()) {
             return false;
@@ -44,7 +44,7 @@ public class ChargedItemWithStatus extends ChargedItem {
     }
 
     private void setActivity(TicTac7xChargesImprovedConfig.ItemActivity status) {
-        provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, getConfigStatusKey(), status);
+        provider.configManager.setConfiguration(getConfigStatusKey(), status);
     }
 
     @Override

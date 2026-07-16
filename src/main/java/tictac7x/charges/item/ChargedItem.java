@@ -65,7 +65,7 @@ public class ChargedItem extends ChargedItemBase {
         }
 
         if (this.getChargesFromConfig() != charges) {
-            provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey, charges);
+            provider.configManager.setConfiguration(configKey, charges);
         }
     }
 
@@ -78,7 +78,7 @@ public class ChargedItem extends ChargedItemBase {
     }
 
     protected int getChargesFromConfig() {
-        Optional<String> charges = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        Optional<String> charges = Optional.ofNullable(provider.configManager.getConfiguration(configKey));
 
         if (!charges.isPresent()) {
             return ChargeId.UNKNOWN;

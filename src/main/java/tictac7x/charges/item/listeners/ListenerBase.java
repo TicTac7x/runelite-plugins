@@ -180,8 +180,8 @@ public abstract class ListenerBase {
                 }
                 for (StorageItem storeableItem : ((ChargedItemWithStorage) chargedItem).storage.getStorableItems()) {
                     if (
-                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName()) ||
-                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.itemId).getName())
+                        itemOne.equals(provider.itemManager.getItemComposition(storeableItem.itemId).name) ||
+                        itemTwo.equals(provider.itemManager.getItemComposition(storeableItem.itemId).name)
                     ) {
                         isValid = true;
                         break loopChecker;
@@ -198,10 +198,10 @@ public abstract class ListenerBase {
         if (trigger.onUseChargedItemOnStorageItem.isPresent() && chargedItem instanceof ChargedItemWithStorage) {
             boolean useCheck = false;
             useCheckLooper: for (CustomMenuOptionClicked menuEntry : chargedItem.provider.store.menuOptionsClicked) {
-                if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(provider.itemManager.getItemComposition(chargedItem.itemId).getName())) continue;
+                if (!menuEntry.option.equals("Use") || !menuEntry.target.contains(" -> ") || !menuEntry.target.split(" -> ")[0].equals(provider.itemManager.getItemComposition(chargedItem.itemId).name)) continue;
 
                 for (StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
-                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.itemId).getName())) {
+                    if (menuEntry.target.split(" -> ")[1].equals(provider.itemManager.getItemComposition(storageItem.itemId).name)) {
                         useCheck = true;
                         break useCheckLooper;
                     }

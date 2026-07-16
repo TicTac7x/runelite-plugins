@@ -9,27 +9,12 @@ import tictac7x.charges.item.storage.*;
 import java.util.*;
 
 public class CustomItemContainerChanged {
-    public int itemContainerId;
-    private List<StorageItem> items;
+    public final int itemContainerId;
+    private final List<StorageItem> items;
 
     public CustomItemContainerChanged(int itemContainerId, List<StorageItem> items) {
         this.itemContainerId = itemContainerId;
         this.items = items;
-    }
-
-    public CustomItemContainerChanged(ItemContainerChanged event, MyItemManager itemManager) {
-        this.itemContainerId = event.getContainerId();
-        this.items = new ArrayList<>();
-
-        for (Item item : event.getItemContainer().getItems()) {
-            if (item == null || item.getId() == -1 || item.getId() == 6512) continue;
-
-            MyItemComposition itemComposition = itemManager.getItemComposition(item.getId());
-            items.add(new StorageItem(
-                itemComposition.itemId,
-                itemComposition.isPlaceholder ? 0 : item.getQuantity()
-            ));
-        }
     }
 
     public CustomItemContainerChanged(CustomItemContainerChanged previousItemContainerChanged) {

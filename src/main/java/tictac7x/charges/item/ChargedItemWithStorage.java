@@ -30,7 +30,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
             Optional<StorageItem> storageItem = storage.getStorage().getItem(storableItem.itemId);
             if (storageItem.isPresent() && storageItem.get().getQuantity() > 0) {
                 // Name
-                tooltip += (storableItem.displayName.isPresent() ? storableItem.displayName.get() : provider.itemManager.getItemComposition(storageItem.get().itemId).getName()) + ": ";
+                tooltip += (storableItem.displayName.isPresent() ? storableItem.displayName.get() : provider.itemManager.getItemComposition(storageItem.get().itemId).name) + ": ";
                 // Quantity
                 tooltip += ColorUtil.wrapWithColorTag(String.valueOf(storageItem.get().getQuantity()), JagexColors.MENU_TARGET) + "</br>";
             }

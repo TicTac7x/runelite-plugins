@@ -178,7 +178,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
 
         // Default teleport not set, show default.
         if (varbit10966 == 0 && varbit10968 == 0) {
-            return provider.itemManager.getItemComposition(itemId).getName();
+            return provider.itemManager.getItemComposition(itemId).name;
 
         // Default teleport set, show correct location display name.
         } else {

@@ -27,6 +27,7 @@ import net.runelite.client.util.*;
 import tictac7x.charges.events.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.overlays.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
@@ -117,6 +118,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	private MyClient myClient;
+	private MyConfig myConfig;
 	private MyItemManager myItemManager;
 	private MyConfigManager myConfigManager;
 	private Provider provider;
@@ -138,25 +140,57 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			() -> client.getGameState(),
 			(actor) -> client.getLocalPlayer() == actor
 		);
-		myItemManager = new MyItemManager((itemId) -> {
+		myItemManager = new MyItemManager(
+			(itemId) -> {
 			ItemComposition itemComposition = itemManager.getItemComposition(itemId);
-			return new MyItemComposition(
-				itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : itemId,
-				itemComposition.getName(),
-				itemComposition.isStackable(),
-				itemComposition.getPlaceholderTemplateId() != -1
-			);
-		});
-		myConfigManager = new MyConfigManager((key, value) -> {
-			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, key, value);
-		});
+				return new MyItemComposition(
+					itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : itemId,
+					itemComposition.getName(),
+					itemComposition.isStackable(),
+					itemComposition.getPlaceholderTemplateId() != -1
+				);
+			},
+			(itemId) -> itemManager.getImage(itemId)
+		);
+		myConfig = new MyConfig(
+				() -> config.showDebugIds(),
+				() -> config.getVersion(),
+				() -> config.showDailyReset(),
+				() -> config.getResetDate(),
+				() -> config.getColorUnknown(),
+				() -> config.getColorEmpty(),
+				() -> config.getColorActivated(),
+				() -> config.getColorDefault(),
+				() -> config.hideDestroyMenuEntries(),
+				() -> config.showOverlays(),
+				() -> config.showUnlimited(),
+				() -> config.showBankOverlays(),
+				() -> config.showOverlaysOnlyInBank(),
+				() -> config.itemOverlayLocation(),
+				() -> config.showStorageTooltips(),
+				() -> config.showInfoboxes(),
+				() -> config.combatTimeDegradableStyle(),
+				() -> config.getEscapeCrystalInactivityPeriod(),
+				() -> config.getEscapeCrystalTimeRemainingUnit(),
+				() -> config.getEscapeCrystalTimeRemainingWarning(),
+				() -> config.getEscapeCrystalStatus(),
+				() -> config.get4DoseColor(),
+				() -> config.get3DoseColor(),
+				() -> config.get2DoseColor(),
+				() -> config.get1DoseColor(),
+				() -> config.getColossalPouchDecayCount()
+		);
+		myConfigManager = new MyConfigManager(
+			(key, value) -> configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, key, value),
+			(key) -> configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, key)
+		);
 
 		keyManager.registerKeyListener(this);
 		mouseManager.registerMouseListener(this);
 		mouseManager.registerMouseWheelListener(this);
 
 		store = new Store(myClient, myItemManager, myConfigManager);
-		provider = new Provider(client, clientThread, pluginManager, configManager, itemManager, infoBoxManager, chatMessageManager, tooltipManager, notifier, this, config, store, gson);
+		provider = new Provider(client, clientThread, pluginManager, myConfigManager, myItemManager, infoBoxManager, chatMessageManager, tooltipManager, notifier, this, myConfig, store, gson);
 		store.addProvider(provider);
 
 		chargedItems = new ChargedItemBase[]{
@@ -536,12 +570,31 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event) {
-		store.onItemContainerChanged(event);
+		List<StorageItem> items = new ArrayList<>();
+
+		for (Item item : event.getItemContainer().getItems()) {
+			if (item == null || item.getId() == -1 || item.getId() == 6512) continue;
+
+			MyItemComposition itemComposition = myItemManager.getItemComposition(item.getId());
+			items.add(new StorageItem(
+				itemComposition.itemId,
+				itemComposition.isPlaceholder ? 0 : item.getQuantity()
+			));
+		}
+
+		CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(event.getContainerId(), items);
+		store.onItemContainerChanged(itemContainerChanged);
 	}
 
 	@Subscribe
 	public void onGraphicChanged(GraphicChanged event) {
-		store.onGraphicChanged(event);
+		if (event.getActor() != client.getLocalPlayer()) return;
+
+		List<Integer> graphicIds = new ArrayList<>();
+		for (ActorSpotAnim spotAnim : event.getActor().getSpotAnims()) {
+			graphicIds.add(spotAnim.getId());
+		}
+		store.onGraphicChanged(new CustomGraphicChanged(event.getActor().getName(), graphicIds));
 	}
 
 	@Subscribe

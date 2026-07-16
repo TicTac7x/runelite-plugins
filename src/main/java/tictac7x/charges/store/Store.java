@@ -141,7 +141,7 @@ public class Store {
         });
     }
 
-    private void onItemContainerChanged(CustomItemContainerChanged event) {
+    public void onItemContainerChanged(CustomItemContainerChanged event) {
         runNextGameTickQueue();
 
         if (
@@ -171,11 +171,6 @@ public class Store {
         }
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> listenerOnItemContainerChanged.trigger(event, chargedItem));
-    }
-
-    public void onItemContainerChanged(ItemContainerChanged eventOriginal) {
-        CustomItemContainerChanged event = new CustomItemContainerChanged(eventOriginal, itemManager);
-        onItemContainerChanged(event);
     }
 
     private void updateChargedItemsPrimaryId(boolean checkBank) {
@@ -627,7 +622,8 @@ public class Store {
         if (event.message.contains("The banker charges")) {
             Arrays.stream(chargedItems).forEach(chargedItem -> listenerOnChatMessage.trigger(event, chargedItem));
         } else {
-            getInventoryAndEquipmentChargedItems().forEach(chargedItem -> listenerOnChatMessage.trigger(event, chargedItem));
+            Stream<ChargedItemBase> chargedItems = getInventoryAndEquipmentChargedItems();
+            chargedItems.forEach(chargedItem -> listenerOnChatMessage.trigger(event, chargedItem));
         }
     }
 
@@ -647,10 +643,7 @@ public class Store {
         });
     }
 
-    public void onGraphicChanged(GraphicChanged event) {
-        CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
-        if (!client.isLocalPlayer(graphicChanged.actor)) return;
-
+    public void onGraphicChanged(CustomGraphicChanged graphicChanged) {
         if (graphicChanged.hasGraphicId(GraphicId.SPLASH)) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
         }

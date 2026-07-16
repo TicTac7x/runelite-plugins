@@ -324,7 +324,7 @@ public class Storage {
 
         // Load storage from config.
         try {
-            String jsonString = provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey);
+            String jsonString = provider.configManager.getConfiguration(storageConfigKey);
             JsonArray jsonStorage = (JsonArray) (new JsonParser()).parse(jsonString);
 
             for (JsonElement jsonStorageItem : jsonStorage) {
@@ -348,7 +348,7 @@ public class Storage {
             jsonStorage.add(jsonItem);
         }
 
-        provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey, provider.gson.toJson(jsonStorage));
+        provider.configManager.setConfiguration(storageConfigKey, provider.gson.toJson(jsonStorage));
     }
 
     public Optional<StorageItem> getItem(int itemId) {
@@ -408,7 +408,7 @@ public class Storage {
                     if (
                         name.equalsIgnoreCase(checkName) ||
                         name.toLowerCase().contains(checkName.toLowerCase()) ||
-                        name.contains(provider.itemManager.getItemComposition(storableItem.itemId).getName())
+                        name.contains(provider.itemManager.getItemComposition(storableItem.itemId).name)
                     ) {
                         return Optional.of(new StorageItem(storableItem.itemId, quantity));
                     }

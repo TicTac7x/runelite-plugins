@@ -16,14 +16,14 @@ public class Provider {
     public Client client;
     public ClientThread clientThread;
     public PluginManager pluginManager;
-    public ConfigManager configManager;
-    public ItemManager itemManager;
+    public MyConfigManager configManager;
+    public MyItemManager itemManager;
     public InfoBoxManager infoBoxManager;
     public ChatMessageManager chatMessageManager;
     public TooltipManager tooltipManager;
     public Notifier notifier;
     public TicTac7xChargesImprovedPlugin plugin;
-    public TicTac7xChargesImprovedConfig config;
+    public MyConfig config;
     public Store store;
     public Gson gson;
 
@@ -31,14 +31,14 @@ public class Provider {
         Client client,
         ClientThread clientThread,
         PluginManager pluginManager,
-        ConfigManager configManager,
-        ItemManager itemManager,
+        MyConfigManager configManager,
+        MyItemManager itemManager,
         InfoBoxManager infoBoxManager,
         ChatMessageManager chatMessageManager,
         TooltipManager tooltipManager,
         Notifier notifier,
         TicTac7xChargesImprovedPlugin plugin,
-        TicTac7xChargesImprovedConfig config,
+        MyConfig config,
         Store store,
         Gson gson
     ) {

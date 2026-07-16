@@ -14,7 +14,9 @@ import net.runelite.api.gameval.*;
 import tictac7x.charges.store.ids.*;
 import tictac7x.charges.store.utils.*;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.regex.*;
 import java.util.stream.*;
 
@@ -194,6 +196,20 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
                 return;
             }
         }
+    }
+
+    @Override
+    public Color getTextColor(int itemId) {
+        return getTotalTextColor();
+    }
+
+    @Override
+    public Color getTotalTextColor() {
+        if (getTotalCharges() == 28) {
+            return provider.config.getColorEmpty();
+        }
+
+        return super.getTotalTextColor();
     }
 }
 

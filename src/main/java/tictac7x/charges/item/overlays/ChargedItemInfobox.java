@@ -75,7 +75,7 @@ public class ChargedItemInfobox extends InfoBox {
 
     private boolean isChargedItemInfoboxEnabled() {
         String configKey = chargedItem.getConfigKey() + TicTac7xChargesImprovedConfig._infobox;
-        Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, configKey));
+        Optional<String> visible = Optional.ofNullable(provider.configManager.getConfiguration(configKey));
         return visible.isPresent() && visible.get().equals("true");
     }
 }

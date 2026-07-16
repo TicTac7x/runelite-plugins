@@ -70,13 +70,13 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Decay.
             new OnChatMessage("Your pouch has decayed through use.").onMenuOption("Fill").consumer(() -> {
-                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, provider.config.getColossalPouchDecayCount() + 1);
+                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, provider.config.getColossalPouchDecayCount() + 1);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
             // Repair.
             new OnChatMessage("Fine. A simple transfiguration spell should resolve things for you.").consumer(() -> {
-                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, 0);
+                provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.colossal_pouch_decay_count, 0);
                 storage.setMaximumTotalQuantity(getPouchCapacity());
             }),
 
