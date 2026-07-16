@@ -62,12 +62,10 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.13";
+	public static String pluginVersion = "v0.7";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Gem pouch, sack, satchel and tote added.<br>" +
-		"<colHIGHLIGHT>* Ghommal's hilt added.<br>" +
-		"<colHIGHLIGHT>* Silkliend herb sack added and herb sack fixes."
+		"<colHIGHLIGHT>* Venator bow fixes."
 	;
 
 	@Inject
