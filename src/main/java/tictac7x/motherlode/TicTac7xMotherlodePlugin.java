@@ -17,6 +17,7 @@ import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WallObjectDespawned;
 import net.runelite.api.events.WallObjectSpawned;
 import net.runelite.api.events.WidgetLoaded;
+import net.runelite.api.gameval.*;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
@@ -42,7 +43,7 @@ import javax.inject.Inject;
 	conflicts = {"Motherlode Mine", "MLM Mining Markers"}
 )
 public class TicTac7xMotherlodePlugin extends Plugin {
-	private final String pluginVersion = "v0.4.4";
+	private final String pluginVersion = "v0.4.5";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Additional pickaxes animations support.<br>" +
@@ -84,6 +85,7 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private Sack sack;
 	private Motherlode motherlode;
 	private Widget widget;
+	private MyVarbitManager varbitManager;
 
 	@Provides
 	TicTac7xMotherlodeConfig provideConfig(ConfigManager configManager) {
@@ -92,12 +94,19 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
+		varbitManager = new MyVarbitManager() {
+			@Override
+			public int getVarbitValue(int varbitId) {
+				return client.getVarbitValue(varbitId);
+			}
+		};
+
 		provider = new Provider(client);
 		character = new Character(client);
 		bank = new Bank(configManager, config, itemManager);
 		inventory = new Inventory();
 		hopper = new Hopper(client, inventory);
-		sack = new Sack();
+		sack = new Sack(varbitManager);
 		motherlode = new Motherlode(client, clientThread, notifier, config, bank, inventory, sack, hopper);
 		widget = new Widget(client, config, motherlode, character);
 		oreVeins = new OreVeins(config, character, motherlode, provider);
@@ -189,18 +198,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Subscribe
 	public void onVarbitChanged(final VarbitChanged event) {
-		final int varbitId = event.getVarbitId();
-		final int varbitValue = event.getValue();
-
-		switch (varbitId) {
-			case VarbitId.MOTHERLODE_SACK_PAYDIRT:
-				sack.setPaydirt(varbitValue);
-				break;
-			case VarbitId.MOTHERLODE_SACK_UPGRADED:
-				sack.setIsSackUpgraded(varbitValue == 1);
-				break;
-		}
-
 		hopper.onVarbitChanged(event);
 		motherlode.onVarbitChanged(event);
 	}
@@ -208,11 +205,11 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private void sendMessageAboutPluginVersion(final GameStateChanged event) {
 		if (event.getGameState() == GameState.LOGGED_IN && !config.getVersion().equals(pluginVersion)) {
 			configManager.setConfiguration(TicTac7xMotherlodeConfig.group, TicTac7xMotherlodeConfig.version, pluginVersion);
-			chatMessageManager.queue(QueuedMessage.builder()
-				.type(ChatMessageType.CONSOLE)
-				.runeLiteFormattedMessage(pluginMessage)
-				.build()
-			);
+//			chatMessageManager.queue(QueuedMessage.builder()
+//				.type(ChatMessageType.CONSOLE)
+//				.runeLiteFormattedMessage(pluginMessage)
+//				.build()
+//			);
 		}
 	}
 

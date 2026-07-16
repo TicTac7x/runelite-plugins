@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = 'tictac7x-motherlode'
-version = 'v0.4.4'
+version = 'v0.4.5'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
