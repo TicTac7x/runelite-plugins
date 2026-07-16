@@ -20,8 +20,8 @@ public class J_DesertAmulet extends ChargedItem {
 
         this.triggers.addAll(List.of(
             new OnChatMessage("You have already used your available teleports for today.").setFixedCharges(0),
-            new OnResetDaily().specificItem (ItemID.DESERT_AMULET_MEDIUM).setFixedCharges(1),
-            new OnResetDaily().specificItem (ItemID.DESERT_AMULET_HARD).setFixedCharges(1)
+            new OnResetDaily().specificItem(ItemID.DESERT_AMULET_MEDIUM).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemID.DESERT_AMULET_HARD).setFixedCharges(1)
         ));
     }
 }

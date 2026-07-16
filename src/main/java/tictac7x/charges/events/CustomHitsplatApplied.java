@@ -2,6 +2,7 @@ package tictac7x.charges.events;
 
 import net.runelite.api.*;
 import net.runelite.api.events.*;
+import tictac7x.charges.*;
 
 public class CustomHitsplatApplied {
     public Actor actor;
@@ -11,11 +12,11 @@ public class CustomHitsplatApplied {
     public boolean byMe;
     public boolean byOthers;
 
-    public CustomHitsplatApplied(HitsplatApplied event, Client client) {
+    public CustomHitsplatApplied(HitsplatApplied event, MyClient client) {
         this.actor = event.getActor();
         this.type = event.getHitsplat().getHitsplatType();
         this.amount = event.getHitsplat().getAmount();
-        this.toMe = event.getActor() == client.getLocalPlayer();
+        this.toMe = client.isLocalPlayer(event.getActor());
         this.byMe = event.getHitsplat().isMine();
         this.byOthers = event.getHitsplat().isOthers();
     }

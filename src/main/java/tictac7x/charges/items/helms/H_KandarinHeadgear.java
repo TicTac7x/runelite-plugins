@@ -25,7 +25,7 @@ public class H_KandarinHeadgear extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem (ItemID.SEERS_HEADBAND_HARD).setFixedCharges(1)
+            new OnResetDaily().specificItem(ItemID.SEERS_HEADBAND_HARD).setFixedCharges(1)
         ));
     }
 }

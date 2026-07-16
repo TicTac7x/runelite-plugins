@@ -42,28 +42,28 @@ public class J_ExplorersRing extends ChargedItemWithStorageMultipleCharges {
             // Check.
             new OnMenuOptionClicked("Check").onItemClick().runConsumerOnNextGameTick(() -> updateStorage()),
 
-            new OnResetDaily().specificItem (ItemID.LUMBRIDGE_RING_EASY).consumer(() -> {
+            new OnResetDaily().specificItem(ItemID.LUMBRIDGE_RING_EASY).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 2);
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, 0);
             }),
 
-            new OnResetDaily().specificItem (ItemID.LUMBRIDGE_RING_MEDIUM).consumer(() -> {
+            new OnResetDaily().specificItem(ItemID.LUMBRIDGE_RING_MEDIUM).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 3);
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, 3);
             }),
 
-            new OnResetDaily().specificItem (ItemID.LUMBRIDGE_RING_HARD).consumer(() -> {
+            new OnResetDaily().specificItem(ItemID.LUMBRIDGE_RING_HARD).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 4);
                 storage.put(ExplorersRingStorageItemId.TELEPORTS, ChargeId.UNLIMITED);
             }),
 
-            new OnResetDaily().specificItem (ItemID.LUMBRIDGE_RING_ELITE).consumer(() -> {
+            new OnResetDaily().specificItem(ItemID.LUMBRIDGE_RING_ELITE).consumer(() -> {
                 storage.clear();
                 storage.put(ExplorersRingStorageItemId.ALCHEMY, 30);
                 storage.put(ExplorersRingStorageItemId.ENERGY_RESTORES, 3);

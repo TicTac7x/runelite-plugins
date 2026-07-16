@@ -351,7 +351,7 @@ public class Storage {
         provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, storageConfigKey, provider.gson.toJson(jsonStorage));
     }
 
-    private Optional<StorageItem> getItem(int itemId) {
+    public Optional<StorageItem> getItem(int itemId) {
         return storage.getItem(itemId);
     }
 

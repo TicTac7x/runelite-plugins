@@ -5,14 +5,10 @@ import net.runelite.api.events.*;
 import net.runelite.client.chat.*;
 
 public class CustomGraphicChanged {
-    private Actor actor;
+    public final Actor actor;
 
     public CustomGraphicChanged(GraphicChanged event) {
         this.actor = event.getActor();
-    }
-
-    public boolean isLocalPlayer(Client client) {
-        return actor == client.getLocalPlayer();
     }
 
     public boolean hasGraphicId(int graphicId) {

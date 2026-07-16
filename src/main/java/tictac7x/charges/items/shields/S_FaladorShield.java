@@ -32,10 +32,10 @@ public class S_FaladorShield extends ChargedItem {
             new OnGraphicChanged(321).onItemClick().decreaseCharges(1),
 
             // Daily resets.
-            new OnResetDaily().specificItem (ItemID.FALADOR_SHIELD_EASY).setFixedCharges(1),
-            new OnResetDaily().specificItem (ItemID.FALADOR_SHIELD_MEDIUM).setFixedCharges(1),
-            new OnResetDaily().specificItem (ItemID.FALADOR_SHIELD_HARD).setFixedCharges(1),
-            new OnResetDaily().specificItem (ItemID.FALADOR_SHIELD_ELITE).setFixedCharges(2)
+            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_EASY).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_MEDIUM).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_HARD).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemID.FALADOR_SHIELD_ELITE).setFixedCharges(2)
         ));
     }
 }

@@ -19,10 +19,10 @@ public class U_BottomlessMilkBucket extends ChargedItemWithStorage {
         };
 
         this.storage.storableItems(
-            new StorableItem (ItemID.BUCKET_MILK).checkName("regular milk"),
-            new StorableItem (ItemID.CHOCOLATY_MILK).checkName("chocolatey milk"),
-            new StorableItem (ItemID.CHICKENQUEST_MILKY_MIXTURE).checkName("creamy milk"),
-            new StorableItem (ItemID.HANGOVER_CURE).checkName("hangover cure")
+            new StorableItem(ItemID.BUCKET_MILK).checkName("regular milk"),
+            new StorableItem(ItemID.CHOCOLATY_MILK).checkName("chocolatey milk"),
+            new StorableItem(ItemID.CHICKENQUEST_MILKY_MIXTURE).checkName("creamy milk"),
+            new StorableItem(ItemID.HANGOVER_CURE).checkName("hangover cure")
         );
 
         this.triggers.addAll(List.of(
@@ -49,65 +49,65 @@ public class U_BottomlessMilkBucket extends ChargedItemWithStorage {
 
             // Milk
             new OnChatMessage("You milk the cow.").consumer(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
                     storage.add(ItemID.BUCKET_MILK, 1);
                 }
             }),
 
             // Churn
-            new OnChatMessage("You churn your milk to make (cream|butter|cheese).").unallowedItem (ItemID.BUCKET_MILK).consumer(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnChatMessage("You churn your milk to make (cream|butter|cheese).").unallowedItem(ItemID.BUCKET_MILK).consumer(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
 
             // Make tea
-            new OnItemUsed (ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.BOWL_NETTLETEA).isBothWays().unallowedItem (ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnItemUsed(ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.BOWL_NETTLETEA).isBothWays().unallowedItem(ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
-            new OnItemUsed (ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.CUP_OF_NETTLETEA).isBothWays().unallowedItem (ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnItemUsed(ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.CUP_OF_NETTLETEA).isBothWays().unallowedItem(ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
-            new OnItemUsed (ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.BOWL_DAMIANA_TEA).isBothWays().unallowedItem (ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnItemUsed(ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.BOWL_DAMIANA_TEA).isBothWays().unallowedItem(ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
-            new OnItemUsed (ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.CUP_DAMIANA_TEA).isBothWays().unallowedItem (ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnItemUsed(ItemID.BOTTOMLESS_MILK_BUCKET_FILLED, ItemID.CUP_DAMIANA_TEA).isBothWays().unallowedItem(ItemID.BUCKET_MILK).runConsumerOnNextGameTick(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
 
             // Make uncooked cake
-            new OnChatMessage("You mix the milk, flour and egg together to make a raw cake mix.").unallowedItem (ItemID.BUCKET_MILK).consumer(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnChatMessage("You mix the milk, flour and egg together to make a raw cake mix.").unallowedItem(ItemID.BUCKET_MILK).consumer(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
 
             // Make chocolatey milk
-            new OnChatMessage("You mix the chocolate into the bucket.").unallowedItem (ItemID.BUCKET_MILK).consumer(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnChatMessage("You mix the chocolate into the bucket.").unallowedItem(ItemID.BUCKET_MILK).consumer(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             }),
 
             // Make hangover cure
-            new OnChatMessage("You mix the snape grass into the bucket.").unallowedItem (ItemID.CHOCOLATY_MILK).consumer(() -> {
-                if (storage.hasItem (ItemID.CHOCOLATY_MILK)) {
-                    storage.remove (ItemID.CHOCOLATY_MILK, 1);
+            new OnChatMessage("You mix the snape grass into the bucket.").unallowedItem(ItemID.CHOCOLATY_MILK).consumer(() -> {
+                if (storage.hasItem(ItemID.CHOCOLATY_MILK)) {
+                    storage.remove(ItemID.CHOCOLATY_MILK, 1);
                 }
             }),
 
             // Feed milk to cat
-            new OnChatMessage(".+ laps up the milk").unallowedItem (ItemID.BUCKET_MILK).consumer(() -> {
-                if (storage.hasItem (ItemID.BUCKET_MILK)) {
-                    storage.remove (ItemID.BUCKET_MILK, 1);
+            new OnChatMessage(".+ laps up the milk").unallowedItem(ItemID.BUCKET_MILK).consumer(() -> {
+                if (storage.hasItem(ItemID.BUCKET_MILK)) {
+                    storage.remove(ItemID.BUCKET_MILK, 1);
                 }
             })
         ));

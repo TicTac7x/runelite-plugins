@@ -16,7 +16,7 @@ public class U_CoalBag extends ChargedItemWithStorageEmptyable {
     public U_CoalBag(Provider provider) {
         super(TicTac7xChargesImprovedConfig.coal_bag, ItemID.COAL_BAG, provider);
         this.storage = storage
-            .storableItems(new StorableItem (ItemID.COAL).checkName("Coal"))
+            .storableItems(new StorableItem(ItemID.COAL).checkName("Coal"))
             .setMaximumTotalQuantity(27)
             .setMaximumTotalQuantityWithEquippedItem(36, ItemID.SKILLCAPE_SMITHING, ItemID.SKILLCAPE_SMITHING_TRIMMED);
 
@@ -31,12 +31,12 @@ public class U_CoalBag extends ChargedItemWithStorageEmptyable {
 
             // Fill or check with 1 coal.
             new OnChatMessage("The coal bag( still)? contains one piece of coal.").consumer(() -> {
-                storage.put (ItemID.COAL, 1);
+                storage.put(ItemID.COAL, 1);
             }),
 
             // Check or empty with not enough inventory space.
             new OnChatMessage("The coal bag( still)? contains (?<charges>.+) pieces of coal.").matcherConsumer((m) -> {
-                storage.put (ItemID.COAL, Integer.parseInt(m.group("charges")));
+                storage.put(ItemID.COAL, Integer.parseInt(m.group("charges")));
             }),
 
             // Replace "Fill" with proper "Fill from bank".
@@ -50,29 +50,29 @@ public class U_CoalBag extends ChargedItemWithStorageEmptyable {
             // Extra coal mined by varrock platebody.
             new OnChatMessage(
                 "(You manage to mine some coal.|Your Celestial ring allows you to mine an additional ore.|The Varrock platebody enabled you to mine an additional ore.)"
-            ).onMenuOption("Mine").onMenuTarget("Coal rocks").requiredItem (ItemID.COAL_BAG_OPEN).addToStorage (ItemID.COAL, 1),
+            ).onMenuOption("Mine").onMenuTarget("Coal rocks").requiredItem(ItemID.COAL_BAG_OPEN).addToStorage(ItemID.COAL, 1),
 
             // Superheat spells.
             new OnXpDrop(Skill.SMITHING).onMenuOption("Cast").onMenuTarget(
                 "Superheat Item -> Lovakite ore",
                 "Superheat Item -> Iron ore"
             ).consumer(() -> {
-                storage.removeAndPrioritizeInventory (ItemID.COAL, 2);
+                storage.removeAndPrioritizeInventory(ItemID.COAL, 2);
             }),
             new OnXpDrop(Skill.SMITHING).onMenuOption("Cast").onMenuTarget(
                 "Superheat Item -> Mithril ore"
             ).consumer(() -> {
-                storage.removeAndPrioritizeInventory (ItemID.COAL, 4);
+                storage.removeAndPrioritizeInventory(ItemID.COAL, 4);
             }),
             new OnXpDrop(Skill.SMITHING).onMenuOption("Cast").onMenuTarget(
                 "Superheat Item -> Adamantite ore"
             ).consumer(() -> {
-                storage.removeAndPrioritizeInventory (ItemID.COAL, 6);
+                storage.removeAndPrioritizeInventory(ItemID.COAL, 6);
             }),
             new OnXpDrop(Skill.SMITHING).onMenuOption("Cast").onMenuTarget(
                 "Superheat Item -> Runite ore"
             ).consumer(() -> {
-                storage.removeAndPrioritizeInventory (ItemID.COAL, 8);
+                storage.removeAndPrioritizeInventory(ItemID.COAL, 8);
             }),
 
             // Hide destroy.

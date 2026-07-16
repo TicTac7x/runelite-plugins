@@ -9,7 +9,7 @@ public class ListenerOnResetDaily extends ListenerBase {
         super(provider);
     }
 
-    public boolean trigger(ChargedItemBase chargedItem) {
+    public void trigger(ChargedItemBase chargedItem) {
         for (TriggerBase triggerBase : chargedItem.triggers) {
             if (!isValidTrigger(chargedItem, triggerBase)) continue;
             OnResetDaily trigger = (OnResetDaily) triggerBase;
@@ -19,10 +19,11 @@ public class ListenerOnResetDaily extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (triggerUsed) return true;
+            if (triggerUsed) {
+                afterTrigger(trigger);
+                return;
+            }
         }
-
-        return false;
     }
 
     public boolean isValidTrigger(ChargedItemBase chargedItem, TriggerBase triggerBase) {

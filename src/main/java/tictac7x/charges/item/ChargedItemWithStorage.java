@@ -15,7 +15,7 @@ public class ChargedItemWithStorage extends ChargedItemBase {
     public ChargedItemWithStorage(String configKey, int itemId, Provider provider) {
         super(configKey, itemId, provider);
         this.storage = new Storage(this, configKey, provider);
-        provider.clientThread.invokeLater(this::loadCharges);
+        loadCharges();
     }
 
     @Override

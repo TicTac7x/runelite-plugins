@@ -24,13 +24,13 @@ public class _Blowpipe extends ChargedItemWithStorage {
         this.items = items;
 
         List<StorableItem> storableItems = new ArrayList<>();
-        storableItems.add(new StorableItem (ItemID.BRONZE_DART).checkName("Bronze dart"));
-        storableItems.add(new StorableItem (ItemID.IRON_DART).checkName("Iron dart"));
-        storableItems.add(new StorableItem (ItemID.STEEL_DART).checkName("Steel dart"));
-        storableItems.add(new StorableItem (ItemID.MITHRIL_DART).checkName("Mithril dart"));
+        storableItems.add(new StorableItem(ItemID.BRONZE_DART).checkName("Bronze dart"));
+        storableItems.add(new StorableItem(ItemID.IRON_DART).checkName("Iron dart"));
+        storableItems.add(new StorableItem(ItemID.STEEL_DART).checkName("Steel dart"));
+        storableItems.add(new StorableItem(ItemID.MITHRIL_DART).checkName("Mithril dart"));
         if (supportsAdamantiteDarts) {
             storableItems.add(
-                new StorableItem (ItemID.ADAMANT_DART).checkName("Adamant dart")
+                new StorableItem(ItemID.ADAMANT_DART).checkName("Adamant dart")
             );
         }
         storage.storableItems(

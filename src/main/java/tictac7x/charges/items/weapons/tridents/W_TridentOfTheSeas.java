@@ -12,7 +12,7 @@ public class W_TridentOfTheSeas extends _Trident {
             TicTac7xChargesImprovedConfig.trident_of_the_seas,
             ItemID.TOTS_CHARGED,
             ItemID.TOTS_UNCHARGED,
-            Optional.of (ItemID.TOTS),
+            Optional.of(ItemID.TOTS),
             "Trident of the seas",
             1251,
             provider

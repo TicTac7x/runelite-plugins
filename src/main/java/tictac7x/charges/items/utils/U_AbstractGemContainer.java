@@ -39,18 +39,18 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         List<StorableItem> storableGems = new ArrayList<>();
         if (semiPreciousGems) {
             storableGems.addAll(List.of(
-                    new StorableItem (ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
-                    new StorableItem (ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
-                    new StorableItem (ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
+                    new StorableItem(ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
+                    new StorableItem(ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
+                    new StorableItem(ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
             ));
         }
         if (preciousGems) {
             storableGems.addAll(List.of(
-                new StorableItem (ItemID.UNCUT_SAPPHIRE).checkName("Sapphires", "Sapphire").displayName("Uncut sapphire"),
-                new StorableItem (ItemID.UNCUT_EMERALD).checkName("Emeralds", "Emerald").displayName("Uncut emerald"),
-                new StorableItem (ItemID.UNCUT_RUBY).checkName("Rubies", "Ruby").displayName("Uncut ruby"),
-                new StorableItem (ItemID.UNCUT_DIAMOND).checkName("Diamonds", "Diamond").displayName("Uncut diamond"),
-                new StorableItem (ItemID.UNCUT_DRAGONSTONE).checkName("Dragonstones", "Dragonstone").displayName("Uncut dragonstone")
+                new StorableItem(ItemID.UNCUT_SAPPHIRE).checkName("Sapphires", "Sapphire").displayName("Uncut sapphire"),
+                new StorableItem(ItemID.UNCUT_EMERALD).checkName("Emeralds", "Emerald").displayName("Uncut emerald"),
+                new StorableItem(ItemID.UNCUT_RUBY).checkName("Rubies", "Ruby").displayName("Uncut ruby"),
+                new StorableItem(ItemID.UNCUT_DIAMOND).checkName("Diamonds", "Diamond").displayName("Uncut diamond"),
+                new StorableItem(ItemID.UNCUT_DRAGONSTONE).checkName("Dragonstones", "Dragonstone").displayName("Uncut dragonstone")
             ));
         }
         storage.storableItems(storableGems.toArray(StorableItem[]::new));

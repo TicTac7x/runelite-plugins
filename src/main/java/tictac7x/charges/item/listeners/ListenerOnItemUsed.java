@@ -11,17 +11,20 @@ public class ListenerOnItemUsed extends ListenerBase {
     }
 
     public void trigger(CustomMenuOptionClicked event, ChargedItemBase chargedItem) {
-        for (TriggerBase triggerBase : chargedItem.triggers) {
-            if (!isValidTrigger(chargedItem, triggerBase, event)) continue;
+        for (TriggerBase trigger : chargedItem.triggers) {
+            if (!isValidTrigger(chargedItem, trigger, event)) continue;
 
-            OnItemUsed triggerOnItemUsed = (OnItemUsed) triggerBase;
+            OnItemUsed triggerOnItemUsed = (OnItemUsed) trigger;
             boolean triggerUsed = false;
 
             if (super.trigger(triggerOnItemUsed, chargedItem)) {
                 triggerUsed = true;
             }
 
-            if (triggerUsed) return;
+            if (triggerUsed) {
+                afterTrigger(trigger);
+                return;
+            }
         }
     }
 

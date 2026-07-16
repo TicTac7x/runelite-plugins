@@ -24,9 +24,9 @@ import java.util.regex.*;
 import java.util.stream.*;
 
 public class Store {
-    private Client client;
-    private ItemManager itemManager;
-    private ConfigManager configManager;
+    private MyClient client;
+    private MyItemManager itemManager;
+    private MyConfigManager configManager;
     private Provider provider;
     private ZoneId timezone = ZoneId.of("Europe/London");
 
@@ -76,7 +76,7 @@ public class Store {
     private ListenerOnCombat listenerOnCombat;
     private ListenerOnGameTick listenerOnGameTick;
 
-    public Store(Client client, ItemManager itemManager, ConfigManager configManager) {
+    public Store(MyClient client, MyItemManager itemManager, MyConfigManager configManager) {
         this.client = client;
         this.itemManager = itemManager;
         this.configManager = configManager;
@@ -164,7 +164,7 @@ public class Store {
                     storageStringBuilder.append(item.itemId).append(",");
                 }
                 String storageString = storageStringBuilder.toString().replaceAll(",$", "");
-                configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.storage_bank, storageString);
+                configManager.setConfiguration(TicTac7xChargesImprovedConfig.storage_bank, storageString);
             }
 
             updateChargedItemsPrimaryId(event.getContainerId() == InventoryID.BANK);
@@ -268,10 +268,9 @@ public class Store {
 
         checkBankWithdraw(customMenuOptionClicked);
 
-        // Gametick changed, clear previous menu entries since they are no longer valid.
-        if (gametick >= gametick_before + 2) {
-            gametick = 0; gametick_before = 0;
-            menuOptionsClicked.clear();
+        // Clear older menu options.
+        if (menuOptionsClicked.size() > 20) {
+            menuOptionsClicked = menuOptionsClicked.subList(menuOptionsClicked.size() - 20, menuOptionsClicked.size());
         }
 
         // Save menu option and target for other triggers to use.
@@ -316,13 +315,13 @@ public class Store {
             amountString.equals("All-but-1") ? bank.count(customMenuOptionClicked.itemId) - 1 :
             Integer.parseInt(amountString);
 
-        ItemComposition itemComposition = itemManager.getItemComposition(customMenuOptionClicked.itemId);
+        MyItemComposition itemComposition = itemManager.getItemComposition(customMenuOptionClicked.itemId);
 
         // Copy of current inventory.
         CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(inventory);
 
         // Add new items.
-        if (itemComposition.isStackable() || client.getVarbitValue(3958) == 1) {
+        if (itemComposition.isStackable || client.getVarbitValue(VarbitID.BANK_WITHDRAWNOTES) == 1) {
             itemContainerChanged.addStackableItem(new StorageItem(customMenuOptionClicked.itemId, amount));
         } else {
             itemContainerChanged.addNonStackableItem(new StorageItem(customMenuOptionClicked.itemId, Math.min(amount, 28 - inventory.getItems().size())));
@@ -342,13 +341,6 @@ public class Store {
         runNextGameTickQueue();
         gametick++;
 
-        // Keep only last menu entry.
-        if (menuOptionsClicked.size() > 1) {
-            CustomMenuOptionClicked lastMenuEntry = menuOptionsClicked.get(menuOptionsClicked.size() - 1);
-            menuOptionsClicked.clear();
-            menuOptionsClicked.add(lastMenuEntry);
-        }
-
         if (isInCombat()) {
             onCombat();
         }
@@ -364,7 +356,7 @@ public class Store {
                     customMenuOptionClicked.itemId == itemId ||
                     // Additional target name check, because itemId can be -1 when the clicked item was not in inventory.
                     // Target can be also in format of item -> something else, which is why we are checking for partial match
-                    customMenuOptionClicked.target.contains(itemManager.getItemComposition(itemId).getName())
+                    customMenuOptionClicked.target.contains(itemManager.getItemComposition(itemId).name)
                 ) return true;
             }
         }
@@ -613,7 +605,8 @@ public class Store {
         nextTickQueue.add(consumer);
     }
 
-    public void onChatMessage(CustomChatMessage event) {switch (event.type) {
+    public void onChatMessage(CustomChatMessage event) {
+        switch (event.type) {
             case GAMEMESSAGE:
             case DIALOG:
             case SPAM:
@@ -656,7 +649,7 @@ public class Store {
 
     public void onGraphicChanged(GraphicChanged event) {
         CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
-        if (!graphicChanged.isLocalPlayer(client)) return;
+        if (!client.isLocalPlayer(graphicChanged.actor)) return;
 
         if (graphicChanged.hasGraphicId(GraphicId.SPLASH)) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
@@ -725,7 +718,7 @@ public class Store {
     }
 
     public void onResetDaily(String date) {
-        configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.date, date);
+        configManager.setConfiguration(TicTac7xChargesImprovedConfig.date, date);
 
         if (provider.config.showDailyReset()) {
             provider.chatMessageManager.queue(QueuedMessage.builder()
@@ -779,7 +772,7 @@ public class Store {
 
         // Send message about plugin updates for once.
         if (!provider.config.getVersion().equals(TicTac7xChargesImprovedPlugin.pluginVersion)) {
-            configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.version, TicTac7xChargesImprovedPlugin.pluginVersion);
+            configManager.setConfiguration(TicTac7xChargesImprovedConfig.version, TicTac7xChargesImprovedPlugin.pluginVersion);
             provider.chatMessageManager.queue(QueuedMessage.builder()
                 .type(ChatMessageType.CONSOLE)
                 .runeLiteFormattedMessage(TicTac7xChargesImprovedPlugin.pluginMessage)
@@ -816,5 +809,9 @@ public class Store {
         }
 
         return false;
+    }
+
+    public void clearOnMenuOptionsClicked() {
+        menuOptionsClicked.clear();
     }
 }

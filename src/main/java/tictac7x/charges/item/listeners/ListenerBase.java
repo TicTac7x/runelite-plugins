@@ -96,7 +96,17 @@ public abstract class ListenerBase {
             triggerUsed = true;
         }
 
+        if (triggerUsed) {
+            afterTrigger(trigger);
+        }
+
         return triggerUsed;
+    }
+
+    void afterTrigger(TriggerBase trigger) {
+        if (trigger.onItemClick.isPresent()) {
+            provider.store.clearOnMenuOptionsClicked();
+        }
     }
 
     boolean isValidTrigger(TriggerBase trigger, ChargedItemBase chargedItem) {

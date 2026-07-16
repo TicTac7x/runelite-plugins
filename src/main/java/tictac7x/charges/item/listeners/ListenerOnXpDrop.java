@@ -25,7 +25,10 @@ public class ListenerOnXpDrop extends ListenerBase {
                 triggerUsed = true;
             }
 
-            if (triggerUsed) return;
+            if (triggerUsed) {
+                afterTrigger(trigger);
+                return;
+            }
         }
     }
 

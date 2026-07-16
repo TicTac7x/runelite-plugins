@@ -17,9 +17,9 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
     public U_BottomlessCompostBucket(Provider provider) {
         super(TicTac7xChargesImprovedConfig.bottomless_compost_bucket, ItemID.BOTTOMLESS_COMPOST_BUCKET_FILLED, provider);
         storage = storage.setMaximumTotalQuantity(10_000).storableItems(
-            new StorableItem (ItemID.BUCKET_ULTRACOMPOST).checkName("ultra"),
-            new StorableItem (ItemID.BUCKET_SUPERCOMPOST).checkName("super"),
-            new StorableItem (ItemID.BUCKET_COMPOST).checkName("regular").displayName("Regular compost")
+            new StorableItem(ItemID.BUCKET_ULTRACOMPOST).checkName("ultra"),
+            new StorableItem(ItemID.BUCKET_SUPERCOMPOST).checkName("super"),
+            new StorableItem(ItemID.BUCKET_COMPOST).checkName("regular").displayName("Regular compost")
         );
 
         this.items = new TriggerItem[]{
@@ -85,7 +85,7 @@ public class U_BottomlessCompostBucket extends ChargedItemWithStorage {
             }),
 
             // Fill compost from bin.
-            new OnXpDrop(Skill.FARMING).unallowedItem (ItemID.BUCKET_EMPTY).onMenuOption("Take").onMenuTarget("Compost Bin", "Big Compost Bin").consumer(() -> {
+            new OnXpDrop(Skill.FARMING).unallowedItem(ItemID.BUCKET_EMPTY).onMenuOption("Take").onMenuTarget("Compost Bin", "Big Compost Bin").consumer(() -> {
                 if (getCompostType().isPresent()) {
                     storage.add(getCompostType().get().itemId, 2);
                 }

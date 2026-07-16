@@ -51,6 +51,10 @@ public class ListenerOnWidgetLoaded extends ListenerBase {
                 triggerUsed = true;
             }
 
+            if (triggerUsed) {
+                afterTrigger(trigger);
+            }
+
             if (triggerUsed && !trigger.multiTrigger) return;
         }
     }

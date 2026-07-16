@@ -24,24 +24,24 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
     private Optional<Integer> lastLogUsedFromBasketForBeehive = Optional.empty();
 
     private List<StorableLog> storableLogs = List.of(
-        new StorableLog (ItemID.LOGS, "Logs", true).displayName("Regular logs").checkName("some logs", "x Logs"),
-        new StorableLog (ItemID.ACHEY_TREE_LOGS, "Achey tree logs", true).checkName("Achey tree logs"),
-        new StorableLog (ItemID.OAK_LOGS, "Oak logs", true).checkName("Oak logs"),
-        new StorableLog (ItemID.WILLOW_LOGS, "Willow logs", true).checkName("Willow logs"),
-        new StorableLog (ItemID.TEAK_LOGS, "Teak logs", true).checkName("Teak logs"),
-        new StorableLog (ItemID.JATOBA_LOGS, "Jatoba logs", true).checkName("Jatoba logs"),
-        new StorableLog (ItemID.JUNIPER_LOGS, "Juniper logs", true).checkName("Juniper logs"),
-        new StorableLog (ItemID.MAPLE_LOGS, "Maple logs", true).checkName("Maple logs"),
-        new StorableLog (ItemID.HOLLOW_BARK, "Bark", true).checkName("Bark"),
-        new StorableLog (ItemID.MAHOGANY_LOGS, "Mahogany logs", true).checkName("Mahogany logs"),
-        new StorableLog (ItemID.ARCTIC_PINE_LOG, "Arctic pine logs", true).checkName("Arctic pine logs"),
-        new StorableLog (ItemID.YEW_LOGS, "Yew logs", true).checkName("Yew logs"),
-        new StorableLog (ItemID.BLISTERWOOD_LOGS, "Blisterwood logs", true).checkName("Blisterwood logs"),
-        new StorableLog (ItemID.CAMPHOR_LOGS, "Camphor logs", true).checkName("Camphor logs"),
-        new StorableLog (ItemID.MAGIC_LOGS, "Magic logs", true).checkName("Magic logs"),
-        new StorableLog (ItemID.IRONWOOD_LOGS, "Ironwood logs", true).checkName("Ironwood logs"),
-        new StorableLog (ItemID.REDWOOD_LOGS, "Redwood logs", true).checkName("Redwood logs"),
-        new StorableLog (ItemID.ROSEWOOD_LOGS, "Rosewood logs", true).checkName("Rosewood logs")
+        new StorableLog(ItemID.LOGS, "Logs", true).displayName("Regular logs").checkName("some logs", "x Logs"),
+        new StorableLog(ItemID.ACHEY_TREE_LOGS, "Achey tree logs", true).checkName("Achey tree logs"),
+        new StorableLog(ItemID.OAK_LOGS, "Oak logs", true).checkName("Oak logs"),
+        new StorableLog(ItemID.WILLOW_LOGS, "Willow logs", true).checkName("Willow logs"),
+        new StorableLog(ItemID.TEAK_LOGS, "Teak logs", true).checkName("Teak logs"),
+        new StorableLog(ItemID.JATOBA_LOGS, "Jatoba logs", true).checkName("Jatoba logs"),
+        new StorableLog(ItemID.JUNIPER_LOGS, "Juniper logs", true).checkName("Juniper logs"),
+        new StorableLog(ItemID.MAPLE_LOGS, "Maple logs", true).checkName("Maple logs"),
+        new StorableLog(ItemID.HOLLOW_BARK, "Bark", true).checkName("Bark"),
+        new StorableLog(ItemID.MAHOGANY_LOGS, "Mahogany logs", true).checkName("Mahogany logs"),
+        new StorableLog(ItemID.ARCTIC_PINE_LOG, "Arctic pine logs", true).checkName("Arctic pine logs"),
+        new StorableLog(ItemID.YEW_LOGS, "Yew logs", true).checkName("Yew logs"),
+        new StorableLog(ItemID.BLISTERWOOD_LOGS, "Blisterwood logs", true).checkName("Blisterwood logs"),
+        new StorableLog(ItemID.CAMPHOR_LOGS, "Camphor logs", true).checkName("Camphor logs"),
+        new StorableLog(ItemID.MAGIC_LOGS, "Magic logs", true).checkName("Magic logs"),
+        new StorableLog(ItemID.IRONWOOD_LOGS, "Ironwood logs", true).checkName("Ironwood logs"),
+        new StorableLog(ItemID.REDWOOD_LOGS, "Redwood logs", true).checkName("Redwood logs"),
+        new StorableLog(ItemID.ROSEWOOD_LOGS, "Rosewood logs", true).checkName("Rosewood logs")
     );
 
     public C_LogBasket(String configKey, int itemId, int openItemId, Storage storage, Provider provider) {
@@ -52,7 +52,7 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
 
     public C_LogBasket(Provider provider) {
         super(TicTac7xChargesImprovedConfig.log_basket, ItemID.LOG_BASKET_CLOSED, provider);
-        setup (ItemID.LOG_BASKET_CLOSED, ItemID.LOG_BASKET_OPEN);
+        setup(ItemID.LOG_BASKET_CLOSED, ItemID.LOG_BASKET_OPEN);
     }
 
     public void setup(int itemId, int openItemId) {
@@ -86,14 +86,14 @@ public class C_LogBasket extends ChargedItemWithStorageEmptyable {
             }).onItemClick(),
 
             // Miscellania support.
-            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(openItemId).addToStorage (ItemID.MAPLE_LOGS, 0),
-            new OnChatMessage("You get some teak logs and give them to Carpenter Kjallak.").requiredItem(openItemId).addToStorage (ItemID.TEAK_LOGS, 0),
-            new OnChatMessage("You get some mahogany logs and give them to Carpenter Kjallak.").requiredItem(openItemId).addToStorage (ItemID.MAHOGANY_LOGS, 0),
+            new OnChatMessage("You get some maple logs and give them to Lumberjack Leif.").requiredItem(openItemId).addToStorage(ItemID.MAPLE_LOGS, 0),
+            new OnChatMessage("You get some teak logs and give them to Carpenter Kjallak.").requiredItem(openItemId).addToStorage(ItemID.TEAK_LOGS, 0),
+            new OnChatMessage("You get some mahogany logs and give them to Carpenter Kjallak.").requiredItem(openItemId).addToStorage(ItemID.MAHOGANY_LOGS, 0),
 
 
             // Achey tree.
             new OnChatMessage("You get some logs.").onMenuTarget("Achey Tree").consumer(() -> {
-                lastLogs = Optional.of(new StorageItem (ItemID.ACHEY_TREE_LOGS, 1));
+                lastLogs = Optional.of(new StorageItem(ItemID.ACHEY_TREE_LOGS, 1));
                 storage.add(lastLogs);
                 infernalQuantityTracker++;
             }).requiredItem(openItemId),

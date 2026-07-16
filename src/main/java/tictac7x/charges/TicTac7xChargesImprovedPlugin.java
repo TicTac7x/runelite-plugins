@@ -116,6 +116,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		return configManager.getConfig(TicTac7xChargesImprovedConfig.class);
 	}
 
+	private MyClient myClient;
+	private MyItemManager myItemManager;
+	private MyConfigManager myConfigManager;
 	private Provider provider;
 	private Store store;
 
@@ -129,11 +132,30 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Override
 	protected void startUp() {
+		myClient = new MyClient(
+			(varbitId) -> client.getVarbitValue(varbitId),
+			() -> client.getTickCount(),
+			() -> client.getGameState(),
+			(actor) -> client.getLocalPlayer() == actor
+		);
+		myItemManager = new MyItemManager((itemId) -> {
+			ItemComposition itemComposition = itemManager.getItemComposition(itemId);
+			return new MyItemComposition(
+				itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : itemId,
+				itemComposition.getName(),
+				itemComposition.isStackable(),
+				itemComposition.getPlaceholderTemplateId() != -1
+			);
+		});
+		myConfigManager = new MyConfigManager((key, value) -> {
+			configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, key, value);
+		});
+
 		keyManager.registerKeyListener(this);
 		mouseManager.registerMouseListener(this);
 		mouseManager.registerMouseWheelListener(this);
 
-		store = new Store(client, itemManager, configManager);
+		store = new Store(myClient, myItemManager, myConfigManager);
 		provider = new Provider(client, clientThread, pluginManager, configManager, itemManager, infoBoxManager, chatMessageManager, tooltipManager, notifier, this, config, store, gson);
 		store.addProvider(provider);
 
@@ -508,8 +530,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onChatMessage(ChatMessage event) {
 		store.onChatMessage(new CustomChatMessage(
 			event.getType(),
-			getCleanText(event.getMessage()),
-			event.getSender()
+			getCleanText(event.getMessage())
 		));
 	}
 

@@ -3,6 +3,7 @@ package tictac7x.charges.events;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
 import net.runelite.client.game.*;
+import tictac7x.charges.*;
 import tictac7x.charges.item.storage.*;
 
 import java.util.*;
@@ -16,17 +17,17 @@ public class CustomItemContainerChanged {
         this.items = items;
     }
 
-    public CustomItemContainerChanged(ItemContainerChanged event, ItemManager itemManager) {
+    public CustomItemContainerChanged(ItemContainerChanged event, MyItemManager itemManager) {
         this.itemContainerId = event.getContainerId();
         this.items = new ArrayList<>();
 
         for (Item item : event.getItemContainer().getItems()) {
             if (item == null || item.getId() == -1 || item.getId() == 6512) continue;
 
-            ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
+            MyItemComposition itemComposition = itemManager.getItemComposition(item.getId());
             items.add(new StorageItem(
-                itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : item.getId(),
-                itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity()
+                itemComposition.itemId,
+                itemComposition.isPlaceholder ? 0 : item.getQuantity()
             ));
         }
     }

@@ -46,9 +46,9 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
 
             // Enter Gauntlet detection.
             new OnMenuOptionClicked("Enter", "Enter-corrupted").onMenuTarget("The Gauntlet").consumer(() -> {
-                if (provider.store.inventoryContainsItem (ItemID.TOB_TELEPORT)) {
+                if (provider.store.inventoryContainsItem(ItemID.TOB_TELEPORT)) {
                     inGauntletWithEscapeCrystal = true;
-                } else if (provider.store.equipmentContainsItem (ItemID.TOB_TELEPORT)) {
+                } else if (provider.store.equipmentContainsItem(ItemID.TOB_TELEPORT)) {
                     provider.notifier.notify("Escape crystal disabled, because it was not in the inventory!");
                     inGauntletWithEscapeCrystal = false;
                 } else {

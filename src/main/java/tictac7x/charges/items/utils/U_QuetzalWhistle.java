@@ -34,9 +34,9 @@ public class U_QuetzalWhistle extends ChargedItem {
             new OnChatMessage("You craft yourself a basic quetzal whistle.").setFixedCharges(0),
 
             // Fully charged.
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem (ItemID.HG_QUETZALWHISTLE_BASIC).setFixedCharges(5),
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem (ItemID.HG_QUETZALWHISTLE_ENHANCED).setFixedCharges(20),
-            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem (ItemID.HG_QUETZALWHISTLE_PERFECTED).setFixedCharges(50),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemID.HG_QUETZALWHISTLE_BASIC).setFixedCharges(5),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemID.HG_QUETZALWHISTLE_ENHANCED).setFixedCharges(20),
+            new OnChatMessage("Looks like the birds are all full for now. Make them work a bit before feeding them again!").requiredItem(ItemID.HG_QUETZALWHISTLE_PERFECTED).setFixedCharges(50),
 
             // Partially charged.
             new OnItemContainerChanged(InventoryID.INV).onMenuOption("Recharge-whistle").hasChatMessage("Soar Leader Pitri|There you go. Some whistle charges for you!").onInventoryDifference(itemsDifference -> {

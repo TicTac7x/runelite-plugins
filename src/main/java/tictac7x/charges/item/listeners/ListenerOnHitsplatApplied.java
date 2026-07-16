@@ -33,6 +33,7 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
                     trigger.triggerTick = provider.client.getTickCount();
                 }
 
+                afterTrigger(trigger);
                 return;
             }
         }

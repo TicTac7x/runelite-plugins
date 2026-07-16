@@ -27,28 +27,28 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         this.items = items;
 
         this.storage.storableItems(
-            new StorableItem (ItemID.SNAKEBOSS_SCALE),
-            new StorableItem (ItemID.BRONZE_DART).checkName("Bronze dart"),
-            new StorableItem (ItemID.IRON_DART).checkName("Iron dart"),
-            new StorableItem (ItemID.STEEL_DART).checkName("Steel dart"),
-            new StorableItem (ItemID.MITHRIL_DART).checkName("Mithril dart"),
-            new StorableItem (ItemID.ADAMANT_DART).checkName("Adamant dart"),
-            new StorableItem (ItemID.RUNE_DART).checkName("Rune dart"),
-            new StorableItem (ItemID.AMETHYST_DART).checkName("Amethyst dart"),
-            new StorableItem (ItemID.DRAGON_DART).checkName("Dragon dart")
+            new StorableItem(ItemID.SNAKEBOSS_SCALE),
+            new StorableItem(ItemID.BRONZE_DART).checkName("Bronze dart"),
+            new StorableItem(ItemID.IRON_DART).checkName("Iron dart"),
+            new StorableItem(ItemID.STEEL_DART).checkName("Steel dart"),
+            new StorableItem(ItemID.MITHRIL_DART).checkName("Mithril dart"),
+            new StorableItem(ItemID.ADAMANT_DART).checkName("Adamant dart"),
+            new StorableItem(ItemID.RUNE_DART).checkName("Rune dart"),
+            new StorableItem(ItemID.AMETHYST_DART).checkName("Amethyst dart"),
+            new StorableItem(ItemID.DRAGON_DART).checkName("Dragon dart")
         );
 
         this.triggers.addAll(List.of(
             // Check without darts.
             new OnChatMessage("Darts: None\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
-                StorageItem scales = new StorageItem (ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
+                StorageItem scales = new StorageItem(ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
                 storage.clearAndPut(scales);
 
             }),
 
             // Check with darts.
             new OnChatMessage("Darts: (?<dartstype>.+) x (?<dartsamount>.+)\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
-                storage.clearAndPut (ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
+                storage.clearAndPut(ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
 
                 Optional<StorageItem> darts = getStorageItemFromName(m.group("dartstype"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("dartsamount")));
                 if (darts.isPresent()) {
@@ -58,7 +58,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
             // Unload (empty only darts)
             new OnMenuOptionClicked("Unload").onItemClick().runConsumerOnNextGameTick(() -> {
-                storage.clearAndPut(storage.getStorage().getItem (ItemID.SNAKEBOSS_SCALE));
+                storage.clearAndPut(storage.getStorage().getItem(ItemID.SNAKEBOSS_SCALE));
             }),
 
             // Uncharge (empty darts and scales)
@@ -77,7 +77,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnAnimationChanged(5061).isEquipped().consumer(() -> {
                 // 1/3 chance to not use scale.
                 if (ThreadLocalRandom.current().nextInt(1, 4) != 3) {
-                    storage.remove (ItemID.SNAKEBOSS_SCALE, 1);
+                    storage.remove(ItemID.SNAKEBOSS_SCALE, 1);
                 }
 
                 // Calculate if dart could have been used.
