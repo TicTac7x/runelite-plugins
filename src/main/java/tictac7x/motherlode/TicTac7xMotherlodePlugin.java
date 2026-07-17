@@ -85,7 +85,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	private Sack sack;
 	private Motherlode motherlode;
 	private Widget widget;
-	private MyVarbitManager varbitManager;
 
 	@Provides
 	TicTac7xMotherlodeConfig provideConfig(ConfigManager configManager) {
@@ -94,19 +93,12 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 
 	@Override
 	protected void startUp() {
-		varbitManager = new MyVarbitManager() {
-			@Override
-			public int getVarbitValue(int varbitId) {
-				return client.getVarbitValue(varbitId);
-			}
-		};
-
 		provider = new Provider(client);
 		character = new Character(client);
 		bank = new Bank(configManager, config, itemManager);
 		inventory = new Inventory();
 		hopper = new Hopper(client, inventory);
-		sack = new Sack(varbitManager);
+		sack = new Sack(provider);
 		motherlode = new Motherlode(client, clientThread, notifier, config, bank, inventory, sack, hopper);
 		widget = new Widget(client, config, motherlode, character);
 		oreVeins = new OreVeins(config, character, motherlode, provider);

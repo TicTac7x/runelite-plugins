@@ -1,62 +1,64 @@
 package tictac7x.motherlode;
 
+import net.runelite.api.*;
 import net.runelite.api.gameval.*;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.*;
+import org.mockito.*;
+import org.mockito.junit.*;
 import java.util.*;
-
+import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SackTest {
-    Map<Integer, Integer> varbits = new HashMap<>();
-    MyVarbitManager varbitManager = new MyVarbitManager() {
-        @Override
-        public int getVarbitValue(int varbitId) {
-            return varbits.get(varbitId);
-        }
-    };
+    @Mock
+    Client client;
+
+    Provider provider;
     Sack sack;
 
     @Before
     public void setup() {
-        sack = new Sack(varbitManager);
+        provider = new Provider(client);
+        sack = new Sack(provider);
     }
 
     @Test
     public void PaydirtAmount() {
-        varbits.put(VarbitID.MOTHERLODE_SACK_TRANSMIT, 0);
-        varbits.put(VarbitID.MOTHERLODE_BIGGERSACK, 0);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT)).thenReturn(0);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_BIGGERSACK)).thenReturn(0);
         assertEquals(0, sack.getPaydirt());
         assertEquals(108, sack.getSpaceLeft());
 
-        varbits.put(VarbitID.MOTHERLODE_SACK_TRANSMIT, 10);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT)).thenReturn(10);
         assertEquals(10, sack.getPaydirt());
         assertEquals(98, sack.getSpaceLeft());
 
-        varbits.put(VarbitID.MOTHERLODE_SACK_TRANSMIT, 108);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT)).thenReturn(108);
         assertEquals(108, sack.getPaydirt());
         assertEquals(0, sack.getSpaceLeft());
 
-        varbits.put(VarbitID.MOTHERLODE_BIGGERSACK, 1);
-        varbits.put(VarbitID.MOTHERLODE_SACK_TRANSMIT, 189);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_BIGGERSACK)).thenReturn(1);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT)).thenReturn(189);
         assertEquals(189, sack.getPaydirt());
         assertEquals(0, sack.getSpaceLeft());
 
-        varbits.put(VarbitID.MOTHERLODE_SACK_TRANSMIT, 0);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT)).thenReturn(0);
         assertEquals(0, sack.getPaydirt());
         assertEquals(189, sack.getSpaceLeft());
 
-        varbits.put(VarbitID.MOTHERLODE_SACK_TRANSMIT, 20);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_SACK_TRANSMIT)).thenReturn(20);
         assertEquals(169, sack.getSpaceLeft());
     }
 
     @Test
     public void Sizes() {
-        varbits.put(VarbitID.MOTHERLODE_BIGGERSACK, 0);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_BIGGERSACK)).thenReturn(0);
         assertEquals(108, sack.getSize());
 
-        varbits.put(VarbitID.MOTHERLODE_BIGGERSACK, 1);
+        when(client.getVarbitValue(VarbitID.MOTHERLODE_BIGGERSACK)).thenReturn(1);
         assertEquals(189, sack.getSize());
     }
 }
