@@ -35,9 +35,9 @@ public class U_BloodEssence extends ChargedItemWithStatus {
 
             // Status from inventory.
             new OnItemContainerChanged(InventoryID.INV).itemsConsumer(items -> {
-                if (items.hasItem (ItemID.BLOOD_ESSENCE_ACTIVE)) {
+                if (items.hasItem(ItemID.BLOOD_ESSENCE_ACTIVE)) {
                     activate();
-                } else if (items.hasItem (ItemID.BLOOD_ESSENCE_INACTIVE)) {
+                } else if (items.hasItem(ItemID.BLOOD_ESSENCE_INACTIVE)) {
                     deactivate();
                 }
             }),

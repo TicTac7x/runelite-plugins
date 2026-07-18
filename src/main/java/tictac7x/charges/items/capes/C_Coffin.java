@@ -14,12 +14,12 @@ public class C_Coffin extends ChargedItemWithStorageEmptyable {
     public C_Coffin(Provider provider) {
         super(TicTac7xChargesImprovedConfig.coffin, ItemID.SHADES_COFFIN_GOLD, provider);
         this.storage = storage.storableItems(
-            new StorableItem (ItemID.SHADE_BONES1).checkName("Loar"),
-            new StorableItem (ItemID.SHADE_BONES2).checkName("Phrin"),
-            new StorableItem (ItemID.SHADE_BONES3).checkName("Riyl"),
-            new StorableItem (ItemID.SHADE_BONES4).checkName("Asyn"),
-            new StorableItem (ItemID.SHADE_BONES5).checkName("Fiyr"),
-            new StorableItem (ItemID.SHADE_BONES6).checkName("Urium")
+            new StorableItem(ItemID.SHADE_BONES1).checkName("Loar"),
+            new StorableItem(ItemID.SHADE_BONES2).checkName("Phrin"),
+            new StorableItem(ItemID.SHADE_BONES3).checkName("Riyl"),
+            new StorableItem(ItemID.SHADE_BONES4).checkName("Asyn"),
+            new StorableItem(ItemID.SHADE_BONES5).checkName("Fiyr"),
+            new StorableItem(ItemID.SHADE_BONES6).checkName("Urium")
         );
 
         this.items = new TriggerItem[]{
@@ -45,12 +45,12 @@ public class C_Coffin extends ChargedItemWithStorageEmptyable {
             // Check.
             new OnChatMessage("Loar (?<loar>.+) / Phrin (?<phrin>.+) / Riyl (?<riyl>.+) / Asyn (?<asyn>.+) / Fiyr (?<fiyr>.+) / Urium (?<urium>.+)").matcherConsumer(m -> {
                 storage.clear();
-                storage.put (ItemID.SHADE_BONES1, Integer.parseInt(m.group("loar")));
-                storage.put (ItemID.SHADE_BONES2, Integer.parseInt(m.group("phrin")));
-                storage.put (ItemID.SHADE_BONES3, Integer.parseInt(m.group("riyl")));
-                storage.put (ItemID.SHADE_BONES4, Integer.parseInt(m.group("asyn")));
-                storage.put (ItemID.SHADE_BONES5, Integer.parseInt(m.group("fiyr")));
-                storage.put (ItemID.SHADE_BONES6, Integer.parseInt(m.group("urium")));
+                storage.put(ItemID.SHADE_BONES1, Integer.parseInt(m.group("loar")));
+                storage.put(ItemID.SHADE_BONES2, Integer.parseInt(m.group("phrin")));
+                storage.put(ItemID.SHADE_BONES3, Integer.parseInt(m.group("riyl")));
+                storage.put(ItemID.SHADE_BONES4, Integer.parseInt(m.group("asyn")));
+                storage.put(ItemID.SHADE_BONES5, Integer.parseInt(m.group("fiyr")));
+                storage.put(ItemID.SHADE_BONES6, Integer.parseInt(m.group("urium")));
             }),
 
             // Try to empty already empty.

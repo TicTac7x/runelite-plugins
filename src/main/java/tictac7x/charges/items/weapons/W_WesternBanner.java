@@ -19,13 +19,13 @@ public class W_WesternBanner extends ChargedItem {
 
         this.triggers.addAll(List.of(
             // Teleport.
-            new OnMenuOptionClicked("Teleport").hasItemId (ItemID.WESTERN_BANNER_HARD).setFixedCharges(0),
+            new OnMenuOptionClicked("Teleport").hasItemId(ItemID.WESTERN_BANNER_HARD).setFixedCharges(0),
 
             // Teleport already used.
             new OnChatMessage("You have already used your available teleports for today. Try again tomorrow after the standard has recharged.").onItemClick().setFixedCharges(0),
 
             // Daily reset.
-            new OnResetDaily().requiredItem (ItemID.WESTERN_BANNER_HARD).setFixedCharges(1)
+            new OnResetDaily().requiredItem(ItemID.WESTERN_BANNER_HARD).setFixedCharges(1)
         ));
     }
 }

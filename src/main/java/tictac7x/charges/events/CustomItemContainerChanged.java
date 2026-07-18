@@ -3,32 +3,18 @@ package tictac7x.charges.events;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
 import net.runelite.client.game.*;
+import tictac7x.charges.*;
 import tictac7x.charges.item.storage.*;
 
 import java.util.*;
 
 public class CustomItemContainerChanged {
-    public int itemContainerId;
-    private List<StorageItem> items;
+    public final int itemContainerId;
+    private final List<StorageItem> items;
 
     public CustomItemContainerChanged(int itemContainerId, List<StorageItem> items) {
         this.itemContainerId = itemContainerId;
         this.items = items;
-    }
-
-    public CustomItemContainerChanged(ItemContainerChanged event, ItemManager itemManager) {
-        this.itemContainerId = event.getContainerId();
-        this.items = new ArrayList<>();
-
-        for (Item item : event.getItemContainer().getItems()) {
-            if (item == null || item.getId() == -1 || item.getId() == 6512) continue;
-
-            ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
-            items.add(new StorageItem(
-                itemComposition.getPlaceholderTemplateId() != -1 ? itemComposition.getPlaceholderId() : item.getId(),
-                itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity()
-            ));
-        }
     }
 
     public CustomItemContainerChanged(CustomItemContainerChanged previousItemContainerChanged) {

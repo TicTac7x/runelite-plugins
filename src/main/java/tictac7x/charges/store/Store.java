@@ -126,7 +126,7 @@ public class Store {
     public int getInventoryEmptySlots() {
         return 28 - inventory.size();
     }
-    
+
     private Stream<ChargedItemBase> getInventoryAndEquipmentChargedItems() {
         return Arrays.stream(chargedItems).filter(ChargedItemBase::inInventoryOrEquipment);
     }
@@ -141,7 +141,7 @@ public class Store {
         });
     }
 
-    private void onItemContainerChanged(CustomItemContainerChanged event) {
+    public void onItemContainerChanged(CustomItemContainerChanged event) {
         runNextGameTickQueue();
 
         if (
@@ -171,11 +171,6 @@ public class Store {
         }
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> listenerOnItemContainerChanged.trigger(event, chargedItem));
-    }
-
-    public void onItemContainerChanged(ItemContainerChanged eventOriginal) {
-        CustomItemContainerChanged event = new CustomItemContainerChanged(eventOriginal, itemManager);
-        onItemContainerChanged(event);
     }
 
     private void updateChargedItemsPrimaryId(boolean checkBank) {
@@ -654,10 +649,7 @@ public class Store {
         });
     }
 
-    public void onGraphicChanged(GraphicChanged event) {
-        CustomGraphicChanged graphicChanged = new CustomGraphicChanged(event);
-        if (!graphicChanged.isLocalPlayer(client)) return;
-
+    public void onGraphicChanged(CustomGraphicChanged graphicChanged) {
         if (graphicChanged.hasGraphicId(GraphicId.SPLASH)) {
             inCombatTicksRemainingDamageDoneToOthers = HIGHEST_MONSTER_ATTACK_SPEED;
         }

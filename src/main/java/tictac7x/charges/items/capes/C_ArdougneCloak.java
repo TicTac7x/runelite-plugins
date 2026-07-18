@@ -21,8 +21,8 @@ public class C_ArdougneCloak extends ChargedItem {
 
         this.triggers.addAll(List.of(
             new OnChatMessage("You have used (?<used>.+) of your (?<total>.+) Ardougne Farm teleports for today.").setDifferenceCharges(),
-            new OnResetDaily().specificItem (ItemID.ARDY_CAPE_MEDIUM).setFixedCharges(3),
-            new OnResetDaily().specificItem (ItemID.ARDY_CAPE_HARD).setFixedCharges(5)
+            new OnResetDaily().specificItem(ItemID.ARDY_CAPE_MEDIUM).setFixedCharges(3),
+            new OnResetDaily().specificItem(ItemID.ARDY_CAPE_HARD).setFixedCharges(5)
         ));
     }
 }

@@ -24,12 +24,13 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
 	testImplementation 'junit:junit:4.12'
+	testImplementation 'org.mockito:mockito-junit-jupiter:5.18.0'
 	testImplementation group: 'net.runelite', name:'client', version: runeLiteVersion
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
 group = 'tictac7x-charges'
-version = 'v0.6.13'
+version = 'v0.6.14'
 
 
 tasks.withType(JavaCompile).configureEach {

@@ -27,9 +27,9 @@ public class B_FremennikSeaBoots extends ChargedItem {
             new OnGraphicChanged(111).onItemClick().decreaseCharges(1),
 
             // Daily reset.
-            new OnResetDaily().specificItem (ItemID.FREMENNIK_BOOTS_EASY).setFixedCharges(1),
-            new OnResetDaily().specificItem (ItemID.FREMENNIK_BOOTS_MEDIUM).setFixedCharges(3),
-            new OnResetDaily().specificItem (ItemID.FREMENNIK_BOOTS_HARD).setFixedCharges(5)
+            new OnResetDaily().specificItem(ItemID.FREMENNIK_BOOTS_EASY).setFixedCharges(1),
+            new OnResetDaily().specificItem(ItemID.FREMENNIK_BOOTS_MEDIUM).setFixedCharges(3),
+            new OnResetDaily().specificItem(ItemID.FREMENNIK_BOOTS_HARD).setFixedCharges(5)
         ));
     }
 }

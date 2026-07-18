@@ -20,10 +20,10 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
     public U_ColossalPouch(Provider provider) {
         super(TicTac7xChargesImprovedConfig.colossal_pouch, ItemID.RCU_POUCH_COLOSSAL, provider);
         this.storage = storage.storableItems(
-            new StorableItem (ItemID.BLANKRUNE),
-            new StorableItem (ItemID.BLANKRUNE_HIGH),
-            new StorableItem (ItemID.BLANKRUNE_DAEYALT),
-            new StorableItem (ItemID.GOTR_GUARDIAN_ESSENCE)
+            new StorableItem(ItemID.BLANKRUNE),
+            new StorableItem(ItemID.BLANKRUNE_HIGH),
+            new StorableItem(ItemID.BLANKRUNE_DAEYALT),
+            new StorableItem(ItemID.GOTR_GUARDIAN_ESSENCE)
         ).setMaximumTotalQuantity(40).setHoldsSingleType(true);
 
         this.items = new TriggerItem[]{
@@ -37,10 +37,10 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Guardians of the rift.
             new OnChatMessage("The rift becomes active!").consumer(() -> {
-                storage.put (ItemID.GOTR_GUARDIAN_ESSENCE, 0);
+                storage.put(ItemID.GOTR_GUARDIAN_ESSENCE, 0);
             }),
             new OnVarbitChanged(13691, 0).consumer(() -> {
-                storage.put (ItemID.GOTR_GUARDIAN_ESSENCE, 0);
+                storage.put(ItemID.GOTR_GUARDIAN_ESSENCE, 0);
             }),
 
             // Check.
@@ -82,13 +82,13 @@ public class U_ColossalPouch extends ChargedItemWithStorageEmptyable {
 
             // Fill from inventory.
             new OnMenuOptionClicked("Fill").runConsumerOnNextGameTick(() -> {
-                if (provider.store.inventoryContainsItem (ItemID.GOTR_GUARDIAN_ESSENCE)) {
+                if (provider.store.inventoryContainsItem(ItemID.GOTR_GUARDIAN_ESSENCE)) {
                     storage.add(ItemID.GOTR_GUARDIAN_ESSENCE, provider.store.getInventoryItemQuantity(ItemID.GOTR_GUARDIAN_ESSENCE));
-                } else if (provider.store.inventoryContainsItem (ItemID.BLANKRUNE_DAEYALT)) {
+                } else if (provider.store.inventoryContainsItem(ItemID.BLANKRUNE_DAEYALT)) {
                     storage.add(ItemID.BLANKRUNE_DAEYALT, provider.store.getInventoryItemQuantity(ItemID.BLANKRUNE_DAEYALT));
-                } else if (provider.store.inventoryContainsItem (ItemID.BLANKRUNE_HIGH)) {
+                } else if (provider.store.inventoryContainsItem(ItemID.BLANKRUNE_HIGH)) {
                     storage.add(ItemID.BLANKRUNE_HIGH, provider.store.getInventoryItemQuantity(ItemID.BLANKRUNE_HIGH));
-                } else if (provider.store.inventoryContainsItem (ItemID.BLANKRUNE)) {
+                } else if (provider.store.inventoryContainsItem(ItemID.BLANKRUNE)) {
                     storage.add(ItemID.BLANKRUNE, provider.store.getInventoryItemQuantity(ItemID.BLANKRUNE));
                 }
             }),

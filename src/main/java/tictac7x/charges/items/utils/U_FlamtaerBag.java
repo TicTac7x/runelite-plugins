@@ -17,9 +17,9 @@ public class U_FlamtaerBag extends ChargedItemWithStorageEmptyable {
     public U_FlamtaerBag(Provider provider) {
         super(TicTac7xChargesImprovedConfig.flamtaer_bag, ItemID.FLAMTAER_BAG, provider);
         storage.storableItems(
-            new StorableItem (ItemID.TIMBERBEAM),
-            new StorableItem (ItemID.LIMESTONEBRICK),
-            new StorableItem (ItemID.SWAMPPASTE)
+            new StorableItem(ItemID.TIMBERBEAM),
+            new StorableItem(ItemID.LIMESTONEBRICK),
+            new StorableItem(ItemID.SWAMPPASTE)
         );
 
         this.items = new TriggerItem[]{
@@ -30,16 +30,16 @@ public class U_FlamtaerBag extends ChargedItemWithStorageEmptyable {
             // Check.
             new OnChatMessage("Timber beams: (?<beams>.+) Limestone bricks: (?<bricks>.+) Swamp paste: (?<paste>.+)").matcherConsumer(m -> {
                 storage.clear();
-                storage.put (ItemID.TIMBERBEAM, Integer.parseInt(m.group("beams")));
-                storage.put (ItemID.LIMESTONEBRICK, Integer.parseInt(m.group("bricks")));
-                storage.put (ItemID.SWAMPPASTE, Integer.parseInt(m.group("paste")));
+                storage.put(ItemID.TIMBERBEAM, Integer.parseInt(m.group("beams")));
+                storage.put(ItemID.LIMESTONEBRICK, Integer.parseInt(m.group("bricks")));
+                storage.put(ItemID.SWAMPPASTE, Integer.parseInt(m.group("paste")));
             }),
 
             // Repaired.
             new OnChatMessage("Your temple repair resource pool is full").consumer(() -> {
-                storage.removeAndPrioritizeInventory (ItemID.TIMBERBEAM, 1);
-                storage.removeAndPrioritizeInventory (ItemID.LIMESTONEBRICK, 1);
-                storage.removeAndPrioritizeInventory (ItemID.SWAMPPASTE, 5);
+                storage.removeAndPrioritizeInventory(ItemID.TIMBERBEAM, 1);
+                storage.removeAndPrioritizeInventory(ItemID.LIMESTONEBRICK, 1);
+                storage.removeAndPrioritizeInventory(ItemID.SWAMPPASTE, 5);
             }),
 
             // Replace "Empty" with proper "Empty to inventory" at bank.

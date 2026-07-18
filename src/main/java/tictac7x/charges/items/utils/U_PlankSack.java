@@ -14,13 +14,13 @@ public class U_PlankSack extends ChargedItemWithStorageEmptyable {
     public U_PlankSack(Provider provider) {
         super(TicTac7xChargesImprovedConfig.plank_sack, ItemID.PLANK_SACK, provider);
         storage.setMaximumTotalQuantity(28).storableItems(
-            new StorableItem (ItemID.WOODPLANK).checkName("Regular plank"),
-            new StorableItem (ItemID.PLANK_OAK).checkName("Oak plank"),
-            new StorableItem (ItemID.PLANK_TEAK).checkName("Teak plank"),
-            new StorableItem (ItemID.PLANK_MAHOGANY).checkName("Mahogany plank"),
-            new StorableItem (ItemID.PLANK_CAMPHOR).checkName("Camphor plank"),
-            new StorableItem (ItemID.PLANK_IRONWOOD).checkName("Ironwood plank"),
-            new StorableItem (ItemID.PLANK_ROSEWOOD).checkName("Rosewood plank")
+            new StorableItem(ItemID.WOODPLANK).checkName("Regular plank"),
+            new StorableItem(ItemID.PLANK_OAK).checkName("Oak plank"),
+            new StorableItem(ItemID.PLANK_TEAK).checkName("Teak plank"),
+            new StorableItem(ItemID.PLANK_MAHOGANY).checkName("Mahogany plank"),
+            new StorableItem(ItemID.PLANK_CAMPHOR).checkName("Camphor plank"),
+            new StorableItem(ItemID.PLANK_IRONWOOD).checkName("Ironwood plank"),
+            new StorableItem(ItemID.PLANK_ROSEWOOD).checkName("Rosewood plank")
         );
 
         this.items = new TriggerItem[]{
@@ -33,13 +33,13 @@ public class U_PlankSack extends ChargedItemWithStorageEmptyable {
 
             // Check
             new OnMenuOptionClicked("Check").consumer(() -> storage.clear()),
-            new OnChatMessage("Regular planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.WOODPLANK, Integer.parseInt(m.group("charges")))),
-            new OnChatMessage("Oak planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.PLANK_OAK, Integer.parseInt(m.group("charges")))),
-            new OnChatMessage("Teak planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.PLANK_TEAK, Integer.parseInt(m.group("charges")))),
-            new OnChatMessage("Mahogany planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.PLANK_MAHOGANY, Integer.parseInt(m.group("charges")))),
-            new OnChatMessage("Camphor planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.PLANK_CAMPHOR, Integer.parseInt(m.group("charges")))),
-            new OnChatMessage("Ironwood planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.PLANK_IRONWOOD, Integer.parseInt(m.group("charges")))),
-            new OnChatMessage("Rosewood planks: (?<charges>.+)").matcherConsumer(m -> storage.put (ItemID.PLANK_ROSEWOOD, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Regular planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.WOODPLANK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Oak planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.PLANK_OAK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Teak planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.PLANK_TEAK, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Mahogany planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.PLANK_MAHOGANY, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Camphor planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.PLANK_CAMPHOR, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Ironwood planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.PLANK_IRONWOOD, Integer.parseInt(m.group("charges")))),
+            new OnChatMessage("Rosewood planks: (?<charges>.+)").matcherConsumer(m -> storage.put(ItemID.PLANK_ROSEWOOD, Integer.parseInt(m.group("charges")))),
 
             // Contents changed
             new OnVarbitsMapChanged(

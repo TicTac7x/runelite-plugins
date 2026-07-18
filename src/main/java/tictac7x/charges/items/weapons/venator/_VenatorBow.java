@@ -23,48 +23,32 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
         };
 
         this.storage.storableItems(
-            new StorableItem (ItemID.ANCIENT_ESSENCE)
-        );
-
-        String itemNameRegex = Pattern.quote(itemName);
+            new StorableItem(ItemID.ANCIENT_ESSENCE)
+        ).emptyIsNegative();
 
         this.triggers.addAll(List.of(
             // Charging the bow with essence - Check to see if the bow is already fully charged.
-            new OnChatMessage(itemNameRegex + " is already fully charged.").onItemClick().consumer(() -> {
-                storage.clearAndPut (ItemID.ANCIENT_ESSENCE, 50000);
+            new OnChatMessage(itemName + " is already fully charged.").onItemClick().consumer(() -> {
+                storage.clearAndPut(ItemID.ANCIENT_ESSENCE, 50000);
             }),
 
             // Charging the bow with essence - For charging your echo venator bow, as of March 2026, the game doesn't explicitly say "echo venator bow", but I'll include it just in case
-            new OnChatMessage("You use .+ ancient essence to charge your " + itemNameRegex + ". It now has (?<charges>.+) charges.").onItemClick().matcherConsumer(m -> {
-                storage.clearAndPut (ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+            new OnChatMessage("You use .+ ancient essence to charge your " + itemName.toLowerCase() + ". It now has (?<charges>.+) charges.").onItemClick().matcherConsumer(m -> {
+                storage.clearAndPut(ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 
             // Uncharge (you can only uncharge ALL charges at once)
-            new OnChatMessage("You fully uncharge your " + itemNameRegex + ", regaining (?<charges>.+) ancient essence in the process.").consumer(() -> storage.clear()),
+            new OnChatMessage("You fully uncharge your " + itemName.toLowerCase() + ", regaining (?<charges>.+) ancient essence in the process.").consumer(() -> storage.clear()),
 
             // Check.
-            new OnChatMessage("Your " + itemNameRegex + "  has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
-                storage.clearAndPut (ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
+            new OnChatMessage("Your " + itemName.toLowerCase() + " has (?<charges>.+) charges? remaining.").onItemClick().matcherConsumer(m -> {
+                storage.clearAndPut(ItemID.ANCIENT_ESSENCE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges")));
             }),
 
             // Attack.
             new OnGraphicChanged(2289).isEquipped().consumer(() -> {
-                storage.remove (ItemID.ANCIENT_ESSENCE, 1);
+                storage.remove(ItemID.ANCIENT_ESSENCE, 1);
             })
         ));
-    }
-
-    @Override
-    public Color getTextColor(int itemId) {
-        return this.getTotalTextColor();
-    }
-
-    @Override
-    public Color getTotalTextColor() {
-        if (this.storage.getStorage().count (ItemID.ANCIENT_ESSENCE) == 0) {
-            return provider.config.getColorEmpty();
-        }
-
-        return super.getTotalTextColor();
     }
 }

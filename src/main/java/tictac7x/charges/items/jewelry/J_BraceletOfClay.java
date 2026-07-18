@@ -24,7 +24,7 @@ public class J_BraceletOfClay extends ChargedItem {
             // Mine clay.
             new OnItemContainerChanged(InventoryID.INV).isEquipped().onMenuOption("Mine").onMenuTarget("Clay rocks").consumer(() -> {
                 if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
-                int clayBefore = provider.store.getPreviousInventoryItemQuantity (ItemID.SOFTCLAY);
+                int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemID.SOFTCLAY);
                 int clayAfter = provider.store.getInventoryItemQuantity(ItemID.SOFTCLAY);
                 decreaseCharges(clayAfter - clayBefore);
             }),
@@ -32,7 +32,7 @@ public class J_BraceletOfClay extends ChargedItem {
             // Mine soft clay.
             new OnItemContainerChanged(InventoryID.INV).isEquipped().onMenuOption("Mine").onMenuTarget("Soft clay rocks").consumer(() -> {
                 if (provider.store.hasChatMessage("Your bracelet of clay crumbles to dust.")) return;
-                int clayBefore = provider.store.getPreviousInventoryItemQuantity (ItemID.SOFTCLAY);
+                int clayBefore = provider.store.getPreviousInventoryItemQuantity(ItemID.SOFTCLAY);
                 int clayAfter = provider.store.getInventoryItemQuantity(ItemID.SOFTCLAY);
 
                 // At least 2 soft clay was mined.

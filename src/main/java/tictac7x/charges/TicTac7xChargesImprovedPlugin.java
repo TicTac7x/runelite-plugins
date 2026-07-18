@@ -27,6 +27,7 @@ import net.runelite.client.util.*;
 import tictac7x.charges.events.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.overlays.*;
+import tictac7x.charges.item.storage.*;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
@@ -61,12 +62,10 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.13";
+	public static String pluginVersion = "v0.6.14";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Gem pouch, sack, satchel and tote added.<br>" +
-		"<colHIGHLIGHT>* Ghommal's hilt added.<br>" +
-		"<colHIGHLIGHT>* Silkliend herb sack added and herb sack fixes."
+		"<colHIGHLIGHT>* Venator bow fixes."
 	;
 
 	@Inject
@@ -508,19 +507,37 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public void onChatMessage(ChatMessage event) {
 		store.onChatMessage(new CustomChatMessage(
 			event.getType(),
-			getCleanText(event.getMessage()),
-			event.getSender()
+			getCleanText(event.getMessage())
 		));
 	}
 
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event) {
-		store.onItemContainerChanged(event);
+		List<StorageItem> items = new ArrayList<>();
+
+		for (Item item : event.getItemContainer().getItems()) {
+			if (item == null || item.getId() == -1 || item.getId() == 6512) continue;
+
+			ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
+			items.add(new StorageItem(
+				itemComposition.getId(),
+				itemComposition.getPlaceholderTemplateId() != -1 ? 0 : item.getQuantity()
+			));
+		}
+
+		CustomItemContainerChanged itemContainerChanged = new CustomItemContainerChanged(event.getContainerId(), items);
+		store.onItemContainerChanged(itemContainerChanged);
 	}
 
 	@Subscribe
 	public void onGraphicChanged(GraphicChanged event) {
-		store.onGraphicChanged(event);
+		if (event == null || event.getActor() == null) return;
+
+		List<Integer> graphicIds = new ArrayList<>();
+		for (ActorSpotAnim spotAnim : event.getActor().getSpotAnims()) {
+			graphicIds.add(spotAnim.getId());
+		}
+		store.onGraphicChanged(new CustomGraphicChanged(event.getActor().getName(), graphicIds));
 	}
 
 	@Subscribe
