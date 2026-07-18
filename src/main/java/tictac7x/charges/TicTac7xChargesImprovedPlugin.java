@@ -531,7 +531,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onGraphicChanged(GraphicChanged event) {
-		if (event == null || event.getActor() == null) return;
+		if (event == null || event.getActor() == null || event.getActor() != client.getLocalPlayer()) return;
 
 		List<Integer> graphicIds = new ArrayList<>();
 		for (ActorSpotAnim spotAnim : event.getActor().getSpotAnims()) {
