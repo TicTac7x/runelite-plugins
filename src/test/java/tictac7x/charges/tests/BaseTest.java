@@ -22,6 +22,7 @@ import tictac7x.charges.item.storage.*;
 import tictac7x.charges.store.*;
 
 import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -66,12 +67,32 @@ public abstract class BaseTest {
 
     @Before
     public void setup() {
+        Map<String, String> settings = new HashMap<>();
+
         store = new Store(client, itemManager, configManager);
         provider = new Provider(client, clientThread, pluginManager, configManager, itemManager, infoBoxManager, chatMessageManager, tooltipManager, notifier, plugin, config, store, new Gson());
         store.addProvider(provider);
 
-        when(config.getColorDefault()).thenReturn(Color.WHITE);
-        when(config.getColorEmpty()).thenReturn(Color.RED);
+        lenient().when(config.getColorDefault()).thenReturn(Color.WHITE);
+        lenient().when(config.getColorEmpty()).thenReturn(Color.RED);
+        lenient().when(config.getColorActivated()).thenReturn(Color.GREEN);
+
+        lenient().doAnswer(invocation -> {
+            String key = invocation.getArgument(1);
+            Integer value = invocation.getArgument(2);
+
+            settings.put(key, String.valueOf(value));
+            return null;
+        }).when(configManager).setConfiguration(
+            eq(TicTac7xChargesImprovedConfig.group),
+            anyString(),
+            anyInt()
+        );
+        lenient().when(configManager.getConfiguration(eq(TicTac7xChargesImprovedConfig.group), anyString()))
+        .thenAnswer(invocation -> {
+            String key = invocation.getArgument(1);
+            return settings.get(key);
+        });
     }
 
     public void setupInventoryItem(ChargedItemBase chargedItem) {

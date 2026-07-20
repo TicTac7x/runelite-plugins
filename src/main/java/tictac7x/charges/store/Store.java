@@ -241,27 +241,29 @@ public class Store {
         }
     }
 
-    public void onMenuOptionClicked(CustomMenuOptionClicked customMenuOptionClicked) {
+    public void onMenuOptionClicked(CustomMenuOptionClicked event) {
         if (
             // Menu option not found.
-            customMenuOptionClicked.option.isEmpty() ||
+            event.option.isEmpty() ||
             // Not menu.
-            customMenuOptionClicked.target.isEmpty() && (
-                !customMenuOptionClicked.option.contains("Buy-") &&
-                !customMenuOptionClicked.option.equals("Continue") &&
-                !customMenuOptionClicked.option.equals("Yes") &&
-                customMenuOptionClicked.eventId != 65540 && // Special event check for log basket
-                customMenuOptionClicked.eventId != 65538 && // Special event check for forestry basket
-                customMenuOptionClicked.eventId != 131074 && // Special event check for forestry basket
-                customMenuOptionClicked.eventId != 131076 // Special event check for forestry basket
+            event.target.isEmpty() && (
+                !event.option.contains("Buy-") &&
+                !event.option.equals("Continue") &&
+                !event.option.equals("Yes") &&
+                event.eventId != 65540 && // Special event check for log basket
+                event.eventId != 65538 && // Special event check for forestry basket
+                event.eventId != 131074 && // Special event check for forestry basket
+                event.eventId != 131076 // Special event check for forestry basket
             ) ||
             // Cancel option.
-            customMenuOptionClicked.actionName.equals("CANCEL") ||
+            event.actionName.equals("CANCEL") ||
             // RuneLite specific action.
-            customMenuOptionClicked.actionName.equals("RUNELITE")
+            event.actionName.equals("RUNELITE") ||
+            // Use
+            event.option.equals("Use") && !event.target.contains(" -> ")
         ) return;
 
-        checkBankWithdraw(customMenuOptionClicked);
+        checkBankWithdraw(event);
 
         // Gametick changed, clear previous menu entries since they are no longer valid.
         if (gametick >= gametick_before + 2) {
@@ -270,22 +272,22 @@ public class Store {
         }
 
         // Save menu option and target for other triggers to use.
-        menuOptionsClicked.add(customMenuOptionClicked);
+        menuOptionsClicked.add(event);
 
         if (
             previousMenuOptionClicked.isPresent() &&
             previousMenuOptionClicked.get().option.equals("Use") &&
-            customMenuOptionClicked.option.equals("Use") &&
-            customMenuOptionClicked.target.contains("->")
+            event.option.equals("Use") &&
+            event.target.contains("->")
         ) {
-            customMenuOptionClicked.assignUsedItemId(previousMenuOptionClicked.get().itemId);
+            event.assignUsedItemId(previousMenuOptionClicked.get().itemId);
         }
 
-        this.previousMenuOptionClicked = Optional.of(customMenuOptionClicked);
+        this.previousMenuOptionClicked = Optional.of(event);
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
-            listenerOnMenuOptionClicked.trigger(customMenuOptionClicked, chargedItem);
-            listenerOnItemUsed.trigger(customMenuOptionClicked, chargedItem);
+            listenerOnMenuOptionClicked.trigger(event, chargedItem);
+            listenerOnItemUsed.trigger(event, chargedItem);
         });
     }
 
@@ -608,7 +610,8 @@ public class Store {
         nextTickQueue.add(consumer);
     }
 
-    public void onChatMessage(CustomChatMessage event) {switch (event.type) {
+    public void onChatMessage(CustomChatMessage event) {
+        switch (event.type) {
             case GAMEMESSAGE:
             case DIALOG:
             case SPAM:
