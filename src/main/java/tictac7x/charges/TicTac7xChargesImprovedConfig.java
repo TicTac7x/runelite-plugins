@@ -201,8 +201,12 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String toxic_staff_of_the_dead = "toxic_staff_of_the_dead";
     String trident_of_the_seas = "trident_of_the_seas";
     String trident_of_the_seas_e = "trident_of_the_seas_e";
+    String trident_of_the_seas_o = "trident_of_the_seas_o";
+    String trident_of_the_seas_e_o = "trident_of_the_seas_e_o";
     String trident_of_the_swamp = "trident_of_the_swamp";
     String trident_of_the_swamp_e = "trident_of_the_swamp_e";
+    String trident_of_the_swamp_o = "trident_of_the_swamp_o";
+    String trident_of_the_swamp_e_o = "trident_of_the_swamp_e_o";
     String tumekens_shadow = "tumekens_shadow";
     String venator_bow = "venator_bow";
     String warped_sceptre = "warped_sceptre";
@@ -1316,6 +1320,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean tridentOfTheSeasEInfobox() { return true; }
 
         @ConfigItem(
+            keyName = trident_of_the_seas_o + _infobox,
+            name = "Trident of the seas (o)",
+            description = "",
+            section = infoboxes
+        ) default boolean tridentOfTheSeasOInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = trident_of_the_seas_e_o + _infobox,
+            name = "Trident of the seas (e) (o)",
+            description = "",
+            section = infoboxes
+        ) default boolean tridentOfTheSeasEOInfobox() { return true; }
+
+        @ConfigItem(
             keyName = trident_of_the_swamp + _infobox,
             name = "Trident of the swamp",
             description = "",
@@ -1328,6 +1346,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampEInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = trident_of_the_swamp_o + _infobox,
+            name = "Trident of the swamp (o)",
+            description = "",
+            section = infoboxes
+        ) default boolean tridentOfTheSwampOInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = trident_of_the_swamp_e_o + _infobox,
+            name = "Trident of the swamp (e) (o)",
+            description = "",
+            section = infoboxes
+        ) default boolean tridentOfTheSwampEOInfobox() { return true; }
 
         @ConfigItem(
             keyName = warped_sceptre + _infobox,
@@ -2303,6 +2335,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean tridentOfTheSeasEOverlay() { return true; }
 
         @ConfigItem(
+            keyName = trident_of_the_seas_o + _overlay,
+            name = "Trident of the seas (o)",
+            description = "",
+            section = overlays
+        ) default boolean tridentOfTheSeasOOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = trident_of_the_seas_e_o + _overlay,
+            name = "Trident of the seas (e) (o)",
+            description = "",
+            section = overlays
+        ) default boolean tridentOfTheSeasEOOverlay() { return true; }
+
+        @ConfigItem(
             keyName = trident_of_the_swamp + _overlay,
             name = "Trident of the swamp",
             description = "",
@@ -2315,6 +2361,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampEOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = trident_of_the_swamp_o + _overlay,
+            name = "Trident of the swamp (o)",
+            description = "",
+            section = overlays
+        ) default boolean tridentOfTheSwampOOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = trident_of_the_swamp_e_o + _overlay,
+            name = "Trident of the swamp (e) (o)",
+            description = "",
+            section = overlays
+        ) default boolean tridentOfTheSwampEOOverlay() { return true; }
 
         @ConfigItem(
             keyName = warped_sceptre + _overlay,
