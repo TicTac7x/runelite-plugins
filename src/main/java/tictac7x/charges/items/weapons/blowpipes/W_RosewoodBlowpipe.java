@@ -17,6 +17,7 @@ public class W_RosewoodBlowpipe extends _Blowpipe {
                 new TriggerItem(ItemID.ROSEWOOD_BLOWPIPE_EMPTY).fixedCharges(0)
             },
             true,
+            true,
             13144
         );
     }

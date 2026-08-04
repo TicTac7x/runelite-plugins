@@ -11,7 +11,7 @@ import net.runelite.api.gameval.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.*;
 
-import java.util.List;
+import java.util.*;
 
 public class U_FurPouch extends ChargedItemWithStorageEmptyable {
     public U_FurPouch(Provider provider) {
@@ -36,7 +36,10 @@ public class U_FurPouch extends ChargedItemWithStorageEmptyable {
             // Aerial.
             new StorableItem(ItemID.HUNTINGBEAST_SPEEDY_FUR),
             new StorableItem(ItemID.HUNTINGBEAST_SILENT_FUR),
-            new StorableItem(ItemID.HUNTINGBEAST_SPEEDY2_FUR)
+            new StorableItem(ItemID.HUNTINGBEAST_SPEEDY2_FUR),
+
+            // Other
+            new StorableItem(ItemID.GOAT_PIT_FUR)
         );
 
         this.items = new TriggerItem[]{
@@ -114,6 +117,45 @@ public class U_FurPouch extends ChargedItemWithStorageEmptyable {
             }),
             new OnXpDrop(Skill.HUNTER, 156).hasChatMessage("You retrieve the falcon as well as the fur of the dead kebbit.").requiredItem(ItemID.HG_FURPOUCH_SMALL_OPEN, ItemID.HG_FURPOUCH_MED_OPEN, ItemID.HG_FURPOUCH_LARGE_OPEN).consumer(() -> {
                 storage.add(ItemID.HUNTINGBEAST_SPEEDY2_FUR, 1);
+            }),
+
+            // Goat hunting.
+            new OnXpDrop(Skill.HUNTER, 173).runConsumerOnNextGameTick(() -> {
+                if (provider.store.getPreviousInventoryItemQuantity(ItemID.DESERT_GOAT_HORN) == provider.store.getInventoryItemQuantity(ItemID.DESERT_GOAT_HORN)) {
+                    storage.add(ItemID.GOAT_PIT_FUR, 1);
+                }
+            }),
+            new OnXpDrop(Skill.HUNTER, 346).runConsumerOnNextGameTick(() -> {
+                if (provider.store.getPreviousInventoryItemQuantity(ItemID.DESERT_GOAT_HORN) == provider.store.getInventoryItemQuantity(ItemID.DESERT_GOAT_HORN)) {
+                    storage.add(ItemID.GOAT_PIT_FUR, 1);
+                }
+            }),
+
+            // Golem crafting.
+            new OnChatMessage("You have crafted .+ golems? on Wyrmscraig.").consumer(() -> {
+                List<Integer> fursPriority = List.of(
+                    ItemID.HUNTING_ANTELOPEMOON_FUR,
+                    ItemID.HUNTING_ANTELOPESUN_FUR,
+                    ItemID.HUNTINGBEAST_SPEEDY2_FUR,
+                    ItemID.HUNTING_FUR_TIGER_SHABBY,
+                    ItemID.HUNTINGBEAST_SILENT_FUR,
+                    ItemID.HUNTING_FENNECFOX_FUR,
+                    ItemID.HUNTINGBEAST_SPEEDY_FUR,
+                    ItemID.HUNTING_FUR_LEOPARD_SHABBY,
+                    ItemID.HUNTING_FUR_JAGUAR_SHABBY,
+                    ItemID.HUNTINGBEAST_JUNGLE_FUR,
+                    ItemID.HUNTINGBEAST_WOODLAND_FUR,
+                    ItemID.HUNTINGBEAST_DESERT_FUR,
+                    ItemID.HUNTINGBEAST_POLAR_FUR,
+                    ItemID.GOAT_PIT_FUR
+                );
+
+                for (int itemId : fursPriority) {
+                    if (storage.hasItem(itemId)) {
+                        storage.remove(itemId, 1);
+                        break;
+                    }
+                }
             })
         ));
     }

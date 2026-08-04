@@ -65,7 +65,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String pluginVersion = "v0.6.15";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Tridents ornament kits support."
+		"<colHIGHLIGHT>* Tridents ornament kits support.<br>" +
+		"<colHIGHLIGHT>* Fur pouch supports goat fur and golem crafting."
 	;
 
 	@Inject

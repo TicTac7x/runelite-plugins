@@ -16,6 +16,7 @@ public class W_CamphorBlowpipe extends _Blowpipe {
                 new TriggerItem(ItemID.CAMPHOR_BLOWPIPE_EMPTY).fixedCharges(0)
             },
             false,
+            false,
             13142
         );
     }

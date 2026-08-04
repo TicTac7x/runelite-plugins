@@ -1,6 +1,7 @@
 package tictac7x.charges.tests;
 
 import net.runelite.api.*;
+import net.runelite.api.events.*;
 import net.runelite.api.gameval.*;
 import net.runelite.api.gameval.InventoryID;
 import org.junit.*;
@@ -38,6 +39,7 @@ public class BindingNecklaceTest extends BaseTest {
             new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "Your Binding necklace has disintegrated.")
         );
         store.onItemContainerChanged(new CustomItemContainerChanged(InventoryID.WORN, new ArrayList<>()));
+        store.onGameTick(new GameTick());
         assertEquals(16, bindingNecklace.getTotalCharges());
         assertEquals(config.getColorEmpty(), bindingNecklace.getTotalTextColor());
 

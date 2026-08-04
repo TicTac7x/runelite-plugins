@@ -17,6 +17,7 @@ public class W_IronwoodBlowpipe extends _Blowpipe {
                 new TriggerItem(ItemID.IRONWOOD_BLOWPIPE_EMPTY).fixedCharges(0)
             },
             true,
+            false,
             13143
         );
     }

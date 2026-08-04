@@ -33,7 +33,7 @@ public class Store {
     private int HIGHEST_MONSTER_ATTACK_SPEED = 8;
 
     private int gametick = 0;
-    private int gametick_before = 0;
+    private int gametickBefore = 0;
     private int inCombatTicksRemainingDamageDoneToOthers = 0;
     private int inCombatTicksRemainingDamageDoneToMe = 0;
 
@@ -142,8 +142,6 @@ public class Store {
     }
 
     public void onItemContainerChanged(CustomItemContainerChanged event) {
-        runNextGameTickQueue();
-
         if (
             event.getContainerId() == InventoryID.BANK ||
             event.getContainerId() == InventoryID.INV ||
@@ -266,8 +264,8 @@ public class Store {
         checkBankWithdraw(event);
 
         // Gametick changed, clear previous menu entries since they are no longer valid.
-        if (gametick >= gametick_before + 2) {
-            gametick = 0; gametick_before = 0;
+        if (gametick >= gametickBefore + 2) {
+            gametickBefore = gametick;
             menuOptionsClicked.clear();
         }
 
@@ -293,8 +291,8 @@ public class Store {
 
     public void onWidgetMenuOptionClicked(CustomWidgetMenuOptionClicked customWidgetMenuOptionClicked) {
         // Gametick changed, clear previous widget menu entries since they are no longer valid.
-        if (gametick >= gametick_before + 2) {
-            gametick = 0; gametick_before = 0;
+        if (gametick >= gametickBefore + 2) {
+            gametickBefore = gametick;
             widgetMenuActionsClicked.clear();
         }
 
