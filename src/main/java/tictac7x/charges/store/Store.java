@@ -33,7 +33,7 @@ public class Store {
     private int HIGHEST_MONSTER_ATTACK_SPEED = 8;
 
     private int gametick = 0;
-    private int gametick_before = 0;
+    private int gametickBefore = 0;
     private int inCombatTicksRemainingDamageDoneToOthers = 0;
     private int inCombatTicksRemainingDamageDoneToMe = 0;
 
@@ -142,8 +142,6 @@ public class Store {
     }
 
     public void onItemContainerChanged(CustomItemContainerChanged event) {
-        runNextGameTickQueue();
-
         if (
             event.getContainerId() == InventoryID.BANK ||
             event.getContainerId() == InventoryID.INV ||
@@ -241,58 +239,60 @@ public class Store {
         }
     }
 
-    public void onMenuOptionClicked(CustomMenuOptionClicked customMenuOptionClicked) {
+    public void onMenuOptionClicked(CustomMenuOptionClicked event) {
         if (
             // Menu option not found.
-            customMenuOptionClicked.option.isEmpty() ||
+            event.option.isEmpty() ||
             // Not menu.
-            customMenuOptionClicked.target.isEmpty() && (
-                !customMenuOptionClicked.option.contains("Buy-") &&
-                !customMenuOptionClicked.option.equals("Continue") &&
-                !customMenuOptionClicked.option.equals("Yes") &&
-                customMenuOptionClicked.eventId != 65540 && // Special event check for log basket
-                customMenuOptionClicked.eventId != 65538 && // Special event check for forestry basket
-                customMenuOptionClicked.eventId != 131074 && // Special event check for forestry basket
-                customMenuOptionClicked.eventId != 131076 // Special event check for forestry basket
+            event.target.isEmpty() && (
+                !event.option.contains("Buy-") &&
+                !event.option.equals("Continue") &&
+                !event.option.equals("Yes") &&
+                event.eventId != 65540 && // Special event check for log basket
+                event.eventId != 65538 && // Special event check for forestry basket
+                event.eventId != 131074 && // Special event check for forestry basket
+                event.eventId != 131076 // Special event check for forestry basket
             ) ||
             // Cancel option.
-            customMenuOptionClicked.actionName.equals("CANCEL") ||
+            event.actionName.equals("CANCEL") ||
             // RuneLite specific action.
-            customMenuOptionClicked.actionName.equals("RUNELITE")
+            event.actionName.equals("RUNELITE") ||
+            // Use
+            event.option.equals("Use") && !event.target.contains(" -> ")
         ) return;
 
-        checkBankWithdraw(customMenuOptionClicked);
+        checkBankWithdraw(event);
 
         // Gametick changed, clear previous menu entries since they are no longer valid.
-        if (gametick >= gametick_before + 2) {
-            gametick = 0; gametick_before = 0;
+        if (gametick >= gametickBefore + 2) {
+            gametickBefore = gametick;
             menuOptionsClicked.clear();
         }
 
         // Save menu option and target for other triggers to use.
-        menuOptionsClicked.add(customMenuOptionClicked);
+        menuOptionsClicked.add(event);
 
         if (
             previousMenuOptionClicked.isPresent() &&
             previousMenuOptionClicked.get().option.equals("Use") &&
-            customMenuOptionClicked.option.equals("Use") &&
-            customMenuOptionClicked.target.contains("->")
+            event.option.equals("Use") &&
+            event.target.contains("->")
         ) {
-            customMenuOptionClicked.assignUsedItemId(previousMenuOptionClicked.get().itemId);
+            event.assignUsedItemId(previousMenuOptionClicked.get().itemId);
         }
 
-        this.previousMenuOptionClicked = Optional.of(customMenuOptionClicked);
+        this.previousMenuOptionClicked = Optional.of(event);
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
-            listenerOnMenuOptionClicked.trigger(customMenuOptionClicked, chargedItem);
-            listenerOnItemUsed.trigger(customMenuOptionClicked, chargedItem);
+            listenerOnMenuOptionClicked.trigger(event, chargedItem);
+            listenerOnItemUsed.trigger(event, chargedItem);
         });
     }
 
     public void onWidgetMenuOptionClicked(CustomWidgetMenuOptionClicked customWidgetMenuOptionClicked) {
         // Gametick changed, clear previous widget menu entries since they are no longer valid.
-        if (gametick >= gametick_before + 2) {
-            gametick = 0; gametick_before = 0;
+        if (gametick >= gametickBefore + 2) {
+            gametickBefore = gametick;
             widgetMenuActionsClicked.clear();
         }
 
@@ -608,7 +608,8 @@ public class Store {
         nextTickQueue.add(consumer);
     }
 
-    public void onChatMessage(CustomChatMessage event) {switch (event.type) {
+    public void onChatMessage(CustomChatMessage event) {
+        switch (event.type) {
             case GAMEMESSAGE:
             case DIALOG:
             case SPAM:

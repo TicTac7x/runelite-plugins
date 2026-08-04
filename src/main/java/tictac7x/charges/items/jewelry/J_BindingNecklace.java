@@ -19,14 +19,11 @@ public class J_BindingNecklace extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
-            // Check, one left.
-            new OnChatMessage("You have one charge left before your Binding necklace disintegrates.").setFixedCharges(1),
-
             // Check.
-            new OnChatMessage("You have (?<charges>.+) charges left before your Binding necklace disintegrates.").setDynamicallyCharges(),
+            new OnChatMessage("You have (?<charges>.+) charges? left before your Binding necklace disintegrates.").setDynamicallyCharges(),
 
             // Charge used.
-            new OnChatMessage("You (partially succeed to )?bind the temple's power into (Mud|Lava|Steam|Dust|Smoke|Mist|Aether) runes?.").decreaseCharges(1),
+            new OnChatMessage("You bind the temple's power into (Mud|Lava|Steam|Dust|Smoke|Mist|Aether) runes?.").decreaseCharges(1),
 
             // Fully used.
             new OnChatMessage("Your Binding necklace has disintegrated.").runConsumerOnNextGameTick(() -> setCharges(16)),

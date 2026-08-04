@@ -18,6 +18,7 @@ public class _Blowpipe extends ChargedItemWithStorage {
         Provider provider,
         TriggerItem[] items,
         boolean supportsAdamantiteDarts,
+        boolean supportsRuniteDarts,
         int attackAnimationId
     ) {
         super(configKey, itemId, provider);
@@ -31,6 +32,11 @@ public class _Blowpipe extends ChargedItemWithStorage {
         if (supportsAdamantiteDarts) {
             storableItems.add(
                 new StorableItem(ItemID.ADAMANT_DART).checkName("Adamant dart")
+            );
+        }
+        if (supportsRuniteDarts) {
+            storableItems.add(
+                new StorableItem(ItemID.ADAMANT_DART).checkName("Rune dart")
             );
         }
         storage.storableItems(
