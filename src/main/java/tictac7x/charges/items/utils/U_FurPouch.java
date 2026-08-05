@@ -120,7 +120,7 @@ public class U_FurPouch extends ChargedItemWithStorageEmptyable {
             }),
 
             // Goat hunting.
-            new OnXpDrop(Skill.HUNTER).runConsumerOnNextGameTick(() -> {
+            new OnXpDrop(Skill.HUNTER).onMenuOption("Clear").onMenuTarget("Goat Pit").requiredItem(ItemID.HG_FURPOUCH_SMALL_OPEN, ItemID.HG_FURPOUCH_MED_OPEN, ItemID.HG_FURPOUCH_LARGE_OPEN).runConsumerOnNextGameTick(() -> {
                 if (provider.store.getPreviousInventoryItemQuantity(ItemID.DESERT_GOAT_HORN) == provider.store.getInventoryItemQuantity(ItemID.DESERT_GOAT_HORN)) {
                     storage.add(ItemID.GOAT_PIT_FUR, 1);
                 }
