@@ -14,6 +14,14 @@ public class AhrimsRobeskirt extends _BarrowsItem {
             new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_50),
             new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_25),
             new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_BROKEN).fixedCharges(0),
+
+            // Echo ornament kit variants (Leagues V: Raging Echoes).
+            new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_ORNAMENT).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_ORNAMENT_100),
+            new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_ORNAMENT_75),
+            new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_ORNAMENT_50),
+            new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_ORNAMENT_25),
+            new TriggerItem(ItemID.BARROWS_AHRIM_LEGS_ORNAMENT_BROKEN).fixedCharges(0),
         };
     }
 }

@@ -27,7 +27,7 @@ public class _BarrowsItem extends ChargedItem {
                 int chargesUsedInCurrentTier = (100 - percentage) * 250 / 100;
 
                 for (CustomMenuOptionClicked menuOptionClicked : provider.store.menuOptionsClicked) {
-                    if (menuOptionClicked.target.contains(provider.itemManager.getItemComposition(itemId).getName())) {
+                    if (menuOptionClicked.target.contains(provider.itemManager.getItemComposition(this.itemId).getName())) {
                         int currentTierMaxCharges = Integer.parseInt(menuOptionClicked.target.replaceAll("\\D", "")) * 10;
                         setCharges(currentTierMaxCharges - chargesUsedInCurrentTier);
                         return;

@@ -14,6 +14,14 @@ public class AhrimsHood extends _BarrowsItem {
             new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_50),
             new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_25),
             new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_BROKEN).fixedCharges(0),
+
+            // Echo ornament kit variants (Leagues V: Raging Echoes).
+            new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT).fixedCharges(1000),
+            new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT_100),
+            new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT_75),
+            new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT_50),
+            new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT_25),
+            new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT_BROKEN).fixedCharges(0),
         };
     }
 }
