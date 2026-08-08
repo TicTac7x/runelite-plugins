@@ -43,12 +43,10 @@ import javax.inject.Inject;
 	conflicts = {"Motherlode Mine", "MLM Mining Markers"}
 )
 public class TicTac7xMotherlodePlugin extends Plugin {
-	private final String pluginVersion = "v0.4.5";
+	private final String pluginVersion = "v0.4.6";
 	private final String pluginMessage = "" +
 		"<colHIGHLIGHT>Motherlode Mine Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Additional pickaxes animations support.<br>" +
-		"<colHIGHLIGHT>* Ore veins regeneration support.<br>" +
-		"<colHIGHLIGHT>* Option to disable deposits optimization."
+		"<colHIGHLIGHT>* Golden nuggets detection bug fixed."
 	;
 
 	@Inject
@@ -129,12 +127,6 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 		inventory.onItemContainerChanged(event);
 		bank.onItemContainerChanged(event);
 		motherlode.onItemContainerChanged(event);
-	}
-
-	@Subscribe
-	public void onChatMessage(final ChatMessage event) {
-		if (!character.isInMotherlode()) return;
-		motherlode.onChatMessage(event);
 	}
 
 	@Subscribe
