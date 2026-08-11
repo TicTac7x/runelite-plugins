@@ -18,6 +18,7 @@ public class ListenerOnMenuOpened extends ListenerBase {
             boolean triggerUsed = false;
 
             if (trigger.menuConsumer.isPresent()) {
+                triggerUsed = true;
                 trigger.menuConsumer.get().accept(menuOpened);
             }
 

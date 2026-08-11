@@ -21,13 +21,13 @@ public class OnConfigMenuOpened extends OnMenuOpened {
             Menu chargesSubMenu = chargesMenuEntry.createSubMenu();
             MenuEntry totalMenuEntry = chargesSubMenu.createMenuEntry(-1);
             totalMenuEntry
-                .setOption("Show total")
+                .setOption("Show-total")
                 .setTarget("")
                 .setType(MenuAction.RUNELITE)
                 .onClick((menuEntry) -> provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey + TicTac7xChargesImprovedConfig._display, StorageDisplay.TOTAL));
             MenuEntry individualMenuEntry = chargesSubMenu.createMenuEntry(-1);
             individualMenuEntry
-                .setOption("Show individual")
+                .setOption("Show-individual")
                 .setTarget("")
                 .setType(MenuAction.RUNELITE)
                 .onClick((menuEntry) -> provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, configKey + TicTac7xChargesImprovedConfig._display, StorageDisplay.INDIVIDUAL));

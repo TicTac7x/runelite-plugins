@@ -8,9 +8,6 @@ import java.util.function.*;
 public class OnMenuOpened extends TriggerBase {
     public Optional<Consumer<MenuOpened>> menuConsumer = Optional.empty();
 
-    public OnMenuOpened() {
-    }
-
     public OnMenuOpened menuConsumer(Consumer<MenuOpened> menuConsumer) {
         this.menuConsumer = Optional.of(menuConsumer);
         return this;
