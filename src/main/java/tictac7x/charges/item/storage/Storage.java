@@ -25,7 +25,7 @@ public class Storage {
     public Optional<Boolean> showIndividualCharges = Optional.empty();
     public boolean holdsSingleType = false;
     public boolean emptyIsNegative = false;
-    private Optional<Integer> maximumIndividualQuantity = Optional.empty();
+    public Optional<Integer> maximumIndividualQuantity = Optional.empty();
     private StorableItem[] storableItems = new StorableItem[]{};
     public Optional<MaximumComboQuantity> maximumTotalComboQuantity = Optional.empty();
 

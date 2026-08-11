@@ -74,6 +74,7 @@ public class Store {
     private ListenerOnItemUsed listenerOnItemUsed;
     private ListenerOnScriptPreFired listenerOnScriptPreFired;
     private ListenerOnCombat listenerOnCombat;
+    private ListenerOnMenuOpened listenerOnMenuOpened;
     private ListenerOnGameTick listenerOnGameTick;
 
     public Store(Client client, ItemManager itemManager, ConfigManager configManager) {
@@ -102,6 +103,7 @@ public class Store {
         listenerOnItemUsed = new ListenerOnItemUsed(provider);
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(provider);
         listenerOnCombat = new ListenerOnCombat(provider);
+        listenerOnMenuOpened = new ListenerOnMenuOpened(provider);
         listenerOnGameTick = new ListenerOnGameTick(provider);
 
         return this;
@@ -760,6 +762,12 @@ public class Store {
     public void onCombat() {
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
             listenerOnCombat.trigger(chargedItem);
+        });
+    }
+
+    public void onMenuOpened(MenuOpened event) {
+        getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
+            listenerOnMenuOpened.trigger(event, chargedItem);
         });
     }
 

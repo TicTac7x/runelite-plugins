@@ -1,6 +1,7 @@
 package tictac7x.charges.items.utils;
 
 import net.runelite.api.*;
+import net.runelite.api.gameval.ItemID;
 import net.runelite.api.gameval.InventoryID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
@@ -14,13 +15,13 @@ import java.util.*;
 import java.util.stream.*;
 
 public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmptyable {
-    private String containerNameRegex;
+    private final String containerNameRegex;
 
     protected U_AbstractGemContainer(
         String configKey,
         int itemId,
         int openItemId,
-        int maxQuantity,
+        int maxIndividualQuantity,
         String containerName,
         boolean preciousGems,
         boolean semiPreciousGems,
@@ -34,7 +35,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
             new TriggerItem(openItemId),
         };
 
-        storage.setMaximumIndividualQuantity(maxQuantity);
+        storage.setMaximumIndividualQuantity(maxIndividualQuantity);
 
         List<StorableItem> storableGems = new ArrayList<>();
         if (semiPreciousGems) {
@@ -114,7 +115,10 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 
             // Hide destroy.
-            new OnMenuEntryAdded("Destroy").hide()
+            new OnMenuEntryAdded("Destroy").hide(),
+
+            // Config menu
+            new OnConfigMenuOpened(provider, getConfigKey())
         ));
 
         // Telegrab - only add trigger if this container holds that gem type.

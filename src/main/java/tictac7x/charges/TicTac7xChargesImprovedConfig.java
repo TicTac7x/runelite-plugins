@@ -1,6 +1,7 @@
 package tictac7x.charges;
 
 import net.runelite.client.config.*;
+import tictac7x.charges.store.enums.*;
 import tictac7x.charges.store.ids.*;
 
 import java.awt.Color;
@@ -40,6 +41,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String _infobox = "_infobox";
     String _overlay = "_overlay";
     String _storage = "_storage";
+    String _display = "_display";
 
     // Armor sets
     String crystal_body = "crystal_body";
@@ -3009,6 +3011,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = herb_sack + _storage,
             section = debug
         ) default String getHerbSackStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = herb_sack + _display,
+            name = herb_sack + _display,
+            description = herb_sack + _display,
+            section = debug
+        ) default String getHerbSackDisplay() { return StorageDisplay.TOTAL; }
 
         @ConfigItem(
             keyName = silklined_herb_sack + _storage,
