@@ -28,7 +28,6 @@ public class Store {
     private ItemManager itemManager;
     private ConfigManager configManager;
     private Provider provider;
-    private ZoneId timezone = ZoneId.of("Europe/London");
 
     private int HIGHEST_MONSTER_ATTACK_SPEED = 8;
 
@@ -794,7 +793,7 @@ public class Store {
     }
 
     private void checkForChargesReset() {
-        String date = LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String date = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         if (!date.equals(provider.config.getResetDate())) {
             onResetDaily(date);
