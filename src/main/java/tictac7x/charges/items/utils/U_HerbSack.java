@@ -3,7 +3,9 @@ package tictac7x.charges.items.utils;
 import net.runelite.api.*;
 import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.gameval.ItemID;
+import net.runelite.api.widgets.*;
 import tictac7x.charges.*;
+import tictac7x.charges.events.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
 import tictac7x.charges.item.triggers.*;
@@ -11,14 +13,16 @@ import net.runelite.api.gameval.*;
 import tictac7x.charges.store.Provider;
 import tictac7x.charges.store.ids.*;
 
+import javax.annotation.*;
 import java.util.*;
+import java.util.function.*;
 
 public class U_HerbSack extends ChargedItemWithStorageEmptyable {
     public U_HerbSack(Provider provider) {
         this(TicTac7xChargesImprovedConfig.herb_sack, ItemID.SLAYER_HERB_SACK, ItemID.SLAYER_HERB_SACK_OPEN, 30, provider);
     }
 
-    protected U_HerbSack(String configKey, int itemId, int openItemId, int maxQuantity, Provider provider) {
+    protected U_HerbSack(String configKey, int itemId, int openItemId, int maxIndividualQuantity, Provider provider) {
         super(configKey, itemId, provider);
 
         this.items = new TriggerItem[]{
@@ -26,7 +30,7 @@ public class U_HerbSack extends ChargedItemWithStorageEmptyable {
             new TriggerItem(openItemId),
         };
 
-        storage = storage.setMaximumIndividualQuantity(maxQuantity).storableItems(
+        storage = storage.setMaximumIndividualQuantity(maxIndividualQuantity).storableItems(
             new StorableItem(ItemID.UNIDENTIFIED_GUAM).checkName("Guam leaf"),
             new StorableItem(ItemID.UNIDENTIFIED_MARENTILL).checkName("Marrentill"),
             new StorableItem(ItemID.UNIDENTIFIED_TARROMIN).checkName("Tarromin"),
@@ -135,7 +139,10 @@ public class U_HerbSack extends ChargedItemWithStorageEmptyable {
 
             // Pick snapdragon
             new OnXpDrop(Skill.FARMING).requiredItem(openItemId).onMenuOption("Pick").onMenuTarget("Snapdragon")
-            .addToStorage(ItemID.UNIDENTIFIED_SNAPDRAGON)
+            .addToStorage(ItemID.UNIDENTIFIED_SNAPDRAGON),
+
+            // Config menu
+            new OnConfigMenuOpened(provider, getConfigKey())
         ));
     }
 }

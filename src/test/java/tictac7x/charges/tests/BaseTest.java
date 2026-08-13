@@ -3,6 +3,7 @@ package tictac7x.charges.tests;
 import com.google.gson.*;
 import net.runelite.api.*;
 import net.runelite.api.gameval.InventoryID;
+import net.runelite.api.gameval.ItemID;
 import net.runelite.client.*;
 import net.runelite.client.callback.*;
 import net.runelite.client.chat.*;
@@ -92,6 +93,31 @@ public abstract class BaseTest {
         .thenAnswer(invocation -> {
             String key = invocation.getArgument(1);
             return settings.get(key);
+        });
+
+        lenient().when(itemManager.getItemComposition(anyInt())).thenAnswer(invocation -> {
+            int itemId = invocation.getArgument(0);
+
+            ItemComposition composition = mock(ItemComposition.class);
+
+            String name;
+            switch (itemId) {
+                case ItemID.UNCUT_SAPPHIRE:
+                    name = "Uncut sapphire";
+                    break;
+                case ItemID.WATERMELON_SEED:
+                    name = "Watermelon seed";
+                    break;
+                case ItemID.RANARR_SEED:
+                    name = "Ranarr seed";
+                    break;
+                default:
+                    name = "unsupported";
+                    break;
+            }
+
+            when(composition.getName()).thenReturn(name);
+            return composition;
         });
     }
 

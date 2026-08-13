@@ -50,7 +50,7 @@ public class FurPouchTest extends BaseTest {
         assertEquals(0, furPouch.storage.getStorage().count(ItemID.HUNTINGBEAST_SPEEDY2_FUR));
 
         // Goat catching.
-        store.onMenuOptionClicked(new CustomMenuOptionClicked(-1, "Goat pit", "Clear", -1, "", -1, -1));
+        store.onMenuOptionClicked(new CustomMenuOptionClicked(-1, "Goat Pit", "Clear", -1, "", -1, -1));
         store.onStatChanged(new StatChanged(Skill.HUNTER, 7_444_523 + 156 + 173, 93, 93));
         store.onGameTick(new GameTick());
         assertEquals(3, furPouch.storage.getStorage().count(ItemID.GOAT_PIT_FUR));

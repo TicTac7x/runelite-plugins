@@ -62,11 +62,12 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.15";
+	public static String pluginVersion = "v0.6.16";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Tridents ornament kits support.<br>" +
-		"<colHIGHLIGHT>* Fur pouch supports goat fur and golem crafting."
+		"<colHIGHLIGHT>* Herb sack and gem pouches have in-game options to show individual charges.<br>" +
+		"<colHIGHLIGHT>* Gem containers support golem crafting.<br>" +
+		"<colHIGHLIGHT>* Option to disable updates messages."
 	;
 
 	@Inject
@@ -635,6 +636,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onMenuEntryAdded(MenuEntryAdded event) {
 		store.onMenuEntryAdded(event);
+	}
+
+	@Subscribe
+	public void onMenuOpened(MenuOpened event) {
+		store.onMenuOpened(event);
 	}
 
 	@Subscribe

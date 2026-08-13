@@ -1,6 +1,7 @@
 package tictac7x.charges;
 
 import net.runelite.client.config.*;
+import tictac7x.charges.store.enums.*;
 import tictac7x.charges.store.ids.*;
 
 import java.awt.Color;
@@ -40,6 +41,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String _infobox = "_infobox";
     String _overlay = "_overlay";
     String _storage = "_storage";
+    String _display = "_display";
 
     // Armor sets
     String crystal_body = "crystal_body";
@@ -299,12 +301,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             position = 10
         ) default boolean showDailyReset() { return false; }
 
+        @ConfigItem(
+            keyName = "show_update_message",
+            name = "Show updates message",
+            description = "Show message in chatbox about plugin updates",
+            section = general,
+            position = 11
+        ) default boolean showUpdatesMessage() { return true; }
+
         @Alpha
         @ConfigItem(
             keyName = "colors_default",
             name = "Default",
             description = "Color of default charges",
-            position = 11,
+            position = 12,
             section = general
         ) default Color getColorDefault() { return Color.white; }
 
@@ -313,7 +323,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             keyName = "colors_unknown",
             name = "Unknown",
             description = "Color of unknown charges",
-            position = 12,
+            position = 13,
             section = general
         ) default Color getColorUnknown() { return Color.gray; }
 
@@ -322,7 +332,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             keyName = "colors_empty",
             name = "Empty",
             description = "Color of empty charges",
-            position = 13,
+            position = 14,
             section = general
         ) default Color getColorEmpty() { return Color.red; }
 
@@ -331,7 +341,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             keyName = "colors_activated",
             name = "Activated",
             description = "Color of activated charges",
-            position = 14,
+            position = 15,
             section = general
         ) default Color getColorActivated() { return Color.green; }
 
@@ -3009,6 +3019,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = herb_sack + _storage,
             section = debug
         ) default String getHerbSackStorage() { return ""; }
+
+        @ConfigItem(
+            keyName = herb_sack + _display,
+            name = herb_sack + _display,
+            description = herb_sack + _display,
+            section = debug
+        ) default String getHerbSackDisplay() { return StorageDisplay.TOTAL; }
 
         @ConfigItem(
             keyName = silklined_herb_sack + _storage,

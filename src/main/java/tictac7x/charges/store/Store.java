@@ -28,7 +28,6 @@ public class Store {
     private ItemManager itemManager;
     private ConfigManager configManager;
     private Provider provider;
-    private ZoneId timezone = ZoneId.of("Europe/London");
 
     private int HIGHEST_MONSTER_ATTACK_SPEED = 8;
 
@@ -74,6 +73,7 @@ public class Store {
     private ListenerOnItemUsed listenerOnItemUsed;
     private ListenerOnScriptPreFired listenerOnScriptPreFired;
     private ListenerOnCombat listenerOnCombat;
+    private ListenerOnMenuOpened listenerOnMenuOpened;
     private ListenerOnGameTick listenerOnGameTick;
 
     public Store(Client client, ItemManager itemManager, ConfigManager configManager) {
@@ -102,6 +102,7 @@ public class Store {
         listenerOnItemUsed = new ListenerOnItemUsed(provider);
         listenerOnScriptPreFired = new ListenerOnScriptPreFired(provider);
         listenerOnCombat = new ListenerOnCombat(provider);
+        listenerOnMenuOpened = new ListenerOnMenuOpened(provider);
         listenerOnGameTick = new ListenerOnGameTick(provider);
 
         return this;
@@ -763,6 +764,12 @@ public class Store {
         });
     }
 
+    public void onMenuOpened(MenuOpened event) {
+        getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
+            listenerOnMenuOpened.trigger(event, chargedItem);
+        });
+    }
+
     public void onGameStateChanged(GameStateChanged event) {
         if (event.getGameState() == GameState.LOGGING_IN) {
             checkForChargesReset();
@@ -770,19 +777,23 @@ public class Store {
 
         if (event.getGameState() != GameState.LOGGED_IN) return;
 
-        // Send message about plugin updates for once.
+        // Update config version to latest
         if (!provider.config.getVersion().equals(TicTac7xChargesImprovedPlugin.pluginVersion)) {
             configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.version, TicTac7xChargesImprovedPlugin.pluginVersion);
-            provider.chatMessageManager.queue(QueuedMessage.builder()
-                .type(ChatMessageType.CONSOLE)
-                .runeLiteFormattedMessage(TicTac7xChargesImprovedPlugin.pluginMessage)
-                .build()
-            );
+
+            // Send message about plugin updates for once.
+            if (provider.config.showUpdatesMessage()) {
+                provider.chatMessageManager.queue(QueuedMessage.builder()
+                    .type(ChatMessageType.CONSOLE)
+                    .runeLiteFormattedMessage(TicTac7xChargesImprovedPlugin.pluginMessage)
+                    .build()
+                );
+            }
         }
     }
 
     private void checkForChargesReset() {
-        String date = LocalDateTime.now(timezone).format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String date = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         if (!date.equals(provider.config.getResetDate())) {
             onResetDaily(date);

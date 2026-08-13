@@ -18,7 +18,7 @@ public class W_AbyssalTentacle extends ChargedItem {
 
         this.triggers.addAll(List.of(
             // Check.
-            new OnChatMessage("Your abyssal tentacle can perform (?<charges>.+) more attacks?").setDynamicallyCharges(),
+            new OnChatMessage("Your abyssal tentacle can perform (?<charges>.+) more attacks?.").setDynamicallyCharges(),
 
             // Attack.
             new OnAnimationChanged(1658).itemEquipped().decreaseCharges(1),
