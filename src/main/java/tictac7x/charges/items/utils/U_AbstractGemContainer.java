@@ -111,6 +111,12 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
             // Pick up.
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(openItemId).pickUpToStorage(),
 
+            // Golem crafting
+            new OnChatMessage("As you complete the golem it leaves a gift in your gem sack for you: (?<quantity>.+) x (?<gem>.+).").matcherConsumer(m -> {
+                Optional<StorageItem> gem = getStorageItemFromName(m.group("gem"), Integer.parseInt(m.group("quantity")));
+                storage.add(gem);
+            }),
+
             // Replace "Empty" with proper "Empty to bank".
             new OnMenuEntryAdded("Empty").replaceOption(TicTac7xChargesImprovedPlugin.menuOptionEmptyToBank).isWidgetVisible(WidgetId.BANK, WidgetId.DEPOSIT_BOX),
 

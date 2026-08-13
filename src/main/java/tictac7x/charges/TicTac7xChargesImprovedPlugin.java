@@ -65,7 +65,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String pluginVersion = "v0.6.16";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Herb sack and gem pouches have in-game options to show individual charges."
+		"<colHIGHLIGHT>* Herb sack and gem pouches have in-game options to show individual charges.<br>" +
+		"<colHIGHLIGHT>* Gem containers support golem crafting.<br>" +
+		"<colHIGHLIGHT>* Option to disable updates messages."
 	;
 
 	@Inject

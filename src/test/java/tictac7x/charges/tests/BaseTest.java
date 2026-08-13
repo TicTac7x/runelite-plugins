@@ -3,6 +3,7 @@ package tictac7x.charges.tests;
 import com.google.gson.*;
 import net.runelite.api.*;
 import net.runelite.api.gameval.InventoryID;
+import net.runelite.api.gameval.ItemID;
 import net.runelite.client.*;
 import net.runelite.client.callback.*;
 import net.runelite.client.chat.*;
@@ -92,6 +93,52 @@ public abstract class BaseTest {
         .thenAnswer(invocation -> {
             String key = invocation.getArgument(1);
             return settings.get(key);
+        });
+
+        when(itemManager.getItemComposition(anyInt())).thenAnswer(invocation -> {
+            int itemId = invocation.getArgument(0);
+
+            ItemComposition composition = mock(ItemComposition.class);
+
+            String name;
+            switch (itemId) {
+                case ItemID.UNCUT_OPAL:
+                    name = "Uncut opal";
+                    break;
+                case ItemID.UNCUT_JADE:
+                    name = "Uncut jade";
+                    break;
+                case ItemID.UNCUT_RED_TOPAZ:
+                    name = "Uncut red topaz";
+                    break;
+                case ItemID.UNCUT_SAPPHIRE:
+                    name = "Uncut sapphire";
+                    break;
+                case ItemID.UNCUT_EMERALD:
+                    name = "Uncut emerald";
+                    break;
+                case ItemID.UNCUT_RUBY:
+                    name = "Uncut ruby";
+                    break;
+                case ItemID.UNCUT_DIAMOND:
+                    name = "Uncut diamond";
+                    break;
+                case ItemID.UNCUT_DRAGONSTONE:
+                    name = "Uncut dragonstone";
+                    break;
+                case ItemID.UNCUT_ONYX:
+                    name = "Uncut onyx";
+                    break;
+                case ItemID.UNCUT_ZENYTE:
+                    name = "Uncut zenyte";
+                    break;
+                default:
+                    name = null;
+                    break;
+            }
+
+            when(composition.getName()).thenReturn(name);
+            return composition;
         });
     }
 

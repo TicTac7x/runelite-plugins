@@ -778,14 +778,18 @@ public class Store {
 
         if (event.getGameState() != GameState.LOGGED_IN) return;
 
-        // Send message about plugin updates for once.
+        // Update config version to latest
         if (!provider.config.getVersion().equals(TicTac7xChargesImprovedPlugin.pluginVersion)) {
             configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, TicTac7xChargesImprovedConfig.version, TicTac7xChargesImprovedPlugin.pluginVersion);
-            provider.chatMessageManager.queue(QueuedMessage.builder()
-                .type(ChatMessageType.CONSOLE)
-                .runeLiteFormattedMessage(TicTac7xChargesImprovedPlugin.pluginMessage)
-                .build()
-            );
+
+            // Send message about plugin updates for once.
+            if (provider.config.showUpdatesMessage()) {
+                provider.chatMessageManager.queue(QueuedMessage.builder()
+                    .type(ChatMessageType.CONSOLE)
+                    .runeLiteFormattedMessage(TicTac7xChargesImprovedPlugin.pluginMessage)
+                    .build()
+                );
+            }
         }
     }
 
