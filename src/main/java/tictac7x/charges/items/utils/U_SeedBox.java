@@ -161,8 +161,11 @@ public class U_SeedBox extends ChargedItemWithStorage {
             new OnItemContainerChanged(InventoryID.SEED_BOX).updateStorage(),
 
             // Planting.
-            new OnChatMessage("An? (?<seed>.*) seed was taken from your seed box.").matcherConsumer(m -> {
+            new OnChatMessage("An? (?<seed>.+) seed was taken from your seed box.").matcherConsumer(m -> {
                 storage.remove(getStorageItemFromName(m.group("seed"), 1));
+            }),
+            new OnChatMessage("(?<quantity>.+) (?<seed>.+) seeds were taken from your seed box.").matcherConsumer(m -> {
+                storage.remove(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
             }),
 
             // Replace "Empty" with proper "Empty to bank".

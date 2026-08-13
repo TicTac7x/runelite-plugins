@@ -95,45 +95,24 @@ public abstract class BaseTest {
             return settings.get(key);
         });
 
-        when(itemManager.getItemComposition(anyInt())).thenAnswer(invocation -> {
+        lenient().when(itemManager.getItemComposition(anyInt())).thenAnswer(invocation -> {
             int itemId = invocation.getArgument(0);
 
             ItemComposition composition = mock(ItemComposition.class);
 
             String name;
             switch (itemId) {
-                case ItemID.UNCUT_OPAL:
-                    name = "Uncut opal";
-                    break;
-                case ItemID.UNCUT_JADE:
-                    name = "Uncut jade";
-                    break;
-                case ItemID.UNCUT_RED_TOPAZ:
-                    name = "Uncut red topaz";
-                    break;
                 case ItemID.UNCUT_SAPPHIRE:
                     name = "Uncut sapphire";
                     break;
-                case ItemID.UNCUT_EMERALD:
-                    name = "Uncut emerald";
+                case ItemID.WATERMELON_SEED:
+                    name = "Watermelon seed";
                     break;
-                case ItemID.UNCUT_RUBY:
-                    name = "Uncut ruby";
-                    break;
-                case ItemID.UNCUT_DIAMOND:
-                    name = "Uncut diamond";
-                    break;
-                case ItemID.UNCUT_DRAGONSTONE:
-                    name = "Uncut dragonstone";
-                    break;
-                case ItemID.UNCUT_ONYX:
-                    name = "Uncut onyx";
-                    break;
-                case ItemID.UNCUT_ZENYTE:
-                    name = "Uncut zenyte";
+                case ItemID.RANARR_SEED:
+                    name = "Ranarr seed";
                     break;
                 default:
-                    name = null;
+                    name = "unsupported";
                     break;
             }
 
