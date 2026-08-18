@@ -48,7 +48,10 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
             // Attack.
             new OnGraphicChanged(2289).isEquipped().consumer(() -> {
                 storage.remove(ItemID.ANCIENT_ESSENCE, 1);
-            })
+            }),
+
+            // Auto-charge.
+            new OnAutoChargeMessage(itemName, "Ancient essence", 1, this)
         ));
     }
 }
