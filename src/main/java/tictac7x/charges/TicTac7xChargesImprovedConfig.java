@@ -442,7 +442,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = pendant_of_ates + _infobox,
-            name = "Pendant of ates",
+            name = "Pendant of Ates",
             description = "",
             section = infoboxes
         ) default boolean pendantOfAtesInfobox() { return true; }
@@ -897,21 +897,21 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = tome_of_earth + _infobox,
-            name = "Tome of earth",
+            name = "Tome of Earth",
             description = "",
             section = infoboxes
         ) default boolean tomeOfEarthInfobox() { return true; }
 
         @ConfigItem(
             keyName = tome_of_fire + _infobox,
-            name = "Tome of fire",
+            name = "Tome of Fire",
             description = "",
             section = infoboxes
         ) default boolean tomeOfFireInfobox() { return true; }
 
         @ConfigItem(
             keyName = tome_of_water + _infobox,
-            name = "Tome of water",
+            name = "Tome of Water",
             description = "",
             section = infoboxes
         ) default boolean tomeOfWaterInfobox() { return true; }
@@ -1485,7 +1485,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = pendant_of_ates + _overlay,
-            name = "Pendant of ates",
+            name = "Pendant of Ates",
             description = "",
             section = overlays
         ) default boolean pendantOfAtesOverlay() { return true; }
@@ -2143,21 +2143,21 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = tome_of_earth + _overlay,
-            name = "Tome of earth",
+            name = "Tome of Earth",
             description = "",
             section = overlays
         ) default boolean tomeOfEarthOverlay() { return true; }
 
         @ConfigItem(
             keyName = tome_of_fire + _overlay,
-            name = "Tome of fire",
+            name = "Tome of Fire",
             description = "",
             section = overlays
         ) default boolean tomeOfFireOverlay() { return true; }
 
         @ConfigItem(
             keyName = tome_of_water + _overlay,
-            name = "Tome of water",
+            name = "Tome of Water",
             description = "",
             section = overlays
         ) default boolean tomeOfWaterOverlay() { return true; }
