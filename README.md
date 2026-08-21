@@ -152,7 +152,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Scythe of Vitur
 * Skull sceptre
 * Slayer staff (e)
-* Trident of the seas / swamp
+* Trident of the Seas / Swamp
 * Tumeken's shadow
 * Venator bow
   * Echo venator bow

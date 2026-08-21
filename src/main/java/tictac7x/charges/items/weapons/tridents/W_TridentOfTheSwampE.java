@@ -13,7 +13,7 @@ public class W_TridentOfTheSwampE extends _Trident {
             ItemID.TOXIC_TOTS_I_CHARGED,
             ItemID.TOXIC_TOTS_I_UNCHARGED,
             Optional.empty(),
-            "Trident of the swamp (e)",
+            "Trident of the Swamp (e)",
             665,
             provider
         );

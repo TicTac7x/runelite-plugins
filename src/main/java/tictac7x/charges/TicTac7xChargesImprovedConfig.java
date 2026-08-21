@@ -1317,56 +1317,56 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = trident_of_the_seas + _infobox,
-            name = "Trident of the seas",
+            name = "Trident of the Seas",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSeasInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_seas_e + _infobox,
-            name = "Trident of the seas (e)",
+            name = "Trident of the Seas (e)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSeasEInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_seas_o + _infobox,
-            name = "Trident of the seas (o)",
+            name = "Trident of the Seas (o)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSeasOInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_seas_e_o + _infobox,
-            name = "Trident of the seas (e) (o)",
+            name = "Trident of the Seas (e) (o)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSeasEOInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp + _infobox,
-            name = "Trident of the swamp",
+            name = "Trident of the Swamp",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp_e + _infobox,
-            name = "Trident of the swamp (e)",
+            name = "Trident of the Swamp (e)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampEInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp_o + _infobox,
-            name = "Trident of the swamp (o)",
+            name = "Trident of the Swamp (o)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampOInfobox() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp_e_o + _infobox,
-            name = "Trident of the swamp (e) (o)",
+            name = "Trident of the Swamp (e) (o)",
             description = "",
             section = infoboxes
         ) default boolean tridentOfTheSwampEOInfobox() { return true; }
@@ -2332,56 +2332,56 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
         @ConfigItem(
             keyName = trident_of_the_seas + _overlay,
-            name = "Trident of the seas",
+            name = "Trident of the Seas",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSeasOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_seas_e + _overlay,
-            name = "Trident of the seas (e)",
+            name = "Trident of the Seas (e)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSeasEOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_seas_o + _overlay,
-            name = "Trident of the seas (o)",
+            name = "Trident of the Seas (o)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSeasOOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_seas_e_o + _overlay,
-            name = "Trident of the seas (e) (o)",
+            name = "Trident of the Seas (e) (o)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSeasEOOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp + _overlay,
-            name = "Trident of the swamp",
+            name = "Trident of the Swamp",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp_e + _overlay,
-            name = "Trident of the swamp (e)",
+            name = "Trident of the Swamp (e)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampEOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp_o + _overlay,
-            name = "Trident of the swamp (o)",
+            name = "Trident of the Swamp (o)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampOOverlay() { return true; }
 
         @ConfigItem(
             keyName = trident_of_the_swamp_e_o + _overlay,
-            name = "Trident of the swamp (e) (o)",
+            name = "Trident of the Swamp (e) (o)",
             description = "",
             section = overlays
         ) default boolean tridentOfTheSwampEOOverlay() { return true; }

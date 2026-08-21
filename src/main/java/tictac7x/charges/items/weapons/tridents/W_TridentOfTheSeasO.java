@@ -13,7 +13,7 @@ public class W_TridentOfTheSeasO extends _Trident {
             ItemID.TOTS_CHARGED_ORN,
             ItemID.TOTS_UNCHARGED_ORN,
             Optional.of(ItemID.TOTS_ORN),
-            "Trident of the seas (o)",
+            "Trident of the Seas (o)",
             3721,
             provider
         );
