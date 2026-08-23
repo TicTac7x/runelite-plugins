@@ -13,6 +13,7 @@ import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WallObjectDespawned;
 import net.runelite.api.events.WallObjectSpawned;
@@ -145,6 +146,12 @@ public class TicTac7xMotherlodePlugin extends Plugin {
 	public void onAnimationChanged(final AnimationChanged event) {
 		if (!character.isInMotherlode()) return;
 		hopper.onAnimationChanged(event);
+	}
+
+	@Subscribe
+	public void onMenuEntryAdded(final MenuEntryAdded event) {
+		if (!character.isInMotherlode()) return;
+		oreVeins.onMenuEntryAdded(event);
 	}
 
 	@Subscribe
