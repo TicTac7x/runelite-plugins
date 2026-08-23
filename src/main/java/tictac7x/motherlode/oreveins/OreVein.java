@@ -168,8 +168,12 @@ public class OreVein {
     }
 
     public static boolean isOreVein(final WallObject wallObject) {
+        return isOreVein(wallObject.getId());
+    }
+
+    public static boolean isOreVein(final int wallObjectId) {
         for (final int oreVeinId : ORE_VEINS_IDS) {
-            if (wallObject.getId() == oreVeinId) return true;
+            if (wallObjectId == oreVeinId) return true;
         }
 
         return false;

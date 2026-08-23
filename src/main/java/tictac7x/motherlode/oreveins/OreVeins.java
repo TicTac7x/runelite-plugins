@@ -2,10 +2,13 @@ package tictac7x.motherlode.oreveins;
 
 import net.runelite.api.Actor;
 import net.runelite.api.GameState;
+import net.runelite.api.MenuAction;
+import net.runelite.api.MenuEntry;
 import net.runelite.api.Player;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.WallObjectDespawned;
 import net.runelite.api.events.WallObjectSpawned;
 import net.runelite.client.ui.overlay.Overlay;
@@ -73,6 +76,24 @@ public class OreVeins extends Overlay {
         for (final OreVein oreVein : oreVeins.values()) {
             oreVein.onGameTick();
         }
+    }
+
+    public void onMenuEntryAdded(final MenuEntryAdded event) {
+        if (!config.removeMineWhenFull() || !isOreVeinMineEntry(event.getMenuEntry()) || !motherlode.shouldStopMining()) return;
+
+        final List<MenuEntry> menuEntries = new ArrayList<>();
+
+        for (final MenuEntry menuEntry : provider.client.getMenu().getMenuEntries()) {
+            if (!isOreVeinMineEntry(menuEntry)) {
+                menuEntries.add(menuEntry);
+            }
+        }
+
+        provider.client.getMenu().setMenuEntries(menuEntries.toArray(new MenuEntry[0]));
+    }
+
+    private boolean isOreVeinMineEntry(final MenuEntry menuEntry) {
+        return menuEntry.getType() == MenuAction.GAME_OBJECT_FIRST_OPTION && OreVein.isOreVein(menuEntry.getIdentifier());
     }
 
     private void updateOreVein(final WallObject wallObject, final boolean isDepleted) {

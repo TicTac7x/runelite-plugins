@@ -10,6 +10,7 @@ public class Hopper {
     private final Client client;
     private final Inventory inventory;
     private int paydirt = 0;
+    private int lastSackPaydirt = -1;
 
     public Hopper(final Client client, final Inventory inventory) {
         this.client = client;
@@ -22,13 +23,17 @@ public class Hopper {
 
     public void onAnimationChanged(final AnimationChanged event) {
         if (event.getActor() == client.getLocalPlayer() && event.getActor().getAnimation() == AnimationId.DEPOSIT_PAYDIRT) {
-            paydirt = inventory.getPaydirt();
+            paydirt += inventory.getPaydirt();
         }
     }
 
     public void onVarbitChanged(final VarbitChanged event) {
-        if (event.getVarbitId() == VarbitId.MOTHERLODE_SACK_PAYDIRT) {
-            paydirt = 0;
+        if (event.getVarbitId() != VarbitId.MOTHERLODE_SACK_PAYDIRT) return;
+
+        final int sackPaydirt = event.getValue();
+        if (lastSackPaydirt >= 0 && sackPaydirt > lastSackPaydirt) {
+            paydirt = Math.max(0, paydirt - (sackPaydirt - lastSackPaydirt));
         }
+        lastSackPaydirt = sackPaydirt;
     }
 }

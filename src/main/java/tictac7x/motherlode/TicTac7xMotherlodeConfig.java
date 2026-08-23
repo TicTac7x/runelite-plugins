@@ -32,6 +32,14 @@ public interface TicTac7xMotherlodeConfig extends Config {
 			section = general
 		) default boolean notifyToStopMining() { return true; }
 
+		@ConfigItem(
+			keyName = "remove_mine_when_full",
+			name = "Remove Mine when Full",
+			description = "Removes mine option from ore veins when sack would become full with already owned paydirt.",
+			position = 3,
+			section = general
+		) default boolean removeMineWhenFull() { return false; }
+
 	@ConfigSection(
 		name = "Ore veins and rockfalls",
 		description = "Highlight ore veins and rockfalls based on their states.",
