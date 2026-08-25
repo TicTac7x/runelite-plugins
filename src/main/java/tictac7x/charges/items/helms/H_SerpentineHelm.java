@@ -52,7 +52,7 @@ public class H_SerpentineHelm extends ChargedItemWithStorage {
             new OnCombat(90).isEquipped().consumer(() -> storage.remove(ItemID.SNAKEBOSS_SCALE, 10)),
 
             // Auto-charge.
-            new OnAutoChargeMessage(itemName, "Zulrah scales", 1, this, ItemID.SNAKEBOSS_SCALE),
+            new OnAutoChargeMessage(itemName, "Zulrah's scales", 1, this, ItemID.SNAKEBOSS_SCALE),
 
             // Ran out of charges upon degrading in combat
             new OnChatMessage("Your serpentine helm has run out of Zulrah's scales.").consumer(() -> storage.clear())
