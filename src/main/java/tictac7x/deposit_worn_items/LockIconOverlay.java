@@ -43,10 +43,10 @@ public class LockIconOverlay extends Overlay {
         }
 
         @Nullable
-        final Widget widgetBankDepositWornItems = client.getWidget(12, 46);
+        final Widget widgetBankDepositWornItems = client.getWidget(12, 49);
 
         @Nullable
-        final Widget widgetDepositBoxDepositWornItems = client.getWidget(192, 6);
+        final Widget widgetDepositBoxDepositWornItems = client.getWidget(192, 30);
 
         if (widgetBankDepositWornItems != null) {
             graphics2D.drawImage(
