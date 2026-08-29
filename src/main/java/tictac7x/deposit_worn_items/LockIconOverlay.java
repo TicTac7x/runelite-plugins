@@ -1,7 +1,7 @@
 package tictac7x.deposit_worn_items;
 
 import net.runelite.api.Client;
-import net.runelite.api.SpriteID;
+import net.runelite.api.gameval.SpriteID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.game.SpriteManager;
 import net.runelite.client.ui.overlay.Overlay;
@@ -37,7 +37,8 @@ public class LockIconOverlay extends Overlay {
         if (config.isDepositWornItemsEnabled()) return null;
 
         if (lockIcon == null) {
-            lockIcon = spriteManager.getSprite(SpriteID.BANK_PLACEHOLDERS_LOCK, 0);
+            lockIcon = spriteManager.getSprite(SpriteID.Bankbuttons._7, 0);
+            if (lockIcon == null) return null;
             lockIcon = ImageUtil.resizeImage(lockIcon, 12, 14);
             lockIcon = ImageUtil.alphaOffset(lockIcon, -50);
         }
