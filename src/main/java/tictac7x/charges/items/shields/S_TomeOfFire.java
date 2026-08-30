@@ -25,7 +25,7 @@ public class S_TomeOfFire extends ChargedItem {
             new OnGraphicChanged(99, 126, 129, 155, 1464).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnAutoChargeMessage("Tome of fire", "Burnt page", 20, this)
+            new OnAutoChargeMessage("Tome of Fire", "Burnt page", 20, this)
         ));
     }
 }

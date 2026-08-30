@@ -34,7 +34,7 @@ public class W_BowOfFaerdhinen extends ChargedItem {
             new OnGraphicChanged(1888).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnAutoChargeMessage("Bow of faerdhinen", "Crystal shard", 100, this)
+            new OnAutoChargeMessage("Bow of Faerdhinen", "Crystal shard", 100, this)
         ));
     }
 }

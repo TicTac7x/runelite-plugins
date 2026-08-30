@@ -25,7 +25,7 @@ public class S_TomeOfEarth extends ChargedItem {
             new OnGraphicChanged(96, 123, 138, 164, 1461).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnAutoChargeMessage("Tome of earth", "Soiled page", 20, this)
+            new OnAutoChargeMessage("Tome of Earth", "Soiled page", 20, this)
         ));
     }
 }
