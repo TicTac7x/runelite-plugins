@@ -334,7 +334,7 @@ public class Store {
         }
     }
 
-    public void onGameTick(GameTick ignored) {
+    public void onGameTick(GameTick event) {
         runNextGameTickQueue();
         gametick++;
 
@@ -351,6 +351,10 @@ public class Store {
 
         inCombatTicksRemainingDamageDoneToOthers = Math.max(0, inCombatTicksRemainingDamageDoneToOthers - 1);
         inCombatTicksRemainingDamageDoneToMe = Math.max(0, inCombatTicksRemainingDamageDoneToMe - 1);
+
+        getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
+            listenerOnGameTick.trigger(event, chargedItem);
+        });
     }
 
     public boolean inMenuTargets(int ...itemIds) {

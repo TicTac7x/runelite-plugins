@@ -36,7 +36,7 @@ public class _Blowpipe extends ChargedItemWithStorage {
         }
         if (supportsRuniteDarts) {
             storableItems.add(
-                new StorableItem(ItemID.ADAMANT_DART).checkName("Rune dart")
+                new StorableItem(ItemID.RUNE_DART).checkName("Rune dart")
             );
         }
         storage.storableItems(
