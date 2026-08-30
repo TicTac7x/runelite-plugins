@@ -68,10 +68,9 @@ public class TicTac7xDepositWornItemsPlugin extends Plugin {
 		for (MenuEntry menuEntry : menu.getMenuEntries()) {
 			if (menuEntry.getOption().equals("Deposit worn items")) {
 				if (!config.isDepositWornItemsEnabled()) {
-					newMenuEntries.add(menu.createMenuEntry(0).setOption("Disabled").onClick((e) -> {}));
-				} else {
-					newMenuEntries.add(menuEntry);
+					menuEntry.setDeprioritized(true);
 				}
+				newMenuEntries.add(0, menuEntry);
 
 				if (config.isDepositWornItemsToggleable()) {
 					newMenuEntries.add(0, menu.createMenuEntry(0).setOption((config.isDepositWornItemsEnabled() ? "Disable" : "Enable") + " deposit").onClick((e) -> {
