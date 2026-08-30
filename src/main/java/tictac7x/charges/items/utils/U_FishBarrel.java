@@ -120,6 +120,9 @@ public class U_FishBarrel extends ChargedItemWithStorageEmptyable {
             // Fill from inventory.
             new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onMenuOption("Fill"),
 
+            // Pick up.
+            new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(ItemID.FISH_BARREL_OPEN, ItemID.FISH_SACK_BARREL_OPEN).pickUpToStorage(),
+
             // Use fish on barrel.
             new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
