@@ -59,14 +59,6 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
             // Leave Gauntlet detection.
             new OnChatMessage("(You leave the Gauntlet.|Your reward awaits you in the nearby chest.)").consumer(() -> {
                 inGauntletWithEscapeCrystal = false;
-            }),
-
-            new OnGameTick().consumer(() -> {
-                long timeRemainingUntilActivation = getTimeRemainingUntilActivation();
-                if (!alertedAboutActivation && isAboutToActivate()) {
-                    alertedAboutActivation = true;
-                    provider.notifier.notify("Escape crystal is activating in " + timeRemainingUntilActivation + (provider.config.getEscapeCrystalTimeRemainingUnit() == TicTac7xChargesImprovedConfig.EscapeCrystalTimeRemainingUnit.SECONDS ? " seconds." : " ticks."));
-                }
             })
         ));
     }
@@ -90,7 +82,7 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
     }
 
     private boolean isAboutToActivate() {
-        return provider.config.getEscapeCrystalTimeRemainingWarning() > 0 && isActivated() && getTimeRemainingUntilActivation() <= provider.config.getEscapeCrystalTimeRemainingWarning();
+        return provider.config.getEscapeCrystalTimeRemainingWarning() > 0 && isActivated() && provider.store.isLockedInCombat() && getTimeRemainingUntilActivation() <= provider.config.getEscapeCrystalTimeRemainingWarning();
     }
 
     @Override
@@ -132,6 +124,11 @@ public class J_EscapeCrystal extends ChargedItemWithStatus {
         }
 
         long timeRemainingUntilActivation = getTimeRemainingUntilActivation();
+        if (!alertedAboutActivation && isAboutToActivate()) {
+            alertedAboutActivation = true;
+            provider.notifier.notify("Escape crystal is activating in " + timeRemainingUntilActivation + (provider.config.getEscapeCrystalTimeRemainingUnit() == TicTac7xChargesImprovedConfig.EscapeCrystalTimeRemainingUnit.SECONDS ? " seconds." : " ticks."));
+        }
+
         switch (provider.config.getEscapeCrystalTimeRemainingUnit()) {
             case SECONDS:
                 return timeRemainingUntilActivation / 60 + ":" + String.format("%02d", timeRemainingUntilActivation % 60);
