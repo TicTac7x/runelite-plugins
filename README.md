@@ -1,4 +1,4 @@
-# Item Charges Improved v0.6.16
+# Item Charges Improved v0.6.17
 
 Show charges of various items that are in inventory or equipped
 
@@ -62,7 +62,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Games necklace
 * Giantsoul amulet
 * Necklace of passage
-* Pendant of ates
+* Pendant of Ates
 * Phoenix necklace
 * Ring of dueling
 * Ring of endurance
@@ -89,9 +89,9 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Falador shield
 * Ghommal's hilt
 * Kharedst's memoirs / Book of the dead
-* Tome of earth
-* Tome of fire
-* Tome of water
+* Tome of Earth
+* Tome of Fire
+* Tome of Water
 
 ### Utilities
 * Ash sanctifier
@@ -152,7 +152,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Scythe of Vitur
 * Skull sceptre
 * Slayer staff (e)
-* Trident of the seas / swamp
+* Trident of the Seas / Swamp
 * Tumeken's shadow
 * Venator bow
   * Echo venator bow

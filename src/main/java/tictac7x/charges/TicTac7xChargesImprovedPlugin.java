@@ -62,12 +62,12 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.16";
+	public static String pluginVersion = "v0.6.17";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Herb sack and gem pouches have in-game options to show individual charges.<br>" +
-		"<colHIGHLIGHT>* Gem containers support golem crafting.<br>" +
-		"<colHIGHLIGHT>* Option to disable updates messages."
+		"<colHIGHLIGHT>* Rosewood blowpipe rune darts tracking fixed.<br>" +
+		"<colHIGHLIGHT>* Celestial ring charges tracking for new ores added.<br>" +
+		"<colHIGHLIGHT>* Various item fixes that names got updated."
 	;
 
 	@Inject

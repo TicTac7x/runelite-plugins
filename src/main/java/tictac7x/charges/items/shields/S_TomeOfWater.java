@@ -25,7 +25,7 @@ public class S_TomeOfWater extends ChargedItem {
             new OnGraphicChanged(93, 120, 135, 161, 1458).isEquipped().decreaseCharges(1),
 
             // Auto-charge.
-            new OnAutoChargeMessage("Tome of water", "Soaked page", 20, this)
+            new OnAutoChargeMessage("Tome of Water", "Soaked page", 20, this)
         ));
     }
 }

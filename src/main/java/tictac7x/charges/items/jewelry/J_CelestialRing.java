@@ -32,7 +32,7 @@ public class J_CelestialRing extends ChargedItem {
             new OnChatMessage("Your Celestial (ring|signet) has run out of charges.").setFixedCharges(0),
 
             // Mine.
-            new OnChatMessage("You manage to (mine|quarry) some (clay|copper|tin|guardian fragments|guardian essence|tephra|blurite|limestone|iron|silver|coal|sandstone|gold|granite|mithril|lovakite|adamantite|soft clay)( ore)?.").isEquipped().decreaseCharges(1),
+            new OnChatMessage("You manage to (mine|quarry) some (clay|copper|tin|guardian fragments|guardian essence|tephra|blurite|limestone|iron|silver|lead|coal|sandstone|gold|granite|rubium|sunstone|mithril|amalgamation|lovakite|adamantite|soft clay)( ore)?.").isEquipped().decreaseCharges(1),
 
             // Auto-charge.
             new OnChatMessage("The banker charges your Celestial (ring|signet) using (?<stardust>.+)x Stardust.").matcherConsumer(m -> {
