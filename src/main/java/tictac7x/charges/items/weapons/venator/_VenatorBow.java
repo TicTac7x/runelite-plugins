@@ -51,7 +51,7 @@ public abstract class _VenatorBow extends ChargedItemWithStorage {
             }),
 
             // Auto-charge.
-            new OnAutoChargeMessage(itemName, "Ancient essence", 1, this)
+            new OnAutoChargeMessage(itemName, "Ancient essence", 1, this, ItemID.ANCIENT_ESSENCE)
         ));
     }
 }
