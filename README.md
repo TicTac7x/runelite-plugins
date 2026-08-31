@@ -61,6 +61,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Flamtaer bracelet
 * Games necklace
 * Giantsoul amulet
+* Inoculation bracelet
 * Necklace of passage
 * Pendant of Ates
 * Phoenix necklace
@@ -78,6 +79,9 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Skills necklace
 * Slayer ring
 * Xeric's talisman
+
+### Legs
+* Morytania legs 3/4
 
 ### Potions
 * All

@@ -35,6 +35,7 @@ import tictac7x.charges.items.crystal.*;
 import tictac7x.charges.items.foods.*;
 import tictac7x.charges.items.helms.*;
 import tictac7x.charges.items.jewelry.*;
+import tictac7x.charges.items.legs.L_MorytaniaLegs;
 import tictac7x.charges.items.moons.*;
 import tictac7x.charges.items.potions.*;
 import tictac7x.charges.items.potions.P_Overload;
@@ -67,7 +68,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Rosewood blowpipe rune darts tracking fixed.<br>" +
 		"<colHIGHLIGHT>* Celestial ring charges tracking for new ores added.<br>" +
-		"<colHIGHLIGHT>* Various item fixes that names got updated."
+		"<colHIGHLIGHT>* Various item fixes that names got updated.<br>" +
+		"<colHIGHLIGHT>* Morytania legs and inoculation bracelet added."
 	;
 
 	@Inject
@@ -193,6 +195,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_FlamtaerBracelet(provider),
 			new J_GamesNecklace(provider),
 			new J_GiantsoulAmulet(provider),
+			new J_InoculationBracelet(provider),
 			new J_NecklaceOfPassage(provider),
 			new J_PhoenixNecklace(provider),
 			new J_DodgyNecklace(provider),
@@ -215,6 +218,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new J_SkillsNecklace(provider),
 			new J_XericsTalisman(provider),
 			new J_SailorsAmulet(provider),
+
+			// Legs
+			new L_MorytaniaLegs(provider),
+
 			// Potions
 			new P_Absorption(provider),
 			new P_Agility(provider),

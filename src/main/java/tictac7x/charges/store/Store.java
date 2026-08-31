@@ -525,7 +525,11 @@ public class Store {
         List<StorageItem> allItems = new ArrayList<>();
         allItems.addAll(inventory.getItems());
         allItems.addAll(equipment.getItems());
-        allItems.addAll(bank.getItems());
+
+        String[] storageBank = provider.config.getStorageBank().split(",");
+        for (String bankItemId : storageBank) {
+            allItems.add(new StorageItem(Integer.parseInt(bankItemId)));
+        }
         return allItems;
     }
 
