@@ -97,6 +97,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String flamtaer_bracelet = "flamtaer_bracelet";
     String games_necklace = "games_necklace";
     String giantsoul_amulet = "giantsoul_amulet";
+    String inoculation_bracelet = "inoculation_bracelet";
     String necklace_of_passage = "necklace_of_passage";
     String pendant_of_ates = "pendant_of_ates";
     String phoenix_necklace = "phoenix_necklace";
@@ -118,6 +119,9 @@ public interface TicTac7xChargesImprovedConfig extends Config {
 
     String baskets = "baskets";
     String sacks = "sacks";
+
+    // Legs
+    String morytania_legs = "morytania_legs";
 
     // Shields
     String chronicle = "chronicle";
@@ -833,6 +837,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean sailorsAmuletInfobox() { return true; }
 
         @ConfigItem(
+            keyName =  morytania_legs + _infobox,
+            name = "Morytania legs",
+            description = "",
+            section = infoboxes
+        ) default boolean morytaniaLegsInfobox() { return true; }
+
+        @ConfigItem(
             keyName =  baskets + _infobox,
             name = "Baskets",
             description = "",
@@ -1048,6 +1059,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = infoboxes
         ) default boolean giantsoulAmuletInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = inoculation_bracelet + _infobox,
+            name = "Inoculation bracelet",
+            description = "",
+            section = infoboxes
+        ) default boolean inoculationBraceletInfobox() { return true; }
 
         @ConfigItem(
             keyName = gricollers_can + _infobox,
@@ -1939,6 +1957,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean giantsoulAmuletOverlay() { return true; }
 
         @ConfigItem(
+            keyName = inoculation_bracelet + _overlay,
+            name = "Inoculation bracelet",
+            description = "",
+            section = overlays
+        ) default boolean inoculationBraceletOverlay() { return true; }
+
+        @ConfigItem(
             keyName = gricollers_can + _overlay,
             name = "Gricoller's can",
             description = "",
@@ -2413,6 +2438,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean sailorsAmuletOverlay() { return true; }
+
+        @ConfigItem(
+            keyName =  morytania_legs + _overlay,
+            name = "Morytania legs",
+            description = "",
+            section = overlays
+        ) default boolean morytaniaLegsOverlay() { return true; }
 
         @ConfigItem(
             keyName =  baskets + _overlay,

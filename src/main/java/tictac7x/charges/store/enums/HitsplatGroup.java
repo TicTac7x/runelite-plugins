@@ -4,4 +4,5 @@ public enum HitsplatGroup {
     ALL,
     SUCCESSFUL,
     BLOCKED,
+    DISEASE_BLOCKED,
 }

@@ -88,6 +88,10 @@ public class ListenerOnHitsplatApplied extends ListenerBase {
             return false;
         }
 
+        if (trigger.hitsplatGroup == HitsplatGroup.DISEASE_BLOCKED && event.type != HitsplatID.DISEASE_BLOCKED) {
+            return false;
+        }
+
         // More than zero damage.
         if (trigger.moreThanZeroDamage.isPresent() && event.amount == 0) {
             return false;
