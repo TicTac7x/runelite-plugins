@@ -26,7 +26,7 @@ dependencies {
 
 group = 'tictac7x-motherlode'
 version = 'v0.4.6'
-sourceCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_11
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
