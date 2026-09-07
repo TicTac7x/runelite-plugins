@@ -116,7 +116,7 @@ public class OreVein {
     }
 
     public boolean isRendering(final TicTac7xMotherlodeConfig config, final Character character) {
-        if (config.upstairsOnly() && sector.contains(Sector.DOWNSTAIRS)) {// sector == Sector.DOWNSTAIRS) {
+        if (config.upstairsOnly() && sector.contains(Sector.DOWNSTAIRS)) {
             return false;
         }
 
@@ -128,7 +128,7 @@ public class OreVein {
     }
 
     private float getMaxHealth() {
-        return sector.contains(Sector.DOWNSTAIRS)  //sector == Sector.DOWNSTAIRS
+        return sector.contains(Sector.DOWNSTAIRS)
             ? DESPAWN_TIME_DOWNSTAIRS_GAMETICKS
             : DESPAWN_TIME_UPPERFLOOR_GAMETICKS;
     }
@@ -140,7 +140,7 @@ public class OreVein {
     }
 
     private float getResetTime() {
-        return sector.contains(Sector.LONG_RESET_SECTOR) //sector == Sector.DOWNSTAIRS
+        return sector.contains(Sector.LONG_RESET_SECTOR)
              ? RESET_LONG_MAX_TIME_GAMETICKS
              : RESET_SHORT_NAX_TIME_GAMETICKS;
     }
