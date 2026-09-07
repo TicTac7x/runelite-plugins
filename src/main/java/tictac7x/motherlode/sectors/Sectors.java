@@ -41,8 +41,6 @@ public class Sectors {
 
         if (isInSector(LONG_RESET_SECTOR, location)) {
             sectors.add(Sector.LONG_RESET_SECTOR);
-        } else {
-            sectors.add(Sector.SHORT_RESET_SECTOR);
         }
 
         return sectors;

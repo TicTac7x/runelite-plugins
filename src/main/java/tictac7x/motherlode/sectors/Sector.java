@@ -8,6 +8,5 @@ public enum Sector {
     UPSTAIRS_S,
     UPSTAIRS_NE,
     UPSTAIRS_E,
-    LONG_RESET_SECTOR,
-    SHORT_RESET_SECTOR
+    LONG_RESET_SECTOR
 }
