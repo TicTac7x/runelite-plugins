@@ -24,13 +24,13 @@ public class W_ScytheOfVitur extends ChargedItem {
 
         this.triggers.addAll(List.of(
             // Check.
-            new OnChatMessage("Your (Holy s|Sanguine s|[Ss])cythe (of [Vv]itur )?has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
+            new OnChatMessage("Your (Holy s|Sanguine s|S)cythe (of vitur )?has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
 
             // Charge partially full.
-            new OnChatMessage("You apply an additional .+ charges to your (Holy s|Sanguine s|S)cythe of (V|v)itur. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
+            new OnChatMessage("You apply an additional .+ charges to your (Holy s|Sanguine s|S)cythe of vitur. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
 
             // Charge empty.
-            new OnChatMessage("You apply (?<charges>.+) charges to your (Holy s|Sanguine s|S)cythe of (V|v)itur.").setDynamicallyCharges(),
+            new OnChatMessage("You apply (?<charges>.+) charges to your (Holy s|Sanguine s|S)cythe of vitur.").setDynamicallyCharges(),
 
             // Attack.
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().oncePerGameTick().isEquipped().decreaseCharges(1)
