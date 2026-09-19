@@ -8,7 +8,7 @@ public class BlueMoonChestplate extends _MoonItem {
     public BlueMoonChestplate(
         Provider provider
     ) {
-        super("Blue moon chestplate", ItemID.FROST_MOON_CHESTPLATE, provider);
+        super("Blue Moon chestplate", ItemID.FROST_MOON_CHESTPLATE, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.FROST_MOON_CHESTPLATE).fixedCharges(3000),

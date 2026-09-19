@@ -8,7 +8,7 @@ public class BlueMoonHelm extends _MoonItem {
     public BlueMoonHelm(
         Provider provider
     ) {
-        super("Blue moon helm", ItemID.FROST_MOON_HELM, provider);
+        super("Blue Moon helm", ItemID.FROST_MOON_HELM, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.FROST_MOON_HELM).fixedCharges(3000),

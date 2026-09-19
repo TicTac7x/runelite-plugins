@@ -8,7 +8,7 @@ public class EclipseMoonTassets extends _MoonItem {
     public EclipseMoonTassets(
         Provider provider
     ) {
-        super("Eclipse moon tassets", ItemID.ECLIPSE_MOON_TASSETS, provider);
+        super("Eclipse Moon tassets", ItemID.ECLIPSE_MOON_TASSETS, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ECLIPSE_MOON_TASSETS).fixedCharges(3000),

@@ -8,7 +8,7 @@ public class EclipseMoonChestplate extends _MoonItem {
     public EclipseMoonChestplate(
         Provider provider
     ) {
-        super("Eclipse moon chestplate", ItemID.ECLIPSE_MOON_CHESTPLATE, provider);
+        super("Eclipse Moon chestplate", ItemID.ECLIPSE_MOON_CHESTPLATE, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ECLIPSE_MOON_CHESTPLATE).fixedCharges(3000),

@@ -8,7 +8,7 @@ public class BloodMoonTassets extends _MoonItem {
     public BloodMoonTassets(
         Provider provider
     ) {
-        super("Blood moon tassets", ItemID.BLOOD_MOON_TASSETS, provider);
+        super("Blood Moon tassets", ItemID.BLOOD_MOON_TASSETS, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BLOOD_MOON_TASSETS).fixedCharges(3000),

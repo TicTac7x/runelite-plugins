@@ -8,7 +8,7 @@ public class EclipseMoonHelm extends _MoonItem {
     public EclipseMoonHelm(
         Provider provider
     ) {
-        super("Eclipse moon helm", ItemID.ECLIPSE_MOON_HELM, provider);
+        super("Eclipse Moon helm", ItemID.ECLIPSE_MOON_HELM, provider);
 
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.ECLIPSE_MOON_HELM).fixedCharges(3000),
