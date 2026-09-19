@@ -24,7 +24,7 @@ public class W_ScytheOfVitur extends ChargedItem {
 
         this.triggers.addAll(List.of(
             // Check.
-            new OnChatMessage("Your (Holy s|Sanguine s|S)cythe (of vitur )?has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
+            new OnChatMessage("Your (Holy s|Sanguine s|S)cythe of vitur has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
 
             // Charge partially full.
             new OnChatMessage("You apply an additional .+ charges to your (Holy s|Sanguine s|S)cythe of vitur. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
