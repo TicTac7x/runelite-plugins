@@ -20,17 +20,19 @@ public class W_ScytheOfVitur extends ChargedItem {
             new TriggerItem(ItemID.SCYTHE_OF_VITUR_UNCHARGED_OR).fixedCharges(0),
             new TriggerItem(ItemID.SCYTHE_OF_VITUR_BL),
             new TriggerItem(ItemID.SCYTHE_OF_VITUR_UNCHARGED_BL).fixedCharges(0),
+            new TriggerItem(ItemID.DEADMAN_BLIGHTED_SCYTHE_OF_VITUR),
+            new TriggerItem(ItemID.DEADMAN_BLIGHTED_SCYTHE_OF_VITUR_UNCHARGED).fixedCharges(0),
         };
 
         this.triggers.addAll(List.of(
             // Check.
-            new OnChatMessage("Your (Holy s|Sanguine s|[Ss])cythe (of vitur )?has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
+            new OnChatMessage("Your (Holy |Sanguine |Corrupted )?Scythe (of vitur )?has (?<charges>.+) charges (remaining|left).").setDynamicallyCharges(),
 
             // Charge partially full.
-            new OnChatMessage("You apply an additional .+ charges to your (Holy s|Sanguine s|S)cythe of vitur. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
+            new OnChatMessage("You apply an additional .+ charges to your (Holy |Sanguine |Corrupted )?Scythe of vitur. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
 
             // Charge empty.
-            new OnChatMessage("You apply (?<charges>.+) charges to your (Holy s|Sanguine s|S)cythe of vitur.").setDynamicallyCharges(),
+            new OnChatMessage("You apply (?<charges>.+) charges to your (Holy |Sanguine |Corrupted )?Scythe of vitur.").setDynamicallyCharges(),
 
             // Attack.
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().oncePerGameTick().isEquipped().decreaseCharges(1)
