@@ -18,6 +18,7 @@ public class J_SlayerRing extends ChargedItem {
             new TriggerItem(ItemID.SLAYER_RING_6).fixedCharges(6),
             new TriggerItem(ItemID.SLAYER_RING_7).fixedCharges(7),
             new TriggerItem(ItemID.SLAYER_RING_8).fixedCharges(8),
+            new TriggerItem(ItemID.SLAYER_RING_ETERNAL).unlimitedCharges(),
         };
     }
 }
