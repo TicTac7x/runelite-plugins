@@ -36,8 +36,15 @@ public class ChargedItem extends ChargedItemBase {
 
         for (TriggerItem triggerItem : items) {
             if (triggerItem.fixedCharges.isPresent()) {
-                totalFixedCharges += provider.store.getInventoryItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
-                equipmentFixedCharges += provider.store.getEquipmentItemQuantity(triggerItem.itemId) * triggerItem.fixedCharges.get();
+                int inventoryItemQuantity = provider.store.getInventoryItemQuantity(triggerItem.itemId);
+                int equipmentItemQuantity = provider.store.getEquipmentItemQuantity(triggerItem.itemId);
+
+                if ((inventoryItemQuantity > 0 || equipmentItemQuantity > 0) && (triggerItem.fixedCharges.get() == ChargeId.UNLIMITED)) {
+                    return ChargeId.UNLIMITED;
+                }
+
+                totalFixedCharges += inventoryItemQuantity * triggerItem.fixedCharges.get();
+                equipmentFixedCharges += equipmentItemQuantity * triggerItem.fixedCharges.get();
                 fixedItemsFound = true;
             }
         }
