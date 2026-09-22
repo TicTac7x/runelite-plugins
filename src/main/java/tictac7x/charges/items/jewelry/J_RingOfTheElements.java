@@ -26,10 +26,20 @@ public class J_RingOfTheElements extends ChargedItem {
             new OnMenuEntryAdded("Rub").replaceOption("Teleport"),
 
             // Last destination replaced with actual altar.
-            new OnMenuEntryAdded("Last Destination").replaceOption("Air Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 1),
-            new OnMenuEntryAdded("Last Destination").replaceOption("Water Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 2),
-            new OnMenuEntryAdded("Last Destination").replaceOption("Earth Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 3),
-            new OnMenuEntryAdded("Last Destination").replaceOption("Fire Altar").replaceTarget("Ring of the elements", "").varbitCheck(13708, 4)
+            new OnMenuEntryAdded("Last Destination").replaceOptionConsumer(() -> {
+                switch (provider.client.getVarbitValue(VarbitID.RING_OF_ELEMENTS_LAST_DESTINATION)) {
+                    case 1:
+                        return "Air Altar";
+                    case 2:
+                        return "Water Altar";
+                    case 3:
+                        return "Earth Altar";
+                    case 4:
+                        return "Fire Altar";
+                    default:
+                        return "Last Destination";
+                }
+            })
         ));
     }
 }

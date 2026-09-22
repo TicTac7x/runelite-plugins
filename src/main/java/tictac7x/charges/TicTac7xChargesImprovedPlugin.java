@@ -63,13 +63,14 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.17";
+	public static String pluginVersion = "v0.6.18";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Rosewood blowpipe rune darts tracking fixed.<br>" +
-		"<colHIGHLIGHT>* Celestial ring charges tracking for new ores added.<br>" +
-		"<colHIGHLIGHT>* Various item fixes that names got updated.<br>" +
-		"<colHIGHLIGHT>* Morytania legs and inoculation bracelet added."
+		"<colHIGHLIGHT>* Multiple item fixes caused by item renamings.<br>" +
+		"<colHIGHLIGHT>* Eternal slayer ring added.<br>" +
+		"<colHIGHLIGHT>* Daily reset logic improved.<br>" +
+		"<colHIGHLIGHT>* Quetzal and master scroll book dynamic last destination menu entries.<br>" +
+		"<colHIGHLIGHT>* Echo Ahrims set support added."
 	;
 
 	@Inject
@@ -454,6 +455,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new AhrimsRobetop(provider),
 			new AhrimsRobeskirt(provider),
 			new AhrimsStaff(provider),
+
+			new EchoAhrimsHood(provider),
+			new EchoAhrimsRobetop(provider),
+			new EchoAhrimsRobeskirt(provider),
+			new EchoAhrimsStaff(provider),
 
 			new DharoksHelm(provider),
 			new DharoksPlatebody(provider),

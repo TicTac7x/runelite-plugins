@@ -7,7 +7,6 @@ import java.util.function.*;
 
 public class OnMenuOptionClicked extends TriggerBase {
     public String[] options;
-    public Optional<String[]> target = Optional.empty();
     public Optional<Consumer<CustomMenuOptionClicked>> menuOptionConsumer = Optional.empty();
     public Optional<Integer> hasItemId = Optional.empty();
 
@@ -22,11 +21,6 @@ public class OnMenuOptionClicked extends TriggerBase {
 
     public OnMenuOptionClicked hasItemId(int itemId) {
         this.hasItemId = Optional.of(itemId);
-        return this;
-    }
-
-    public OnMenuOptionClicked target(String... target) {
-        this.target = Optional.of(target);
         return this;
     }
 }

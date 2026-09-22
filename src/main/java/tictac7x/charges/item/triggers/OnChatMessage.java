@@ -15,7 +15,7 @@ public class OnChatMessage extends TriggerBase {
     public Optional<Consumer<String>> stringConsumer = Optional.empty();
 
     public OnChatMessage(String message) {
-        this.message = Pattern.compile(message);
+        this.message = Pattern.compile(message, Pattern.CASE_INSENSITIVE);
     }
 
     public TriggerBase setDynamicallyCharges() {

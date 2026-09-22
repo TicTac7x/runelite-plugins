@@ -12,7 +12,6 @@ public class OnWidgetLoaded extends TriggerBase {
 
     public Optional<Pattern> text = Optional.empty();
     public Optional<Consumer<Matcher>> matcherConsumer = Optional.empty();
-    public Optional<Consumer<Widget>> widgetConsumer = Optional.empty();
     public Optional<Boolean> setDynamically = Optional.empty();
 
     public OnWidgetLoaded(int groupId, int childId) {
@@ -38,11 +37,6 @@ public class OnWidgetLoaded extends TriggerBase {
 
     public OnWidgetLoaded matcherConsumer(Consumer<Matcher> consumer) {
         this.matcherConsumer = Optional.of(consumer);
-        return this;
-    }
-
-    public OnWidgetLoaded widgetConsumer(Consumer<Widget> consumer) {
-        this.widgetConsumer = Optional.of(consumer);
         return this;
     }
 }
