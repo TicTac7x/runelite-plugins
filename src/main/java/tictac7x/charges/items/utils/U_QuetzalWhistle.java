@@ -60,6 +60,42 @@ public class U_QuetzalWhistle extends ChargedItem {
                             break;
                     }
                 }
+            }),
+
+            // Dynamic teleport menu option
+            new OnMenuEntryAdded("Last-destination").replaceOptionConsumer(() -> {
+                switch (provider.client.getVarbitValue(VarbitID.QUETZAL_LAST_DESTINATION)) {
+                    case 1:
+                        return "Civitas illa Fortis";
+                    case 2:
+                        return "The Teomat";
+                    case 3:
+                        return "Sunset Coast";
+                    case 4:
+                        return "Hunter Guild";
+                    case 5:
+                        return "Cam Torum Entrance";
+                    case 6:
+                        return "Colossal Wyrm Remains";
+                    case 7:
+                        return "Outer Fortis";
+                    case 8:
+                        return "Fortis Colosseum";
+                    case 9:
+                        return "Aldarin";
+                    case 10:
+                        return "Quetzacalli Gorge";
+                    case 11:
+                        return "Salvager Overlook";
+                    case 12:
+                        return "Tal Teklan";
+                    case 13:
+                        return "Auburnvale";
+                    case 14:
+                        return "Kastori";
+                    default:
+                        return "Last-destination";
+                }
             })
         ));
     }

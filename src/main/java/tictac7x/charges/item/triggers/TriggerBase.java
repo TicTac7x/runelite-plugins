@@ -17,7 +17,6 @@ public abstract class TriggerBase {
     public Optional<int[]> onMenuImpostor = Optional.empty();
     public Optional<Boolean> onItemClick = Optional.empty();
     public Optional<WidgetMenuAction> onWidgetMenuAction = Optional.empty();
-    public boolean onHover = false;
     public Optional<StorageItem[]> onUseStorageItemOnChargedItem = Optional.empty();
     public Optional<StorageItem[]> onUseChargedItemOnStorageItem = Optional.empty();
     public Optional<Boolean> isEquipped = Optional.empty();
@@ -129,11 +128,6 @@ public abstract class TriggerBase {
     
     public TriggerBase onWidgetMenuAction(WidgetMenuAction widgetMenuAction) {
         this.onWidgetMenuAction = Optional.of(widgetMenuAction);
-        return this;
-    }
-
-    public TriggerBase onHover() {
-        this.onHover = true;
         return this;
     }
 

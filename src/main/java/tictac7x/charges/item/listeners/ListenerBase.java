@@ -135,7 +135,7 @@ public abstract class ListenerBase {
         }
 
         // Menu target check.
-        if (trigger.onMenuTarget.isPresent() && !trigger.onHover && chargedItem.provider.store.notInMenuTargets(trigger.onMenuTarget.get())) {
+        if (trigger.onMenuTarget.isPresent() && chargedItem.provider.store.notInMenuTargets(trigger.onMenuTarget.get())) {
             return false;
         }
 

@@ -66,7 +66,7 @@ public class U_MasterScrollBook extends ChargedItemWithStorage {
             new OnVarbitChanged(16238).varbitValueConsumer(charges -> storage.put(ItemID.TELEPORTSCROLL_CHASMOFFIRE, charges)),
 
             // Replace default teleport option.
-            new OnMenuEntryAdded("Teleport").replaceTargetDynamically("Master scroll book", this::getDefaultTeleportLocation),
+            new OnMenuEntryAdded("Teleport").replaceOptionConsumer(this::getDefaultTeleportLocation),
 
             // Widget
             new OnWidgetLoaded(597, 2).consumer(() -> {
