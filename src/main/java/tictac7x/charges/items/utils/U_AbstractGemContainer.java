@@ -40,9 +40,9 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         List<StorableItem> storableGems = new ArrayList<>();
         if (semiPreciousGems) {
             storableGems.addAll(List.of(
-                    new StorableItem(ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
-                    new StorableItem(ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
-                    new StorableItem(ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
+                new StorableItem(ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
+                new StorableItem(ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
+                new StorableItem(ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
             ));
         }
         if (preciousGems) {
