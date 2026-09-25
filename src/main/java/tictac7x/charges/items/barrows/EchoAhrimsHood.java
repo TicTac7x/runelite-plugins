@@ -6,7 +6,7 @@ import tictac7x.charges.store.Provider;
 
 public class EchoAhrimsHood extends _BarrowsItem {
     public EchoAhrimsHood(Provider provider) {
-        super("Echo Ahrim's hood", ItemID.BARROWS_AHRIM_HEAD_ORNAMENT, provider);
+        super("Echo Ahrim's hood", "Ahrim's hood", ItemID.BARROWS_AHRIM_HEAD_ORNAMENT, provider);
         this.items = new TriggerItem[]{
             new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT).fixedCharges(1000),
             new TriggerItem(ItemID.BARROWS_AHRIM_HEAD_ORNAMENT_100),
