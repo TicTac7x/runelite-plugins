@@ -112,7 +112,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(openItemId).pickUpToStorage(),
 
             // Golem crafting
-            new OnChatMessage("As you complete the golem it leaves a gift in your gem sack for you: (?<quantity>.+) x (?<gem>.+).").matcherConsumer(m -> {
+            new OnChatMessage("As you complete the golem it leaves a gift in your " + containerNameRegex + " for you: (?<quantity>.+) x (?<gem>.+).").matcherConsumer(m -> {
                 Optional<StorageItem> gem = getStorageItemFromName(m.group("gem"), Integer.parseInt(m.group("quantity")));
                 storage.add(gem);
             }),
