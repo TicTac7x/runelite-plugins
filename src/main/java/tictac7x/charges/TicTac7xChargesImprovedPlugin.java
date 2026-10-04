@@ -66,7 +66,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String pluginVersion = "v0.6.19";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid fixes."
+		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid, Toxic blowpipe fixes."
 	;
 
 	@Inject
