@@ -49,11 +49,16 @@ public class J_EfaritaysAid extends ChargedItem {
                 "Vampyre Juvinate",
 
                 // Tier 3
+                "Ancient Feral Vyre",
+                "Blood-Starved Venator",
                 "Damien Leucurte",
+                "Lowerniel Drakan",
                 "Ranis Drakan",
                 "Vanstrom Klause",
+                "Venator",
                 "Vyrewatch Sentinel",
-                "Vyrewatch"
+                "Vyrewatch",
+                "Wyrd"
             ).isEquipped().decreaseCharges(1).consumer(() -> {
                 attackedVampyre = true;
             }),
