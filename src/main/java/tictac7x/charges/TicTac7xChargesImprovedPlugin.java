@@ -63,14 +63,10 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.18";
+	public static String pluginVersion = "v0.6.19";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Multiple item fixes caused by item renamings.<br>" +
-		"<colHIGHLIGHT>* Eternal slayer ring added.<br>" +
-		"<colHIGHLIGHT>* Daily reset logic improved.<br>" +
-		"<colHIGHLIGHT>* Quetzal and master scroll book dynamic last destination menu entries.<br>" +
-		"<colHIGHLIGHT>* Echo Ahrims set support added."
+		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid fixes."
 	;
 
 	@Inject
@@ -414,7 +410,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_Waterskin(provider),
 
 			// Weapons
-            new W_AbyssalTentacle(provider),
+			new W_AbyssalTentacle(provider),
 			new W_Arclight(provider),
 			new W_BlazingBlowpipe(provider),
 			new W_BowOfFaerdhinen(provider),
@@ -423,7 +419,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_CrawsBow(provider),
 			new W_CrystalBow(provider),
 			new W_CrystalHalberd(provider),
-            new W_EchoVenatorBow(provider),
+			new W_EchoVenatorBow(provider),
 			new W_EnchantedLyre(provider),
 			new W_EyeOfAyak(provider),
 			new W_InfernalAxe(provider),
@@ -633,7 +629,12 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onStatChanged(StatChanged event) {
-		store.onStatChanged(event);
+		int xpDrop = store.getSkillXp(event.getSkill()).isPresent()
+			? event.getXp() - store.getSkillXp(event.getSkill()).get()
+			: 0;
+
+		CustomStatChanged statChanged = new CustomStatChanged(event.getSkill(), event.getLevel(), event.getXp(), xpDrop);
+		store.onStatChanged(statChanged);
 	}
 
 	@Subscribe

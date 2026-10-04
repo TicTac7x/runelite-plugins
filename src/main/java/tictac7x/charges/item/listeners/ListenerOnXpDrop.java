@@ -16,6 +16,11 @@ public class ListenerOnXpDrop extends ListenerBase {
             OnXpDrop trigger = (OnXpDrop) triggerBase;
             boolean triggerUsed = false;
 
+            if (trigger.amountConsumer.isPresent()) {
+                trigger.amountConsumer.get().accept(event.xpDrop);
+                triggerUsed = true;
+            }
+
             if (super.trigger(trigger, chargedItem)) {
                 triggerUsed = true;
             }
