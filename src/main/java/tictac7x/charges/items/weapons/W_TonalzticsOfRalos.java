@@ -49,8 +49,10 @@ public class W_TonalzticsOfRalos extends ChargedItemWithStorage {
             )),
 
             // Attack: one charge is used per throw, no matter if the special attack is used or not.
-            // TODO: The animations are taken from the animation id list, verify both of them in game
-            // (enable "Debug IDs" in the debug section of the plugin settings to see the animation ids).
+            // The charged throw (10923) and the uncharged throw (10922) are confirmed in game.
+            // The uncharged animations (10916, 10922) are not listed, they do not use any charges.
+            // TODO: Verify the special attack (Division) animation, it is taken from the animation id list.
+            // (enable "Debug IDs" in the debug section of the plugin settings to see the animation ids)
             new OnAnimationChanged(
                 AnimationID.HUMAN_GLAIVE_RALOS01_CHARGED_THROW,
                 AnimationID.HUMAN_GLAIVE_RALOS01_CHARGED_SPECIAL
