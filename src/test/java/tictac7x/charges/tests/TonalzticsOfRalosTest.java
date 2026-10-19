@@ -44,9 +44,22 @@ public class TonalzticsOfRalosTest extends BaseTest {
         attack(AnimationID.HUMAN_GLAIVE_RALOS01_CHARGED_SPECIAL);
         assertEquals(1538, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
 
+        // The uncharged throw and the uncharged special attack do not use any charges.
+        attack(AnimationID.HUMAN_GLAIVE_RALOS01_UNCHARGED_THROW);
+        attack(AnimationID.HUMAN_GLAIVE_RALOS01_UNCHARGED_SPECIAL);
+        assertEquals(1538, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+
         // Uncharge.
         store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You uncharge your Tonalztics of Ralos, regaining 1538 sunfire splinters in the process."));
         assertEquals(0, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+
+        // Bank charge.
+        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "The banker charges your Tonalztics of Ralos using 14x Sunfire splinters."));
+        assertEquals(14, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+
+        // Bank charge with a comma separated amount.
+        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "The banker charges your Tonalztics of Ralos using 1,000x Sunfire splinters."));
+        assertEquals(1014, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
     }
 
     @Test
