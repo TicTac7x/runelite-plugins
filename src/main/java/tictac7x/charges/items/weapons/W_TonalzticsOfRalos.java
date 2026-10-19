@@ -26,7 +26,14 @@ public class W_TonalzticsOfRalos extends ChargedItemWithStorage {
 
         this.triggers.addAll(List.of(
             // Charge: "You apply 5 charges to your Tonalztics of Ralos."
-            new OnChatMessage(".*You apply (?<charges>.+) charges to your Tonalztics of Ralos\\..*").matcherConsumer(m -> storage.clearAndPut(
+            new OnChatMessage(".*You apply (?<charges>[\\d,]+) charges? to your Tonalztics of Ralos\\..*").matcherConsumer(m -> storage.clearAndPut(
+                ItemID.SUNFIRESPLINTER,
+                TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
+            )),
+
+            // Add charges to an already charged weapon: "You apply an additional 50 charges to your Tonalztics of Ralos. It now has 100 charges in total."
+            // The message holds the total amount of charges, not the amount that was added.
+            new OnChatMessage(".*You apply an additional [\\d,]+ charges? to your Tonalztics of Ralos\\. It now has (?<charges>[\\d,]+) charges? in total\\..*").matcherConsumer(m -> storage.clearAndPut(
                 ItemID.SUNFIRESPLINTER,
                 TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
             )),
@@ -36,7 +43,7 @@ public class W_TonalzticsOfRalos extends ChargedItemWithStorage {
 
             // Check: "Your Tonalztics of Ralos has 5 charges remaining."
             // TODO: The wording of the check message is not documented, verify it in game and adjust the pattern if it differs.
-            new OnChatMessage(".*Your Tonalztics of Ralos has (?<charges>.+) charges? remaining\\..*").matcherConsumer(m -> storage.clearAndPut(
+            new OnChatMessage(".*Your Tonalztics of Ralos has (?<charges>[\\d,]+) charges? remaining\\..*").matcherConsumer(m -> storage.clearAndPut(
                 ItemID.SUNFIRESPLINTER,
                 TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
             )),

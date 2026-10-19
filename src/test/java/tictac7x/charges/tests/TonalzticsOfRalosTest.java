@@ -23,24 +23,29 @@ public class TonalzticsOfRalosTest extends BaseTest {
         setupEquipmentItem(tonalztics);
 
         // Charge.
-        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You apply 5000 charges to your Tonalztics of Ralos."));
-        assertEquals(5000, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
-        assertEquals(5000, tonalztics.getCharges(ItemID.TONALZTICS_OF_RALOS_CHARGED));
+        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You apply 50 charges to your Tonalztics of Ralos."));
+        assertEquals(50, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+        assertEquals(50, tonalztics.getCharges(ItemID.TONALZTICS_OF_RALOS_CHARGED));
+
+        // Add charges to an already charged weapon, the message holds the total amount of charges.
+        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You apply an additional 1,500 charges to your Tonalztics of Ralos. It now has 1,550 charges in total."));
+        assertEquals(1550, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+        assertEquals(1550, tonalztics.getCharges(ItemID.TONALZTICS_OF_RALOS_CHARGED));
 
         // Check.
-        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "Your Tonalztics of Ralos has 4500 charges remaining."));
-        assertEquals(4500, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "Your Tonalztics of Ralos has 1,540 charges remaining."));
+        assertEquals(1540, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
 
         // Attack (regular throw).
         attack(AnimationID.HUMAN_GLAIVE_RALOS01_CHARGED_THROW);
-        assertEquals(4499, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+        assertEquals(1539, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
 
         // Attack (special attack).
         attack(AnimationID.HUMAN_GLAIVE_RALOS01_CHARGED_SPECIAL);
-        assertEquals(4498, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
+        assertEquals(1538, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
 
         // Uncharge.
-        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You uncharge your Tonalztics of Ralos, regaining 4498 sunfire splinters in the process."));
+        store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You uncharge your Tonalztics of Ralos, regaining 1538 sunfire splinters in the process."));
         assertEquals(0, tonalztics.storage.getStorage().count(ItemID.SUNFIRESPLINTER));
     }
 
