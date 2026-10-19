@@ -63,9 +63,10 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.19";
+	public static String pluginVersion = "v0.6.20";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
+		"<colHIGHLIGHT>* Tonalztics of Ralos support.<br>" +
 		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid, Toxic blowpipe fixes."
 	;
 
@@ -431,6 +432,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_ScytheOfVitur(provider),
 			new W_SkullSceptre(provider),
 			new W_SlayerStaffE(provider),
+			new W_TonalzticsOfRalos(provider),
 			new W_ToxicBlowpipe(provider),
 			new W_TridentOfTheSeas(provider),
 			new W_TridentOfTheSeasE(provider),

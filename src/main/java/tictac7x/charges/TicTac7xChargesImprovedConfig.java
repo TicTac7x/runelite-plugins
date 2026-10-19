@@ -203,6 +203,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String scythe_of_vitur = "scythe_of_vitur";
     String skull_sceptre = "skull_sceptre";
     String slayer_staff_e = "slayer_staff_e";
+    String tonalztics_of_ralos = "tonalztics_of_ralos";
     String toxic_blowpipe = "toxic_blowpipe";
     String toxic_staff_of_the_dead = "toxic_staff_of_the_dead";
     String trident_of_the_seas = "trident_of_the_seas";
@@ -1320,6 +1321,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean slayerStaffEInfobox() { return true; }
 
         @ConfigItem(
+            keyName = tonalztics_of_ralos + _infobox,
+            name = "Tonalztics of Ralos",
+            description = "",
+            section = infoboxes
+        ) default boolean tonalzticsOfRalosInfobox() { return true; }
+
+        @ConfigItem(
             keyName = toxic_blowpipe + _infobox,
             name = "Toxic blowpipe",
             description = "",
@@ -2340,6 +2348,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean slayerStaffEOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = tonalztics_of_ralos + _overlay,
+            name = "Tonalztics of Ralos",
+            description = "",
+            section = overlays
+        ) default boolean tonalzticsOfRalosOverlay() { return true; }
 
         @ConfigItem(
             keyName = toxic_blowpipe + _overlay,

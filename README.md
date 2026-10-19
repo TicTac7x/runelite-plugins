@@ -1,4 +1,4 @@
-# Item Charges Improved v0.6.18
+# Item Charges Improved v0.6.20
 
 Show charges of various items that are in inventory or equipped
 
@@ -156,6 +156,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Scythe of Vitur
 * Skull sceptre
 * Slayer staff (e)
+* Tonalztics of Ralos
 * Trident of the Seas / Swamp
 * Tumeken's shadow
 * Venator bow
