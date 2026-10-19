@@ -39,7 +39,7 @@ public class W_TonalzticsOfRalos extends ChargedItemWithStorage {
             )),
 
             // Bank charge: "The banker charges your Tonalztics of Ralos using 14x Sunfire splinters."
-            // The amount of charges is added to the current amount of charges.
+            // The message holds the amount of charges that was added, so it is added to the current amount of charges.
             new OnChatMessage(".*The banker charges your Tonalztics of Ralos using (?<amount>[\\d,]+)x Sunfire splinters?\\..*").matcherConsumer(m -> storage.add(
                 ItemID.SUNFIRESPLINTER,
                 TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("amount"))
