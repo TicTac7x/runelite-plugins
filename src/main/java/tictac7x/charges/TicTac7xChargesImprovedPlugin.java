@@ -63,14 +63,11 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.18";
+	public static String pluginVersion = "v0.6.19";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
-		"<colHIGHLIGHT>* Multiple item fixes caused by item renamings.<br>" +
-		"<colHIGHLIGHT>* Eternal slayer ring added.<br>" +
-		"<colHIGHLIGHT>* Daily reset logic improved.<br>" +
-		"<colHIGHLIGHT>* Quetzal and master scroll book dynamic last destination menu entries.<br>" +
-		"<colHIGHLIGHT>* Echo Ahrims set support added."
+		"<colHIGHLIGHT>* Tonalztics of Ralos support.<br>" +
+		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid, Toxic blowpipe, Forestry kit, Skull sceptre fixes."
 	;
 
 	@Inject
@@ -414,7 +411,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new U_Waterskin(provider),
 
 			// Weapons
-            new W_AbyssalTentacle(provider),
+			new W_AbyssalTentacle(provider),
 			new W_Arclight(provider),
 			new W_BlazingBlowpipe(provider),
 			new W_BowOfFaerdhinen(provider),
@@ -423,7 +420,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_CrawsBow(provider),
 			new W_CrystalBow(provider),
 			new W_CrystalHalberd(provider),
-            new W_EchoVenatorBow(provider),
+			new W_EchoVenatorBow(provider),
 			new W_EnchantedLyre(provider),
 			new W_EyeOfAyak(provider),
 			new W_InfernalAxe(provider),
@@ -435,6 +432,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_ScytheOfVitur(provider),
 			new W_SkullSceptre(provider),
 			new W_SlayerStaffE(provider),
+			new W_TonalzticsOfRalos(provider),
 			new W_ToxicBlowpipe(provider),
 			new W_TridentOfTheSeas(provider),
 			new W_TridentOfTheSeasE(provider),
@@ -524,10 +522,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onChatMessage(ChatMessage event) {
-		store.onChatMessage(new CustomChatMessage(
+		CustomChatMessage customChatMessage = new CustomChatMessage(
 			event.getType(),
 			getCleanText(event.getMessage())
-		));
+		);
+		store.onChatMessage(customChatMessage);
 	}
 
 	@Subscribe
@@ -633,7 +632,12 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onStatChanged(StatChanged event) {
-		store.onStatChanged(event);
+		int xpDrop = store.getSkillXp(event.getSkill()).isPresent()
+			? event.getXp() - store.getSkillXp(event.getSkill()).get()
+			: 0;
+
+		CustomStatChanged statChanged = new CustomStatChanged(event.getSkill(), event.getLevel(), event.getXp(), xpDrop);
+		store.onStatChanged(statChanged);
 	}
 
 	@Subscribe
@@ -724,7 +728,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	public static String getCleanText(String text) {
-		return text.replaceAll("</?col.*?>", "").replace("<br>", " ").replace("\u00A0"," ");
+		return text
+			.replaceAll("@.*?@", "")
+			.replaceAll("</?col.*?>", "")
+			.replace("<br>", " ")
+			.replace("\u00A0"," ");
 	}
 
 	public static String menuOptionEmptyToBank = "Empty-to-bank";

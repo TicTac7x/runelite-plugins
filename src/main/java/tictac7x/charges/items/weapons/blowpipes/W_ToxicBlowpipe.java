@@ -86,7 +86,10 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                         storage.remove(item.itemId, 1);
                     }
                 }
-            })
+            }),
+
+            // Auto-charge.
+            new OnAutoChargeMessage("Toxic blowpipe", "Zulrah's scales", 1, this, ItemID.SNAKEBOSS_SCALE)
         ));
     }
 

@@ -136,17 +136,17 @@ public class U_SeedBox extends ChargedItemWithStorage {
 
             // Empty into inventory.
             new OnChatMessage("Emptied (?<quantity>.+) x (?<seed>.+)( seed| frag)? to your inventory.").matcherConsumer(m -> {
-                storage.remove(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
+                storage.remove(getStorageItemFromName(m.group("seed"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("quantity"))));
             }),
 
             // Store.
             new OnChatMessage("Stored (?<quantity>.+) x (?<seed>.+)( seed| frag)? in your seed box.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
+                storage.add(getStorageItemFromName(m.group("seed"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("quantity"))));
             }),
 
             // Pickup.
             new OnChatMessage("You put (?<quantity>.+) x (?<seed>.+)( seed| frag)? straight into your open seed box.").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
+                storage.add(getStorageItemFromName(m.group("seed"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("quantity"))));
             }),
 
             // Pickpocketing.
@@ -154,7 +154,7 @@ public class U_SeedBox extends ChargedItemWithStorage {
                 storage.add(getStorageItemFromName(m.group("seed"), 1));
             }),
             new OnChatMessage("The following stolen loot gets added to your seed box: (?<seed>.+)( seed| frag)? x (?<quantity>.+).").matcherConsumer(m -> {
-                storage.add(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
+                storage.add(getStorageItemFromName(m.group("seed"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("quantity"))));
             }),
 
             // Check.
@@ -165,7 +165,7 @@ public class U_SeedBox extends ChargedItemWithStorage {
                 storage.remove(getStorageItemFromName(m.group("seed"), 1));
             }),
             new OnChatMessage("(?<quantity>.+) (?<seed>.+) seeds were taken from your seed box.").matcherConsumer(m -> {
-                storage.remove(getStorageItemFromName(m.group("seed"), Integer.parseInt(m.group("quantity"))));
+                storage.remove(getStorageItemFromName(m.group("seed"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("quantity"))));
             }),
 
             // Replace "Empty" with proper "Empty to bank".

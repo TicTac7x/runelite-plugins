@@ -40,9 +40,9 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
         List<StorableItem> storableGems = new ArrayList<>();
         if (semiPreciousGems) {
             storableGems.addAll(List.of(
-                    new StorableItem(ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
-                    new StorableItem(ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
-                    new StorableItem(ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
+                new StorableItem(ItemID.UNCUT_OPAL).checkName("Opal").displayName("Uncut opal"),
+                new StorableItem(ItemID.UNCUT_JADE).checkName("Jade").displayName("Uncut jade"),
+                new StorableItem(ItemID.UNCUT_RED_TOPAZ).checkName("Red Topaz").displayName("Uncut red topaz")
             ));
         }
         if (preciousGems) {
@@ -112,7 +112,7 @@ public abstract class U_AbstractGemContainer extends ChargedItemWithStorageEmpty
             new OnItemPickup(storage.getStorableItems()).isByOne().requiredItem(openItemId).pickUpToStorage(),
 
             // Golem crafting
-            new OnChatMessage("As you complete the golem it leaves a gift in your gem sack for you: (?<quantity>.+) x (?<gem>.+).").matcherConsumer(m -> {
+            new OnChatMessage("As you complete the golem it leaves a gift in your " + containerNameRegex + " for you: (?<quantity>.+) x (?<gem>.+).").matcherConsumer(m -> {
                 Optional<StorageItem> gem = getStorageItemFromName(m.group("gem"), Integer.parseInt(m.group("quantity")));
                 storage.add(gem);
             }),

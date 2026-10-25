@@ -1,5 +1,6 @@
 package tictac7x.charges.items.utils;
 
+import net.runelite.api.Skill;
 import net.runelite.api.gameval.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
@@ -97,8 +98,25 @@ public class U_FishBarrel extends ChargedItemWithStorageEmptyable {
                 storage.add(lastCaughtFish);
             }).requiredItem(ItemID.FISH_BARREL_OPEN, ItemID.FISH_SACK_BARREL_OPEN),
 
+            // Aerial
+            new OnXpDrop(Skill.FISHING).amountConsumer(xp -> {
+                if (xp >= 11 && xp <= 13) {
+                    lastCaughtFish = Optional.of(new StorageItem(ItemID.AERIAL_FISHING_BLUEGILL, 1));
+                    storage.add(ItemID.AERIAL_FISHING_BLUEGILL, 1);
+                } else if (xp >= 40 && xp <= 42) {
+                    lastCaughtFish = Optional.of(new StorageItem(ItemID.AERIAL_FISHING_COMMON_TENCH, 1));
+                    storage.add(ItemID.AERIAL_FISHING_COMMON_TENCH, 1);
+                } else if (xp >= 65 && xp <= 67) {
+                    lastCaughtFish = Optional.of(new StorageItem(ItemID.AERIAL_FISHING_MOTTLED_EEL, 1));
+                    storage.add(ItemID.AERIAL_FISHING_MOTTLED_EEL, 1);
+                } else if (xp >= 100 && xp <= 102) {
+                    lastCaughtFish = Optional.of(new StorageItem(ItemID.AERIAL_FISHING_GREATER_SIREN, 1));
+                    storage.add(ItemID.AERIAL_FISHING_GREATER_SIREN, 1);
+                }
+            }).requiredItem(ItemID.FISH_BARREL_OPEN, ItemID.FISH_SACK_BARREL_OPEN).onMenuOption("Catch").onMenuTarget("Fishing spot"),
+
             // Extra fish.
-            new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemID.FISH_BARREL_OPEN, ItemID.FISH_SACK_BARREL_OPEN).consumer(() -> {
+            new OnChatMessage(".* enabled you to catch an extra fish.").requiredItem(ItemID.FISH_BARREL_OPEN, ItemID.FISH_SACK_BARREL_OPEN).runConsumerOnNextGameTick(() -> {
                 storage.add(lastCaughtFish);
             }),
 
