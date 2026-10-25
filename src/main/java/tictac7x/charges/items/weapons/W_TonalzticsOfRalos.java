@@ -25,31 +25,30 @@ public class W_TonalzticsOfRalos extends ChargedItemWithStorage {
         ).setMaximumTotalQuantity(20_000).emptyIsNegative();
 
         this.triggers.addAll(List.of(
-            // Charge: "You apply 5 charges to your Tonalztics of Ralos."
-            new OnChatMessage(".*You apply (?<charges>[\\d,]+) charges? to your Tonalztics of Ralos\\..*").matcherConsumer(m -> storage.clearAndPut(
-                ItemID.SUNFIRESPLINTER,
-                TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
-            )),
-
             // Add charges to an already charged weapon: "You apply an additional 50 charges to your Tonalztics of Ralos. It now has 100 charges in total."
             // The message holds the total amount of charges, not the amount that was added.
-            new OnChatMessage(".*You apply an additional [\\d,]+ charges? to your Tonalztics of Ralos\\. It now has (?<charges>[\\d,]+) charges? in total\\..*").matcherConsumer(m -> storage.clearAndPut(
+            new OnChatMessage("You apply an additional .+ charges? to your Tonalztics of Ralos. It now has (?<charges>.+) charges? in total.").matcherConsumer(m -> {
+                storage.clearAndPut(
+                        ItemID.SUNFIRESPLINTER,
+                        TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
+                );
+            }),
+
+            // Charge: "You apply 5 charges to your Tonalztics of Ralos."
+            new OnChatMessage("You apply (?<charges>.+) charges? to your Tonalztics of Ralos.").matcherConsumer(m -> storage.clearAndPut(
                 ItemID.SUNFIRESPLINTER,
                 TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
             )),
 
             // Bank charge: "The banker charges your Tonalztics of Ralos using 14x Sunfire splinters."
             // The message holds the amount of charges that was added, so it is added to the current amount of charges.
-            new OnChatMessage(".*The banker charges your Tonalztics of Ralos using (?<amount>[\\d,]+)x Sunfire splinters?\\..*").matcherConsumer(m -> storage.add(
-                ItemID.SUNFIRESPLINTER,
-                TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("amount"))
-            )),
+            new OnAutoChargeMessage("Tonalztics of Ralos", "Sunfire splinters", 1, this, ItemID.SUNFIRESPLINTER),
 
             // Uncharge: "You uncharge your Tonalztics of Ralos, regaining 5 sunfire splinters in the process."
-            new OnChatMessage(".*You uncharge your Tonalztics of Ralos, regaining .*sunfire splinter.*").consumer(() -> storage.clear()),
+            new OnChatMessage("You uncharge your Tonalztics of Ralos, regaining .* sunfire splinters in the process.").consumer(() -> storage.clear()),
 
             // Check: "Your Tonalztics of Ralos has 5 charges remaining."
-            new OnChatMessage(".*Your Tonalztics of Ralos has (?<charges>[\\d,]+) charges? remaining\\..*").matcherConsumer(m -> storage.clearAndPut(
+            new OnChatMessage("Your Tonalztics of Ralos has (?<charges>.+) charges? remaining.").matcherConsumer(m -> storage.clearAndPut(
                 ItemID.SUNFIRESPLINTER,
                 TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("charges"))
             )),

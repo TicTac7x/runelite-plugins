@@ -18,17 +18,17 @@ public class W_SkullSceptre extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Empty.
+            new OnChatMessage("Your (imbued )?Skull Sceptre has run out of charges. You must use some more sceptre pieces or fragments on it to recharge it.").setFixedCharges(0),
+
             // Teleport.
             new OnChatMessage("Your Skull Sceptre has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
             // Check.
             new OnChatMessage("Concentrating deeply, you divine that the sceptre has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 
-            // Charge to maximum without all Varrock diaries completed.
-            new OnChatMessage("You charge the Skull Sceptre with .*. It now contains the maximum number of charges, (?<charges>.+). Completing tiers of the Varrock achievement diary will allow the imbued Skull Sceptre to hold more charges.").setDynamicallyCharges(),
-
             // Charge to maximum.
-            new OnChatMessage("You charge the Skull Sceptre with .*. It now contains the maximum number of charges, (?<charges>.+).").setDynamicallyCharges(),
+            new OnChatMessage("You charge the Skull Sceptre with .*. It now contains the maximum number of charges, (?<charges>\\d+).").setDynamicallyCharges(),
 
             // Charge.
             new OnChatMessage("You charge the Skull Sceptre with .*. It now contains (?<charges>.+) charges?.").setDynamicallyCharges(),

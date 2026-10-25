@@ -63,11 +63,11 @@ import java.util.concurrent.*;
 )
 
 public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener, MouseListener, MouseWheelListener {
-	public static String pluginVersion = "v0.6.20";
+	public static String pluginVersion = "v0.6.19";
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Tonalztics of Ralos support.<br>" +
-		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid, Toxic blowpipe fixes."
+		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid, Toxic blowpipe, Forestry kit, Skull sceptre fixes."
 	;
 
 	@Inject
@@ -522,10 +522,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 	@Subscribe
 	public void onChatMessage(ChatMessage event) {
-		store.onChatMessage(new CustomChatMessage(
+		CustomChatMessage customChatMessage = new CustomChatMessage(
 			event.getType(),
 			getCleanText(event.getMessage())
-		));
+		);
+		store.onChatMessage(customChatMessage);
 	}
 
 	@Subscribe
@@ -727,7 +728,11 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	}
 
 	public static String getCleanText(String text) {
-		return text.replaceAll("</?col.*?>", "").replace("<br>", " ").replace("\u00A0"," ");
+		return text
+			.replaceAll("@.*?@", "")
+			.replaceAll("</?col.*?>", "")
+			.replace("<br>", " ")
+			.replace("\u00A0"," ");
 	}
 
 	public static String menuOptionEmptyToBank = "Empty-to-bank";
