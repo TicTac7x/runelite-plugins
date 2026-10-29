@@ -133,8 +133,10 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String tome_of_earth = "tome_of_earth";
     String tome_of_fire = "tome_of_fire";
     String tome_of_water = "tome_of_water";
+    String zoryas_tome = "zoryas_tome";
 
     // Utilities
+    String archivists_folio = "archivists_folio";
     String ash_sanctifier = "ash_sanctifier";
     String blood_essence = "blood_essence";
     String ash_sanctifier_status = "ash_sanctifier_status";
@@ -197,6 +199,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
     String ibans_staff = "ibans_staff";
     String infernal_axe = "infernal_axe";
     String ironwood_blowpipe = "ironwood_blowpipe";
+    String obligator = "obligator";
     String pharaohs_sceptre = "pharaohs_sceptre";
     String rosewood_blowpipe = "rosewood_blowpipe";
     String sanguinesti_staff = "sanguinesti_staff";
@@ -928,6 +931,20 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean tomeOfWaterInfobox() { return true; }
 
         @ConfigItem(
+            keyName = zoryas_tome + _infobox,
+            name = "Zorya's tome",
+            description = "",
+            section = infoboxes
+        ) default boolean zoryasTomeInfobox() { return true; }
+
+        @ConfigItem(
+            keyName = archivists_folio + _infobox,
+            name = "Archivist's folio",
+            description = "",
+            section = infoboxes
+        ) default boolean archivistsFolioInfobox() { return true; }
+
+        @ConfigItem(
             keyName = ash_sanctifier + _infobox,
             name = "Ash sanctifier",
             description = "",
@@ -1278,6 +1295,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean ironwoodBlowpipeInfobox() { return true; }
 
         @ConfigItem(
+            keyName = obligator + _infobox,
+            name = "Obligator",
+            description = "",
+            section = infoboxes
+        ) default boolean obligatorInfobox() { return true; }
+
+        @ConfigItem(
             keyName = pharaohs_sceptre + _infobox,
             name = "Pharaoh's sceptre",
             description = "",
@@ -1598,6 +1622,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean ardougneCloakOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = archivists_folio + _overlay,
+            name = "Archivist's folio",
+            description = "",
+            section = overlays
+        ) default boolean archivistsFolioOverlay() { return true; }
 
         @ConfigItem(
             keyName = ash_sanctifier + _overlay,
@@ -2188,6 +2219,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default boolean tomeOfWaterOverlay() { return true; }
 
         @ConfigItem(
+            keyName = zoryas_tome + _overlay,
+            name = "Zorya's tome",
+            description = "",
+            section = overlays
+        ) default boolean zoryasTomeOverlay() { return true; }
+
+        @ConfigItem(
             keyName = venator_bow + _overlay,
             name = "Venator bow",
             description = "",
@@ -2291,6 +2329,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = "",
             section = overlays
         ) default boolean ironwoodBlowpipeOverlay() { return true; }
+
+        @ConfigItem(
+            keyName = obligator + _overlay,
+            name = "Obligator",
+            description = "",
+            section = overlays
+        ) default boolean obligatorOverlay() { return true; }
 
         @ConfigItem(
             keyName = pharaohs_sceptre + _overlay,
@@ -2605,6 +2650,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         ) default int getArclightCharges() { return ChargeId.UNKNOWN; }
 
         @ConfigItem(
+            keyName = archivists_folio,
+            name = archivists_folio,
+            description = archivists_folio,
+            section = debug
+        ) default int getArchivistsFolioCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
             keyName = ash_sanctifier,
             name = ash_sanctifier,
             description = ash_sanctifier,
@@ -2757,6 +2809,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = moons_gear + "_eclipse_chestplate",
             section = debug
         ) default int getEclipseMoonChestplateCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = obligator,
+            name = obligator,
+            description = obligator,
+            section = debug
+        ) default int getObligatorCharges() { return ChargeId.UNKNOWN; }
 
         @ConfigItem(
             keyName = pharaohs_sceptre,
@@ -3100,6 +3159,13 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             description = tome_of_fire,
             section = debug
         ) default int getTomeOfFireCharges() { return ChargeId.UNKNOWN; }
+
+        @ConfigItem(
+            keyName = zoryas_tome,
+            name = zoryas_tome,
+            description = zoryas_tome,
+            section = debug
+        ) default int getZoryasTomeCharges() { return ChargeId.UNKNOWN; }
 
         @ConfigItem(
             keyName = dodgy_necklace,
