@@ -21,13 +21,11 @@ public class W_ZoryasTome extends ChargedItem {
             // Check.
             new OnChatMessage("Zorya's tome has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
-            // Charge (item dialog: sent as a MESBOX message, widget as fallback).
+            // Charge.
             new OnChatMessage("You charge your Zorya's tome with .+ It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
-            new OnWidgetLoaded(193, 2).text("You charge your Zorya's tome with .+ It now has (?<charges>.+) charges?.").setDynamically(),
 
-            // Uncharge (item dialog: sent as a MESBOX message, widget as fallback).
+            // Uncharge.
             new OnChatMessage("You uncharge Zorya's tome.").setFixedCharges(0),
-            new OnWidgetLoaded(193, 2).text("You uncharge Zorya's tome.").setFixedCharges(0),
 
             // Attack and special attack (1 charge per attack).
             new OnGraphicChanged(

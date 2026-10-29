@@ -22,13 +22,11 @@ public class W_Obligator extends ChargedItem {
             // Check.
             new OnChatMessage("Your [Oo]bligator has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 
-            // Charge (item dialog: sent as a MESBOX message, widget as fallback).
+            // Charge.
             new OnChatMessage("You charge your Obligator with .+ It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
-            new OnWidgetLoaded(193, 2).text("You charge your Obligator with .+ It now has (?<charges>.+) charges?.").setDynamically(),
 
-            // Uncharge (item dialog: sent as a MESBOX message, widget as fallback).
+            // Uncharge.
             new OnChatMessage("You uncharge the Obligator.").setFixedCharges(0),
-            new OnWidgetLoaded(193, 2).text("You uncharge the Obligator.").setFixedCharges(0),
 
             // Attack.
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.SUCCESSFUL).moreThanZeroDamage().oncePerGameTick().isEquipped().decreaseCharges(1)

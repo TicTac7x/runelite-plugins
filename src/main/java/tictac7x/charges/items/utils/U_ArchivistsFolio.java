@@ -18,15 +18,12 @@ public class U_ArchivistsFolio extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
-            // Check (item dialog: sent as a MESBOX message, widget as fallback).
+            // Check.
             new OnChatMessage("The folio has one charge.").setFixedCharges(1),
-            new OnWidgetLoaded(193, 2).text("The folio has one charge.").setFixedCharges(1),
             new OnChatMessage("The folio has (?<charges>.+) charges.").setDynamicallyCharges(),
-            new OnWidgetLoaded(193, 2).text("The folio has (?<charges>.+) charges.").setDynamically(),
 
-            // Charge (item dialog, 1 ascension shard = 5 charges: MESBOX message, widget as fallback).
+            // Charge (1 ascension shard = 5 charges).
             new OnChatMessage("You charge your Archivist's folio with .+ It now has (?<charges>.+) charges?.").setDynamicallyCharges(),
-            new OnWidgetLoaded(193, 2).text("You charge your Archivist's folio with .+ It now has (?<charges>.+) charges?.").setDynamically(),
 
             // Teleport.
             new OnChatMessage("You open the folio and read the words.").decreaseCharges(1)
