@@ -371,6 +371,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new S_TomeOfWater(provider),
 
 			// Utilities
+			new U_ArchivistsFolio(provider),
 			new U_AshSanctifier(provider),
 			new U_BloodEssence(provider),
 			new U_BoneCrusher(provider),
@@ -429,6 +430,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_InfernalAxe(provider),
 			new W_IronwoodBlowpipe(provider),
 			new W_IbansStaff(provider),
+			new W_Obligator(provider),
 			new W_PharaohsSceptre(provider),
 			new W_RosewoodBlowpipe(provider),
 			new W_SanguinestiStaff(provider),
@@ -448,6 +450,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			new W_VenatorBow(provider),
 			new W_WarpedSceptre(provider),
 			new W_WebweaverBow(provider),
+			new W_ZoryasTome(provider),
 			new W_WesternBanner(provider),
 
 			// Barrows armor sets
