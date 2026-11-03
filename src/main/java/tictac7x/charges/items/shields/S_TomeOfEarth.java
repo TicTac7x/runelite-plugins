@@ -18,6 +18,9 @@ public class S_TomeOfEarth extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_TOME_OF_EARTH_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("Your tome currently holds (?<charges>.+) charges?.").setDynamicallyCharges().onItemClick(),
 

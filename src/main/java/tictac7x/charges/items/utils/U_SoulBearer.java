@@ -18,6 +18,9 @@ public class U_SoulBearer extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_SOUL_BEARER_QUANTITY).setDynamically(),
+
             // Uncharge.
             new OnChatMessage("You remove the runes from the soul bearer.").setFixedCharges(0),
 

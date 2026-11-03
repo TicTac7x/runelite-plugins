@@ -17,6 +17,9 @@ public class U_GricollersCan extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.ZEAH_WATERINGCAN_CHARGES).setDynamically(),
+
             // Check.
             new OnChatMessage("Watering can charges remaining: (?<charges>.+)%").setDynamicallyCharges().onItemClick(),
 

@@ -18,6 +18,9 @@ public class J_CowbellAmulet extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_COWBELL_AMULET_QUANTITY).setDynamically(),
+
             // Check
             new OnChatMessage("The amulet has (?<charges>.+) charges?.").onItemClick().setDynamicallyCharges(),
 

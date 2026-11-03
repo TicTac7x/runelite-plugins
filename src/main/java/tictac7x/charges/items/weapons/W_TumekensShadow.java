@@ -18,6 +18,9 @@ public class W_TumekensShadow extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_TUMEKENS_SHADOW_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("Tumeken's shadow( only)? has (?<charges>.+) charges? (remaining|left)").setDynamicallyCharges(),
 

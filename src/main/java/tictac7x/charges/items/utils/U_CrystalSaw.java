@@ -17,6 +17,9 @@ public class U_CrystalSaw extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.EYEGLO_CRYSTAL_SAW_CHARGES).setDynamically(),
+
             // Check.
             new OnChatMessage("Your saw has (?<charges>.+) charges? left.").setDynamicallyCharges()
         ));

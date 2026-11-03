@@ -18,6 +18,9 @@ public class J_AlchemistsAmulet extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_ALCHEMISTS_AMULET_QUANTITY).setDynamically(),
+
             // Check
             new OnChatMessage("Your Alchemist's amulet has (?<charges>.+) charges? left.").setDynamicallyCharges(),
 

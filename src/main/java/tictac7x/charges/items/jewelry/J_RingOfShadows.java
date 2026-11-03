@@ -19,6 +19,9 @@ public class J_RingOfShadows extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_RING_OF_SHADOWS_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("Your ring of shadows has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 

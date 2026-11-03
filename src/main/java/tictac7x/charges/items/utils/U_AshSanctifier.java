@@ -1,6 +1,7 @@
 package tictac7x.charges.items.utils;
 
 import net.runelite.api.*;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -17,6 +18,9 @@ public class U_AshSanctifier extends ChargedItemWithStatus {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_ASH_SANCTIFIER_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("(The|Your) ash sanctifier has (?<charges>.+) charges?( left)?. It has been deactivated").setDynamicallyCharges().deactivate(),
             new OnChatMessage("(The|Your) ash sanctifier has (?<charges>.+) charges?( left)?. It is active").setDynamicallyCharges().activate(),

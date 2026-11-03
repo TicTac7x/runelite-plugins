@@ -2,6 +2,7 @@ package tictac7x.charges.items.utils;
 
 import net.runelite.api.*;
 import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -19,6 +20,9 @@ public class U_BoneCrusher extends ChargedItemWithStatus {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_BONECRUSHER_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("The bonecrusher( necklace)? has no charges.").setFixedCharges(0),
             new OnChatMessage("The bonecrusher( necklace)? has one charge.").setFixedCharges(1),

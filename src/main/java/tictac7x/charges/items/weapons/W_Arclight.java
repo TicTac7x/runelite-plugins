@@ -24,6 +24,9 @@ public class W_Arclight extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_ARCLIGHT_QUANTITY).setDynamically(),
+
             new OnChatMessage("Your arclight has (?<charges>.+) charges?( left)?.").setDynamicallyCharges(),
             new OnChatMessage("Your arclight can perform (?<charges>.+) more attacks.").setDynamicallyCharges(),
             new OnChatMessage("Your arclight has degraded.").setFixedCharges(0),

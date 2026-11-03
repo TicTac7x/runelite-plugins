@@ -18,6 +18,9 @@ public class S_TomeOfFire extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_TOME_OF_FIRE_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("Your tome has been charged with (Burnt|Searing) Pages. It currently holds (?<charges>.+) charges?.").setDynamicallyCharges().onItemClick(),
 

@@ -18,6 +18,9 @@ public class J_AmuletOfBloodFury extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_BLOOD_FURY_QUANTITY).setDynamically(),
+
             // Creation
             new OnChatMessage("You have successfully created an Amulet of blood fury.").setFixedCharges(10000),
 

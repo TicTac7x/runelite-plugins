@@ -18,6 +18,9 @@ public class W_WarpedSceptre extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_WARPED_SCEPTRE_QUANTITY).setDynamically(),
+
             // Charge additional.
             new OnChatMessage("You add an additional .+ charges? to your warped sceptre. It now has (?<charges>.+) charges in total.").setDynamicallyCharges(),
 

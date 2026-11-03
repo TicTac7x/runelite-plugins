@@ -18,6 +18,9 @@ public class J_PendantOfAtes extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_PENDANT_OF_ATES_QUANTITY).setDynamically(),
+
             // Check empty.
             new OnChatMessage("The pendant has no charges.").setFixedCharges(0).onItemClick(),
 

@@ -18,6 +18,9 @@ public class J_GiantsoulAmulet extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_GIANTSOUL_AMULET_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("Your Giantsoul amulet has (?<charges>.+) charges? left powering it.").setDynamicallyCharges(),
 

@@ -27,6 +27,9 @@ public class W_EyeOfAyak  extends ChargedItem {
          */
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_EYE_OF_AYAK_QUANTITY).setDynamically(),
+
             // Check
             new OnChatMessage("The Eye of Ayak has (?<charges>.+) charges? remaining.").setDynamicallyCharges(),
 

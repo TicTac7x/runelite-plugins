@@ -18,6 +18,9 @@ public class H_CircletOfWater extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_CIRCLET_OF_WATER_QUANTITY).setDynamically(),
+
             // Protect from heat.
             new OnChatMessage("Your circlet protects you from the desert heat.").decreaseCharges(1),
 

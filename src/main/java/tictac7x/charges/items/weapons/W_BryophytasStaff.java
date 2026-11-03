@@ -2,6 +2,7 @@ package tictac7x.charges.items.weapons;
 
 import net.runelite.api.*;
 import net.runelite.api.gameval.ItemID;
+import net.runelite.api.gameval.VarbitID;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
@@ -19,6 +20,9 @@ public class W_BryophytasStaff extends ChargedItem {
         };
 
         this.triggers.addAll(List.of(
+            // Charges tracked by the game.
+            new OnVarbitChanged(VarbitID.CHARGES_BRYOPHYTAS_STAFF_QUANTITY).setDynamically(),
+
             // Check.
             new OnChatMessage("The nature staff has (?<charges>.+) charges?.").setDynamicallyCharges(),
 
