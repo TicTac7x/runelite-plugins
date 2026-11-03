@@ -28,6 +28,7 @@ import tictac7x.charges.events.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.overlays.*;
 import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
@@ -111,6 +112,9 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	
 	@Inject
 	private Gson gson;
+
+	@Inject
+	private EventBus eventBus;
 
 	@Inject
 	private TicTac7xChargesImprovedConfig config;
@@ -664,6 +668,39 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event) {
 		store.onConfigChanged(event);
+	}
+
+	/**
+	 * Allows other plugins read an item's current charges via a {@link PluginMessage}. Post namespace
+	 * "tictac7x-charges", name "charges", with "requester" (the namespace to reply to) and "itemId":
+	 * <pre>{@code
+	 * eventBus.post(new PluginMessage("tictac7x-charges", "charges",
+	 * 	Map.of("requester", "<your namespace>", "itemId", 12899)));
+	 * }</pre>
+	 * The reply is posted to that namespace, name "charges", with "itemId" echoed back and
+	 * "charges": -1 if unknown or not a tracked item, -2 if unlimited.
+	 */
+	@Subscribe
+	public void onPluginMessage(PluginMessage event) {
+		if (!TicTac7xChargesImprovedConfig.group.equals(event.getNamespace()) || !"charges".equals(event.getName())) return;
+
+		Object requester = event.getData().get("requester");
+		Object itemId = event.getData().get("itemId");
+		if (!(requester instanceof String) || !(itemId instanceof Integer) || chargedItems == null) return;
+
+		int charges = getChargedItem((Integer) itemId).map(item -> item.getCharges((Integer) itemId)).orElse(ChargeId.UNKNOWN);
+		eventBus.post(new PluginMessage((String) requester, "charges", Map.of("itemId", itemId, "charges", charges)));
+	}
+
+	// The tracked item with itemId as one of its variants.
+	private Optional<ChargedItemBase> getChargedItem(int itemId) {
+		for (ChargedItemBase chargedItem : chargedItems) {
+			for (TriggerItem triggerItem : chargedItem.items) {
+				if (triggerItem.itemId == itemId) return Optional.of(chargedItem);
+			}
+		}
+
+		return Optional.empty();
 	}
 
 	@Override
