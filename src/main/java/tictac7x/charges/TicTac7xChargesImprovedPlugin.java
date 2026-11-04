@@ -67,6 +67,8 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	public static String pluginMessage =
 		"<colHIGHLIGHT>Item Charges Improved " + pluginVersion + ":<br>" +
 		"<colHIGHLIGHT>* Tonalztics of Ralos support.<br>" +
+		"<colHIGHLIGHT>* Hidden destroy options Configurable charges menu options now visible with shift right click.<br>" +
+		"<colHIGHLIGHT>* Configurable charges menu options now visible with shift right click.<br>" +
 		"<colHIGHLIGHT>* Fish barrel, Gem Sack, Echo Ahrim set, Efaritay's Aid, Toxic blowpipe, Forestry kit, Skull sceptre fixes."
 	;
 
