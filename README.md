@@ -98,6 +98,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Tome of Water
 
 ### Utilities
+* Archivist's folio
 * Ash sanctifier
 * Blood essence
 * Bonecrusher
@@ -150,6 +151,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Iban's staff
 * Infernal axe
 * Ironwood blowpipe
+* Obligator
 * Pharaoh's sceptre
 * Rosewood blowpipe
 * Sanguinesti staff
@@ -164,4 +166,5 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Warped sceptre
 * Webweaver bow
 * Western banner
+* Zorya's tome
 
