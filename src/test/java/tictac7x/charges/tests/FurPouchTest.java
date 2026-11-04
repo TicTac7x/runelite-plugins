@@ -34,9 +34,9 @@ public class FurPouchTest extends BaseTest {
         assertEquals(3, furPouch.storage.getStorage().count(ItemID.GOAT_PIT_FUR));
 
         // Catch dashed kebbit.
-        store.onStatChanged(new StatChanged(Skill.HUNTER, 7_444_523, 93, 93));
+        store.onStatChanged(new CustomStatChanged(Skill.HUNTER, 93, 7_444_523, 0));
         store.onChatMessage(new CustomChatMessage(ChatMessageType.GAMEMESSAGE, "You retrieve the falcon as well as the fur of the dead kebbit."));
-        store.onStatChanged(new StatChanged(Skill.HUNTER, 7_444_523 + 156, 93, 93));
+        store.onStatChanged(new CustomStatChanged(Skill.HUNTER, 93, 7_444_523 + 156, 156));
 
         assertEquals(3, furPouch.storage.getStorage().count(ItemID.GOAT_PIT_FUR));
         assertEquals(1, furPouch.storage.getStorage().count(ItemID.HUNTINGBEAST_SPEEDY2_FUR));
@@ -51,7 +51,7 @@ public class FurPouchTest extends BaseTest {
 
         // Goat catching.
         store.onMenuOptionClicked(new CustomMenuOptionClicked(-1, "Goat Pit", "Clear", -1, "", -1, -1));
-        store.onStatChanged(new StatChanged(Skill.HUNTER, 7_444_523 + 156 + 173, 93, 93));
+        store.onStatChanged(new CustomStatChanged(Skill.HUNTER, 93, 7_444_523 + 156 + 173, 173));
         store.onGameTick(new GameTick());
         assertEquals(3, furPouch.storage.getStorage().count(ItemID.GOAT_PIT_FUR));
 

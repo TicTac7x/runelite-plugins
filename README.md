@@ -1,4 +1,4 @@
-# Item Charges Improved v0.6.18
+# Item Charges Improved v0.6.19
 
 Show charges of various items that are in inventory or equipped
 
@@ -98,6 +98,7 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Tome of Water
 
 ### Utilities
+* Archivist's folio
 * Ash sanctifier
 * Blood essence
 * Bonecrusher
@@ -150,12 +151,14 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Iban's staff
 * Infernal axe
 * Ironwood blowpipe
+* Obligator
 * Pharaoh's sceptre
 * Rosewood blowpipe
 * Sanguinesti staff
 * Scythe of Vitur
 * Skull sceptre
 * Slayer staff (e)
+* Tonalztics of Ralos
 * Trident of the Seas / Swamp
 * Tumeken's shadow
 * Venator bow
@@ -163,4 +166,5 @@ If you find any dialogs or chat messages that don't seem to affect the charges o
 * Warped sceptre
 * Webweaver bow
 * Western banner
+* Zorya's tome
 

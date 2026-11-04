@@ -104,8 +104,17 @@ public class Store {
         listenerOnCombat = new ListenerOnCombat(provider);
         listenerOnMenuOpened = new ListenerOnMenuOpened(provider);
         listenerOnGameTick = new ListenerOnGameTick(provider);
+        loadStats();
 
         return this;
+    }
+
+    private void loadStats() {
+        provider.clientThread.invoke(() -> {
+            for (Skill skill : Skill.values()) {
+                skillsXp.put(skill, client.getSkillExperience(skill));
+            }
+        });
     }
 
     public List<String> getLastChatMessages() {
@@ -132,13 +141,12 @@ public class Store {
         return Arrays.stream(chargedItems).filter(ChargedItemBase::inInventoryOrEquipment);
     }
 
-    public void onStatChanged(StatChanged eventOriginal) {
-        CustomStatChanged event = new CustomStatChanged(eventOriginal, this);
-        skillsXp.put(event.skill, event.xp);
+    public void onStatChanged(CustomStatChanged statChanged) {
+        skillsXp.put(statChanged.skill, statChanged.xpTotal);
 
         getInventoryAndEquipmentChargedItems().forEach(chargedItem -> {
-            listenerOnStatChanged.trigger(event, chargedItem);
-            listenerOnXpDrop.trigger(event, chargedItem);
+            listenerOnStatChanged.trigger(statChanged, chargedItem);
+            listenerOnXpDrop.trigger(statChanged, chargedItem);
         });
     }
 

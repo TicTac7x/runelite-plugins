@@ -9,11 +9,7 @@ import tictac7x.charges.store.*;
 import java.util.List;
 
 public class _BarrowsItem extends ChargedItem {
-    public _BarrowsItem(
-            String itemName,
-            int itemId,
-            Provider provider
-            ) {
+    public _BarrowsItem(String itemName, String messageItemName, int itemId, Provider provider) {
         super(
             TicTac7xChargesImprovedConfig.barrows_gear + "_" + itemName.toLowerCase().replace("'", "").replace(" ", "_"),
             itemId,
@@ -22,7 +18,7 @@ public class _BarrowsItem extends ChargedItem {
 
         this.triggers.addAll(List.of(
             // Check.
-            new OnChatMessage(itemName + ": (?<percentage>.+)% remaining until the next degradation.").matcherConsumer((m) -> {
+            new OnChatMessage(messageItemName + ": (?<percentage>.+)% remaining until the next degradation.").matcherConsumer((m) -> {
                 int percentage = Integer.parseInt(m.group("percentage"));
                 int chargesUsedInCurrentTier = (100 - percentage) * 250 / 100;
 
@@ -38,6 +34,10 @@ public class _BarrowsItem extends ChargedItem {
             // Degrade in combat.
             new OnCombat(90).isEquipped().decreaseCharges(1)
         ));
+    }
+
+    public _BarrowsItem(String itemName, int itemId, Provider provider) {
+        this(itemName, itemName, itemId, provider);
     }
 
     @Override

@@ -10,6 +10,10 @@ import java.util.*;
 public class OnConfigMenuOpened extends OnMenuOpened {
     public OnConfigMenuOpened(Provider provider, String configKey) {
         menuConsumer(menuOpened -> {
+            if (!provider.client.isKeyPressed(KeyCode.KC_SHIFT)) {
+                return;
+            }
+
             Menu menu = provider.client.getMenu();
 
             MenuEntry chargesMenuEntry = menu.createMenuEntry(2);

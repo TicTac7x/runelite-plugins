@@ -53,6 +53,9 @@ public class C_Coffin extends ChargedItemWithStorageEmptyable {
                 storage.put(ItemID.SHADE_BONES6, Integer.parseInt(m.group("urium")));
             }),
 
+            // Empty to bank
+            new OnChatMessage("All of your shade remains have been deposited into your bank").setFixedCharges(0),
+
             // Try to empty already empty.
             new OnChatMessage("Your coffin is empty.").onItemClick().emptyStorage(),
 

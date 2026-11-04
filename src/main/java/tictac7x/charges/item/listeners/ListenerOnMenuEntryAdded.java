@@ -34,7 +34,7 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
                 } catch (Exception ignored) {}
             }
 
-            if (trigger.hide.isPresent() && trigger.menuEntryOption.isPresent()) {
+            if (trigger.hide.isPresent() && trigger.menuEntryOption.isPresent() && !provider.client.isKeyPressed(KeyCode.KC_SHIFT)) {
                 List<MenuEntry> newMenuEntries = new ArrayList<>();
 
                 for (MenuEntry entry : provider.client.getMenuEntries()) {
