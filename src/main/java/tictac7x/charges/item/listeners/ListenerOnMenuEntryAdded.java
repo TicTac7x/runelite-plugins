@@ -2,12 +2,15 @@ package tictac7x.charges.item.listeners;
 
 import net.runelite.api.*;
 import net.runelite.api.events.*;
+import net.runelite.api.widgets.Widget;
+import org.apache.commons.lang3.ArrayUtils;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.triggers.*;
 import tictac7x.charges.store.*;
 import tictac7x.charges.store.utils.*;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class ListenerOnMenuEntryAdded extends ListenerBase {
     public ListenerOnMenuEntryAdded(Provider provider) {
@@ -59,9 +62,20 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
         if (!(triggerBase instanceof OnMenuEntryAdded)) return false;
         OnMenuEntryAdded trigger = (OnMenuEntryAdded) triggerBase;
 
-        // Menu item id check
-        if (event.getItemId() != chargedItem.itemId) {
+        Widget w = event.getMenuEntry().getWidget();
+        if(w == null) {
             return false;
+        }
+
+        if (w.getItemId() >= 0 && w.getItemId() != chargedItem.itemId) {
+            return false;
+        }
+
+        if (w.getItemId() == -1) {
+            int[] itemIds = Stream.concat(Stream.of(w), Arrays.stream(Optional.ofNullable(w.getChildren()).orElse(new Widget[]{}))).filter(Objects::nonNull).mapToInt(Widget::getItemId).distinct().filter(x -> x!= -1).toArray();
+            if(!ArrayUtils.contains(itemIds, chargedItem.itemId)) {
+                return false;
+            }
         }
 
         // Hide config check.
@@ -71,6 +85,11 @@ public class ListenerOnMenuEntryAdded extends ListenerBase {
 
         // Menu entry option check.
         if (trigger.menuEntryOption.isPresent() && !event.getOption().equals(trigger.menuEntryOption.get())) {
+            return false;
+        }
+
+        // Menu entry option check.
+        if (trigger.menuEntryIdentifier.isPresent() && !ArrayUtils.contains(trigger.menuEntryIdentifier.get(), event.getIdentifier())) {
             return false;
         }
 
