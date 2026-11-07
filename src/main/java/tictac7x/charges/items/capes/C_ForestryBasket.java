@@ -40,14 +40,19 @@ public class C_ForestryBasket extends ChargedItemWithStorage {
         this.triggers.addAll(logBasket.triggers);
 
         this.triggers.addAll(List.of(
+            new OnMenuEntryAdded("Forestry kit", 65540, 65539).replaceOption("View kit"),
+            new OnMenuEntryAdded("Forestry kit", 65538).replaceOption("Fill kit"),
+            new OnMenuEntryAdded("Log basket", 131074).replaceOption("Fill logs"),
+            new OnMenuEntryAdded("Empty basket", 131076 , 131075).replaceOption("Empty logs"),
+
             // Fill kit from inventory.
-            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Forestry kit").onItemClick().fillStorageFromInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Fill kit").onItemClick().fillStorageFromInventory(),
 
             // Fill logs from inventory.
-            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Log basket").onItemClick().fillStorageFromInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Fill logs").onItemClick().fillStorageFromInventory(),
 
             // Empty logs to inventory.
-            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Empty basket").onItemClick().emptyStorageToInventory(),
+            new OnItemContainerChanged(InventoryID.INV).onMenuOption("Empty logs").onItemClick().emptyStorageToInventory(),
 
             // Empty logs from check dialog.
             new OnItemContainerChanged(InventoryID.INV).onWidgetMenuAction(new WidgetMenuAction("Yes", 0, "Empty the logs from the forestry basket into your inventory?")).emptyStorageToInventory(),

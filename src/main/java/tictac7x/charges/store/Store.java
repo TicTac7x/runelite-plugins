@@ -256,11 +256,11 @@ public class Store {
             event.target.isEmpty() && (
                 !event.option.contains("Buy-") &&
                 !event.option.equals("Continue") &&
-                !event.option.equals("Yes") &&
+                !event.option.equals("Yes")/* &&
                 event.eventId != 65540 && // Special event check for log basket
                 event.eventId != 65538 && // Special event check for forestry basket
                 event.eventId != 131074 && // Special event check for forestry basket
-                event.eventId != 131076 // Special event check for forestry basket
+                event.eventId != 131076 // Special event check for forestry basket*/
             ) ||
             // Cancel option.
             event.actionName.equals("CANCEL") ||
