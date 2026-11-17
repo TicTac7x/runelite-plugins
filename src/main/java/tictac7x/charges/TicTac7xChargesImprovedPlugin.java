@@ -28,6 +28,7 @@ import tictac7x.charges.events.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.overlays.*;
 import tictac7x.charges.item.storage.*;
+import tictac7x.charges.item.triggers.TriggerItem;
 import tictac7x.charges.items.barrows.*;
 import tictac7x.charges.items.boots.*;
 import tictac7x.charges.items.capes.*;
@@ -126,6 +127,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	private ChargedItemOverlay overlayChargedItems;
 
 	private ChargedItemBase[] chargedItems;
+	private Map<Integer, ChargedItemBase> chargedItemsByItemId = Collections.emptyMap();
 	private List<InfoBox> chargedItemsInfoboxes = new ArrayList<>();
 
 
@@ -504,6 +506,14 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 
 		store.setChargedItems(chargedItems);
 
+		Map<Integer, ChargedItemBase> byItemId = new HashMap<>();
+		for (ChargedItemBase chargedItem : chargedItems) {
+			for (TriggerItem triggerItem : chargedItem.items) {
+				byItemId.putIfAbsent(triggerItem.itemId, chargedItem);
+			}
+		}
+		chargedItemsByItemId = byItemId;
+
 		// Items overlays.
 		overlayChargedItems = new ChargedItemOverlay(provider, chargedItems);
 		overlayManager.add(overlayChargedItems);
@@ -524,6 +534,7 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		overlayManager.remove(overlayChargedItems);
 		chargedItemsInfoboxes.forEach(chargedItemInfobox -> infoBoxManager.removeInfoBox(chargedItemInfobox));
 		chargedItemsInfoboxes.clear();
+		chargedItemsByItemId = Collections.emptyMap();
 	}
 
 	@Subscribe
@@ -674,6 +685,63 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event) {
 		store.onConfigChanged(event);
+	}
+
+	/**
+	 * Allows other plugins to read items' current charges via a {@link PluginMessage}. Post namespace
+	 * "tictac7x-charges", name "charges", with a mutable data map holding "itemIds" (an int[] or a
+	 * collection of Integer). Before {@code post} returns, this plugin adds to that map:
+	 * <ul>
+	 * <li>"charges": a Map&lt;Integer, Integer&gt; of each item id to its charges, -1 if unknown or not a
+	 * tracked item, -2 if unlimited.</li>
+	 * <li>"storage": a Map&lt;Integer, Map&lt;Integer, Integer&gt;&gt; of each item id that stores other items
+	 * (e.g. a toxic blowpipe's darts and Zulrah's scales) to their item ids and quantities.</li>
+	 * </ul>
+	 * <pre>{@code
+	 * Map<String, Object> data = new HashMap<>();
+	 * data.put("itemIds", new int[]{ItemID.TOXIC_BLOWPIPE_LOADED});
+	 * eventBus.post(new PluginMessage("tictac7x-charges", "charges", data));
+	 * Map<?, ?> charges = (Map<Integer, Integer>) data.get("charges");
+	 * Map<?, ?> storage = (Map<Integer, Map<Integer, Integer>>) data.get("storage");
+	 * }</pre>
+	 */
+	@Subscribe
+	public void onPluginMessage(PluginMessage event) {
+		if (!TicTac7xChargesImprovedConfig.group.equals(event.getNamespace()) || !"charges".equals(event.getName())) return;
+
+		Map<String, Object> data = event.getData();
+		Object requested = data.get("itemIds");
+		List<Integer> itemIds = new ArrayList<>();
+		if (requested instanceof int[]) {
+			for (int itemId : (int[]) requested) {
+				itemIds.add(itemId);
+			}
+		} else if (requested instanceof Collection) {
+			for (Object itemId : (Collection<?>) requested) {
+				if (itemId instanceof Integer) {
+					itemIds.add((Integer) itemId);
+				}
+			}
+		} else {
+			return;
+		}
+
+		Map<Integer, Integer> charges = new HashMap<>();
+		Map<Integer, Map<Integer, Integer>> storage = new HashMap<>();
+		for (int itemId : itemIds) {
+			ChargedItemBase chargedItem = chargedItemsByItemId.get(itemId);
+			charges.put(itemId, chargedItem == null ? ChargeId.UNKNOWN : chargedItem.getCharges(itemId));
+			if (chargedItem instanceof ChargedItemWithStorage) {
+				Map<Integer, Integer> stored = new HashMap<>();
+				for (StorageItem storageItem : ((ChargedItemWithStorage) chargedItem).getStorage().getItems()) {
+					stored.merge(storageItem.itemId, storageItem.getQuantity(), Integer::sum);
+				}
+				storage.put(itemId, stored);
+			}
+		}
+
+		data.put("charges", charges);
+		data.put("storage", storage);
 	}
 
 	@Override
