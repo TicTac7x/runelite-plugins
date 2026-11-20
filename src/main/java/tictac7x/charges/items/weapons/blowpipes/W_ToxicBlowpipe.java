@@ -12,9 +12,14 @@ import tictac7x.charges.store.ids.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.*;
 
 public class W_ToxicBlowpipe extends ChargedItemWithStorage {
+    // Expected (not yet applied) consumption since the last whole unit was removed.
+    // Darts are tracked in percent (100 = one dart), scales in thirds (3 = one scale),
+    // so the estimate follows the game's average usage instead of rolling its own dice.
+    private int dartsOwedPercent = 0;
+    private int scalesOwedThirds = 0;
+
     public W_ToxicBlowpipe(Provider provider) {
         this(provider, TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemID.TOXIC_BLOWPIPE_LOADED, new TriggerItem[]{
             new TriggerItem(ItemID.TOXIC_BLOWPIPE),
@@ -43,7 +48,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnChatMessage("Darts: None\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
                 StorageItem scales = new StorageItem(ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
                 storage.clearAndPut(scales);
-
+                resetOwed();
             }),
 
             // Check with darts.
@@ -54,11 +59,24 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 if (darts.isPresent()) {
                     storage.put(darts);
                 }
+                resetOwed();
             }).onItemClick(),
+
+            // Ran out of scales, darts or both. The game is authoritative here, so sync the estimate to it.
+            new OnChatMessage("Your blowpipe has run out of (?<what>scales and darts|scales|darts)\\.").matcherConsumer(m -> {
+                if (m.group("what").contains("scales")) {
+                    storage.remove(ItemID.SNAKEBOSS_SCALE);
+                }
+                if (m.group("what").contains("darts")) {
+                    removeAllDarts();
+                }
+                resetOwed();
+            }),
 
             // Unload (empty only darts)
             new OnMenuOptionClicked("Unload").onItemClick().runConsumerOnNextGameTick(() -> {
                 storage.clearAndPut(storage.getStorage().getItem(ItemID.SNAKEBOSS_SCALE));
+                resetOwed();
             }),
 
             // Uncharge (empty darts and scales)
@@ -69,21 +87,30 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                     script.arguments.length >= 5 &&
                     script.arguments[4].toString().equals("Yes")
                 ) {
-                    provider.store.addConsumerToNextTickQueue(() -> storage.clear());
+                    provider.store.addConsumerToNextTickQueue(() -> {
+                        storage.clear();
+                        resetOwed();
+                    });
                 }
             }),
 
             // Attack.
             new OnAnimationChanged(5061).isEquipped().consumer(() -> {
-                // 1/3 chance to not use scale.
-                if (ThreadLocalRandom.current().nextInt(1, 4) != 3) {
+                // 2/3 chance to use a scale.
+                scalesOwedThirds += 2;
+                if (scalesOwedThirds >= 3) {
+                    scalesOwedThirds -= 3;
                     storage.remove(ItemID.SNAKEBOSS_SCALE, 1);
                 }
 
-                // Calculate if dart could have been used.
-                for (StorageItem item : storage.getStorage().getItems()) {
-                    if (item.itemId != ItemID.SNAKEBOSS_SCALE && TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
-                        storage.remove(item.itemId, 1);
+                // Ava's devices save a percentage of darts.
+                dartsOwedPercent += 100 - TicTac7xChargesImprovedPlugin.getRangedAmmoRecoveryRate(provider);
+                if (dartsOwedPercent >= 100) {
+                    dartsOwedPercent -= 100;
+                    for (StorageItem item : storage.getStorage().getItems()) {
+                        if (item.itemId != ItemID.SNAKEBOSS_SCALE) {
+                            storage.remove(item.itemId, 1);
+                        }
                     }
                 }
             }),
@@ -93,6 +120,44 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         ));
     }
 
+    private void resetOwed() {
+        dartsOwedPercent = 0;
+        scalesOwedThirds = 0;
+    }
+
+    private void removeAllDarts() {
+        for (StorageItem item : storage.getStorage().getItems()) {
+            if (item.itemId != ItemID.SNAKEBOSS_SCALE) {
+                storage.remove(item.itemId);
+            }
+        }
+    }
+
+    private int getScales() {
+        return getStorage().count(ItemID.SNAKEBOSS_SCALE);
+    }
+
+    private int getDarts() {
+        int darts = 0;
+
+        for (StorageItem item : getStorage().getItems()) {
+            if (item.itemId != ItemID.SNAKEBOSS_SCALE) {
+                darts += item.getQuantity();
+            }
+        }
+
+        return darts;
+    }
+
+    /**
+     * A shot needs both a dart and a scale, so the blowpipe has only as many
+     * charges as the scarcer of the two. A missing dart or scale entry counts as 0,
+     * it must never fall back to the count of whatever is left.
+     */
+    private int getRemainingCharges() {
+        return Math.min(getScales(), getDarts());
+    }
+
     @Override
     public String getChargesString(int itemId) {
         return this.getTotalChargesString();
@@ -100,17 +165,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
     @Override
     public String getTotalChargesString() {
-        Optional<Integer> charges = Optional.empty();
-
-        for (StorageItem item : getStorage().getItems()) {
-            if (!charges.isPresent()) {
-                charges = Optional.of(item.getQuantity());
-            } else if (item.getQuantity() < charges.get()) {
-                charges = Optional.of(item.getQuantity());
-            }
-        }
-
-        return TicTac7xChargesImprovedPlugin.getChargesMinified(charges.orElse(0));
+        return TicTac7xChargesImprovedPlugin.getChargesMinified(getRemainingCharges());
     }
 
     @Override
@@ -120,7 +175,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
     @Override
     public Color getTotalTextColor() {
-        if (storage.getStorage().getItems().size() != 2) {
+        if (getRemainingCharges() == 0) {
             return provider.config.getColorEmpty();
         }
 
