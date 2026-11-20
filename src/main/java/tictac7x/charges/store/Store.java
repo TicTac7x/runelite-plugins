@@ -37,6 +37,7 @@ public class Store {
     private int inCombatTicksRemainingDamageDoneToMe = 0;
 
     private ChargedItemBase[] chargedItems = new ChargedItemBase[]{};
+    private boolean hopping = false;
     private int lastChatMessagesTick = 0;
     private List<String> lastChatMessages = new ArrayList<>();
 
@@ -245,6 +246,10 @@ public class Store {
                 inventoryItemId.isPresent() ? inventoryItemId.get() :
                 bankItemId.isPresent() ? bankItemId.get() :
                 chargedItem.itemId;
+
+            if (chargedItem.inInventoryOrEquipment()) {
+                chargedItem.onInventoryOrEquipmentUpdated();
+            }
         }
     }
 
@@ -787,7 +792,18 @@ public class Store {
     }
 
     public void onGameStateChanged(GameStateChanged event) {
+        if (event.getGameState() == GameState.HOPPING) {
+            hopping = true;
+            return;
+        }
+
         if (event.getGameState() != GameState.LOGGED_IN) return;
+
+        // World hop is not a new login.
+        if (!hopping) {
+            Arrays.stream(chargedItems).forEach(ChargedItemBase::onLogin);
+        }
+        hopping = false;
 
         checkForChargesReset();
 

@@ -26,6 +26,16 @@ public abstract class ChargedItemBase {
     public boolean inInventory = false;
     public boolean inEquipment = false;
 
+    /**
+     * Called once per fresh login (not on world hop).
+     */
+    public void onLogin() {}
+
+    /**
+     * Called whenever inventory or equipment was re-evaluated and the item is present in either.
+     */
+    public void onInventoryOrEquipmentUpdated() {}
+
     public ChargedItemBase(
         String configKey,
         int itemId,

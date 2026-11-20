@@ -54,6 +54,9 @@ public class _Blowpipe extends ChargedItemWithStorage {
                 dartsOwedPercent = 0;
             }).onItemClick(),
 
+            // Load darts by using them on the blowpipe.
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
+
             // Ran out of darts. The game is authoritative here, so sync the estimate to it.
             new OnChatMessage("Your blowpipe has run out of (scales and )?darts\\.").consumer(() -> {
                 storage.clear();

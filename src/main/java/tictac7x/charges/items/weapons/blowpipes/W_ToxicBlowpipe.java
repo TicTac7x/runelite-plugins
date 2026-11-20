@@ -1,7 +1,9 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.gameval.*;
 import net.runelite.api.widgets.*;
+import net.runelite.client.chat.*;
 import tictac7x.charges.*;
 import tictac7x.charges.item.*;
 import tictac7x.charges.item.storage.*;
@@ -19,6 +21,10 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     // so the estimate follows the game's average usage instead of rolling its own dice.
     private int dartsOwedPercent = 0;
     private int scalesOwedThirds = 0;
+
+    // The estimate is only known to match the game right after a Check.
+    private boolean checkedThisLogin = false;
+    private boolean remindedThisLogin = false;
 
     public W_ToxicBlowpipe(Provider provider) {
         this(provider, TicTac7xChargesImprovedConfig.toxic_blowpipe, ItemID.TOXIC_BLOWPIPE_LOADED, new TriggerItem[]{
@@ -48,7 +54,7 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
             new OnChatMessage("Darts: None\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
                 StorageItem scales = new StorageItem(ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
                 storage.clearAndPut(scales);
-                resetOwed();
+                onChecked();
             }),
 
             // Check with darts.
@@ -59,8 +65,11 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 if (darts.isPresent()) {
                     storage.put(darts);
                 }
-                resetOwed();
+                onChecked();
             }).onItemClick(),
+
+            // Load darts or scales by using them on the blowpipe.
+            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Ran out of scales, darts or both. The game is authoritative here, so sync the estimate to it.
             new OnChatMessage("Your blowpipe has run out of (?<what>scales and darts|scales|darts)\\.").matcherConsumer(m -> {
@@ -125,6 +134,40 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         scalesOwedThirds = 0;
     }
 
+    private void onChecked() {
+        resetOwed();
+        checkedThisLogin = true;
+    }
+
+    @Override
+    public void onLogin() {
+        checkedThisLogin = false;
+        remindedThisLogin = false;
+    }
+
+    @Override
+    public void onInventoryOrEquipmentUpdated() {
+        if (remindedThisLogin || checkedThisLogin || !provider.config.showBlowpipeCheckReminder()) {
+            return;
+        }
+
+        // Nothing to be wrong about yet.
+        if (getRemainingCharges() == 0) {
+            return;
+        }
+
+        remindedThisLogin = true;
+        provider.chatMessageManager.queue(QueuedMessage.builder()
+            .type(ChatMessageType.CONSOLE)
+            .runeLiteFormattedMessage("<colHIGHLIGHT>[Item Charges Improved] " + getItemName() + " charges are an estimate since your last login. Check it to sync them with the game.")
+            .build()
+        );
+    }
+
+    private boolean isEstimateMarked() {
+        return provider.config.showBlowpipeEstimateMarker() && !checkedThisLogin && getRemainingCharges() > 0;
+    }
+
     private void removeAllDarts() {
         for (StorageItem item : storage.getStorage().getItems()) {
             if (item.itemId != ItemID.SNAKEBOSS_SCALE) {
@@ -165,7 +208,8 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
     @Override
     public String getTotalChargesString() {
-        return TicTac7xChargesImprovedPlugin.getChargesMinified(getRemainingCharges());
+        String charges = TicTac7xChargesImprovedPlugin.getChargesMinified(getRemainingCharges());
+        return isEstimateMarked() ? "~" + charges : charges;
     }
 
     @Override
