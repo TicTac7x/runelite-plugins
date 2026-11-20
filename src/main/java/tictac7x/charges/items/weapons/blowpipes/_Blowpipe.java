@@ -12,6 +12,9 @@ import tictac7x.charges.store.ids.*;
 import java.util.*;
 
 public class _Blowpipe extends ChargedItemWithStorage {
+    // Expected (not yet applied) dart consumption in percent (100 = one dart).
+    private int dartsOwedPercent = 0;
+
     public _Blowpipe(
         String configKey,
         int itemId,
@@ -48,12 +51,22 @@ public class _Blowpipe extends ChargedItemWithStorage {
             new OnChatMessage("Darts: (?<type>.+) x (?<amount>.+).").matcherConsumer(m -> {
                 Optional<StorageItem> darts = getStorageItemFromName(m.group("type"), TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("amount")));
                 storage.clearAndPut(darts);
+                dartsOwedPercent = 0;
             }).onItemClick(),
+
+            // Ran out of darts. The game is authoritative here, so sync the estimate to it.
+            new OnChatMessage("Your blowpipe has run out of (scales and )?darts\\.").consumer(() -> {
+                storage.clear();
+                dartsOwedPercent = 0;
+            }),
 
             // Attack
             new OnHitsplatApplied(HitsplatTarget.ENEMY, HitsplatGroup.ALL).isEquipped().hasAnimationId(attackAnimationId).consumer(() -> {
-                for (StorageItem item : storage.getStorage().getItems()) {
-                    if (TicTac7xChargesImprovedPlugin.guessIfRangedAmmoRetrievalWasSuccessful(provider)) {
+                // Ava's devices save a percentage of darts.
+                dartsOwedPercent += 100 - TicTac7xChargesImprovedPlugin.getRangedAmmoRecoveryRate(provider);
+                if (dartsOwedPercent >= 100) {
+                    dartsOwedPercent -= 100;
+                    for (StorageItem item : storage.getStorage().getItems()) {
                         storage.remove(item.itemId, 1);
                     }
                 }

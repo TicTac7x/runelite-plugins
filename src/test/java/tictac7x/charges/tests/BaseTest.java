@@ -116,7 +116,7 @@ public abstract class BaseTest {
                     break;
             }
 
-            when(composition.getName()).thenReturn(name);
+            lenient().when(composition.getName()).thenReturn(name);
             return composition;
         });
     }

@@ -37,6 +37,7 @@ public class Store {
     private int inCombatTicksRemainingDamageDoneToMe = 0;
 
     private ChargedItemBase[] chargedItems = new ChargedItemBase[]{};
+    private boolean loggedIn = false;
     private int lastChatMessagesTick = 0;
     private List<String> lastChatMessages = new ArrayList<>();
 
@@ -245,6 +246,10 @@ public class Store {
                 inventoryItemId.isPresent() ? inventoryItemId.get() :
                 bankItemId.isPresent() ? bankItemId.get() :
                 chargedItem.itemId;
+
+            if (chargedItem.inInventoryOrEquipment()) {
+                chargedItem.onInventoryOrEquipmentUpdated();
+            }
         }
     }
 
@@ -787,7 +792,19 @@ public class Store {
     }
 
     public void onGameStateChanged(GameStateChanged event) {
+        if (event.getGameState() == GameState.LOGIN_SCREEN) {
+            loggedIn = false;
+            return;
+        }
+
         if (event.getGameState() != GameState.LOGGED_IN) return;
+
+        // LOGGED_IN is also fired after every map region load and after a world hop.
+        // Only the first one after the login screen is a new login.
+        if (!loggedIn) {
+            loggedIn = true;
+            Arrays.stream(chargedItems).forEach(ChargedItemBase::onLogin);
+        }
 
         checkForChargesReset();
 

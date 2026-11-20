@@ -353,6 +353,22 @@ public interface TicTac7xChargesImprovedConfig extends Config {
             section = general
         ) default Color getColorActivated() { return Color.green; }
 
+        @ConfigItem(
+            keyName = "blowpipe_estimate_marker",
+            name = "Mark unchecked blowpipe charges",
+            description = "Blowpipe dart and scale counts are estimated from your attacks. Show ~ in front of the charges once shots have been fired since the blowpipe was last checked or uncharged",
+            section = general,
+            position = 16
+        ) default boolean showBlowpipeEstimateMarker() { return true; }
+
+        @ConfigItem(
+            keyName = "blowpipe_check_reminder",
+            name = "Blowpipe check reminder",
+            description = "Once per login, if the blowpipe has been fired since it was last checked, remind in chat to check it so the estimated charges are synced with the game",
+            section = general,
+            position = 17
+        ) default boolean showBlowpipeCheckReminder() { return true; }
+
     @ConfigSection(
         name = "Potions",
         description = "Potions",

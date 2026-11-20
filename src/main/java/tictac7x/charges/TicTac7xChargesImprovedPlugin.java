@@ -825,14 +825,26 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 		return String.valueOf(charges);
 	}
 
-	public static boolean guessIfRangedAmmoRetrievalWasSuccessful(Provider provider) {
-		int recoveryRate;
-
+	/**
+	 * Percentage of ranged ammunition that the equipped Ava's device recovers.
+	 */
+	public static int getRangedAmmoRecoveryRate(Provider provider) {
 		if (provider.store.equipmentContainsItem(ItemID.ANMA_30_REWARD)) {
-			recoveryRate = 60;
-		} else if (provider.store.equipmentContainsItem(ItemID.ANMA_50_REWARD)) {
-			recoveryRate = 72;
-		} else if (provider.store.equipmentContainsItem(
+			return 60;
+		}
+
+		// Accumulator, accumulator max cape, and the ranging cape (which has the accumulator
+		// effect; its Vorkath's head upgrade to 80 % is account state we cannot see, so err low).
+		if (provider.store.equipmentContainsItem(
+			ItemID.ANMA_50_REWARD,
+			ItemID.SKILLCAPE_MAX_ANMA,
+			ItemID.SKILLCAPE_RANGING,
+			ItemID.SKILLCAPE_RANGING_TRIMMED
+		)) {
+			return 72;
+		}
+
+		if (provider.store.equipmentContainsItem(
 			ItemID.AVAS_ASSEMBLER,
 			ItemID.AVAS_ASSEMBLER_TROUVER,
 			ItemID.AVAS_ASSEMBLER_MASORI,
@@ -842,12 +854,10 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI,
 			ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI_TROUVER
 		)) {
-			recoveryRate = 80;
-		} else {
-			recoveryRate = 0;
+			return 80;
 		}
 
-		return ThreadLocalRandom.current().nextInt(1, 101) > recoveryRate;
+		return 0;
 	}
 }
 
