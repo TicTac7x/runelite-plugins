@@ -833,7 +833,14 @@ public class TicTac7xChargesImprovedPlugin extends Plugin implements KeyListener
 			return 60;
 		}
 
-		if (provider.store.equipmentContainsItem(ItemID.ANMA_50_REWARD)) {
+		// Accumulator, accumulator max cape, and the ranging cape (which has the accumulator
+		// effect; its Vorkath's head upgrade to 80 % is account state we cannot see, so err low).
+		if (provider.store.equipmentContainsItem(
+			ItemID.ANMA_50_REWARD,
+			ItemID.SKILLCAPE_MAX_ANMA,
+			ItemID.SKILLCAPE_RANGING,
+			ItemID.SKILLCAPE_RANGING_TRIMMED
+		)) {
 			return 72;
 		}
 
