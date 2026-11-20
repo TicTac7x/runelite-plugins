@@ -81,7 +81,13 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 onChecked();
             }).onItemClick(),
 
-            // Ran out of scales, darts or both. The game is authoritative here, so sync the estimate to it.
+            // Ran out of scales: "Your Toxic blowpipe is out of charges!"
+            new OnChatMessage("Your .*blowpipe is out of charges!").consumer(() -> {
+                storage.remove(ItemID.SNAKEBOSS_SCALE);
+                resetOwed();
+            }),
+
+            // Ran out of darts: "Your blowpipe has run out of darts." The game is authoritative here, so sync the estimate to it.
             new OnChatMessage("Your blowpipe has run out of (?<what>scales and darts|scales|darts)\\.").matcherConsumer(m -> {
                 if (m.group("what").contains("scales")) {
                     storage.remove(ItemID.SNAKEBOSS_SCALE);
