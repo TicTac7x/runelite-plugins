@@ -1,6 +1,7 @@
 package tictac7x.charges.items.weapons.blowpipes;
 
 import net.runelite.api.ChatMessageType;
+import net.runelite.api.Player;
 import net.runelite.api.gameval.*;
 import net.runelite.api.widgets.*;
 import net.runelite.client.chat.*;
@@ -16,6 +17,12 @@ import java.util.*;
 import java.util.List;
 
 public class W_ToxicBlowpipe extends ChargedItemWithStorage {
+    private static final int ATTACK_ANIMATION = 5061;
+
+    // Animation seen on the previous game tick, to detect the attack animation restarting.
+    private int lastAnimation = -1;
+    private int lastAnimationFrame = -1;
+
     // Expected (not yet applied) consumption since the last whole unit was removed.
     // Darts are tracked in percent (100 = one dart), scales in thirds (3 = one scale),
     // so the estimate follows the game's average usage instead of rolling its own dice.
@@ -112,32 +119,50 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 }
             }),
 
-            // Attack.
-            new OnAnimationChanged(5061).isEquipped().consumer(() -> {
-                setExact(false);
+            // Attack. AnimationChanged is not fired when the same attack animation restarts
+            // back to back (rapid, 2 ticks), which skipped most shots in a continuous fight.
+            // Sample the animation every tick instead and count each start or restart.
+            new OnGameTick().isEquipped().consumer(() -> {
+                Player player = provider.client.getLocalPlayer();
+                if (player == null) return;
 
-                // 2/3 chance to use a scale.
-                scalesOwedThirds += 2;
-                if (scalesOwedThirds >= 3) {
-                    scalesOwedThirds -= 3;
-                    storage.remove(ItemID.SNAKEBOSS_SCALE, 1);
-                }
+                int animation = player.getAnimation();
+                int frame = player.getAnimationFrame();
+                boolean attacked = animation == ATTACK_ANIMATION && (lastAnimation != ATTACK_ANIMATION || frame < lastAnimationFrame);
 
-                // Ava's devices save a percentage of darts.
-                dartsOwedPercent += 100 - TicTac7xChargesImprovedPlugin.getRangedAmmoRecoveryRate(provider);
-                if (dartsOwedPercent >= 100) {
-                    dartsOwedPercent -= 100;
-                    for (StorageItem item : storage.getStorage().getItems()) {
-                        if (item.itemId != ItemID.SNAKEBOSS_SCALE) {
-                            storage.remove(item.itemId, 1);
-                        }
-                    }
+                lastAnimation = animation;
+                lastAnimationFrame = frame;
+
+                if (attacked) {
+                    onAttack();
                 }
             }),
 
             // Auto-charge.
             new OnAutoChargeMessage("Toxic blowpipe", "Zulrah's scales", 1, this, ItemID.SNAKEBOSS_SCALE)
         ));
+    }
+
+    private void onAttack() {
+        setExact(false);
+
+        // 2/3 chance to use a scale.
+        scalesOwedThirds += 2;
+        if (scalesOwedThirds >= 3) {
+            scalesOwedThirds -= 3;
+            storage.remove(ItemID.SNAKEBOSS_SCALE, 1);
+        }
+
+        // Ava's devices save a percentage of darts.
+        dartsOwedPercent += 100 - TicTac7xChargesImprovedPlugin.getRangedAmmoRecoveryRate(provider);
+        if (dartsOwedPercent >= 100) {
+            dartsOwedPercent -= 100;
+            for (StorageItem item : storage.getStorage().getItems()) {
+                if (item.itemId != ItemID.SNAKEBOSS_SCALE) {
+                    storage.remove(item.itemId, 1);
+                }
+            }
+        }
     }
 
     private void resetOwed() {
