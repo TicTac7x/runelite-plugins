@@ -356,7 +356,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         @ConfigItem(
             keyName = "blowpipe_estimate_marker",
             name = "Mark unchecked blowpipe charges",
-            description = "Blowpipe dart and scale counts are estimated from your attacks. Show ~ in front of the charges until the blowpipe has been checked this login",
+            description = "Blowpipe dart and scale counts are estimated from your attacks. Show ~ in front of the charges once shots have been fired since the blowpipe was last checked or uncharged",
             section = general,
             position = 16
         ) default boolean showBlowpipeEstimateMarker() { return true; }
@@ -364,7 +364,7 @@ public interface TicTac7xChargesImprovedConfig extends Config {
         @ConfigItem(
             keyName = "blowpipe_check_reminder",
             name = "Blowpipe check reminder",
-            description = "Once per login, when the blowpipe is in your inventory or equipment, remind in chat to check it so the estimated charges are synced with the game",
+            description = "Once per login, if the blowpipe has been fired since it was last checked, remind in chat to check it so the estimated charges are synced with the game",
             section = general,
             position = 17
         ) default boolean showBlowpipeCheckReminder() { return true; }

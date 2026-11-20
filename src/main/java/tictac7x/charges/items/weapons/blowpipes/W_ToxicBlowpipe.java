@@ -22,8 +22,11 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
     private int dartsOwedPercent = 0;
     private int scalesOwedThirds = 0;
 
-    // The estimate is only known to match the game right after a Check.
-    private boolean checkedThisLogin = false;
+    // Whether the stored contents are known to match the game exactly. True after a Check or
+    // an Uncharge, and stays true while darts or scales are loaded on top of an exact state.
+    // Firing makes it an estimate until the next Check. Persisted so a logout does not forget it.
+    private final String exactConfigKey;
+    private boolean exact;
     private boolean remindedThisLogin = false;
 
     public W_ToxicBlowpipe(Provider provider) {
@@ -36,6 +39,8 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         super(configKey, itemId, provider);
 
         this.items = items;
+        this.exactConfigKey = configKey + "_exact";
+        this.exact = "true".equals(provider.configManager.getConfiguration(TicTac7xChargesImprovedConfig.group, exactConfigKey));
 
         this.storage.storableItems(
             new StorableItem(ItemID.SNAKEBOSS_SCALE),
@@ -80,6 +85,9 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                     removeAllDarts();
                 }
                 resetOwed();
+                if (getRemainingCharges() == 0 && storage.isEmpty()) {
+                    setExact(true);
+                }
             }),
 
             // Unload (empty only darts)
@@ -99,12 +107,15 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                     provider.store.addConsumerToNextTickQueue(() -> {
                         storage.clear();
                         resetOwed();
+                        setExact(true);
                     });
                 }
             }),
 
             // Attack.
             new OnAnimationChanged(5061).isEquipped().consumer(() -> {
+                setExact(false);
+
                 // 2/3 chance to use a scale.
                 scalesOwedThirds += 2;
                 if (scalesOwedThirds >= 3) {
@@ -136,18 +147,23 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
 
     private void onChecked() {
         resetOwed();
-        checkedThisLogin = true;
+        setExact(true);
+    }
+
+    private void setExact(boolean exact) {
+        if (this.exact == exact) return;
+        this.exact = exact;
+        provider.configManager.setConfiguration(TicTac7xChargesImprovedConfig.group, exactConfigKey, String.valueOf(exact));
     }
 
     @Override
     public void onLogin() {
-        checkedThisLogin = false;
         remindedThisLogin = false;
     }
 
     @Override
     public void onInventoryOrEquipmentUpdated() {
-        if (remindedThisLogin || checkedThisLogin || !provider.config.showBlowpipeCheckReminder()) {
+        if (remindedThisLogin || exact || !provider.config.showBlowpipeCheckReminder()) {
             return;
         }
 
@@ -159,13 +175,13 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
         remindedThisLogin = true;
         provider.chatMessageManager.queue(QueuedMessage.builder()
             .type(ChatMessageType.CONSOLE)
-            .runeLiteFormattedMessage("<colHIGHLIGHT>[Item Charges Improved] " + getItemName() + " charges are an estimate since your last login. Check it to sync them with the game.")
+            .runeLiteFormattedMessage("<colHIGHLIGHT>[Item Charges Improved] " + getItemName() + " charges are an estimate since it was last checked. Check it to sync them with the game.")
             .build()
         );
     }
 
     private boolean isEstimateMarked() {
-        return provider.config.showBlowpipeEstimateMarker() && !checkedThisLogin && getRemainingCharges() > 0;
+        return provider.config.showBlowpipeEstimateMarker() && !exact && getRemainingCharges() > 0;
     }
 
     private void removeAllDarts() {
