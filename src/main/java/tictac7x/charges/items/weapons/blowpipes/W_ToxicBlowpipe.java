@@ -69,7 +69,8 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 onChecked();
             }),
 
-            // Check with darts.
+            // Check with darts. The game prints this same line on its own whenever darts or
+            // scales are loaded, so loading needs no extra tracking.
             new OnChatMessage("Darts: (?<dartstype>.+) x (?<dartsamount>.+)\\. Scales: (?<scales>.+) \\(.*\\).").matcherConsumer(m -> {
                 storage.clearAndPut(ItemID.SNAKEBOSS_SCALE, TicTac7xChargesImprovedPlugin.getNumberFromCommaString(m.group("scales")));
 
@@ -79,9 +80,6 @@ public class W_ToxicBlowpipe extends ChargedItemWithStorage {
                 }
                 onChecked();
             }).onItemClick(),
-
-            // Load darts or scales by using them on the blowpipe.
-            new OnItemContainerChanged(InventoryID.INV).fillStorageFromInventory().onUseStorageItemOnChargedItem(storage.getStorableItems()),
 
             // Ran out of scales, darts or both. The game is authoritative here, so sync the estimate to it.
             new OnChatMessage("Your blowpipe has run out of (?<what>scales and darts|scales|darts)\\.").matcherConsumer(m -> {
