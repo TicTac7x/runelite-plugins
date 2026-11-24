@@ -267,7 +267,9 @@ public class Storage {
 
     public void emptyToInventory() {
         for (StorageItem itemDifference : provider.store.getInventoryItemsDifference().getItems()) {
-            storage.getItem(itemDifference.itemId).ifPresent(item -> item.decreaseQuantity(itemDifference.getQuantity()));
+            if (itemDifference.getQuantity() > 0) {
+                remove(itemDifference.itemId, itemDifference.getQuantity());
+            }
         }
     }
 
@@ -285,7 +287,9 @@ public class Storage {
 
     public void emptyToBank() {
         for (StorageItem itemDifference : provider.store.getBankItemsDifference().getItems()) {
-            storage.getItem(itemDifference.itemId).ifPresent(item -> item.decreaseQuantity(itemDifference.getQuantity()));
+            if (itemDifference.getQuantity() > 0) {
+                remove(itemDifference.itemId, itemDifference.getQuantity());
+            }
         }
     }
 
